@@ -201,9 +201,7 @@ function rate(r){
  s.t=Date.now()+STEP[s.i]*60000*(r===1?.6:1);markDay();save();flip=false;card=null;render();
 }
 function tea(){
- return '<div class="card"><h3 style="font-size:17px">روابط للبلاكبورد</h3><p class="mut">في البلاكبورد: Build Content ← Web Link، والصق الرابط. كل درس برابط مستقل.</p>'+
- LESSONS.concat(CULT).map(function(l){return '<div style="margin-top:12px"><b>'+l.t+'</b><div class="url">'+l.url+'</div></div>'}).join('')+'</div>'+
- '<div class="card"><h3 style="font-size:17px">خارطة الطريق</h3><ul class="road"><li>✅ دروس تفاعلية، قاموس، مراجعة ذكية</li><li>⏳ نقل الموقع إلى دومينك مع حسابات للطلاب</li><li>⏳ لوحة صدارة وتحديات أسبوعية</li><li>⏳ تدريب النطق بالتسجيل</li><li>⏳ لوحة لك لمتابعة تقدم الطلاب</li></ul><p class="mut">البنود الأربعة الأخيرة تحتاج استضافة وقاعدة بيانات، وهي مهمة المرحلة الثانية.</p></div>'+
+ return '<div class="card"><h3 style="font-size:17px">خارطة الطريق</h3><ul class="road"><li>✅ دروس تفاعلية، قاموس، مراجعة ذكية</li><li>⏳ نقل الموقع إلى دومينك مع حسابات للطلاب</li><li>⏳ لوحة صدارة وتحديات أسبوعية</li><li>⏳ تدريب النطق بالتسجيل</li><li>⏳ لوحة لك لمتابعة تقدم الطلاب</li></ul><p class="mut">البنود الأربعة الأخيرة تحتاج استضافة وقاعدة بيانات، وهي مهمة المرحلة الثانية.</p></div>'+
  '<div class="card"><h3 style="font-size:17px">تنبيه حقوق</h3><p class="mut">الموقع عام، فلا ينبغي نشر نصوص الكتاب وحواراته. القاموس يحوي كلمات مفردة وجملاً من تأليفنا. دروس الكتاب نفسها أبقها خاصة بطلابك.</p></div>';
 }
 document.addEventListener('click',function(e){
