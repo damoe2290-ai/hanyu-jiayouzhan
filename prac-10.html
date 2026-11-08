@@ -1,350 +1,888 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
-<title>الدرس ١٠ · أشتري الأقراص هنا · 我在这儿买光盘</title>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><title>الدرس العاشر 我在这儿买光盘</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
 <style>
-:root{--bg:#FBF6EE;--surface:#FFFDF9;--surface2:#F3EBDD;--fg:#2B1D18;--muted:#7B6A5E;--line:#E8DCC8;--accent:#B8322A;--accent-fg:#fff;--accent-soft:#F8E4DF;--seal:#B8322A;--seal-fg:#fff;--gold:#C98A0A;--good:#2E7D4F;--good-soft:#DDF0E2;--bad:#B3261E;--bad-soft:#F7DBD8;--c1:#7A4FA3;--c2:#E0952B;--c3:#2F6DB5;--c4:#2E8B57;--c5:#C2410C;--t1:#C0392B;--t2:#A66A00;--t3:#1D7A45;--t4:#2759B8;--t5:#6A7B77;
---font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;--font-han:'Noto Serif SC','Songti SC',serif;--font-py:'IBM Plex Sans','Segoe UI',sans-serif}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--c5:#F08A5D;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--c5:#F08A5D;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}
-
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{background:var(--bg);color:var(--fg);font:16px/1.7 var(--font-ui);padding:0 max(16px,env(safe-area-inset-left)) 90px}
-button{font:inherit;color:inherit;cursor:pointer}a{color:var(--accent)}
+/* Layout concept: a study sheet on cool jade-grey paper. Hanzi are the large ink forms, coloured by tone;
+   one red seal (课) is the only loud mark. Single column, sticky tab bar, everything else stays quiet. */
+:root{
+  --bg:#FBF6EE; --surface:#FFFDF9; --surface2:#F3EBDD; --fg:#2B1D18; --muted:#7B6A5E; --line:#E8DCC8;
+  --accent:#B8322A; --accent-fg:#FFFFFF; --accent-soft:#F8E4DF;
+  --seal:#B8322A; --seal-fg:#FFFFFF; --star:#C98A0A;
+  --good:#2E7D4F; --good-soft:#DDF0E2; --bad:#B3261E; --bad-soft:#F7DBD8;
+  --t1:#C0392B; --t2:#A66A00; --t3:#1D7A45; --t4:#2759B8; --t5:#6A7B77;
+  --font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+  --font-han:'Noto Serif SC','Songti SC','STSong','SimSun',serif;
+  --font-py:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+    --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+    --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+    --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+    --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+  --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+  --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+  --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+  --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--font-ui);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 64px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+button{font-family:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.wrap{max-width:820px;margin:0 auto}h1,h2,h3,p{margin:0}
-.han{font-family:var(--font-han)}.py{font-family:var(--font-py)}.mut{color:var(--muted);font-size:14px}
-.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
-.hdr{position:sticky;top:0;z-index:20;background:var(--bg);padding-block:10px 0}
-.top{display:flex;align-items:center;gap:10px}
-.top h1{flex:1;font-size:17px;line-height:1.3}
-.ib{font-size:20px;line-height:1;min-width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--fg)}
-.pg{height:6px;border-radius:9px;background:var(--surface2);margin-top:8px;overflow:hidden}.pg i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
-.tabs{display:flex;gap:4px;margin-top:8px;padding-bottom:8px;border-bottom:1px solid var(--line);overflow-x:auto}
-.tab{flex:1;min-height:44px;padding:0 12px;border:0;border-radius:12px;background:none;color:var(--muted);font-weight:600;white-space:nowrap}
-.tab[aria-selected=true]{background:var(--accent);color:var(--accent-fg)}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
-.sw{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:14px}
-.sw[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
-.banner{border-radius:20px;margin-top:12px;padding:22px 18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:linear-gradient(135deg,var(--accent-soft),var(--surface2))}
-.banner .big{font:700 52px/1 var(--font-han);color:var(--accent);min-width:1.6em;text-align:center}
-.banner h2{font-size:22px;line-height:1.3}.banner p{color:var(--muted);font-size:15px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
-.sec{margin-top:26px}
-.sec>h2{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:21px;line-height:1.35;border-inline-start:5px solid var(--accent);padding-inline-start:10px}
-.sec>h2 .har{font-size:14px;color:var(--muted);font-weight:500;font-family:var(--font-ui)}
-.zb{display:block}.zb .t{display:block}
-.pyl{display:none;font:14px/1.5 var(--font-py);color:var(--muted);direction:ltr;text-align:left;margin-top:1px}
-body.py .pyl{display:block}
-.ar2{display:none;color:var(--muted);font-size:15px;line-height:1.7;margin-top:2px}
-body.ar .ar2{display:block}
-.zh{font-family:var(--font-han);font-size:19px;line-height:1.95;direction:ltr;text-align:left;display:block}
-.blk{margin-top:12px}
-.p .zh{font-size:19px}
-.g{border-bottom:2px dotted var(--accent);cursor:pointer;padding-bottom:1px}.g:hover,.g.on{background:var(--accent-soft)}
-.key{border-inline-start:5px solid var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--surface));border-radius:10px;padding:10px 14px}
-.key:before{content:'重点 · نقطة مهمة';display:block;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:2px}
-ul.ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-ul.ul li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 12px}
-.tl{display:grid;gap:0;position:relative;margin:0;padding:0;list-style:none}
-.tl li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
-.tl li:last-child{border:0}
-.tl .lb{font:700 15px/1.3 var(--font-han);color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:6px 8px;text-align:center;align-self:start;direction:ltr}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.cd{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
-.cd .hd{display:flex;gap:8px;align-items:center;justify-content:space-between}
-.cd .hd b{font:700 24px/1.2 var(--font-han);direction:ltr}.cd .hd .ar{font-size:13px;color:var(--muted)}
-.cd .zh{font-size:16px;line-height:1.75}
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
-table{border-collapse:collapse;width:100%;min-width:480px;background:var(--surface)}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);vertical-align:top;text-align:start}
-th{background:var(--accent-soft);font-family:var(--font-han)}td:first-child{font-weight:700;background:var(--surface2)}
-tr:last-child td{border-bottom:0}
-td .zh,th .zh{font-size:16px;line-height:1.7}
-.btn{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
-.btn.p{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
-.sm{min-width:40px;min-height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface2)}
-.sm.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
-/* terms */
-.tg{display:grid;gap:8px;margin-top:12px}
-.tm{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
-.tm .z{font:700 26px/1.2 var(--font-han);direction:ltr;min-width:2em;text-align:center}
-.tm .ex{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:6px;font-size:14px}
-.tm .ex .han{font-size:17px;direction:ltr;display:block;text-align:left}
-.tm .pp{font-family:var(--font-py);direction:ltr;text-align:start}
-/* practice */
-.pq{position:relative}
-.qh{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-.qn{width:28px;height:28px;border-radius:8px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 14px var(--font-py)}
-.qty{font-size:12px;color:var(--muted);background:var(--surface2);border-radius:99px;padding:0 10px}
-.qs{margin-inline-start:auto;font-size:13px;font-weight:700}.qs.ok{color:var(--good)}.qs.no{color:var(--bad)}
-.q .zh{font-size:19px}
-.opts{display:grid;gap:8px;margin-top:10px}
-.op{display:block;width:100%;text-align:start;min-height:48px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface)}
-.op .zh{font-size:17px;line-height:1.7}
-.op.sel{border-color:var(--accent);background:var(--accent-soft)}
-.op.good{border-color:var(--good);background:var(--good-soft)}
-.op.bad{border-color:var(--bad);background:var(--bad-soft)}
-.op:disabled{cursor:default}
-.tf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.fb{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:15px}
-.fb.ok{background:var(--good-soft);color:var(--good)}.fb.no{background:var(--bad-soft);color:var(--bad)}
-.fb .ar{color:var(--fg)}
-.mt{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.mt .col{display:grid;gap:8px;align-content:start}
-.mt .op{min-height:52px;padding:6px 10px}
-.mt .op.done{opacity:.55;border-color:var(--good);background:var(--good-soft)}
-.mt .op.flash{border-color:var(--bad);background:var(--bad-soft)}
-.line{min-height:58px;border:2px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;direction:ltr;align-items:flex-start}
-.pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;direction:ltr}
-.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 12px;text-align:start;max-width:100%}
-.chip .zh{font-size:16px;line-height:1.6}
-.chip.bad{border-color:var(--bad);background:var(--bad-soft)}.chip.good{border-color:var(--good);background:var(--good-soft)}
-.chip .nn{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:var(--seal);color:var(--seal-fg);font:700 12px var(--font-py);margin-inline-end:6px}
-.rows{display:grid;gap:8px;margin-top:10px}
-.rw{border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--surface)}
-.rw.good{border-color:var(--good);background:var(--good-soft)}.rw.bad{border-color:var(--bad);background:var(--bad-soft)}
-.rw .cs{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.cs button{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font:600 15px var(--font-han)}
-.cs button.sel{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
-.cz{font:19px/2.4 var(--font-han);direction:ltr;text-align:left;margin-top:8px}
-.cz select{font:inherit;font-size:16px;min-height:38px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:0 6px;margin:0 3px;max-width:100%}
-.cz select.good{border-color:var(--good);background:var(--good-soft)}.cz select.bad{border-color:var(--bad);background:var(--bad-soft)}
-.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.sum{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-.sum b{font:700 22px var(--font-py)}
-/* discuss */
-textarea{width:100%;min-height:130px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:10px 12px;font:19px/1.8 var(--font-han);margin-top:10px;resize:vertical;direction:ltr;text-align:left}
-.fr{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.fr button{min-height:38px;padding:0 12px;border-radius:999px;border:1px dashed var(--accent);background:var(--accent-soft);color:var(--accent);font:600 15px var(--font-han);direction:ltr}
-.us{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.us span{font:600 14px var(--font-han);padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
-details.md{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--surface2)}
-details.md summary{cursor:pointer;font-weight:600;min-height:32px}
-.arx{display:block;font-size:16px;line-height:1.7}
-/* dialogue */
-.dl{display:grid;grid-template-columns:104px 1fr auto;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:start}.dl:last-child{border:0}
-.dlg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 14px}
-.sk .zh{font-size:15px;color:var(--accent);line-height:1.5;font-weight:700}
-.sli{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.sli>div{flex:1;min-width:0}
-ul.sl li{padding:6px 12px}
-@media(max-width:520px){.dl{grid-template-columns:78px 1fr auto}}
-/* popover */
-#pop{position:fixed;inset-inline:12px;bottom:12px;z-index:30;max-width:560px;margin-inline:auto;background:var(--surface);border:1.5px solid var(--accent);border-radius:18px;padding:14px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
-#pop .r{display:flex;align-items:center;gap:12px}
-#pop .zz{font:700 30px/1.2 var(--font-han);direction:ltr;white-space:nowrap}#pop .r>div:nth-child(2){min-width:0;flex:1}
-#pop .cl{flex:none}
-.toast{position:fixed;inset:auto 16px 90px;margin:auto;max-width:360px;background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:12px;text-align:center;z-index:40}
-.foot{text-align:center;margin-top:36px;padding-top:14px;border-top:1px solid var(--line)}
-@media(max-width:520px){.mt{grid-template-columns:1fr}.tl li{grid-template-columns:70px 1fr}.banner{grid-template-columns:1fr;text-align:center}}
+.wrap{max-width:720px;margin:0 auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.mut{color:var(--muted);font-size:14px}
+h1,h2,h3,p{margin:0}
 
-/* ===== grammar-lesson look ===== */
-body{font-size:16px;line-height:1.65;padding-bottom:64px}
-.wrap{max-width:720px}
-.hdr{position:sticky;top:0;z-index:20;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);padding-block:0}
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);
+  box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
 .top{display:flex;align-items:center;gap:12px;padding-block:12px 4px}
-.seal{flex:none;width:40px;height:40px;border-radius:4px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 24px/1 var(--font-han);transform:rotate(-4deg);outline:2px solid var(--seal);outline-offset:2px;text-decoration:none}
-.ttl{flex:1;min-width:0}.ttl h1{font-size:20px;font-weight:700;line-height:1.3}
-.ttl p{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:rtl}
-.ibtn{appearance:none;flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;text-decoration:none;color:var(--fg);font-size:17px;line-height:1}
-.pill{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seal{flex:none;width:40px;height:40px;border-radius:4px;background:var(--seal);color:var(--seal-fg);
+  display:grid;place-items:center;font:700 24px/1 var(--font-han);transform:rotate(-4deg);
+  outline:2px solid var(--seal);outline-offset:2px}
+.ttl{flex:1;min-width:0}
+.ttl h1{font-size:20px;font-weight:700;line-height:1.3}
+.ttl p{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;
+  padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
 .pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
-.pg{height:3px;border-radius:2px;background:var(--line);margin-top:0;order:3}
-.tabs{gap:2px;margin-top:4px;padding-bottom:0;border-bottom:0;scrollbar-width:none}
+.ibtn{appearance:none;flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);
+  background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:4px}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;min-height:0;border-radius:0;font-size:15px;padding:10px 12px;border-bottom:3px solid transparent;background:none}
-.tab[aria-selected=true]{background:none;color:var(--fg);border-bottom-color:var(--accent)}
-.hdr .tabs{box-shadow:inset 0 -2px 0 var(--line)}
-.banner{display:block;background:none;border-radius:0;padding:0;margin-top:16px}
-.banner .big{display:none}.banner h2{font-size:21px;font-weight:700;line-height:1.35}.banner p{color:var(--muted);font-size:14px;margin-top:2px}
-.sec>h2{border:0;padding:0;font-size:17px;font-weight:700}
-.sec{margin-top:26px}
-.sw{border:1.5px solid var(--line)}
-.btn{border-radius:12px;min-height:48px;border:0;background:var(--surface2);color:var(--fg)}
-.btn.p{background:var(--accent);color:var(--accent-fg)}
-.spk{appearance:none;flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;cursor:pointer;font-size:16px}
-/* flashcards */
-.sech{padding-top:16px}.sech h2{font-size:21px;font-weight:700;line-height:1.35}.sech p{color:var(--muted);font-size:14px;margin-top:2px}
-.fc{background:var(--surface);border:1px solid var(--line);border-radius:20px;cursor:pointer;display:grid;min-height:310px;position:relative;margin-top:14px}
-.face{grid-area:1/1;padding:48px 18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;animation:pop .22s ease-out}
+.tab{appearance:none;border:0;background:none;color:var(--muted);font-size:15px;font-weight:600;
+  padding:10px 12px;border-bottom:3px solid transparent;white-space:nowrap;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.prog{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+/* shared */
+.panel{padding-block:20px 24px}
+.sec-h{margin-bottom:14px}
+.sec-h h2{font-size:21px;font-weight:700;line-height:1.35}
+.sec-h p{color:var(--muted);font-size:14px;margin-top:2px}
+.sub-h{font-size:17px;font-weight:700;margin:26px 0 10px}
+.btn{appearance:none;border:0;border-radius:12px;padding:12px 18px;font-size:16px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:var(--surface2);color:var(--fg)}
+.btn.sm{min-height:40px;padding:8px 14px;font-size:14px}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 12px;
+  font-size:15px;font-weight:600;cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;min-height:40px;justify-content:center}
+.chip.tgl.on{background:var(--accent-soft);border-color:var(--accent)}
+.spk{appearance:none;flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--accent-soft);
+  color:var(--accent);display:grid;place-items:center;cursor:pointer}
+.spk.sm{width:34px;height:34px}
+.spk.big{width:84px;height:84px;background:var(--accent);color:var(--accent-fg)}
+.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
+.han{font-family:var(--font-han);font-weight:500}
+.py{font-family:var(--font-py)}
+.off{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+
+/* flashcard */
+.fc{background:var(--surface);border:1px solid var(--line);border-radius:20px;cursor:pointer;display:grid;min-height:310px;position:relative}
+.face{grid-area:1/1;padding:48px 18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;animation:pop .22s ease-out}
 .face .spk{position:absolute;top:12px;inset-inline-end:12px}
 .bigzh{font:500 clamp(64px,22vw,104px)/1.15 var(--font-han)}
-.fc .pyl2{font:500 30px/1.2 var(--font-py);direction:ltr}.fc .meaning{font-size:26px;font-weight:700;line-height:1.4}
-.fc .exb{width:100%;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;display:grid;gap:2px}
-.fc .exb .han{font:500 22px/1.4 var(--font-han);direction:ltr}
+.hint{color:var(--muted);font-size:14px}
+.fc .pyl{font:500 30px/1.2 var(--font-py)}
+.fc .meaning{font-size:26px;font-weight:700;line-height:1.4}
+.fc .note{font-size:14px;color:var(--muted);max-width:30em}
+.ex{width:100%;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;display:grid;gap:2px;text-align:start}
+.exzh{font:500 22px/1.4 var(--font-han)}
+.expy{font:14px var(--font-py);color:var(--muted)}
+.exar{font-size:15px;direction:rtl;text-align:right}
 @keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
 .navrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
 .cnt{font:500 15px var(--font-py);color:var(--muted)}
 .actrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.tm{border-radius:0;border:0;border-bottom:1px solid var(--line);background:none;padding:10px 4px}
-.tg{gap:0}
+.row{display:grid;grid-template-columns:5.2em 1fr auto auto;gap:12px;align-items:center;padding:10px 4px;
+  border-bottom:1px solid var(--line);cursor:pointer}
+.row.cur{background:var(--accent-soft);border-radius:10px}
+.rz{font:500 26px/1.2 var(--font-han);text-align:start}
+.rpy{font:15px var(--font-py)}
+.rar{font-size:15px;color:var(--muted)}
+.kn{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);color:transparent}
+.kn.on{background:var(--good);border-color:var(--good);color:var(--bg)}
+
+/* dialogue */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.lines{display:grid;gap:10px}
+.line{display:grid;gap:8px;padding:14px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.line.S{background:var(--accent-soft);border-color:transparent}
+.line.playing{outline:2.5px solid var(--accent);outline-offset:1px}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted)}
+.who .spk{margin-inline-start:auto}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--font-han);background:var(--fg);color:var(--bg)}
+.S .av{background:var(--accent);color:var(--accent-fg)}
+.zhline{display:flex;flex-wrap:wrap;gap:4px 2px;direction:ltr;align-items:flex-end}
+.tok{appearance:none;background:none;border:0;border-radius:8px;padding:2px 4px;cursor:pointer;display:inline-flex;
+  flex-direction:column;align-items:center;color:inherit;font:inherit}
+.tok:hover,.tok:focus-visible{background:var(--surface2)}
+.tok .py{font-size:12px;line-height:1.5}
+.tok .zh{font:500 26px/1.25 var(--font-han)}
+.nopy .tok .py{display:none}
+.punc{font:500 26px/1.25 var(--font-han);align-self:flex-end;padding-bottom:0}
+.arline{color:var(--muted);font-size:15px}
+.noar .arline{display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
+  padding:14px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  box-shadow:0 -8px 24px rgba(0,0,0,.12)}
+.sheet-in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.sh-main{display:grid;gap:0}
+.sh-zh{font:500 34px/1.2 var(--font-han)}
+.sh-py{font:16px var(--font-py)}
+.sh-ar{flex:1;font-size:19px;font-weight:700}
+.cq{display:grid;gap:8px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
+.cq b{font-weight:600}
+.cq .o{display:flex;gap:8px;flex-wrap:wrap}
+
+/* grammar */
+.tones{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tn{display:grid;gap:4px;justify-items:center;text-align:center;padding:12px 8px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.tn svg{width:56px;height:56px}
+.tn .pyl{font:500 24px var(--font-py)}
+.tn .nm{font-size:13px;color:var(--muted)}
+.tn .ex1{font:500 20px var(--font-han)}
+.formula{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0 12px;font-size:15px}
+.fm{padding:4px 10px;border-radius:8px;background:var(--surface2);font-weight:600}
+.fm.k{background:var(--accent);color:var(--accent-fg);font-family:var(--font-han);font-size:18px}
+.sentbox{display:grid;gap:6px;padding:12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);margin-top:10px}
+.sentbox .zhline{align-items:flex-end}
+.qmark{background:var(--accent);color:var(--accent-fg);border-radius:6px;padding:0 4px}
+.qa{display:grid;gap:8px;margin-top:10px}
+.qa .m{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.qa .m .t{flex:1;display:grid}
+.qa .m .z{font:500 22px/1.35 var(--font-han)}
+
+/* writing */
+.cvwrap{width:100%;max-width:340px;margin:0 auto}
+#cv{width:100%;aspect-ratio:1;display:block;border-radius:14px;touch-action:none;border:1px solid var(--line);cursor:crosshair}
+.winfo{display:flex;align-items:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.winfo .big{font:500 44px/1 var(--font-han)}
+
+/* practice */
+.stats{display:grid;gap:12px}
+.xprow{display:flex;align-items:center;gap:12px}
+.xpbar{flex:1;height:10px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.xpbar i{display:block;height:100%;background:var(--accent)}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{width:62px;text-align:center;font-size:12px;line-height:1.35;opacity:.38;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none}
+.badge span{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 4px;border-radius:50%;
+  border:2px solid var(--seal);color:var(--seal);font:700 22px var(--font-han);background:var(--surface)}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.act{appearance:none;text-align:start;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px;
+  cursor:pointer;display:grid;gap:4px;align-content:start}
+.act strong{font-size:16px}
+.act small{color:var(--muted);font-size:13px;line-height:1.5}
+.act.feat{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.act.feat small{color:inherit;opacity:.85}
+.stars{display:flex;gap:2px;color:var(--line)}
+.stars .on{color:var(--star)}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.qbar{flex:1;height:8px;border-radius:5px;background:var(--surface2);overflow:hidden}
+.qbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.qprompt{display:grid;gap:8px;justify-items:center;text-align:center;margin-bottom:18px}
+.qprompt .ar-s{font-size:20px;font-weight:700}
+.opts{display:grid;gap:10px}
+.opt{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;min-height:54px;padding:10px 14px;
+  font-size:18px;font-weight:600;cursor:pointer;text-align:center}
+.opt .pyopt{font:500 22px var(--font-py)}
+.opt.good{background:var(--good-soft);border-color:var(--good)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.slot,.pool{display:flex;flex-wrap:wrap;gap:8px;direction:ltr;min-height:64px;align-items:center;padding:10px;border-radius:14px}
+.slot{border:2px dashed var(--line);margin-bottom:12px;background:var(--surface)}
+.slot .ph{direction:rtl;color:var(--muted);font-size:14px;margin:0 auto}
+.pool{margin-bottom:16px;justify-content:center}
+.chip .zh{font:500 24px/1.2 var(--font-han)}
+.chip .py{font-size:11px;color:var(--muted)}
+.chip.pick{background:var(--accent-soft);border-color:var(--accent)}
+.chip.good{background:var(--good-soft);border-color:var(--good)}
+.chip.bad{background:var(--bad-soft);border-color:var(--bad)}
+.fillsent{font:500 30px/1.6 var(--font-han);direction:ltr}
+.blank{display:inline-block;min-width:1.6em;border-bottom:3px solid var(--accent);text-align:center;margin:0 4px}
+.blank.good{border-color:var(--good);color:var(--good)}
+.blank.bad{border-color:var(--bad);color:var(--bad)}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:grid;gap:8px;align-content:start}
+.mi{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;min-height:58px;padding:6px 8px;
+  cursor:pointer;display:grid;place-items:center;font-size:16px;font-weight:600;line-height:1.35}
+.mi .zh{font:500 24px/1.2 var(--font-han)}
+.mi .py{font-size:12px;color:var(--muted)}
+.mi.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mi.ok{border-color:var(--good);background:var(--good-soft);opacity:.7}
+.mi.no{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin:16px 0;padding:14px;border-radius:14px;display:grid;gap:6px}
+.fb.good{background:var(--good-soft);border:1px solid var(--good)}
+.fb.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.fb .fw{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.res{display:grid;gap:14px;justify-items:center;text-align:center;padding:12px 0}
+.res .stars svg{width:44px;height:44px}
+.res h3{font-size:24px}
+.res .sc{font:700 44px var(--font-py)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;
+  background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;max-width:90vw;text-align:center}
+@media (min-width:560px){
+  .tones{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* lesson 8 additions */
+[hidden]{display:none!important}
+.tg{display:inline-flex;align-items:flex-end;white-space:nowrap}
+.il{width:100%;height:100%;display:block;stroke:var(--fg);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.il .a{fill:var(--accent-soft)}.il .b{fill:var(--surface2)}.il .r{fill:var(--seal)}.il .y{fill:var(--star)}.il .w{fill:var(--surface)}.il .k{fill:var(--fg);stroke:none}
+.pic{display:block;width:100%;height:100%}
+.pic.pb{width:92px;height:92px;margin-bottom:2px}
+.pic.pt{width:44px;height:44px}
+.picbig{width:140px;height:140px}
+.rp{width:44px;height:44px}
+.row{grid-template-columns:44px 5.6em 1fr auto auto}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:0 8px;margin-inline-start:6px;background:var(--surface2);color:var(--muted)}
+.scene{display:flex;gap:8px;justify-content:space-around;flex-wrap:wrap;padding:12px;border-radius:16px;background:var(--surface);border:1px solid var(--line);margin:10px 0 6px}
+.scene figure{margin:0;display:grid;justify-items:center;gap:4px;width:84px;text-align:center}
+.scene .sci{width:68px;height:68px}
+.scene figcaption{font-size:12px;color:var(--muted);line-height:1.35}
+.line.N{background:var(--surface);border-style:dashed}
+.line.L{background:var(--accent-soft);border-color:transparent}
+.line.C{background:var(--surface2);border-color:transparent}
+.L .av{background:var(--accent);color:var(--accent-fg)}
+.C .av{background:var(--seal);color:var(--seal-fg)}
+.N .av{background:var(--muted);color:var(--bg)}
+.calcard{display:grid;justify-items:center;border:2px solid var(--fg);border-radius:14px;overflow:hidden;width:150px;background:var(--surface)}
+.calcard .cm{background:var(--seal);color:var(--seal-fg);width:100%;padding:2px 0;font-weight:700;text-align:center}
+.calcard .cd{font:700 56px/1.15 var(--font-py)}
+.calcard .cw{padding-bottom:6px;font-weight:600}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper b{font:700 28px var(--font-py);min-width:2ch;text-align:center}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.tile{display:grid;justify-items:center;gap:2px;padding:10px 6px;border:1px solid var(--line);border-radius:12px;background:var(--bg);text-align:center}
+.tile .py{font-size:15px}
+.sdg{width:40px;height:40px;flex:none}
+.qa .m .t{min-width:0}
+
+.line.S,.line.A{background:var(--accent-soft);border-color:transparent}
+.line.X,.line.Y{background:var(--surface2);border-color:transparent}
+.S .av,.A .av{background:var(--accent);color:var(--accent-fg)}
+.X .av,.Y .av{background:var(--seal);color:var(--seal-fg)}
+.cqo{display:inline-flex;flex-direction:column;align-items:center;line-height:1.3;height:auto;padding-block:6px}
+.cqo .py{font-size:12px}
+.cq>b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+
+table{border-collapse:collapse;width:100%;min-width:420px;background:var(--surface)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);text-align:start;vertical-align:top}
+th{background:var(--accent-soft)}td:first-child{background:var(--surface2);font-weight:600}tr:last-child td{border-bottom:0}
+.sh2{font-size:15px;font-weight:700;margin:18px 0 6px}
+.tiles .tile .han{font-size:24px}
+.pair{display:grid;gap:6px;margin-top:8px}.pair .tiles{grid-template-columns:1fr 1fr}
+textarea{width:100%;min-height:96px;margin-top:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);font:500 20px/1.6 var(--font-han);resize:vertical}
+.us{display:flex;gap:6px;flex-wrap:wrap}.us span{padding:2px 10px;border-radius:99px;border:1px solid var(--line);font:500 16px var(--font-han);color:var(--muted)}.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
 </style>
-<div class="wrap" dir="rtl" lang="ar">
-<header class="hdr"><div class="top"><a class="seal ib" id="seal" href="index.html" aria-label="العودة إلى الدروس"></a><div class="ttl"><h1 id="ttl"></h1><p id="sub"></p></div><button class="pill" id="slow" aria-pressed="false">صوت بطيء</button><button class="ibtn" id="th" aria-label="الوضع الليلي">☾</button></div>
-<div class="pg" aria-hidden="true"><i id="pgb"></i></div>
-<div class="tabs" role="tablist" id="tabs"></div></header>
-<main id="main"></main>
-<footer class="foot mut">© 2026 أ. محمود الصديق (<span class="han">大漠</span>) · جميع الحقوق محفوظة · المحتوى للتعلّم الشخصي ولا يجوز نسخه أو إعادة نشره.</footer>
+
+<div class="wrap" id="app" dir="rtl" lang="ar">
+  <header class="hdr">
+    <div class="top">
+      <a class="seal" href="index.html#prac" aria-label="العودة إلى الدروس" lang="zh" style="text-decoration:none">十</a>
+      <div class="ttl"><h1>الدرس العاشر</h1><p>我在这儿买光盘</p></div>
+      <button class="pill" id="slowbtn" data-act="slow" aria-pressed="false">صوت بطيء</button>
+      <button class="ibtn" data-act="theme" aria-label="تبديل المظهر الفاتح والداكن"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="أقسام الدرس">
+      <button class="tab" role="tab" data-act="tab" data-tab="vocab">المفردات</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="dialogue">الحوار</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="grammar">القواعد</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="writing">الكتابة</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="practice">التمارين</button>
+    </nav>
+    <div class="prog" aria-hidden="true"><i id="gprog"></i></div>
+  </header>
+  <main>
+    <section id="p-vocab" class="panel" hidden></section>
+    <section id="p-dialogue" class="panel" hidden></section>
+    <section id="p-grammar" class="panel" hidden></section>
+    <section id="p-writing" class="panel" hidden></section>
+    <section id="p-practice" class="panel" hidden></section>
+  </main>
+  <div id="sheet" class="sheet" hidden></div>
+  <div id="toast" class="toast" role="status" hidden></div>
 </div>
-<div id="pop" hidden></div><div class="toast" id="toast" hidden></div>
+
 <script>
 (function(){
-var D={"n":10,"course":"prac","cname":"القراءة ١","big":"买","title_zh":"我在这儿买光盘","title_ar":"الدرس ١٠ · أشتري الأقراص هنا","intro_ar":"المساومة والتسوّق جزء من الحياة في الصين. تتعلّم في هذا الدرس العملة الصينية، وكيف تتحدث عن أذواقك وهواياتك، وماذا تفعل حين لا تعرف كيف تقول شيئاً.","defpy":1,"minc":12,"tword":"كلمة","tabs":[["read","الدرس"],["terms","المفردات"],["prac","التمارين"],["disc","تحدّث"]],"sections":[{"h":"一、课文（一）","ar":"النص ١: في المجمّع التجاري","b":[{"dlg":[["王小云｜وانغ شياويون","大为，你在这儿买什么？｜داوي، ماذا تشتري هنا؟"],["马大为｜ما داوي","我买音乐光盘。｜أشتري أقراص موسيقى."],["王小云｜وانغ شياويون","你常常来这儿吗？｜هل تأتي إلى هنا كثيراً؟"],["马大为｜ما داوي","我不常来这儿。星期天我常常跟林娜去小商场。这个商场很大。｜لا آتي إلى هنا كثيراً. يوم الأحد أذهب كثيراً مع لين نا إلى المجمع الصغير. هذا المجمع كبير جداً."],["王小云｜وانغ شياويون","你喜欢什么音乐？｜أي موسيقى تحب؟"],["马大为｜ما داوي","我喜欢中国音乐。这张光盘怎么样？｜أحب الموسيقى الصينية. كيف هذا القرص؟"],["王小云｜وانغ شياويون","这张很好，是《梁祝》，很有名。｜هذا جيد جداً، إنه «ليانغ تشو»، مشهور جداً."],["马大为｜ما داوي","好，我买这张。这儿有没有书和报？｜جيد، سأشتري هذا. هل توجد هنا كتب وصحف؟"],["王小云｜وانغ شياويون","这儿没有书，也没有报。｜لا توجد هنا كتب ولا صحف."],["马大为｜ما داوي","本子呢？｜والدفاتر؟"],["王小云｜وانغ شياويون","有，在那儿买。跟我来，我也买本子。｜نعم، تُباع هناك. تعال معي، أنا أيضاً سأشتري دفاتر."]]}]},{"h":"一、课文（二）","ar":"النص ٢: في السوق (المساومة)","b":[{"dlg":[["师傅｜البائع","先生，您要什么？｜سيدي، ماذا تريد؟"],["丁力波｜دينغ ليبو","你好，师傅。请问，这是什么？｜مرحباً أيها الأخ. عفواً، ما هذا؟"],["师傅｜البائع","您不认识吗？这是香蕉苹果。｜ألا تعرفه؟ هذا «تفاح الموز»."],["丁力波｜دينغ ليبو","对不起，我是问：这个汉语怎么说？｜آسف، أسأل: كيف يُقال هذا بالصينية؟"],["师傅｜البائع","啊，您是外国人。您在哪儿工作？｜آه، أنت أجنبي. أين تعمل؟"],["丁力波｜دينغ ليبو","我在语言学院学习。｜أنا أدرس في معهد اللغات."],["师傅｜البائع","您学习汉语，是不是？您跟我学，很容易：这叫香蕉，这叫香蕉苹果，这也是苹果，那是葡萄……｜أنت تدرس الصينية، أليس كذلك؟ تعلّم معي، الأمر سهل جداً: هذا يسمى موز، وهذا تفاح الموز، وهذا أيضاً تفاح، وذلك عنب…"],["丁力波｜دينغ ليبو","香蕉、苹果、香蕉苹果……，一斤苹果多少钱？｜موز، تفاح، تفاح الموز… كم سعر جين (نصف كيلو) من التفاح؟"],["师傅｜البائع","一斤三块二毛钱。｜جين واحد بثلاثة يوان وعشرين ماو."],["丁力波｜دينغ ليبو","您的苹果真贵。｜تفاحكم غالٍ حقاً."],["师傅｜البائع","一斤三块二不贵。您看，我的苹果大。好，做个朋友，三块钱一斤。｜ثلاثة يوان واثنان ماو ليس غالياً. انظر، تفاحي كبير. حسناً، لنكن أصدقاء، ثلاثة يوان للجين."],["丁力波｜دينغ ليبو","一斤香蕉多少钱？｜كم سعر جين الموز؟"],["师傅｜البائع","两块七毛五分一斤，五块钱两斤。｜يوانان وسبعة ماو وخمسة فن للجين، وخمسة يوان للجينين."],["丁力波｜دينغ ليبو","我买三斤香蕉和两斤香蕉苹果。｜أشتري ثلاثة جين موز وجينين من تفاح الموز."],["师傅｜البائع","一共十四块钱。再送您一个苹果。您还要什么？｜المجموع أربعة عشر يوان. وأهديك تفاحة أخرى. هل تريد شيئاً آخر؟"],["丁力波｜دينغ ليبو","不要了，谢谢。给你钱。｜لا شكراً، لا أريد شيئاً آخر. تفضل المال."],["师傅｜البائع","好，您给我二十块钱，我找您六块钱。再见。｜حسناً، أعطيتني عشرين يواناً وأرجع لك ستة يوان. إلى اللقاء."],["丁力波｜دينغ ليبو","再见！｜إلى اللقاء!"]]}]},{"h":"二、注释","ar":"الملاحظات","b":[{"p":"① 这个商场很大。｜إذا جاء اسم الإشارة «这/那» صفةً للاسم فإننا نضع بينهما كلمة عدّ: 这张光盘، 那个朋友، 那瓶酒."},{"p":"② 先生，您要什么？｜«先生» لقب لمخاطبة الرجل البالغ، ويُستعمل أيضاً احتراماً لعالم أو متخصص رجلاً كان أو امرأة. «您要什么؟» و«您还要什么؟» يقولهما البائعون وموظفو الفنادق لعرض المساعدة."},{"p":"③ 你好，师傅。｜«师傅» صيغة احترام لمخاطبة العمال وأصحاب المهن الخدمية: سائق التاكسي والحافلة، بائع التذاكر، الطباخ، موظف الفندق، وصار استعمالها أوسع اليوم."},{"p":"④ 我是问：这个汉语怎么说？｜«怎么 + فعل» تسأل عن طريقة فعل شيء: 怎么说؟ 怎么做؟ 怎么去؟ 怎么介绍؟"},{"p":"⑤ 您学习汉语，是不是？｜النمط «……，是不是؟» لإبداء رأي أو تخمين مع انتظار رد. الجواب المثبت «是啊»، والمنفي «不（是）». مثال: A: 你喜欢中国音乐，是吗؟ B: 是啊。"},{"p":"⑥ 一斤苹果多少钱？｜«كم سعر جين التفاح؟» والجين (斤) نصف كيلو. يمكن قلب الجملة: 多少钱一斤؟ ← 三块二一斤. في المتاجر الكبرى لا يساوم الناس عادةً، لكن في الأسواق الحرّة والأكشاك كثيراً ما يساومون."},{"p":"⑦ 一斤三块二毛钱。｜وحدات العملة (人民币): 元 (يوان) وتُنطق في الكلام 块، و角 وتُنطق 毛، و分 (فن). وإذا انتهى المبلغ بـ毛 أو 分 يمكن حذف «毛钱/分钱». مثال: 1.75元 ← 一块七毛五. وإذا بدأ المبلغ بـ٢毛 نقول 两毛، وإذا انتهى بـ٢分 نقول 二分: 0.22元 ← 两毛二."},{"key":"不要了，谢谢。｜معناها: «لا، شكراً (لا أريد المزيد)»."}]},{"h":"三、人民币","ar":"العملة الصينية","b":[{"table":{"head":["书面｜الكتابة","口语｜في الكلام","价值｜القيمة"],"rows":[["元","块","١ يوان"],["角","毛","١/١٠ يوان"],["分","分","١/١٠٠ يوان"]]}},{"sl":["一块七毛五｜١.٧٥ يوان","四块八｜٤.٨٠ يوان","两毛二｜٠.٢٢ يوان","三块二毛｜٣.٢٠ يوان","两块七毛五分｜٢.٧٥ يوان","二十块｜٢٠ يوان"]},{"p":"补充词｜كلمات إضافية:"},{"sl":["元｜يوان (كتابياً)","笔｜قلم","支｜كلمة عدّ للأقلام","份｜كلمة عدّ للصحف","本｜كلمة عدّ للكتب والدفاتر","杯｜كوب","售货员｜بائع","作家｜كاتب","便宜｜رخيص","书店｜مكتبة","体育馆｜صالة رياضية","卖｜يبيع"]}]},{"h":"四、关键句","ar":"الجمل المفتاحية","b":[{"sl":["这个商场很大。｜هذا المجمع كبير جداً.","一斤香蕉多少钱？｜كم سعر جين الموز؟","两块七毛五一斤。｜يوانان وسبعة ماو وخمسة فن للجين.","您在哪儿工作？｜أين تعمل؟","我常常跟他来这儿。｜أنا آتي إلى هنا كثيراً معه.","我送你一个苹果。｜أهديك تفاحة.","您给我二十块钱。｜أعطيتني عشرين يواناً.","这个汉语怎么说？｜كيف يُقال هذا بالصينية؟"]}]}],"terms":[{"zh":"在","ar":"في / عند","py":"zài","ex":"我在这儿买光盘。｜أشتري الأقراص هنا."},{"zh":"这儿","ar":"هنا","py":"zhèér","ex":"我常常来这儿。｜آتي إلى هنا كثيراً."},{"zh":"光盘","ar":"قرص (CD)","py":"guāngpán","ex":"我买音乐光盘。｜أشتري أقراص موسيقى."},{"zh":"音乐","ar":"موسيقى","py":"yīnyuè","ex":"我喜欢中国音乐。｜أحب الموسيقى الصينية."},{"zh":"商场","ar":"مجمع تجاري","py":"shāngchǎng","ex":"这个商场很大。｜هذا المجمع كبير جداً."},{"zh":"常常","ar":"كثيراً / غالباً","py":"chángcháng","ex":"我常常来这儿。｜آتي إلى هنا كثيراً."},{"zh":"跟","ar":"مع / يتبع","py":"gēn","ex":"跟我来。｜تعال معي."},{"zh":"有名","ar":"مشهور","py":"yǒumíng","ex":"很有名。｜مشهور جداً."},{"zh":"书","ar":"كتاب","py":"shū","ex":"这儿没有书。｜لا توجد هنا كتب."},{"zh":"报","ar":"صحيفة","py":"bào","ex":"这儿没有报。｜لا توجد هنا صحف."},{"zh":"本子","ar":"دفتر","py":"běnzi","ex":"本子在那儿买。｜الدفاتر تُباع هناك."},{"zh":"那儿","ar":"هناك","py":"nàér","ex":"在那儿买。｜اشترِ هناك."},{"zh":"先生","ar":"سيد / أستاذ","py":"xiānsheng","ex":"先生，您要什么？｜سيدي، ماذا تريد؟"},{"zh":"要","ar":"يريد","py":"yào","ex":"您要什么？｜ماذا تريد؟"},{"zh":"师傅","ar":"أيها الأخ (احتراماً للعامل)","py":"shīfu","ex":"你好，师傅。｜مرحباً أيها الأخ."},{"zh":"香蕉苹果","ar":"تفاح الموز (نوع)","py":"xiāngjiāo píngguǒ","ex":"这是香蕉苹果。｜هذا تفاح الموز."},{"zh":"香蕉","ar":"موز","py":"xiāngjiāo","ex":"一斤香蕉｜جين موز"},{"zh":"苹果","ar":"تفاح","py":"píngguǒ","ex":"一斤苹果多少钱？｜كم سعر جين التفاح؟"},{"zh":"对不起","ar":"آسف","py":"duìbùqǐ","ex":"对不起，请再说一遍。｜آسف، أعد من فضلك."},{"zh":"怎么","ar":"كيف","py":"zěn me","ex":"这个汉语怎么说？｜كيف يُقال هذا بالصينية؟"},{"zh":"容易","ar":"سهل","py":"róngyì","ex":"学汉语很容易。｜تعلّم الصينية سهل."},{"zh":"葡萄","ar":"عنب","py":"pútáo","ex":"那是葡萄。｜ذاك عنب."},{"zh":"钱","ar":"مال / نقود","py":"qián","ex":"多少钱？｜كم السعر؟"},{"zh":"斤","ar":"جين (نصف كيلو)","py":"jīn","ex":"一斤苹果｜جين تفاح"},{"zh":"块","ar":"يوان (كلاماً)","py":"kuài","ex":"三块钱一斤｜ثلاثة يوان للجين"},{"zh":"毛","ar":"ماو (١/١٠ يوان)","py":"máo","ex":"两毛钱｜ماوان"},{"zh":"贵","ar":"غالٍ","py":"guì","ex":"您的苹果真贵。｜تفاحكم غالٍ حقاً."},{"zh":"分","ar":"فن (١/١٠٠ يوان)","py":"fēn","ex":"五分钱｜خمسة فن"},{"zh":"送","ar":"يهدي","py":"sòng","ex":"再送您一个苹果。｜وأهديك تفاحة."},{"zh":"给","ar":"يعطي","py":"gěi","ex":"给你钱。｜أعطيك المال."},{"zh":"找","ar":"يرجع الباقي / يبحث","py":"zhǎo","ex":"我找您六块钱。｜أرجع لك ستة يوان."}],"practice":[{"t":"mcq","q":"“一斤香蕉多少钱？”可以怎么回答？","o":["两块七毛五一斤。","我在商场买。","我很喜欢香蕉。","这是香蕉。"],"a":0,"why":"«多少钱» سؤال عن السعر ← الجواب بالمبلغ."},{"t":"match","q":"صِل الكلمة بمعناها","p":[["商场","مجمع تجاري"],["光盘","قرص CD"],["苹果","تفاح"],["钱","مال"],["贵","غالٍ"],["送","يهدي"]]},{"t":"cloze","q":"您___我二十块钱，我___您六块钱。","a":["给","找"],"bank":["给","找","送","买"]},{"t":"order","q":"رتّب الجملة: كم سعر جين التفاح؟","items":["一斤","苹果","多少","钱","？"]},{"t":"mcq","q":"“一块七毛五”是多少钱？","o":["1.75元","17.5元","1.57元","7.15元"],"a":0,"why":"一块 = ١ يوان، 七毛 = ٠.٧، 五 = ٠.٠٥ → ١.٧٥."},{"t":"tf","q":"大为常常来这个商场买光盘。","a":false,"why":"«我不常来这儿» — داوي لا يأتي كثيراً إلى هذا المكان."},{"t":"mcq","q":"丁力波想问“这个汉语怎么说？”因为他：","o":["不知道苹果的汉语怎么说","不想买苹果","很忙","不认识师傅"],"a":0,"why":"لأنه يريد أن يعرف الاسم الصيني."},{"t":"mcq","q":"哪一个对？","o":["这张光盘","这个光盘","这瓶光盘","这本光盘"],"a":0,"why":"كلمة عدّ القرص هي «张»."},{"t":"listen","q":"استمع ثم اختر الجملة التي سمعتها","say":"一斤香蕉多少钱？","o":["一斤香蕉多少钱？","一斤苹果多少钱？","两斤香蕉多少钱？"],"a":0},{"t":"say","q":"استمع لكل جملة ثم كرّرها بصوت عالٍ","items":["这个汉语怎么说？｜كيف يُقال هذا بالصينية؟","一斤苹果多少钱？｜كم سعر جين التفاح؟","不要了，谢谢。给你钱。｜لا شكراً. تفضل المال."]}],"discuss":[{"q":"你在市场买东西：问价钱，然后买。","ar":"تتسوّق في السوق: اسأل عن السعر ثم اشترِ.","frames":["师傅，","一斤……多少钱？","我买……斤。","一共……钱。","给你钱。"],"use":["多少钱","一共","给","买"],"model":"师傅，一斤苹果多少钱？三块钱一斤。我买两斤。一共六块钱。给你钱。｜أيها الأخ، كم سعر جين التفاح؟ ثلاثة يوان للجين. أشتري جينين. المجموع ستة يوان. تفضل المال."},{"q":"你喜欢什么音乐？你常常去哪儿买东西？","ar":"أي موسيقى تحب؟ وأين تتسوق عادةً؟","frames":["我喜欢……音乐。","我常常去……","我常常跟……去。","这个……很大。"],"use":["喜欢","音乐","常常","跟"],"model":"我喜欢中国音乐。我常常去商场，我常常跟朋友去。这个商场很大。｜أحب الموسيقى الصينية. أذهب كثيراً إلى المجمع، وأذهب مع أصدقائي. هذا المجمع كبير جداً."}],"py":{"买":"mǎi","我在这儿买光盘":"wǒ zài zhèér mǎi guāngpán","一、课文（一）":"yì, kèwén (yì)","王小云":"Wáng Xiǎoyún","大为，你在这儿买什么？":"dà wèi, nǐ zài zhèér mǎi shénme?","马大为":"Mǎ Dàwéi","我买音乐光盘。":"wǒ mǎi yīnyuè guāngpán.","你常常来这儿吗？":"nǐ chángcháng lái zhèér ma?","我不常来这儿。星期天我常常跟林娜去小商场。这个商场很大。":"wǒ bù cháng lái zhèér. xīngqītiān wǒ chángcháng gēn Lín Nà qù xiǎo shāngchǎng. zhè gè shāngchǎng hěn dà.","你喜欢什么音乐？":"nǐ xǐhuan shénme yīnyuè?","我喜欢中国音乐。这张光盘怎么样？":"wǒ xǐhuan Zhōngguó yīnyuè. zhè Zhāng guāngpán zěnmeyàng?","这张很好，是《梁祝》，很有名。":"zhè Zhāng hěn hǎo, shì “Liáng Zhù”, hěn yǒumíng.","好，我买这张。这儿有没有书和报？":"hǎo, wǒ mǎi zhè Zhāng. zhèér yǒu méi yǒu shū hé bào?","这儿没有书，也没有报。":"zhèér méi yǒu shū, yě méi yǒu bào.","本子呢？":"běnzi ne?","有，在那儿买。跟我来，我也买本子。":"yǒu, zài nàér mǎi. gēn wǒ lái, wǒ yě mǎi běnzi.","一、课文（二）":"yì, kèwén (èr)","师傅":"shīfu","先生，您要什么？":"xiānsheng, nín yào shénme?","丁力波":"Dīng Lìbō","你好，师傅。请问，这是什么？":"nǐ hǎo, shīfu. qǐng wèn, zhè shì shénme?","您不认识吗？这是香蕉苹果。":"nín bú rènshi ma? zhè shì xiāngjiāopíngguǒ.","对不起，我是问：这个汉语怎么说？":"duìbùqǐ, wǒ shì wèn: zhè gè Hànyǔ zěnme shuō?","啊，您是外国人。您在哪儿工作？":"a, nín shì wàiguó rén. nín zài nǎér gōngzuò?","我在语言学院学习。":"wǒ zài Yǔyán Xuéyuàn xuéxí.","您学习汉语，是不是？您跟我学，很容易：这叫香蕉，这叫香蕉苹果，这也是苹果，那是葡萄……":"nín xuéxí Hànyǔ, shì búshì? nín gēn wǒ xué, hěn róngyì: zhè jiào xiāngjiāo, zhè jiào xiāngjiāopíngguǒ, zhè yě shì píngguǒ, nà shì pútáo … …","香蕉、苹果、香蕉苹果……，一斤苹果多少钱？":"xiāngjiāo, píngguǒ, xiāngjiāopíngguǒ … …, yì jīn píngguǒ duōshǎo qián?","一斤三块二毛钱。":"yì jīn sān kuài èr máo qián.","您的苹果真贵。":"nín de píngguǒ zhēn guì.","一斤三块二不贵。您看，我的苹果大。好，做个朋友，三块钱一斤。":"yì jīn sān kuài èr bú guì. nín kàn, wǒ de píngguǒ dà. hǎo, zuò gè péngyou, sān kuài qián yì jīn.","一斤香蕉多少钱？":"yì jīn xiāngjiāo duōshǎo qián?","两块七毛五分一斤，五块钱两斤。":"liǎng kuài qī máo wǔ fēn yì jīn, wǔ kuài qián liǎng jīn.","我买三斤香蕉和两斤香蕉苹果。":"wǒ mǎi sān jīn xiāngjiāo hé liǎng jīn xiāngjiāopíngguǒ.","一共十四块钱。再送您一个苹果。您还要什么？":"yígòng shí sì kuài qián. zài sòng nín yí gè píngguǒ. nín hái yào shénme?","不要了，谢谢。给你钱。":"bú yào le, xièxie. gěi nǐ qián.","好，您给我二十块钱，我找您六块钱。再见。":"hǎo, nín gěi wǒ èrshí kuài qián, wǒ zhǎo nín liù kuài qián. zàijiàn.","再见！":"zàijiàn!","二、注释":"èr, zhù shì","① 这个商场很大。":"① zhè gè shāngchǎng hěn dà.","② 先生，您要什么？":"② xiānsheng, nín yào shénme?","③ 你好，师傅。":"③ nǐ hǎo, shīfu.","④ 我是问：这个汉语怎么说？":"④ wǒ shì wèn: zhè gè Hànyǔ zěnme shuō?","⑤ 您学习汉语，是不是？":"⑤ nín xuéxí Hànyǔ, shì búshì?","⑥ 一斤苹果多少钱？":"⑥ yì jīn píngguǒ duōshǎo qián?","⑦ 一斤三块二毛钱。":"⑦ yì jīn sān kuài èr máo qián.","不要了，谢谢。":"bú yào le, xièxie.","三、人民币":"sān, rén mín bì","书面":"shū miàn","口语":"kǒu yǔ","价值":"jià zhí","元":"yuán","块":"kuài","角":"jiǎo","毛":"máo","分":"fēn","一块七毛五":"yí kuài qī máo wǔ","四块八":"sì kuài bā","两毛二":"liǎng máo èr","三块二毛":"sān kuài èr máo","两块七毛五分":"liǎng kuài qī máo wǔ fēn","二十块":"èrshí kuài","补充词":"bǔ chōng cí","笔":"bǐ","支":"zhī","份":"fèn","本":"běn","杯":"bēi","售货员":"shòu huò yuán","作家":"zuò jiā","便宜":"biàn yí","书店":"shūdiàn","体育馆":"tǐ yù guǎn","卖":"mài","四、关键句":"sì, guān jiàn jù","这个商场很大。":"zhè gè shāngchǎng hěn dà.","两块七毛五一斤。":"liǎng kuài qī máo wǔ yì jīn.","您在哪儿工作？":"nín zài nǎér gōngzuò?","我常常跟他来这儿。":"wǒ chángcháng gēn tā lái zhèér.","我送你一个苹果。":"wǒ sòng nǐ yí gè píngguǒ.","您给我二十块钱。":"nín gěi wǒ èrshí kuài qián.","这个汉语怎么说？":"zhè gè Hànyǔ zěnme shuō?","“一斤香蕉多少钱？”可以怎么回答？":"“yì jīn xiāngjiāo duōshǎo qián?” kě yǐ zěnme huí dá?","我在商场买。":"wǒ zài shāngchǎng mǎi.","我很喜欢香蕉。":"wǒ hěn xǐhuan xiāngjiāo.","这是香蕉。":"zhè shì xiāngjiāo.","商场":"shāngchǎng","光盘":"guāngpán","苹果":"píngguǒ","钱":"qián","贵":"guì","送":"sòng","您___我二十块钱，我___您六块钱。":"nín _ _ _ wǒ èrshí kuài qián, wǒ _ _ _ nín liù kuài qián.","您＿＿我二十块钱，我＿＿您六块钱。":"nín ＿ ＿ wǒ èrshí kuài qián, wǒ ＿ ＿ nín liù kuài qián.","给":"gěi","找":"zhǎo","一斤":"yì jīn","多少":"duōshǎo","“一块七毛五”是多少钱？":"“yí kuài qī máo wǔ” shì duōshǎo qián?","大为常常来这个商场买光盘。":"dà wèi chángcháng lái zhè gè shāngchǎng mǎi guāngpán.","丁力波想问“这个汉语怎么说？”因为他：":"Dīng Lìbō xiǎng wèn “zhè gè Hànyǔ zěnme shuō?” yīn wèi tā:","不知道苹果的汉语怎么说":"bù zhī dào píngguǒ de Hànyǔ zěnme shuō","不想买苹果":"bù xiǎng mǎi píngguǒ","很忙":"hěn máng","不认识师傅":"bú rènshi shīfu","哪一个对？":"nǎ yí gè duì?","这张光盘":"zhè Zhāng guāngpán","这个光盘":"zhè gè guāngpán","这瓶光盘":"zhè píng guāngpán","这本光盘":"zhè běn guāngpán","一斤苹果多少钱？":"yì jīn píngguǒ duōshǎo qián?","两斤香蕉多少钱？":"liǎng jīn xiāngjiāo duōshǎo qián?","你在市场买东西：问价钱，然后买。":"nǐ zài shì chǎng mǎi dōng xī: wèn jià qián, rán hòu mǎi.","师傅，":"shīfu,","一斤……多少钱？":"yì jīn … … duōshǎo qián?","我买……斤。":"wǒ mǎi … … jīn.","一共……钱。":"yígòng … … qián.","给你钱。":"gěi nǐ qián.","多少钱":"duōshǎo qián","一共":"yígòng","师傅，一斤苹果多少钱？三块钱一斤。我买两斤。一共六块钱。给你钱。":"shīfu, yì jīn píngguǒ duōshǎo qián? sān kuài qián yì jīn. wǒ mǎi liǎng jīn. yígòng liù kuài qián. gěi nǐ qián.","你喜欢什么音乐？你常常去哪儿买东西？":"nǐ xǐhuan shénme yīnyuè? nǐ chángcháng qù nǎér mǎi dōng xī?","我喜欢……音乐。":"wǒ xǐhuan … … yīnyuè.","我常常去……":"wǒ chángcháng qù … …","我常常跟……去。":"wǒ chángcháng gēn … … qù.","这个……很大。":"zhè gè … … hěn dà.","喜欢":"xǐhuan","音乐":"yīnyuè","常常":"chángcháng","跟":"gēn","我喜欢中国音乐。我常常去商场，我常常跟朋友去。这个商场很大。":"wǒ xǐhuan Zhōngguó yīnyuè. wǒ chángcháng qù shāngchǎng, wǒ chángcháng gēn péngyou qù. zhè gè shāngchǎng hěn dà.","我在这儿买光盘。":"wǒ zài zhèér mǎi guāngpán.","我常常来这儿。":"wǒ chángcháng lái zhèér.","我喜欢中国音乐。":"wǒ xǐhuan Zhōngguó yīnyuè.","跟我来。":"gēn wǒ lái.","很有名。":"hěn yǒumíng.","这儿没有书。":"zhèér méi yǒu shū.","这儿没有报。":"zhèér méi yǒu bào.","本子在那儿买。":"běnzi zài nàér mǎi.","在那儿买。":"zài nàér mǎi.","您要什么？":"nín yào shénme?","你好，师傅。":"nǐ hǎo, shīfu.","这是香蕉苹果。":"zhè shì xiāngjiāopíngguǒ.","一斤香蕉":"yì jīn xiāngjiāo","对不起，请再说一遍。":"duìbùqǐ, qǐng zài shuō yí biàn.","学汉语很容易。":"xué Hànyǔ hěn róngyì.","那是葡萄。":"nà shì pútáo.","多少钱？":"duōshǎo qián?","一斤苹果":"yì jīn píngguǒ","三块钱一斤":"sān kuài qián yì jīn","两毛钱":"liǎng máo qián","五分钱":"wǔ fēn qián","再送您一个苹果。":"zài sòng nín yí gè píngguǒ.","我找您六块钱。":"wǒ zhǎo nín liù kuài qián."}},PY=D.py,CRS=D.course,KEY='noor-'+D.course+D.n+'-v1',HUB='zh-hub-v1';
-var S={prac:{},txt:{},ui:{}};try{var o=JSON.parse(localStorage.getItem(KEY)||'{}');for(var k in o)S[k]=o[k]}catch(e){}
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var shuffle=function(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a};
+var pick=function(a,n){return shuffle(a).slice(0,n)};
+
+/* ---------- state ---------- */
+var KEY='noor-prac10-v1',HUBK='zh-hub-v1',CRS='prac';
+var S={known:{},wrong:{},xp:0,best:{},badges:{},heard:{},py:true,ar:true,slow:false,card:0};
+try{var raw=localStorage.getItem(KEY);if(raw){Object.assign(S,JSON.parse(raw))}}catch(e){}
+S.flip=false;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-function $(s,r){return (r||document).querySelector(s)}
-function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
-function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2200)}
-var voice=null;function pick(){var v=(window.speechSynthesis&&speechSynthesis.getVoices())||[];voice=v.filter(function(x){return /^zh/i.test(x.lang)})[0]||null}
-if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick}
-function speak(t){if(!window.speechSynthesis){toast('الصوت غير متاح');return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t.replace(/[“”《》]/g,''));u.lang='zh-CN';if(voice)u.voice=voice;u.rate=document.body.classList.contains('slow')?.6:.85;speechSynthesis.speak(u)}
+try{var th=localStorage.getItem(KEY+'-theme');if(th){document.documentElement.setAttribute('data-theme',th)}}catch(e){}
+
+/* ---------- icons ---------- */
+var IC={
+  spk:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  play:'<path d="M7 5l12 7-12 7z" fill="currentColor"/>',
+  stop:'<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
+  redo:'<path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/>',
+  star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17.3 6.6 20.2l1.1-6.1L3.2 9.9l6.1-.8z"/>'
+};
+function ic(n,s){s=s||20;return '<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
+function spkBtn(t,cls){return '<button class="spk '+(cls||'')+'" data-act="say" data-t="'+esc(t)+'" aria-label="استمع">'+ic('spk',cls==='big'?36:20)+'</button>'}
+
+/* ---------- speech ---------- */
+var TTS={ok:('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window),voice:null,warned:false};
+function pickVoice(){
+  if(!TTS.ok)return;
+  var vs=speechSynthesis.getVoices();
+  TTS.voice=vs.filter(function(v){return /^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return /^zh/i.test(v.lang)})[0]||null;
+}
+if(TTS.ok){pickVoice();try{speechSynthesis.onvoiceschanged=pickVoice}catch(e){}}
+function speak(text,done,pitch){
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');if(done)done();return false}
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN';
+    if(TTS.voice)u.voice=TTS.voice;
+    else if(!TTS.warned&&speechSynthesis.getVoices().length){TTS.warned=true;toast('لا يوجد صوت صيني على جهازك، ثبّت صوتاً صينياً من إعدادات النظام')}
+    u.rate=S.slow?0.55:0.85;
+    u.pitch=pitch||1;
+    u.onend=function(){if(done)done()};
+    u.onerror=function(){if(done)done()};
+    speechSynthesis.speak(u);
+    return true;
+  }catch(e){if(done)done();return false}
+}
+function stopSpeech(){try{if(TTS.ok)speechSynthesis.cancel()}catch(e){}}
+
+/* ---------- toast ---------- */
+var toastT=null;
+function toast(msg){var t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},2800)}
+
+/* ---------- pinyin helpers ---------- */
 function toneOf(s){var d=s.normalize('NFD');if(/̄/.test(d))return 1;if(/́/.test(d))return 2;if(/̌/.test(d))return 3;if(/̀/.test(d))return 4;return 5}
-function pyh(py){return py.split(' ').map(function(x){return '<span class="t'+toneOf(x)+'">'+esc(x)+'</span>'}).join(' ')}
-/* glossary */
-var TERMS=D.terms,TI={};TERMS.forEach(function(t,i){TI[t.zh]=i});
-var TRE=null;(function(){var a=TERMS.map(function(t){return t.zh}).sort(function(x,y){return y.length-x.length}).map(function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')});if(a.length)TRE=new RegExp(a.join('|'),'g')})();
-function gl(z){var e=esc(z);return TRE?e.replace(TRE,function(m){return '<span class="g" data-g="'+TI[m]+'" tabindex="0" role="button">'+m+'</span>'}):e}
-function sp(s){var i=s.indexOf('｜');return i<0?[s,'']:[s.slice(0,i),s.slice(i+1)]}
-function Z(zh,cls){if(/[\u0600-\u06ff]/.test(zh)&&!/[\u4e00-\u9fff]/.test(zh))return '<span class="arx">'+esc(zh)+'</span>';return '<span class="zb"><span class="zh '+(cls||'')+'" lang="zh">'+gl(zh)+'</span><span class="pyl">'+esc(PY[zh]||'')+'</span></span>'}
-function ZA(s,cls){var p=sp(s);return Z(p[0],cls)+(p[1]?'<span class="ar2">'+esc(p[1])+'</span>':'')}
-function ZP(zh){return '<span class="zb"><span class="han" lang="zh" dir="ltr">'+esc(zh)+'</span><span class="pyl">'+esc(PY[zh]||'')+'</span></span>'}
-/* hub review */
-function addRev(zh){var h={};try{h=JSON.parse(localStorage.getItem(HUB)||'{}')||{}}catch(e){}h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};var has=!!h.dues[CRS][zh];if(has)delete h.dues[CRS][zh];else h.dues[CRS][zh]={i:0,t:Date.now()};try{localStorage.setItem(HUB,JSON.stringify(h))}catch(e){}return !has}
-function inRev(zh){try{var h=JSON.parse(localStorage.getItem(HUB)||'{}');return !!(h.dues&&h.dues[CRS]&&h.dues[CRS][zh])}catch(e){return false}}
-var SAYS=[];function sayBtn(z){SAYS.push(z);return '<button class="sm" data-sz="'+(SAYS.length-1)+'" aria-label="استمع">🔊</button>'}
-/* ---------- reading ---------- */
-function block(b){
- if(b.p)return '<div class="blk p">'+ZA(b.p)+'</div>';
- if(b.key)return '<div class="blk key">'+ZA(b.key)+'</div>';
- if(b.ul)return '<ul class="ul blk">'+b.ul.map(function(x){return '<li>'+ZA(x)+'</li>'}).join('')+'</ul>';
- if(b.tl)return '<ol class="tl blk">'+b.tl.map(function(x){return '<li><span class="lb">'+esc(x[0])+'</span><div>'+ZA(x[1])+'</div></li>'}).join('')+'</ol>';
- if(b.cards)return '<div class="cards blk">'+b.cards.map(function(c){return '<div class="cd"><div class="hd"><b>'+gl(c[0])+'</b><span class="ar">'+esc(c[1])+'</span></div>'+(c[2]?ZA(c[2]):'')+'</div>'}).join('')+'</div>';
- if(b.table){var t=b.table;return '<div class="tw blk"><table><thead><tr>'+t.head.map(function(h){return '<th>'+ZA(h)+'</th>'}).join('')+'</tr></thead><tbody>'+t.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+ZA(c)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'}
- if(b.dlg)return '<div class="dlg blk">'+b.dlg.map(function(l){var q=sp(l[0]),t=sp(l[1]);return '<div class="dl"><div class="sk">'+Z(q[0])+(q[1]?'<span class="ar2">'+esc(q[1])+'</span>':'')+'</div><div class="tx">'+ZA(l[1])+'</div>'+sayBtn(t[0])+'</div>'}).join('')+'</div>';
- if(b.sl)return '<ul class="ul blk sl">'+b.sl.map(function(x){return '<li><div class="sli"><div>'+ZA(x)+'</div>'+sayBtn(sp(x)[0])+'</div></li>'}).join('')+'</ul>';
- return '';
+var MARK={1:'̄',2:'́',3:'̌',4:'̀'};
+function setTone(s,n){
+  var b=s.normalize('NFD').replace(/[̀́̄̌]/g,'').normalize('NFC');
+  if(n===5)return b;
+  var low=b.toLowerCase(),idx=-1,i;
+  if(/[ae]/.test(low))idx=low.search(/[ae]/);
+  else if(low.indexOf('ou')>-1)idx=low.indexOf('o');
+  else{for(i=low.length-1;i>=0;i--){if('aeiou'.indexOf(low[i])>-1){idx=i;break}}}
+  if(idx<0)return b;
+  return (b.slice(0,idx+1)+MARK[n]+b.slice(idx+1)).normalize('NFC');
 }
-function reading(){
- return '<div class="banner"><div class="big" aria-hidden="true">'+esc(D.big)+'</div><div><h2>'+esc(D.title_ar)+'</h2><p>'+esc(D.intro_ar)+'</p></div></div>'+
- D.sections.map(function(s){return '<section class="sec"><h2><span class="han" lang="zh" dir="ltr">'+gl(s.h)+'</span><span class="har">'+esc(s.ar)+'</span></h2>'+(PY[s.h]?'<div class="pyl" style="margin-inline-start:15px">'+esc(PY[s.h])+'</div>':'')+s.b.map(block).join('')+
-  '<div class="act"><button class="btn" data-say-sec="'+D.sections.indexOf(s)+'">🔊 استمع للقسم</button></div></section>'}).join('');
+function toneVariants(py){
+  var syl=py.split(' '),out=[syl.join(' ')],guard=0;
+  while(out.length<4&&guard++<80){
+    var i=Math.floor(Math.random()*syl.length),cur=toneOf(syl[i]),n=1+Math.floor(Math.random()*5);
+    if(n===cur)continue;
+    var c=syl.slice();c[i]=setTone(syl[i],n);var j=c.join(' ');
+    if(out.indexOf(j)<0)out.push(j);
+  }
+  return out;
 }
-function secText(i){var s=D.sections[i],t=[s.h];s.b.forEach(function(b){['p','key'].forEach(function(k){if(b[k])t.push(sp(b[k])[0])});if(b.ul)b.ul.forEach(function(x){t.push(sp(x)[0])});if(b.tl)b.tl.forEach(function(x){t.push(sp(x[1])[0])});if(b.cards)b.cards.forEach(function(c){t.push(c[0]);if(c[2])t.push(sp(c[2])[0])})});return t.join('。')}
-/* ---------- terms ---------- */
-var tf='',fcI=0,fcF=false;S.kn=S.kn||{};
-function fcHTML(){var t=TERMS[fcI],k=Object.keys(S.kn).length,e=t.ex?sp(t.ex):null;
- var face=fcF?'<div class="face"><button class="spk" data-say-t="'+fcI+'" aria-label="استمع">🔊</button><div class="pyl2">'+pyh(t.py)+'</div><div class="meaning">'+esc(t.ar)+'</div>'+(e?'<div class="exb"><span class="han">'+esc(e[0])+'</span><span class="mut">'+esc(e[1])+'</span></div>':'')+'</div>'
-  :'<div class="face"><button class="spk" data-say-t="'+fcI+'" aria-label="استمع">🔊</button><div class="bigzh">'+esc(t.zh)+'</div><div class="mut">اضغط لإظهار المعنى</div></div>';
- return '<div class="sech"><h2>بطاقات المفردات</h2><p>'+TERMS.length+' '+(D.tword||'كلمة')+' · اضغط البطاقة لقلبها · عرفت <b>'+k+'</b> منها</p></div><div class="fc" data-fc="flip">'+face+'</div><div class="navrow"><button class="btn" data-fc="prev">السابقة</button><span class="cnt">'+(fcI+1)+' / '+TERMS.length+'</span><button class="btn" data-fc="next">التالية</button></div><div class="actrow"><button class="btn p" data-fc="know">✓ أعرفها</button><button class="btn" data-fc="later">↻ أراجعها لاحقاً</button></div>';}
-function fcAct(a){var n=TERMS.length,t=TERMS[fcI];
- if(a==='flip'){fcF=!fcF}
- else{if(a==='prev')fcI=(fcI+n-1)%n;else{if(a==='know'){S.kn[t.zh]=1;save()}if(a==='later'&&!inRev(t.zh)){addRev(t.zh);toast('أُضيفت إلى مفردات '+D.cname)}fcI=(fcI+1)%n}fcF=false}
- $('#fcbox').innerHTML=fcHTML();if(a==='later'||a==='know')refreshList()}
-function refreshList(){var l=$('#tlist');if(l)l.innerHTML=listHTML()}
-function termsTab(){
- return '<div id="fcbox">'+fcHTML()+'</div><h3 class="sec-t" style="font-size:17px;margin:26px 0 4px">قائمة الكلمات</h3><p class="mut">اضغط «+» لإضافة الكلمة إلى مفردات «'+D.cname+'» للمراجعة المتباعدة.</p><div class="actrow" style="grid-template-columns:1fr"><button class="btn" id="addall">أضف كل الكلمات إلى المراجعة</button></div><div id="tlist">'+listHTML()+'</div>';}
-function listHTML(){
- return '<div class="tg">'+
- TERMS.map(function(t,i){var on=inRev(t.zh);return '<div class="tm"><div class="z">'+esc(t.zh)+'</div><div><div class="pp">'+pyh(t.py)+'</div><div>'+esc(t.ar)+'</div></div><div style="display:flex;gap:6px"><button class="sm" data-say-t="'+i+'" aria-label="استمع">🔊</button><button class="sm'+(on?' on':'')+'" data-add-t="'+i+'" aria-label="مراجعة">'+(on?'✓':'+')+'</button></div>'+(t.ex?'<div class="ex">'+ZP(sp(t.ex)[0])+'<span class="mut">'+esc(sp(t.ex)[1])+'</span></div>':'')+'</div>'}).join('')+'</div>';
+function han(zh,py){
+  var sy=py.split(' ');
+  return Array.from(zh).map(function(c,i){return '<span class="t'+(sy[i]?toneOf(sy[i]):5)+'">'+esc(c)+'</span>'}).join('');
 }
-/* ---------- practice ---------- */
-var TY={listen:'استماع',say:'قراءة بصوت عالٍ',mcq:'اختيار من متعدد',tf:'صح أو خطأ',match:'مطابقة',order:'ترتيب',cls:'تصنيف',cloze:'إكمال'};
-var B={};
-function rec(i,ok){if(!S.prac[i]){S.prac[i]={c:ok?1:0};save();upd()}var q=$('#s'+i);if(q){var r=S.prac[i];q.className='qs '+(r.c?'ok':'no');q.textContent=r.c?'✓ من أول محاولة':'أُنجز'}}
-function fb(el,ok,msg){var f=$('.fb',el);f.hidden=false;f.className='fb '+(ok?'ok':'no');f.innerHTML=(ok?'أحسنت! ':'')+(msg?'<span class="ar">'+esc(msg)+'</span>':'')}
-B.mcq=function(el,it,i){var b=$('.qb',el),ord=shuf(it.o.map(function(_,k){return k}));
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="opts">'+ord.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.o[k])+'</button>'}).join('')+'</div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var k=+x.dataset.k,ok=k===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if(+o.dataset.k===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why)}};
-B.listen=function(el,it,i){var b=$('.qb',el),ord=shuf(it.o.map(function(_,k){return k}));
- b.innerHTML='<div class="q"><p>'+esc(it.q||'استمع ثم اختر الإجابة الصحيحة')+'</p><div class="act">'+sayBtn(it.say).replace('class="sm"','class="btn p"').replace('>🔊<','>🔊 استمع<')+'</div></div><div class="opts">'+ord.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.o[k])+'</button>'}).join('')+'</div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var k=+x.dataset.k,ok=k===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if(+o.dataset.k===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why||('الجملة المسموعة: '+it.say))}};
-B.say=function(el,it,i){var b=$('.qb',el);
- b.innerHTML='<div class="q"><p>'+esc(it.q||'استمع ثم كرّر بصوت عالٍ')+'</p></div><ul class="ul sl" style="margin-top:10px">'+it.items.map(function(x){return '<li><div class="sli"><div>'+ZA(x)+'</div>'+sayBtn(sp(x)[0])+'</div></li>'}).join('')+'</ul><div class="act"><button class="btn p" data-done="1">أنهيتُ القراءة بصوت عالٍ ✓</button></div>';
- b.onclick=function(e){var t=e.target.closest('[data-done]');if(!t)return;rec(i,true);fb(el,true,'أحسنت! كرّر التمرين حتى تصبح القراءة سلسة.')}};
-B.tf=function(el,it,i){var b=$('.qb',el);
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="tf"><button class="op" data-v="1"><span class="zh" style="text-align:center">对 ✓</span></button><button class="op" data-v="0"><span class="zh" style="text-align:center">错 ✗</span></button></div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var v=x.dataset.v==='1',ok=v===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if((o.dataset.v==='1')===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why)}};
-B.match=function(el,it,i){var b=$('.qb',el),R=shuf(it.p.map(function(_,k){return k})),sel=null,left=it.p.length,miss=0;
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="mt"><div class="col" id="L'+i+'">'+it.p.map(function(p,k){return '<button class="op" data-k="'+k+'">'+Z(p[0])+'</button>'}).join('')+'</div><div class="col" id="R'+i+'">'+R.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.p[k][1])+'</button>'}).join('')+'</div></div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.classList.contains('done'))return;var side=x.parentNode.id.charAt(0);
-  if(side==='L'){[].forEach.call(b.querySelectorAll('#L'+i+' .op'),function(o){o.classList.remove('sel')});x.classList.add('sel');sel=x;return}
-  if(!sel){toast('اختر من العمود الأول أولاً');return}
-  if(sel.dataset.k===x.dataset.k){sel.classList.remove('sel');sel.classList.add('done');x.classList.add('done');sel=null;left--;if(!left){rec(i,miss===0);fb(el,miss===0,miss?'عدد الأخطاء: '+miss:'')}}
-  else{miss++;x.classList.add('flash');setTimeout(function(){x.classList.remove('flash')},500)}}};
-B.order=function(el,it,i){var b=$('.qb',el),n=it.items.length,pool=shuf(it.items.map(function(_,k){return k})),pl=[],tries=0;
- if(n>1&&pool.join()===it.items.map(function(_,k){return k}).join())pool.reverse();
- function draw(){b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="line" aria-label="الترتيب">'+pl.map(function(k,j){return '<button class="chip" data-r="'+j+'"><span class="nn">'+(j+1)+'</span>'+Z(it.items[k])+'</button>'}).join('')+(pl.length?'':'<span class="mut">اضغط على العناصر بالترتيب الصحيح</span>')+'</div><div class="pool">'+pool.map(function(k){return '<button class="chip" data-p="'+k+'">'+Z(it.items[k])+'</button>'}).join('')+'</div><div class="act"><button class="btn p" data-chk="1"'+(pool.length?' disabled':'')+'>تحقق</button><button class="btn" data-rs="1">إعادة</button><button class="btn" data-sol="1">أظهر الحل</button></div>'}
- draw();
- b.onclick=function(e){var t=e.target.closest('button');if(!t)return;
-  if(t.dataset.p!=null){var k=+t.dataset.p;pool.splice(pool.indexOf(k),1);pl.push(k);draw()}
-  else if(t.dataset.r!=null){pool.push(pl.splice(+t.dataset.r,1)[0]);draw()}
-  else if(t.dataset.rs){pool=pool.concat(pl);pl=[];draw();$('.fb',el).hidden=true}
-  else if(t.dataset.sol){pl=it.items.map(function(_,k){return k});pool=[];draw();[].forEach.call(b.querySelectorAll('.line .chip'),function(c){c.classList.add('good')});rec(i,false);fb(el,false,'هذا هو الترتيب الصحيح.')}
-  else if(t.dataset.chk){var ok=true;[].forEach.call(b.querySelectorAll('.line .chip'),function(c,j){var g=it.items[pl[j]]===it.items[j];if(!g)ok=false;c.classList.add(g?'good':'bad')});tries++;rec(i,ok&&tries===1);fb(el,ok,ok?'':'بعض العناصر في غير موضعها (الأحمر). اضغط «إعادة» وجرّب مجدداً.')}}};
-B.cls=function(el,it,i){var b=$('.qb',el),ch=[];
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="rows">'+it.items.map(function(x,k){return '<div class="rw" data-k="'+k+'">'+Z(x[0])+'<div class="cs">'+it.cats.map(function(c,j){return '<button data-j="'+j+'">'+esc(c)+'</button>'}).join('')+'</div></div>'}).join('')+'</div><div class="act"><button class="btn p" data-chk="1">تحقق</button></div>';
- b.onclick=function(e){var t=e.target.closest('button');if(!t)return;
-  if(t.dataset.j!=null){var rw=t.closest('.rw'),k=+rw.dataset.k;ch[k]=+t.dataset.j;[].forEach.call(rw.querySelectorAll('button'),function(x){x.classList.toggle('sel',x===t)});rw.classList.remove('good','bad')}
-  else if(t.dataset.chk){var good=0,all=it.items.length;if(ch.filter(function(x){return x!=null}).length<all){toast('صنّف كل العناصر أولاً');return}
-   [].forEach.call(b.querySelectorAll('.rw'),function(rw){var k=+rw.dataset.k,g=ch[k]===it.items[k][1];if(g)good++;rw.classList.remove('good','bad');rw.classList.add(g?'good':'bad')});
-   rec(i,good===all);fb(el,good===all,good+' من '+all+(good<all?' — صحّح العناصر الحمراء وأعد التحقق.':''))}}};
-B.cloze=function(el,it,i){var b=$('.qb',el),parts=it.q.split('___'),bank=shuf(it.bank||it.a),h='';
- parts.forEach(function(p,k){h+=esc(p);if(k<parts.length-1)h+='<select data-k="'+k+'" aria-label="الفراغ '+(k+1)+'"><option value="">…</option>'+bank.map(function(w){return '<option>'+esc(w)+'</option>'}).join('')+'</select>'});
- b.innerHTML='<div class="q">'+Z(it.q.replace(/___/g,'＿＿'))+'</div><div class="cz">'+h+'</div><div class="act"><button class="btn p" data-chk="1">تحقق</button></div>';
- b.onclick=function(e){var t=e.target.closest('[data-chk]');if(!t)return;var sels=b.querySelectorAll('select'),good=0;[].forEach.call(sels,function(s,k){var g=s.value===it.a[k];if(g)good++;s.classList.remove('good','bad');s.classList.add(g?'good':'bad')});rec(i,good===sels.length);fb(el,good===sels.length,good+' من '+sels.length)}};
-function practice(){return '<div class="card sum"><div><b id="psc">0</b> <span class="mut">/ '+D.practice.length+' أُنجزت</span></div><div class="mut" id="pok"></div><button class="btn" id="prs">إعادة التدريبات</button></div>'+D.practice.map(function(it,i){return '<section class="card pq" data-i="'+i+'"><div class="qh"><span class="qn">'+(i+1)+'</span><span class="qty">'+TY[it.t]+'</span>'+(it.say&&it.t!=='listen'?sayBtn(it.say):'')+'<span class="qs" id="s'+i+'"></span></div><div class="qb"></div><div class="fb" hidden></div></section>'}).join('')}
-function initPractice(){D.practice.forEach(function(it,i){var el=$('.pq[data-i="'+i+'"]');B[it.t](el,it,i);var r=S.prac[i];if(r){var q=$('#s'+i);q.className='qs '+(r.c?'ok':'no');q.textContent=r.c?'✓ من أول محاولة':'أُنجز'}})}
-/* ---------- discuss ---------- */
-function discuss(){return D.discuss.map(function(d,i){return '<section class="card" data-d="'+i+'"><div class="qh"><span class="qn">'+(i+1)+'</span><span class="qty">نقاش وكتابة</span></div><div class="q">'+Z(d.q)+'</div><p class="mut" style="margin-top:4px">'+esc(d.ar)+'</p>'+
- '<div class="fr">'+d.frames.map(function(f,k){return '<button data-fr="'+k+'">'+esc(f)+'</button>'}).join('')+'</div>'+
- '<textarea data-ta="'+i+'" placeholder="اكتب إجابتك بالصينية…" lang="zh" aria-label="إجابتك"></textarea>'+
- '<div class="mut" style="margin-top:4px"><span data-cc="'+i+'">0</span> حرفاً · المصطلحات المستخدمة:</div><div class="us">'+d.use.map(function(u){return '<span data-u="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
- '<details class="md"><summary>نموذج إجابة</summary>'+ZA(d.model)+'<div class="act"><button class="btn" data-say-m="'+i+'">🔊 استمع</button></div></details></section>'}).join('')}
-function initDisc(){D.discuss.forEach(function(d,i){var ta=$('[data-ta="'+i+'"]'),v=S.txt[i]||'';ta.value=v;chk(i)})}
-function chk(i){var ta=$('[data-ta="'+i+'"]'),el=$('[data-d="'+i+'"]'),v=ta.value;$('[data-cc="'+i+'"]').textContent=v.replace(/\s/g,'').length;[].forEach.call(el.querySelectorAll('[data-u]'),function(s){s.classList.toggle('on',v.indexOf(s.dataset.u)>-1)})}
-/* ---------- shell ---------- */
-var TABS=D.tabs||[['read','📖 القراءة'],['terms','🔤 المصطلحات'],['prac','✍️ التدريبات'],['disc','💬 نقاش']],tab=S.ui.tab||'read';
-function upd(){var pd=Object.keys(S.prac).length,ok=0,k;for(k in S.prac)if(S.prac[k].c)ok++;var dn=D.discuss.filter(function(d,i){return (S.txt[i]||'').replace(/\s/g,'').length>=(D.minc||50)}).length,tot=D.practice.length+D.discuss.length;
- $('#pgb').style.width=Math.round((pd+dn)/tot*100)+'%';var a=$('#psc');if(a){a.textContent=pd;$('#pok').textContent=pd?'من أول محاولة: '+ok+' من '+pd:''}}
-function show(t){$('#pop').hidden=true;tab=t;S.ui.tab=t;save();[].forEach.call(document.querySelectorAll('.pane'),function(p){p.hidden=p.id!=='p-'+t});$('#tabs').innerHTML=TABS.map(function(x){return '<button class="tab" role="tab" aria-selected="'+(x[0]===t)+'" data-tab="'+x[0]+'">'+x[1]+'</button>'}).join('');window.scrollTo(0,0)}
-function init(){
- document.title=D.title_ar+' · '+D.title_zh;var NZ=['','一','二','三','四','五','六','七','八','九','十'],NA=['','الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر'];$('#seal').textContent=NZ[D.n]||D.n;$('#ttl').textContent='الدرس '+(NA[D.n]||D.n);$('#sub').innerHTML='<span class="han" dir="ltr">'+esc(D.title_zh)+'</span>';
- var tools='<div class="tools"><button class="sw" id="spy" aria-pressed="false">拼音 · البينيين</button><button class="sw" id="sar" aria-pressed="false">الترجمة العربية</button><span class="mut">المصطلحات المسطّرة بنقط: اضغط عليها لمعناها</span></div>';
- $('#seal').href='index.html#'+D.course;if(S.ui.slow){document.body.classList.add('slow');$('#slow').setAttribute('aria-pressed','true')}
- $('#main').innerHTML='<div id="p-read" class="pane">'+tools+reading()+'</div><div id="p-terms" class="pane" hidden>'+termsTab()+'</div><div id="p-prac" class="pane" hidden>'+practice()+'</div><div id="p-disc" class="pane" hidden>'+discuss()+'</div>';
- initPractice();initDisc();
- if(S.ui.py==null?D.defpy:S.ui.py)document.body.classList.add('py');if(S.ui.ar)document.body.classList.add('ar');syncSw();show(tab);upd();
+function pyhtml(py){return py.split(' ').map(function(s){return '<span class="t'+toneOf(s)+'">'+esc(s)+'</span>'}).join('')}
+
+/* ---------- content ---------- */
+var D={"vocab":[{"zh":"在","py":"zài","ar":"في / عند","ex":["我在这儿买光盘。","Wǒ zài zhèér mǎi guāngpán.","أشتري الأقراص هنا."]},{"zh":"这儿","py":"zhè ér","ar":"هنا","ex":["我常常来这儿。","Wǒ chángcháng lái zhèér.","آتي إلى هنا كثيراً."]},{"zh":"光盘","py":"guāng pán","ar":"قرص (CD)","ex":["我买音乐光盘。","Wǒ mǎi yīnyuè guāngpán.","أشتري أقراص موسيقى."]},{"zh":"音乐","py":"yīn yuè","ar":"موسيقى","ex":["我喜欢中国音乐。","Wǒ xǐhuan Zhōngguó yīnyuè.","أحب الموسيقى الصينية."]},{"zh":"商场","py":"shāng chǎng","ar":"مجمع تجاري","ex":["这个商场很大。","Zhè gè shāngchǎng hěn dà.","هذا المجمع كبير جداً."]},{"zh":"常常","py":"cháng cháng","ar":"كثيراً / غالباً","ex":["我常常来这儿。","Wǒ chángcháng lái zhèér.","آتي إلى هنا كثيراً."]},{"zh":"跟","py":"gēn","ar":"مع / يتبع","ex":["跟我来。","Gēn wǒ lái.","تعال معي."]},{"zh":"有名","py":"yǒu míng","ar":"مشهور","ex":["很有名。","Hěn yǒumíng.","مشهور جداً."]},{"zh":"书","py":"shū","ar":"كتاب","ex":["这儿没有书。","Zhèér méi yǒu shū.","لا توجد هنا كتب."]},{"zh":"报","py":"bào","ar":"صحيفة","ex":["这儿没有报。","Zhèér méi yǒu bào.","لا توجد هنا صحف."]},{"zh":"本子","py":"běn zi","ar":"دفتر","ex":["本子在那儿买。","Běnzi zài nàér mǎi.","الدفاتر تُباع هناك."]},{"zh":"那儿","py":"nà ér","ar":"هناك","ex":["在那儿买。","Zài nàér mǎi.","اشترِ هناك."]},{"zh":"先生","py":"xiān sheng","ar":"سيد / أستاذ","ex":["先生，您要什么？","Xiānsheng, nín yào shénme?","سيدي، ماذا تريد؟"]},{"zh":"要","py":"yào","ar":"يريد","ex":["您要什么？","Nín yào shénme?","ماذا تريد؟"]},{"zh":"师傅","py":"shī fu","ar":"أيها الأخ (احتراماً للعامل)","ex":["你好，师傅。","Nǐ hǎo, shīfu.","مرحباً أيها الأخ."]},{"zh":"香蕉苹果","py":"xiāng jiāo píng guǒ","ar":"تفاح الموز (نوع)","ex":["这是香蕉苹果。","Zhè shì xiāngjiāopíngguǒ.","هذا تفاح الموز."]},{"zh":"香蕉","py":"xiāng jiāo","ar":"موز","ex":["一斤香蕉","Yì jīn xiāngjiāo","جين موز"]},{"zh":"苹果","py":"píng guǒ","ar":"تفاح","ex":["一斤苹果多少钱？","Yì jīn píngguǒ duōshǎo qián?","كم سعر جين التفاح؟"]},{"zh":"对不起","py":"duì bù qǐ","ar":"آسف","ex":["对不起，请再说一遍。","Duìbùqǐ, qǐng zài shuō yí biàn.","آسف، أعد من فضلك."]},{"zh":"怎么","py":"zěn me","ar":"كيف","ex":["这个汉语怎么说？","Zhè gè Hànyǔ zěnme shuō?","كيف يُقال هذا بالصينية؟"]},{"zh":"容易","py":"róng yì","ar":"سهل","ex":["学汉语很容易。","Xué Hànyǔ hěn róngyì.","تعلّم الصينية سهل."]},{"zh":"葡萄","py":"pú táo","ar":"عنب","ex":["那是葡萄。","Nà shì pútáo.","ذاك عنب."]},{"zh":"钱","py":"qián","ar":"مال / نقود","ex":["多少钱？","Duōshǎo qián?","كم السعر؟"]},{"zh":"斤","py":"jīn","ar":"جين (نصف كيلو)","ex":["一斤苹果","Yì jīn píngguǒ","جين تفاح"]},{"zh":"块","py":"kuài","ar":"يوان (كلاماً)","ex":["三块钱一斤","Sān kuài qián yì jīn","ثلاثة يوان للجين"]},{"zh":"毛","py":"máo","ar":"ماو (١/١٠ يوان)","ex":["两毛钱","Liǎng máo qián","ماوان"]},{"zh":"贵","py":"guì","ar":"غالٍ","ex":["您的苹果真贵。","Nín de píngguǒ zhēn guì.","تفاحكم غالٍ حقاً."]},{"zh":"分","py":"fēn","ar":"فن (١/١٠٠ يوان)","ex":["五分钱","Wǔ fēn qián","خمسة فن"]},{"zh":"送","py":"sòng","ar":"يهدي","ex":["再送您一个苹果。","Zài sòng nín yí gè píngguǒ.","وأهديك تفاحة."]},{"zh":"给","py":"gěi","ar":"يعطي","ex":["给你钱。","Gěi nǐ qián.","أعطيك المال."]},{"zh":"找","py":"zhǎo","ar":"يرجع الباقي / يبحث","ex":["我找您六块钱。","Wǒ zhǎo nín liù kuài qián.","أرجع لك ستة يوان."]}],"tokpy":{"大":"dà","为":"wèi","你":"nǐ","在":"zài","这儿":"zhè ér","买":"mǎi","什么":"shén me","我":"wǒ","音乐":"yīn yuè","光盘":"guāng pán","常常":"cháng cháng","来":"lái","吗":"ma","不":"bú","常":"cháng","星期天":"xīng qī tiān","跟":"gēn","林娜":"Lín Nà","去":"qù","小":"xiǎo","商场":"shāng chǎng","这":"zhè","个":"gè","很":"hěn","喜欢":"xǐ huan","中国":"Zhōng guó","张":"zhāng","怎么样":"zěn me yàng","好":"hǎo","是":"shì","梁祝":"Liáng Zhù","有名":"yǒu míng","有":"yǒu","没":"méi","书":"shū","和":"hé","报":"bào","也":"yě","本子":"běn zi","呢":"ne","那儿":"nà ér","先生":"xiān sheng","您":"nín","要":"yào","师傅":"shī fu","请":"qǐng","问":"wèn","认识":"rèn shi","香蕉苹果":"xiāng jiāo píng guǒ","对不起":"duì bù qǐ","汉语":"Hàn yǔ","怎么":"zěn me","说":"shuō","啊":"a","外国":"wài guó","人":"rén","哪儿":"nǎ ér","工作":"gōng zuò","语言学院":"Yǔ Yán xué yuàn","学习":"xué xí","不是":"bú shì","学":"xué","容易":"róng yì","叫":"jiào","香蕉":"xiāng jiāo","苹果":"píng guǒ","那":"nà","葡萄":"pú táo","一":"yì","斤":"jīn","多少":"duō shǎo","钱":"qián","三":"sān","块":"kuài","二":"èr","毛":"máo","的":"de","真":"zhēn","贵":"guì","看":"kàn","做":"zuò","朋友":"péng you","两":"liǎng","七":"qī","五":"wǔ","分":"fēn","一共":"yí gòng","十":"shí","四":"sì","再":"zài","送":"sòng","还":"hái","了":"le","谢谢":"xiè xie","给":"gěi","二十":"èr shí","找":"zhǎo","六":"liù","再见":"zài jiàn","他":"tā"},"dlg":[{"text":1,"who":"S","zh":"大为，你在这儿买什么？","ar":"داوي، ماذا تشتري هنا؟","tok":[["大","dà","كبير"],["为","wèi",""],["，"],["你","nǐ","أنتَ/أنتِ"],["在","zài","في / عند"],["这儿","zhè ér","هنا"],["买","mǎi","يشتري"],["什么","shén me","ماذا / أي"],["？"]]},{"text":1,"who":"X","zh":"我买音乐光盘。","ar":"أشتري أقراص موسيقى.","tok":[["我","wǒ","أنا"],["买","mǎi","يشتري"],["音乐","yīn yuè","موسيقى"],["光盘","guāng pán","قرص (CD)"],["。"]]},{"text":1,"who":"S","zh":"你常常来这儿吗？","ar":"هل تأتي إلى هنا كثيراً؟","tok":[["你","nǐ","أنتَ/أنتِ"],["常常","cháng cháng","كثيراً / غالباً"],["来","lái","يأتي"],["这儿","zhè ér","هنا"],["吗","ma","(أداة سؤال)"],["？"]]},{"text":1,"who":"X","zh":"我不常来这儿。星期天我常常跟林娜去小商场。这个商场很大。","ar":"لا آتي إلى هنا كثيراً. يوم الأحد أذهب كثيراً مع لين نا إلى المجمع الصغير. هذا المجمع كبير جداً.","tok":[["我","wǒ","أنا"],["不","bù","لا"],["常","cháng",""],["来","lái","يأتي"],["这儿","zhè ér","هنا"],["。"],["星期天","xīng qī tiān",""],["我","wǒ","أنا"],["常常","cháng cháng","كثيراً / غالباً"],["跟","gēn","مع / يتبع"],["林娜","Lín Nà",""],["去","qù","يذهب"],["小","xiǎo","صغير"],["商场","shāng chǎng","مجمع تجاري"],["。"],["这","zhè","هذا"],["个","gè","كلمة عدّ عامة"],["商场","shāng chǎng","مجمع تجاري"],["很","hěn","جداً"],["大","dà","كبير"],["。"]]},{"text":1,"who":"S","zh":"你喜欢什么音乐？","ar":"أي موسيقى تحب؟","tok":[["你","nǐ","أنتَ/أنتِ"],["喜欢","xǐ huan","يحب"],["什么","shén me","ماذا / أي"],["音乐","yīn yuè","موسيقى"],["？"]]},{"text":1,"who":"X","zh":"我喜欢中国音乐。这张光盘怎么样？","ar":"أحب الموسيقى الصينية. كيف هذا القرص؟","tok":[["我","wǒ","أنا"],["喜欢","xǐ huan","يحب"],["中国","Zhōng guó","الصين"],["音乐","yīn yuè","موسيقى"],["。"],["这","zhè","هذا"],["张","zhāng","كلمة عدّ للأشياء المسطحة"],["光盘","guāng pán","قرص (CD)"],["怎么样","zěn me yàng","كيف (الحال)؟"],["？"]]},{"text":1,"who":"S","zh":"这张很好，是《梁祝》，很有名。","ar":"هذا جيد جداً، إنه «ليانغ تشو»، مشهور جداً.","tok":[["这","zhè","هذا"],["张","zhāng","كلمة عدّ للأشياء المسطحة"],["很","hěn","جداً"],["好","hǎo","جيد"],["，"],["是","shì","يكون"],["《"],["梁祝","Liáng Zhù",""],["》"],["，"],["很","hěn","جداً"],["有名","yǒu míng","مشهور"],["。"]]},{"text":1,"who":"X","zh":"好，我买这张。这儿有没有书和报？","ar":"جيد، سأشتري هذا. هل توجد هنا كتب وصحف؟","tok":[["好","hǎo","جيد"],["，"],["我","wǒ","أنا"],["买","mǎi","يشتري"],["这","zhè","هذا"],["张","zhāng","كلمة عدّ للأشياء المسطحة"],["。"],["这儿","zhè ér","هنا"],["有","yǒu","يملك / يوجد"],["没","méi","لا / ليس (نفي 有)"],["有","yǒu","يملك / يوجد"],["书","shū","كتاب"],["和","hé","و"],["报","bào","صحيفة"],["？"]]},{"text":1,"who":"S","zh":"这儿没有书，也没有报。","ar":"لا توجد هنا كتب ولا صحف.","tok":[["这儿","zhè ér","هنا"],["没","méi","لا / ليس (نفي 有)"],["有","yǒu","يملك / يوجد"],["书","shū","كتاب"],["，"],["也","yě","أيضاً"],["没","méi","لا / ليس (نفي 有)"],["有","yǒu","يملك / يوجد"],["报","bào","صحيفة"],["。"]]},{"text":1,"who":"X","zh":"本子呢？","ar":"والدفاتر؟","tok":[["本子","běn zi","دفتر"],["呢","ne","(أداة سؤال: وأنت؟)"],["？"]]},{"text":1,"who":"S","zh":"有，在那儿买。跟我来，我也买本子。","ar":"نعم، تُباع هناك. تعال معي، أنا أيضاً سأشتري دفاتر.","tok":[["有","yǒu","يملك / يوجد"],["，"],["在","zài","في / عند"],["那儿","nà ér","هناك"],["买","mǎi","يشتري"],["。"],["跟","gēn","مع / يتبع"],["我","wǒ","أنا"],["来","lái","يأتي"],["，"],["我","wǒ","أنا"],["也","yě","أيضاً"],["买","mǎi","يشتري"],["本子","běn zi","دفتر"],["。"]]},{"text":2,"who":"L","zh":"先生，您要什么？","ar":"سيدي، ماذا تريد؟","tok":[["先生","xiān sheng","سيد / أستاذ"],["，"],["您","nín","حضرتك (مهذب)"],["要","yào","يريد"],["什么","shén me","ماذا / أي"],["？"]]},{"text":2,"who":"C","zh":"你好，师傅。请问，这是什么？","ar":"مرحباً أيها الأخ. عفواً، ما هذا؟","tok":[["你","nǐ","أنتَ/أنتِ"],["好","hǎo","جيد"],["，"],["师傅","shī fu","أيها الأخ (احتراماً للعامل)"],["。"],["请","qǐng","من فضلك"],["问","wèn","يسأل"],["，"],["这","zhè","هذا"],["是","shì","يكون"],["什么","shén me","ماذا / أي"],["？"]]},{"text":2,"who":"L","zh":"您不认识吗？这是香蕉苹果。","ar":"ألا تعرفه؟ هذا «تفاح الموز».","tok":[["您","nín","حضرتك (مهذب)"],["不","bú","لا"],["认识","rèn shi","يعرف / يتعرف"],["吗","ma","(أداة سؤال)"],["？"],["这","zhè","هذا"],["是","shì","يكون"],["香蕉苹果","xiāng jiāo píng guǒ","تفاح الموز (نوع)"],["。"]]},{"text":2,"who":"C","zh":"对不起，我是问：这个汉语怎么说？","ar":"آسف، أسأل: كيف يُقال هذا بالصينية؟","tok":[["对不起","duì bù qǐ","آسف"],["，"],["我","wǒ","أنا"],["是","shì","يكون"],["问","wèn","يسأل"],["："],["这","zhè","هذا"],["个","gè","كلمة عدّ عامة"],["汉语","Hàn yǔ","اللغة الصينية"],["怎么","zěn me","كيف"],["说","shuō","يقول / يتحدث"],["？"]]},{"text":2,"who":"L","zh":"啊，您是外国人。您在哪儿工作？","ar":"آه، أنت أجنبي. أين تعمل؟","tok":[["啊","a","آه (فهم مفاجئ)"],["，"],["您","nín","حضرتك (مهذب)"],["是","shì","يكون"],["外国","wài guó","أجنبي / بلد أجنبي"],["人","rén","شخص"],["。"],["您","nín","حضرتك (مهذب)"],["在","zài","في / عند"],["哪儿","nǎ ér","أين"],["工作","gōng zuò","عمل"],["？"]]},{"text":2,"who":"C","zh":"我在语言学院学习。","ar":"أنا أدرس في معهد اللغات.","tok":[["我","wǒ","أنا"],["在","zài","في / عند"],["语言学院","Yǔ Yán xué yuàn",""],["学习","xué xí","يدرس"],["。"]]},{"text":2,"who":"L","zh":"您学习汉语，是不是？您跟我学，很容易：这叫香蕉，这叫香蕉苹果，这也是苹果，那是葡萄……","ar":"أنت تدرس الصينية، أليس كذلك؟ تعلّم معي، الأمر سهل جداً: هذا يسمى موز، وهذا تفاح الموز، وهذا أيضاً تفاح، وذلك عنب…","tok":[["您","nín","حضرتك (مهذب)"],["学习","xué xí","يدرس"],["汉语","Hàn yǔ","اللغة الصينية"],["，"],["是","shì","يكون"],["不是","bú shì",""],["？"],["您","nín","حضرتك (مهذب)"],["跟","gēn","مع / يتبع"],["我","wǒ","أنا"],["学","xué",""],["，"],["很","hěn","جداً"],["容易","róng yì","سهل"],["："],["这","zhè","هذا"],["叫","jiào","يُدعى"],["香蕉","xiāng jiāo","موز"],["，"],["这","zhè","هذا"],["叫","jiào","يُدعى"],["香蕉苹果","xiāng jiāo píng guǒ","تفاح الموز (نوع)"],["，"],["这","zhè","هذا"],["也","yě","أيضاً"],["是","shì","يكون"],["苹果","píng guǒ","تفاح"],["，"],["那","nà","ذلك"],["是","shì","يكون"],["葡萄","pú táo","عنب"],["…"],["…"]]},{"text":2,"who":"C","zh":"香蕉、苹果、香蕉苹果……，一斤苹果多少钱？","ar":"موز، تفاح، تفاح الموز… كم سعر جين (نصف كيلو) من التفاح؟","tok":[["香蕉","xiāng jiāo","موز"],["、"],["苹果","píng guǒ","تفاح"],["、"],["香蕉苹果","xiāng jiāo píng guǒ","تفاح الموز (نوع)"],["…"],["…"],["，"],["一","yì","واحد"],["斤","jīn","جين (نصف كيلو)"],["苹果","píng guǒ","تفاح"],["多少","duō shǎo","كم (للكميات)"],["钱","qián","مال / نقود"],["？"]]},{"text":2,"who":"L","zh":"一斤三块二毛钱。","ar":"جين واحد بثلاثة يوان وعشرين ماو.","tok":[["一","yì","واحد"],["斤","jīn","جين (نصف كيلو)"],["三","sān","ثلاثة"],["块","kuài","يوان (كلاماً)"],["二","èr","اثنان"],["毛","máo","ماو (١/١٠ يوان)"],["钱","qián","مال / نقود"],["。"]]},{"text":2,"who":"C","zh":"您的苹果真贵。","ar":"تفاحكم غالٍ حقاً.","tok":[["您","nín","حضرتك (مهذب)"],["的","de","أداة الإضافة"],["苹果","píng guǒ","تفاح"],["真","zhēn","حقاً"],["贵","guì","غالٍ"],["。"]]},{"text":2,"who":"L","zh":"一斤三块二不贵。您看，我的苹果大。好，做个朋友，三块钱一斤。","ar":"ثلاثة يوان واثنان ماو ليس غالياً. انظر، تفاحي كبير. حسناً، لنكن أصدقاء، ثلاثة يوان للجين.","tok":[["一","yì","واحد"],["斤","jīn","جين (نصف كيلو)"],["三","sān","ثلاثة"],["块","kuài","يوان (كلاماً)"],["二","èr","اثنان"],["不","bú","لا"],["贵","guì","غالٍ"],["。"],["您","nín","حضرتك (مهذب)"],["看","kàn","ينظر / يرى"],["，"],["我","wǒ","أنا"],["的","de","أداة الإضافة"],["苹果","píng guǒ","تفاح"],["大","dà","كبير"],["。"],["好","hǎo","جيد"],["，"],["做","zuò","يعمل / يفعل"],["个","gè","كلمة عدّ عامة"],["朋友","péng you","صديق"],["，"],["三","sān","ثلاثة"],["块","kuài","يوان (كلاماً)"],["钱","qián","مال / نقود"],["一","yì","واحد"],["斤","jīn","جين (نصف كيلو)"],["。"]]},{"text":2,"who":"C","zh":"一斤香蕉多少钱？","ar":"كم سعر جين الموز؟","tok":[["一","yì","واحد"],["斤","jīn","جين (نصف كيلو)"],["香蕉","xiāng jiāo","موز"],["多少","duō shǎo","كم (للكميات)"],["钱","qián","مال / نقود"],["？"]]},{"text":2,"who":"L","zh":"两块七毛五分一斤，五块钱两斤。","ar":"يوانان وسبعة ماو وخمسة فن للجين، وخمسة يوان للجينين.","tok":[["两","liǎng","اثنان (مع كلمة عدّ)"],["块","kuài","يوان (كلاماً)"],["七","qī","سبعة"],["毛","máo","ماو (١/١٠ يوان)"],["五","wǔ","خمسة"],["分","fēn","فن (١/١٠٠ يوان)"],["一","yì","واحد"],["斤","jīn","جين (نصف كيلو)"],["，"],["五","wǔ","خمسة"],["块","kuài","يوان (كلاماً)"],["钱","qián","مال / نقود"],["两","liǎng","اثنان (مع كلمة عدّ)"],["斤","jīn","جين (نصف كيلو)"],["。"]]},{"text":2,"who":"C","zh":"我买三斤香蕉和两斤香蕉苹果。","ar":"أشتري ثلاثة جين موز وجينين من تفاح الموز.","tok":[["我","wǒ","أنا"],["买","mǎi","يشتري"],["三","sān","ثلاثة"],["斤","jīn","جين (نصف كيلو)"],["香蕉","xiāng jiāo","موز"],["和","hé","و"],["两","liǎng","اثنان (مع كلمة عدّ)"],["斤","jīn","جين (نصف كيلو)"],["香蕉苹果","xiāng jiāo píng guǒ","تفاح الموز (نوع)"],["。"]]},{"text":2,"who":"L","zh":"一共十四块钱。再送您一个苹果。您还要什么？","ar":"المجموع أربعة عشر يوان. وأهديك تفاحة أخرى. هل تريد شيئاً آخر؟","tok":[["一共","yí gòng","في المجموع"],["十","shí","عشرة"],["四","sì","أربعة"],["块","kuài","يوان (كلاماً)"],["钱","qián","مال / نقود"],["。"],["再","zài","مرة أخرى"],["送","sòng","يهدي"],["您","nín","حضرتك (مهذب)"],["一","yí","واحد"],["个","gè","كلمة عدّ عامة"],["苹果","píng guǒ","تفاح"],["。"],["您","nín","حضرتك (مهذب)"],["还","hái","أيضاً / بالإضافة"],["要","yào","يريد"],["什么","shén me","ماذا / أي"],["？"]]},{"text":2,"who":"C","zh":"不要了，谢谢。给你钱。","ar":"لا شكراً، لا أريد شيئاً آخر. تفضل المال.","tok":[["不","bú","لا"],["要","yào","يريد"],["了","le","أداة نغمية / ماضٍ"],["，"],["谢谢","xiè xie","شكراً"],["。"],["给","gěi","يعطي"],["你","nǐ","أنتَ/أنتِ"],["钱","qián","مال / نقود"],["。"]]},{"text":2,"who":"L","zh":"好，您给我二十块钱，我找您六块钱。再见。","ar":"حسناً، أعطيتني عشرين يواناً وأرجع لك ستة يوان. إلى اللقاء.","tok":[["好","hǎo","جيد"],["，"],["您","nín","حضرتك (مهذب)"],["给","gěi","يعطي"],["我","wǒ","أنا"],["二十","èr shí",""],["块","kuài","يوان (كلاماً)"],["钱","qián","مال / نقود"],["，"],["我","wǒ","أنا"],["找","zhǎo","يرجع الباقي / يبحث"],["您","nín","حضرتك (مهذب)"],["六","liù","ستة"],["块","kuài","يوان (كلاماً)"],["钱","qián","مال / نقود"],["。"],["再见","zài jiàn","إلى اللقاء"],["。"]]},{"text":2,"who":"C","zh":"再见！","ar":"إلى اللقاء!","tok":[["再见","zài jiàn","إلى اللقاء"],["！"]]}],"txt":{"1":{"h":"النص ١: في المجمّع التجاري","scene":""},"2":{"h":"النص ٢: في السوق (المساومة)","scene":""}},"sent":[{"tokens":["大","为","你","在","这儿","买","什么"],"zh":"大为，你在这儿买什么？","py":"Dà wèi, nǐ zài zhèér mǎi shénme?","ar":"داوي، ماذا تشتري هنا؟"},{"tokens":["我","买","音乐","光盘"],"zh":"我买音乐光盘。","py":"Wǒ mǎi yīnyuè guāngpán.","ar":"أشتري أقراص موسيقى."},{"tokens":["你","常常","来","这儿","吗"],"zh":"你常常来这儿吗？","py":"Nǐ chángcháng lái zhèér ma?","ar":"هل تأتي إلى هنا كثيراً؟"},{"tokens":["你","喜欢","什么","音乐"],"zh":"你喜欢什么音乐？","py":"Nǐ xǐhuan shénme yīnyuè?","ar":"أي موسيقى تحب؟"},{"tokens":["这","张","很","好","是","梁祝","很","有名"],"zh":"这张很好，是《梁祝》，很有名。","py":"Zhè Zhāng hěn hǎo, shì “Liáng Zhù”, hěn yǒumíng.","ar":"هذا جيد جداً، إنه «ليانغ تشو»، مشهور جداً."},{"tokens":["这儿","没","有","书","也","没","有","报"],"zh":"这儿没有书，也没有报。","py":"Zhèér méi yǒu shū, yě méi yǒu bào.","ar":"لا توجد هنا كتب ولا صحف."},{"tokens":["先生","您","要","什么"],"zh":"先生，您要什么？","py":"Xiānsheng, nín yào shénme?","ar":"سيدي، ماذا تريد؟"},{"tokens":["我","在","语言学院","学习"],"zh":"我在语言学院学习。","py":"Wǒ zài Yǔyán Xuéyuàn xuéxí.","ar":"أنا أدرس في معهد اللغات."},{"tokens":["香蕉","苹果","香蕉苹果","一","斤","苹果","多少","钱"],"zh":"香蕉、苹果、香蕉苹果……，一斤苹果多少钱？","py":"Xiāngjiāo, píngguǒ, xiāngjiāopíngguǒ … …, yì jīn píngguǒ duōshǎo qián?","ar":"موز، تفاح، تفاح الموز… كم سعر جين (نصف كيلو) من التفاح؟"},{"tokens":["一","斤","三","块","二","毛","钱"],"zh":"一斤三块二毛钱。","py":"Yì jīn sān kuài èr máo qián.","ar":"جين واحد بثلاثة يوان وعشرين ماو."},{"tokens":["您","的","苹果","真","贵"],"zh":"您的苹果真贵。","py":"Nín de píngguǒ zhēn guì.","ar":"تفاحكم غالٍ حقاً."},{"tokens":["一","斤","香蕉","多少","钱"],"zh":"一斤香蕉多少钱？","py":"Yì jīn xiāngjiāo duōshǎo qián?","ar":"كم سعر جين الموز؟"},{"tokens":["这","个","商场","很","大"],"zh":"这个商场很大。","py":"Zhè gè shāngchǎng hěn dà.","ar":"هذا المجمع كبير جداً."},{"tokens":["两","块","七","毛","五","一","斤"],"zh":"两块七毛五一斤。","py":"Liǎng kuài qī máo wǔ yì jīn.","ar":"يوانان وسبعة ماو وخمسة فن للجين."}],"fill":[{"pre":"大为，你","post":"这儿买什么？","ans":"在","opts":["在","要","报"],"ar":"داوي، ماذا تشتري هنا؟","py":"Dà wèi, nǐ zài zhèér mǎi shénme?"},{"pre":"我买","post":"光盘。","ans":"音乐","opts":["音乐","苹果","怎么"],"ar":"أشتري أقراص موسيقى.","py":"Wǒ mǎi yīnyuè guāngpán."},{"pre":"你常常来","post":"吗？","ans":"这儿","opts":["这儿","光盘","商场"],"ar":"هل تأتي إلى هنا كثيراً؟","py":"Nǐ chángcháng lái zhèér ma?"},{"pre":"你喜欢什么","post":"？","ans":"音乐","opts":["音乐","先生","有名"],"ar":"أي موسيقى تحب؟","py":"Nǐ xǐhuan shénme yīnyuè?"},{"pre":"这张很好，是《梁祝》，很","post":"。","ans":"有名","opts":["有名","容易","香蕉"],"ar":"هذا جيد جداً، إنه «ليانغ تشو»، مشهور جداً.","py":"Zhè Zhāng hěn hǎo, shì “Liáng Zhù”, hěn yǒumíng."},{"pre":"这儿没有","post":"，也没有报。","ans":"书","opts":["书","斤","毛"],"ar":"لا توجد هنا كتب ولا صحف.","py":"Zhèér méi yǒu shū, yě méi yǒu bào."},{"pre":"","post":"，您要什么？","ans":"先生","opts":["先生","光盘","葡萄"],"ar":"سيدي، ماذا تريد؟","py":"Xiānsheng, nín yào shénme?"},{"pre":"我","post":"语言学院学习。","ans":"在","opts":["在","分","送"],"ar":"أنا أدرس في معهد اللغات.","py":"Wǒ zài Yǔyán Xuéyuàn xuéxí."},{"pre":"香蕉、苹果、香蕉苹果……，一斤苹果多少","post":"？","ans":"钱","opts":["钱","在","送"],"ar":"موز، تفاح، تفاح الموز… كم سعر جين (نصف كيلو) من التفاح؟","py":"Xiāngjiāo, píngguǒ, xiāngjiāopíngguǒ … …, yì jīn píngguǒ duōshǎo qián?"},{"pre":"一斤三","post":"二毛钱。","ans":"块","opts":["块","贵","送"],"ar":"جين واحد بثلاثة يوان وعشرين ماو.","py":"Yì jīn sān kuài èr máo qián."},{"pre":"您的","post":"真贵。","ans":"苹果","opts":["苹果","师傅","那儿"],"ar":"تفاحكم غالٍ حقاً.","py":"Nín de píngguǒ zhēn guì."},{"pre":"一","post":"香蕉多少钱？","ans":"斤","opts":["斤","书","毛"],"ar":"كم سعر جين الموز؟","py":"Yì jīn xiāngjiāo duōshǎo qián?"}],"chars":[{"c":"在","py":"zài","ar":"في / عند","w":"在"},{"c":"跟","py":"gēn","ar":"مع / يتبع","w":"跟"},{"c":"书","py":"shū","ar":"كتاب","w":"书"},{"c":"报","py":"bào","ar":"صحيفة","w":"报"},{"c":"要","py":"yào","ar":"يريد","w":"要"},{"c":"钱","py":"qián","ar":"مال / نقود","w":"钱"},{"c":"斤","py":"jīn","ar":"جين (نصف كيلو)","w":"斤"},{"c":"块","py":"kuài","ar":"يوان (كلاماً)","w":"块"}],"spk":{"N":{"n":"المشهد","a":"景"},"S":{"n":"وانغ شياويون","a":"王"},"X":{"n":"ما داوي","a":"马"},"L":{"n":"البائع","a":"师"},"C":{"n":"دينغ ليبو","a":"丁"}},"pitch":{"S":1.0,"X":0.9,"L":1.1,"C":0.95,"A":1.05,"Y":0.9,"N":1.0},"acts":["match","listen","meaning","tone","order","fill","lesson","write"],"lq":[{"type":"mc","prompt":"<div class=\"ar-s\">“一斤香蕉多少钱？”可以怎么回答？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">两块七毛五一斤。<\/span> <span class=\"py ltr mut\">Liǎng kuài qī máo wǔ yì jīn.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我在商场买。<\/span> <span class=\"py ltr mut\">Wǒ zài shāngchǎng mǎi.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我很喜欢香蕉。<\/span> <span class=\"py ltr mut\">Wǒ hěn xǐhuan xiāngjiāo.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">这是香蕉。<\/span> <span class=\"py ltr mut\">Zhè shì xiāngjiāo.<\/span>","ok":false}],"fb":"<div>«多少钱» سؤال عن السعر ← الجواب بالمبلغ.<\/div>","wid":[]},{"type":"match","words":[{"zh":"商场","py":"shāng chǎng","ar":"مجمع تجاري"},{"zh":"光盘","py":"guāng pán","ar":"قرص CD"},{"zh":"苹果","py":"píng guǒ","ar":"تفاح"},{"zh":"钱","py":"qián","ar":"مال"},{"zh":"贵","py":"guì","ar":"غالٍ"},{"zh":"送","py":"sòng","ar":"يهدي"}],"wid":[]},{"type":"fill","f":{"pre":"您","post":"我二十块钱，我找您六块钱。","ans":"给","opts":["给","找","送","买"],"ar":"","py":"Nín gěi wǒ èrshí kuài qián, wǒ zhǎo nín liù kuài qián."},"wid":[]},{"type":"fill","f":{"pre":"您给我二十块钱，我","post":"您六块钱。","ans":"找","opts":["找","给","送","买"],"ar":"","py":"Nín gěi wǒ èrshí kuài qián, wǒ zhǎo nín liù kuài qián."},"wid":[]},{"type":"order","s":{"tokens":["一斤","苹果","多少","钱","？"],"zh":"一斤苹果多少钱？","py":"Yì jīn píngguǒ duōshǎo qián?","ar":"كم سعر جين التفاح؟"},"wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">“一块七毛五”是多少钱？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">1.75元<\/span> <span class=\"py ltr mut\">1. 75 yuán<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">17.5元<\/span> <span class=\"py ltr mut\">17. 5 yuán<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">1.57元<\/span> <span class=\"py ltr mut\">1. 57 yuán<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">7.15元<\/span> <span class=\"py ltr mut\">7. 15 yuán<\/span>","ok":false}],"fb":"<div>一块 = ١ يوان، 七毛 = ٠.٧، 五 = ٠.٠٥ → ١.٧٥.<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">大为常常来这个商场买光盘。<\/div><div class=\"mut\">صح أم خطأ؟<\/div>","opts":[{"html":"صح","ok":false},{"html":"خطأ","ok":true}],"fix":1,"fb":"<div>«我不常来这儿» — داوي لا يأتي كثيراً إلى هذا المكان.<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">丁力波想问“这个汉语怎么说？”因为他：<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不知道苹果的汉语怎么说<\/span> <span class=\"py ltr mut\">Bù zhī dào píngguǒ de Hànyǔ zěnme shuō<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不想买苹果<\/span> <span class=\"py ltr mut\">Bù xiǎng mǎi píngguǒ<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">很忙<\/span> <span class=\"py ltr mut\">Hěn máng<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不认识师傅<\/span> <span class=\"py ltr mut\">Bú rènshi shīfu<\/span>","ok":false}],"fb":"<div>لأنه يريد أن يعرف الاسم الصيني.<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">哪一个对？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">这张光盘<\/span> <span class=\"py ltr mut\">Zhè Zhāng guāngpán<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">这个光盘<\/span> <span class=\"py ltr mut\">Zhè gè guāngpán<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">这瓶光盘<\/span> <span class=\"py ltr mut\">Zhè píng guāngpán<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">这本光盘<\/span> <span class=\"py ltr mut\">Zhè běn guāngpán<\/span>","ok":false}],"fb":"<div>كلمة عدّ القرص هي «张».<\/div>","wid":[]},{"type":"mc","sp":"一斤香蕉多少钱？","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر الجملة التي سمعتها<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">一斤香蕉多少钱？<\/span> <span class=\"py ltr mut\">Yì jīn xiāngjiāo duōshǎo qián?<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">一斤苹果多少钱？<\/span> <span class=\"py ltr mut\">Yì jīn píngguǒ duōshǎo qián?<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">两斤香蕉多少钱？<\/span> <span class=\"py ltr mut\">Liǎng jīn xiāngjiāo duōshǎo qián?<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">一斤香蕉多少钱？<\/span><\/div>","wid":[]}],"gram":"<div class=\"sec-h\"><h2>القواعد<\/h2><p>ملاحظات الدرس وأنماط الجمل والجمل المفتاحية. اضغط أي كلمة لترى معناها.<\/p><\/div><h3 class=\"sub-h\">الملاحظات · <span class=\"han\" dir=\"ltr\">二、注释<\/span><\/h3><div class=\"card\"><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">①<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"这\" data-p=\"zhè\" data-a=\"هذا\"><span class=\"py\"><span class=\"t4\">zhè<\/span><\/span><span class=\"zh\"><span class=\"t4\">这<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"个\" data-p=\"gè\" data-a=\"كلمة عدّ عامة\"><span class=\"py\"><span class=\"t4\">gè<\/span><\/span><span class=\"zh\"><span class=\"t4\">个<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"商场\" data-p=\"shāng chǎng\" data-a=\"مجمع تجاري\"><span class=\"py\"><span class=\"t1\">shāng<\/span><span class=\"t3\">chǎng<\/span><\/span><span class=\"zh\"><span class=\"t1\">商<\/span><span class=\"t3\">场<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"很\" data-p=\"hěn\" data-a=\"جداً\"><span class=\"py\"><span class=\"t3\">hěn<\/span><\/span><span class=\"zh\"><span class=\"t3\">很<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"大\" data-p=\"dà\" data-a=\"كبير\"><span class=\"py\"><span class=\"t4\">dà<\/span><\/span><span class=\"zh\"><span class=\"t4\">大<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>إذا جاء اسم الإشارة «这/那» صفةً للاسم فإننا نضع بينهما كلمة عدّ: 这张光盘، 那个朋友، 那瓶酒.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这个商场很大。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">②<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"先生\" data-p=\"xiān sheng\" data-a=\"سيد / أستاذ\"><span class=\"py\"><span class=\"t1\">xiān<\/span><span class=\"t5\">sheng<\/span><\/span><span class=\"zh\"><span class=\"t1\">先<\/span><span class=\"t5\">生<\/span><\/span><\/button><span class=\"punc\">，<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"您\" data-p=\"nín\" data-a=\"حضرتك (مهذب)\"><span class=\"py\"><span class=\"t2\">nín<\/span><\/span><span class=\"zh\"><span class=\"t2\">您<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"要\" data-p=\"yào\" data-a=\"يريد\"><span class=\"py\"><span class=\"t4\">yào<\/span><\/span><span class=\"zh\"><span class=\"t4\">要<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"什么\" data-p=\"shén me\" data-a=\"ماذا / أي\"><span class=\"py\"><span class=\"t2\">shén<\/span><span class=\"t5\">me<\/span><\/span><span class=\"zh\"><span class=\"t2\">什<\/span><span class=\"t5\">么<\/span><\/span><\/button><span class=\"punc\">？<\/span><\/span><\/div><div>«先生» لقب لمخاطبة الرجل البالغ، ويُستعمل أيضاً احتراماً لعالم أو متخصص رجلاً كان أو امرأة. «您要什么؟» و«您还要什么؟» يقولهما البائعون وموظفو الفنادق لعرض المساعدة.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"先生，您要什么？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">③<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"你\" data-p=\"nǐ\" data-a=\"أنتَ/أنتِ\"><span class=\"py\"><span class=\"t3\">nǐ<\/span><\/span><span class=\"zh\"><span class=\"t3\">你<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"好\" data-p=\"hǎo\" data-a=\"جيد\"><span class=\"py\"><span class=\"t3\">hǎo<\/span><\/span><span class=\"zh\"><span class=\"t3\">好<\/span><\/span><\/button><span class=\"punc\">，<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"师傅\" data-p=\"shī fu\" data-a=\"أيها الأخ (احتراماً للعامل)\"><span class=\"py\"><span class=\"t1\">shī<\/span><span class=\"t5\">fu<\/span><\/span><span class=\"zh\"><span class=\"t1\">师<\/span><span class=\"t5\">傅<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>«师傅» صيغة احترام لمخاطبة العمال وأصحاب المهن الخدمية: سائق التاكسي والحافلة، بائع التذاكر، الطباخ، موظف الفندق، وصار استعمالها أوسع اليوم.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你好，师傅。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">④<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我\" data-p=\"wǒ\" data-a=\"أنا\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"是\" data-p=\"shì\" data-a=\"يكون\"><span class=\"py\"><span class=\"t4\">shì<\/span><\/span><span class=\"zh\"><span class=\"t4\">是<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"问\" data-p=\"wèn\" data-a=\"يسأل\"><span class=\"py\"><span class=\"t4\">wèn<\/span><\/span><span class=\"zh\"><span class=\"t4\">问<\/span><\/span><\/button><span class=\"punc\">：<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"这\" data-p=\"zhè\" data-a=\"هذا\"><span class=\"py\"><span class=\"t4\">zhè<\/span><\/span><span class=\"zh\"><span class=\"t4\">这<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"个\" data-p=\"gè\" data-a=\"كلمة عدّ عامة\"><span class=\"py\"><span class=\"t4\">gè<\/span><\/span><span class=\"zh\"><span class=\"t4\">个<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"汉语\" data-p=\"Hàn yǔ\" data-a=\"اللغة الصينية\"><span class=\"py\"><span class=\"t4\">Hàn<\/span><span class=\"t3\">yǔ<\/span><\/span><span class=\"zh\"><span class=\"t4\">汉<\/span><span class=\"t3\">语<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"怎么\" data-p=\"zěn me\" data-a=\"كيف\"><span class=\"py\"><span class=\"t3\">zěn<\/span><span class=\"t5\">me<\/span><\/span><span class=\"zh\"><span class=\"t3\">怎<\/span><span class=\"t5\">么<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"说\" data-p=\"shuō\" data-a=\"يقول / يتحدث\"><span class=\"py\"><span class=\"t1\">shuō<\/span><\/span><span class=\"zh\"><span class=\"t1\">说<\/span><\/span><\/button><span class=\"punc\">？<\/span><\/span><\/div><div>«怎么 + فعل» تسأل عن طريقة فعل شيء: 怎么说؟ 怎么做؟ 怎么去؟ 怎么介绍؟<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我是问：这个汉语怎么说？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">⑤<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"您\" data-p=\"nín\" data-a=\"حضرتك (مهذب)\"><span class=\"py\"><span class=\"t2\">nín<\/span><\/span><span class=\"zh\"><span class=\"t2\">您<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"学习\" data-p=\"xué xí\" data-a=\"يدرس\"><span class=\"py\"><span class=\"t2\">xué<\/span><span class=\"t2\">xí<\/span><\/span><span class=\"zh\"><span class=\"t2\">学<\/span><span class=\"t2\">习<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"汉语\" data-p=\"Hàn yǔ\" data-a=\"اللغة الصينية\"><span class=\"py\"><span class=\"t4\">Hàn<\/span><span class=\"t3\">yǔ<\/span><\/span><span class=\"zh\"><span class=\"t4\">汉<\/span><span class=\"t3\">语<\/span><\/span><\/button><span class=\"punc\">，<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"是\" data-p=\"shì\" data-a=\"يكون\"><span class=\"py\"><span class=\"t4\">shì<\/span><\/span><span class=\"zh\"><span class=\"t4\">是<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"不是\" data-p=\"bú shì\" data-a=\"\"><span class=\"py\"><span class=\"t2\">bú<\/span><span class=\"t4\">shì<\/span><\/span><span class=\"zh\"><span class=\"t2\">不<\/span><span class=\"t4\">是<\/span><\/span><\/button><span class=\"punc\">？<\/span><\/span><\/div><div>النمط «……，是不是؟» لإبداء رأي أو تخمين مع انتظار رد. الجواب المثبت «是啊»، والمنفي «不（是）». مثال: A: 你喜欢中国音乐，是吗؟ B: 是啊。<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"您学习汉语，是不是？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">⑥<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"一\" data-p=\"yì\" data-a=\"واحد\"><span class=\"py\"><span class=\"t4\">yì<\/span><\/span><span class=\"zh\"><span class=\"t4\">一<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"斤\" data-p=\"jīn\" data-a=\"جين (نصف كيلو)\"><span class=\"py\"><span class=\"t1\">jīn<\/span><\/span><span class=\"zh\"><span class=\"t1\">斤<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"苹果\" data-p=\"píng guǒ\" data-a=\"تفاح\"><span class=\"py\"><span class=\"t2\">píng<\/span><span class=\"t3\">guǒ<\/span><\/span><span class=\"zh\"><span class=\"t2\">苹<\/span><span class=\"t3\">果<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"多少\" data-p=\"duō shǎo\" data-a=\"كم (للكميات)\"><span class=\"py\"><span class=\"t1\">duō<\/span><span class=\"t3\">shǎo<\/span><\/span><span class=\"zh\"><span class=\"t1\">多<\/span><span class=\"t3\">少<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"钱\" data-p=\"qián\" data-a=\"مال / نقود\"><span class=\"py\"><span class=\"t2\">qián<\/span><\/span><span class=\"zh\"><span class=\"t2\">钱<\/span><\/span><\/button><span class=\"punc\">？<\/span><\/span><\/div><div>«كم سعر جين التفاح؟» والجين (斤) نصف كيلو. يمكن قلب الجملة: 多少钱一斤؟ ← 三块二一斤. في المتاجر الكبرى لا يساوم الناس عادةً، لكن في الأسواق الحرّة والأكشاك كثيراً ما يساومون.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"一斤苹果多少钱？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">⑦<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"一\" data-p=\"yì\" data-a=\"واحد\"><span class=\"py\"><span class=\"t4\">yì<\/span><\/span><span class=\"zh\"><span class=\"t4\">一<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"斤\" data-p=\"jīn\" data-a=\"جين (نصف كيلو)\"><span class=\"py\"><span class=\"t1\">jīn<\/span><\/span><span class=\"zh\"><span class=\"t1\">斤<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"三\" data-p=\"sān\" data-a=\"ثلاثة\"><span class=\"py\"><span class=\"t1\">sān<\/span><\/span><span class=\"zh\"><span class=\"t1\">三<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"块\" data-p=\"kuài\" data-a=\"يوان (كلاماً)\"><span class=\"py\"><span class=\"t4\">kuài<\/span><\/span><span class=\"zh\"><span class=\"t4\">块<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"二\" data-p=\"èr\" data-a=\"اثنان\"><span class=\"py\"><span class=\"t4\">èr<\/span><\/span><span class=\"zh\"><span class=\"t4\">二<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"毛\" data-p=\"máo\" data-a=\"ماو (١/١٠ يوان)\"><span class=\"py\"><span class=\"t2\">máo<\/span><\/span><span class=\"zh\"><span class=\"t2\">毛<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"钱\" data-p=\"qián\" data-a=\"مال / نقود\"><span class=\"py\"><span class=\"t2\">qián<\/span><\/span><span class=\"zh\"><span class=\"t2\">钱<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>وحدات العملة (人民币): 元 (يوان) وتُنطق في الكلام 块، و角 وتُنطق 毛، و分 (فن). وإذا انتهى المبلغ بـ毛 أو 分 يمكن حذف «毛钱/分钱». مثال: 1.75元 ← 一块七毛五. وإذا بدأ المبلغ بـ٢毛 نقول 两毛، وإذا انتهى بـ٢分 نقول 二分: 0.22元 ← 两毛二.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"一斤三块二毛钱。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"不\" data-p=\"bú\" data-a=\"لا\"><span class=\"py\"><span class=\"t2\">bú<\/span><\/span><span class=\"zh\"><span class=\"t2\">不<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"要\" data-p=\"yào\" data-a=\"يريد\"><span class=\"py\"><span class=\"t4\">yào<\/span><\/span><span class=\"zh\"><span class=\"t4\">要<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"了\" data-p=\"le\" data-a=\"أداة نغمية / ماضٍ\"><span class=\"py\"><span class=\"t5\">le<\/span><\/span><span class=\"zh\"><span class=\"t5\">了<\/span><\/span><\/button><span class=\"punc\">，<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"谢谢\" data-p=\"xiè xie\" data-a=\"شكراً\"><span class=\"py\"><span class=\"t4\">xiè<\/span><span class=\"t5\">xie<\/span><\/span><span class=\"zh\"><span class=\"t4\">谢<\/span><span class=\"t5\">谢<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>معناها: «لا، شكراً (لا أريد المزيد)».<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"不要了，谢谢。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">العملة الصينية · <span class=\"han\" dir=\"ltr\">三、人民币<\/span><\/h3><div class=\"card\"><div class=\"tw\"><table><thead><tr><th><div class=\"han\" dir=\"ltr\">书面<\/div><div class=\"mut\">الكتابة<\/div><\/th><th><div class=\"han\" dir=\"ltr\">口语<\/div><div class=\"mut\">في الكلام<\/div><\/th><th><div class=\"han\" dir=\"ltr\">价值<\/div><div class=\"mut\">القيمة<\/div><\/th><\/tr><\/thead><tbody><tr><td><div class=\"han\" dir=\"ltr\">元<\/div><div class=\"mut py\" dir=\"ltr\">Yuán<\/div><\/td><td><div class=\"han\" dir=\"ltr\">块<\/div><div class=\"mut py\" dir=\"ltr\">Kuài<\/div><\/td><td>١ يوان<\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">角<\/div><div class=\"mut py\" dir=\"ltr\">Jiǎo<\/div><\/td><td><div class=\"han\" dir=\"ltr\">毛<\/div><div class=\"mut py\" dir=\"ltr\">Máo<\/div><\/td><td>١/١٠ يوان<\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">分<\/div><div class=\"mut py\" dir=\"ltr\">Fēn<\/div><\/td><td><div class=\"han\" dir=\"ltr\">分<\/div><div class=\"mut py\" dir=\"ltr\">Fēn<\/div><\/td><td>١/١٠٠ يوان<\/td><\/tr><\/tbody><\/table><\/div><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"一块七毛五\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">一块七毛五<\/span><span class=\"mut py\" dir=\"ltr\">Yí kuài qī máo wǔ<\/span><span>١.٧٥ يوان<\/span><\/div><\/div><\/div><div class=\"tiles\" style=\"margin-top:8px\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">四<\/span><span class=\"t4\">块<\/span><span class=\"t1\">八<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">sì<\/span><span class=\"t4\">kuài<\/span><span class=\"t1\">bā<\/span><\/span><span class=\"mut\">٤.٨٠ يوان<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"四块八\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">两<\/span><span class=\"t2\">毛<\/span><span class=\"t4\">二<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">liǎng<\/span><span class=\"t2\">máo<\/span><span class=\"t4\">èr<\/span><\/span><span class=\"mut\">٠.٢٢ يوان<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"两毛二\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">三<\/span><span class=\"t4\">块<\/span><span class=\"t4\">二<\/span><span class=\"t2\">毛<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">sān<\/span><span class=\"t4\">kuài<\/span><span class=\"t4\">èr<\/span><span class=\"t2\">máo<\/span><\/span><span class=\"mut\">٣.٢٠ يوان<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"三块二毛\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"两块七毛五分\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">两块七毛五分<\/span><span class=\"mut py\" dir=\"ltr\">Liǎng kuài qī máo wǔ fēn<\/span><span>٢.٧٥ يوان<\/span><\/div><\/div><\/div><div class=\"tiles\" style=\"margin-top:8px\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">二<\/span><span class=\"t2\">十<\/span><span class=\"t4\">块<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">èr<\/span><span class=\"t2\">shí<\/span><span class=\"t4\">kuài<\/span><\/span><span class=\"mut\">٢٠ يوان<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"二十块\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">补充词<\/span> · كلمات إضافية:<\/h4><div class=\"tiles\" style=\"margin-top:8px\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">元<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">yuán<\/span><\/span><span class=\"mut\">يوان (كتابياً)<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"元\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">笔<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">bǐ<\/span><\/span><span class=\"mut\">قلم<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"笔\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">支<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">zhī<\/span><\/span><span class=\"mut\">كلمة عدّ للأقلام<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"支\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">份<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">fèn<\/span><\/span><span class=\"mut\">كلمة عدّ للصحف<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"份\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">本<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">běn<\/span><\/span><span class=\"mut\">كلمة عدّ للكتب والدفاتر<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"本\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">杯<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">bēi<\/span><\/span><span class=\"mut\">كوب<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"杯\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">售<\/span><span class=\"t4\">货<\/span><span class=\"t2\">员<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">shòu<\/span><span class=\"t4\">huò<\/span><span class=\"t2\">yuán<\/span><\/span><span class=\"mut\">بائع<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"售货员\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">作<\/span><span class=\"t1\">家<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">zuò<\/span><span class=\"t1\">jiā<\/span><\/span><span class=\"mut\">كاتب<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"作家\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">便<\/span><span class=\"t5\">宜<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">pián<\/span><span class=\"t5\">yi<\/span><\/span><span class=\"mut\">رخيص<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"便宜\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">书<\/span><span class=\"t4\">店<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">shū<\/span><span class=\"t4\">diàn<\/span><\/span><span class=\"mut\">مكتبة<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"书店\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">体<\/span><span class=\"t4\">育<\/span><span class=\"t3\">馆<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">tǐ<\/span><span class=\"t4\">yù<\/span><span class=\"t3\">guǎn<\/span><\/span><span class=\"mut\">صالة رياضية<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"体育馆\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">卖<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">mài<\/span><\/span><span class=\"mut\">يبيع<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"卖\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><h3 class=\"sub-h\">الجمل المفتاحية · <span class=\"han\" dir=\"ltr\">四、关键句<\/span><\/h3><div class=\"card\"><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这个商场很大。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这个商场很大。<\/span><span class=\"mut py\" dir=\"ltr\">Zhè gè shāngchǎng hěn dà.<\/span><span>هذا المجمع كبير جداً.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"一斤香蕉多少钱？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">一斤香蕉多少钱？<\/span><span class=\"mut py\" dir=\"ltr\">Yì jīn xiāngjiāo duōshǎo qián?<\/span><span>كم سعر جين الموز؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"两块七毛五一斤。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">两块七毛五一斤。<\/span><span class=\"mut py\" dir=\"ltr\">Liǎng kuài qī máo wǔ yì jīn.<\/span><span>يوانان وسبعة ماو وخمسة فن للجين.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"您在哪儿工作？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">您在哪儿工作？<\/span><span class=\"mut py\" dir=\"ltr\">Nín zài nǎér gōngzuò?<\/span><span>أين تعمل؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我常常跟他来这儿。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我常常跟他来这儿。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ chángcháng gēn tā lái zhèér.<\/span><span>أنا آتي إلى هنا كثيراً معه.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我送你一个苹果。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我送你一个苹果。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ sòng nǐ yí gè píngguǒ.<\/span><span>أهديك تفاحة.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"您给我二十块钱。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">您给我二十块钱。<\/span><span class=\"mut py\" dir=\"ltr\">Nín gěi wǒ èrshí kuài qián.<\/span><span>أعطيتني عشرين يواناً.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这个汉语怎么说？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这个汉语怎么说？<\/span><span class=\"mut py\" dir=\"ltr\">Zhè gè Hànyǔ zěnme shuō?<\/span><span>كيف يُقال هذا بالصينية؟<\/span><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">كرّر بعدي<\/h3><div class=\"card\"><p class=\"mut\">استمع لكل جملة ثم كرّرها بصوت عالٍ.<\/p><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这个汉语怎么说？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这个汉语怎么说？<\/span><span class=\"mut py\" dir=\"ltr\">Zhè gè Hànyǔ zěnme shuō?<\/span><span>كيف يُقال هذا بالصينية؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"一斤苹果多少钱？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">一斤苹果多少钱？<\/span><span class=\"mut py\" dir=\"ltr\">Yì jīn píngguǒ duōshǎo qián?<\/span><span>كم سعر جين التفاح؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"不要了，谢谢。给你钱。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">不要了，谢谢。给你钱。<\/span><span class=\"mut py\" dir=\"ltr\">Bú yào le, xièxie. gěi nǐ qián.<\/span><span>لا شكراً. تفضل المال.<\/span><\/div><\/div><\/div><\/div>","disc":[{"q":"你在市场买东西：问价钱，然后买。","ar":"تتسوّق في السوق: اسأل عن السعر ثم اشترِ.","frames":["师傅，","一斤……多少钱？","我买……斤。","一共……钱。","给你钱。"],"use":["多少钱","一共","给","买"],"model":"师傅，一斤苹果多少钱？三块钱一斤。我买两斤。一共六块钱。给你钱。｜أيها الأخ، كم سعر جين التفاح؟ ثلاثة يوان للجين. أشتري جينين. المجموع ستة يوان. تفضل المال."},{"q":"你喜欢什么音乐？你常常去哪儿买东西？","ar":"أي موسيقى تحب؟ وأين تتسوق عادةً؟","frames":["我喜欢……音乐。","我常常去……","我常常跟……去。","这个……很大。"],"use":["喜欢","音乐","常常","跟"],"model":"我喜欢中国音乐。我常常去商场，我常常跟朋友去。这个商场很大。｜أحب الموسيقى الصينية. أذهب كثيراً إلى المجمع، وأذهب مع أصدقائي. هذا المجمع كبير جداً."}],"minc":12};
+var VOCAB=D.vocab,TOKPY=D.tokpy,DLG=D.dlg,TXT=D.txt,CQ={},SENT=D.sent,FILL=D.fill,CHARS=D.chars,SPK=D.spk,PITCH=D.pitch,ACTS=D.acts;
+function pitchOf(w){return PITCH[w]||1}
+function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
+function picHtml(){return ''}
+var CLASSX=[];
+var BADGES={
+ first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'听',n:'المستمع'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
+};
+/* ---------- progress / badges ---------- */
+function award(id){if(!S.badges[id]){S.badges[id]=1;save();toast('وسام جديد: '+BADGES[id].n)}}
+function knownCount(){return VOCAB.filter(function(_,i){return S.known[i]}).length}
+function progress(){
+  var k=knownCount()/VOCAB.length,h=Object.keys(S.heard).length/DLG.length,a=ACTS.filter(function(x){return S.best[x]}).length/ACTS.length;
+  return Math.round((k+h+a)/3*100);
 }
-function syncSw(){$('#spy').setAttribute('aria-pressed',document.body.classList.contains('py'));$('#sar').setAttribute('aria-pressed',document.body.classList.contains('ar'))}
-var cur=-1;
-function pop(i){var t=TERMS[i];cur=i;var p=$('#pop');p.hidden=false;p.innerHTML='<div class="r"><div class="zz">'+esc(t.zh)+'</div><div><div class="pp" style="font-family:var(--font-py);direction:ltr">'+pyh(t.py)+'</div><div>'+esc(t.ar)+'</div></div><div class="cl" style="display:flex;gap:6px"><button class="sm" data-pop="say" aria-label="استمع">🔊</button><button class="sm'+(inRev(t.zh)?' on':'')+'" data-pop="add" aria-label="مراجعة">'+(inRev(t.zh)?'✓':'+')+'</button><button class="sm" data-pop="x" aria-label="إغلاق">✕</button></div></div>'+(t.ex?'<div style="margin-top:8px;border-top:1px dashed var(--line);padding-top:6px">'+ZP(sp(t.ex)[0])+'<span class="mut">'+esc(sp(t.ex)[1])+'</span></div>':'')}
-document.addEventListener('click',function(e){
- var t=e.target.closest('[data-g],[data-tab],[data-pop],[data-say-sec],[data-say-t],[data-add-t],#addall,#slow,[data-fc],#spy,#sar,#prs,[data-fr],[data-say-m],[data-sz]');
- if(!t){if(!e.target.closest('#pop')){$('#pop').hidden=true}return}
- var d=t.dataset;
- if(d.g!=null){speak(TERMS[+d.g].zh);pop(+d.g)}
- else if(d.tab)show(d.tab);
- else if(d.pop){if(d.pop==='x')$('#pop').hidden=true;else if(d.pop==='say')speak(TERMS[cur].zh);else{var on=addRev(TERMS[cur].zh);pop(cur);toast(on?'أُضيف إلى مفردات '+D.cname:'أُزيل من المراجعة');refreshTerms()}}
- else if(d.saySec!=null)speak(secText(+d.saySec));
- else if(d.sayT!=null)speak(TERMS[+d.sayT].zh);
- else if(d.addT!=null){var on2=addRev(TERMS[+d.addT].zh);toast(on2?'أُضيف إلى مفردات '+D.cname:'أُزيل من المراجعة');refreshTerms()}
- else if(t.id==='addall'){TERMS.forEach(function(x){if(!inRev(x.zh))addRev(x.zh)});toast('أُضيفت كل المصطلحات');refreshTerms()}
- else if(t.id==='slow'){var s=document.body.classList.toggle('slow');S.ui.slow=s?1:0;save();t.setAttribute('aria-pressed',s)}
- else if(d.fc){fcAct(d.fc)}
- else if(t.id==='spy'||t.id==='sar'){var c=t.id==='spy'?'py':'ar';document.body.classList.toggle(c);S.ui[c]=document.body.classList.contains(c)?1:0;save();syncSw()}
- else if(t.id==='prs'){if(confirm('مسح نتائج التدريبات وإعادتها؟')){S.prac={};save();initPractice();[].forEach.call(document.querySelectorAll('.qs'),function(q){q.textContent='';q.className='qs'});[].forEach.call(document.querySelectorAll('.fb'),function(f){f.hidden=true});upd()}}
- else if(d.fr!=null){var sec=t.closest('[data-d]'),i=+sec.dataset.d,ta=$('textarea',sec),f=D.discuss[i].frames[+d.fr],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);ta.focus();ta.dispatchEvent(new Event('input',{bubbles:true}))}
- else if(d.sz!=null)speak(SAYS[+d.sz]);
- else if(d.sayM!=null)speak(sp(D.discuss[+d.sayM].model)[0]);
+function updateProg(){$('#gprog').style.width=progress()+'%'}
+
+/* ---------- tabs ---------- */
+var TABS=['vocab','dialogue','grammar','writing','practice'];
+var tab='vocab';
+var RENDER={vocab:renderVocab,dialogue:renderDialogue,grammar:renderGrammar,writing:renderWriting,practice:renderPractice};
+function setTab(name,fromHash){
+  if(TABS.indexOf(name)<0)name='vocab';
+  tab=name;
+  stopSpeech();stopAll();closeSheet();
+  $$('.tab').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.tab===name))});
+  TABS.forEach(function(t){$('#p-'+t).hidden=(t!==name)});
+  RENDER[name]();
+  if(!fromHash){try{history.replaceState(null,'','#'+name)}catch(e){location.hash=name}}
+  window.scrollTo(0,0);
+  var sel=$('.tab[aria-selected="true"]');if(sel&&sel.scrollIntoView){try{sel.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}
+}
+
+/* ---------- vocab ---------- */
+function renderVocab(){
+  var w=VOCAB[S.card];
+  var rows=VOCAB.map(function(v,i){
+    return '<div class="row'+(i===S.card?' cur':'')+'" data-act="jump" data-i="'+i+'">'+
+      '<div class="rp">'+picHtml(v.zh,'pt')+'</div><div class="rz" dir="ltr">'+han(v.zh,v.py)+'</div>'+
+      '<div><div class="rpy'+(S.py?'':' off')+'" dir="ltr">'+pyhtml(v.py)+'</div><div class="rar'+(S.ar?'':' off')+'">'+v.ar+(v.sup?'<span class="tag">تكميلية</span>':'')+'</div></div>'+
+      '<span class="kn'+(S.known[i]?' on':'')+'" aria-label="'+(S.known[i]?'محفوظة':'غير محفوظة')+'">'+ic('check',14)+'</span>'+
+      spkBtn(v.zh,'sm')+'</div>';
+  }).join('');
+  $('#p-vocab').innerHTML=
+    '<div class="sec-h"><h2>بطاقات المفردات</h2><p>'+VOCAB.length+' كلمة · اضغط البطاقة لقلبها · عرفتَ <b>'+knownCount()+'</b> منها</p></div>'+
+    '<div class="fc" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة">'+
+      '<div class="face front"'+(S.flip?' hidden':'')+'>'+spkBtn(w.zh)+
+        '<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div></div>'+
+      '<div class="face back"'+(S.flip?'':' hidden')+'>'+spkBtn(w.zh)+
+        picHtml(w.zh,'pb')+'<div class="pyl" dir="ltr">'+pyhtml(w.py)+'</div>'+
+        '<div class="meaning">'+w.ar+'</div>'+(w.note?'<div class="note">'+w.note+'</div>':'')+
+        '<div class="ex" dir="ltr"><div class="exzh">'+w.ex[0]+'</div><div class="expy">'+w.ex[1]+'</div><div class="exar" dir="rtl">'+w.ex[2]+'</div></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="navrow"><button class="btn ghost sm" data-act="prev">السابقة</button><span class="cnt">'+(S.card+1)+' / '+VOCAB.length+'</span><button class="btn ghost sm" data-act="next">التالية</button></div>'+
+    '<div class="actrow"><button class="btn ghost" data-act="again">'+ic('redo',18)+' أراجعها لاحقاً</button><button class="btn primary" data-act="know">'+ic('check',18)+' أعرفها</button></div>'+
+    '<h3 class="sub-h">قائمة الكلمات</h3>'+
+    '<div class="tools"><button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy">拼音 البينيين</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar">الترجمة</button></div>'+
+    '<div>'+rows+'</div>';
+}
+
+/* ---------- dialogue ---------- */
+var playing=false;
+function cqHtml(t){var out='';if(!window.__cqs){window.__cqs=1;[1,2,3].forEach(function(k){(CQ[k]||[]).forEach(function(c){var ans=c.o[c.a];c.o=shuffle(c.o);c.a=c.o.indexOf(ans)})})}(CQ[t]||[]).forEach(function(c,i){out+='<div class="cq" id="cq'+t+'_'+i+'"><b><span class="han ltr" style="font-size:19px">'+(i+1)+'. '+c.q.zh+'</span><span class="py mut ltr">'+c.q.py+'</span></b><div class="o">'+c.o.map(function(o,j){return '<button class="chip cqo" data-act="cq" data-q="'+t+'" data-i="'+i+'" data-o="'+j+'"><span class="han" style="font-size:18px">'+o.zh+'</span><span class="py mut">'+o.py+'</span></button>'}).join('')+'</div></div>'});return out?'<h3 class="sub-h">问题 · أسئلة</h3>'+out:''}
+function renderDialogue(){
+  var out='',lastText=0;
+  DLG.forEach(function(L,i){
+    if(L.text!==lastText){if(lastText)out+=cqHtml(lastText);lastText=L.text;out+='<h3 class="sub-h" style="margin-bottom:0">'+TXT[L.text].h+'</h3>'+TXT[L.text].scene}
+    var groups=[];
+    L.tok.forEach(function(t,j){
+      if(t.length===1){if(groups.length)groups[groups.length-1]+='<span class="punc">'+t[0]+'</span>';else groups.push('<span class="punc">'+t[0]+'</span>')}
+      else groups.push('<button class="tok" data-act="tok" data-l="'+i+'" data-k="'+j+'"><span class="py">'+pyhtml(t[1])+'</span><span class="zh">'+han(t[0],t[1])+'</span></button>');
+    });
+    var toks=groups.map(function(g){return '<span class="tg">'+g+'</span>'}).join('');
+    var sp=SPK[L.who];
+    out+='<div class="line '+L.who+'" id="ln'+i+'"><div class="who"><span class="av" lang="zh">'+sp.a+'</span>'+sp.n+spkBtn(L.zh,'sm').replace('data-act="say"','data-act="sayline" data-l="'+i+'"')+'</div>'+
+      '<div class="zhline">'+toks+'</div><div class="arline">'+L.ar+'</div></div>';
+  });
+  out+=cqHtml(lastText);
+  var cx=CLASSX.map(function(c){
+    return '<div class="m">'+spkBtn(c.zh,'sm')+'<div class="t"><span class="z" dir="ltr">'+c.zh+'</span><span class="mut py" dir="ltr">'+c.py+'</span><span>'+c.ar+'</span></div></div>';
+  }).join('');
+  $('#p-dialogue').innerHTML=
+    '<div class="sec-h"><h2>نصوص الدرس</h2><p>اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جملة.</p></div>'+
+    '<div class="tools"><button class="btn primary sm" id="playall" data-act="playall">'+ic('play',16)+' تشغيل النصوص كاملة</button>'+
+    '<button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy2">拼音</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar2">الترجمة</button></div>'+
+    '<div class="lines'+(S.py?'':' nopy')+(S.ar?'':' noar')+'" id="lines">'+out+'</div>'+
+    
+    (cx?'<h3 class="sub-h">عبارات الصف</h3><div class="qa" style="margin-top:0">'+cx+'</div>':'');
+  syncLines();
+}
+function syncLines(){var l=$('#lines');if(!l)return;l.classList.toggle('nopy',!S.py);l.classList.toggle('noar',!S.ar)}
+function openSheet(tk){
+  $('#sheet').innerHTML='<div class="sheet-in">'+spkBtn(tk[0])+'<div class="sh-main"><div class="sh-zh" dir="ltr">'+han(tk[0],tk[1])+'</div><div class="sh-py" dir="ltr">'+pyhtml(tk[1])+'</div></div><div class="sh-ar">'+tk[2]+'</div><button class="ibtn" data-act="closesheet" aria-label="إغلاق">'+ic('x',16)+'</button></div>';
+  $('#sheet').hidden=false;
+  speak(tk[0]);
+}
+function closeSheet(){var s=$('#sheet');if(s)s.hidden=true}
+function markLine(i){$$('.line').forEach(function(el,j){el.classList.toggle('playing',j===i)})}
+function setPlayBtn(){var b=$('#playall');if(b)b.innerHTML=playing?ic('stop',16)+' إيقاف':ic('play',16)+' تشغيل النصوص كاملة'}
+function stopAll(){playing=false;markLine(-1);setPlayBtn()}
+function playAll(){
+  if(playing){stopSpeech();stopAll();return}
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');return}
+  playing=true;setPlayBtn();
+  var i=0;
+  var next=function(){
+    if(!playing||i>=DLG.length){stopAll();checkListener();return}
+    var L=DLG[i];markLine(i);S.heard[i]=1;i++;save();updateProg();
+    speak(L.zh,function(){setTimeout(next,350)},pitchOf(L.who));
+  };
+  next();
+}
+function checkListener(){if(Object.keys(S.heard).length>=DLG.length)award('listener')}
+
+/* ---------- grammar ---------- */
+function renderGrammar(){$('#p-grammar').innerHTML=D.gram}
+/* ---------- writing ---------- */
+var W={i:0,strokes:[],cur:null,ghost:true};
+function renderWriting(){
+  var c=CHARS[W.i];
+  var chips=CHARS.map(function(x,i){return '<button class="chip tgl'+(i===W.i?' on':'')+'" data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  $('#p-writing').innerHTML=
+    '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
+    '<div class="chips">'+chips+'</div>'+
+    '<div class="winfo"><span class="big han">'+c.c+'</span><div><div class="py" style="font-size:20px">'+c.py+'</div><div>'+c.ar+'</div><div class="mut">من كلمة: <span class="han" dir="ltr">'+esc(c.w)+'</span></div></div>'+spkBtn(c.c)+'</div>'+
+    '<div class="cvwrap"><canvas id="cv" width="640" height="640" aria-label="مساحة الكتابة"></canvas></div>'+
+    '<div class="tools" style="margin-top:14px;justify-content:center"><button class="btn ghost sm" data-act="wclear">'+ic('redo',16)+' مسح</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>'+
+    '<p class="mut" style="margin-top:12px;text-align:center">قاعدة عامة في ترتيب الخطوط: من الأعلى إلى الأسفل، ومن اليسار إلى اليمين.</p>'+writingExtra();
+  var cv=$('#cv');
+  cv.addEventListener('pointerdown',function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}W.cur=[pt(e)];W.strokes.push(W.cur);drawCanvas()});
+  cv.addEventListener('pointermove',function(e){if(!W.cur)return;W.cur.push(pt(e));drawCanvas()});
+  var end=function(){W.cur=null};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+  drawCanvas();
+  if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+}
+function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
+function drawCanvas(){
+  var cv=$('#cv');if(!cv)return;
+  var ctx=cv.getContext('2d'),cs=getComputedStyle(document.documentElement),w=cv.width,h=cv.height;
+  var col=function(n){return cs.getPropertyValue(n).trim()};
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle=col('--surface');ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle=col('--line');ctx.lineWidth=3;ctx.setLineDash([14,12]);
+  ctx.beginPath();ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.moveTo(0,0);ctx.lineTo(w,h);ctx.moveTo(w,0);ctx.lineTo(0,h);ctx.stroke();
+  ctx.setLineDash([]);
+  if(W.ghost){
+    ctx.globalAlpha=0.16;ctx.fillStyle=col('--fg');
+    ctx.font='500 '+Math.round(w*0.76)+'px "Noto Serif SC","Songti SC","STSong",serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(CHARS[W.i].c,w/2,h/2+h*0.03);
+    ctx.globalAlpha=1;
+  }
+  ctx.strokeStyle=col('--fg');ctx.lineWidth=18;ctx.lineCap='round';ctx.lineJoin='round';
+  W.strokes.forEach(function(s){
+    ctx.beginPath();ctx.moveTo(s[0].x,s[0].y);
+    if(s.length===1)ctx.lineTo(s[0].x+0.1,s[0].y+0.1);
+    for(var i=1;i<s.length;i++)ctx.lineTo(s[i].x,s[i].y);
+    ctx.stroke();
+  });
+}
+
+function writingExtra(){
+  var r=[['من الأعلى إلى الأسفل','上到下','مثل 三 و 二: الخط الأعلى أولاً.'],['من اليسار إلى اليمين','左到右','مثل 你 و 好: الجزء الأيسر أولاً.'],['الأفقي قبل العمودي','先横后竖','مثل 十 و 干: الخط الأفقي أولاً.'],['الوسط قبل الجانبين','先中间后两边','مثل 小 و 水: الخط الأوسط أولاً.'],['من الخارج إلى الداخل ثم الإغلاق','先外后内再封口','مثل 日 و 国: الإطار أولاً ثم الداخل ثم الإغلاق.']];
+  return '<div class="card" style="margin-top:18px"><h3 style="font-size:16px;margin-bottom:6px">قواعد ترتيب الخطوط</h3><div class="qa" style="margin-top:0">'+r.map(function(x){return '<div class="m"><div class="t"><span class="z" dir="ltr">'+x[1]+'</span><span>'+x[0]+'</span><span class="mut">'+x[2]+'</span></div></div>'}).join('')+'</div></div>';
+}
+
+/* ---------- practice / quiz ---------- */
+var Q=null;
+var OKM=['أحسنت!','ممتاز!','صحيح!','رائع!'];
+function stars(n,size){var o='';for(var i=1;i<=3;i++)o+='<span class="'+(i<=n?'on':'')+'">'+ic('star',size||16)+'</span>';return '<span class="stars">'+o+'</span>'}
+function renderPractice(){
+  if(Q){renderQ();return}
+  var lvl=Math.floor(S.xp/100)+1,pct=S.xp%100;
+  var bd=Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('');
+  var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],lesson:['أسئلة الدرس','أسئلة متنوعة على نص الدرس'],write:['تحدّث واكتب','اكتب جملاً بالصينية بمساعدة نماذج']};
+  var cards=ACTS.map(function(k){return '<button class="act" data-act="start" data-k="'+k+'"><strong>'+info[k][0]+'</strong><small>'+info[k][1]+'</small>'+stars(S.best[k]||0)+'</button>'}).join('');
+  var wn=Object.keys(S.wrong).length;
+  $('#p-practice').innerHTML=
+    '<div class="sec-h"><h2>تمارين الدرس</h2><p>كل إجابة صحيحة تمنحك 10 نقاط.</p></div>'+
+    '<div class="card stats"><div class="xprow"><strong>المستوى '+lvl+'</strong><div class="xpbar"><i style="width:'+pct+'%"></i></div><span class="cnt">'+S.xp+' XP</span></div><div class="badges">'+bd+'</div></div>'+
+    '<h3 class="sub-h">اختر نشاطاً</h3>'+
+    '<div class="acts"><button class="act feat" data-act="start" data-k="all"><strong>الاختبار الشامل</strong><small>'+build('all').length+' سؤالاً من كل الأنواع</small>'+(S.best.all?stars(S.best.all,16):'')+'</button>'+cards+
+    (wn?'<button class="act" data-act="start" data-k="review"><strong>مراجعة أخطائي</strong><small>'+wn+' كلمة تحتاج مراجعة</small></button>':'')+'</div>';
+}
+function fbWord(w){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+han(w.zh,w.py)+'</span><span class="py ltr">'+pyhtml(w.py)+'</span><span>= '+w.ar+'</span>'+spkBtn(w.zh,'sm')+'</div>'}
+function fbSent(s){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+esc(s.zh)+'</span>'+spkBtn(s.zh,'sm')+'</div><div class="py mut ltr">'+s.py+'</div><div>'+s.ar+'</div>'}
+function qMeaning(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="mut">ما معنى هذه الكلمة؟</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qListen(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],audio:w.zh,prompt:spkBtn(w.zh,'big')+'<div class="mut">استمع ثم اختر المعنى</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qTone(w){
+  var o=shuffle(toneVariants(w.py));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+esc(w.zh)+'</div><div class="mut">اختر النطق الصحيح بالنغمات</div>',
+    opts:o.map(function(v){return {html:'<span class="pyopt ltr">'+v.replace(/ /g,'')+'</span>',ok:v===w.py}}),fb:fbWord(w)};
+}
+function qOrder(s){return {type:'order',s:s,wid:s.tokens.map(vid).filter(function(i){return i>=0})}}
+function qFill(f){return {type:'fill',f:f,wid:[vid(f.ans)].filter(function(i){return i>=0})}}
+function qMatch(n){return {type:'match',words:pick(VOCAB,n||5)}}
+function rnd(n){return Math.floor(Math.random()*n)}
+function qRead(kind){
+  var arr=kind==='num'?NUMS:AMTS;
+  var f=arr[rnd(arr.length)];
+  var wrong=shuffle(arr.filter(function(o){return o!==f})).slice(0,3);
+  var opts=shuffle([f].concat(wrong));
+  return {type:'mc',wid:[],
+    prompt:'<div class="han ltr" style="font-size:34px;font-weight:700">'+f[0]+'</div><div class="mut">'+(kind==='num'?'كيف يُقرأ هذا الرقم بالصينية؟':'كيف يُقرأ هذا المبلغ بالصينية؟')+'</div>',
+    opts:opts.map(function(o){return {html:'<span class="han ltr" style="font-size:19px">'+o[1]+'</span> <span class="py ltr mut">'+o[2]+'</span>',ok:o===f}}),
+    fb:'<div class="fw"><span class="han ltr" style="font-size:22px">'+f[0]+' = '+f[1]+'</span>'+spkBtn(f[1],'sm')+'</div><div class="py mut ltr">'+f[2]+'</div>'};
+}
+function qNum(){return qRead('num')}
+function qMoney(){return qRead('money')}
+function qPic(w){
+  var pool=PICQ.map(function(z){return VOCAB[vid(z)]}).filter(function(v){return v!==w});
+  var o=shuffle([w].concat(pick(pool,3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],
+    prompt:'<div class="picbig">'+picHtml(w.zh)+'</div><div class="mut">ما الكلمة المناسبة للصورة؟</div>',
+    opts:o.map(function(x){return {html:'<span class="han ltr" style="font-size:24px">'+esc(x.zh)+'</span> <span class="py ltr mut">'+x.py.replace(/ /g,'')+'</span>',ok:x===w}}),
+    fb:fbWord(w)};
+}
+function picW(z){return qPic(VOCAB[vid(z)])}
+function cloneQ(q){return JSON.parse(JSON.stringify(q))}
+function fromSpec(sp){var q=cloneQ(sp);if(q.type==='mc'&&q.sp){q.audio=q.sp;q.prompt=q.prompt.replace('@@SPK@@',spkBtn(q.sp,'big'))}if(q.type==='mc'&&!q.fix)q.opts=shuffle(q.opts);return q}
+window.__q=function(){return Q};
+function build(kind){
+  var LQ=D.lq||[];
+  switch(kind){
+    case 'match':return [qMatch(5),qMatch(5),qMatch(5)];
+    case 'listen':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qListen);
+    case 'meaning':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qMeaning);
+    case 'tone':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qTone);
+    case 'order':return pick(SENT,Math.min(4,SENT.length)).map(qOrder);
+    case 'fill':return pick(FILL,Math.min(5,FILL.length)).map(qFill);
+    case 'lesson':return LQ.map(fromSpec);
+    case 'all':return [qMatch(5)].concat(pick(VOCAB,2).map(qListen),pick(VOCAB,2).map(qMeaning),pick(VOCAB,2).map(qTone),SENT.length?pick(SENT,Math.min(2,SENT.length)).map(qOrder):[],FILL.length?pick(FILL,Math.min(2,FILL.length)).map(qFill):[],pick(LQ,Math.min(3,LQ.length)).map(fromSpec));
+    case 'review':return pick(Object.keys(S.wrong).map(function(i){return VOCAB[+i]}).filter(Boolean),8).map(function(w,i){return i%2?qListen(w):qMeaning(w)});
+  }
+  return [];
+}
+/* ---------- write & speak ---------- */
+function ccount(v){return v.replace(/\s/g,'').length}
+function renderWrite(){
+  S.txt=S.txt||{};
+  $('#p-practice').innerHTML='<div class="qtop"><button class="btn ghost sm" data-act="qexit">رجوع</button><strong>تحدّث واكتب</strong></div>'+
+  D.disc.map(function(d,i){var ms=d.model.split('｜');
+    return '<section class="card wr" data-wd="'+i+'" style="margin-bottom:12px"><div class="qprompt" style="justify-items:start;text-align:start"><div class="han ltr" style="font-size:22px">'+(i+1)+'. '+esc(d.q)+'</div><div class="mut">'+esc(d.ar)+'</div></div>'+
+    '<div class="chips">'+d.frames.map(function(f,k){return '<button class="chip" data-act="wfr" data-d="'+i+'" data-k="'+k+'"><span class="han" style="font-size:17px">'+esc(f)+'</span></button>'}).join('')+'</div>'+
+    '<textarea data-wta="'+i+'" lang="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
+    '<div class="mut" style="margin:6px 0"><span data-wcc="'+i+'">0</span> / '+D.minc+' حرفاً · الكلمات المقترحة:</div><div class="us">'+d.use.map(function(u){return '<span data-wu="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
+    '<details class="md"><summary>نموذج إجابة</summary><div class="han ltr" style="font-size:20px;margin-top:8px">'+esc(ms[0])+'</div><div class="mut">'+esc(ms[1]||'')+'</div><button class="btn ghost sm" data-act="wsay" data-d="'+i+'" style="margin-top:8px">'+ic('spk',16)+' استمع</button></details></section>'}).join('');
+  D.disc.forEach(function(d,i){var ta=$('[data-wta="'+i+'"]');ta.value=S.txt[i]||'';wchk(i)});
+}
+function wchk(i){var ta=$('[data-wta="'+i+'"]'),el=$('[data-wd="'+i+'"]');if(!ta)return;var v=ta.value,n=ccount(v);$('[data-wcc="'+i+'"]').textContent=n;
+  $$('[data-wu]',el).forEach(function(s){s.classList.toggle('on',v.indexOf(s.dataset.wu)>-1)});
+  S.wdone=S.wdone||{};
+  if(n>=D.minc&&!S.wdone[i]){S.wdone[i]=1;S.xp+=20;toast('أحسنت! +20 نقطة')}
+  var dn=Object.keys(S.wdone).length;S.best.write=dn>=D.disc.length?3:(dn?2:0);save();updateProg()}
+function startQuiz(kind){
+  if(kind==='write'){renderWrite();return}
+  var list=build(kind);
+  if(!list.length){toast('لا توجد أسئلة الآن');return}
+  Q={kind:kind,list:list,i:0,score:0,gain:0,fin:false};
+  renderQ();
+}
+function qShell(){
+  $('#p-practice').innerHTML=
+    '<div class="qtop"><button class="btn ghost sm" data-act="qexit">خروج</button><div class="qbar"><i id="qprog"></i></div><span class="cnt" id="qcount"></span></div>'+
+    '<div id="qbody"></div><div id="qfb"></div><button class="btn primary wide" id="qnext" data-act="qnext" hidden>التالي</button>';
+}
+function renderQ(){
+  if(!$('#qbody'))qShell();
+  var q=Q.list[Q.i];
+  Q.fin=false;
+  $('#qprog').style.width=(Q.i/Q.list.length*100)+'%';
+  $('#qcount').textContent=(Q.i+1)+' / '+Q.list.length;
+  $('#qfb').innerHTML='';$('#qnext').hidden=true;
+  R[q.type](q,$('#qbody'));
+}
+var R={};
+R.mc=function(q,b){
+  b.innerHTML='<div class="qprompt">'+q.prompt+'</div><div class="opts">'+q.opts.map(function(o,i){return '<button class="opt" data-act="opt" data-i="'+i+'">'+o.html+'</button>'}).join('')+'</div>';
+  if(q.audio)setTimeout(function(){speak(q.audio)},200);
+};
+R.order=function(q,b){q.picked=[];q.pool=shuffle(q.s.tokens.map(function(t,i){return {t:t,i:i}}));q.done=false;drawOrder(q,b)};
+function chipHtml(p,act){var py=TOKPY[p.t]||'';return '<button class="chip'+(act==='unpick'?' pick':'')+'" data-act="'+act+'" data-i="'+p.i+'">'+(S.py&&py?'<span class="py">'+py.replace(/ /g,'')+'</span>':'')+'<span class="zh">'+p.t+'</span></button>'}
+function drawOrder(q,b){
+  var left=q.pool.filter(function(p){return q.picked.indexOf(p)<0});
+  b.innerHTML='<div class="qprompt"><span class="mut">رتّب الجملة الصينية</span><div class="ar-s">'+q.s.ar+'</div></div>'+
+    '<div class="slot">'+(q.picked.length?q.picked.map(function(p){return chipHtml(p,'unpick')}).join(''):'<span class="ph">اضغط الكلمات بالترتيب الصحيح</span>')+'</div>'+
+    '<div class="pool">'+left.map(function(p){return chipHtml(p,'pick')}).join('')+'</div>'+
+    '<button class="btn primary wide" data-act="checkorder"'+(left.length?' disabled':'')+'>تحقّق</button>';
+}
+R.fill=function(q,b){
+  var opts=shuffle(q.f.opts);
+  b.innerHTML='<div class="qprompt"><span class="mut">أكمل الجملة</span><div class="ar-s">'+q.f.ar+'</div><div class="fillsent">'+esc(q.f.pre)+'<span class="blank" id="blank">&nbsp;</span>'+esc(q.f.post)+'</div></div>'+
+    '<div class="pool">'+opts.map(function(o){return '<button class="chip" data-act="fill" data-o="'+esc(o)+'"><span class="zh">'+o+'</span></button>'}).join('')+'</div>';
+};
+R.match=function(q,b){
+  q.sel=null;q.done={};q.err=0;q.errIds={};
+  q.left=shuffle(q.words);q.right=shuffle(q.words);
+  b.innerHTML='<div class="qprompt"><span class="mut">اربط كل كلمة صينية بمعناها العربي</span></div><div class="mrow">'+
+    '<div class="mcol" dir="ltr">'+q.left.map(function(w){return '<button class="mi" data-act="ml" data-i="'+q.words.indexOf(w)+'"><span class="zh">'+esc(w.zh)+'</span><span class="py">'+(S.py?w.py.replace(/ /g,''):'')+'</span></button>'}).join('')+'</div>'+
+    '<div class="mcol">'+q.right.map(function(w){return '<button class="mi" data-act="mr" data-i="'+q.words.indexOf(w)+'">'+w.ar+'</button>'}).join('')+'</div></div>';
+};
+function finishQ(ok,wids,extra){
+  if(Q.fin)return;Q.fin=true;
+  if(ok){
+    Q.score++;S.xp+=10;Q.gain+=10;
+    (wids||[]).forEach(function(i){if(S.wrong[i]){S.wrong[i]--;if(S.wrong[i]<=0)delete S.wrong[i]}});
+  }else{(wids||[]).forEach(function(i){S.wrong[i]=(S.wrong[i]||0)+1})}
+  save();
+  $('#qfb').innerHTML='<div class="fb '+(ok?'good':'bad')+'"><strong>'+(ok?OKM[Math.floor(Math.random()*OKM.length)]:'ليست الإجابة الصحيحة')+'</strong>'+(extra||'')+'</div>';
+  var nb=$('#qnext');nb.textContent=(Q.i===Q.list.length-1)?'عرض النتيجة':'التالي';nb.hidden=false;
+  try{nb.scrollIntoView({block:'nearest'})}catch(e){}
+}
+function endQuiz(){
+  var n=Q.list.length,pct=Math.round(Q.score/n*100),st=pct>=90?3:(pct>=60?2:1),kind=Q.kind;
+  var before=Math.floor((S.xp-Q.gain)/100)+1,after=Math.floor(S.xp/100)+1;
+  if(kind!=='review')S.best[kind]=Math.max(S.best[kind]||0,st);
+  award('first');
+  if(pct===100)award('perfect');
+  if(kind==='all'&&pct>=80)award('master');
+  save();updateProg();
+  var msg=pct>=90?'ممتاز! أتقنتَ هذا الجزء':(pct>=60?'جيد، راجع الأخطاء وأعد المحاولة':'تحتاج إلى مراجعة، ارجع إلى البطاقات والحوار');
+  $('#p-practice').innerHTML='<div class="res"><div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>'+
+    '<h3>'+msg+'</h3><div class="sc">'+Q.score+' / '+n+'</div><p class="mut">كسبتَ '+Q.gain+' نقطة'+(after>before?' · وصلتَ إلى المستوى '+after:'')+'</p>'+
+    '<div class="tools" style="justify-content:center"><button class="btn primary" data-act="start" data-k="'+kind+'">'+ic('redo',18)+' أعد المحاولة</button><button class="btn ghost" data-act="qexit">كل التمارين</button></div></div>';
+  Q=null;
+  if(after>before)toast('مستوى جديد: '+after);
+}
+
+/* ---------- events ---------- */
+var A={};
+A.tab=function(t){setTab(t.dataset.tab)};
+A.slow=function(){S.slow=!S.slow;save();syncSlow();toast(S.slow?'صوت بطيء: مفعّل':'صوت بطيء: متوقف')};
+A.theme=function(){
+  var d=document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  var n=d==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',n);
+  try{localStorage.setItem(KEY+'-theme',n)}catch(e){}
+  if(tab==='writing')drawCanvas();
+};
+A.say=function(t){speak(t.dataset.t)};
+A.sayline=function(t){var L=DLG[+t.dataset.l];if(speak(L.zh,null,pitchOf(L.who))){S.heard[+t.dataset.l]=1;save();updateProg();checkListener();var s=$('#p-dialogue .sec-h p');if(s)s.textContent='اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جمل.'}};
+A.tok=function(t){openSheet(DLG[+t.dataset.l].tok[+t.dataset.k])};
+A.closesheet=closeSheet;
+A.playall=playAll;
+A.tpy=function(){S.py=!S.py;save();renderVocab()};
+A.tar=function(){S.ar=!S.ar;save();renderVocab()};
+A.tpy2=function(){S.py=!S.py;save();renderDialogue()};
+A.tar2=function(){S.ar=!S.ar;save();renderDialogue()};
+A.flip=function(){
+  S.flip=!S.flip;
+  var f=$('#fc .front'),b=$('#fc .back');if(f)f.hidden=S.flip;if(b)b.hidden=!S.flip;
+};
+A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab()};
+A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab()};
+function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};if(on){if(!h.dues[CRS][zh])h.dues[CRS][zh]={i:0,t:Date.now()}}localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
+A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
+A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
+A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
+A.cq=function(t){
+  var q=+t.dataset.q,i=+t.dataset.i,o=+t.dataset.o,c=CQ[q][i];
+  $$('#cq'+q+'_'+i+' .chip').forEach(function(b,j){b.disabled=true;if(j===c.a)b.classList.add('good');else if(j===o)b.classList.add('bad')});
+  if(o===c.a){speak(c.o[c.a].zh)}
+};
+A.s=function(t){G.s=+t.dataset.i;renderGrammar()};
+A.adv=function(t){G.a=+t.dataset.i;renderGrammar()};
+A.pred=function(t){G.p=+t.dataset.i;renderGrammar()};
+A.num=function(t){G.num=+t.dataset.i;renderGrammar()};
+A.rmb=function(t){G.rmb=+t.dataset.i;renderGrammar()};
+A.it=function(t){G.it=+t.dataset.i;renderGrammar()};
+A.pat=function(t){G.pat=+t.dataset.i;renderGrammar()};
+A.mw=function(t){G.mw=+t.dataset.i;renderGrammar()};
+
+A.gtok=function(t){openSheet([t.dataset.z,t.dataset.p,t.dataset.a||''])};
+A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i)};
+A.wsay=function(t){speak(D.disc[+t.dataset.d].model.split('｜')[0])};
+A.wch=function(t){W.i=+t.dataset.i;W.strokes=[];W.cur=null;renderWriting()};
+A.wclear=function(){W.strokes=[];W.cur=null;drawCanvas()};
+A.wghost=function(){W.ghost=!W.ghost;renderWriting()};
+A.start=function(t){startQuiz(t.dataset.k)};
+A.qexit=function(){Q=null;stopSpeech();renderPractice()};
+A.qnext=function(){Q.i++;if(Q.i>=Q.list.length)endQuiz();else{$('#qbody').innerHTML='';renderQ()}};
+A.opt=function(t){
+  if(!Q||Q.fin)return;
+  var q=Q.list[Q.i],i=+t.dataset.i,ok=q.opts[i].ok;
+  $$('#qbody .opt').forEach(function(el,j){el.disabled=true;if(q.opts[j].ok)el.classList.add('good');else if(j===i)el.classList.add('bad')});
+  finishQ(ok,q.wid,q.fb);
+};
+A.pick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  var p=q.pool.filter(function(x){return x.i===+t.dataset.i})[0];q.picked.push(p);drawOrder(q,$('#qbody'));
+};
+A.unpick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  q.picked=q.picked.filter(function(x){return x.i!==+t.dataset.i});drawOrder(q,$('#qbody'));
+};
+A.checkorder=function(){
+  var q=Q.list[Q.i];if(q.done)return;q.done=true;
+  var ok=q.picked.every(function(p,k){return p.i===k});
+  $$('#qbody .slot .chip').forEach(function(c){c.disabled=true;c.classList.add(ok?'good':'bad')});
+  $$('#qbody [data-act="checkorder"]').forEach(function(c){c.disabled=true});
+  finishQ(ok,q.wid,fbSent(q.s));
+  if(ok)speak(q.s.zh);
+};
+A.fill=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  var o=t.dataset.o,ok=o===q.f.ans,bl=$('#blank');
+  bl.textContent=o;bl.classList.add(ok?'good':'bad');
+  $$('#qbody .pool .chip').forEach(function(c){c.disabled=true;if(c.dataset.o===q.f.ans)c.classList.add('good');else if(c===t)c.classList.add('bad')});
+  finishQ(ok,q.wid,fbSent({zh:q.f.pre+q.f.ans+q.f.post,py:q.f.py,ar:q.f.ar}));
+  if(ok)speak(q.f.pre+q.f.ans+q.f.post);
+};
+A.ml=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  if(q.done[t.dataset.i])return;
+  $$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+  t.classList.add('sel');q.sel=t.dataset.i;
+};
+A.mr=function(t){
+  var q=Q.list[Q.i];if(Q.fin||q.sel===null||q.done[t.dataset.i])return;
+  var i=t.dataset.i,L=$('#qbody [data-act="ml"][data-i="'+q.sel+'"]');
+  if(i===q.sel){
+    q.done[i]=1;t.classList.add('ok');L.classList.remove('sel');L.classList.add('ok');t.disabled=true;L.disabled=true;
+    speak(q.words[+i].zh);
+    if(Object.keys(q.done).length===q.words.length){
+      var errIds=Object.keys(q.errIds).map(Number);
+      errIds.forEach(function(k){var vi=VOCAB.indexOf(q.words[k]);if(vi>=0)S.wrong[vi]=(S.wrong[vi]||0)+1});
+      finishQ(q.err<=1,[],'<div>عدد الأخطاء: '+q.err+'</div>');
+    }
+  }else{
+    q.err++;q.errIds[q.sel]=1;
+    t.classList.add('no');L.classList.add('no');
+    setTimeout(function(){t.classList.remove('no');L.classList.remove('no')},450);
+  }
+  q.sel=null;$$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+};
+
+var app=$('#app');
+app.addEventListener('click',function(e){
+  var t=e.target.closest('[data-act]');
+  if(!e.target.closest('#sheet')&&!e.target.closest('.tok')&&!$('#sheet').hidden)closeSheet();
+  if(!t||!app.contains(t))return;
+  var f=A[t.dataset.act];if(f)f(t,e);
 });
-function refreshTerms(){var y=window.scrollY;$('#p-terms').innerHTML=termsTab();window.scrollTo(0,y)}
-document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('g')){e.preventDefault();e.target.click()}});
-document.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.ta!=null){var i=+ta.dataset.ta;S.txt[i]=ta.value;save();chk(i);upd()}});
-$('#th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark')};
-init();
+app.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.wta!=null){var i=+ta.dataset.wta;S.txt[i]=ta.value;wchk(i)}});
+app.addEventListener('keydown',function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.id==='fc'){e.preventDefault();A.flip()}
+});
+window.addEventListener('hashchange',function(){var h=location.hash.replace('#','');if(h&&h!==tab)setTab(h,true)});
+function syncSlow(){$('#slowbtn').setAttribute('aria-pressed',String(S.slow))}
+syncSlow();updateProg();
+setTab(location.hash.replace('#','')||'vocab',true);
 })();
 </script>
 </body></html>

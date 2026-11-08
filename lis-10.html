@@ -1,350 +1,888 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
-<title>الدرس ١٠ · حيّكم جميل حقاً · 你们小区真漂亮</title>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><title>الدرس العاشر 你们小区真漂亮</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
 <style>
-:root{--bg:#FBF6EE;--surface:#FFFDF9;--surface2:#F3EBDD;--fg:#2B1D18;--muted:#7B6A5E;--line:#E8DCC8;--accent:#B8322A;--accent-fg:#fff;--accent-soft:#F8E4DF;--seal:#B8322A;--seal-fg:#fff;--gold:#C98A0A;--good:#2E7D4F;--good-soft:#DDF0E2;--bad:#B3261E;--bad-soft:#F7DBD8;--c1:#7A4FA3;--c2:#E0952B;--c3:#2F6DB5;--c4:#2E8B57;--c5:#C2410C;--t1:#C0392B;--t2:#A66A00;--t3:#1D7A45;--t4:#2759B8;--t5:#6A7B77;
---font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;--font-han:'Noto Serif SC','Songti SC',serif;--font-py:'IBM Plex Sans','Segoe UI',sans-serif}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--c5:#F08A5D;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--c5:#F08A5D;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}
-
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{background:var(--bg);color:var(--fg);font:16px/1.7 var(--font-ui);padding:0 max(16px,env(safe-area-inset-left)) 90px}
-button{font:inherit;color:inherit;cursor:pointer}a{color:var(--accent)}
+/* Layout concept: a study sheet on cool jade-grey paper. Hanzi are the large ink forms, coloured by tone;
+   one red seal (课) is the only loud mark. Single column, sticky tab bar, everything else stays quiet. */
+:root{
+  --bg:#FBF6EE; --surface:#FFFDF9; --surface2:#F3EBDD; --fg:#2B1D18; --muted:#7B6A5E; --line:#E8DCC8;
+  --accent:#B8322A; --accent-fg:#FFFFFF; --accent-soft:#F8E4DF;
+  --seal:#B8322A; --seal-fg:#FFFFFF; --star:#C98A0A;
+  --good:#2E7D4F; --good-soft:#DDF0E2; --bad:#B3261E; --bad-soft:#F7DBD8;
+  --t1:#C0392B; --t2:#A66A00; --t3:#1D7A45; --t4:#2759B8; --t5:#6A7B77;
+  --font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+  --font-han:'Noto Serif SC','Songti SC','STSong','SimSun',serif;
+  --font-py:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+    --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+    --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+    --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+    --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+  --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+  --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+  --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+  --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--font-ui);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 64px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+button{font-family:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.wrap{max-width:820px;margin:0 auto}h1,h2,h3,p{margin:0}
-.han{font-family:var(--font-han)}.py{font-family:var(--font-py)}.mut{color:var(--muted);font-size:14px}
-.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
-.hdr{position:sticky;top:0;z-index:20;background:var(--bg);padding-block:10px 0}
-.top{display:flex;align-items:center;gap:10px}
-.top h1{flex:1;font-size:17px;line-height:1.3}
-.ib{font-size:20px;line-height:1;min-width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--fg)}
-.pg{height:6px;border-radius:9px;background:var(--surface2);margin-top:8px;overflow:hidden}.pg i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
-.tabs{display:flex;gap:4px;margin-top:8px;padding-bottom:8px;border-bottom:1px solid var(--line);overflow-x:auto}
-.tab{flex:1;min-height:44px;padding:0 12px;border:0;border-radius:12px;background:none;color:var(--muted);font-weight:600;white-space:nowrap}
-.tab[aria-selected=true]{background:var(--accent);color:var(--accent-fg)}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
-.sw{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:14px}
-.sw[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
-.banner{border-radius:20px;margin-top:12px;padding:22px 18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:linear-gradient(135deg,var(--accent-soft),var(--surface2))}
-.banner .big{font:700 52px/1 var(--font-han);color:var(--accent);min-width:1.6em;text-align:center}
-.banner h2{font-size:22px;line-height:1.3}.banner p{color:var(--muted);font-size:15px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
-.sec{margin-top:26px}
-.sec>h2{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:21px;line-height:1.35;border-inline-start:5px solid var(--accent);padding-inline-start:10px}
-.sec>h2 .har{font-size:14px;color:var(--muted);font-weight:500;font-family:var(--font-ui)}
-.zb{display:block}.zb .t{display:block}
-.pyl{display:none;font:14px/1.5 var(--font-py);color:var(--muted);direction:ltr;text-align:left;margin-top:1px}
-body.py .pyl{display:block}
-.ar2{display:none;color:var(--muted);font-size:15px;line-height:1.7;margin-top:2px}
-body.ar .ar2{display:block}
-.zh{font-family:var(--font-han);font-size:19px;line-height:1.95;direction:ltr;text-align:left;display:block}
-.blk{margin-top:12px}
-.p .zh{font-size:19px}
-.g{border-bottom:2px dotted var(--accent);cursor:pointer;padding-bottom:1px}.g:hover,.g.on{background:var(--accent-soft)}
-.key{border-inline-start:5px solid var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--surface));border-radius:10px;padding:10px 14px}
-.key:before{content:'重点 · نقطة مهمة';display:block;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:2px}
-ul.ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-ul.ul li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 12px}
-.tl{display:grid;gap:0;position:relative;margin:0;padding:0;list-style:none}
-.tl li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
-.tl li:last-child{border:0}
-.tl .lb{font:700 15px/1.3 var(--font-han);color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:6px 8px;text-align:center;align-self:start;direction:ltr}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
-.cd{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
-.cd .hd{display:flex;gap:8px;align-items:center;justify-content:space-between}
-.cd .hd b{font:700 24px/1.2 var(--font-han);direction:ltr}.cd .hd .ar{font-size:13px;color:var(--muted)}
-.cd .zh{font-size:16px;line-height:1.75}
-.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
-table{border-collapse:collapse;width:100%;min-width:480px;background:var(--surface)}
-th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);vertical-align:top;text-align:start}
-th{background:var(--accent-soft);font-family:var(--font-han)}td:first-child{font-weight:700;background:var(--surface2)}
-tr:last-child td{border-bottom:0}
-td .zh,th .zh{font-size:16px;line-height:1.7}
-.btn{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
-.btn.p{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
-.sm{min-width:40px;min-height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface2)}
-.sm.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
-/* terms */
-.tg{display:grid;gap:8px;margin-top:12px}
-.tm{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
-.tm .z{font:700 26px/1.2 var(--font-han);direction:ltr;min-width:2em;text-align:center}
-.tm .ex{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:6px;font-size:14px}
-.tm .ex .han{font-size:17px;direction:ltr;display:block;text-align:left}
-.tm .pp{font-family:var(--font-py);direction:ltr;text-align:start}
-/* practice */
-.pq{position:relative}
-.qh{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-.qn{width:28px;height:28px;border-radius:8px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 14px var(--font-py)}
-.qty{font-size:12px;color:var(--muted);background:var(--surface2);border-radius:99px;padding:0 10px}
-.qs{margin-inline-start:auto;font-size:13px;font-weight:700}.qs.ok{color:var(--good)}.qs.no{color:var(--bad)}
-.q .zh{font-size:19px}
-.opts{display:grid;gap:8px;margin-top:10px}
-.op{display:block;width:100%;text-align:start;min-height:48px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface)}
-.op .zh{font-size:17px;line-height:1.7}
-.op.sel{border-color:var(--accent);background:var(--accent-soft)}
-.op.good{border-color:var(--good);background:var(--good-soft)}
-.op.bad{border-color:var(--bad);background:var(--bad-soft)}
-.op:disabled{cursor:default}
-.tf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.fb{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:15px}
-.fb.ok{background:var(--good-soft);color:var(--good)}.fb.no{background:var(--bad-soft);color:var(--bad)}
-.fb .ar{color:var(--fg)}
-.mt{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.mt .col{display:grid;gap:8px;align-content:start}
-.mt .op{min-height:52px;padding:6px 10px}
-.mt .op.done{opacity:.55;border-color:var(--good);background:var(--good-soft)}
-.mt .op.flash{border-color:var(--bad);background:var(--bad-soft)}
-.line{min-height:58px;border:2px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;direction:ltr;align-items:flex-start}
-.pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;direction:ltr}
-.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 12px;text-align:start;max-width:100%}
-.chip .zh{font-size:16px;line-height:1.6}
-.chip.bad{border-color:var(--bad);background:var(--bad-soft)}.chip.good{border-color:var(--good);background:var(--good-soft)}
-.chip .nn{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:var(--seal);color:var(--seal-fg);font:700 12px var(--font-py);margin-inline-end:6px}
-.rows{display:grid;gap:8px;margin-top:10px}
-.rw{border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--surface)}
-.rw.good{border-color:var(--good);background:var(--good-soft)}.rw.bad{border-color:var(--bad);background:var(--bad-soft)}
-.rw .cs{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.cs button{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font:600 15px var(--font-han)}
-.cs button.sel{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
-.cz{font:19px/2.4 var(--font-han);direction:ltr;text-align:left;margin-top:8px}
-.cz select{font:inherit;font-size:16px;min-height:38px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:0 6px;margin:0 3px;max-width:100%}
-.cz select.good{border-color:var(--good);background:var(--good-soft)}.cz select.bad{border-color:var(--bad);background:var(--bad-soft)}
-.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.sum{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
-.sum b{font:700 22px var(--font-py)}
-/* discuss */
-textarea{width:100%;min-height:130px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:10px 12px;font:19px/1.8 var(--font-han);margin-top:10px;resize:vertical;direction:ltr;text-align:left}
-.fr{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.fr button{min-height:38px;padding:0 12px;border-radius:999px;border:1px dashed var(--accent);background:var(--accent-soft);color:var(--accent);font:600 15px var(--font-han);direction:ltr}
-.us{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-.us span{font:600 14px var(--font-han);padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
-.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
-details.md{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--surface2)}
-details.md summary{cursor:pointer;font-weight:600;min-height:32px}
-.arx{display:block;font-size:16px;line-height:1.7}
-/* dialogue */
-.dl{display:grid;grid-template-columns:104px 1fr auto;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:start}.dl:last-child{border:0}
-.dlg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 14px}
-.sk .zh{font-size:15px;color:var(--accent);line-height:1.5;font-weight:700}
-.sli{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.sli>div{flex:1;min-width:0}
-ul.sl li{padding:6px 12px}
-@media(max-width:520px){.dl{grid-template-columns:78px 1fr auto}}
-/* popover */
-#pop{position:fixed;inset-inline:12px;bottom:12px;z-index:30;max-width:560px;margin-inline:auto;background:var(--surface);border:1.5px solid var(--accent);border-radius:18px;padding:14px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
-#pop .r{display:flex;align-items:center;gap:12px}
-#pop .zz{font:700 30px/1.2 var(--font-han);direction:ltr;white-space:nowrap}#pop .r>div:nth-child(2){min-width:0;flex:1}
-#pop .cl{flex:none}
-.toast{position:fixed;inset:auto 16px 90px;margin:auto;max-width:360px;background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:12px;text-align:center;z-index:40}
-.foot{text-align:center;margin-top:36px;padding-top:14px;border-top:1px solid var(--line)}
-@media(max-width:520px){.mt{grid-template-columns:1fr}.tl li{grid-template-columns:70px 1fr}.banner{grid-template-columns:1fr;text-align:center}}
+.wrap{max-width:720px;margin:0 auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.mut{color:var(--muted);font-size:14px}
+h1,h2,h3,p{margin:0}
 
-/* ===== grammar-lesson look ===== */
-body{font-size:16px;line-height:1.65;padding-bottom:64px}
-.wrap{max-width:720px}
-.hdr{position:sticky;top:0;z-index:20;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);padding-block:0}
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);
+  box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
 .top{display:flex;align-items:center;gap:12px;padding-block:12px 4px}
-.seal{flex:none;width:40px;height:40px;border-radius:4px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 24px/1 var(--font-han);transform:rotate(-4deg);outline:2px solid var(--seal);outline-offset:2px;text-decoration:none}
-.ttl{flex:1;min-width:0}.ttl h1{font-size:20px;font-weight:700;line-height:1.3}
-.ttl p{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:rtl}
-.ibtn{appearance:none;flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;text-decoration:none;color:var(--fg);font-size:17px;line-height:1}
-.pill{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.seal{flex:none;width:40px;height:40px;border-radius:4px;background:var(--seal);color:var(--seal-fg);
+  display:grid;place-items:center;font:700 24px/1 var(--font-han);transform:rotate(-4deg);
+  outline:2px solid var(--seal);outline-offset:2px}
+.ttl{flex:1;min-width:0}
+.ttl h1{font-size:20px;font-weight:700;line-height:1.3}
+.ttl p{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;
+  padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
 .pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
-.pg{height:3px;border-radius:2px;background:var(--line);margin-top:0;order:3}
-.tabs{gap:2px;margin-top:4px;padding-bottom:0;border-bottom:0;scrollbar-width:none}
+.ibtn{appearance:none;flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);
+  background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:4px}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;min-height:0;border-radius:0;font-size:15px;padding:10px 12px;border-bottom:3px solid transparent;background:none}
-.tab[aria-selected=true]{background:none;color:var(--fg);border-bottom-color:var(--accent)}
-.hdr .tabs{box-shadow:inset 0 -2px 0 var(--line)}
-.banner{display:block;background:none;border-radius:0;padding:0;margin-top:16px}
-.banner .big{display:none}.banner h2{font-size:21px;font-weight:700;line-height:1.35}.banner p{color:var(--muted);font-size:14px;margin-top:2px}
-.sec>h2{border:0;padding:0;font-size:17px;font-weight:700}
-.sec{margin-top:26px}
-.sw{border:1.5px solid var(--line)}
-.btn{border-radius:12px;min-height:48px;border:0;background:var(--surface2);color:var(--fg)}
-.btn.p{background:var(--accent);color:var(--accent-fg)}
-.spk{appearance:none;flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;cursor:pointer;font-size:16px}
-/* flashcards */
-.sech{padding-top:16px}.sech h2{font-size:21px;font-weight:700;line-height:1.35}.sech p{color:var(--muted);font-size:14px;margin-top:2px}
-.fc{background:var(--surface);border:1px solid var(--line);border-radius:20px;cursor:pointer;display:grid;min-height:310px;position:relative;margin-top:14px}
-.face{grid-area:1/1;padding:48px 18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;animation:pop .22s ease-out}
+.tab{appearance:none;border:0;background:none;color:var(--muted);font-size:15px;font-weight:600;
+  padding:10px 12px;border-bottom:3px solid transparent;white-space:nowrap;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.prog{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+/* shared */
+.panel{padding-block:20px 24px}
+.sec-h{margin-bottom:14px}
+.sec-h h2{font-size:21px;font-weight:700;line-height:1.35}
+.sec-h p{color:var(--muted);font-size:14px;margin-top:2px}
+.sub-h{font-size:17px;font-weight:700;margin:26px 0 10px}
+.btn{appearance:none;border:0;border-radius:12px;padding:12px 18px;font-size:16px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:var(--surface2);color:var(--fg)}
+.btn.sm{min-height:40px;padding:8px 14px;font-size:14px}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 12px;
+  font-size:15px;font-weight:600;cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;min-height:40px;justify-content:center}
+.chip.tgl.on{background:var(--accent-soft);border-color:var(--accent)}
+.spk{appearance:none;flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--accent-soft);
+  color:var(--accent);display:grid;place-items:center;cursor:pointer}
+.spk.sm{width:34px;height:34px}
+.spk.big{width:84px;height:84px;background:var(--accent);color:var(--accent-fg)}
+.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
+.han{font-family:var(--font-han);font-weight:500}
+.py{font-family:var(--font-py)}
+.off{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+
+/* flashcard */
+.fc{background:var(--surface);border:1px solid var(--line);border-radius:20px;cursor:pointer;display:grid;min-height:310px;position:relative}
+.face{grid-area:1/1;padding:48px 18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;animation:pop .22s ease-out}
 .face .spk{position:absolute;top:12px;inset-inline-end:12px}
 .bigzh{font:500 clamp(64px,22vw,104px)/1.15 var(--font-han)}
-.fc .pyl2{font:500 30px/1.2 var(--font-py);direction:ltr}.fc .meaning{font-size:26px;font-weight:700;line-height:1.4}
-.fc .exb{width:100%;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;display:grid;gap:2px}
-.fc .exb .han{font:500 22px/1.4 var(--font-han);direction:ltr}
+.hint{color:var(--muted);font-size:14px}
+.fc .pyl{font:500 30px/1.2 var(--font-py)}
+.fc .meaning{font-size:26px;font-weight:700;line-height:1.4}
+.fc .note{font-size:14px;color:var(--muted);max-width:30em}
+.ex{width:100%;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;display:grid;gap:2px;text-align:start}
+.exzh{font:500 22px/1.4 var(--font-han)}
+.expy{font:14px var(--font-py);color:var(--muted)}
+.exar{font-size:15px;direction:rtl;text-align:right}
 @keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
 .navrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
 .cnt{font:500 15px var(--font-py);color:var(--muted)}
 .actrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
-.tm{border-radius:0;border:0;border-bottom:1px solid var(--line);background:none;padding:10px 4px}
-.tg{gap:0}
+.row{display:grid;grid-template-columns:5.2em 1fr auto auto;gap:12px;align-items:center;padding:10px 4px;
+  border-bottom:1px solid var(--line);cursor:pointer}
+.row.cur{background:var(--accent-soft);border-radius:10px}
+.rz{font:500 26px/1.2 var(--font-han);text-align:start}
+.rpy{font:15px var(--font-py)}
+.rar{font-size:15px;color:var(--muted)}
+.kn{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);color:transparent}
+.kn.on{background:var(--good);border-color:var(--good);color:var(--bg)}
+
+/* dialogue */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.lines{display:grid;gap:10px}
+.line{display:grid;gap:8px;padding:14px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.line.S{background:var(--accent-soft);border-color:transparent}
+.line.playing{outline:2.5px solid var(--accent);outline-offset:1px}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted)}
+.who .spk{margin-inline-start:auto}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--font-han);background:var(--fg);color:var(--bg)}
+.S .av{background:var(--accent);color:var(--accent-fg)}
+.zhline{display:flex;flex-wrap:wrap;gap:4px 2px;direction:ltr;align-items:flex-end}
+.tok{appearance:none;background:none;border:0;border-radius:8px;padding:2px 4px;cursor:pointer;display:inline-flex;
+  flex-direction:column;align-items:center;color:inherit;font:inherit}
+.tok:hover,.tok:focus-visible{background:var(--surface2)}
+.tok .py{font-size:12px;line-height:1.5}
+.tok .zh{font:500 26px/1.25 var(--font-han)}
+.nopy .tok .py{display:none}
+.punc{font:500 26px/1.25 var(--font-han);align-self:flex-end;padding-bottom:0}
+.arline{color:var(--muted);font-size:15px}
+.noar .arline{display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
+  padding:14px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  box-shadow:0 -8px 24px rgba(0,0,0,.12)}
+.sheet-in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.sh-main{display:grid;gap:0}
+.sh-zh{font:500 34px/1.2 var(--font-han)}
+.sh-py{font:16px var(--font-py)}
+.sh-ar{flex:1;font-size:19px;font-weight:700}
+.cq{display:grid;gap:8px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
+.cq b{font-weight:600}
+.cq .o{display:flex;gap:8px;flex-wrap:wrap}
+
+/* grammar */
+.tones{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tn{display:grid;gap:4px;justify-items:center;text-align:center;padding:12px 8px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.tn svg{width:56px;height:56px}
+.tn .pyl{font:500 24px var(--font-py)}
+.tn .nm{font-size:13px;color:var(--muted)}
+.tn .ex1{font:500 20px var(--font-han)}
+.formula{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0 12px;font-size:15px}
+.fm{padding:4px 10px;border-radius:8px;background:var(--surface2);font-weight:600}
+.fm.k{background:var(--accent);color:var(--accent-fg);font-family:var(--font-han);font-size:18px}
+.sentbox{display:grid;gap:6px;padding:12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);margin-top:10px}
+.sentbox .zhline{align-items:flex-end}
+.qmark{background:var(--accent);color:var(--accent-fg);border-radius:6px;padding:0 4px}
+.qa{display:grid;gap:8px;margin-top:10px}
+.qa .m{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.qa .m .t{flex:1;display:grid}
+.qa .m .z{font:500 22px/1.35 var(--font-han)}
+
+/* writing */
+.cvwrap{width:100%;max-width:340px;margin:0 auto}
+#cv{width:100%;aspect-ratio:1;display:block;border-radius:14px;touch-action:none;border:1px solid var(--line);cursor:crosshair}
+.winfo{display:flex;align-items:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.winfo .big{font:500 44px/1 var(--font-han)}
+
+/* practice */
+.stats{display:grid;gap:12px}
+.xprow{display:flex;align-items:center;gap:12px}
+.xpbar{flex:1;height:10px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.xpbar i{display:block;height:100%;background:var(--accent)}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{width:62px;text-align:center;font-size:12px;line-height:1.35;opacity:.38;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none}
+.badge span{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 4px;border-radius:50%;
+  border:2px solid var(--seal);color:var(--seal);font:700 22px var(--font-han);background:var(--surface)}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.act{appearance:none;text-align:start;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px;
+  cursor:pointer;display:grid;gap:4px;align-content:start}
+.act strong{font-size:16px}
+.act small{color:var(--muted);font-size:13px;line-height:1.5}
+.act.feat{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.act.feat small{color:inherit;opacity:.85}
+.stars{display:flex;gap:2px;color:var(--line)}
+.stars .on{color:var(--star)}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.qbar{flex:1;height:8px;border-radius:5px;background:var(--surface2);overflow:hidden}
+.qbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.qprompt{display:grid;gap:8px;justify-items:center;text-align:center;margin-bottom:18px}
+.qprompt .ar-s{font-size:20px;font-weight:700}
+.opts{display:grid;gap:10px}
+.opt{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;min-height:54px;padding:10px 14px;
+  font-size:18px;font-weight:600;cursor:pointer;text-align:center}
+.opt .pyopt{font:500 22px var(--font-py)}
+.opt.good{background:var(--good-soft);border-color:var(--good)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.slot,.pool{display:flex;flex-wrap:wrap;gap:8px;direction:ltr;min-height:64px;align-items:center;padding:10px;border-radius:14px}
+.slot{border:2px dashed var(--line);margin-bottom:12px;background:var(--surface)}
+.slot .ph{direction:rtl;color:var(--muted);font-size:14px;margin:0 auto}
+.pool{margin-bottom:16px;justify-content:center}
+.chip .zh{font:500 24px/1.2 var(--font-han)}
+.chip .py{font-size:11px;color:var(--muted)}
+.chip.pick{background:var(--accent-soft);border-color:var(--accent)}
+.chip.good{background:var(--good-soft);border-color:var(--good)}
+.chip.bad{background:var(--bad-soft);border-color:var(--bad)}
+.fillsent{font:500 30px/1.6 var(--font-han);direction:ltr}
+.blank{display:inline-block;min-width:1.6em;border-bottom:3px solid var(--accent);text-align:center;margin:0 4px}
+.blank.good{border-color:var(--good);color:var(--good)}
+.blank.bad{border-color:var(--bad);color:var(--bad)}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:grid;gap:8px;align-content:start}
+.mi{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;min-height:58px;padding:6px 8px;
+  cursor:pointer;display:grid;place-items:center;font-size:16px;font-weight:600;line-height:1.35}
+.mi .zh{font:500 24px/1.2 var(--font-han)}
+.mi .py{font-size:12px;color:var(--muted)}
+.mi.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mi.ok{border-color:var(--good);background:var(--good-soft);opacity:.7}
+.mi.no{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin:16px 0;padding:14px;border-radius:14px;display:grid;gap:6px}
+.fb.good{background:var(--good-soft);border:1px solid var(--good)}
+.fb.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.fb .fw{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.res{display:grid;gap:14px;justify-items:center;text-align:center;padding:12px 0}
+.res .stars svg{width:44px;height:44px}
+.res h3{font-size:24px}
+.res .sc{font:700 44px var(--font-py)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;
+  background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;max-width:90vw;text-align:center}
+@media (min-width:560px){
+  .tones{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* lesson 8 additions */
+[hidden]{display:none!important}
+.tg{display:inline-flex;align-items:flex-end;white-space:nowrap}
+.il{width:100%;height:100%;display:block;stroke:var(--fg);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.il .a{fill:var(--accent-soft)}.il .b{fill:var(--surface2)}.il .r{fill:var(--seal)}.il .y{fill:var(--star)}.il .w{fill:var(--surface)}.il .k{fill:var(--fg);stroke:none}
+.pic{display:block;width:100%;height:100%}
+.pic.pb{width:92px;height:92px;margin-bottom:2px}
+.pic.pt{width:44px;height:44px}
+.picbig{width:140px;height:140px}
+.rp{width:44px;height:44px}
+.row{grid-template-columns:44px 5.6em 1fr auto auto}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:0 8px;margin-inline-start:6px;background:var(--surface2);color:var(--muted)}
+.scene{display:flex;gap:8px;justify-content:space-around;flex-wrap:wrap;padding:12px;border-radius:16px;background:var(--surface);border:1px solid var(--line);margin:10px 0 6px}
+.scene figure{margin:0;display:grid;justify-items:center;gap:4px;width:84px;text-align:center}
+.scene .sci{width:68px;height:68px}
+.scene figcaption{font-size:12px;color:var(--muted);line-height:1.35}
+.line.N{background:var(--surface);border-style:dashed}
+.line.L{background:var(--accent-soft);border-color:transparent}
+.line.C{background:var(--surface2);border-color:transparent}
+.L .av{background:var(--accent);color:var(--accent-fg)}
+.C .av{background:var(--seal);color:var(--seal-fg)}
+.N .av{background:var(--muted);color:var(--bg)}
+.calcard{display:grid;justify-items:center;border:2px solid var(--fg);border-radius:14px;overflow:hidden;width:150px;background:var(--surface)}
+.calcard .cm{background:var(--seal);color:var(--seal-fg);width:100%;padding:2px 0;font-weight:700;text-align:center}
+.calcard .cd{font:700 56px/1.15 var(--font-py)}
+.calcard .cw{padding-bottom:6px;font-weight:600}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper b{font:700 28px var(--font-py);min-width:2ch;text-align:center}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.tile{display:grid;justify-items:center;gap:2px;padding:10px 6px;border:1px solid var(--line);border-radius:12px;background:var(--bg);text-align:center}
+.tile .py{font-size:15px}
+.sdg{width:40px;height:40px;flex:none}
+.qa .m .t{min-width:0}
+
+.line.S,.line.A{background:var(--accent-soft);border-color:transparent}
+.line.X,.line.Y{background:var(--surface2);border-color:transparent}
+.S .av,.A .av{background:var(--accent);color:var(--accent-fg)}
+.X .av,.Y .av{background:var(--seal);color:var(--seal-fg)}
+.cqo{display:inline-flex;flex-direction:column;align-items:center;line-height:1.3;height:auto;padding-block:6px}
+.cqo .py{font-size:12px}
+.cq>b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+
+table{border-collapse:collapse;width:100%;min-width:420px;background:var(--surface)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);text-align:start;vertical-align:top}
+th{background:var(--accent-soft)}td:first-child{background:var(--surface2);font-weight:600}tr:last-child td{border-bottom:0}
+.sh2{font-size:15px;font-weight:700;margin:18px 0 6px}
+.tiles .tile .han{font-size:24px}
+.pair{display:grid;gap:6px;margin-top:8px}.pair .tiles{grid-template-columns:1fr 1fr}
+textarea{width:100%;min-height:96px;margin-top:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);font:500 20px/1.6 var(--font-han);resize:vertical}
+.us{display:flex;gap:6px;flex-wrap:wrap}.us span{padding:2px 10px;border-radius:99px;border:1px solid var(--line);font:500 16px var(--font-han);color:var(--muted)}.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
 </style>
-<div class="wrap" dir="rtl" lang="ar">
-<header class="hdr"><div class="top"><a class="seal ib" id="seal" href="index.html" aria-label="العودة إلى الدروس"></a><div class="ttl"><h1 id="ttl"></h1><p id="sub"></p></div><button class="pill" id="slow" aria-pressed="false">صوت بطيء</button><button class="ibtn" id="th" aria-label="الوضع الليلي">☾</button></div>
-<div class="pg" aria-hidden="true"><i id="pgb"></i></div>
-<div class="tabs" role="tablist" id="tabs"></div></header>
-<main id="main"></main>
-<footer class="foot mut">© 2026 أ. محمود الصديق (<span class="han">大漠</span>) · جميع الحقوق محفوظة · المحتوى للتعلّم الشخصي ولا يجوز نسخه أو إعادة نشره.</footer>
+
+<div class="wrap" id="app" dir="rtl" lang="ar">
+  <header class="hdr">
+    <div class="top">
+      <a class="seal" href="index.html#lis" aria-label="العودة إلى الدروس" lang="zh" style="text-decoration:none">十</a>
+      <div class="ttl"><h1>الدرس العاشر</h1><p>你们小区真漂亮</p></div>
+      <button class="pill" id="slowbtn" data-act="slow" aria-pressed="false">صوت بطيء</button>
+      <button class="ibtn" data-act="theme" aria-label="تبديل المظهر الفاتح والداكن"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="أقسام الدرس">
+      <button class="tab" role="tab" data-act="tab" data-tab="vocab">المفردات</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="dialogue">الحوار</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="grammar">الأصوات</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="writing">الكتابة</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="practice">التمارين</button>
+    </nav>
+    <div class="prog" aria-hidden="true"><i id="gprog"></i></div>
+  </header>
+  <main>
+    <section id="p-vocab" class="panel" hidden></section>
+    <section id="p-dialogue" class="panel" hidden></section>
+    <section id="p-grammar" class="panel" hidden></section>
+    <section id="p-writing" class="panel" hidden></section>
+    <section id="p-practice" class="panel" hidden></section>
+  </main>
+  <div id="sheet" class="sheet" hidden></div>
+  <div id="toast" class="toast" role="status" hidden></div>
 </div>
-<div id="pop" hidden></div><div class="toast" id="toast" hidden></div>
+
 <script>
 (function(){
-var D={"n":10,"course":"lis","cname":"الاستماع ١","big":"区","title_zh":"你们小区真漂亮","title_ar":"الدرس ١٠ · حيّكم جميل حقاً","intro_ar":"تدرّب على سماع وصف المكان (漂亮، 多، 少، 近، 远) وعلى جمل التعبير عن الرأي («觉得»، «太……了»، «非常»)، وعلى الدعوة اللطيفة بـ «吧».","defpy":1,"minc":12,"tword":"كلمة","tabs":[["read","الدرس"],["terms","المفردات"],["prac","التمارين"],["disc","تحدّث"]],"sections":[{"h":"第一部分 语音","ar":"الجزء الأول: النطق","b":[{"p":"听后跟读｜استمع ثم كرّر:"},{"sl":["安心｜مطمئن","冰雹｜برَد","时光｜وقت / أيام","文明｜حضارة","人海｜بحر من البشر","理亏｜على خطأ","悔改｜يتوب","美味｜طعام لذيذ","诞生｜يولد / ينشأ","忘情｜ينسى نفسه","大事｜أمر كبير","赶潮流｜يلحق بالموضة","沙尘暴｜عاصفة رملية"]},{"p":"听读辨音｜ميّز بين الأصوات المتقاربة:"},{"sl":["武汉 — 午饭｜(Wǔhàn / wǔfàn)","黄色 — 红色｜(huángsè / hóngsè)","迟到 — 迟早｜(chídào / chízǎo)"]},{"p":"我也知道｜أعرف أيضاً:"},{"sl":["包子｜خبز محشو بالبخار","面条｜معكرونة / نودلز","玉米｜ذرة","豆腐｜توفو"]}]},{"h":"第二部分 课文","ar":"الجزء الثاني: النصوص","b":[{"p":"跟读短语和句子｜كرّر العبارات والجمل:"},{"sl":["很多｜كثير","不少｜ليس قليلاً (كثير)","树很多，花也不少。｜الأشجار كثيرة والأزهار ليست قليلة.","这个小区的树很漂亮。｜أشجار هذا الحي جميلة.","饭馆很近。｜المطعم قريب جداً.","请喝茶。｜تفضل اشرب الشاي.","我们去喝茶。｜سنذهب لشرب الشاي.","太远了！｜بعيد جداً!","你累不累？｜هل أنت متعب؟","你有事吗？｜هل لديك شغل؟","你有什么事？｜ما الأمر؟","讨论问题｜مناقشة المشكلات","张老师家非常近，我们五个同学一起走。｜بيت المعلم تشانغ قريب جداً، نمشي نحن خمسة زملاء معاً.","讨论环保问题｜مناقشة مشكلات البيئة","讨论一下环保问题｜لنناقش قليلاً مشكلات البيئة"]},{"p":"نص تدريبي من إعداد المنصّة:｜نص تدريبي:"},{"dlg":[["甲｜أ","你们小区怎么样？｜كيف حيّكم؟"],["乙｜ب","真漂亮，树很多，花也不少。｜جميل حقاً، الأشجار كثيرة والأزهار ليست قليلة."],["甲｜أ","饭馆近不近？｜هل المطاعم قريبة؟"],["乙｜ب","非常近，饭非常好吃。｜قريبة جداً والطعام لذيذ جداً."],["甲｜أ","你累不累？我们去喝茶吧。｜هل أنت متعب؟ لنذهب لشرب الشاي."],["乙｜ب","好，小区旁边就有一个茶馆。｜حسناً، بجانب الحي مقهى شاي بالضبط."]]}]}],"terms":[{"zh":"觉得","ar":"يشعر / يرى","py":"juéde","ex":"我觉得小区很漂亮。｜أرى أن الحي جميل جداً."},{"zh":"小区","ar":"حي سكني","py":"xiǎoqū","ex":"你们小区真漂亮。｜حيّكم جميل حقاً."},{"zh":"怎么样","ar":"كيف؟","py":"zěnmeyàng","ex":"你们小区怎么样？｜كيف حيّكم؟"},{"zh":"漂亮","ar":"جميل","py":"piàoliang","ex":"真漂亮！｜جميل حقاً!"},{"zh":"多","ar":"كثير","py":"duō","ex":"树很多。｜الأشجار كثيرة."},{"zh":"树","ar":"شجرة","py":"shù","ex":"树很多。｜الأشجار كثيرة."},{"zh":"花","ar":"زهرة","py":"huā","ex":"花也不少。｜الأزهار ليست قليلة."},{"zh":"少","ar":"قليل","py":"shǎo","ex":"不少｜كثير (ليس قليلاً)"},{"zh":"饭馆","ar":"مطعم","py":"fànguǎn","ex":"饭馆很近。｜المطعم قريب."},{"zh":"近","ar":"قريب","py":"jìn","ex":"饭馆很近。｜المطعم قريب."},{"zh":"非常","ar":"جداً","py":"fēicháng","ex":"饭非常好吃。｜الطعام لذيذ جداً."},{"zh":"茶馆","ar":"مقهى شاي","py":"cháguǎn","ex":"小区旁边有茶馆。｜بجانب الحي مقهى شاي."},{"zh":"喝","ar":"يشرب","py":"hē","ex":"我们去喝茶。｜سنذهب لشرب الشاي."},{"zh":"家","ar":"بيت / أسرة","py":"jiā","ex":"去张老师家。｜الذهاب إلى بيت المعلم تشانغ."},{"zh":"太","ar":"أكثر من اللازم / جداً","py":"tài","ex":"太远了！｜بعيد جداً!"},{"zh":"走","ar":"يمشي / يذهب","py":"zǒu","ex":"五个同学一起走。｜خمسة زملاء يمشون معاً."},{"zh":"环保","ar":"حماية البيئة","py":"huánbǎo","ex":"讨论环保问题。｜مناقشة قضايا البيئة."},{"zh":"累","ar":"متعب","py":"lèi","ex":"你累不累？｜هل أنت متعب؟"},{"zh":"事","ar":"أمر / شغل","py":"shì","ex":"你有什么事？｜ما الأمر؟"},{"zh":"讨论","ar":"يناقش","py":"tǎolùn","ex":"讨论问题｜مناقشة قضية"},{"zh":"一下","ar":"قليلاً","py":"yíxià","ex":"讨论一下环保问题。｜لنناقش قضية البيئة قليلاً."},{"zh":"问题","ar":"مشكلة / سؤال","py":"wèntí","ex":"环保问题｜قضايا البيئة"}],"practice":[{"t":"listen","q":"استمع ثم اختر: أيّ الجملتين سمعت؟","say":"树很多，花也不少。","o":["树很多，花也不少。","树很多，花也很多。"],"a":0,"why":"الجملة المسموعة: 树很多，花也不少。"},{"t":"listen","q":"استمع ثم اختر: أيّ الجملتين سمعت؟","say":"这个小区的树很漂亮。","o":["这个地方的树很漂亮。","这个小区的树很漂亮。"],"a":1,"why":"الجملة المسموعة: 这个小区的树很漂亮。"},{"t":"listen","q":"استمع ثم اختر: أيّ الجملتين سمعت؟","say":"我们去喝茶吧。","o":["我们去喝茶。","我们去喝茶吧。"],"a":1,"why":"الجملة المسموعة: 我们去喝茶吧。"},{"t":"listen","q":"استمع ثم اختر: أيّ الجملتين سمعت؟","say":"我们不累。","o":["我们不累。","你累不累？"],"a":0,"why":"الجملة المسموعة: 我们不累。"},{"t":"listen","q":"استمع ثم اختر: أيّ الجملتين سمعت؟","say":"你有没有事？","o":["你有什么事？","你有没有事？"],"a":1,"why":"الجملة المسموعة: 你有没有事？"},{"t":"listen","q":"استمع ثم اختر: أيّ الجملتين سمعت؟","say":"讨论环保问题","o":["讨论环保问题","讨论讨论问题"],"a":0,"why":"الجملة المسموعة: 讨论环保问题"},{"t":"listen","q":"استمع ثم اختر الكلمة التي سمعتها","say":"迟到","o":["迟到","迟早"],"a":0},{"t":"listen","q":"استمع للسؤال ثم اختر الجواب المناسب","say":"你们小区怎么样？","o":["真漂亮，树很多。","我去喝茶。","太累了。"],"a":0,"why":"السؤال: 你们小区怎么样？"},{"t":"listen","q":"استمع للسؤال ثم اختر الجواب المناسب","say":"你累不累？","o":["我不累。","树很多。","饭馆很近。"],"a":0,"why":"السؤال: 你累不累？"},{"t":"cloze","q":"你们小区真漂亮，有很___树，花也不___。","say":"你们小区真漂亮，有很多树，花也不少。","a":["多","少"],"bank":["多","少","近","累"]},{"t":"mcq","q":"“太远了！”是什么意思？","o":["بعيد جداً (أكثر من اللازم)","قريب جداً","ليس بعيداً","جميل جداً"],"a":0,"why":"«太……了» تدل على المبالغة أو الإعجاب: «太远了» = بعيد جداً."},{"t":"say","q":"استمع ثم كرّر بصوت عالٍ","items":["你们小区真漂亮。｜حيّكم جميل حقاً.","我们去喝茶吧。｜لنذهب لشرب الشاي.","讨论一下环保问题。｜لنناقش قضية البيئة."]}],"discuss":[{"q":"你们小区（或学校）怎么样？树多不多？饭馆近不近？","ar":"صف حيّك أو جامعتك: الأشجار؟ المطاعم؟","frames":["我觉得……","树很多，","花也不少。","饭馆很近。","非常……"],"use":["觉得","树","近","非常"],"model":"我觉得我们小区非常漂亮，树很多，花也不少。饭馆很近。｜أرى أن حيّنا جميل جداً، الأشجار كثيرة والأزهار ليست قليلة. المطاعم قريبة."},{"q":"请邀请朋友去喝茶，然后一起讨论一个问题。","ar":"ادعُ صديقك لشرب الشاي ثم ناقشا قضية ما.","frames":["你累不累？","我们去喝茶吧。","你有事吗？","我们讨论一下……问题。"],"use":["累","喝","讨论","问题"],"model":"你累不累？我们去喝茶吧。喝茶以后，我们讨论一下环保问题。｜هل أنت متعب؟ لنذهب لشرب الشاي. وبعده نناقش قضية البيئة."}],"py":{"区":"qū","你们小区真漂亮":"nǐmen xiǎoqū zhēn piàoliang","第一部分 语音":"dì yí bù fēn yǔ yīn","听后跟读":"tīng hòu gēn dú","安心":"ān xīn","冰雹":"bīng báo","时光":"shí guāng","文明":"wén míng","人海":"rén hǎi","理亏":"lǐ kuī","悔改":"huǐ gǎi","美味":"měi wèi","诞生":"dàn shēng","忘情":"wàng qíng","大事":"dà shì","赶潮流":"gǎn cháo liú","沙尘暴":"shā chén bào","听读辨音":"tīng dú biàn yīn","武汉 — 午饭":"wǔ hàn — wǔfàn","黄色 — 红色":"huáng sè — hóng sè","迟到 — 迟早":"chí dào — chí zǎo","我也知道":"wǒ yě zhī dào","包子":"bāozi","面条":"miàntiáo","玉米":"yùmǐ","豆腐":"dòufǔ","第二部分 课文":"dì èr bù fēn kèwén","跟读短语和句子":"gēn dú duǎn yǔ hé jùzi","很多":"hěn duō","不少":"bù shǎo","树很多，花也不少。":"shù hěn duō, huā yě bù shǎo.","这个小区的树很漂亮。":"zhè gè xiǎoqū de shù hěn piàoliang.","饭馆很近。":"fànguǎn hěn jìn.","请喝茶。":"qǐng hē chá.","我们去喝茶。":"wǒmen qù hē chá.","太远了！":"tài yuǎn le!","你累不累？":"nǐ lèi bú lèi?","你有事吗？":"nǐ yǒu shì ma?","你有什么事？":"nǐ yǒu shénme shì?","讨论问题":"tǎolùn wèntí","张老师家非常近，我们五个同学一起走。":"Zhāng lǎoshī jiā fēicháng jìn, wǒmen wǔ gè tóngxué yìqǐ zǒu.","讨论环保问题":"tǎolùn huánbǎo wèntí","讨论一下环保问题":"tǎolùn yíxià huánbǎo wèntí","甲":"jiǎ","你们小区怎么样？":"nǐmen xiǎoqū zěnmeyàng?","乙":"yǐ","真漂亮，树很多，花也不少。":"zhēn piàoliang, shù hěn duō, huā yě bù shǎo.","饭馆近不近？":"fànguǎn jìn bú jìn?","非常近，饭非常好吃。":"fēicháng jìn, fàn fēicháng hǎochī.","你累不累？我们去喝茶吧。":"nǐ lèi bú lèi? wǒmen qù hē chá ba.","好，小区旁边就有一个茶馆。":"hǎo, xiǎoqū pángbiān jiù yǒu yí gè cháguǎn.","树很多，花也很多。":"shù hěn duō, huā yě hěn duō.","这个地方的树很漂亮。":"zhè gè dìfang de shù hěn piàoliang.","我们去喝茶吧。":"wǒmen qù hē chá ba.","我们不累。":"wǒmen bú lèi.","你有没有事？":"nǐ yǒu méi yǒu shì?","讨论讨论问题":"tǎolùn tǎolùn wèntí","迟到":"chí dào","迟早":"chí zǎo","真漂亮，树很多。":"zhēn piàoliang, shù hěn duō.","我去喝茶。":"wǒ qù hē chá.","太累了。":"tài lèi le.","我不累。":"wǒ bú lèi.","树很多。":"shù hěn duō.","你们小区真漂亮，有很___树，花也不___。":"nǐmen xiǎoqū zhēn piàoliang, yǒu hěn _ _ _ shù, huā yě bù _ _ _.","你们小区真漂亮，有很＿＿树，花也不＿＿。":"nǐmen xiǎoqū zhēn piàoliang, yǒu hěn ＿ ＿ shù, huā yě bù ＿ ＿.","你们小区真漂亮，有很多树，花也不少。":"nǐmen xiǎoqū zhēn piàoliang, yǒu hěn duō shù, huā yě bù shǎo.","多":"duō","少":"shǎo","近":"jìn","累":"lèi","“太远了！”是什么意思？":"“tài yuǎn le!” shì shénme yì sī?","你们小区真漂亮。":"nǐmen xiǎoqū zhēn piàoliang.","讨论一下环保问题。":"tǎolùn yíxià huánbǎo wèntí.","你们小区（或学校）怎么样？树多不多？饭馆近不近？":"nǐmen xiǎoqū (huò xuéxiào) zěnmeyàng? shù duō bù duō? fànguǎn jìn bú jìn?","我觉得……":"wǒ juéde … …","树很多，":"shù hěn duō,","花也不少。":"huā yě bù shǎo.","非常……":"fēicháng … …","觉得":"juéde","树":"shù","非常":"fēicháng","我觉得我们小区非常漂亮，树很多，花也不少。饭馆很近。":"wǒ juéde wǒmen xiǎoqū fēicháng piàoliang, shù hěn duō, huā yě bù shǎo. fànguǎn hěn jìn.","请邀请朋友去喝茶，然后一起讨论一个问题。":"qǐng yāo qǐng péngyou qù hē chá, rán hòu yìqǐ tǎolùn yí gè wèntí.","我们讨论一下……问题。":"wǒmen tǎolùn yíxià … … wèntí.","喝":"hē","讨论":"tǎolùn","问题":"wèntí","你累不累？我们去喝茶吧。喝茶以后，我们讨论一下环保问题。":"nǐ lèi bú lèi? wǒmen qù hē chá ba. hē chá yǐhòu, wǒmen tǎolùn yíxià huánbǎo wèntí.","我觉得小区很漂亮。":"wǒ juéde xiǎoqū hěn piàoliang.","真漂亮！":"zhēn piàoliang!","饭非常好吃。":"fàn fēicháng hǎochī.","小区旁边有茶馆。":"xiǎoqū pángbiān yǒu cháguǎn.","去张老师家。":"qù Zhāng lǎoshī jiā.","五个同学一起走。":"wǔ gè tóngxué yìqǐ zǒu.","讨论环保问题。":"tǎolùn huánbǎo wèntí.","环保问题":"huánbǎo wèntí"}},PY=D.py,CRS=D.course,KEY='noor-'+D.course+D.n+'-v1',HUB='zh-hub-v1';
-var S={prac:{},txt:{},ui:{}};try{var o=JSON.parse(localStorage.getItem(KEY)||'{}');for(var k in o)S[k]=o[k]}catch(e){}
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var shuffle=function(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a};
+var pick=function(a,n){return shuffle(a).slice(0,n)};
+
+/* ---------- state ---------- */
+var KEY='noor-lis10-v1',HUBK='zh-hub-v1',CRS='lis';
+var S={known:{},wrong:{},xp:0,best:{},badges:{},heard:{},py:true,ar:true,slow:false,card:0};
+try{var raw=localStorage.getItem(KEY);if(raw){Object.assign(S,JSON.parse(raw))}}catch(e){}
+S.flip=false;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
-function $(s,r){return (r||document).querySelector(s)}
-function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
-function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2200)}
-var voice=null;function pick(){var v=(window.speechSynthesis&&speechSynthesis.getVoices())||[];voice=v.filter(function(x){return /^zh/i.test(x.lang)})[0]||null}
-if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick}
-function speak(t){if(!window.speechSynthesis){toast('الصوت غير متاح');return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t.replace(/[“”《》]/g,''));u.lang='zh-CN';if(voice)u.voice=voice;u.rate=document.body.classList.contains('slow')?.6:.85;speechSynthesis.speak(u)}
+try{var th=localStorage.getItem(KEY+'-theme');if(th){document.documentElement.setAttribute('data-theme',th)}}catch(e){}
+
+/* ---------- icons ---------- */
+var IC={
+  spk:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  play:'<path d="M7 5l12 7-12 7z" fill="currentColor"/>',
+  stop:'<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
+  redo:'<path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/>',
+  star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17.3 6.6 20.2l1.1-6.1L3.2 9.9l6.1-.8z"/>'
+};
+function ic(n,s){s=s||20;return '<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
+function spkBtn(t,cls){return '<button class="spk '+(cls||'')+'" data-act="say" data-t="'+esc(t)+'" aria-label="استمع">'+ic('spk',cls==='big'?36:20)+'</button>'}
+
+/* ---------- speech ---------- */
+var TTS={ok:('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window),voice:null,warned:false};
+function pickVoice(){
+  if(!TTS.ok)return;
+  var vs=speechSynthesis.getVoices();
+  TTS.voice=vs.filter(function(v){return /^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return /^zh/i.test(v.lang)})[0]||null;
+}
+if(TTS.ok){pickVoice();try{speechSynthesis.onvoiceschanged=pickVoice}catch(e){}}
+function speak(text,done,pitch){
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');if(done)done();return false}
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN';
+    if(TTS.voice)u.voice=TTS.voice;
+    else if(!TTS.warned&&speechSynthesis.getVoices().length){TTS.warned=true;toast('لا يوجد صوت صيني على جهازك، ثبّت صوتاً صينياً من إعدادات النظام')}
+    u.rate=S.slow?0.55:0.85;
+    u.pitch=pitch||1;
+    u.onend=function(){if(done)done()};
+    u.onerror=function(){if(done)done()};
+    speechSynthesis.speak(u);
+    return true;
+  }catch(e){if(done)done();return false}
+}
+function stopSpeech(){try{if(TTS.ok)speechSynthesis.cancel()}catch(e){}}
+
+/* ---------- toast ---------- */
+var toastT=null;
+function toast(msg){var t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},2800)}
+
+/* ---------- pinyin helpers ---------- */
 function toneOf(s){var d=s.normalize('NFD');if(/̄/.test(d))return 1;if(/́/.test(d))return 2;if(/̌/.test(d))return 3;if(/̀/.test(d))return 4;return 5}
-function pyh(py){return py.split(' ').map(function(x){return '<span class="t'+toneOf(x)+'">'+esc(x)+'</span>'}).join(' ')}
-/* glossary */
-var TERMS=D.terms,TI={};TERMS.forEach(function(t,i){TI[t.zh]=i});
-var TRE=null;(function(){var a=TERMS.map(function(t){return t.zh}).sort(function(x,y){return y.length-x.length}).map(function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')});if(a.length)TRE=new RegExp(a.join('|'),'g')})();
-function gl(z){var e=esc(z);return TRE?e.replace(TRE,function(m){return '<span class="g" data-g="'+TI[m]+'" tabindex="0" role="button">'+m+'</span>'}):e}
-function sp(s){var i=s.indexOf('｜');return i<0?[s,'']:[s.slice(0,i),s.slice(i+1)]}
-function Z(zh,cls){if(/[\u0600-\u06ff]/.test(zh)&&!/[\u4e00-\u9fff]/.test(zh))return '<span class="arx">'+esc(zh)+'</span>';return '<span class="zb"><span class="zh '+(cls||'')+'" lang="zh">'+gl(zh)+'</span><span class="pyl">'+esc(PY[zh]||'')+'</span></span>'}
-function ZA(s,cls){var p=sp(s);return Z(p[0],cls)+(p[1]?'<span class="ar2">'+esc(p[1])+'</span>':'')}
-function ZP(zh){return '<span class="zb"><span class="han" lang="zh" dir="ltr">'+esc(zh)+'</span><span class="pyl">'+esc(PY[zh]||'')+'</span></span>'}
-/* hub review */
-function addRev(zh){var h={};try{h=JSON.parse(localStorage.getItem(HUB)||'{}')||{}}catch(e){}h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};var has=!!h.dues[CRS][zh];if(has)delete h.dues[CRS][zh];else h.dues[CRS][zh]={i:0,t:Date.now()};try{localStorage.setItem(HUB,JSON.stringify(h))}catch(e){}return !has}
-function inRev(zh){try{var h=JSON.parse(localStorage.getItem(HUB)||'{}');return !!(h.dues&&h.dues[CRS]&&h.dues[CRS][zh])}catch(e){return false}}
-var SAYS=[];function sayBtn(z){SAYS.push(z);return '<button class="sm" data-sz="'+(SAYS.length-1)+'" aria-label="استمع">🔊</button>'}
-/* ---------- reading ---------- */
-function block(b){
- if(b.p)return '<div class="blk p">'+ZA(b.p)+'</div>';
- if(b.key)return '<div class="blk key">'+ZA(b.key)+'</div>';
- if(b.ul)return '<ul class="ul blk">'+b.ul.map(function(x){return '<li>'+ZA(x)+'</li>'}).join('')+'</ul>';
- if(b.tl)return '<ol class="tl blk">'+b.tl.map(function(x){return '<li><span class="lb">'+esc(x[0])+'</span><div>'+ZA(x[1])+'</div></li>'}).join('')+'</ol>';
- if(b.cards)return '<div class="cards blk">'+b.cards.map(function(c){return '<div class="cd"><div class="hd"><b>'+gl(c[0])+'</b><span class="ar">'+esc(c[1])+'</span></div>'+(c[2]?ZA(c[2]):'')+'</div>'}).join('')+'</div>';
- if(b.table){var t=b.table;return '<div class="tw blk"><table><thead><tr>'+t.head.map(function(h){return '<th>'+ZA(h)+'</th>'}).join('')+'</tr></thead><tbody>'+t.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+ZA(c)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'}
- if(b.dlg)return '<div class="dlg blk">'+b.dlg.map(function(l){var q=sp(l[0]),t=sp(l[1]);return '<div class="dl"><div class="sk">'+Z(q[0])+(q[1]?'<span class="ar2">'+esc(q[1])+'</span>':'')+'</div><div class="tx">'+ZA(l[1])+'</div>'+sayBtn(t[0])+'</div>'}).join('')+'</div>';
- if(b.sl)return '<ul class="ul blk sl">'+b.sl.map(function(x){return '<li><div class="sli"><div>'+ZA(x)+'</div>'+sayBtn(sp(x)[0])+'</div></li>'}).join('')+'</ul>';
- return '';
+var MARK={1:'̄',2:'́',3:'̌',4:'̀'};
+function setTone(s,n){
+  var b=s.normalize('NFD').replace(/[̀́̄̌]/g,'').normalize('NFC');
+  if(n===5)return b;
+  var low=b.toLowerCase(),idx=-1,i;
+  if(/[ae]/.test(low))idx=low.search(/[ae]/);
+  else if(low.indexOf('ou')>-1)idx=low.indexOf('o');
+  else{for(i=low.length-1;i>=0;i--){if('aeiou'.indexOf(low[i])>-1){idx=i;break}}}
+  if(idx<0)return b;
+  return (b.slice(0,idx+1)+MARK[n]+b.slice(idx+1)).normalize('NFC');
 }
-function reading(){
- return '<div class="banner"><div class="big" aria-hidden="true">'+esc(D.big)+'</div><div><h2>'+esc(D.title_ar)+'</h2><p>'+esc(D.intro_ar)+'</p></div></div>'+
- D.sections.map(function(s){return '<section class="sec"><h2><span class="han" lang="zh" dir="ltr">'+gl(s.h)+'</span><span class="har">'+esc(s.ar)+'</span></h2>'+(PY[s.h]?'<div class="pyl" style="margin-inline-start:15px">'+esc(PY[s.h])+'</div>':'')+s.b.map(block).join('')+
-  '<div class="act"><button class="btn" data-say-sec="'+D.sections.indexOf(s)+'">🔊 استمع للقسم</button></div></section>'}).join('');
+function toneVariants(py){
+  var syl=py.split(' '),out=[syl.join(' ')],guard=0;
+  while(out.length<4&&guard++<80){
+    var i=Math.floor(Math.random()*syl.length),cur=toneOf(syl[i]),n=1+Math.floor(Math.random()*5);
+    if(n===cur)continue;
+    var c=syl.slice();c[i]=setTone(syl[i],n);var j=c.join(' ');
+    if(out.indexOf(j)<0)out.push(j);
+  }
+  return out;
 }
-function secText(i){var s=D.sections[i],t=[s.h];s.b.forEach(function(b){['p','key'].forEach(function(k){if(b[k])t.push(sp(b[k])[0])});if(b.ul)b.ul.forEach(function(x){t.push(sp(x)[0])});if(b.tl)b.tl.forEach(function(x){t.push(sp(x[1])[0])});if(b.cards)b.cards.forEach(function(c){t.push(c[0]);if(c[2])t.push(sp(c[2])[0])})});return t.join('。')}
-/* ---------- terms ---------- */
-var tf='',fcI=0,fcF=false;S.kn=S.kn||{};
-function fcHTML(){var t=TERMS[fcI],k=Object.keys(S.kn).length,e=t.ex?sp(t.ex):null;
- var face=fcF?'<div class="face"><button class="spk" data-say-t="'+fcI+'" aria-label="استمع">🔊</button><div class="pyl2">'+pyh(t.py)+'</div><div class="meaning">'+esc(t.ar)+'</div>'+(e?'<div class="exb"><span class="han">'+esc(e[0])+'</span><span class="mut">'+esc(e[1])+'</span></div>':'')+'</div>'
-  :'<div class="face"><button class="spk" data-say-t="'+fcI+'" aria-label="استمع">🔊</button><div class="bigzh">'+esc(t.zh)+'</div><div class="mut">اضغط لإظهار المعنى</div></div>';
- return '<div class="sech"><h2>بطاقات المفردات</h2><p>'+TERMS.length+' '+(D.tword||'كلمة')+' · اضغط البطاقة لقلبها · عرفت <b>'+k+'</b> منها</p></div><div class="fc" data-fc="flip">'+face+'</div><div class="navrow"><button class="btn" data-fc="prev">السابقة</button><span class="cnt">'+(fcI+1)+' / '+TERMS.length+'</span><button class="btn" data-fc="next">التالية</button></div><div class="actrow"><button class="btn p" data-fc="know">✓ أعرفها</button><button class="btn" data-fc="later">↻ أراجعها لاحقاً</button></div>';}
-function fcAct(a){var n=TERMS.length,t=TERMS[fcI];
- if(a==='flip'){fcF=!fcF}
- else{if(a==='prev')fcI=(fcI+n-1)%n;else{if(a==='know'){S.kn[t.zh]=1;save()}if(a==='later'&&!inRev(t.zh)){addRev(t.zh);toast('أُضيفت إلى مفردات '+D.cname)}fcI=(fcI+1)%n}fcF=false}
- $('#fcbox').innerHTML=fcHTML();if(a==='later'||a==='know')refreshList()}
-function refreshList(){var l=$('#tlist');if(l)l.innerHTML=listHTML()}
-function termsTab(){
- return '<div id="fcbox">'+fcHTML()+'</div><h3 class="sec-t" style="font-size:17px;margin:26px 0 4px">قائمة الكلمات</h3><p class="mut">اضغط «+» لإضافة الكلمة إلى مفردات «'+D.cname+'» للمراجعة المتباعدة.</p><div class="actrow" style="grid-template-columns:1fr"><button class="btn" id="addall">أضف كل الكلمات إلى المراجعة</button></div><div id="tlist">'+listHTML()+'</div>';}
-function listHTML(){
- return '<div class="tg">'+
- TERMS.map(function(t,i){var on=inRev(t.zh);return '<div class="tm"><div class="z">'+esc(t.zh)+'</div><div><div class="pp">'+pyh(t.py)+'</div><div>'+esc(t.ar)+'</div></div><div style="display:flex;gap:6px"><button class="sm" data-say-t="'+i+'" aria-label="استمع">🔊</button><button class="sm'+(on?' on':'')+'" data-add-t="'+i+'" aria-label="مراجعة">'+(on?'✓':'+')+'</button></div>'+(t.ex?'<div class="ex">'+ZP(sp(t.ex)[0])+'<span class="mut">'+esc(sp(t.ex)[1])+'</span></div>':'')+'</div>'}).join('')+'</div>';
+function han(zh,py){
+  var sy=py.split(' ');
+  return Array.from(zh).map(function(c,i){return '<span class="t'+(sy[i]?toneOf(sy[i]):5)+'">'+esc(c)+'</span>'}).join('');
 }
-/* ---------- practice ---------- */
-var TY={listen:'استماع',say:'قراءة بصوت عالٍ',mcq:'اختيار من متعدد',tf:'صح أو خطأ',match:'مطابقة',order:'ترتيب',cls:'تصنيف',cloze:'إكمال'};
-var B={};
-function rec(i,ok){if(!S.prac[i]){S.prac[i]={c:ok?1:0};save();upd()}var q=$('#s'+i);if(q){var r=S.prac[i];q.className='qs '+(r.c?'ok':'no');q.textContent=r.c?'✓ من أول محاولة':'أُنجز'}}
-function fb(el,ok,msg){var f=$('.fb',el);f.hidden=false;f.className='fb '+(ok?'ok':'no');f.innerHTML=(ok?'أحسنت! ':'')+(msg?'<span class="ar">'+esc(msg)+'</span>':'')}
-B.mcq=function(el,it,i){var b=$('.qb',el),ord=shuf(it.o.map(function(_,k){return k}));
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="opts">'+ord.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.o[k])+'</button>'}).join('')+'</div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var k=+x.dataset.k,ok=k===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if(+o.dataset.k===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why)}};
-B.listen=function(el,it,i){var b=$('.qb',el),ord=shuf(it.o.map(function(_,k){return k}));
- b.innerHTML='<div class="q"><p>'+esc(it.q||'استمع ثم اختر الإجابة الصحيحة')+'</p><div class="act">'+sayBtn(it.say).replace('class="sm"','class="btn p"').replace('>🔊<','>🔊 استمع<')+'</div></div><div class="opts">'+ord.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.o[k])+'</button>'}).join('')+'</div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var k=+x.dataset.k,ok=k===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if(+o.dataset.k===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why||('الجملة المسموعة: '+it.say))}};
-B.say=function(el,it,i){var b=$('.qb',el);
- b.innerHTML='<div class="q"><p>'+esc(it.q||'استمع ثم كرّر بصوت عالٍ')+'</p></div><ul class="ul sl" style="margin-top:10px">'+it.items.map(function(x){return '<li><div class="sli"><div>'+ZA(x)+'</div>'+sayBtn(sp(x)[0])+'</div></li>'}).join('')+'</ul><div class="act"><button class="btn p" data-done="1">أنهيتُ القراءة بصوت عالٍ ✓</button></div>';
- b.onclick=function(e){var t=e.target.closest('[data-done]');if(!t)return;rec(i,true);fb(el,true,'أحسنت! كرّر التمرين حتى تصبح القراءة سلسة.')}};
-B.tf=function(el,it,i){var b=$('.qb',el);
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="tf"><button class="op" data-v="1"><span class="zh" style="text-align:center">对 ✓</span></button><button class="op" data-v="0"><span class="zh" style="text-align:center">错 ✗</span></button></div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var v=x.dataset.v==='1',ok=v===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if((o.dataset.v==='1')===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why)}};
-B.match=function(el,it,i){var b=$('.qb',el),R=shuf(it.p.map(function(_,k){return k})),sel=null,left=it.p.length,miss=0;
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="mt"><div class="col" id="L'+i+'">'+it.p.map(function(p,k){return '<button class="op" data-k="'+k+'">'+Z(p[0])+'</button>'}).join('')+'</div><div class="col" id="R'+i+'">'+R.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.p[k][1])+'</button>'}).join('')+'</div></div>';
- b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.classList.contains('done'))return;var side=x.parentNode.id.charAt(0);
-  if(side==='L'){[].forEach.call(b.querySelectorAll('#L'+i+' .op'),function(o){o.classList.remove('sel')});x.classList.add('sel');sel=x;return}
-  if(!sel){toast('اختر من العمود الأول أولاً');return}
-  if(sel.dataset.k===x.dataset.k){sel.classList.remove('sel');sel.classList.add('done');x.classList.add('done');sel=null;left--;if(!left){rec(i,miss===0);fb(el,miss===0,miss?'عدد الأخطاء: '+miss:'')}}
-  else{miss++;x.classList.add('flash');setTimeout(function(){x.classList.remove('flash')},500)}}};
-B.order=function(el,it,i){var b=$('.qb',el),n=it.items.length,pool=shuf(it.items.map(function(_,k){return k})),pl=[],tries=0;
- if(n>1&&pool.join()===it.items.map(function(_,k){return k}).join())pool.reverse();
- function draw(){b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="line" aria-label="الترتيب">'+pl.map(function(k,j){return '<button class="chip" data-r="'+j+'"><span class="nn">'+(j+1)+'</span>'+Z(it.items[k])+'</button>'}).join('')+(pl.length?'':'<span class="mut">اضغط على العناصر بالترتيب الصحيح</span>')+'</div><div class="pool">'+pool.map(function(k){return '<button class="chip" data-p="'+k+'">'+Z(it.items[k])+'</button>'}).join('')+'</div><div class="act"><button class="btn p" data-chk="1"'+(pool.length?' disabled':'')+'>تحقق</button><button class="btn" data-rs="1">إعادة</button><button class="btn" data-sol="1">أظهر الحل</button></div>'}
- draw();
- b.onclick=function(e){var t=e.target.closest('button');if(!t)return;
-  if(t.dataset.p!=null){var k=+t.dataset.p;pool.splice(pool.indexOf(k),1);pl.push(k);draw()}
-  else if(t.dataset.r!=null){pool.push(pl.splice(+t.dataset.r,1)[0]);draw()}
-  else if(t.dataset.rs){pool=pool.concat(pl);pl=[];draw();$('.fb',el).hidden=true}
-  else if(t.dataset.sol){pl=it.items.map(function(_,k){return k});pool=[];draw();[].forEach.call(b.querySelectorAll('.line .chip'),function(c){c.classList.add('good')});rec(i,false);fb(el,false,'هذا هو الترتيب الصحيح.')}
-  else if(t.dataset.chk){var ok=true;[].forEach.call(b.querySelectorAll('.line .chip'),function(c,j){var g=it.items[pl[j]]===it.items[j];if(!g)ok=false;c.classList.add(g?'good':'bad')});tries++;rec(i,ok&&tries===1);fb(el,ok,ok?'':'بعض العناصر في غير موضعها (الأحمر). اضغط «إعادة» وجرّب مجدداً.')}}};
-B.cls=function(el,it,i){var b=$('.qb',el),ch=[];
- b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="rows">'+it.items.map(function(x,k){return '<div class="rw" data-k="'+k+'">'+Z(x[0])+'<div class="cs">'+it.cats.map(function(c,j){return '<button data-j="'+j+'">'+esc(c)+'</button>'}).join('')+'</div></div>'}).join('')+'</div><div class="act"><button class="btn p" data-chk="1">تحقق</button></div>';
- b.onclick=function(e){var t=e.target.closest('button');if(!t)return;
-  if(t.dataset.j!=null){var rw=t.closest('.rw'),k=+rw.dataset.k;ch[k]=+t.dataset.j;[].forEach.call(rw.querySelectorAll('button'),function(x){x.classList.toggle('sel',x===t)});rw.classList.remove('good','bad')}
-  else if(t.dataset.chk){var good=0,all=it.items.length;if(ch.filter(function(x){return x!=null}).length<all){toast('صنّف كل العناصر أولاً');return}
-   [].forEach.call(b.querySelectorAll('.rw'),function(rw){var k=+rw.dataset.k,g=ch[k]===it.items[k][1];if(g)good++;rw.classList.remove('good','bad');rw.classList.add(g?'good':'bad')});
-   rec(i,good===all);fb(el,good===all,good+' من '+all+(good<all?' — صحّح العناصر الحمراء وأعد التحقق.':''))}}};
-B.cloze=function(el,it,i){var b=$('.qb',el),parts=it.q.split('___'),bank=shuf(it.bank||it.a),h='';
- parts.forEach(function(p,k){h+=esc(p);if(k<parts.length-1)h+='<select data-k="'+k+'" aria-label="الفراغ '+(k+1)+'"><option value="">…</option>'+bank.map(function(w){return '<option>'+esc(w)+'</option>'}).join('')+'</select>'});
- b.innerHTML='<div class="q">'+Z(it.q.replace(/___/g,'＿＿'))+'</div><div class="cz">'+h+'</div><div class="act"><button class="btn p" data-chk="1">تحقق</button></div>';
- b.onclick=function(e){var t=e.target.closest('[data-chk]');if(!t)return;var sels=b.querySelectorAll('select'),good=0;[].forEach.call(sels,function(s,k){var g=s.value===it.a[k];if(g)good++;s.classList.remove('good','bad');s.classList.add(g?'good':'bad')});rec(i,good===sels.length);fb(el,good===sels.length,good+' من '+sels.length)}};
-function practice(){return '<div class="card sum"><div><b id="psc">0</b> <span class="mut">/ '+D.practice.length+' أُنجزت</span></div><div class="mut" id="pok"></div><button class="btn" id="prs">إعادة التدريبات</button></div>'+D.practice.map(function(it,i){return '<section class="card pq" data-i="'+i+'"><div class="qh"><span class="qn">'+(i+1)+'</span><span class="qty">'+TY[it.t]+'</span>'+(it.say&&it.t!=='listen'?sayBtn(it.say):'')+'<span class="qs" id="s'+i+'"></span></div><div class="qb"></div><div class="fb" hidden></div></section>'}).join('')}
-function initPractice(){D.practice.forEach(function(it,i){var el=$('.pq[data-i="'+i+'"]');B[it.t](el,it,i);var r=S.prac[i];if(r){var q=$('#s'+i);q.className='qs '+(r.c?'ok':'no');q.textContent=r.c?'✓ من أول محاولة':'أُنجز'}})}
-/* ---------- discuss ---------- */
-function discuss(){return D.discuss.map(function(d,i){return '<section class="card" data-d="'+i+'"><div class="qh"><span class="qn">'+(i+1)+'</span><span class="qty">نقاش وكتابة</span></div><div class="q">'+Z(d.q)+'</div><p class="mut" style="margin-top:4px">'+esc(d.ar)+'</p>'+
- '<div class="fr">'+d.frames.map(function(f,k){return '<button data-fr="'+k+'">'+esc(f)+'</button>'}).join('')+'</div>'+
- '<textarea data-ta="'+i+'" placeholder="اكتب إجابتك بالصينية…" lang="zh" aria-label="إجابتك"></textarea>'+
- '<div class="mut" style="margin-top:4px"><span data-cc="'+i+'">0</span> حرفاً · المصطلحات المستخدمة:</div><div class="us">'+d.use.map(function(u){return '<span data-u="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
- '<details class="md"><summary>نموذج إجابة</summary>'+ZA(d.model)+'<div class="act"><button class="btn" data-say-m="'+i+'">🔊 استمع</button></div></details></section>'}).join('')}
-function initDisc(){D.discuss.forEach(function(d,i){var ta=$('[data-ta="'+i+'"]'),v=S.txt[i]||'';ta.value=v;chk(i)})}
-function chk(i){var ta=$('[data-ta="'+i+'"]'),el=$('[data-d="'+i+'"]'),v=ta.value;$('[data-cc="'+i+'"]').textContent=v.replace(/\s/g,'').length;[].forEach.call(el.querySelectorAll('[data-u]'),function(s){s.classList.toggle('on',v.indexOf(s.dataset.u)>-1)})}
-/* ---------- shell ---------- */
-var TABS=D.tabs||[['read','📖 القراءة'],['terms','🔤 المصطلحات'],['prac','✍️ التدريبات'],['disc','💬 نقاش']],tab=S.ui.tab||'read';
-function upd(){var pd=Object.keys(S.prac).length,ok=0,k;for(k in S.prac)if(S.prac[k].c)ok++;var dn=D.discuss.filter(function(d,i){return (S.txt[i]||'').replace(/\s/g,'').length>=(D.minc||50)}).length,tot=D.practice.length+D.discuss.length;
- $('#pgb').style.width=Math.round((pd+dn)/tot*100)+'%';var a=$('#psc');if(a){a.textContent=pd;$('#pok').textContent=pd?'من أول محاولة: '+ok+' من '+pd:''}}
-function show(t){$('#pop').hidden=true;tab=t;S.ui.tab=t;save();[].forEach.call(document.querySelectorAll('.pane'),function(p){p.hidden=p.id!=='p-'+t});$('#tabs').innerHTML=TABS.map(function(x){return '<button class="tab" role="tab" aria-selected="'+(x[0]===t)+'" data-tab="'+x[0]+'">'+x[1]+'</button>'}).join('');window.scrollTo(0,0)}
-function init(){
- document.title=D.title_ar+' · '+D.title_zh;var NZ=['','一','二','三','四','五','六','七','八','九','十'],NA=['','الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر'];$('#seal').textContent=NZ[D.n]||D.n;$('#ttl').textContent='الدرس '+(NA[D.n]||D.n);$('#sub').innerHTML='<span class="han" dir="ltr">'+esc(D.title_zh)+'</span>';
- var tools='<div class="tools"><button class="sw" id="spy" aria-pressed="false">拼音 · البينيين</button><button class="sw" id="sar" aria-pressed="false">الترجمة العربية</button><span class="mut">المصطلحات المسطّرة بنقط: اضغط عليها لمعناها</span></div>';
- $('#seal').href='index.html#'+D.course;if(S.ui.slow){document.body.classList.add('slow');$('#slow').setAttribute('aria-pressed','true')}
- $('#main').innerHTML='<div id="p-read" class="pane">'+tools+reading()+'</div><div id="p-terms" class="pane" hidden>'+termsTab()+'</div><div id="p-prac" class="pane" hidden>'+practice()+'</div><div id="p-disc" class="pane" hidden>'+discuss()+'</div>';
- initPractice();initDisc();
- if(S.ui.py==null?D.defpy:S.ui.py)document.body.classList.add('py');if(S.ui.ar)document.body.classList.add('ar');syncSw();show(tab);upd();
+function pyhtml(py){return py.split(' ').map(function(s){return '<span class="t'+toneOf(s)+'">'+esc(s)+'</span>'}).join('')}
+
+/* ---------- content ---------- */
+var D={"vocab":[{"zh":"觉得","py":"jué de","ar":"يشعر / يرى","ex":["我觉得小区很漂亮。","Wǒ juéde xiǎoqū hěn piàoliang.","أرى أن الحي جميل جداً."]},{"zh":"小区","py":"xiǎo qū","ar":"حي سكني","ex":["你们小区真漂亮。","Nǐmen xiǎoqū zhēn piàoliang.","حيّكم جميل حقاً."]},{"zh":"怎么样","py":"zěn me yàng","ar":"كيف؟","ex":["你们小区怎么样？","Nǐmen xiǎoqū zěnmeyàng?","كيف حيّكم؟"]},{"zh":"漂亮","py":"piào liang","ar":"جميل","ex":["真漂亮！","Zhēn piàoliang!","جميل حقاً!"]},{"zh":"多","py":"duō","ar":"كثير","ex":["树很多。","Shù hěn duō.","الأشجار كثيرة."]},{"zh":"树","py":"shù","ar":"شجرة","ex":["树很多。","Shù hěn duō.","الأشجار كثيرة."]},{"zh":"花","py":"huā","ar":"زهرة","ex":["花也不少。","Huā yě bù shǎo.","الأزهار ليست قليلة."]},{"zh":"少","py":"shǎo","ar":"قليل","ex":["不少","Bù shǎo","كثير (ليس قليلاً)"]},{"zh":"饭馆","py":"fàn guǎn","ar":"مطعم","ex":["饭馆很近。","Fànguǎn hěn jìn.","المطعم قريب."]},{"zh":"近","py":"jìn","ar":"قريب","ex":["饭馆很近。","Fànguǎn hěn jìn.","المطعم قريب."]},{"zh":"非常","py":"fēi cháng","ar":"جداً","ex":["饭非常好吃。","Fàn fēicháng hǎochī.","الطعام لذيذ جداً."]},{"zh":"茶馆","py":"chá guǎn","ar":"مقهى شاي","ex":["小区旁边有茶馆。","Xiǎoqū pángbiān yǒu cháguǎn.","بجانب الحي مقهى شاي."]},{"zh":"喝","py":"hē","ar":"يشرب","ex":["我们去喝茶。","Wǒmen qù hē chá.","سنذهب لشرب الشاي."]},{"zh":"家","py":"jiā","ar":"بيت / أسرة","ex":["去张老师家。","Qù Zhāng lǎoshī jiā.","الذهاب إلى بيت المعلم تشانغ."]},{"zh":"太","py":"tài","ar":"أكثر من اللازم / جداً","ex":["太远了！","Tài yuǎn le!","بعيد جداً!"]},{"zh":"走","py":"zǒu","ar":"يمشي / يذهب","ex":["五个同学一起走。","Wǔ gè tóngxué yìqǐ zǒu.","خمسة زملاء يمشون معاً."]},{"zh":"环保","py":"huán bǎo","ar":"حماية البيئة","ex":["讨论环保问题。","Tǎolùn huánbǎo wèntí.","مناقشة قضايا البيئة."]},{"zh":"累","py":"lèi","ar":"متعب","ex":["你累不累？","Nǐ lèi bú lèi?","هل أنت متعب؟"]},{"zh":"事","py":"shì","ar":"أمر / شغل","ex":["你有什么事？","Nǐ yǒu shénme shì?","ما الأمر؟"]},{"zh":"讨论","py":"tǎo lùn","ar":"يناقش","ex":["讨论问题","Tǎolùn wèntí","مناقشة قضية"]},{"zh":"一下","py":"yí xià","ar":"قليلاً","ex":["讨论一下环保问题。","Tǎolùn yíxià huánbǎo wèntí.","لنناقش قضية البيئة قليلاً."]},{"zh":"问题","py":"wèn tí","ar":"مشكلة / سؤال","ex":["环保问题","Huánbǎo wèntí","قضايا البيئة"]}],"tokpy":{"你们":"nǐ men","小区":"xiǎo qū","怎么样":"zěn me yàng","真":"zhēn","漂亮":"piào liang","树":"shù","很":"hěn","多":"duō","花":"huā","也":"yě","不":"bú","少":"shǎo","饭馆":"fàn guǎn","近":"jìn","非常":"fēi cháng","饭":"fàn","好吃":"hǎo chī","你":"nǐ","累":"lèi","我们":"wǒ men","去":"qù","喝":"hē","茶":"chá","吧":"ba","好":"hǎo","旁边":"páng biān","就":"jiù","有":"yǒu","一":"yí","个":"gè","茶馆":"chá guǎn","觉得":"jué de","家":"jiā","太":"tài","走":"zǒu","环保":"huán bǎo","事":"shì","讨论":"tǎo lùn","一下":"yí xià","问题":"wèn tí","这":"zhè","的":"de","吗":"ma","什么":"shén me"},"dlg":[{"text":1,"who":"S","zh":"你们小区怎么样？","ar":"كيف حيّكم؟","tok":[["你们","nǐ men","أنتم"],["小区","xiǎo qū","حي سكني"],["怎么样","zěn me yàng","كيف (الحال)؟"],["？"]]},{"text":1,"who":"X","zh":"真漂亮，树很多，花也不少。","ar":"جميل حقاً، الأشجار كثيرة والأزهار ليست قليلة.","tok":[["真","zhēn","حقاً"],["漂亮","piào liang","جميل"],["，"],["树","shù","شجرة"],["很","hěn","جداً"],["多","duō","كثير"],["，"],["花","huā","زهرة"],["也","yě","أيضاً"],["不","bù","لا"],["少","shǎo","قليل"],["。"]]},{"text":1,"who":"S","zh":"饭馆近不近？","ar":"هل المطاعم قريبة؟","tok":[["饭馆","fàn guǎn","مطعم"],["近","jìn","قريب"],["不","bú","لا"],["近","jìn","قريب"],["？"]]},{"text":1,"who":"X","zh":"非常近，饭非常好吃。","ar":"قريبة جداً والطعام لذيذ جداً.","tok":[["非常","fēi cháng","جداً"],["近","jìn","قريب"],["，"],["饭","fàn","وجبة / أرز"],["非常","fēi cháng","جداً"],["好吃","hǎo chī","لذيذ"],["。"]]},{"text":1,"who":"S","zh":"你累不累？我们去喝茶吧。","ar":"هل أنت متعب؟ لنذهب لشرب الشاي.","tok":[["你","nǐ","أنتَ/أنتِ"],["累","lèi","متعب"],["不","bú","لا"],["累","lèi","متعب"],["？"],["我们","wǒ men","نحن"],["去","qù","يذهب"],["喝","hē","يشرب"],["茶","chá",""],["吧","ba","أداة اقتراح لطيف"],["。"]]},{"text":1,"who":"X","zh":"好，小区旁边就有一个茶馆。","ar":"حسناً، بجانب الحي مقهى شاي بالضبط.","tok":[["好","hǎo","جيد"],["，"],["小区","xiǎo qū","حي سكني"],["旁边","páng biān","بجانب"],["就","jiù","بالضبط"],["有","yǒu","يملك / يوجد"],["一","yí","واحد"],["个","gè","كلمة عدّ عامة"],["茶馆","chá guǎn","مقهى شاي"],["。"]]}],"txt":{"1":{"h":"الجزء الثاني: النصوص","scene":"<p class=\"mut\" style=\"margin:6px 0\">نص تدريبي من إعداد المنصّة:<\/p>"}},"sent":[{"tokens":["你们","小区","怎么样"],"zh":"你们小区怎么样？","py":"Nǐmen xiǎoqū zěnmeyàng?","ar":"كيف حيّكم؟"},{"tokens":["饭馆","近","不","近"],"zh":"饭馆近不近？","py":"Fànguǎn jìn bú jìn?","ar":"هل المطاعم قريبة؟"},{"tokens":["非常","近","饭","非常","好吃"],"zh":"非常近，饭非常好吃。","py":"Fēicháng jìn, fàn fēicháng hǎochī.","ar":"قريبة جداً والطعام لذيذ جداً."},{"tokens":["好","小区","旁边","就","有","一","个","茶馆"],"zh":"好，小区旁边就有一个茶馆。","py":"Hǎo, xiǎoqū pángbiān jiù yǒu yí gè cháguǎn.","ar":"حسناً، بجانب الحي مقهى شاي بالضبط."},{"tokens":["树","很","多","花","也","不","少"],"zh":"树很多，花也不少。","py":"Shù hěn duō, huā yě bù shǎo.","ar":"الأشجار كثيرة والأزهار ليست قليلة."},{"tokens":["这","个","小区","的","树","很","漂亮"],"zh":"这个小区的树很漂亮。","py":"Zhè gè xiǎoqū de shù hěn piàoliang.","ar":"أشجار هذا الحي جميلة."},{"tokens":["饭馆","很","近"],"zh":"饭馆很近。","py":"Fànguǎn hěn jìn.","ar":"المطعم قريب جداً."},{"tokens":["我们","去","喝","茶"],"zh":"我们去喝茶。","py":"Wǒmen qù hē chá.","ar":"سنذهب لشرب الشاي."},{"tokens":["你","累","不","累"],"zh":"你累不累？","py":"Nǐ lèi bú lèi?","ar":"هل أنت متعب؟"},{"tokens":["你","有","事","吗"],"zh":"你有事吗？","py":"Nǐ yǒu shì ma?","ar":"هل لديك شغل؟"},{"tokens":["你","有","什么","事"],"zh":"你有什么事？","py":"Nǐ yǒu shénme shì?","ar":"ما الأمر؟"}],"fill":[{"pre":"你们小区","post":"？","ans":"怎么样","opts":["怎么样","太","事"],"ar":"كيف حيّكم؟","py":"Nǐmen xiǎoqū zěnmeyàng?"},{"pre":"","post":"近不近？","ans":"饭馆","opts":["饭馆","环保","一下"],"ar":"هل المطاعم قريبة؟","py":"Fànguǎn jìn bú jìn?"},{"pre":"非常","post":"，饭非常好吃。","ans":"近","opts":["近","树","多"],"ar":"قريبة جداً والطعام لذيذ جداً.","py":"Fēicháng jìn, fàn fēicháng hǎochī."},{"pre":"好，小区旁边就有一个","post":"。","ans":"茶馆","opts":["茶馆","觉得","讨论"],"ar":"حسناً، بجانب الحي مقهى شاي بالضبط.","py":"Hǎo, xiǎoqū pángbiān jiù yǒu yí gè cháguǎn."},{"pre":"树很多，","post":"也不少。","ans":"花","opts":["花","走","家"],"ar":"الأشجار كثيرة والأزهار ليست قليلة.","py":"Shù hěn duō, huā yě bù shǎo."},{"pre":"这个小区的树很","post":"。","ans":"漂亮","opts":["漂亮","觉得","讨论"],"ar":"أشجار هذا الحي جميلة.","py":"Zhè gè xiǎoqū de shù hěn piàoliang."},{"pre":"","post":"很近。","ans":"饭馆","opts":["饭馆","讨论","一下"],"ar":"المطعم قريب جداً.","py":"Fànguǎn hěn jìn."},{"pre":"我们去","post":"茶。","ans":"喝","opts":["喝","多","近"],"ar":"سنذهب لشرب الشاي.","py":"Wǒmen qù hē chá."},{"pre":"你有","post":"吗？","ans":"事","opts":["事","花","多"],"ar":"هل لديك شغل؟","py":"Nǐ yǒu shì ma?"},{"pre":"你有什么","post":"？","ans":"事","opts":["事","太","树"],"ar":"ما الأمر؟","py":"Nǐ yǒu shénme shì?"}],"chars":[{"c":"多","py":"duō","ar":"كثير","w":"多"},{"c":"树","py":"shù","ar":"شجرة","w":"树"},{"c":"花","py":"huā","ar":"زهرة","w":"花"},{"c":"少","py":"shǎo","ar":"قليل","w":"少"},{"c":"近","py":"jìn","ar":"قريب","w":"近"},{"c":"喝","py":"hē","ar":"يشرب","w":"喝"},{"c":"家","py":"jiā","ar":"بيت / أسرة","w":"家"},{"c":"太","py":"tài","ar":"أكثر من اللازم / جداً","w":"太"}],"spk":{"N":{"n":"المشهد","a":"景"},"S":{"n":"أ","a":"甲"},"X":{"n":"ب","a":"乙"}},"pitch":{"S":1.0,"X":0.9,"L":1.1,"C":0.95,"A":1.05,"Y":0.9,"N":1.0},"acts":["match","listen","meaning","tone","order","fill","lesson","write"],"lq":[{"type":"mc","sp":"树很多，花也不少。","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر: أيّ الجملتين سمعت؟<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">树很多，花也不少。<\/span> <span class=\"py ltr mut\">Shù hěn duō, huā yě bù shǎo.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">树很多，花也很多。<\/span> <span class=\"py ltr mut\">Shù hěn duō, huā yě hěn duō.<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">树很多，花也不少。<\/span><\/div><div>الجملة المسموعة: 树很多，花也不少。<\/div>","wid":[]},{"type":"mc","sp":"这个小区的树很漂亮。","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر: أيّ الجملتين سمعت؟<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">这个地方的树很漂亮。<\/span> <span class=\"py ltr mut\">Zhè gè dìfang de shù hěn piàoliang.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">这个小区的树很漂亮。<\/span> <span class=\"py ltr mut\">Zhè gè xiǎoqū de shù hěn piàoliang.<\/span>","ok":true}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">这个小区的树很漂亮。<\/span><\/div><div>الجملة المسموعة: 这个小区的树很漂亮。<\/div>","wid":[]},{"type":"mc","sp":"我们去喝茶吧。","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر: أيّ الجملتين سمعت؟<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我们去喝茶。<\/span> <span class=\"py ltr mut\">Wǒmen qù hē chá.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我们去喝茶吧。<\/span> <span class=\"py ltr mut\">Wǒmen qù hē chá ba.<\/span>","ok":true}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">我们去喝茶吧。<\/span><\/div><div>الجملة المسموعة: 我们去喝茶吧。<\/div>","wid":[]},{"type":"mc","sp":"我们不累。","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر: أيّ الجملتين سمعت؟<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我们不累。<\/span> <span class=\"py ltr mut\">Wǒmen bú lèi.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">你累不累？<\/span> <span class=\"py ltr mut\">Nǐ lèi bú lèi?<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">我们不累。<\/span><\/div><div>الجملة المسموعة: 我们不累。<\/div>","wid":[]},{"type":"mc","sp":"你有没有事？","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر: أيّ الجملتين سمعت؟<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">你有什么事？<\/span> <span class=\"py ltr mut\">Nǐ yǒu shénme shì?<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">你有没有事？<\/span> <span class=\"py ltr mut\">Nǐ yǒu méi yǒu shì?<\/span>","ok":true}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">你有没有事？<\/span><\/div><div>الجملة المسموعة: 你有没有事？<\/div>","wid":[]},{"type":"mc","sp":"讨论环保问题","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر: أيّ الجملتين سمعت؟<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">讨论环保问题<\/span> <span class=\"py ltr mut\">Tǎolùn huánbǎo wèntí<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">讨论讨论问题<\/span> <span class=\"py ltr mut\">Tǎolùn tǎolùn wèntí<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">讨论环保问题<\/span><\/div><div>الجملة المسموعة: 讨论环保问题<\/div>","wid":[]},{"type":"mc","sp":"迟到","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر الكلمة التي سمعتها<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">迟到<\/span> <span class=\"py ltr mut\">Chí dào<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">迟早<\/span> <span class=\"py ltr mut\">Chí zǎo<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">迟到<\/span><\/div>","wid":[]},{"type":"mc","sp":"你们小区怎么样？","prompt":"@@SPK@@<div class=\"mut\">استمع للسؤال ثم اختر الجواب المناسب<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">真漂亮，树很多。<\/span> <span class=\"py ltr mut\">Zhēn piàoliang, shù hěn duō.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我去喝茶。<\/span> <span class=\"py ltr mut\">Wǒ qù hē chá.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">太累了。<\/span> <span class=\"py ltr mut\">Tài lèi le.<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">你们小区怎么样？<\/span><\/div><div>السؤال: 你们小区怎么样？<\/div>","wid":[]},{"type":"mc","sp":"你累不累？","prompt":"@@SPK@@<div class=\"mut\">استمع للسؤال ثم اختر الجواب المناسب<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我不累。<\/span> <span class=\"py ltr mut\">Wǒ bú lèi.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">树很多。<\/span> <span class=\"py ltr mut\">Shù hěn duō.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">饭馆很近。<\/span> <span class=\"py ltr mut\">Fànguǎn hěn jìn.<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">你累不累？<\/span><\/div><div>السؤال: 你累不累？<\/div>","wid":[]},{"type":"fill","f":{"pre":"你们小区真漂亮，有很","post":"树，花也不少。","ans":"多","opts":["多","少","近","累"],"ar":"","py":"Nǐmen xiǎoqū zhēn piàoliang, yǒu hěn duō shù, huā yě bù shǎo."},"wid":[]},{"type":"fill","f":{"pre":"你们小区真漂亮，有很多树，花也不","post":"。","ans":"少","opts":["少","多","近","累"],"ar":"","py":"Nǐmen xiǎoqū zhēn piàoliang, yǒu hěn duō shù, huā yě bù shǎo."},"wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">“太远了！”是什么意思？<\/div>","opts":[{"html":"بعيد جداً (أكثر من اللازم)","ok":true},{"html":"قريب جداً","ok":false},{"html":"ليس بعيداً","ok":false},{"html":"جميل جداً","ok":false}],"fb":"<div>«太……了» تدل على المبالغة أو الإعجاب: «太远了» = بعيد جداً.<\/div>","wid":[]}],"gram":"<div class=\"sec-h\"><h2>الأصوات والجمل<\/h2><p>استمع وكرّر. اضغط أي كلمة لترى معناها.<\/p><\/div><h3 class=\"sub-h\">الجزء الأول: النطق · <span class=\"han\" dir=\"ltr\">第一部分 语音<\/span><\/h3><div class=\"card\"><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">听后跟读<\/span> · استمع ثم كرّر:<\/h4><div class=\"tiles\" style=\"margin-top:8px\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">安<\/span><span class=\"t1\">心<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">ān<\/span><span class=\"t1\">xīn<\/span><\/span><span class=\"mut\">مطمئن<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"安心\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">冰<\/span><span class=\"t2\">雹<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">bīng<\/span><span class=\"t2\">báo<\/span><\/span><span class=\"mut\">برَد<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"冰雹\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">时<\/span><span class=\"t1\">光<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">shí<\/span><span class=\"t1\">guāng<\/span><\/span><span class=\"mut\">وقت / أيام<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"时光\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">文<\/span><span class=\"t2\">明<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">wén<\/span><span class=\"t2\">míng<\/span><\/span><span class=\"mut\">حضارة<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"文明\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">人<\/span><span class=\"t3\">海<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">rén<\/span><span class=\"t3\">hǎi<\/span><\/span><span class=\"mut\">بحر من البشر<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"人海\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">理<\/span><span class=\"t1\">亏<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">lǐ<\/span><span class=\"t1\">kuī<\/span><\/span><span class=\"mut\">على خطأ<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"理亏\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">悔<\/span><span class=\"t3\">改<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">huǐ<\/span><span class=\"t3\">gǎi<\/span><\/span><span class=\"mut\">يتوب<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"悔改\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">美<\/span><span class=\"t4\">味<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">měi<\/span><span class=\"t4\">wèi<\/span><\/span><span class=\"mut\">طعام لذيذ<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"美味\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">诞<\/span><span class=\"t1\">生<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">dàn<\/span><span class=\"t1\">shēng<\/span><\/span><span class=\"mut\">يولد / ينشأ<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"诞生\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">忘<\/span><span class=\"t2\">情<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">wàng<\/span><span class=\"t2\">qíng<\/span><\/span><span class=\"mut\">ينسى نفسه<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"忘情\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">大<\/span><span class=\"t4\">事<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">dà<\/span><span class=\"t4\">shì<\/span><\/span><span class=\"mut\">أمر كبير<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"大事\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">赶<\/span><span class=\"t2\">潮<\/span><span class=\"t2\">流<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">gǎn<\/span><span class=\"t2\">cháo<\/span><span class=\"t2\">liú<\/span><\/span><span class=\"mut\">يلحق بالموضة<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"赶潮流\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">沙<\/span><span class=\"t2\">尘<\/span><span class=\"t4\">暴<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">shā<\/span><span class=\"t2\">chén<\/span><span class=\"t4\">bào<\/span><\/span><span class=\"mut\">عاصفة رملية<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"沙尘暴\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">听读辨音<\/span> · ميّز بين الأصوات المتقاربة:<\/h4><div class=\"pair\"><div class=\"tiles\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">武<\/span><span class=\"t4\">汉<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">wǔ<\/span><span class=\"t4\">hàn<\/span><\/span><span class=\"mut\"><\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"武汉\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">午<\/span><span class=\"t4\">饭<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">wǔ<\/span><span class=\"t4\">fàn<\/span><\/span><span class=\"mut\"><\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"午饭\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"mut\" style=\"text-align:center\">(Wǔhàn / wǔfàn)<\/div><\/div><div class=\"pair\"><div class=\"tiles\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">黄<\/span><span class=\"t4\">色<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">huáng<\/span><span class=\"t4\">sè<\/span><\/span><span class=\"mut\"><\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"黄色\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">红<\/span><span class=\"t4\">色<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">hóng<\/span><span class=\"t4\">sè<\/span><\/span><span class=\"mut\"><\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"红色\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"mut\" style=\"text-align:center\">(huángsè / hóngsè)<\/div><\/div><div class=\"pair\"><div class=\"tiles\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">迟<\/span><span class=\"t4\">到<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">chí<\/span><span class=\"t4\">dào<\/span><\/span><span class=\"mut\"><\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"迟到\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t2\">迟<\/span><span class=\"t3\">早<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t2\">chí<\/span><span class=\"t3\">zǎo<\/span><\/span><span class=\"mut\"><\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"迟早\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"mut\" style=\"text-align:center\">(chídào / chízǎo)<\/div><\/div><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">我也知道<\/span> · أعرف أيضاً:<\/h4><div class=\"tiles\" style=\"margin-top:8px\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t1\">包<\/span><span class=\"t5\">子<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t1\">bāo<\/span><span class=\"t5\">zi<\/span><\/span><span class=\"mut\">خبز محشو بالبخار<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"包子\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">面<\/span><span class=\"t2\">条<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">miàn<\/span><span class=\"t2\">tiáo<\/span><\/span><span class=\"mut\">معكرونة / نودلز<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"面条\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">玉<\/span><span class=\"t3\">米<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">yù<\/span><span class=\"t3\">mǐ<\/span><\/span><span class=\"mut\">ذرة<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"玉米\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">豆<\/span><span class=\"t3\">腐<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">dòu<\/span><span class=\"t3\">fǔ<\/span><\/span><span class=\"mut\">توفو<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"豆腐\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><h3 class=\"sub-h\">الجزء الثاني: النصوص · <span class=\"han\" dir=\"ltr\">第二部分 课文<\/span><\/h3><div class=\"card\"><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">跟读短语和句子<\/span> · كرّر العبارات والجمل:<\/h4><div class=\"tiles\" style=\"margin-top:8px\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">很<\/span><span class=\"t1\">多<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">hěn<\/span><span class=\"t1\">duō<\/span><\/span><span class=\"mut\">كثير<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"很多\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t4\">不<\/span><span class=\"t3\">少<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t4\">bù<\/span><span class=\"t3\">shǎo<\/span><\/span><span class=\"mut\">ليس قليلاً (كثير)<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"不少\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"树很多，花也不少。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">树很多，花也不少。<\/span><span class=\"mut py\" dir=\"ltr\">Shù hěn duō, huā yě bù shǎo.<\/span><span>الأشجار كثيرة والأزهار ليست قليلة.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这个小区的树很漂亮。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这个小区的树很漂亮。<\/span><span class=\"mut py\" dir=\"ltr\">Zhè gè xiǎoqū de shù hěn piàoliang.<\/span><span>أشجار هذا الحي جميلة.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"饭馆很近。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">饭馆很近。<\/span><span class=\"mut py\" dir=\"ltr\">Fànguǎn hěn jìn.<\/span><span>المطعم قريب جداً.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"请喝茶。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">请喝茶。<\/span><span class=\"mut py\" dir=\"ltr\">Qǐng hē chá.<\/span><span>تفضل اشرب الشاي.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我们去喝茶。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我们去喝茶。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒmen qù hē chá.<\/span><span>سنذهب لشرب الشاي.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"太远了！\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">太远了！<\/span><span class=\"mut py\" dir=\"ltr\">Tài yuǎn le!<\/span><span>بعيد جداً!<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你累不累？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你累不累？<\/span><span class=\"mut py\" dir=\"ltr\">Nǐ lèi bú lèi?<\/span><span>هل أنت متعب؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你有事吗？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你有事吗？<\/span><span class=\"mut py\" dir=\"ltr\">Nǐ yǒu shì ma?<\/span><span>هل لديك شغل؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你有什么事？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你有什么事？<\/span><span class=\"mut py\" dir=\"ltr\">Nǐ yǒu shénme shì?<\/span><span>ما الأمر؟<\/span><\/div><\/div><\/div><div class=\"tiles\" style=\"margin-top:8px\"><div class=\"tile\"><span class=\"han\" dir=\"ltr\"><span class=\"t3\">讨<\/span><span class=\"t4\">论<\/span><span class=\"t4\">问<\/span><span class=\"t2\">题<\/span><\/span><span class=\"py\" dir=\"ltr\"><span class=\"t3\">tǎo<\/span><span class=\"t4\">lùn<\/span><span class=\"t4\">wèn<\/span><span class=\"t2\">tí<\/span><\/span><span class=\"mut\">مناقشة المشكلات<\/span><button class=\"spk sm\" data-act=\"say\" data-t=\"讨论问题\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"张老师家非常近，我们五个同学一起走。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">张老师家非常近，我们五个同学一起走。<\/span><span class=\"mut py\" dir=\"ltr\">Zhāng lǎoshī jiā fēicháng jìn, wǒmen wǔ gè tóngxué yìqǐ zǒu.<\/span><span>بيت المعلم تشانغ قريب جداً، نمشي نحن خمسة زملاء معاً.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"讨论环保问题\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">讨论环保问题<\/span><span class=\"mut py\" dir=\"ltr\">Tǎolùn huánbǎo wèntí<\/span><span>مناقشة مشكلات البيئة<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"讨论一下环保问题\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">讨论一下环保问题<\/span><span class=\"mut py\" dir=\"ltr\">Tǎolùn yíxià huánbǎo wèntí<\/span><span>لنناقش قليلاً مشكلات البيئة<\/span><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">كرّر بعدي<\/h3><div class=\"card\"><p class=\"mut\">استمع لكل جملة ثم كرّرها بصوت عالٍ.<\/p><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你们小区真漂亮。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你们小区真漂亮。<\/span><span class=\"mut py\" dir=\"ltr\">Nǐmen xiǎoqū zhēn piàoliang.<\/span><span>حيّكم جميل حقاً.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我们去喝茶吧。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我们去喝茶吧。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒmen qù hē chá ba.<\/span><span>لنذهب لشرب الشاي.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"讨论一下环保问题。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">讨论一下环保问题。<\/span><span class=\"mut py\" dir=\"ltr\">Tǎolùn yíxià huánbǎo wèntí.<\/span><span>لنناقش قضية البيئة.<\/span><\/div><\/div><\/div><\/div>","disc":[{"q":"你们小区（或学校）怎么样？树多不多？饭馆近不近？","ar":"صف حيّك أو جامعتك: الأشجار؟ المطاعم؟","frames":["我觉得……","树很多，","花也不少。","饭馆很近。","非常……"],"use":["觉得","树","近","非常"],"model":"我觉得我们小区非常漂亮，树很多，花也不少。饭馆很近。｜أرى أن حيّنا جميل جداً، الأشجار كثيرة والأزهار ليست قليلة. المطاعم قريبة."},{"q":"请邀请朋友去喝茶，然后一起讨论一个问题。","ar":"ادعُ صديقك لشرب الشاي ثم ناقشا قضية ما.","frames":["你累不累？","我们去喝茶吧。","你有事吗？","我们讨论一下……问题。"],"use":["累","喝","讨论","问题"],"model":"你累不累？我们去喝茶吧。喝茶以后，我们讨论一下环保问题。｜هل أنت متعب؟ لنذهب لشرب الشاي. وبعده نناقش قضية البيئة."}],"minc":12};
+var VOCAB=D.vocab,TOKPY=D.tokpy,DLG=D.dlg,TXT=D.txt,CQ={},SENT=D.sent,FILL=D.fill,CHARS=D.chars,SPK=D.spk,PITCH=D.pitch,ACTS=D.acts;
+function pitchOf(w){return PITCH[w]||1}
+function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
+function picHtml(){return ''}
+var CLASSX=[];
+var BADGES={
+ first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'听',n:'المستمع'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
+};
+/* ---------- progress / badges ---------- */
+function award(id){if(!S.badges[id]){S.badges[id]=1;save();toast('وسام جديد: '+BADGES[id].n)}}
+function knownCount(){return VOCAB.filter(function(_,i){return S.known[i]}).length}
+function progress(){
+  var k=knownCount()/VOCAB.length,h=Object.keys(S.heard).length/DLG.length,a=ACTS.filter(function(x){return S.best[x]}).length/ACTS.length;
+  return Math.round((k+h+a)/3*100);
 }
-function syncSw(){$('#spy').setAttribute('aria-pressed',document.body.classList.contains('py'));$('#sar').setAttribute('aria-pressed',document.body.classList.contains('ar'))}
-var cur=-1;
-function pop(i){var t=TERMS[i];cur=i;var p=$('#pop');p.hidden=false;p.innerHTML='<div class="r"><div class="zz">'+esc(t.zh)+'</div><div><div class="pp" style="font-family:var(--font-py);direction:ltr">'+pyh(t.py)+'</div><div>'+esc(t.ar)+'</div></div><div class="cl" style="display:flex;gap:6px"><button class="sm" data-pop="say" aria-label="استمع">🔊</button><button class="sm'+(inRev(t.zh)?' on':'')+'" data-pop="add" aria-label="مراجعة">'+(inRev(t.zh)?'✓':'+')+'</button><button class="sm" data-pop="x" aria-label="إغلاق">✕</button></div></div>'+(t.ex?'<div style="margin-top:8px;border-top:1px dashed var(--line);padding-top:6px">'+ZP(sp(t.ex)[0])+'<span class="mut">'+esc(sp(t.ex)[1])+'</span></div>':'')}
-document.addEventListener('click',function(e){
- var t=e.target.closest('[data-g],[data-tab],[data-pop],[data-say-sec],[data-say-t],[data-add-t],#addall,#slow,[data-fc],#spy,#sar,#prs,[data-fr],[data-say-m],[data-sz]');
- if(!t){if(!e.target.closest('#pop')){$('#pop').hidden=true}return}
- var d=t.dataset;
- if(d.g!=null){speak(TERMS[+d.g].zh);pop(+d.g)}
- else if(d.tab)show(d.tab);
- else if(d.pop){if(d.pop==='x')$('#pop').hidden=true;else if(d.pop==='say')speak(TERMS[cur].zh);else{var on=addRev(TERMS[cur].zh);pop(cur);toast(on?'أُضيف إلى مفردات '+D.cname:'أُزيل من المراجعة');refreshTerms()}}
- else if(d.saySec!=null)speak(secText(+d.saySec));
- else if(d.sayT!=null)speak(TERMS[+d.sayT].zh);
- else if(d.addT!=null){var on2=addRev(TERMS[+d.addT].zh);toast(on2?'أُضيف إلى مفردات '+D.cname:'أُزيل من المراجعة');refreshTerms()}
- else if(t.id==='addall'){TERMS.forEach(function(x){if(!inRev(x.zh))addRev(x.zh)});toast('أُضيفت كل المصطلحات');refreshTerms()}
- else if(t.id==='slow'){var s=document.body.classList.toggle('slow');S.ui.slow=s?1:0;save();t.setAttribute('aria-pressed',s)}
- else if(d.fc){fcAct(d.fc)}
- else if(t.id==='spy'||t.id==='sar'){var c=t.id==='spy'?'py':'ar';document.body.classList.toggle(c);S.ui[c]=document.body.classList.contains(c)?1:0;save();syncSw()}
- else if(t.id==='prs'){if(confirm('مسح نتائج التدريبات وإعادتها؟')){S.prac={};save();initPractice();[].forEach.call(document.querySelectorAll('.qs'),function(q){q.textContent='';q.className='qs'});[].forEach.call(document.querySelectorAll('.fb'),function(f){f.hidden=true});upd()}}
- else if(d.fr!=null){var sec=t.closest('[data-d]'),i=+sec.dataset.d,ta=$('textarea',sec),f=D.discuss[i].frames[+d.fr],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);ta.focus();ta.dispatchEvent(new Event('input',{bubbles:true}))}
- else if(d.sz!=null)speak(SAYS[+d.sz]);
- else if(d.sayM!=null)speak(sp(D.discuss[+d.sayM].model)[0]);
+function updateProg(){$('#gprog').style.width=progress()+'%'}
+
+/* ---------- tabs ---------- */
+var TABS=['vocab','dialogue','grammar','writing','practice'];
+var tab='vocab';
+var RENDER={vocab:renderVocab,dialogue:renderDialogue,grammar:renderGrammar,writing:renderWriting,practice:renderPractice};
+function setTab(name,fromHash){
+  if(TABS.indexOf(name)<0)name='vocab';
+  tab=name;
+  stopSpeech();stopAll();closeSheet();
+  $$('.tab').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.tab===name))});
+  TABS.forEach(function(t){$('#p-'+t).hidden=(t!==name)});
+  RENDER[name]();
+  if(!fromHash){try{history.replaceState(null,'','#'+name)}catch(e){location.hash=name}}
+  window.scrollTo(0,0);
+  var sel=$('.tab[aria-selected="true"]');if(sel&&sel.scrollIntoView){try{sel.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}
+}
+
+/* ---------- vocab ---------- */
+function renderVocab(){
+  var w=VOCAB[S.card];
+  var rows=VOCAB.map(function(v,i){
+    return '<div class="row'+(i===S.card?' cur':'')+'" data-act="jump" data-i="'+i+'">'+
+      '<div class="rp">'+picHtml(v.zh,'pt')+'</div><div class="rz" dir="ltr">'+han(v.zh,v.py)+'</div>'+
+      '<div><div class="rpy'+(S.py?'':' off')+'" dir="ltr">'+pyhtml(v.py)+'</div><div class="rar'+(S.ar?'':' off')+'">'+v.ar+(v.sup?'<span class="tag">تكميلية</span>':'')+'</div></div>'+
+      '<span class="kn'+(S.known[i]?' on':'')+'" aria-label="'+(S.known[i]?'محفوظة':'غير محفوظة')+'">'+ic('check',14)+'</span>'+
+      spkBtn(v.zh,'sm')+'</div>';
+  }).join('');
+  $('#p-vocab').innerHTML=
+    '<div class="sec-h"><h2>بطاقات المفردات</h2><p>'+VOCAB.length+' كلمة · اضغط البطاقة لقلبها · عرفتَ <b>'+knownCount()+'</b> منها</p></div>'+
+    '<div class="fc" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة">'+
+      '<div class="face front"'+(S.flip?' hidden':'')+'>'+spkBtn(w.zh)+
+        '<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div></div>'+
+      '<div class="face back"'+(S.flip?'':' hidden')+'>'+spkBtn(w.zh)+
+        picHtml(w.zh,'pb')+'<div class="pyl" dir="ltr">'+pyhtml(w.py)+'</div>'+
+        '<div class="meaning">'+w.ar+'</div>'+(w.note?'<div class="note">'+w.note+'</div>':'')+
+        '<div class="ex" dir="ltr"><div class="exzh">'+w.ex[0]+'</div><div class="expy">'+w.ex[1]+'</div><div class="exar" dir="rtl">'+w.ex[2]+'</div></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="navrow"><button class="btn ghost sm" data-act="prev">السابقة</button><span class="cnt">'+(S.card+1)+' / '+VOCAB.length+'</span><button class="btn ghost sm" data-act="next">التالية</button></div>'+
+    '<div class="actrow"><button class="btn ghost" data-act="again">'+ic('redo',18)+' أراجعها لاحقاً</button><button class="btn primary" data-act="know">'+ic('check',18)+' أعرفها</button></div>'+
+    '<h3 class="sub-h">قائمة الكلمات</h3>'+
+    '<div class="tools"><button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy">拼音 البينيين</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar">الترجمة</button></div>'+
+    '<div>'+rows+'</div>';
+}
+
+/* ---------- dialogue ---------- */
+var playing=false;
+function cqHtml(t){var out='';if(!window.__cqs){window.__cqs=1;[1,2,3].forEach(function(k){(CQ[k]||[]).forEach(function(c){var ans=c.o[c.a];c.o=shuffle(c.o);c.a=c.o.indexOf(ans)})})}(CQ[t]||[]).forEach(function(c,i){out+='<div class="cq" id="cq'+t+'_'+i+'"><b><span class="han ltr" style="font-size:19px">'+(i+1)+'. '+c.q.zh+'</span><span class="py mut ltr">'+c.q.py+'</span></b><div class="o">'+c.o.map(function(o,j){return '<button class="chip cqo" data-act="cq" data-q="'+t+'" data-i="'+i+'" data-o="'+j+'"><span class="han" style="font-size:18px">'+o.zh+'</span><span class="py mut">'+o.py+'</span></button>'}).join('')+'</div></div>'});return out?'<h3 class="sub-h">问题 · أسئلة</h3>'+out:''}
+function renderDialogue(){
+  var out='',lastText=0;
+  DLG.forEach(function(L,i){
+    if(L.text!==lastText){if(lastText)out+=cqHtml(lastText);lastText=L.text;out+='<h3 class="sub-h" style="margin-bottom:0">'+TXT[L.text].h+'</h3>'+TXT[L.text].scene}
+    var groups=[];
+    L.tok.forEach(function(t,j){
+      if(t.length===1){if(groups.length)groups[groups.length-1]+='<span class="punc">'+t[0]+'</span>';else groups.push('<span class="punc">'+t[0]+'</span>')}
+      else groups.push('<button class="tok" data-act="tok" data-l="'+i+'" data-k="'+j+'"><span class="py">'+pyhtml(t[1])+'</span><span class="zh">'+han(t[0],t[1])+'</span></button>');
+    });
+    var toks=groups.map(function(g){return '<span class="tg">'+g+'</span>'}).join('');
+    var sp=SPK[L.who];
+    out+='<div class="line '+L.who+'" id="ln'+i+'"><div class="who"><span class="av" lang="zh">'+sp.a+'</span>'+sp.n+spkBtn(L.zh,'sm').replace('data-act="say"','data-act="sayline" data-l="'+i+'"')+'</div>'+
+      '<div class="zhline">'+toks+'</div><div class="arline">'+L.ar+'</div></div>';
+  });
+  out+=cqHtml(lastText);
+  var cx=CLASSX.map(function(c){
+    return '<div class="m">'+spkBtn(c.zh,'sm')+'<div class="t"><span class="z" dir="ltr">'+c.zh+'</span><span class="mut py" dir="ltr">'+c.py+'</span><span>'+c.ar+'</span></div></div>';
+  }).join('');
+  $('#p-dialogue').innerHTML=
+    '<div class="sec-h"><h2>نصوص الدرس</h2><p>اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جملة.</p></div>'+
+    '<div class="tools"><button class="btn primary sm" id="playall" data-act="playall">'+ic('play',16)+' تشغيل النصوص كاملة</button>'+
+    '<button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy2">拼音</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar2">الترجمة</button></div>'+
+    '<div class="lines'+(S.py?'':' nopy')+(S.ar?'':' noar')+'" id="lines">'+out+'</div>'+
+    
+    (cx?'<h3 class="sub-h">عبارات الصف</h3><div class="qa" style="margin-top:0">'+cx+'</div>':'');
+  syncLines();
+}
+function syncLines(){var l=$('#lines');if(!l)return;l.classList.toggle('nopy',!S.py);l.classList.toggle('noar',!S.ar)}
+function openSheet(tk){
+  $('#sheet').innerHTML='<div class="sheet-in">'+spkBtn(tk[0])+'<div class="sh-main"><div class="sh-zh" dir="ltr">'+han(tk[0],tk[1])+'</div><div class="sh-py" dir="ltr">'+pyhtml(tk[1])+'</div></div><div class="sh-ar">'+tk[2]+'</div><button class="ibtn" data-act="closesheet" aria-label="إغلاق">'+ic('x',16)+'</button></div>';
+  $('#sheet').hidden=false;
+  speak(tk[0]);
+}
+function closeSheet(){var s=$('#sheet');if(s)s.hidden=true}
+function markLine(i){$$('.line').forEach(function(el,j){el.classList.toggle('playing',j===i)})}
+function setPlayBtn(){var b=$('#playall');if(b)b.innerHTML=playing?ic('stop',16)+' إيقاف':ic('play',16)+' تشغيل النصوص كاملة'}
+function stopAll(){playing=false;markLine(-1);setPlayBtn()}
+function playAll(){
+  if(playing){stopSpeech();stopAll();return}
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');return}
+  playing=true;setPlayBtn();
+  var i=0;
+  var next=function(){
+    if(!playing||i>=DLG.length){stopAll();checkListener();return}
+    var L=DLG[i];markLine(i);S.heard[i]=1;i++;save();updateProg();
+    speak(L.zh,function(){setTimeout(next,350)},pitchOf(L.who));
+  };
+  next();
+}
+function checkListener(){if(Object.keys(S.heard).length>=DLG.length)award('listener')}
+
+/* ---------- grammar ---------- */
+function renderGrammar(){$('#p-grammar').innerHTML=D.gram}
+/* ---------- writing ---------- */
+var W={i:0,strokes:[],cur:null,ghost:true};
+function renderWriting(){
+  var c=CHARS[W.i];
+  var chips=CHARS.map(function(x,i){return '<button class="chip tgl'+(i===W.i?' on':'')+'" data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  $('#p-writing').innerHTML=
+    '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
+    '<div class="chips">'+chips+'</div>'+
+    '<div class="winfo"><span class="big han">'+c.c+'</span><div><div class="py" style="font-size:20px">'+c.py+'</div><div>'+c.ar+'</div><div class="mut">من كلمة: <span class="han" dir="ltr">'+esc(c.w)+'</span></div></div>'+spkBtn(c.c)+'</div>'+
+    '<div class="cvwrap"><canvas id="cv" width="640" height="640" aria-label="مساحة الكتابة"></canvas></div>'+
+    '<div class="tools" style="margin-top:14px;justify-content:center"><button class="btn ghost sm" data-act="wclear">'+ic('redo',16)+' مسح</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>'+
+    '<p class="mut" style="margin-top:12px;text-align:center">قاعدة عامة في ترتيب الخطوط: من الأعلى إلى الأسفل، ومن اليسار إلى اليمين.</p>'+writingExtra();
+  var cv=$('#cv');
+  cv.addEventListener('pointerdown',function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}W.cur=[pt(e)];W.strokes.push(W.cur);drawCanvas()});
+  cv.addEventListener('pointermove',function(e){if(!W.cur)return;W.cur.push(pt(e));drawCanvas()});
+  var end=function(){W.cur=null};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+  drawCanvas();
+  if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+}
+function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
+function drawCanvas(){
+  var cv=$('#cv');if(!cv)return;
+  var ctx=cv.getContext('2d'),cs=getComputedStyle(document.documentElement),w=cv.width,h=cv.height;
+  var col=function(n){return cs.getPropertyValue(n).trim()};
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle=col('--surface');ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle=col('--line');ctx.lineWidth=3;ctx.setLineDash([14,12]);
+  ctx.beginPath();ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.moveTo(0,0);ctx.lineTo(w,h);ctx.moveTo(w,0);ctx.lineTo(0,h);ctx.stroke();
+  ctx.setLineDash([]);
+  if(W.ghost){
+    ctx.globalAlpha=0.16;ctx.fillStyle=col('--fg');
+    ctx.font='500 '+Math.round(w*0.76)+'px "Noto Serif SC","Songti SC","STSong",serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(CHARS[W.i].c,w/2,h/2+h*0.03);
+    ctx.globalAlpha=1;
+  }
+  ctx.strokeStyle=col('--fg');ctx.lineWidth=18;ctx.lineCap='round';ctx.lineJoin='round';
+  W.strokes.forEach(function(s){
+    ctx.beginPath();ctx.moveTo(s[0].x,s[0].y);
+    if(s.length===1)ctx.lineTo(s[0].x+0.1,s[0].y+0.1);
+    for(var i=1;i<s.length;i++)ctx.lineTo(s[i].x,s[i].y);
+    ctx.stroke();
+  });
+}
+
+function writingExtra(){
+  var r=[['من الأعلى إلى الأسفل','上到下','مثل 三 و 二: الخط الأعلى أولاً.'],['من اليسار إلى اليمين','左到右','مثل 你 و 好: الجزء الأيسر أولاً.'],['الأفقي قبل العمودي','先横后竖','مثل 十 و 干: الخط الأفقي أولاً.'],['الوسط قبل الجانبين','先中间后两边','مثل 小 و 水: الخط الأوسط أولاً.'],['من الخارج إلى الداخل ثم الإغلاق','先外后内再封口','مثل 日 و 国: الإطار أولاً ثم الداخل ثم الإغلاق.']];
+  return '<div class="card" style="margin-top:18px"><h3 style="font-size:16px;margin-bottom:6px">قواعد ترتيب الخطوط</h3><div class="qa" style="margin-top:0">'+r.map(function(x){return '<div class="m"><div class="t"><span class="z" dir="ltr">'+x[1]+'</span><span>'+x[0]+'</span><span class="mut">'+x[2]+'</span></div></div>'}).join('')+'</div></div>';
+}
+
+/* ---------- practice / quiz ---------- */
+var Q=null;
+var OKM=['أحسنت!','ممتاز!','صحيح!','رائع!'];
+function stars(n,size){var o='';for(var i=1;i<=3;i++)o+='<span class="'+(i<=n?'on':'')+'">'+ic('star',size||16)+'</span>';return '<span class="stars">'+o+'</span>'}
+function renderPractice(){
+  if(Q){renderQ();return}
+  var lvl=Math.floor(S.xp/100)+1,pct=S.xp%100;
+  var bd=Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('');
+  var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],lesson:['أسئلة الدرس','أسئلة متنوعة على نص الدرس'],write:['تحدّث واكتب','اكتب جملاً بالصينية بمساعدة نماذج']};
+  var cards=ACTS.map(function(k){return '<button class="act" data-act="start" data-k="'+k+'"><strong>'+info[k][0]+'</strong><small>'+info[k][1]+'</small>'+stars(S.best[k]||0)+'</button>'}).join('');
+  var wn=Object.keys(S.wrong).length;
+  $('#p-practice').innerHTML=
+    '<div class="sec-h"><h2>تمارين الدرس</h2><p>كل إجابة صحيحة تمنحك 10 نقاط.</p></div>'+
+    '<div class="card stats"><div class="xprow"><strong>المستوى '+lvl+'</strong><div class="xpbar"><i style="width:'+pct+'%"></i></div><span class="cnt">'+S.xp+' XP</span></div><div class="badges">'+bd+'</div></div>'+
+    '<h3 class="sub-h">اختر نشاطاً</h3>'+
+    '<div class="acts"><button class="act feat" data-act="start" data-k="all"><strong>الاختبار الشامل</strong><small>'+build('all').length+' سؤالاً من كل الأنواع</small>'+(S.best.all?stars(S.best.all,16):'')+'</button>'+cards+
+    (wn?'<button class="act" data-act="start" data-k="review"><strong>مراجعة أخطائي</strong><small>'+wn+' كلمة تحتاج مراجعة</small></button>':'')+'</div>';
+}
+function fbWord(w){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+han(w.zh,w.py)+'</span><span class="py ltr">'+pyhtml(w.py)+'</span><span>= '+w.ar+'</span>'+spkBtn(w.zh,'sm')+'</div>'}
+function fbSent(s){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+esc(s.zh)+'</span>'+spkBtn(s.zh,'sm')+'</div><div class="py mut ltr">'+s.py+'</div><div>'+s.ar+'</div>'}
+function qMeaning(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="mut">ما معنى هذه الكلمة؟</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qListen(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],audio:w.zh,prompt:spkBtn(w.zh,'big')+'<div class="mut">استمع ثم اختر المعنى</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qTone(w){
+  var o=shuffle(toneVariants(w.py));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+esc(w.zh)+'</div><div class="mut">اختر النطق الصحيح بالنغمات</div>',
+    opts:o.map(function(v){return {html:'<span class="pyopt ltr">'+v.replace(/ /g,'')+'</span>',ok:v===w.py}}),fb:fbWord(w)};
+}
+function qOrder(s){return {type:'order',s:s,wid:s.tokens.map(vid).filter(function(i){return i>=0})}}
+function qFill(f){return {type:'fill',f:f,wid:[vid(f.ans)].filter(function(i){return i>=0})}}
+function qMatch(n){return {type:'match',words:pick(VOCAB,n||5)}}
+function rnd(n){return Math.floor(Math.random()*n)}
+function qRead(kind){
+  var arr=kind==='num'?NUMS:AMTS;
+  var f=arr[rnd(arr.length)];
+  var wrong=shuffle(arr.filter(function(o){return o!==f})).slice(0,3);
+  var opts=shuffle([f].concat(wrong));
+  return {type:'mc',wid:[],
+    prompt:'<div class="han ltr" style="font-size:34px;font-weight:700">'+f[0]+'</div><div class="mut">'+(kind==='num'?'كيف يُقرأ هذا الرقم بالصينية؟':'كيف يُقرأ هذا المبلغ بالصينية؟')+'</div>',
+    opts:opts.map(function(o){return {html:'<span class="han ltr" style="font-size:19px">'+o[1]+'</span> <span class="py ltr mut">'+o[2]+'</span>',ok:o===f}}),
+    fb:'<div class="fw"><span class="han ltr" style="font-size:22px">'+f[0]+' = '+f[1]+'</span>'+spkBtn(f[1],'sm')+'</div><div class="py mut ltr">'+f[2]+'</div>'};
+}
+function qNum(){return qRead('num')}
+function qMoney(){return qRead('money')}
+function qPic(w){
+  var pool=PICQ.map(function(z){return VOCAB[vid(z)]}).filter(function(v){return v!==w});
+  var o=shuffle([w].concat(pick(pool,3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],
+    prompt:'<div class="picbig">'+picHtml(w.zh)+'</div><div class="mut">ما الكلمة المناسبة للصورة؟</div>',
+    opts:o.map(function(x){return {html:'<span class="han ltr" style="font-size:24px">'+esc(x.zh)+'</span> <span class="py ltr mut">'+x.py.replace(/ /g,'')+'</span>',ok:x===w}}),
+    fb:fbWord(w)};
+}
+function picW(z){return qPic(VOCAB[vid(z)])}
+function cloneQ(q){return JSON.parse(JSON.stringify(q))}
+function fromSpec(sp){var q=cloneQ(sp);if(q.type==='mc'&&q.sp){q.audio=q.sp;q.prompt=q.prompt.replace('@@SPK@@',spkBtn(q.sp,'big'))}if(q.type==='mc'&&!q.fix)q.opts=shuffle(q.opts);return q}
+window.__q=function(){return Q};
+function build(kind){
+  var LQ=D.lq||[];
+  switch(kind){
+    case 'match':return [qMatch(5),qMatch(5),qMatch(5)];
+    case 'listen':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qListen);
+    case 'meaning':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qMeaning);
+    case 'tone':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qTone);
+    case 'order':return pick(SENT,Math.min(4,SENT.length)).map(qOrder);
+    case 'fill':return pick(FILL,Math.min(5,FILL.length)).map(qFill);
+    case 'lesson':return LQ.map(fromSpec);
+    case 'all':return [qMatch(5)].concat(pick(VOCAB,2).map(qListen),pick(VOCAB,2).map(qMeaning),pick(VOCAB,2).map(qTone),SENT.length?pick(SENT,Math.min(2,SENT.length)).map(qOrder):[],FILL.length?pick(FILL,Math.min(2,FILL.length)).map(qFill):[],pick(LQ,Math.min(3,LQ.length)).map(fromSpec));
+    case 'review':return pick(Object.keys(S.wrong).map(function(i){return VOCAB[+i]}).filter(Boolean),8).map(function(w,i){return i%2?qListen(w):qMeaning(w)});
+  }
+  return [];
+}
+/* ---------- write & speak ---------- */
+function ccount(v){return v.replace(/\s/g,'').length}
+function renderWrite(){
+  S.txt=S.txt||{};
+  $('#p-practice').innerHTML='<div class="qtop"><button class="btn ghost sm" data-act="qexit">رجوع</button><strong>تحدّث واكتب</strong></div>'+
+  D.disc.map(function(d,i){var ms=d.model.split('｜');
+    return '<section class="card wr" data-wd="'+i+'" style="margin-bottom:12px"><div class="qprompt" style="justify-items:start;text-align:start"><div class="han ltr" style="font-size:22px">'+(i+1)+'. '+esc(d.q)+'</div><div class="mut">'+esc(d.ar)+'</div></div>'+
+    '<div class="chips">'+d.frames.map(function(f,k){return '<button class="chip" data-act="wfr" data-d="'+i+'" data-k="'+k+'"><span class="han" style="font-size:17px">'+esc(f)+'</span></button>'}).join('')+'</div>'+
+    '<textarea data-wta="'+i+'" lang="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
+    '<div class="mut" style="margin:6px 0"><span data-wcc="'+i+'">0</span> / '+D.minc+' حرفاً · الكلمات المقترحة:</div><div class="us">'+d.use.map(function(u){return '<span data-wu="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
+    '<details class="md"><summary>نموذج إجابة</summary><div class="han ltr" style="font-size:20px;margin-top:8px">'+esc(ms[0])+'</div><div class="mut">'+esc(ms[1]||'')+'</div><button class="btn ghost sm" data-act="wsay" data-d="'+i+'" style="margin-top:8px">'+ic('spk',16)+' استمع</button></details></section>'}).join('');
+  D.disc.forEach(function(d,i){var ta=$('[data-wta="'+i+'"]');ta.value=S.txt[i]||'';wchk(i)});
+}
+function wchk(i){var ta=$('[data-wta="'+i+'"]'),el=$('[data-wd="'+i+'"]');if(!ta)return;var v=ta.value,n=ccount(v);$('[data-wcc="'+i+'"]').textContent=n;
+  $$('[data-wu]',el).forEach(function(s){s.classList.toggle('on',v.indexOf(s.dataset.wu)>-1)});
+  S.wdone=S.wdone||{};
+  if(n>=D.minc&&!S.wdone[i]){S.wdone[i]=1;S.xp+=20;toast('أحسنت! +20 نقطة')}
+  var dn=Object.keys(S.wdone).length;S.best.write=dn>=D.disc.length?3:(dn?2:0);save();updateProg()}
+function startQuiz(kind){
+  if(kind==='write'){renderWrite();return}
+  var list=build(kind);
+  if(!list.length){toast('لا توجد أسئلة الآن');return}
+  Q={kind:kind,list:list,i:0,score:0,gain:0,fin:false};
+  renderQ();
+}
+function qShell(){
+  $('#p-practice').innerHTML=
+    '<div class="qtop"><button class="btn ghost sm" data-act="qexit">خروج</button><div class="qbar"><i id="qprog"></i></div><span class="cnt" id="qcount"></span></div>'+
+    '<div id="qbody"></div><div id="qfb"></div><button class="btn primary wide" id="qnext" data-act="qnext" hidden>التالي</button>';
+}
+function renderQ(){
+  if(!$('#qbody'))qShell();
+  var q=Q.list[Q.i];
+  Q.fin=false;
+  $('#qprog').style.width=(Q.i/Q.list.length*100)+'%';
+  $('#qcount').textContent=(Q.i+1)+' / '+Q.list.length;
+  $('#qfb').innerHTML='';$('#qnext').hidden=true;
+  R[q.type](q,$('#qbody'));
+}
+var R={};
+R.mc=function(q,b){
+  b.innerHTML='<div class="qprompt">'+q.prompt+'</div><div class="opts">'+q.opts.map(function(o,i){return '<button class="opt" data-act="opt" data-i="'+i+'">'+o.html+'</button>'}).join('')+'</div>';
+  if(q.audio)setTimeout(function(){speak(q.audio)},200);
+};
+R.order=function(q,b){q.picked=[];q.pool=shuffle(q.s.tokens.map(function(t,i){return {t:t,i:i}}));q.done=false;drawOrder(q,b)};
+function chipHtml(p,act){var py=TOKPY[p.t]||'';return '<button class="chip'+(act==='unpick'?' pick':'')+'" data-act="'+act+'" data-i="'+p.i+'">'+(S.py&&py?'<span class="py">'+py.replace(/ /g,'')+'</span>':'')+'<span class="zh">'+p.t+'</span></button>'}
+function drawOrder(q,b){
+  var left=q.pool.filter(function(p){return q.picked.indexOf(p)<0});
+  b.innerHTML='<div class="qprompt"><span class="mut">رتّب الجملة الصينية</span><div class="ar-s">'+q.s.ar+'</div></div>'+
+    '<div class="slot">'+(q.picked.length?q.picked.map(function(p){return chipHtml(p,'unpick')}).join(''):'<span class="ph">اضغط الكلمات بالترتيب الصحيح</span>')+'</div>'+
+    '<div class="pool">'+left.map(function(p){return chipHtml(p,'pick')}).join('')+'</div>'+
+    '<button class="btn primary wide" data-act="checkorder"'+(left.length?' disabled':'')+'>تحقّق</button>';
+}
+R.fill=function(q,b){
+  var opts=shuffle(q.f.opts);
+  b.innerHTML='<div class="qprompt"><span class="mut">أكمل الجملة</span><div class="ar-s">'+q.f.ar+'</div><div class="fillsent">'+esc(q.f.pre)+'<span class="blank" id="blank">&nbsp;</span>'+esc(q.f.post)+'</div></div>'+
+    '<div class="pool">'+opts.map(function(o){return '<button class="chip" data-act="fill" data-o="'+esc(o)+'"><span class="zh">'+o+'</span></button>'}).join('')+'</div>';
+};
+R.match=function(q,b){
+  q.sel=null;q.done={};q.err=0;q.errIds={};
+  q.left=shuffle(q.words);q.right=shuffle(q.words);
+  b.innerHTML='<div class="qprompt"><span class="mut">اربط كل كلمة صينية بمعناها العربي</span></div><div class="mrow">'+
+    '<div class="mcol" dir="ltr">'+q.left.map(function(w){return '<button class="mi" data-act="ml" data-i="'+q.words.indexOf(w)+'"><span class="zh">'+esc(w.zh)+'</span><span class="py">'+(S.py?w.py.replace(/ /g,''):'')+'</span></button>'}).join('')+'</div>'+
+    '<div class="mcol">'+q.right.map(function(w){return '<button class="mi" data-act="mr" data-i="'+q.words.indexOf(w)+'">'+w.ar+'</button>'}).join('')+'</div></div>';
+};
+function finishQ(ok,wids,extra){
+  if(Q.fin)return;Q.fin=true;
+  if(ok){
+    Q.score++;S.xp+=10;Q.gain+=10;
+    (wids||[]).forEach(function(i){if(S.wrong[i]){S.wrong[i]--;if(S.wrong[i]<=0)delete S.wrong[i]}});
+  }else{(wids||[]).forEach(function(i){S.wrong[i]=(S.wrong[i]||0)+1})}
+  save();
+  $('#qfb').innerHTML='<div class="fb '+(ok?'good':'bad')+'"><strong>'+(ok?OKM[Math.floor(Math.random()*OKM.length)]:'ليست الإجابة الصحيحة')+'</strong>'+(extra||'')+'</div>';
+  var nb=$('#qnext');nb.textContent=(Q.i===Q.list.length-1)?'عرض النتيجة':'التالي';nb.hidden=false;
+  try{nb.scrollIntoView({block:'nearest'})}catch(e){}
+}
+function endQuiz(){
+  var n=Q.list.length,pct=Math.round(Q.score/n*100),st=pct>=90?3:(pct>=60?2:1),kind=Q.kind;
+  var before=Math.floor((S.xp-Q.gain)/100)+1,after=Math.floor(S.xp/100)+1;
+  if(kind!=='review')S.best[kind]=Math.max(S.best[kind]||0,st);
+  award('first');
+  if(pct===100)award('perfect');
+  if(kind==='all'&&pct>=80)award('master');
+  save();updateProg();
+  var msg=pct>=90?'ممتاز! أتقنتَ هذا الجزء':(pct>=60?'جيد، راجع الأخطاء وأعد المحاولة':'تحتاج إلى مراجعة، ارجع إلى البطاقات والحوار');
+  $('#p-practice').innerHTML='<div class="res"><div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>'+
+    '<h3>'+msg+'</h3><div class="sc">'+Q.score+' / '+n+'</div><p class="mut">كسبتَ '+Q.gain+' نقطة'+(after>before?' · وصلتَ إلى المستوى '+after:'')+'</p>'+
+    '<div class="tools" style="justify-content:center"><button class="btn primary" data-act="start" data-k="'+kind+'">'+ic('redo',18)+' أعد المحاولة</button><button class="btn ghost" data-act="qexit">كل التمارين</button></div></div>';
+  Q=null;
+  if(after>before)toast('مستوى جديد: '+after);
+}
+
+/* ---------- events ---------- */
+var A={};
+A.tab=function(t){setTab(t.dataset.tab)};
+A.slow=function(){S.slow=!S.slow;save();syncSlow();toast(S.slow?'صوت بطيء: مفعّل':'صوت بطيء: متوقف')};
+A.theme=function(){
+  var d=document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  var n=d==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',n);
+  try{localStorage.setItem(KEY+'-theme',n)}catch(e){}
+  if(tab==='writing')drawCanvas();
+};
+A.say=function(t){speak(t.dataset.t)};
+A.sayline=function(t){var L=DLG[+t.dataset.l];if(speak(L.zh,null,pitchOf(L.who))){S.heard[+t.dataset.l]=1;save();updateProg();checkListener();var s=$('#p-dialogue .sec-h p');if(s)s.textContent='اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جمل.'}};
+A.tok=function(t){openSheet(DLG[+t.dataset.l].tok[+t.dataset.k])};
+A.closesheet=closeSheet;
+A.playall=playAll;
+A.tpy=function(){S.py=!S.py;save();renderVocab()};
+A.tar=function(){S.ar=!S.ar;save();renderVocab()};
+A.tpy2=function(){S.py=!S.py;save();renderDialogue()};
+A.tar2=function(){S.ar=!S.ar;save();renderDialogue()};
+A.flip=function(){
+  S.flip=!S.flip;
+  var f=$('#fc .front'),b=$('#fc .back');if(f)f.hidden=S.flip;if(b)b.hidden=!S.flip;
+};
+A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab()};
+A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab()};
+function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};if(on){if(!h.dues[CRS][zh])h.dues[CRS][zh]={i:0,t:Date.now()}}localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
+A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
+A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
+A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
+A.cq=function(t){
+  var q=+t.dataset.q,i=+t.dataset.i,o=+t.dataset.o,c=CQ[q][i];
+  $$('#cq'+q+'_'+i+' .chip').forEach(function(b,j){b.disabled=true;if(j===c.a)b.classList.add('good');else if(j===o)b.classList.add('bad')});
+  if(o===c.a){speak(c.o[c.a].zh)}
+};
+A.s=function(t){G.s=+t.dataset.i;renderGrammar()};
+A.adv=function(t){G.a=+t.dataset.i;renderGrammar()};
+A.pred=function(t){G.p=+t.dataset.i;renderGrammar()};
+A.num=function(t){G.num=+t.dataset.i;renderGrammar()};
+A.rmb=function(t){G.rmb=+t.dataset.i;renderGrammar()};
+A.it=function(t){G.it=+t.dataset.i;renderGrammar()};
+A.pat=function(t){G.pat=+t.dataset.i;renderGrammar()};
+A.mw=function(t){G.mw=+t.dataset.i;renderGrammar()};
+
+A.gtok=function(t){openSheet([t.dataset.z,t.dataset.p,t.dataset.a||''])};
+A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i)};
+A.wsay=function(t){speak(D.disc[+t.dataset.d].model.split('｜')[0])};
+A.wch=function(t){W.i=+t.dataset.i;W.strokes=[];W.cur=null;renderWriting()};
+A.wclear=function(){W.strokes=[];W.cur=null;drawCanvas()};
+A.wghost=function(){W.ghost=!W.ghost;renderWriting()};
+A.start=function(t){startQuiz(t.dataset.k)};
+A.qexit=function(){Q=null;stopSpeech();renderPractice()};
+A.qnext=function(){Q.i++;if(Q.i>=Q.list.length)endQuiz();else{$('#qbody').innerHTML='';renderQ()}};
+A.opt=function(t){
+  if(!Q||Q.fin)return;
+  var q=Q.list[Q.i],i=+t.dataset.i,ok=q.opts[i].ok;
+  $$('#qbody .opt').forEach(function(el,j){el.disabled=true;if(q.opts[j].ok)el.classList.add('good');else if(j===i)el.classList.add('bad')});
+  finishQ(ok,q.wid,q.fb);
+};
+A.pick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  var p=q.pool.filter(function(x){return x.i===+t.dataset.i})[0];q.picked.push(p);drawOrder(q,$('#qbody'));
+};
+A.unpick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  q.picked=q.picked.filter(function(x){return x.i!==+t.dataset.i});drawOrder(q,$('#qbody'));
+};
+A.checkorder=function(){
+  var q=Q.list[Q.i];if(q.done)return;q.done=true;
+  var ok=q.picked.every(function(p,k){return p.i===k});
+  $$('#qbody .slot .chip').forEach(function(c){c.disabled=true;c.classList.add(ok?'good':'bad')});
+  $$('#qbody [data-act="checkorder"]').forEach(function(c){c.disabled=true});
+  finishQ(ok,q.wid,fbSent(q.s));
+  if(ok)speak(q.s.zh);
+};
+A.fill=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  var o=t.dataset.o,ok=o===q.f.ans,bl=$('#blank');
+  bl.textContent=o;bl.classList.add(ok?'good':'bad');
+  $$('#qbody .pool .chip').forEach(function(c){c.disabled=true;if(c.dataset.o===q.f.ans)c.classList.add('good');else if(c===t)c.classList.add('bad')});
+  finishQ(ok,q.wid,fbSent({zh:q.f.pre+q.f.ans+q.f.post,py:q.f.py,ar:q.f.ar}));
+  if(ok)speak(q.f.pre+q.f.ans+q.f.post);
+};
+A.ml=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  if(q.done[t.dataset.i])return;
+  $$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+  t.classList.add('sel');q.sel=t.dataset.i;
+};
+A.mr=function(t){
+  var q=Q.list[Q.i];if(Q.fin||q.sel===null||q.done[t.dataset.i])return;
+  var i=t.dataset.i,L=$('#qbody [data-act="ml"][data-i="'+q.sel+'"]');
+  if(i===q.sel){
+    q.done[i]=1;t.classList.add('ok');L.classList.remove('sel');L.classList.add('ok');t.disabled=true;L.disabled=true;
+    speak(q.words[+i].zh);
+    if(Object.keys(q.done).length===q.words.length){
+      var errIds=Object.keys(q.errIds).map(Number);
+      errIds.forEach(function(k){var vi=VOCAB.indexOf(q.words[k]);if(vi>=0)S.wrong[vi]=(S.wrong[vi]||0)+1});
+      finishQ(q.err<=1,[],'<div>عدد الأخطاء: '+q.err+'</div>');
+    }
+  }else{
+    q.err++;q.errIds[q.sel]=1;
+    t.classList.add('no');L.classList.add('no');
+    setTimeout(function(){t.classList.remove('no');L.classList.remove('no')},450);
+  }
+  q.sel=null;$$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+};
+
+var app=$('#app');
+app.addEventListener('click',function(e){
+  var t=e.target.closest('[data-act]');
+  if(!e.target.closest('#sheet')&&!e.target.closest('.tok')&&!$('#sheet').hidden)closeSheet();
+  if(!t||!app.contains(t))return;
+  var f=A[t.dataset.act];if(f)f(t,e);
 });
-function refreshTerms(){var y=window.scrollY;$('#p-terms').innerHTML=termsTab();window.scrollTo(0,y)}
-document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('g')){e.preventDefault();e.target.click()}});
-document.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.ta!=null){var i=+ta.dataset.ta;S.txt[i]=ta.value;save();chk(i);upd()}});
-$('#th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark')};
-init();
+app.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.wta!=null){var i=+ta.dataset.wta;S.txt[i]=ta.value;wchk(i)}});
+app.addEventListener('keydown',function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.id==='fc'){e.preventDefault();A.flip()}
+});
+window.addEventListener('hashchange',function(){var h=location.hash.replace('#','');if(h&&h!==tab)setTab(h,true)});
+function syncSlow(){$('#slowbtn').setAttribute('aria-pressed',String(S.slow))}
+syncSlow();updateProg();
+setTab(location.hash.replace('#','')||'vocab',true);
 })();
 </script>
 </body></html>
