@@ -1,0 +1,208 @@
+<title>汉语加油站</title>
+<style>
+:root{--bg:#FBF6EE;--surface:#FFFDF9;--surface2:#F3EBDD;--fg:#2B1D18;--muted:#7B6A5E;--line:#E8DCC8;--accent:#B8322A;--accent-fg:#fff;--accent-soft:#F8E4DF;--seal:#B8322A;--seal-fg:#fff;--gold:#C98A0A;--good:#2E7D4F;--good-soft:#DDF0E2;--bad:#B3261E;--bad-soft:#F7DBD8;--c1:#7A4FA3;--c2:#E0952B;--c3:#2F6DB5;--c4:#2E8B57;--t1:#C0392B;--t2:#A66A00;--t3:#1D7A45;--t4:#2759B8;--t5:#6A7B77;
+--font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;--font-han:'Noto Serif SC','Songti SC',serif;--font-py:'IBM Plex Sans','Segoe UI',sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 var(--font-ui);padding:0 max(16px,env(safe-area-inset-left)) 64px}
+button{font:inherit;color:inherit;cursor:pointer}a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1100px;margin:0 auto}.narrow{max-width:720px;margin:0 auto}h1,h2,h3,p{margin:0}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}.mut{color:var(--muted);font-size:14px}
+.hdr{position:sticky;top:0;z-index:9;background:var(--bg);padding-block:12px 0}
+.top{display:flex;align-items:center;gap:12px}
+.seal{width:40px;height:40px;border-radius:4px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 24px/1 var(--font-han);transform:rotate(-4deg)}
+.top h1{flex:1;font-size:20px}
+.ib{font-size:22px;line-height:1;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface)}
+.tabs{display:flex;gap:6px;margin-top:10px;padding-bottom:10px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{flex:1;max-width:200px;min-height:44px;padding:0 14px;border:0;border-radius:12px;background:none;color:var(--muted);font-weight:600;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.tab[aria-selected=true]{background:var(--accent);color:var(--accent-fg);box-shadow:0 4px 12px color-mix(in srgb,var(--accent) 35%,transparent)}.tab .tag{background:var(--gold);color:#fff}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+.hero{background:var(--accent-soft);border-color:transparent}
+.hero h2{font-size:22px;margin-bottom:4px}
+.grid{display:grid;gap:12px;margin-top:12px}
+.course{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.course .n{width:48px;height:48px;border-radius:10px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 26px var(--font-han)}
+.course{width:100%;font:inherit;color:inherit;cursor:pointer;text-align:start}.course.soon{opacity:.6;cursor:default}.course.soon .n{background:var(--surface2);color:var(--muted)}
+.course b{display:block}
+.btn{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
+.btn.p{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.han{font-family:var(--font-han)}.py{font-family:var(--font-py)}
+.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
+input[type=search]{width:100%;min-height:48px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:0 14px;font:inherit}
+.w{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;margin-top:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.w .z{font-size:30px;line-height:1.2;min-width:2.2em;text-align:center}
+.w .ex{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:8px;font-size:14px}
+.sm{min-width:44px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--surface2)}
+.sm.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.tag{font-size:11px;background:var(--surface2);color:var(--muted);border-radius:999px;padding:0 8px;margin-inline-start:6px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.stat b{display:block;font-size:26px;font-family:var(--font-py)}
+.fc{min-height:220px;display:grid;place-items:center;text-align:center;gap:6px;cursor:pointer}
+.rate{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.rate button{min-height:52px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
+.r0{border-color:var(--bad)!important;color:var(--bad)}.r3{border-color:var(--good)!important;color:var(--good)}
+.url{direction:ltr;text-align:left;font:13px var(--font-py);background:var(--surface2);padding:8px 10px;border-radius:8px;word-break:break-all;user-select:all;margin-top:6px}
+.road li{margin:6px 0}
+
+.ic{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.banner{position:relative;overflow:hidden;border-radius:20px;margin-top:12px;padding:28px 20px 70px;text-align:center;background:linear-gradient(180deg,#F8E4DF 0%,#FBF1E2 70%,var(--bg) 100%)}
+:root[data-theme=dark] .banner{background:linear-gradient(180deg,#1E332D,#152622 80%,var(--bg))}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .banner{background:linear-gradient(180deg,#1E332D,#152622 80%,var(--bg))}}
+.banner h2{font-size:clamp(22px,4.5vw,32px);position:relative}.banner p{position:relative;color:var(--muted)}
+.banner svg.bg{position:absolute;inset:0;width:100%;height:100%;opacity:.16;pointer-events:none}
+.banner .jy{position:absolute;inset-block-start:16px;inset-inline-end:16px;writing-mode:vertical-rl;font:700 22px var(--font-han);color:var(--accent);opacity:.8}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:-52px;position:relative}
+.cc{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 8px 24px rgba(80,40,20,.08);display:grid;gap:10px}
+.cc .r1{display:flex;gap:12px;align-items:center}
+.cover{flex:none;width:62px;height:84px;border-radius:6px 10px 10px 6px;color:#fff;display:grid;place-items:center;text-align:center;font:700 15px/1.2 var(--font-han);box-shadow:inset 6px 0 0 rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.18)}
+.cc b{display:block;font-size:17px}
+.bar{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden}.bar i{display:block;height:100%;border-radius:99px}
+.cc.soon{opacity:.6}.cc.soon .r1{align-items:center}@media(max-width:600px){.cc.soon{grid-template-columns:1fr auto;align-items:center}.cc.soon .btn{min-height:40px;padding:0 12px}.cc.soon .cover{width:48px;height:64px;font-size:12px}}
+.main2{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+@media(min-width:880px){.main2{grid-template-columns:1fr 320px}}
+.tl{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:620px){.tl{grid-template-columns:240px 1fr}}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--accent-fg);border-radius:10px;padding:2px 12px;font-weight:700}
+.scene{border-radius:14px;min-height:170px;background:linear-gradient(180deg,#F8E4DF,#FBF1E2);overflow:hidden}
+:root[data-theme=dark] .scene{background:linear-gradient(180deg,#1E332D,#152622)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .scene{background:linear-gradient(180deg,#1E332D,#152622)}}
+.scene svg{width:100%;height:100%;display:block}
+.side .row2{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.side .row2:last-child{border:0}
+.side .row2 b{margin-inline-start:auto;font-family:var(--font-py);font-size:18px}
+.qt{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+.qt button{display:grid;justify-items:center;gap:2px;padding:10px 4px;min-height:72px;border-radius:12px;border:1px solid var(--line);background:var(--surface2);font-size:13px;font-weight:600}
+.qt button:disabled{opacity:.5;cursor:default}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:12px}
+.feat div{display:flex;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:14px;font-weight:600}
+.feat .ic{color:var(--accent);width:26px;height:26px}
+.toast{position:fixed;inset:auto 16px 20px;margin:auto;max-width:360px;background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:12px;text-align:center;z-index:20}
+</style>
+<div class="wrap" dir="rtl" lang="ar">
+<header class="hdr"><div class="top"><div class="seal" aria-hidden="true">汉</div><h1><span class="han" dir="ltr">汉语加油站</span> <span class="mut" style="display:block;font-size:13px;font-weight:400">منصة تعليم اللغة الصينية التفاعلية</span></h1>
+<button class="ib" id="th" aria-label="تبديل الوضع الليلي">◐</button></div>
+<div class="tabs" role="tablist" id="tabs"></div></header>
+<main id="main"></main>
+<footer class="mut" style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--line)">© 2026 أ. محمود الصديق (<span class="han">大漠</span>) · جميع الحقوق محفوظة<br>المحتوى للتعلّم الشخصي، ولا يجوز نسخه أو إعادة نشره دون إذن.</footer>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script>
+var VOCAB=[{"zh":"今天","py":"jīn tiān","ar":"اليوم","note":"","ex":["今天星期二。","Jīntiān xīngqī'èr.","اليوم الثلاثاء."],"sup":0,"l":8},{"zh":"月","py":"yuè","ar":"شهر","note":"","ex":["今天九月二十八号。","Jīntiān jiǔ yuè èrshíbā hào.","اليوم 28 سبتمبر."],"sup":0,"l":8},{"zh":"日","py":"rì","ar":"يوم (في التاريخ المكتوب)","note":"في الكلام نقول 号 بدلاً منها.","ex":["今天十月三日。","Jīntiān shí yuè sān rì.","اليوم 3 أكتوبر."],"sup":0,"l":8},{"zh":"星期","py":"xīng qī","ar":"أسبوع / يوم الأسبوع","note":"يليها رقم: 星期一 الاثنين ... 星期日 الأحد.","ex":["今天星期几？","Jīntiān xīngqī jǐ?","أي يوم من الأسبوع اليوم؟"],"sup":0,"l":8},{"zh":"的","py":"de","ar":"أداة الإضافة (的)","note":"تأتي بعد المالك وقبل الشيء: 我的书.","ex":["这是我的书。","Zhè shì wǒ de shū.","هذا كتابي."],"sup":0,"l":8},{"zh":"生日","py":"shēng rì","ar":"عيد الميلاد","note":"","ex":["今天是我的生日。","Jīntiān shì wǒ de shēngrì.","اليوم عيد ميلادي."],"sup":0,"l":8},{"zh":"下课","py":"xià kè","ar":"تنتهي الحصة","note":"","ex":["下课以后，我去吃饭。","Xià kè yǐhòu, wǒ qù chī fàn.","بعد انتهاء الحصة أذهب لتناول الطعام."],"sup":0,"l":8},{"zh":"以后","py":"yǐ hòu","ar":"بعد / لاحقاً","note":"","ex":["以后我们一起吃饭。","Yǐhòu wǒmen yìqǐ chī fàn.","لاحقاً نأكل معاً."],"sup":0,"l":8},{"zh":"准备","py":"zhǔn bèi","ar":"يخطط / يجهّز","note":"","ex":["他准备礼物。","Tā zhǔnbèi lǐwù.","هو يجهّز هدية."],"sup":0,"l":8},{"zh":"请","py":"qǐng","ar":"يدعو (إلى الطعام)","note":"","ex":["我请你吃饭。","Wǒ qǐng nǐ chī fàn.","أدعوك إلى الطعام."],"sup":0,"l":8},{"zh":"吃","py":"chī","ar":"يأكل","note":"","ex":["你吃什么？","Nǐ chī shénme?","ماذا تأكل؟"],"sup":0,"l":8},{"zh":"饭","py":"fàn","ar":"طعام / وجبة","note":"","ex":["我们吃饭吧。","Wǒmen chī fàn ba.","لنأكل."],"sup":0,"l":8},{"zh":"对","py":"duì","ar":"صحيح","note":"","ex":["今天星期二，对吗？","Jīntiān xīngqī'èr, duì ma?","اليوم الثلاثاء، صحيح؟"],"sup":0,"l":8},{"zh":"号","py":"hào","ar":"رقم اليوم (في الكلام)","note":"","ex":["今天十号。","Jīntiān shí hào.","اليوم العاشر."],"sup":0,"l":8},{"zh":"怎么样","py":"zěn me yàng","ar":"ما رأيك؟","note":"تأتي في آخر الجملة لطلب الرأي.","ex":["我们一起去，怎么样？","Wǒmen yìqǐ qù, zěnmeyàng?","نذهب معاً، ما رأيك؟"],"sup":0,"l":8},{"zh":"祝","py":"zhù","ar":"يتمنى","note":"","ex":["祝你生日快乐！","Zhù nǐ shēngrì kuàilè!","عيد ميلاد سعيد!"],"sup":0,"l":8},{"zh":"快乐","py":"kuài lè","ar":"سعيد","note":"","ex":["祝你快乐！","Zhù nǐ kuàilè!","أتمنى لك السعادة!"],"sup":0,"l":8},{"zh":"礼物","py":"lǐ wù","ar":"هدية","note":"","ex":["这是我的礼物。","Zhè shì wǒ de lǐwù.","هذه هديتي."],"sup":0,"l":8},{"zh":"本","py":"běn","ar":"وحدة عدّ للكتب","note":"","ex":["我有两本书。","Wǒ yǒu liǎng běn shū.","عندي كتابان."],"sup":0,"l":8},{"zh":"书","py":"shū","ar":"كتاب","note":"","ex":["这是谁的书？","Zhè shì shéi de shū?","لمن هذا الكتاب؟"],"sup":0,"l":8},{"zh":"支","py":"zhī","ar":"وحدة عدّ للأقلام","note":"","ex":["我有一支笔。","Wǒ yǒu yì zhī bǐ.","عندي قلم."],"sup":0,"l":8},{"zh":"笔","py":"bǐ","ar":"قلم","note":"","ex":["这是他的笔。","Zhè shì tā de bǐ.","هذا قلمه."],"sup":0,"l":8},{"zh":"啊","py":"a","ar":"أداة موافقة","note":"تأتي في آخر الجملة للتعبير عن الموافقة.","ex":["好啊！","Hǎo a!","حسناً! موافق."],"sup":0,"l":8},{"zh":"时间","py":"shí jiān","ar":"وقت","note":"","ex":["你有时间吗？","Nǐ yǒu shíjiān ma?","هل عندك وقت؟"],"sup":0,"l":8},{"zh":"没问题","py":"méi wèn tí","ar":"لا مشكلة","note":"","ex":["星期日？没问题。","Xīngqīrì? Méi wèntí.","يوم الأحد؟ لا مشكلة."],"sup":0,"l":8},{"zh":"没有","py":"méi yǒu","ar":"ليس عنده","note":"تُختصر أحياناً إلى 没.","ex":["我没有时间。","Wǒ méiyǒu shíjiān.","ليس عندي وقت."],"sup":0,"l":8},{"zh":"问题","py":"wèn tí","ar":"سؤال / مشكلة","note":"","ex":["你有问题吗？","Nǐ yǒu wèntí ma?","هل عندك سؤال؟"],"sup":0,"l":8},{"zh":"中文","py":"Zhōng wén","ar":"اللغة الصينية","note":"","ex":["我学中文。","Wǒ xué Zhōngwén.","أدرس الصينية."],"sup":0,"l":8},{"zh":"明天","py":"míng tiān","ar":"غداً","note":"","ex":["明天星期三。","Míngtiān xīngqīsān.","غداً الأربعاء."],"sup":1,"l":8},{"zh":"后天","py":"hòu tiān","ar":"بعد غد","note":"","ex":["后天星期四。","Hòutiān xīngqīsì.","بعد غد الخميس."],"sup":1,"l":8},{"zh":"昨天","py":"zuó tiān","ar":"أمس","note":"","ex":["昨天星期一。","Zuótiān xīngqīyī.","أمس الاثنين."],"sup":1,"l":8},{"zh":"前天","py":"qián tiān","ar":"أول أمس","note":"","ex":["前天星期日。","Qiántiān xīngqīrì.","أول أمس الأحد."],"sup":1,"l":8},{"zh":"报纸","py":"bào zhǐ","ar":"جريدة","note":"","ex":["这是报纸。","Zhè shì bàozhǐ.","هذه جريدة."],"sup":1,"l":8},{"zh":"杂志","py":"zá zhì","ar":"مجلة","note":"","ex":["这是杂志。","Zhè shì zázhì.","هذه مجلة."],"sup":1,"l":8},{"zh":"衣服","py":"yī fu","ar":"ملابس","note":"","ex":["这是我的衣服。","Zhè shì wǒ de yīfu.","هذه ملابسي."],"sup":1,"l":8}];
+var LESSONS=[
+ {n:'نموذج',t:'درس التعارف',d:'مفردات وحوار وقواعد وتدريبات',url:'lesson-intro.html'},
+ {n:'七',t:'الدرس السابع · 中国银行在哪儿',d:'الأماكن والاتجاهات: 在 و 有',url:'lesson-7.html'},
+ {n:'八',t:'الدرس الثامن · 今天几号',d:'التاريخ والأيام وعيد الميلاد',url:'lesson-8.html'}
+];
+var KEY='zh-hub-v1',S={due:{}};
+try{S=JSON.parse(localStorage.getItem(KEY))||S}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function toneOf(s){var d=s.normalize('NFD');if(/̄/.test(d))return 1;if(/́/.test(d))return 2;if(/̌/.test(d))return 3;if(/̀/.test(d))return 4;return 5}
+function pyh(py){return py.split(' ').map(function(x){return '<span class="t'+toneOf(x)+'">'+esc(x)+'</span>'}).join(' ')}
+function norm(s){return s.normalize('NFD').replace(/[̀-ͯ' ]/g,'').toLowerCase()}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2200)}
+var voice=null;function pick(){var v=(window.speechSynthesis&&speechSynthesis.getVoices())||[];voice=v.filter(function(x){return /^zh/i.test(x.lang)})[0]||null}
+if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick}
+function speak(t){if(!window.speechSynthesis){toast('الصوت غير متاح');return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(voice)u.voice=voice;u.rate=.8;speechSynthesis.speak(u)}
+var TABS=[['home','الرئيسية'],['dict','القاموس'],['rev','مفرداتي'],['tea','للمعلم']],tab='home',q='',card=null,flip=false;
+function go(t){tab=t;if(t==='home')crs='';render()}
+function render(){
+ document.getElementById('tabs').innerHTML=TABS.map(function(t){return '<button class="tab" role="tab" aria-selected="'+(t[0]===tab)+'" data-go="'+t[0]+'">'+ic(({home:'home',dict:'book',rev:'repeat',tea:'tool'})[t[0]])+t[1]+(t[0]==='rev'&&dueList().length?'<span class="tag">'+dueList().length+'</span>':'')+'</button>'}).join('');
+ var m=document.getElementById('main');
+ var hh=({home:home,dict:dict,rev:rev,tea:tea})[tab]();m.innerHTML=(tab==='home')?hh:'<div class="narrow">'+hh+'</div>';
+ if(tab==='dict'){var i=document.getElementById('q');i.value=q}
+}
+var crs='';
+var MATS=[
+ {id:'gram',cv:'发展<br>汉语<br><small>初级1</small>',total:30,t:'قواعد ١',s:'《发展汉语初级综合1》',on:1},
+ {id:'fl',cv:'发展<br>汉语<br><small>初级1</small>',t:'لغة أجنبية',s:'《发展汉语初级综合1》 · قريباً',on:0},
+ {id:'prac',cv:'实用<br>汉语',t:'اللغة الصينية العملية',s:'实用汉语 · قريباً',on:0},
+ {id:'cult',cv:'中国<br>文化',t:'الثقافة الصينية',s:'中国文化 · قريباً',on:0}];
+var IC={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',book:'<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>',cards:'<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h13a1 1 0 0 1 1 1v13"/>',tool:'<path d="M14 6l4 4M4 20l9-9M15 4a4 4 0 0 0 5 5l-9 9-5-5z"/>',flame:'<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',cup:'<path d="M8 4h8v6a4 4 0 0 1-8 0zM8 6H4v2a3 3 0 0 0 4 3M16 6h4v2a3 3 0 0 1-4 3M12 14v4M8 20h8"/>',head:'<path d="M4 15v-3a8 8 0 0 1 16 0v3M4 15h3v5H5a1 1 0 0 1-1-1zM20 15h-3v5h2a1 1 0 0 0 1-1z"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',repeat:'<path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"/>',phone:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',spk:'<path d="M4 9v6h4l5 4V5L8 9zM16 8a5 5 0 0 1 0 8"/>',play:'<path d="M7 4l13 8-13 8z"/>',chart:'<path d="M5 20V10M12 20V4M19 20v-7"/>',bot:'<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 14h.01M15 14h.01"/>',next:'<path d="M15 6l-6 6 6 6"/>',prev:'<path d="M9 6l6 6-6 6"/>',plus:'<path d="M12 5v14M5 12h14"/>',check:'<path d="M5 12l5 5 9-10"/>'};
+function ic(n){return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>'}
+function today(){return new Date().toISOString().slice(0,10)}
+function streak(){var d=S.days||[],n=0,t=new Date();while(d.indexOf(t.toISOString().slice(0,10))>-1){n++;t.setDate(t.getDate()-1)}if(!n){t=new Date();t.setDate(t.getDate()-1);while(d.indexOf(t.toISOString().slice(0,10))>-1){n++;t.setDate(t.getDate()-1)}}return n}
+function markDay(){S.days=S.days||[];var t=today();if(S.days.indexOf(t)<0){S.days.push(t);S.days=S.days.slice(-400)}}
+var wi=-1;
+function wotd(){if(wi<0){var d=new Date();wi=(d.getFullYear()*400+d.getMonth()*31+d.getDate())%VOCAB.length}return VOCAB[wi]}
+var PAGODA='<svg viewBox="0 0 240 170" preserveAspectRatio="xMidYMax slice"><circle cx="190" cy="40" r="22" fill="#E0645B" opacity=".5"/><path d="M0 130c40-30 70-10 110-35s80-5 130-25v100H0z" fill="#B8322A" opacity=".12"/><g fill="#B8322A"><path d="M90 140h60v6H90z"/><path d="M100 120h40v20h-40z" opacity=".85"/><path d="M82 120h76l-10-8H92z"/><path d="M104 100h32v12h-32z" opacity=".85"/><path d="M90 100h60l-8-8H98z"/><path d="M110 82h20v10h-20z" opacity=".85"/><path d="M100 82h40l-8-8h-24z"/><path d="M119 52h2v22h-2zM110 76l10-24 10 24z"/></g><g stroke="#B8322A" stroke-width="2" fill="none" opacity=".5"><path d="M30 150c10-30 8-60 22-90M52 60c-8 4-14 2-18-4M52 60c6-8 14-8 18-4"/></g></svg>';
+function home(){
+ if(crs){
+  var m=MATS.filter(function(x){return x.id===crs})[0];
+  return '<div class="narrow"><button class="btn" style="margin-top:12px" data-crs="">→ كل المواد</button>'+
+  '<div class="card hero"><h2>'+m.t+'</h2><p class="han ltr" style="font-size:15px">'+m.s.replace(' · قريباً','')+'</p></div>'+
+  '<h2 style="font-size:17px;margin-top:20px">الدروس</h2><div class="grid">'+
+  LESSONS.map(function(l,i){return '<a class="course" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+i+'"><div class="n">'+l.n+'</div><div><b>'+l.t+'</b><span class="mut">'+l.d+'</span></div><span class="btn p">افتح</span></a>'}).join('')+
+  '<div class="course soon"><div class="n">九</div><div><b>الدرس التاسع</b><span class="mut">قريباً</span></div><span></span></div></div></div>';
+ }
+ var all=Object.keys(S.due),learned=all.filter(function(k){return S.due[k].i>=6}).length,dn=dueList().length,w=wotd(),wid=VOCAB.indexOf(w),last=LESSONS[S.last||0]||LESSONS[0],on=S.due[w.zh];
+ var cards=MATS.map(function(m,i){
+  var col='var(--c'+(i+1)+')',pct=m.total?Math.round(LESSONS.length/m.total*100):0;
+  return '<div class="cc'+(m.on?'':' soon')+'"><div class="r1"><div class="cover han" style="background:'+col+'">'+m.cv+'</div><div><b>'+m.t+'</b><span class="mut han" dir="ltr">'+m.s.replace(' · قريباً','')+'</span></div></div>'+
+  (m.on?'<div><div class="bar"><i style="width:'+Math.max(pct,4)+'%;background:'+col+'"></i></div><div class="mut" style="margin-top:4px">'+LESSONS.length+' دروس متاحة من '+m.total+'</div></div>':'')+
+  '<button class="btn p"'+(m.on?' data-crs="'+m.id+'">ادخل المادة':' disabled>قريباً')+'</button></div>'}).join('');
+ return '<div class="banner"><svg class="bg" viewBox="0 0 240 170" preserveAspectRatio="xMinYMax meet">'+PAGODA.replace(/^<svg[^>]*>/,'').replace('</svg>','')+'</svg><div class="jy" aria-hidden="true">加油！</div><h2>مرحباً بك في رحلتك مع اللغة الصينية</h2><p>تعلّم بذكاء، وتدرّب بتفاعل، وحقّق أهدافك.</p></div>'+
+ '<div class="cgrid">'+cards+'</div>'+
+ '<div class="main2"><section class="card" style="margin:0"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span class="chip">'+ic('book')+' كلمة اليوم</span><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="'+last.url+'" target="_blank" rel="noopener" data-lesson="'+(S.last||0)+'">'+ic('play')+'&nbsp;تابع: '+last.t+'</a></div>'+
+ '<div class="tl" style="margin-top:12px"><div class="scene" aria-hidden="true">'+PAGODA+'</div><div style="text-align:center;display:grid;gap:4px;align-content:center"><div class="han" style="font-size:64px;line-height:1.2" dir="ltr">'+esc(w.zh)+'</div><div class="py ltr" style="font-size:22px">'+pyh(w.py)+'</div><div style="font-size:20px">'+esc(w.ar)+'</div>'+
+ (w.ex?'<div class="mut ltr han" style="margin-top:4px">'+esc(w.ex[0])+'</div>':'')+
+ '<div style="display:flex;gap:8px;justify-content:center;margin-top:8px"><button class="sm" data-wn="1" aria-label="السابق">'+ic('prev')+'</button><button class="btn p" data-say="'+wid+'" style="display:inline-flex;align-items:center;gap:6px">'+ic('spk')+' استمع</button><button class="sm'+(on?' on':'')+'" data-add="'+wid+'" aria-label="'+(on?'في المراجعة':'أضف للمراجعة')+'">'+ic(on?'check':'plus')+'</button><button class="sm" data-wn="-1" aria-label="التالي">'+ic('next')+'</button></div></div></div></section>'+
+ '<aside class="side" style="display:grid;gap:12px"><div class="card" style="margin:0"><h3 style="font-size:17px;display:flex;gap:8px;align-items:center;color:var(--gold)">'+ic('cup')+'<span style="color:var(--fg)">إنجازاتي</span></h3>'+
+ '<div class="row2">'+ic('cards')+'كلمات في المراجعة<b>'+all.length+'</b></div><div class="row2">'+ic('star')+'كلمات راسخة<b>'+learned+'</b></div><div class="row2">'+ic('repeat')+'مستحقة للمراجعة الآن<b>'+dn+'</b></div><div class="row2" style="color:var(--accent)">'+ic('flame')+'<span style="color:var(--fg)">سلسلة المراجعة</span><b>'+streak()+' يوم</b></div></div>'+
+ '<div class="card" style="margin:0"><h3 style="font-size:16px">أدوات سريعة</h3><div class="qt"><button data-go="rev">'+ic('repeat')+'المراجعة'+(dn?' ('+dn+')':'')+'</button><button data-go="dict">'+ic('book')+'القاموس</button><button disabled>'+ic('bot')+'المساعد الذكي<span class="mut" style="font-size:11px">قريباً</span></button><button disabled>'+ic('chart')+'تقرير التقدم<span class="mut" style="font-size:11px">قريباً</span></button></div></div></aside></div>'+
+ '<div class="feat"><div>'+ic('head')+'استماع وتكرار للنطق</div><div>'+ic('target')+'تمارين تفاعلية متنوعة</div><div>'+ic('repeat')+'مراجعة بالتكرار المتباعد</div><div>'+ic('book')+'محتوى حسب كتب المقرر</div><div>'+ic('phone')+'مناسب للجوال</div></div>';
+}
+function dict(){
+ var n=norm(q),L=VOCAB.filter(function(w){return !n||w.zh.indexOf(q.trim())>-1||norm(w.py).indexOf(n)>-1||w.ar.indexOf(q.trim())>-1});
+ return '<div style="margin-top:12px"><input type="search" id="q" placeholder="ابحث: حرف صيني، بينيين، أو كلمة عربية" aria-label="بحث"></div><p class="mut" style="margin-top:8px">'+L.length+' كلمة</p>'+
+ '<div id="list">'+L.map(function(w){var i=VOCAB.indexOf(w),on=S.due[w.zh];return '<div class="w"><div class="z han" dir="ltr">'+esc(w.zh)+'</div><div><div class="py ltr">'+pyh(w.py)+'</div><div>'+esc(w.ar)+(w.sup?'<span class="tag">إضافية</span>':'')+'</div></div><div style="display:flex;gap:6px"><button class="sm" data-say="'+i+'" aria-label="استمع">🔊</button><button class="sm'+(on?' on':'')+'" data-add="'+i+'" aria-label="'+(on?'في المراجعة':'أضف للمراجعة')+'">'+(on?'✓':'+')+'</button></div>'+
+ (w.ex?'<div class="ex"><span class="han ltr" style="font-size:17px">'+esc(w.ex[0])+'</span> <button class="sm" style="min-height:32px" data-sayx="'+i+'" aria-label="استمع للجملة">🔊</button><div class="py mut ltr">'+esc(w.ex[1])+'</div><div>'+esc(w.ex[2])+'</div></div>':'')+
+ (w.note?'<div class="ex mut">'+esc(w.note)+'</div>':'')+'</div>'}).join('')+'</div>';
+}
+function dueList(){var now=Date.now();return Object.keys(S.due).filter(function(k){return S.due[k].t<=now})}
+function rev(){
+ var all=Object.keys(S.due),d=dueList(),learned=all.filter(function(k){return S.due[k].i>=6}).length;
+ var h='<div class="stats" style="margin-top:12px"><div class="stat"><b>'+d.length+'</b><span class="mut">مستحقة الآن</span></div><div class="stat"><b>'+all.length+'</b><span class="mut">في المراجعة</span></div><div class="stat"><b>'+learned+'</b><span class="mut">راسخة</span></div></div>';
+ if(!all.length)return h+'<div class="card"><p>لا توجد كلمات بعد. أضف كلمات من القاموس، أو أضف الكل دفعة واحدة.</p><div style="margin-top:10px;display:flex;gap:8px"><button class="btn p" data-addall="1">أضف كلمات الدرس 8</button><button class="btn" data-go="dict">القاموس</button></div></div>';
+ if(!d.length){var nx=Math.min.apply(null,all.map(function(k){return S.due[k].t}));var mins=Math.max(1,Math.round((nx-Date.now())/60000));return h+'<div class="card"><h3>أحسنت، انتهت مراجعة اليوم</h3><p class="mut">الكلمة التالية بعد '+(mins<90?mins+' دقيقة':mins<2880?Math.round(mins/60)+' ساعة':Math.round(mins/1440)+' يوماً')+'.</p><button class="btn" style="margin-top:10px" data-addall="1">أضف كلمات الدرس 8 كاملة</button></div>'}
+ if(!card||d.indexOf(card)<0)card=d[Math.floor(Math.random()*d.length)];
+ var w=VOCAB.filter(function(x){return x.zh===card})[0];
+ h+='<div class="card fc" data-flip="1" role="button" tabindex="0" aria-label="اقلب البطاقة">';
+ if(!flip)h+='<div class="han" style="font-size:64px" dir="ltr">'+esc(w.zh)+'</div><div class="mut">اضغط لإظهار الإجابة</div>';
+ else h+='<div class="han" style="font-size:48px" dir="ltr">'+esc(w.zh)+'</div><div class="py ltr" style="font-size:22px">'+pyh(w.py)+'</div><div style="font-size:20px">'+esc(w.ar)+'</div>';
+ h+='</div><div style="display:flex;justify-content:center;margin-top:8px"><button class="btn" data-sayc="1">🔊 استمع</button></div>';
+ if(flip)h+='<div class="rate"><button class="r0" data-rate="0">مرة أخرى</button><button data-rate="1">صعب</button><button data-rate="2">جيد</button><button class="r3" data-rate="3">سهل</button></div>';
+ return h;
+}
+var STEP=[1,10,60*24,60*24*3,60*24*7,60*24*16,60*24*40]; // minutes
+function rate(r){
+ var s=S.due[card];if(!s)return;
+ if(r===0)s.i=0;else if(r===1)s.i=Math.max(0,s.i);else if(r===2)s.i=Math.min(STEP.length-1,s.i+1);else s.i=Math.min(STEP.length-1,s.i+2);
+ s.t=Date.now()+STEP[s.i]*60000*(r===1?.6:1);markDay();save();flip=false;card=null;render();
+}
+function tea(){
+ return '<div class="card"><h3 style="font-size:17px">روابط للبلاكبورد</h3><p class="mut">في البلاكبورد: Build Content ← Web Link، والصق الرابط. كل درس برابط مستقل.</p>'+
+ LESSONS.map(function(l){return '<div style="margin-top:12px"><b>'+l.t+'</b><div class="url">'+l.url+'</div></div>'}).join('')+'</div>'+
+ '<div class="card"><h3 style="font-size:17px">خارطة الطريق</h3><ul class="road"><li>✅ دروس تفاعلية، قاموس، مراجعة ذكية</li><li>⏳ نقل الموقع إلى دومينك مع حسابات للطلاب</li><li>⏳ لوحة صدارة وتحديات أسبوعية</li><li>⏳ تدريب النطق بالتسجيل</li><li>⏳ لوحة لك لمتابعة تقدم الطلاب</li></ul><p class="mut">البنود الأربعة الأخيرة تحتاج استضافة وقاعدة بيانات، وهي مهمة المرحلة الثانية.</p></div>'+
+ '<div class="card"><h3 style="font-size:17px">تنبيه حقوق</h3><p class="mut">الموقع عام، فلا ينبغي نشر نصوص الكتاب وحواراته. القاموس يحوي كلمات مفردة وجملاً من تأليفنا. دروس الكتاب نفسها أبقها خاصة بطلابك.</p></div>';
+}
+document.addEventListener('click',function(e){
+ var t=e.target.closest('[data-wn],[data-lesson],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
+ if(d.wn!=null){wi=(wotd(),(wi+ +d.wn+VOCAB.length)%VOCAB.length);render()}
+ else if(d.lesson!=null){S.last=+d.lesson;save();return}
+ else if(d.crs!=null){crs=d.crs;tab='home';render();window.scrollTo(0,0)}
+ else if(d.go)go(d.go);
+ else if(d.say!=null)speak(VOCAB[+d.say].zh);
+ else if(d.sayx!=null)speak(VOCAB[+d.sayx].ex[0]);
+ else if(d.add!=null){var w=VOCAB[+d.add];if(S.due[w.zh])delete S.due[w.zh];else S.due[w.zh]={i:0,t:Date.now()};save();var y=window.scrollY;render();window.scrollTo(0,y)}
+ else if(d.addall){VOCAB.forEach(function(w){if(!S.due[w.zh])S.due[w.zh]={i:0,t:Date.now()}});save();render()}
+ else if(d.flip){flip=!flip;if(flip)speak(card);render()}
+ else if(d.sayc)speak(card);
+ else if(d.rate!=null)rate(+d.rate);
+});
+document.addEventListener('input',function(e){if(e.target.id==='q'){q=e.target.value;var p=e.target.selectionStart;render();var i=document.getElementById('q');i.focus();i.setSelectionRange(p,p)}});
+document.getElementById('th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark')};
+render();
+</script>
