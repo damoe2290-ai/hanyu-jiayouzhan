@@ -95,9 +95,16 @@ var LESSONS=[
  {n:'七',t:'الدرس السابع · 中国银行在哪儿',d:'الأماكن والاتجاهات: 在 و 有',url:'lesson-7.html'},
  {n:'八',t:'الدرس الثامن · 今天几号',d:'التاريخ والأيام وعيد الميلاد',url:'lesson-8.html'}
 ];
-var KEY='zh-hub-v1',S={due:{}};
+var KEY='zh-hub-v1',S={dues:{gram:{},fl:{}}};
 try{S=JSON.parse(localStorage.getItem(KEY))||S}catch(e){}
+if(S.due&&!S.dues){S.dues={gram:S.due,fl:{}};delete S.due}S.dues=S.dues||{};['gram','fl'].forEach(function(k){S.dues[k]=S.dues[k]||{}});
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var VOCAB_BY={gram:VOCAB,fl:VOCAB};
+function CV(){return VOCAB_BY[crs]||[]}
+function DUE(c){var k=c||crs;if(!k)return {};return S.dues[k]||(S.dues[k]={})}
+function allStats(){var a=0,l=0,d=0,n=Date.now();['gram','fl'].forEach(function(c){var D=DUE(c),ks=Object.keys(D);a+=ks.length;l+=ks.filter(function(k){return D[k].i>=6}).length;d+=ks.filter(function(k){return D[k].t<=n}).length});return {all:a,learned:l,due:d}}
+function tabsNow(){return crs?[['home','الدروس'],['dict','القاموس'],['rev','مفرداتي'],['tea','للمعلم']]:[['home','الرئيسية'],['tea','للمعلم']]}
+function cbar(){var m=MATS.filter(function(x){return x.id===crs})[0];return '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap"><b>'+m.t+' <span class="mut han" style="font-weight:400">'+m.s+'</span></b><button class="btn" data-crs="">→ كل المواد</button></div>'}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function toneOf(s){var d=s.normalize('NFD');if(/̄/.test(d))return 1;if(/́/.test(d))return 2;if(/̌/.test(d))return 3;if(/̀/.test(d))return 4;return 5}
 function pyh(py){return py.split(' ').map(function(x){return '<span class="t'+toneOf(x)+'">'+esc(x)+'</span>'}).join(' ')}
@@ -107,9 +114,9 @@ var voice=null;function pick(){var v=(window.speechSynthesis&&speechSynthesis.ge
 if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick}
 function speak(t){if(!window.speechSynthesis){toast('الصوت غير متاح');return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';if(voice)u.voice=voice;u.rate=.8;speechSynthesis.speak(u)}
 var TABS=[['home','الرئيسية'],['dict','القاموس'],['rev','مفرداتي'],['tea','للمعلم']],tab='home',q='',card=null,flip=false;
-function go(t){tab=t;if(t==='home')crs='';render()}
+function go(t){tab=t;render()}
 function render(){
- document.getElementById('tabs').innerHTML=TABS.map(function(t){return '<button class="tab" role="tab" aria-selected="'+(t[0]===tab)+'" data-go="'+t[0]+'">'+ic(({home:'home',dict:'book',rev:'repeat',tea:'tool'})[t[0]])+t[1]+(t[0]==='rev'&&dueList().length?'<span class="tag">'+dueList().length+'</span>':'')+'</button>'}).join('');
+ document.getElementById('tabs').innerHTML=tabsNow().map(function(t){return '<button class="tab" role="tab" aria-selected="'+(t[0]===tab)+'" data-go="'+t[0]+'">'+ic(({home:'home',dict:'book',rev:'repeat',tea:'tool'})[t[0]])+t[1]+(t[0]==='rev'&&dueList().length?'<span class="tag">'+dueList().length+'</span>':'')+'</button>'}).join('');
  var m=document.getElementById('main');
  var hh=({home:home,dict:dict,rev:rev,tea:tea})[tab]();m.innerHTML=(tab==='home')?hh:'<div class="narrow">'+hh+'</div>';
  if(tab==='dict'){var i=document.getElementById('q');i.value=q}
@@ -137,7 +144,7 @@ function home(){
   LESSONS.map(function(l,i){return '<a class="course" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+i+'"><div class="n">'+l.n+'</div><div><b>'+l.t+'</b><span class="mut">'+l.d+'</span></div><span class="btn p">افتح</span></a>'}).join('')+
   '<div class="course soon"><div class="n">九</div><div><b>الدرس التاسع</b><span class="mut">قريباً</span></div><span></span></div></div></div>';
  }
- var all=Object.keys(S.due),learned=all.filter(function(k){return S.due[k].i>=6}).length,dn=dueList().length,w=wotd(),wid=VOCAB.indexOf(w),last=LESSONS[S.last||0]||LESSONS[0],on=S.due[w.zh];
+ var st=allStats(),all={length:st.all},learned=st.learned,dn=st.due,w=wotd(),wid=VOCAB.indexOf(w),last=LESSONS[S.last||0]||LESSONS[0],on=DUE('gram')[w.zh];
  var cards=MATS.map(function(m,i){
   var col='var(--c'+(i+1)+')',pct=m.total?Math.round(LESSONS.length/m.total*100):0;
   return '<div class="cc'+(m.on?'':' soon')+'"><div class="r1"><div class="cover han" style="background:'+col+'">'+m.cv+'</div><div><b>'+m.t+'</b><span class="mut han" dir="ltr">'+m.s.replace(' · قريباً','')+'</span></div></div>'+
@@ -148,27 +155,30 @@ function home(){
  '<div class="main2"><section class="card" style="margin:0"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span class="chip">'+ic('book')+' كلمة اليوم</span><a class="btn" style="display:inline-flex;align-items:center;text-decoration:none" href="'+last.url+'" target="_blank" rel="noopener" data-lesson="'+(S.last||0)+'">'+ic('play')+'&nbsp;تابع: '+last.t+'</a></div>'+
  '<div class="tl" style="margin-top:12px"><div class="scene" aria-hidden="true">'+PAGODA+'</div><div style="text-align:center;display:grid;gap:4px;align-content:center"><div class="han" style="font-size:64px;line-height:1.2" dir="ltr">'+esc(w.zh)+'</div><div class="py ltr" style="font-size:22px">'+pyh(w.py)+'</div><div style="font-size:20px">'+esc(w.ar)+'</div>'+
  (w.ex?'<div class="mut ltr han" style="margin-top:4px">'+esc(w.ex[0])+'</div>':'')+
- '<div style="display:flex;gap:8px;justify-content:center;margin-top:8px"><button class="sm" data-wn="1" aria-label="السابق">'+ic('prev')+'</button><button class="btn p" data-say="'+wid+'" style="display:inline-flex;align-items:center;gap:6px">'+ic('spk')+' استمع</button><button class="sm'+(on?' on':'')+'" data-add="'+wid+'" aria-label="'+(on?'في المراجعة':'أضف للمراجعة')+'">'+ic(on?'check':'plus')+'</button><button class="sm" data-wn="-1" aria-label="التالي">'+ic('next')+'</button></div></div></div></section>'+
+ '<div style="display:flex;gap:8px;justify-content:center;margin-top:8px"><button class="sm" data-wn="1" aria-label="السابق">'+ic('prev')+'</button><button class="btn p" data-wsay="'+wid+'" style="display:inline-flex;align-items:center;gap:6px">'+ic('spk')+' استمع</button><button class="sm'+(on?' on':'')+'" data-wadd="'+wid+'" aria-label="'+(on?'في المراجعة':'أضف للمراجعة')+'">'+ic(on?'check':'plus')+'</button><button class="sm" data-wn="-1" aria-label="التالي">'+ic('next')+'</button></div></div></div></section>'+
  '<aside class="side" style="display:grid;gap:12px"><div class="card" style="margin:0"><h3 style="font-size:17px;display:flex;gap:8px;align-items:center;color:var(--gold)">'+ic('cup')+'<span style="color:var(--fg)">إنجازاتي</span></h3>'+
  '<div class="row2">'+ic('cards')+'كلمات في المراجعة<b>'+all.length+'</b></div><div class="row2">'+ic('star')+'كلمات راسخة<b>'+learned+'</b></div><div class="row2">'+ic('repeat')+'مستحقة للمراجعة الآن<b>'+dn+'</b></div><div class="row2" style="color:var(--accent)">'+ic('flame')+'<span style="color:var(--fg)">سلسلة المراجعة</span><b>'+streak()+' يوم</b></div></div>'+
- '<div class="card" style="margin:0"><h3 style="font-size:16px">أدوات سريعة</h3><div class="qt"><button data-go="rev">'+ic('repeat')+'المراجعة'+(dn?' ('+dn+')':'')+'</button><button data-go="dict">'+ic('book')+'القاموس</button><button disabled>'+ic('bot')+'المساعد الذكي<span class="mut" style="font-size:11px">قريباً</span></button><button disabled>'+ic('chart')+'تقرير التقدم<span class="mut" style="font-size:11px">قريباً</span></button></div></div></aside></div>'+
+ '<div class="card" style="margin:0"><h3 style="font-size:16px">أدوات سريعة</h3><div class="qt"><button data-open="gram:dict">'+ic('book')+'قاموس قواعد ١</button><button data-open="gram:rev">'+ic('repeat')+'مفردات قواعد ١</button><button data-open="fl:dict">'+ic('book')+'قاموس لغة أجنبية</button><button data-open="fl:rev">'+ic('repeat')+'مفردات لغة أجنبية</button><button disabled>'+ic('bot')+'المساعد الذكي<span class="mut" style="font-size:11px">قريباً</span></button><button disabled>'+ic('chart')+'تقرير التقدم<span class="mut" style="font-size:11px">قريباً</span></button></div></div></aside></div>'+
  '<div class="feat"><div>'+ic('head')+'استماع وتكرار للنطق</div><div>'+ic('target')+'تمارين تفاعلية متنوعة</div><div>'+ic('repeat')+'مراجعة بالتكرار المتباعد</div><div>'+ic('book')+'محتوى حسب كتب المقرر</div><div>'+ic('phone')+'مناسب للجوال</div></div>';
 }
+var lf=0;
 function dict(){
- var n=norm(q),L=VOCAB.filter(function(w){return !n||w.zh.indexOf(q.trim())>-1||norm(w.py).indexOf(n)>-1||w.ar.indexOf(q.trim())>-1});
- return '<div style="margin-top:12px"><input type="search" id="q" placeholder="ابحث: حرف صيني، بينيين، أو كلمة عربية" aria-label="بحث"></div><p class="mut" style="margin-top:8px">'+L.length+' كلمة</p>'+
- '<div id="list">'+L.map(function(w){var i=VOCAB.indexOf(w),on=S.due[w.zh];return '<div class="w"><div class="z han" dir="ltr">'+esc(w.zh)+'</div><div><div class="py ltr">'+pyh(w.py)+'</div><div>'+esc(w.ar)+(w.sup?'<span class="tag">إضافية</span>':'')+'</div></div><div style="display:flex;gap:6px"><button class="sm" data-say="'+i+'" aria-label="استمع">🔊</button><button class="sm'+(on?' on':'')+'" data-add="'+i+'" aria-label="'+(on?'في المراجعة':'أضف للمراجعة')+'">'+(on?'✓':'+')+'</button></div>'+
+ var V=CV(),D=DUE(),n=norm(q),L=V.filter(function(w){return (!lf||w.l===lf)&&(!n||w.zh.indexOf(q.trim())>-1||norm(w.py).indexOf(n)>-1||w.ar.indexOf(q.trim())>-1)});
+ return cbar()+'<div style="margin-top:12px"><input type="search" id="q" placeholder="ابحث: حرف صيني، بينيين، أو كلمة عربية" aria-label="بحث"></div>'+
+ '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">'+[0,6,7,8].map(function(x){return '<button class="btn'+(lf===x?' p':'')+'" data-lf="'+x+'">'+(x?'الدرس '+x:'كل الدروس')+'</button>'}).join('')+'</div>'+
+ '<p class="mut" style="margin-top:8px">'+L.length+' كلمة</p>'+
+ '<div id="list">'+L.map(function(w){var i=V.indexOf(w),on=D[w.zh];return '<div class="w"><div class="z han" dir="ltr">'+esc(w.zh)+'</div><div><div class="py ltr">'+pyh(w.py)+'</div><div>'+esc(w.ar)+(w.sup?'<span class="tag">إضافية</span>':'')+'</div></div><div style="display:flex;gap:6px"><button class="sm" data-say="'+i+'" aria-label="استمع">🔊</button><button class="sm'+(on?' on':'')+'" data-add="'+i+'" aria-label="'+(on?'في المراجعة':'أضف للمراجعة')+'">'+(on?'✓':'+')+'</button></div>'+
  (w.ex?'<div class="ex"><span class="han ltr" style="font-size:17px">'+esc(w.ex[0])+'</span> <button class="sm" style="min-height:32px" data-sayx="'+i+'" aria-label="استمع للجملة">🔊</button><div class="py mut ltr">'+esc(w.ex[1])+'</div><div>'+esc(w.ex[2])+'</div></div>':'')+
  (w.note?'<div class="ex mut">'+esc(w.note)+'</div>':'')+'</div>'}).join('')+'</div>';
 }
-function dueList(){var now=Date.now();return Object.keys(S.due).filter(function(k){return S.due[k].t<=now})}
+function dueList(){var now=Date.now(),d=DUE();return Object.keys(d).filter(function(k){return d[k].t<=now})}
 function rev(){
- var all=Object.keys(S.due),d=dueList(),learned=all.filter(function(k){return S.due[k].i>=6}).length;
- var h='<div class="stats" style="margin-top:12px"><div class="stat"><b>'+d.length+'</b><span class="mut">مستحقة الآن</span></div><div class="stat"><b>'+all.length+'</b><span class="mut">في المراجعة</span></div><div class="stat"><b>'+learned+'</b><span class="mut">راسخة</span></div></div>';
- if(!all.length)return h+'<div class="card"><p>لا توجد كلمات بعد. أضف كلمات من القاموس، أو أضف الكل دفعة واحدة.</p><div style="margin-top:10px;display:flex;gap:8px"><button class="btn p" data-addall="1">أضف كلمات الدرس 8</button><button class="btn" data-go="dict">القاموس</button></div></div>';
- if(!d.length){var nx=Math.min.apply(null,all.map(function(k){return S.due[k].t}));var mins=Math.max(1,Math.round((nx-Date.now())/60000));return h+'<div class="card"><h3>أحسنت، انتهت مراجعة اليوم</h3><p class="mut">الكلمة التالية بعد '+(mins<90?mins+' دقيقة':mins<2880?Math.round(mins/60)+' ساعة':Math.round(mins/1440)+' يوماً')+'.</p><button class="btn" style="margin-top:10px" data-addall="1">أضف كلمات الدرس 8 كاملة</button></div>'}
+ var D=DUE(),all=Object.keys(D),d=dueList(),learned=all.filter(function(k){return D[k].i>=6}).length,V=CV();
+ var h=cbar()+'<div class="stats" style="margin-top:12px"><div class="stat"><b>'+d.length+'</b><span class="mut">مستحقة الآن</span></div><div class="stat"><b>'+all.length+'</b><span class="mut">في المراجعة</span></div><div class="stat"><b>'+learned+'</b><span class="mut">راسخة</span></div></div>';
+ if(!all.length)return h+'<div class="card"><p>لا توجد كلمات بعد في مفردات هذه المادة. أضف كلمات من القاموس، أو أضف كل كلمات المادة دفعة واحدة.</p><div style="margin-top:10px;display:flex;gap:8px"><button class="btn p" data-addall="1">أضف كل كلمات المادة</button><button class="btn" data-go="dict">القاموس</button></div></div>';
+ if(!d.length){var nx=Math.min.apply(null,all.map(function(k){return D[k].t}));var mins=Math.max(1,Math.round((nx-Date.now())/60000));return h+'<div class="card"><h3>أحسنت، انتهت مراجعة اليوم</h3><p class="mut">الكلمة التالية بعد '+(mins<90?mins+' دقيقة':mins<2880?Math.round(mins/60)+' ساعة':Math.round(mins/1440)+' يوماً')+'.</p><button class="btn" style="margin-top:10px" data-addall="1">أضف كل كلمات المادة</button></div>'}
  if(!card||d.indexOf(card)<0)card=d[Math.floor(Math.random()*d.length)];
- var w=VOCAB.filter(function(x){return x.zh===card})[0];
+ var w=V.filter(function(x){return x.zh===card})[0];
  h+='<div class="card fc" data-flip="1" role="button" tabindex="0" aria-label="اقلب البطاقة">';
  if(!flip)h+='<div class="han" style="font-size:64px" dir="ltr">'+esc(w.zh)+'</div><div class="mut">اضغط لإظهار الإجابة</div>';
  else h+='<div class="han" style="font-size:48px" dir="ltr">'+esc(w.zh)+'</div><div class="py ltr" style="font-size:22px">'+pyh(w.py)+'</div><div style="font-size:20px">'+esc(w.ar)+'</div>';
@@ -178,7 +188,7 @@ function rev(){
 }
 var STEP=[1,10,60*24,60*24*3,60*24*7,60*24*16,60*24*40]; // minutes
 function rate(r){
- var s=S.due[card];if(!s)return;
+ var s=DUE()[card];if(!s)return;
  if(r===0)s.i=0;else if(r===1)s.i=Math.max(0,s.i);else if(r===2)s.i=Math.min(STEP.length-1,s.i+1);else s.i=Math.min(STEP.length-1,s.i+2);
  s.t=Date.now()+STEP[s.i]*60000*(r===1?.6:1);markDay();save();flip=false;card=null;render();
 }
@@ -189,15 +199,19 @@ function tea(){
  '<div class="card"><h3 style="font-size:17px">تنبيه حقوق</h3><p class="mut">الموقع عام، فلا ينبغي نشر نصوص الكتاب وحواراته. القاموس يحوي كلمات مفردة وجملاً من تأليفنا. دروس الكتاب نفسها أبقها خاصة بطلابك.</p></div>';
 }
 document.addEventListener('click',function(e){
- var t=e.target.closest('[data-wn],[data-lesson],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
+ var t=e.target.closest('[data-wn],[data-wsay],[data-wadd],[data-lf],[data-open],[data-lesson],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
  if(d.wn!=null){wi=(wotd(),(wi+ +d.wn+VOCAB.length)%VOCAB.length);render()}
  else if(d.lesson!=null){S.last=+d.lesson;save();return}
- else if(d.crs!=null){crs=d.crs;tab='home';render();window.scrollTo(0,0)}
+ else if(d.crs!=null){crs=d.crs;lf=0;tab='home';render();window.scrollTo(0,0)}
  else if(d.go)go(d.go);
- else if(d.say!=null)speak(VOCAB[+d.say].zh);
- else if(d.sayx!=null)speak(VOCAB[+d.sayx].ex[0]);
- else if(d.add!=null){var w=VOCAB[+d.add];if(S.due[w.zh])delete S.due[w.zh];else S.due[w.zh]={i:0,t:Date.now()};save();var y=window.scrollY;render();window.scrollTo(0,y)}
- else if(d.addall){VOCAB.forEach(function(w){if(!S.due[w.zh])S.due[w.zh]={i:0,t:Date.now()}});save();render()}
+ else if(d.wsay!=null)speak(VOCAB[+d.wsay].zh);
+ else if(d.wadd!=null){var w0=VOCAB[+d.wadd],D0=DUE('gram');if(D0[w0.zh])delete D0[w0.zh];else D0[w0.zh]={i:0,t:Date.now()};save();var y0=window.scrollY;render();window.scrollTo(0,y0)}
+ else if(d.lf!=null){lf=+d.lf;render()}
+ else if(d.open){var p0=d.open.split(':');crs=p0[0];lf=0;tab=p0[1];render();window.scrollTo(0,0)}
+ else if(d.say!=null)speak(CV()[+d.say].zh);
+ else if(d.sayx!=null)speak(CV()[+d.sayx].ex[0]);
+ else if(d.add!=null){var w=CV()[+d.add],D1=DUE();if(D1[w.zh])delete D1[w.zh];else D1[w.zh]={i:0,t:Date.now()};save();var y=window.scrollY;render();window.scrollTo(0,y)}
+ else if(d.addall){var D2=DUE();CV().forEach(function(w){if(!D2[w.zh])D2[w.zh]={i:0,t:Date.now()}});save();render()}
  else if(d.flip){flip=!flip;if(flip)speak(card);render()}
  else if(d.sayc)speak(card);
  else if(d.rate!=null)rate(+d.rate);
