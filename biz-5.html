@@ -1,0 +1,888 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><title>الدرس الخامس 为了大家的健康干杯</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
+<style>
+/* Layout concept: a study sheet on cool jade-grey paper. Hanzi are the large ink forms, coloured by tone;
+   one red seal (课) is the only loud mark. Single column, sticky tab bar, everything else stays quiet. */
+:root{
+  --bg:#FBF6EE; --surface:#FFFDF9; --surface2:#F3EBDD; --fg:#2B1D18; --muted:#7B6A5E; --line:#E8DCC8;
+  --accent:#B8322A; --accent-fg:#FFFFFF; --accent-soft:#F8E4DF;
+  --seal:#B8322A; --seal-fg:#FFFFFF; --star:#C98A0A;
+  --good:#2E7D4F; --good-soft:#DDF0E2; --bad:#B3261E; --bad-soft:#F7DBD8;
+  --t1:#C0392B; --t2:#A66A00; --t3:#1D7A45; --t4:#2759B8; --t5:#6A7B77;
+  --font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+  --font-han:'Noto Serif SC','Songti SC','STSong','SimSun',serif;
+  --font-py:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+    --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+    --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+    --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+    --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+  --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+  --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+  --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+  --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--font-ui);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 64px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.mut{color:var(--muted);font-size:14px}
+h1,h2,h3,p{margin:0}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);
+  box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
+.top{display:flex;align-items:center;gap:12px;padding-block:12px 4px}
+.seal{flex:none;width:40px;height:40px;border-radius:4px;background:var(--seal);color:var(--seal-fg);
+  display:grid;place-items:center;font:700 24px/1 var(--font-han);transform:rotate(-4deg);
+  outline:2px solid var(--seal);outline-offset:2px}
+.ttl{flex:1;min-width:0}
+.ttl h1{font-size:20px;font-weight:700;line-height:1.3}
+.ttl p{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;
+  padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.ibtn{appearance:none;flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);
+  background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:4px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:0;background:none;color:var(--muted);font-size:15px;font-weight:600;
+  padding:10px 12px;border-bottom:3px solid transparent;white-space:nowrap;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.prog{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+/* shared */
+.panel{padding-block:20px 24px}
+.sec-h{margin-bottom:14px}
+.sec-h h2{font-size:21px;font-weight:700;line-height:1.35}
+.sec-h p{color:var(--muted);font-size:14px;margin-top:2px}
+.sub-h{font-size:17px;font-weight:700;margin:26px 0 10px}
+.btn{appearance:none;border:0;border-radius:12px;padding:12px 18px;font-size:16px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:var(--surface2);color:var(--fg)}
+.btn.sm{min-height:40px;padding:8px 14px;font-size:14px}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 12px;
+  font-size:15px;font-weight:600;cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;min-height:40px;justify-content:center}
+.chip.tgl.on{background:var(--accent-soft);border-color:var(--accent)}
+.spk{appearance:none;flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--accent-soft);
+  color:var(--accent);display:grid;place-items:center;cursor:pointer}
+.spk.sm{width:34px;height:34px}
+.spk.big{width:84px;height:84px;background:var(--accent);color:var(--accent-fg)}
+.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
+.han{font-family:var(--font-han);font-weight:500}
+.py{font-family:var(--font-py)}
+.off{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+
+/* flashcard */
+.fc{background:var(--surface);border:1px solid var(--line);border-radius:20px;cursor:pointer;display:grid;min-height:310px;position:relative}
+.face{grid-area:1/1;padding:48px 18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;animation:pop .22s ease-out}
+.face .spk{position:absolute;top:12px;inset-inline-end:12px}
+.bigzh{font:500 clamp(64px,22vw,104px)/1.15 var(--font-han)}
+.hint{color:var(--muted);font-size:14px}
+.fc .pyl{font:500 30px/1.2 var(--font-py)}
+.fc .meaning{font-size:26px;font-weight:700;line-height:1.4}
+.fc .note{font-size:14px;color:var(--muted);max-width:30em}
+.ex{width:100%;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;display:grid;gap:2px;text-align:start}
+.exzh{font:500 22px/1.4 var(--font-han)}
+.expy{font:14px var(--font-py);color:var(--muted)}
+.exar{font-size:15px;direction:rtl;text-align:right}
+@keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.navrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.cnt{font:500 15px var(--font-py);color:var(--muted)}
+.actrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.row{display:grid;grid-template-columns:5.2em 1fr auto auto;gap:12px;align-items:center;padding:10px 4px;
+  border-bottom:1px solid var(--line);cursor:pointer}
+.row.cur{background:var(--accent-soft);border-radius:10px}
+.rz{font:500 26px/1.2 var(--font-han);text-align:start}
+.rpy{font:15px var(--font-py)}
+.rar{font-size:15px;color:var(--muted)}
+.kn{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);color:transparent}
+.kn.on{background:var(--good);border-color:var(--good);color:var(--bg)}
+
+/* dialogue */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.lines{display:grid;gap:10px}
+.line{display:grid;gap:8px;padding:14px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.line.S{background:var(--accent-soft);border-color:transparent}
+.line.playing{outline:2.5px solid var(--accent);outline-offset:1px}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted)}
+.who .spk{margin-inline-start:auto}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--font-han);background:var(--fg);color:var(--bg)}
+.S .av{background:var(--accent);color:var(--accent-fg)}
+.zhline{display:flex;flex-wrap:wrap;gap:4px 2px;direction:ltr;align-items:flex-end}
+.tok{appearance:none;background:none;border:0;border-radius:8px;padding:2px 4px;cursor:pointer;display:inline-flex;
+  flex-direction:column;align-items:center;color:inherit;font:inherit}
+.tok:hover,.tok:focus-visible{background:var(--surface2)}
+.tok .py{font-size:12px;line-height:1.5}
+.tok .zh{font:500 26px/1.25 var(--font-han)}
+.nopy .tok .py{display:none}
+.punc{font:500 26px/1.25 var(--font-han);align-self:flex-end;padding-bottom:0}
+.arline{color:var(--muted);font-size:15px}
+.noar .arline{display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
+  padding:14px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  box-shadow:0 -8px 24px rgba(0,0,0,.12)}
+.sheet-in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.sh-main{display:grid;gap:0}
+.sh-zh{font:500 34px/1.2 var(--font-han)}
+.sh-py{font:16px var(--font-py)}
+.sh-ar{flex:1;font-size:19px;font-weight:700}
+.cq{display:grid;gap:8px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
+.cq b{font-weight:600}
+.cq .o{display:flex;gap:8px;flex-wrap:wrap}
+
+/* grammar */
+.tones{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tn{display:grid;gap:4px;justify-items:center;text-align:center;padding:12px 8px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.tn svg{width:56px;height:56px}
+.tn .pyl{font:500 24px var(--font-py)}
+.tn .nm{font-size:13px;color:var(--muted)}
+.tn .ex1{font:500 20px var(--font-han)}
+.formula{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0 12px;font-size:15px}
+.fm{padding:4px 10px;border-radius:8px;background:var(--surface2);font-weight:600}
+.fm.k{background:var(--accent);color:var(--accent-fg);font-family:var(--font-han);font-size:18px}
+.sentbox{display:grid;gap:6px;padding:12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);margin-top:10px}
+.sentbox .zhline{align-items:flex-end}
+.qmark{background:var(--accent);color:var(--accent-fg);border-radius:6px;padding:0 4px}
+.qa{display:grid;gap:8px;margin-top:10px}
+.qa .m{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.qa .m .t{flex:1;display:grid}
+.qa .m .z{font:500 22px/1.35 var(--font-han)}
+
+/* writing */
+.cvwrap{width:100%;max-width:340px;margin:0 auto}
+#cv{width:100%;aspect-ratio:1;display:block;border-radius:14px;touch-action:none;border:1px solid var(--line);cursor:crosshair}
+.winfo{display:flex;align-items:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.winfo .big{font:500 44px/1 var(--font-han)}
+
+/* practice */
+.stats{display:grid;gap:12px}
+.xprow{display:flex;align-items:center;gap:12px}
+.xpbar{flex:1;height:10px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.xpbar i{display:block;height:100%;background:var(--accent)}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{width:62px;text-align:center;font-size:12px;line-height:1.35;opacity:.38;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none}
+.badge span{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 4px;border-radius:50%;
+  border:2px solid var(--seal);color:var(--seal);font:700 22px var(--font-han);background:var(--surface)}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.act{appearance:none;text-align:start;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px;
+  cursor:pointer;display:grid;gap:4px;align-content:start}
+.act strong{font-size:16px}
+.act small{color:var(--muted);font-size:13px;line-height:1.5}
+.act.feat{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.act.feat small{color:inherit;opacity:.85}
+.stars{display:flex;gap:2px;color:var(--line)}
+.stars .on{color:var(--star)}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.qbar{flex:1;height:8px;border-radius:5px;background:var(--surface2);overflow:hidden}
+.qbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.qprompt{display:grid;gap:8px;justify-items:center;text-align:center;margin-bottom:18px}
+.qprompt .ar-s{font-size:20px;font-weight:700}
+.opts{display:grid;gap:10px}
+.opt{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;min-height:54px;padding:10px 14px;
+  font-size:18px;font-weight:600;cursor:pointer;text-align:center}
+.opt .pyopt{font:500 22px var(--font-py)}
+.opt.good{background:var(--good-soft);border-color:var(--good)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.slot,.pool{display:flex;flex-wrap:wrap;gap:8px;direction:ltr;min-height:64px;align-items:center;padding:10px;border-radius:14px}
+.slot{border:2px dashed var(--line);margin-bottom:12px;background:var(--surface)}
+.slot .ph{direction:rtl;color:var(--muted);font-size:14px;margin:0 auto}
+.pool{margin-bottom:16px;justify-content:center}
+.chip .zh{font:500 24px/1.2 var(--font-han)}
+.chip .py{font-size:11px;color:var(--muted)}
+.chip.pick{background:var(--accent-soft);border-color:var(--accent)}
+.chip.good{background:var(--good-soft);border-color:var(--good)}
+.chip.bad{background:var(--bad-soft);border-color:var(--bad)}
+.fillsent{font:500 30px/1.6 var(--font-han);direction:ltr}
+.blank{display:inline-block;min-width:1.6em;border-bottom:3px solid var(--accent);text-align:center;margin:0 4px}
+.blank.good{border-color:var(--good);color:var(--good)}
+.blank.bad{border-color:var(--bad);color:var(--bad)}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:grid;gap:8px;align-content:start}
+.mi{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;min-height:58px;padding:6px 8px;
+  cursor:pointer;display:grid;place-items:center;font-size:16px;font-weight:600;line-height:1.35}
+.mi .zh{font:500 24px/1.2 var(--font-han)}
+.mi .py{font-size:12px;color:var(--muted)}
+.mi.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mi.ok{border-color:var(--good);background:var(--good-soft);opacity:.7}
+.mi.no{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin:16px 0;padding:14px;border-radius:14px;display:grid;gap:6px}
+.fb.good{background:var(--good-soft);border:1px solid var(--good)}
+.fb.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.fb .fw{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.res{display:grid;gap:14px;justify-items:center;text-align:center;padding:12px 0}
+.res .stars svg{width:44px;height:44px}
+.res h3{font-size:24px}
+.res .sc{font:700 44px var(--font-py)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;
+  background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;max-width:90vw;text-align:center}
+@media (min-width:560px){
+  .tones{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* lesson 8 additions */
+[hidden]{display:none!important}
+.tg{display:inline-flex;align-items:flex-end;white-space:nowrap}
+.il{width:100%;height:100%;display:block;stroke:var(--fg);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.il .a{fill:var(--accent-soft)}.il .b{fill:var(--surface2)}.il .r{fill:var(--seal)}.il .y{fill:var(--star)}.il .w{fill:var(--surface)}.il .k{fill:var(--fg);stroke:none}
+.pic{display:block;width:100%;height:100%}
+.pic.pb{width:92px;height:92px;margin-bottom:2px}
+.pic.pt{width:44px;height:44px}
+.picbig{width:140px;height:140px}
+.rp{width:44px;height:44px}
+.row{grid-template-columns:44px 5.6em 1fr auto auto}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:0 8px;margin-inline-start:6px;background:var(--surface2);color:var(--muted)}
+.scene{display:flex;gap:8px;justify-content:space-around;flex-wrap:wrap;padding:12px;border-radius:16px;background:var(--surface);border:1px solid var(--line);margin:10px 0 6px}
+.scene figure{margin:0;display:grid;justify-items:center;gap:4px;width:84px;text-align:center}
+.scene .sci{width:68px;height:68px}
+.scene figcaption{font-size:12px;color:var(--muted);line-height:1.35}
+.line.N{background:var(--surface);border-style:dashed}
+.line.L{background:var(--accent-soft);border-color:transparent}
+.line.C{background:var(--surface2);border-color:transparent}
+.L .av{background:var(--accent);color:var(--accent-fg)}
+.C .av{background:var(--seal);color:var(--seal-fg)}
+.N .av{background:var(--muted);color:var(--bg)}
+.calcard{display:grid;justify-items:center;border:2px solid var(--fg);border-radius:14px;overflow:hidden;width:150px;background:var(--surface)}
+.calcard .cm{background:var(--seal);color:var(--seal-fg);width:100%;padding:2px 0;font-weight:700;text-align:center}
+.calcard .cd{font:700 56px/1.15 var(--font-py)}
+.calcard .cw{padding-bottom:6px;font-weight:600}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper b{font:700 28px var(--font-py);min-width:2ch;text-align:center}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.tile{display:grid;justify-items:center;gap:2px;padding:10px 6px;border:1px solid var(--line);border-radius:12px;background:var(--bg);text-align:center}
+.tile .py{font-size:15px}
+.sdg{width:40px;height:40px;flex:none}
+.qa .m .t{min-width:0}
+
+.line.S,.line.A{background:var(--accent-soft);border-color:transparent}
+.line.X,.line.Y{background:var(--surface2);border-color:transparent}
+.S .av,.A .av{background:var(--accent);color:var(--accent-fg)}
+.X .av,.Y .av{background:var(--seal);color:var(--seal-fg)}
+.cqo{display:inline-flex;flex-direction:column;align-items:center;line-height:1.3;height:auto;padding-block:6px}
+.cqo .py{font-size:12px}
+.cq>b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+
+table{border-collapse:collapse;width:100%;min-width:420px;background:var(--surface)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);text-align:start;vertical-align:top}
+th{background:var(--accent-soft)}td:first-child{background:var(--surface2);font-weight:600}tr:last-child td{border-bottom:0}
+.sh2{font-size:15px;font-weight:700;margin:18px 0 6px}
+.tiles .tile .han{font-size:24px}
+.pair{display:grid;gap:6px;margin-top:8px}.pair .tiles{grid-template-columns:1fr 1fr}
+textarea{width:100%;min-height:96px;margin-top:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);font:500 20px/1.6 var(--font-han);resize:vertical}
+.us{display:flex;gap:6px;flex-wrap:wrap}.us span{padding:2px 10px;border-radius:99px;border:1px solid var(--line);font:500 16px var(--font-han);color:var(--muted)}.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
+</style>
+
+<div class="wrap" id="app" dir="rtl" lang="ar">
+  <header class="hdr">
+    <div class="top">
+      <a class="seal" href="index.html#biz" aria-label="العودة إلى الدروس" lang="zh" style="text-decoration:none">五</a>
+      <div class="ttl"><h1>الدرس الخامس</h1><p>为了大家的健康干杯</p></div>
+      <button class="pill" id="slowbtn" data-act="slow" aria-pressed="false">صوت بطيء</button>
+      <button class="ibtn" data-act="theme" aria-label="تبديل المظهر الفاتح والداكن"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="أقسام الدرس">
+      <button class="tab" role="tab" data-act="tab" data-tab="vocab">المفردات</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="dialogue">الحوار</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="grammar">القواعد</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="writing">الكتابة</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="practice">التمارين</button>
+    </nav>
+    <div class="prog" aria-hidden="true"><i id="gprog"></i></div>
+  </header>
+  <main>
+    <section id="p-vocab" class="panel" hidden></section>
+    <section id="p-dialogue" class="panel" hidden></section>
+    <section id="p-grammar" class="panel" hidden></section>
+    <section id="p-writing" class="panel" hidden></section>
+    <section id="p-practice" class="panel" hidden></section>
+  </main>
+  <div id="sheet" class="sheet" hidden></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var shuffle=function(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a};
+var pick=function(a,n){return shuffle(a).slice(0,n)};
+
+/* ---------- state ---------- */
+var KEY='noor-biz5-v1',HUBK='zh-hub-v1',CRS='biz';
+var S={known:{},wrong:{},xp:0,best:{},badges:{},heard:{},py:true,ar:true,slow:false,card:0};
+try{var raw=localStorage.getItem(KEY);if(raw){Object.assign(S,JSON.parse(raw))}}catch(e){}
+S.flip=false;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+try{var th=localStorage.getItem(KEY+'-theme');if(th){document.documentElement.setAttribute('data-theme',th)}}catch(e){}
+
+/* ---------- icons ---------- */
+var IC={
+  spk:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  play:'<path d="M7 5l12 7-12 7z" fill="currentColor"/>',
+  stop:'<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
+  redo:'<path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/>',
+  star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17.3 6.6 20.2l1.1-6.1L3.2 9.9l6.1-.8z"/>'
+};
+function ic(n,s){s=s||20;return '<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
+function spkBtn(t,cls){return '<button class="spk '+(cls||'')+'" data-act="say" data-t="'+esc(t)+'" aria-label="استمع">'+ic('spk',cls==='big'?36:20)+'</button>'}
+
+/* ---------- speech ---------- */
+var TTS={ok:('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window),voice:null,warned:false};
+function pickVoice(){
+  if(!TTS.ok)return;
+  var vs=speechSynthesis.getVoices();
+  TTS.voice=vs.filter(function(v){return /^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return /^zh/i.test(v.lang)})[0]||null;
+}
+if(TTS.ok){pickVoice();try{speechSynthesis.onvoiceschanged=pickVoice}catch(e){}}
+function speak(text,done,pitch){
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');if(done)done();return false}
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN';
+    if(TTS.voice)u.voice=TTS.voice;
+    else if(!TTS.warned&&speechSynthesis.getVoices().length){TTS.warned=true;toast('لا يوجد صوت صيني على جهازك، ثبّت صوتاً صينياً من إعدادات النظام')}
+    u.rate=S.slow?0.55:0.85;
+    u.pitch=pitch||1;
+    u.onend=function(){if(done)done()};
+    u.onerror=function(){if(done)done()};
+    speechSynthesis.speak(u);
+    return true;
+  }catch(e){if(done)done();return false}
+}
+function stopSpeech(){try{if(TTS.ok)speechSynthesis.cancel()}catch(e){}}
+
+/* ---------- toast ---------- */
+var toastT=null;
+function toast(msg){var t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},2800)}
+
+/* ---------- pinyin helpers ---------- */
+function toneOf(s){var d=s.normalize('NFD');if(/̄/.test(d))return 1;if(/́/.test(d))return 2;if(/̌/.test(d))return 3;if(/̀/.test(d))return 4;return 5}
+var MARK={1:'̄',2:'́',3:'̌',4:'̀'};
+function setTone(s,n){
+  var b=s.normalize('NFD').replace(/[̀́̄̌]/g,'').normalize('NFC');
+  if(n===5)return b;
+  var low=b.toLowerCase(),idx=-1,i;
+  if(/[ae]/.test(low))idx=low.search(/[ae]/);
+  else if(low.indexOf('ou')>-1)idx=low.indexOf('o');
+  else{for(i=low.length-1;i>=0;i--){if('aeiou'.indexOf(low[i])>-1){idx=i;break}}}
+  if(idx<0)return b;
+  return (b.slice(0,idx+1)+MARK[n]+b.slice(idx+1)).normalize('NFC');
+}
+function toneVariants(py){
+  var syl=py.split(' '),out=[syl.join(' ')],guard=0;
+  while(out.length<4&&guard++<80){
+    var i=Math.floor(Math.random()*syl.length),cur=toneOf(syl[i]),n=1+Math.floor(Math.random()*5);
+    if(n===cur)continue;
+    var c=syl.slice();c[i]=setTone(syl[i],n);var j=c.join(' ');
+    if(out.indexOf(j)<0)out.push(j);
+  }
+  return out;
+}
+function han(zh,py){
+  var sy=py.split(' ');
+  return Array.from(zh).map(function(c,i){return '<span class="t'+(sy[i]?toneOf(sy[i]):5)+'">'+esc(c)+'</span>'}).join('');
+}
+function pyhtml(py){return py.split(' ').map(function(s){return '<span class="t'+toneOf(s)+'">'+esc(s)+'</span>'}).join('')}
+
+/* ---------- content ---------- */
+var D={"vocab":[{"zh":"晚宴","py":"wǎn yàn","ar":"مأدبة عشاء","ex":["明晚有一个晚宴。","Míng wǎn yǒu yí gè wǎnyàn.","مساء الغد توجد مأدبة عشاء."]},{"zh":"接风","py":"jiē fēng","ar":"استقبال بوليمة لضيف قادم من بعيد","ex":["为您接风。","Wèi nín jiēfēng.","نستقبلك بوليمة ترحيب."]},{"zh":"盛情","py":"shèng qíng","ar":"كرم / حفاوة","ex":["谢谢您的盛情邀请。","Xièxie nín de shèngqíng yāoqǐng.","شكراً لدعوتكم الكريمة."]},{"zh":"邀请","py":"yāo qǐng","ar":"يدعو / دعوة","ex":["我们邀请您参加晚宴。","Wǒmen yāoqǐng nín cānjiā wǎnyàn.","ندعوك لحضور مأدبة العشاء."]},{"zh":"荣幸","py":"róng xìng","ar":"مشرَّف / شرف","ex":["我感到非常荣幸。","Wǒ gǎn dào fēicháng róngxìng.","أشعر بشرف كبير."]},{"zh":"出席","py":"chū xí","ar":"يحضر","ex":["出席宴会的还有哪些人？","Chūxí yànhuì de hái yǒu nǎ xiē rén?","من سيحضر المأدبة أيضاً؟"]},{"zh":"周到","py":"zhōu dào","ar":"دقيق / مراعٍ لكل التفاصيل","ex":["你们安排得太周到了。","Nǐmen ān pái dé tài zhōudào le.","ترتيباتكم دقيقة جداً."]},{"zh":"入席","py":"rù xí","ar":"يجلس إلى المائدة","ex":["请入席吧。","Qǐng rùxí ba.","تفضّل إلى المائدة."]},{"zh":"合","py":"hé","ar":"يناسب","ex":["合不合您的口味？","Hé bù hé nín de kǒuwèi?","هل يناسب ذوقك؟"]},{"zh":"口味","py":"kǒu wèi","ar":"الذوق / النكهة","ex":["中国菜很合我的口味。","Zhōngguó cài hěn hé wǒ de kǒuwèi.","الطعام الصيني يناسب ذوقي."]},{"zh":"老字号","py":"lǎo zì hào","ar":"علامة تجارية عريقة","ex":["这是北京有名的老字号。","Zhè shì Běijīng yǒumíng de lǎozìhào.","هذه علامة عريقة مشهورة في بكين."]},{"zh":"地道","py":"dì dào","ar":"أصيل","ex":["菜做得很地道。","Cài zuò dé hěn dìdào.","الطعام مُعدّ بشكل أصيل."]},{"zh":"烤鸭","py":"kǎo yā","ar":"البط المشوي","ex":["北京烤鸭很有名。","Běijīng kǎoyā hěn yǒumíng.","البط المشوي البكيني مشهور."]},{"zh":"大饱口福","py":"dà bǎo kǒu fú","ar":"يشبع ذوقه بأطايب الطعام","ex":["这次可以大饱口福了。","Zhè cì kě yǐ dàbǎokǒufú le.","هذه المرة سأشبع ذوقي."]},{"zh":"白酒","py":"bái jiǔ","ar":"البايجيو (مشروب صيني قوي)","ex":["中国的白酒太厉害了。","Zhōngguó de báijiǔ tài lì hài le.","البايجيو الصيني قوي جداً."]},{"zh":"推荐","py":"tuī jiàn","ar":"يوصي / يرشّح","ex":["我推荐您尝尝。","Wǒ tuījiàn nín cháng cháng.","أنصحك أن تجرّب."]},{"zh":"醉","py":"zuì","ar":"يسكر / ثمل","ex":["我喝一两杯就要醉了。","Wǒ hē yì liǎng bēi jiù yào zuì le.","أسكر بكأس أو كأسين."]},{"zh":"友谊","py":"yǒu yì","ar":"صداقة","ex":["为了我们的友谊干杯！","Wèi le wǒmen de yǒuyì gānbēi!","نخباً لصداقتنا!"]},{"zh":"茅台酒","py":"máo tái jiǔ","ar":"مشروب ماوتاي","ex":["我推荐您尝尝茅台酒。","Wǒ tuījiàn nín cháng cháng máotáijiǔ.","أنصحك بتذوق ماوتاي."]},{"zh":"祝酒辞","py":"zhù jiǔ cí","ar":"كلمة نخب","ex":["他在宴会上致祝酒辞。","Tā zài yànhuì shàng zhì zhùjiǔcí.","ألقى كلمة نخب في المأدبة."]},{"zh":"代表团","py":"dài biǎo tuán","ar":"وفد","ex":["三星公司的代表团来北京。","Sān xīng gōng sī de dàibiǎotuán lái Běijīng.","وفد سامسونغ جاء إلى بكين."]},{"zh":"全体","py":"quán tǐ","ar":"الجميع / كامل","ex":["我代表全体员工表示欢迎。","Wǒ dài biǎo quántǐ yuángōng biǎoshì huān yíng.","أمثّل جميع الموظفين وأرحّب."]},{"zh":"良好","py":"liáng hǎo","ar":"جيد","ex":["我们有良好的合作关系。","Wǒmen yǒu liánghǎo de hézuò guān xì.","لدينا علاقة تعاون جيدة."]},{"zh":"成功","py":"chéng gōng","ar":"ناجح / نجاح","ex":["我们的合作很成功。","Wǒmen de hézuò hěn chénggōng.","تعاوننا ناجح جداً."]},{"zh":"双方","py":"shuāng fāng","ar":"الطرفان","ex":["双方都非常满意。","Shuāngfāng dōu fēicháng mǎn yì.","الطرفان راضيان جداً."]},{"zh":"重视","py":"zhòng shì","ar":"يولي أهمية","ex":["我们很重视友谊。","Wǒmen hěn zhòngshì yǒuyì.","نقدّر الصداقة كثيراً."]},{"zh":"洽谈","py":"qià tán","ar":"يتفاوض / مباحثات","ex":["我们来洽谈合作。","Wǒmen lái qiàtán hézuò.","جئنا لبحث التعاون."]},{"zh":"举杯","py":"jǔ bēi","ar":"يرفع الكأس","ex":["现在请大家举杯。","Xiànzài qǐng dà jiā jǔbēi.","والآن أرجو رفع الكؤوس."]},{"zh":"干杯","py":"gān bēi","ar":"نخب / في صحتكم","ex":["为了大家的健康干杯！","Wèi le dà jiā de jiàn kāng gānbēi!","نخباً لصحة الجميع!"]},{"zh":"请柬","py":"qǐng jiǎn","ar":"بطاقة دعوة","ex":["我给你一张请柬。","Wǒ gěi nǐ yì Zhāng qǐngjiǎn.","أعطيك بطاقة دعوة."]},{"zh":"庆祝","py":"qìng zhù","ar":"يحتفل","ex":["庆祝公司成立十周年。","Qìngzhù gōng sī chéng lì shí zhōu nián.","نحتفل بالذكرى العاشرة لتأسيس الشركة."]},{"zh":"聚会","py":"jù huì","ar":"يجتمع / تجمّع","ex":["今天我们在这里聚会。","Jīntiān wǒmen zài zhè lǐ jùhuì.","نجتمع هنا اليوم."]},{"zh":"海鲜","py":"hǎi xiān","ar":"مأكولات بحرية","ex":["你喜欢吃海鲜吗？","Nǐ xǐhuan chī hǎixiān ma?","هل تحب المأكولات البحرية؟"]},{"zh":"招牌菜","py":"zhāo pái cài","ar":"الطبق المميز للمطعم","ex":["这是这家饭店的招牌菜。","Zhè shì zhè jiā fàndiàn de zhāopáicài.","هذا الطبق المميز للمطعم."]},{"zh":"油腻","py":"yóu nì","ar":"دسم","ex":["很好吃，可是太油腻了。","Hěn hǎochī, kě shì tài yóunì le.","لذيذ لكنه دسم جداً."]},{"zh":"左右","py":"zuǒ yòu","ar":"نحو / حوالي","ex":["一共10个人左右。","Yígòng 10 gè rén zuǒyòu.","نحو ١٠ أشخاص."]},{"zh":"特别","py":"tè bié","ar":"خاصة / مميز","ex":["特别是这儿的烤鸭。","Tèbié shì zhèér de kǎoyā.","خاصة البط المشوي هنا."]},{"zh":"光临","py":"guāng lín","ar":"يتشرف بالحضور","ex":["欢迎光临。","Huān yíng guānglín.","أهلاً بحضورك."]}],"tokpy":{"场":"chǎng","景":"jǐng","李":"lǐ","明":"míng","亮":"liàng","邀请":"yāo qǐng","史":"shǐ","密":"mì","斯":"sī","先生":"xiān sheng","晚":"wǎn","出席":"chū xí","晚宴":"wǎn yàn","早":"zǎo","上":"shàng","好":"hǎo","您":"nín","明天":"míng tiān","晚上":"wǎn shang","有":"yǒu","什么":"shén me","安":"ān","排":"pái","吗":"ma","我":"wǒ","没":"méi","特别":"tè bié","的":"de","事":"shì","儿":"ér","那":"nà","太":"tài","了":"le","我们":"wǒ men","总":"zǒng","经":"jīng","理":"lǐ","在":"zài","和":"hé","平":"píng","饭店":"fàn diàn","举行":"jǔ xíng","为":"wèi","接风":"jiē fēng","请":"qǐng","光临":"guāng lín","谢谢":"xiè xie","王":"wáng","盛情":"shèng qíng","感":"gǎn","到":"dào","非常":"fēi cháng","荣幸":"róng xìng","顺":"shùn","便":"biàn","问":"wèn","一下":"yí xià","宴会":"yàn huì","还":"hái","哪":"nǎ","些":"xiē","人":"rén","除":"chú","以":"yǐ","外":"wài","一":"yí","位":"wèi","副":"fù","几":"jǐ","部":"bù","门":"mén","一共":"yí gòng","个":"gè","左右":"zuǒ yòu","很":"hěn","高兴":"gāo xìng","能":"néng","认识":"rèn shi","新":"xīn","朋友":"péng you","你们":"nǐ men","得":"dé","周到":"zhōu dào","定":"dìng","时候":"shí hou","点":"diǎn","开":"kāi","始":"shǐ","半":"bàn","派":"pài","车":"chē","来":"lái","宾馆":"bīn guǎn","接":"jiē","看":"kàn","怎么样":"zěn me yàng","就":"jiù","这":"zhè","么":"me","说":"shuō","你":"nǐ","通知":"tōng zhī","见":"jiàn","客":"kè","气":"qì","志":"zhì","东":"dōng","热":"rè","情":"qíng","欢":"huān","迎":"yíng","并":"bìng","介绍":"jiè shào","饭":"fàn","菜":"cài","酒":"jiǔ","今天":"jīn tiān","深":"shēn","里":"lǐ","入席":"rù xí","吧":"ba","今":"jīn","吃":"chī","中国":"Zhōng guó","不":"bú","知":"zhī","道":"dào","合":"hé","口味":"kǒu wèi","好吃":"hǎo chī","再":"zài","过":"guò","家":"jiā","是":"shì","北京":"Běi jīng","有名":"yǒu míng","老字号":"lǎo zì hào","做":"zuò","地道":"dì dào","这儿":"zhè ér","烤鸭":"kǎo yā","直":"zhí","都":"dōu","想":"xiǎng","次":"cì","可":"kě","大饱口福":"dà bǎo kǒu fú","要":"yào","喝":"hē","白酒":"bái jiǔ","啤":"pí","推荐":"tuī jiàn","尝":"cháng","茅台酒":"máo tái jiǔ","厉":"lì","害":"hài","两":"liǎng","杯":"bēi","醉":"zuì","各":"gè","谨":"jǐn","代":"dài","表":"biǎo","五":"wǔ","星":"xīng","电":"diàn","器":"qì","集":"jí","团":"tuán","对":"duì","表示":"biǎo shì","烈":"liè","尊":"zūn","敬":"jìng","友谊":"yǒu yì","大":"dà","健":"jiàn","康":"kāng","干杯":"gān bēi","女":"nǚ","士":"shì","们":"men","韩国":"Hán guó","三":"sān","公":"gōng","司":"sī","代表团":"dài biǎo tuán","首":"shǒu","先":"xiān","全体":"quán tǐ","员工":"yuán gōng","远":"yuǎn","而":"ér","同":"tóng","时":"shí","也":"yě","谢":"xiè","老":"lǎo","良好":"liáng hǎo","合作":"hé zuò","关":"guān","系":"xì","成功":"chéng gōng","双方":"shuāng fāng","满":"mǎn","意":"yì","重视":"zhòng shì","多":"duō","年":"nián","与":"yǔ","洽谈":"qià tán","以后":"yǐ hòu","计":"jì","划":"huà","希":"xī","望":"wàng","更":"gèng","地":"dì","朋":"péng","自":"zì","方":"fāng","亦":"yì","乐":"yuè","乎":"hū","现在":"xiàn zài","举杯":"jǔ bēi","祝酒辞":"zhù jiǔ cí","请柬":"qǐng jiǎn","庆祝":"qìng zhù","聚会":"jù huì","海鲜":"hǎi xiān","招牌菜":"zhāo pái cài","油腻":"yóu nì"},"dlg":[{"text":1,"who":"N","zh":"场景：李明亮邀请史密斯先生明晚出席晚宴。","ar":"المشهد: لي مينغ ليانغ يدعو السيد سميث إلى مأدبة العشاء مساء الغد.","tok":[["场","chǎng",""],["景","jǐng",""],["："],["李","lǐ",""],["明","míng",""],["亮","liàng",""],["邀请","yāo qǐng",""],["史","shǐ",""],["密","mì",""],["斯","sī",""],["先生","xiān sheng","سيد / أستاذ"],["明","míng",""],["晚","wǎn",""],["出席","chū xí",""],["晚宴","wǎn yàn",""],["。"]]},{"text":1,"who":"S","zh":"早上好，史密斯先生。您明天晚上有什么安排吗？","ar":"صباح الخير سيد سميث. هل لديك ارتباط مساء الغد؟","tok":[["早","zǎo",""],["上","shàng","صباح/فوق"],["好","hǎo","جيد"],["，"],["史","shǐ",""],["密","mì",""],["斯","sī",""],["先生","xiān sheng","سيد / أستاذ"],["。"],["您","nín","حضرتك (مهذب)"],["明天","míng tiān","غداً"],["晚上","wǎn shang","مساءً"],["有","yǒu","يملك / يوجد"],["什么","shén me","ماذا / أي"],["安","ān",""],["排","pái",""],["吗","ma","(أداة سؤال)"],["？"]]},{"text":1,"who":"X","zh":"我明晚没什么特别的事儿。","ar":"ليس لدي مساء الغد شيء مهم.","tok":[["我","wǒ","أنا"],["明","míng",""],["晚","wǎn",""],["没","méi","لا / ليس (نفي 有)"],["什么","shén me","ماذا / أي"],["特别","tè bié","خاصةً / جداً"],["的","de","أداة الإضافة"],["事","shì","أمر / شغل"],["儿","ér",""],["。"]]},{"text":1,"who":"S","zh":"那太好了。明晚我们总经理在和平饭店举行晚宴，为您接风，请您光临。","ar":"رائع. مساء الغد يقيم مديرنا العام مأدبة عشاء في فندق السلام لاستقبالك، نرجو حضورك.","tok":[["那","nà","ذلك"],["太","tài","جداً / أكثر من اللازم"],["好","hǎo","جيد"],["了","le","أداة نغمية / ماضٍ"],["。"],["明","míng",""],["晚","wǎn",""],["我们","wǒ men","نحن"],["总","zǒng",""],["经","jīng",""],["理","lǐ",""],["在","zài","في / عند"],["和","hé","و"],["平","píng",""],["饭店","fàn diàn",""],["举行","jǔ xíng",""],["晚宴","wǎn yàn",""],["，"],["为","wèi",""],["您","nín","حضرتك (مهذب)"],["接风","jiē fēng",""],["，"],["请","qǐng","من فضلك"],["您","nín","حضرتك (مهذب)"],["光临","guāng lín",""],["。"]]},{"text":1,"who":"X","zh":"谢谢王总的盛情邀请，我感到非常荣幸。顺便问一下，出席宴会的还有哪些人？","ar":"شكراً للمدير وانغ على دعوته الكريمة، أشعر بشرف كبير. بالمناسبة، من سيحضر المأدبة أيضاً؟","tok":[["谢谢","xiè xie","شكراً"],["王","wáng",""],["总","zǒng",""],["的","de","أداة الإضافة"],["盛情","shèng qíng",""],["邀请","yāo qǐng",""],["，"],["我","wǒ","أنا"],["感","gǎn",""],["到","dào","يصل"],["非常","fēi cháng","جداً"],["荣幸","róng xìng",""],["。"],["顺","shùn",""],["便","biàn",""],["问","wèn","يسأل"],["一下","yí xià","قليلاً / مرة (تلطيف)"],["，"],["出席","chū xí",""],["宴会","yàn huì",""],["的","de","أداة الإضافة"],["还","hái","أيضاً / بالإضافة"],["有","yǒu","يملك / يوجد"],["哪","nǎ","أي"],["些","xiē",""],["人","rén","شخص"],["？"]]},{"text":1,"who":"S","zh":"除了王总以外，还有一位副总经理和几位部门经理，一共10个人左右。","ar":"إضافةً إلى المدير وانغ، هناك نائب مدير عام وعدة مديري أقسام، نحو ١٠ أشخاص في المجموع.","tok":[["除","chú",""],["了","le","أداة نغمية / ماضٍ"],["王","wáng",""],["总","zǒng",""],["以","yǐ",""],["外","wài",""],["，"],["还","hái","أيضاً / بالإضافة"],["有","yǒu","يملك / يوجد"],["一","yí","واحد"],["位","wèi",""],["副","fù",""],["总","zǒng",""],["经","jīng",""],["理","lǐ",""],["和","hé","و"],["几","jǐ","كم (للأعداد الصغيرة)"],["位","wèi",""],["部","bù",""],["门","mén",""],["经","jīng",""],["理","lǐ",""],["，"],["一共","yí gòng","في المجموع"],["10"],["个","gè","كلمة عدّ عامة"],["人","rén","شخص"],["左右","zuǒ yòu",""],["。"]]},{"text":1,"who":"X","zh":"我很高兴能认识一些新朋友，你们安排得太周到了。宴会定在什么时候？","ar":"يسعدني أن أتعرف على أصدقاء جدد، ترتيباتكم دقيقة جداً. متى موعد المأدبة؟","tok":[["我","wǒ","أنا"],["很","hěn","جداً"],["高兴","gāo xìng","سعيد"],["能","néng","يستطيع"],["认识","rèn shi","يعرف / يتعرف"],["一","yì","واحد"],["些","xiē",""],["新","xīn","جديد"],["朋友","péng you","صديق"],["，"],["你们","nǐ men","أنتم"],["安","ān",""],["排","pái",""],["得","dé","(أداة)"],["太","tài","جداً / أكثر من اللازم"],["周到","zhōu dào",""],["了","le","أداة نغمية / ماضٍ"],["。"],["宴会","yàn huì",""],["定","dìng",""],["在","zài","في / عند"],["什么","shén me","ماذا / أي"],["时候","shí hou","وقت / لحظة"],["？"]]},{"text":1,"who":"S","zh":"宴会6点开始，5点半我们派车来宾馆接您，您看怎么样？","ar":"تبدأ المأدبة في السادسة، وفي الخامسة والنصف نرسل سيارة إلى الفندق لتقلّك، ما رأيك؟","tok":[["宴会","yàn huì",""],["6"],["点","diǎn","ساعة (الوقت)"],["开","kāi",""],["始","shǐ",""],["，"],["5"],["点","diǎn","ساعة (الوقت)"],["半","bàn","نصف"],["我们","wǒ men","نحن"],["派","pài",""],["车","chē",""],["来","lái","يأتي"],["宾馆","bīn guǎn",""],["接","jiē",""],["您","nín","حضرتك (مهذب)"],["，"],["您","nín","حضرتك (مهذب)"],["看","kàn","ينظر / يرى"],["怎么样","zěn me yàng","كيف (الحال)؟"],["？"]]},{"text":1,"who":"X","zh":"好的，那就这么说定了。谢谢你通知我，明天见。","ar":"حسناً، إذن اتفقنا. شكراً لإبلاغي، إلى الغد.","tok":[["好","hǎo","جيد"],["的","de","أداة الإضافة"],["，"],["那","nà","ذلك"],["就","jiù","بالضبط"],["这","zhè","هذا"],["么","me",""],["说","shuō","يقول / يتحدث"],["定","dìng",""],["了","le","أداة نغمية / ماضٍ"],["。"],["谢谢","xiè xie","شكراً"],["你","nǐ","أنتَ/أنتِ"],["通知","tōng zhī",""],["我","wǒ","أنا"],["，"],["明天","míng tiān","غداً"],["见","jiàn",""],["。"]]},{"text":1,"who":"S","zh":"您太客气了，明天见。","ar":"أنت لطيف جداً، إلى الغد.","tok":[["您","nín","حضرتك (مهذب)"],["太","tài","جداً / أكثر من اللازم"],["客","kè",""],["气","qì",""],["了","le","أداة نغمية / ماضٍ"],["，"],["明天","míng tiān","غداً"],["见","jiàn",""],["。"]]},{"text":2,"who":"N","zh":"场景：宴会上，王志东热情欢迎史密斯，并介绍饭菜和酒。","ar":"المشهد: في المأدبة يرحّب وانغ تشي دونغ بسميث بحرارة ويعرّفه بالطعام والشراب.","tok":[["场","chǎng",""],["景","jǐng",""],["："],["宴会","yàn huì",""],["上","shàng","صباح/فوق"],["，"],["王","wáng",""],["志","zhì",""],["东","dōng",""],["热","rè",""],["情","qíng",""],["欢","huān",""],["迎","yíng",""],["史","shǐ",""],["密","mì",""],["斯","sī",""],["，"],["并","bìng",""],["介绍","jiè shào","يقدّم / يعرّف"],["饭","fàn","وجبة / أرز"],["菜","cài",""],["和","hé","و"],["酒","jiǔ",""],["。"]]},{"text":2,"who":"L","zh":"晚上好，史密斯先生，欢迎光临，您能出席今天的宴会，我们深感荣幸。","ar":"مساء الخير سيد سميث، أهلاً بك، حضورك المأدبة اليوم يشرّفنا كثيراً.","tok":[["晚上","wǎn shang","مساءً"],["好","hǎo","جيد"],["，"],["史","shǐ",""],["密","mì",""],["斯","sī",""],["先生","xiān sheng","سيد / أستاذ"],["，"],["欢","huān",""],["迎","yíng",""],["光临","guāng lín",""],["，"],["您","nín","حضرتك (مهذب)"],["能","néng","يستطيع"],["出席","chū xí",""],["今天","jīn tiān","اليوم"],["的","de","أداة الإضافة"],["宴会","yàn huì",""],["，"],["我们","wǒ men","نحن"],["深","shēn",""],["感","gǎn",""],["荣幸","róng xìng",""],["。"]]},{"text":2,"who":"X","zh":"哪里哪里，谢谢您的盛情邀请。","ar":"أبداً أبداً، شكراً لدعوتكم الكريمة.","tok":[["哪","nǎ","أي"],["里","lǐ",""],["哪","nǎ","أي"],["里","lǐ",""],["，"],["谢谢","xiè xie","شكراً"],["您","nín","حضرتك (مهذب)"],["的","de","أداة الإضافة"],["盛情","shèng qíng",""],["邀请","yāo qǐng",""],["。"]]},{"text":2,"who":"L","zh":"您太客气了，请入席吧。我们今晚吃中国菜，不知道合不合您的口味？","ar":"أنت لطيف جداً، تفضّل بالجلوس. نأكل الليلة طعاماً صينياً، لا أدري هل يناسب ذوقك؟","tok":[["您","nín","حضرتك (مهذب)"],["太","tài","جداً / أكثر من اللازم"],["客","kè",""],["气","qì",""],["了","le","أداة نغمية / ماضٍ"],["，"],["请","qǐng","من فضلك"],["入席","rù xí",""],["吧","ba","أداة اقتراح لطيف"],["。"],["我们","wǒ men","نحن"],["今","jīn",""],["晚","wǎn",""],["吃","chī","يأكل"],["中国","Zhōng guó","الصين"],["菜","cài",""],["，"],["不","bù","لا"],["知","zhī",""],["道","dào",""],["合","hé",""],["不","bù","لا"],["合","hé",""],["您","nín","حضرتك (مهذب)"],["的","de","أداة الإضافة"],["口味","kǒu wèi",""],["？"]]},{"text":2,"who":"X","zh":"中国菜非常好吃，很合我的口味。","ar":"الطعام الصيني لذيذ جداً ويناسب ذوقي كثيراً.","tok":[["中国","Zhōng guó","الصين"],["菜","cài",""],["非常","fēi cháng","جداً"],["好吃","hǎo chī","لذيذ"],["，"],["很","hěn","جداً"],["合","hé",""],["我","wǒ","أنا"],["的","de","أداة الإضافة"],["口味","kǒu wèi",""],["。"]]},{"text":2,"who":"L","zh":"那再好不过了。这家饭店是北京有名的老字号，菜做得很地道，特别是这儿的烤鸭。","ar":"هذا أفضل ما يكون. هذا المطعم علامة عريقة مشهورة في بكين، وأطباقه أصيلة جداً، وخاصة بطّه المشوي.","tok":[["那","nà","ذلك"],["再","zài","مرة أخرى"],["好","hǎo","جيد"],["不","bú","لا"],["过","guò",""],["了","le","أداة نغمية / ماضٍ"],["。"],["这","zhè","هذا"],["家","jiā","أسرة / بيت"],["饭店","fàn diàn",""],["是","shì","يكون"],["北京","Běi jīng","بكين"],["有名","yǒu míng","مشهور"],["的","de","أداة الإضافة"],["老字号","lǎo zì hào",""],["，"],["菜","cài",""],["做","zuò","يعمل / يفعل"],["得","dé","(أداة)"],["很","hěn","جداً"],["地道","dì dào",""],["，"],["特别","tè bié","خاصةً / جداً"],["是","shì","يكون"],["这儿","zhè ér","هنا"],["的","de","أداة الإضافة"],["烤鸭","kǎo yā","بط مشوي"],["。"]]},{"text":2,"who":"X","zh":"太好了，我一直都想吃北京烤鸭，这次可以大饱口福了。","ar":"رائع، لطالما أردت تذوق البط المشوي البكيني، وهذه المرة سأشبع ذوقي.","tok":[["太","tài","جداً / أكثر من اللازم"],["好","hǎo","جيد"],["了","le","أداة نغمية / ماضٍ"],["，"],["我","wǒ","أنا"],["一","yì","واحد"],["直","zhí",""],["都","dōu","جميعاً"],["想","xiǎng","يريد / يفكر"],["吃","chī","يأكل"],["北京","Běi jīng","بكين"],["烤鸭","kǎo yā","بط مشوي"],["，"],["这","zhè","هذا"],["次","cì",""],["可","kě",""],["以","yǐ",""],["大饱口福","dà bǎo kǒu fú",""],["了","le","أداة نغمية / ماضٍ"],["。"]]},{"text":2,"who":"L","zh":"您要喝点儿什么？白酒还是啤酒？我推荐您尝尝中国的茅台酒。","ar":"ماذا تحب أن تشرب؟ البايجيو أم البيرة؟ أنصحك بتذوق «ماوتاي» الصيني.","tok":[["您","nín","حضرتك (مهذب)"],["要","yào","يريد"],["喝","hē","يشرب"],["点","diǎn","ساعة (الوقت)"],["儿","ér",""],["什么","shén me","ماذا / أي"],["？"],["白酒","bái jiǔ",""],["还","hái","أيضاً / بالإضافة"],["是","shì","يكون"],["啤","pí",""],["酒","jiǔ",""],["？"],["我","wǒ","أنا"],["推荐","tuī jiàn",""],["您","nín","حضرتك (مهذب)"],["尝","cháng",""],["尝","cháng",""],["中国","Zhōng guó","الصين"],["的","de","أداة الإضافة"],["茅台酒","máo tái jiǔ",""],["。"]]},{"text":2,"who":"X","zh":"中国的白酒太厉害了，我喝一两杯就要醉了，还是喝啤酒吧。","ar":"البايجيو الصيني قوي جداً، كأس أو كأسان وأسكر، الأفضل البيرة.","tok":[["中国","Zhōng guó","الصين"],["的","de","أداة الإضافة"],["白酒","bái jiǔ",""],["太","tài","جداً / أكثر من اللازم"],["厉","lì",""],["害","hài",""],["了","le","أداة نغمية / ماضٍ"],["，"],["我","wǒ","أنا"],["喝","hē","يشرب"],["一","yì","واحد"],["两","liǎng","اثنان (مع كلمة عدّ)"],["杯","bēi",""],["就","jiù","بالضبط"],["要","yào","يريد"],["醉","zuì",""],["了","le","أداة نغمية / ماضٍ"],["，"],["还","hái","أيضاً / بالإضافة"],["是","shì","يكون"],["喝","hē","يشرب"],["啤","pí",""],["酒","jiǔ",""],["吧","ba","أداة اقتراح لطيف"],["。"]]},{"text":2,"who":"L","zh":"各位，今天我们在这里为史密斯先生接风，我谨代表五星电器集团对史密斯先生的到来表示热烈的欢迎！为了我们尊敬的客人、为了我们的友谊、为了大家的健康干杯！","ar":"أيها الحضور، نجتمع هنا اليوم لاستقبال السيد سميث، وأنا أمثّل مجموعة النجوم الخمس للأجهزة الكهربائية وأرحّب بحرارة بقدومه! نخباً لضيفنا المحترم، ولصداقتنا، ولصحة الجميع!","tok":[["各","gè",""],["位","wèi",""],["，"],["今天","jīn tiān","اليوم"],["我们","wǒ men","نحن"],["在","zài","في / عند"],["这","zhè","هذا"],["里","lǐ",""],["为","wèi",""],["史","shǐ",""],["密","mì",""],["斯","sī",""],["先生","xiān sheng","سيد / أستاذ"],["接风","jiē fēng",""],["，"],["我","wǒ","أنا"],["谨","jǐn",""],["代","dài",""],["表","biǎo",""],["五","wǔ","خمسة"],["星","xīng",""],["电","diàn",""],["器","qì",""],["集","jí",""],["团","tuán",""],["对","duì","صحيح"],["史","shǐ",""],["密","mì",""],["斯","sī",""],["先生","xiān sheng","سيد / أستاذ"],["的","de","أداة الإضافة"],["到","dào","يصل"],["来","lái","يأتي"],["表示","biǎo shì",""],["热","rè",""],["烈","liè",""],["的","de","أداة الإضافة"],["欢","huān",""],["迎","yíng",""],["！"],["为","wèi",""],["了","le","أداة نغمية / ماضٍ"],["我们","wǒ men","نحن"],["尊","zūn",""],["敬","jìng",""],["的","de","أداة الإضافة"],["客","kè",""],["人","rén","شخص"],["、"],["为","wèi",""],["了","le","أداة نغمية / ماضٍ"],["我们","wǒ men","نحن"],["的","de","أداة الإضافة"],["友谊","yǒu yì",""],["、"],["为","wèi",""],["了","le","أداة نغمية / ماضٍ"],["大","dà","كبير"],["家","jiā","أسرة / بيت"],["的","de","أداة الإضافة"],["健","jiàn",""],["康","kāng",""],["干杯","gān bēi",""],["！"]]},{"text":2,"who":"C","zh":"干杯！","ar":"في صحتكم!","tok":[["干杯","gān bēi",""],["！"]]},{"text":3,"who":"A","zh":"女士们、先生们：晚上好！今天我们在这里举行宴会欢迎韩国三星公司代表团。首先，我谨代表五星电器集团全体员工对远道而来的客人表示热烈的欢迎！同时也非常感谢各位能出席我们的宴会。三星公司是我们的老朋友，和我们集团有良好的合作关系，我们的合作一直都很成功，双方都非常满意，也很重视多年的友谊。这次三星公司派代表团来北京与我们洽谈以后的合作计划，我们深感荣幸。希望我们洽谈成功，以后能更好地合作。“有朋自远方来，不亦乐乎！”现在请大家举杯，为了我们双方合作成功、为了我们的友谊、为了大家的健康，干杯！","ar":"سيداتي سادتي: مساء الخير! نقيم اليوم هذه المأدبة لاستقبال وفد شركة سامسونغ الكورية. أولاً، أمثّل جميع موظفي مجموعة النجوم الخمس وأرحّب بحرارة بالضيوف القادمين من بعيد! وأشكركم أيضاً على حضور مأدبتنا. سامسونغ صديقتنا القديمة ولها علاقة تعاون جيدة مع مجموعتنا، وتعاوننا ناجح دائماً، والطرفان راضيان جداً، ويقدّران صداقة سنوات طويلة. وفد سامسونغ جاء هذه المرة إلى بكين لبحث خطة التعاون المقبلة معنا، ويشرّفنا ذلك كثيراً. نتمنى نجاح المحادثات وتعاوناً أفضل في المستقبل. «أن يأتيك صديق من بعيد، أليس ذلك من دواعي السرور!» والآن أرجو أن ترفعوا كؤوسكم نخباً لنجاح تعاوننا، ولصداقتنا، ولصحة الجميع، في صحتكم!","tok":[["女","nǚ",""],["士","shì",""],["们","men","(جمع)"],["、"],["先生","xiān sheng","سيد / أستاذ"],["们","men","(جمع)"],["："],["晚上","wǎn shang","مساءً"],["好","hǎo","جيد"],["！"],["今天","jīn tiān","اليوم"],["我们","wǒ men","نحن"],["在","zài","في / عند"],["这","zhè","هذا"],["里","lǐ",""],["举行","jǔ xíng",""],["宴会","yàn huì",""],["欢","huān",""],["迎","yíng",""],["韩国","Hán guó",""],["三","sān","ثلاثة"],["星","xīng",""],["公","gōng",""],["司","sī",""],["代表团","dài biǎo tuán",""],["。"],["首","shǒu",""],["先","xiān","أولاً"],["，"],["我","wǒ","أنا"],["谨","jǐn",""],["代","dài",""],["表","biǎo",""],["五","wǔ","خمسة"],["星","xīng",""],["电","diàn",""],["器","qì",""],["集","jí",""],["团","tuán",""],["全体","quán tǐ",""],["员工","yuán gōng",""],["对","duì","صحيح"],["远","yuǎn","بعيد"],["道","dào",""],["而","ér","بينما"],["来","lái","يأتي"],["的","de","أداة الإضافة"],["客","kè",""],["人","rén","شخص"],["表示","biǎo shì",""],["热","rè",""],["烈","liè",""],["的","de","أداة الإضافة"],["欢","huān",""],["迎","yíng",""],["！"],["同","tóng",""],["时","shí",""],["也","yě","أيضاً"],["非常","fēi cháng","جداً"],["感","gǎn",""],["谢","xiè",""],["各","gè",""],["位","wèi",""],["能","néng","يستطيع"],["出席","chū xí",""],["我们","wǒ men","نحن"],["的","de","أداة الإضافة"],["宴会","yàn huì",""],["。"],["三","sān","ثلاثة"],["星","xīng",""],["公","gōng",""],["司","sī",""],["是","shì","يكون"],["我们","wǒ men","نحن"],["的","de","أداة الإضافة"],["老","lǎo",""],["朋友","péng you","صديق"],["，"],["和","hé","و"],["我们","wǒ men","نحن"],["集","jí",""],["团","tuán",""],["有","yǒu","يملك / يوجد"],["良好","liáng hǎo",""],["的","de","أداة الإضافة"],["合作","hé zuò",""],["关","guān",""],["系","xì","قسم"],["，"],["我们","wǒ men","نحن"],["的","de","أداة الإضافة"],["合作","hé zuò",""],["一","yì","واحد"],["直","zhí",""],["都","dōu","جميعاً"],["很","hěn","جداً"],["成功","chéng gōng",""],["，"],["双方","shuāng fāng",""],["都","dōu","جميعاً"],["非常","fēi cháng","جداً"],["满","mǎn",""],["意","yì",""],["，"],["也","yě","أيضاً"],["很","hěn","جداً"],["重视","zhòng shì",""],["多","duō","كثير"],["年","nián","سنة"],["的","de","أداة الإضافة"],["友谊","yǒu yì",""],["。"],["这","zhè","هذا"],["次","cì",""],["三","sān","ثلاثة"],["星","xīng",""],["公","gōng",""],["司","sī",""],["派","pài",""],["代表团","dài biǎo tuán",""],["来","lái","يأتي"],["北京","Běi jīng","بكين"],["与","yǔ",""],["我们","wǒ men","نحن"],["洽谈","qià tán",""],["以后","yǐ hòu","بعد / فيما بعد"],["的","de","أداة الإضافة"],["合作","hé zuò",""],["计","jì",""],["划","huà",""],["，"],["我们","wǒ men","نحن"],["深","shēn",""],["感","gǎn",""],["荣幸","róng xìng",""],["。"],["希","xī",""],["望","wàng",""],["我们","wǒ men","نحن"],["洽谈","qià tán",""],["成功","chéng gōng",""],["，"],["以后","yǐ hòu","بعد / فيما بعد"],["能","néng","يستطيع"],["更","gèng",""],["好","hǎo","جيد"],["地","dì","(أداة)"],["合作","hé zuò",""],["。"],["“"],["有","yǒu","يملك / يوجد"],["朋","péng",""],["自","zì",""],["远","yuǎn","بعيد"],["方","fāng",""],["来","lái","يأتي"],["，"],["不","bú","لا"],["亦","yì",""],["乐","yuè",""],["乎","hū",""],["！"],["”"],["现在","xiàn zài","الآن"],["请","qǐng","من فضلك"],["大","dà","كبير"],["家","jiā","أسرة / بيت"],["举杯","jǔ bēi",""],["，"],["为","wèi",""],["了","le","أداة نغمية / ماضٍ"],["我们","wǒ men","نحن"],["双方","shuāng fāng",""],["合作","hé zuò",""],["成功","chéng gōng",""],["、"],["为","wèi",""],["了","le","أداة نغمية / ماضٍ"],["我们","wǒ men","نحن"],["的","de","أداة الإضافة"],["友谊","yǒu yì",""],["、"],["为","wèi",""],["了","le","أداة نغمية / ماضٍ"],["大","dà","كبير"],["家","jiā","أسرة / بيت"],["的","de","أداة الإضافة"],["健","jiàn",""],["康","kāng",""],["，"],["干杯","gān bēi",""],["！"]]}],"txt":{"1":{"h":"النص ١: دعوة إلى مأدبة","scene":""},"2":{"h":"النص ٢: في المأدبة","scene":""},"3":{"h":"النص ٣: كلمة النخب","scene":""}},"sent":[{"tokens":["您","太","客","气","了","明天","见"],"zh":"您太客气了，明天见。","py":"Nín tài kè qì le, míngtiān jiàn.","ar":"أنت لطيف جداً، إلى الغد."},{"tokens":["您","明天","晚上","有","什么","安","排","吗"],"zh":"您明天晚上有什么安排吗？","py":"Nín míngtiān wǎnshang yǒu shénme ān pái ma?","ar":"هل لديك ارتباط مساء الغد؟"},{"tokens":["请","您","光临"],"zh":"请您光临。","py":"Qǐng nín guānglín.","ar":"نرجو حضورك."},{"tokens":["出席","宴会","的","还","有","哪","些","人"],"zh":"出席宴会的还有哪些人？","py":"Chūxí yànhuì de hái yǒu nǎ xiē rén?","ar":"من سيحضر المأدبة أيضاً؟"},{"tokens":["那","再","好","不","过","了"],"zh":"那再好不过了。","py":"Nà zài hǎo bú guò le.","ar":"هذا أفضل ما يكون."},{"tokens":["我","推荐","您","尝","尝","中国","的","茅台酒"],"zh":"我推荐您尝尝中国的茅台酒。","py":"Wǒ tuījiàn nín cháng cháng Zhōngguó de máotáijiǔ.","ar":"أنصحك بتذوق ماوتاي الصيني."},{"tokens":["为","了","大","家","的","健","康","干杯"],"zh":"为了大家的健康干杯！","py":"Wèi le dà jiā de jiàn kāng gānbēi!","ar":"نخباً لصحة الجميع!"}],"fill":[{"pre":"请您","post":"。","ans":"光临","opts":["光临","荣幸","盛情"],"ar":"نرجو حضورك.","py":"Qǐng nín guānglín."},{"pre":"","post":"宴会的还有哪些人？","ans":"出席","opts":["出席","举杯","友谊"],"ar":"من سيحضر المأدبة أيضاً؟","py":"Chūxí yànhuì de hái yǒu nǎ xiē rén?"},{"pre":"我推荐您尝尝中国的","post":"。","ans":"茅台酒","opts":["茅台酒","祝酒辞","代表团"],"ar":"أنصحك بتذوق ماوتاي الصيني.","py":"Wǒ tuījiàn nín cháng cháng Zhōngguó de máotáijiǔ."},{"pre":"为了大家的健康","post":"！","ans":"干杯","opts":["干杯","左右","成功"],"ar":"نخباً لصحة الجميع!","py":"Wèi le dà jiā de jiàn kāng gānbēi!"}],"chars":[{"c":"合","py":"hé","ar":"يناسب","w":"合"},{"c":"醉","py":"zuì","ar":"يسكر / ثمل","w":"醉"},{"c":"晚","py":"wǎn","ar":"مأدبة عشاء","w":"晚宴"},{"c":"宴","py":"yàn","ar":"مأدبة عشاء","w":"晚宴"},{"c":"接","py":"jiē","ar":"استقبال بوليمة لضيف قادم من بعيد","w":"接风"},{"c":"风","py":"fēng","ar":"استقبال بوليمة لضيف قادم من بعيد","w":"接风"},{"c":"盛","py":"shèng","ar":"كرم / حفاوة","w":"盛情"},{"c":"情","py":"qíng","ar":"كرم / حفاوة","w":"盛情"}],"spk":{"N":{"n":"المشهد","a":"景"},"S":{"n":"لي مينغ ليانغ","a":"李"},"X":{"n":"سميث","a":"史"},"L":{"n":"وانغ تشي دونغ","a":"王"},"C":{"n":"الجميع","a":"大"},"A":{"n":"صاحب الكلمة","a":"祝"}},"pitch":{"S":1.0,"X":0.9,"L":1.1,"C":0.95,"A":1.05,"Y":0.9,"N":1.0},"acts":["match","listen","meaning","tone","order","fill","lesson","write"],"lq":[{"type":"mc","prompt":"<div class=\"ar-s\">宴会在哪儿举行？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">和平饭店<\/span> <span class=\"py ltr mut\">Hé píng fàndiàn<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">北京饭店<\/span> <span class=\"py ltr mut\">Běijīng fàndiàn<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">青年饭店<\/span> <span class=\"py ltr mut\">Qīng nián fàndiàn<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">史密斯的公司<\/span> <span class=\"py ltr mut\">Shǐ mì sī de gōng sī<\/span>","ok":false}],"fb":"<div>李明亮说：«明晚我们总经理在和平饭店举行晚宴».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">宴会几点开始？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">6点<\/span> <span class=\"py ltr mut\">6 diǎn<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">5点半<\/span> <span class=\"py ltr mut\">5 diǎn bàn<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">7点<\/span> <span class=\"py ltr mut\">7 diǎn<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">10点<\/span> <span class=\"py ltr mut\">10 diǎn<\/span>","ok":false}],"fb":"<div>«宴会6点开始，5点半我们派车来宾馆接您».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">出席宴会的一共有多少人？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">10个人左右<\/span> <span class=\"py ltr mut\">10 gè rén zuǒyòu<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">20个人<\/span> <span class=\"py ltr mut\">20 gè rén<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">5个人<\/span> <span class=\"py ltr mut\">5 gè rén<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">100个人<\/span> <span class=\"py ltr mut\">100 gè rén<\/span>","ok":false}],"fb":"<div>«一共10个人左右».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">史密斯喜欢喝茅台酒。<\/div><div class=\"mut\">صح أم خطأ؟<\/div>","opts":[{"html":"صح","ok":false},{"html":"خطأ","ok":true}],"fix":1,"fb":"<div>قال إن البايجيو قوي جداً ويفضّل البيرة.<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">史密斯觉得中国菜很合他的口味。<\/div><div class=\"mut\">صح أم خطأ؟<\/div>","opts":[{"html":"صح","ok":true},{"html":"خطأ","ok":false}],"fix":1,"fb":"<div>«中国菜非常好吃，很合我的口味».<\/div>","wid":[]},{"type":"match","words":[{"zh":"邀请","py":"yāo qǐng","ar":"يدعو"},{"zh":"荣幸","py":"róng xìng","ar":"مشرَّف"},{"zh":"推荐","py":"tuī jiàn","ar":"يوصي"},{"zh":"双方","py":"shuāng fāng","ar":"الطرفان"},{"zh":"洽谈","py":"qià tán","ar":"يتفاوض"},{"zh":"友谊","py":"yǒu yì","ar":"صداقة"}],"wid":[]},{"type":"order","s":{"tokens":["除了","王总","以外","，","还有","一位","副总经理","。"],"zh":"除了王总以外，还有一位副总经理。","py":"Chú le wáng zǒng yǐ wài, hái yǒu yí wèi fù zǒng jīng lǐ.","ar":"رتّب الجملة"},"wid":[]},{"type":"order","s":{"tokens":["我","谨","代表","五星电器集团","表示","热烈的","欢迎","！"],"zh":"我谨代表五星电器集团表示热烈的欢迎！","py":"Wǒ jǐn dài biǎo wǔ xīng diàn qì jí tuán biǎoshì rè liè de huān yíng!","ar":"رتّب الجملة"},"wid":[]},{"type":"fill","f":{"pre":"一共10个人","post":"。你喜欢中国菜，那再好不过了。","ans":"左右","opts":["左右","再","特别","除了"],"ar":"","py":"Yígòng 10 gè rén zuǒyòu. nǐ xǐhuan Zhōngguó cài, nà zài hǎo bú guò le."},"wid":[]},{"type":"fill","f":{"pre":"一共10个人左右。你喜欢中国菜，那","post":"好不过了。","ans":"再","opts":["再","左右","特别","除了"],"ar":"","py":"Yígòng 10 gè rén zuǒyòu. nǐ xǐhuan Zhōngguó cài, nà zài hǎo bú guò le."},"wid":[]},{"type":"fill","f":{"pre":"","post":"王总以外，还有一位副总经理。","ans":"除了","opts":["除了","还","特别","再"],"ar":"","py":"Chú le wáng zǒng yǐ wài, hái yǒu yí wèi fù zǒng jīng lǐ."},"wid":[]},{"type":"fill","f":{"pre":"除了王总以外，","post":"有一位副总经理。","ans":"还","opts":["还","除了","特别","再"],"ar":"","py":"Chú le wáng zǒng yǐ wài, hái yǒu yí wèi fù zǒng jīng lǐ."},"wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">有人夸你：“您的汉语真好！” 谦虚的回答是：<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">哪里哪里。<\/span> <span class=\"py ltr mut\">Nǎ lǐ nǎ lǐ.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">是的，我很好。<\/span> <span class=\"py ltr mut\">Shì de, wǒ hěn hǎo.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不用谢。<\/span> <span class=\"py ltr mut\">Bú yòng xiè.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">再见。<\/span> <span class=\"py ltr mut\">Zàijiàn.<\/span>","ok":false}],"fb":"<div>«哪里哪里» رد متواضع على المديح.<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">明晚请您光临。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"دعوة","ok":true},{"html":"قبول","ok":false},{"html":"سؤال عن الحاضرين","ok":false}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">我感到非常荣幸。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"دعوة","ok":false},{"html":"قبول","ok":true},{"html":"سؤال عن الحاضرين","ok":false}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">出席的还有哪些人？<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"دعوة","ok":false},{"html":"قبول","ok":false},{"html":"سؤال عن الحاضرين","ok":true}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">我一定准时到。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"دعوة","ok":false},{"html":"قبول","ok":true},{"html":"سؤال عن الحاضرين","ok":false}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">请您出席我们的宴会。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"دعوة","ok":true},{"html":"قبول","ok":false},{"html":"سؤال عن الحاضرين","ok":false}],"fix":1,"fb":"","wid":[]},{"type":"mc","sp":"不知道合不合您的口味？","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر الجملة التي سمعتها<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不知道合不合您的口味？<\/span> <span class=\"py ltr mut\">Bù zhī dào hé bù hé nín de kǒuwèi?<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不知道好不好吃？<\/span> <span class=\"py ltr mut\">Bù zhī dào hǎo bù hǎochī?<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不知道您喝不喝酒？<\/span> <span class=\"py ltr mut\">Bù zhī dào nín hē bù hē jiǔ?<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">不知道合不合您的口味？<\/span><\/div>","wid":[]},{"type":"mc","sp":"您要喝点儿什么？白酒还是啤酒？","prompt":"@@SPK@@<div class=\"mut\">استمع للسؤال ثم اختر الجواب المناسب<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我还是喝啤酒吧。<\/span> <span class=\"py ltr mut\">Wǒ hái shì hē pí jiǔ ba.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我喜欢北京烤鸭。<\/span> <span class=\"py ltr mut\">Wǒ xǐhuan Běijīng kǎoyā.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">宴会6点开始。<\/span> <span class=\"py ltr mut\">Yànhuì 6 diǎn kāi shǐ.<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">您要喝点儿什么？白酒还是啤酒？<\/span><\/div><div>السؤال: 您要喝点儿什么？<\/div>","wid":[]}],"gram":"<div class=\"sec-h\"><h2>الأصوات والجمل<\/h2><p>استمع وكرّر. اضغط أي كلمة لترى معناها.<\/p><\/div><h3 class=\"sub-h\">النص ٣: كلمة النخب · <span class=\"han\" dir=\"ltr\">一、课文（三）<\/span><\/h3><div class=\"card\"><div class=\"tw\"><table><thead><tr><th> الجزء<\/th><th><div class=\"han\" dir=\"ltr\">结构<\/div><div class=\"mut\">المحتوى<\/div><\/th><\/tr><\/thead><tbody><tr><td><div class=\"han\" dir=\"ltr\">目的<\/div><div class=\"mut\">الهدف<\/div><\/td><td><div class=\"han\" dir=\"ltr\">今天我们在这里举行宴会欢迎……<\/div><div class=\"mut\">نقيم اليوم المأدبة لاستقبال …<\/div><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">欢迎、感谢<\/div><div class=\"mut\">الترحيب والشكر<\/div><\/td><td><div class=\"han\" dir=\"ltr\">我谨代表……对……表示热烈的欢迎。<\/div><div class=\"mut\">أمثّل … وأرحّب بحرارة بـ …<\/div><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">回顾、现状、未来<\/div><div class=\"mut\">الماضي والحاضر والمستقبل<\/div><\/td><td><div class=\"han\" dir=\"ltr\">回顾过去、介绍双方、说明活动情况、对未来的希望<\/div><div class=\"mut\">ذكر الماضي والتعريف بالطرفين وسبب اللقاء وأمل المستقبل<\/div><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">干杯<\/div><div class=\"mut\">النخب<\/div><\/td><td><div class=\"han\" dir=\"ltr\">现在请大家举杯，为了……干杯！<\/div><div class=\"mut\">والآن أرجو أن ترفعوا كؤوسكم نخباً لـ … في صحتكم!<\/div><\/td><\/tr><\/tbody><\/table><\/div><\/div><h3 class=\"sub-h\">القواعد والتعبيرات · <span class=\"han\" dir=\"ltr\">二、语法与表达<\/span><\/h3><div class=\"card\"><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">①<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"除\" data-p=\"chú\" data-a=\"\"><span class=\"py\"><span class=\"t2\">chú<\/span><\/span><span class=\"zh\"><span class=\"t2\">除<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"了\" data-p=\"le\" data-a=\"أداة نغمية / ماضٍ\"><span class=\"py\"><span class=\"t5\">le<\/span><\/span><span class=\"zh\"><span class=\"t5\">了<\/span><\/span><\/button><span class=\"punc\">…<\/span><span class=\"punc\">…<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"还\" data-p=\"hái\" data-a=\"أيضاً / بالإضافة\"><span class=\"py\"><span class=\"t2\">hái<\/span><\/span><span class=\"zh\"><span class=\"t2\">还<\/span><\/span><\/button><span class=\"punc\">…<\/span><span class=\"punc\">…<\/span><\/span><\/div><div>«إضافةً إلى … هناك أيضاً …». 除了王总以外，还有一位副总经理和几位部门经理。｜إضافةً إلى المدير وانغ، هناك نائب مدير عام وعدة مديري أقسام.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"除了……还……\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"除\" data-p=\"chú\" data-a=\"\"><span class=\"py\"><span class=\"t2\">chú<\/span><\/span><span class=\"zh\"><span class=\"t2\">除<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"了\" data-p=\"le\" data-a=\"أداة نغمية / ماضٍ\"><span class=\"py\"><span class=\"t5\">le<\/span><\/span><span class=\"zh\"><span class=\"t5\">了<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"冰\" data-p=\"bīng\" data-a=\"\"><span class=\"py\"><span class=\"t1\">bīng<\/span><\/span><span class=\"zh\"><span class=\"t1\">冰<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"箱\" data-p=\"xiāng\" data-a=\"\"><span class=\"py\"><span class=\"t1\">xiāng<\/span><\/span><span class=\"zh\"><span class=\"t1\">箱<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"以\" data-p=\"yǐ\" data-a=\"\"><span class=\"py\"><span class=\"t3\">yǐ<\/span><\/span><span class=\"zh\"><span class=\"t3\">以<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"外\" data-p=\"wài\" data-a=\"\"><span class=\"py\"><span class=\"t4\">wài<\/span><\/span><span class=\"zh\"><span class=\"t4\">外<\/span><\/span><\/button><span class=\"punc\">，<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我们\" data-p=\"wǒ men\" data-a=\"نحن\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><span class=\"t5\">men<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><span class=\"t5\">们<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"还\" data-p=\"hái\" data-a=\"أيضاً / بالإضافة\"><span class=\"py\"><span class=\"t2\">hái<\/span><\/span><span class=\"zh\"><span class=\"t2\">还<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"生\" data-p=\"shēng\" data-a=\"\"><span class=\"py\"><span class=\"t1\">shēng<\/span><\/span><span class=\"zh\"><span class=\"t1\">生<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"产\" data-p=\"chǎn\" data-a=\"\"><span class=\"py\"><span class=\"t3\">chǎn<\/span><\/span><span class=\"zh\"><span class=\"t3\">产<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"电视\" data-p=\"diàn shì\" data-a=\"\"><span class=\"py\"><span class=\"t4\">diàn<\/span><span class=\"t4\">shì<\/span><\/span><span class=\"zh\"><span class=\"t4\">电<\/span><span class=\"t4\">视<\/span><\/span><\/button><span class=\"punc\">、<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"空\" data-p=\"kōng\" data-a=\"\"><span class=\"py\"><span class=\"t1\">kōng<\/span><\/span><span class=\"zh\"><span class=\"t1\">空<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"调\" data-p=\"diào\" data-a=\"\"><span class=\"py\"><span class=\"t4\">diào<\/span><\/span><span class=\"zh\"><span class=\"t4\">调<\/span><\/span><\/button><span class=\"punc\">、<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"洗\" data-p=\"xǐ\" data-a=\"\"><span class=\"py\"><span class=\"t3\">xǐ<\/span><\/span><span class=\"zh\"><span class=\"t3\">洗<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"衣\" data-p=\"yì\" data-a=\"\"><span class=\"py\"><span class=\"t4\">yì<\/span><\/span><span class=\"zh\"><span class=\"t4\">衣<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"机\" data-p=\"jī\" data-a=\"\"><span class=\"py\"><span class=\"t1\">jī<\/span><\/span><span class=\"zh\"><span class=\"t1\">机<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"等\" data-p=\"děng\" data-a=\"ينتظر\"><span class=\"py\"><span class=\"t3\">děng<\/span><\/span><span class=\"zh\"><span class=\"t3\">等<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"其\" data-p=\"qí\" data-a=\"\"><span class=\"py\"><span class=\"t2\">qí<\/span><\/span><span class=\"zh\"><span class=\"t2\">其<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"他\" data-p=\"tā\" data-a=\"هو\"><span class=\"py\"><span class=\"t1\">tā<\/span><\/span><span class=\"zh\"><span class=\"t1\">他<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"家\" data-p=\"jiā\" data-a=\"أسرة / بيت\"><span class=\"py\"><span class=\"t1\">jiā<\/span><\/span><span class=\"zh\"><span class=\"t1\">家<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"电\" data-p=\"diàn\" data-a=\"\"><span class=\"py\"><span class=\"t4\">diàn<\/span><\/span><span class=\"zh\"><span class=\"t4\">电<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>إضافةً إلى الثلاجات ننتج أيضاً التلفزيونات والمكيفات والغسالات وغيرها.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"除了冰箱以外，我们还生产电视、空调、洗衣机等其他家电。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">②<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"左右\" data-p=\"zuǒ yòu\" data-a=\"\"><span class=\"py\"><span class=\"t3\">zuǒ<\/span><span class=\"t4\">yòu<\/span><\/span><span class=\"zh\"><span class=\"t3\">左<\/span><span class=\"t4\">右<\/span><\/span><\/button><\/span><\/div><div>بعد العدد تعني «نحو / حوالي». 一共10个人左右。｜نحو ١٠ أشخاص في المجموع.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"左右\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我们\" data-p=\"wǒ men\" data-a=\"نحن\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><span class=\"t5\">men<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><span class=\"t5\">们<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"公\" data-p=\"gōng\" data-a=\"\"><span class=\"py\"><span class=\"t1\">gōng<\/span><\/span><span class=\"zh\"><span class=\"t1\">公<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"司\" data-p=\"sī\" data-a=\"\"><span class=\"py\"><span class=\"t1\">sī<\/span><\/span><span class=\"zh\"><span class=\"t1\">司<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"想\" data-p=\"xiǎng\" data-a=\"يريد / يفكر\"><span class=\"py\"><span class=\"t3\">xiǎng<\/span><\/span><span class=\"zh\"><span class=\"t3\">想<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"买\" data-p=\"mǎi\" data-a=\"يشتري\"><span class=\"py\"><span class=\"t3\">mǎi<\/span><\/span><span class=\"zh\"><span class=\"t3\">买<\/span><\/span><\/button><span class=\"punc\">10<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"台\" data-p=\"tái\" data-a=\"\"><span class=\"py\"><span class=\"t2\">tái<\/span><\/span><span class=\"zh\"><span class=\"t2\">台<\/span><\/span><\/button><span class=\"punc\">5000<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"元\" data-p=\"yuán\" data-a=\"\"><span class=\"py\"><span class=\"t2\">yuán<\/span><\/span><span class=\"zh\"><span class=\"t2\">元<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"左右\" data-p=\"zuǒ yòu\" data-a=\"\"><span class=\"py\"><span class=\"t3\">zuǒ<\/span><span class=\"t4\">yòu<\/span><\/span><span class=\"zh\"><span class=\"t3\">左<\/span><span class=\"t4\">右<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"的\" data-p=\"de\" data-a=\"أداة الإضافة\"><span class=\"py\"><span class=\"t5\">de<\/span><\/span><span class=\"zh\"><span class=\"t5\">的<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"台\" data-p=\"tái\" data-a=\"\"><span class=\"py\"><span class=\"t2\">tái<\/span><\/span><span class=\"zh\"><span class=\"t2\">台<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"式\" data-p=\"shì\" data-a=\"\"><span class=\"py\"><span class=\"t4\">shì<\/span><\/span><span class=\"zh\"><span class=\"t4\">式<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"电脑\" data-p=\"diàn nǎo\" data-a=\"\"><span class=\"py\"><span class=\"t4\">diàn<\/span><span class=\"t3\">nǎo<\/span><\/span><span class=\"zh\"><span class=\"t4\">电<\/span><span class=\"t3\">脑<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>شركتنا تريد شراء ١٠ حواسيب مكتبية سعر الواحد نحو ٥٠٠٠ يوان.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我们公司想买10台5000元左右的台式电脑。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">③<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"再\" data-p=\"zài\" data-a=\"مرة أخرى\"><span class=\"py\"><span class=\"t4\">zài<\/span><\/span><span class=\"zh\"><span class=\"t4\">再<\/span><\/span><\/button><span class=\"punc\">…<\/span><span class=\"punc\">…<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"不\" data-p=\"bú\" data-a=\"لا\"><span class=\"py\"><span class=\"t2\">bú<\/span><\/span><span class=\"zh\"><span class=\"t2\">不<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"过\" data-p=\"guò\" data-a=\"\"><span class=\"py\"><span class=\"t4\">guò<\/span><\/span><span class=\"zh\"><span class=\"t4\">过<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"了\" data-p=\"le\" data-a=\"أداة نغمية / ماضٍ\"><span class=\"py\"><span class=\"t5\">le<\/span><\/span><span class=\"zh\"><span class=\"t5\">了<\/span><\/span><\/button><\/span><\/div><div>«لا يوجد أفضل من ذلك» لتأكيد أقصى درجة. 您喜欢吃中国菜，那再好不过了。｜إن كنت تحب الطعام الصيني فهذا أفضل ما يكون. ومثلها: 再简单不过了 (لا أبسط من ذلك)، 再方便不过了 (لا أسهل من ذلك).<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"再……不过了\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">④<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"特别\" data-p=\"tè bié\" data-a=\"خاصةً / جداً\"><span class=\"py\"><span class=\"t4\">tè<\/span><span class=\"t2\">bié<\/span><\/span><span class=\"zh\"><span class=\"t4\">特<\/span><span class=\"t2\">别<\/span><\/span><\/button><\/span><\/div><div>للتخصيص: «خاصةً». 菜做得很地道，特别是这儿的烤鸭。｜الأطباق أصيلة جداً، وخاصة البط المشوي هنا.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"特别\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"今年\" data-p=\"jīn nián\" data-a=\"هذا العام\"><span class=\"py\"><span class=\"t1\">jīn<\/span><span class=\"t2\">nián<\/span><\/span><span class=\"zh\"><span class=\"t1\">今<\/span><span class=\"t2\">年<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"各\" data-p=\"gè\" data-a=\"\"><span class=\"py\"><span class=\"t4\">gè<\/span><\/span><span class=\"zh\"><span class=\"t4\">各<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"个\" data-p=\"gè\" data-a=\"كلمة عدّ عامة\"><span class=\"py\"><span class=\"t4\">gè<\/span><\/span><span class=\"zh\"><span class=\"t4\">个<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"部\" data-p=\"bù\" data-a=\"\"><span class=\"py\"><span class=\"t4\">bù<\/span><\/span><span class=\"zh\"><span class=\"t4\">部<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"门\" data-p=\"mén\" data-a=\"\"><span class=\"py\"><span class=\"t2\">mén<\/span><\/span><span class=\"zh\"><span class=\"t2\">门<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"的\" data-p=\"de\" data-a=\"أداة الإضافة\"><span class=\"py\"><span class=\"t5\">de<\/span><\/span><span class=\"zh\"><span class=\"t5\">的<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"业\" data-p=\"yè\" data-a=\"\"><span class=\"py\"><span class=\"t4\">yè<\/span><\/span><span class=\"zh\"><span class=\"t4\">业<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"绩\" data-p=\"jì\" data-a=\"\"><span class=\"py\"><span class=\"t4\">jì<\/span><\/span><span class=\"zh\"><span class=\"t4\">绩<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"都\" data-p=\"dōu\" data-a=\"جميعاً\"><span class=\"py\"><span class=\"t1\">dōu<\/span><\/span><span class=\"zh\"><span class=\"t1\">都<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"很\" data-p=\"hěn\" data-a=\"جداً\"><span class=\"py\"><span class=\"t3\">hěn<\/span><\/span><span class=\"zh\"><span class=\"t3\">很<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"好\" data-p=\"hǎo\" data-a=\"جيد\"><span class=\"py\"><span class=\"t3\">hǎo<\/span><\/span><span class=\"zh\"><span class=\"t3\">好<\/span><\/span><\/button><span class=\"punc\">，<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"特别\" data-p=\"tè bié\" data-a=\"خاصةً / جداً\"><span class=\"py\"><span class=\"t4\">tè<\/span><span class=\"t2\">bié<\/span><\/span><span class=\"zh\"><span class=\"t4\">特<\/span><span class=\"t2\">别<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"是\" data-p=\"shì\" data-a=\"يكون\"><span class=\"py\"><span class=\"t4\">shì<\/span><\/span><span class=\"zh\"><span class=\"t4\">是<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"销售\" data-p=\"xiāo shòu\" data-a=\"\"><span class=\"py\"><span class=\"t1\">xiāo<\/span><span class=\"t4\">shòu<\/span><\/span><span class=\"zh\"><span class=\"t1\">销<\/span><span class=\"t4\">售<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"部\" data-p=\"bù\" data-a=\"\"><span class=\"py\"><span class=\"t4\">bù<\/span><\/span><span class=\"zh\"><span class=\"t4\">部<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>أداء الأقسام جيد هذا العام، وخاصة قسم المبيعات.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"今年各个部门的业绩都很好，特别是销售部。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">⑤<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"礼\" data-p=\"lǐ\" data-a=\"\"><span class=\"py\"><span class=\"t3\">lǐ<\/span><\/span><span class=\"zh\"><span class=\"t3\">礼<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"貌\" data-p=\"mào\" data-a=\"\"><span class=\"py\"><span class=\"t4\">mào<\/span><\/span><span class=\"zh\"><span class=\"t4\">貌<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"用\" data-p=\"yòng\" data-a=\"يستخدم\"><span class=\"py\"><span class=\"t4\">yòng<\/span><\/span><span class=\"zh\"><span class=\"t4\">用<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"语\" data-p=\"yǔ\" data-a=\"\"><span class=\"py\"><span class=\"t3\">yǔ<\/span><\/span><span class=\"zh\"><span class=\"t3\">语<\/span><\/span><\/button><\/span><\/div><div>哪里哪里 (رداً على المديح: «أبداً أبداً»)، 您太客气了 (أنت لطيف جداً)، 深感荣幸 (يشرّفنا كثيراً)، 盛情邀请 (دعوة كريمة)، 我谨代表……表示热烈的欢迎 (أمثّل … وأرحّب بحرارة).<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"礼貌用语\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><h3 class=\"sub-h\">الجمل المفتاحية · <span class=\"han\" dir=\"ltr\">三、关键句<\/span><\/h3><div class=\"card\"><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"您明天晚上有什么安排吗？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">您明天晚上有什么安排吗？<\/span><span class=\"mut py\" dir=\"ltr\">Nín míngtiān wǎnshang yǒu shénme ān pái ma?<\/span><span>هل لديك ارتباط مساء الغد؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"请您光临。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">请您光临。<\/span><span class=\"mut py\" dir=\"ltr\">Qǐng nín guānglín.<\/span><span>نرجو حضورك.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"出席宴会的还有哪些人？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">出席宴会的还有哪些人？<\/span><span class=\"mut py\" dir=\"ltr\">Chūxí yànhuì de hái yǒu nǎ xiē rén?<\/span><span>من سيحضر المأدبة أيضاً؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"除了王总以外，还有一位副总经理。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">除了王总以外，还有一位副总经理。<\/span><span class=\"mut py\" dir=\"ltr\">Chú le wáng zǒng yǐ wài, hái yǒu yí wèi fù zǒng jīng lǐ.<\/span><span>إضافةً إلى المدير وانغ، هناك نائب مدير عام.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"不知道合不合您的口味？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">不知道合不合您的口味？<\/span><span class=\"mut py\" dir=\"ltr\">Bù zhī dào hé bù hé nín de kǒuwèi?<\/span><span>لا أدري هل يناسب ذوقك؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"那再好不过了。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">那再好不过了。<\/span><span class=\"mut py\" dir=\"ltr\">Nà zài hǎo bú guò le.<\/span><span>هذا أفضل ما يكون.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我推荐您尝尝中国的茅台酒。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我推荐您尝尝中国的茅台酒。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ tuījiàn nín cháng cháng Zhōngguó de máotáijiǔ.<\/span><span>أنصحك بتذوق ماوتاي الصيني.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我谨代表五星电器集团表示热烈的欢迎。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我谨代表五星电器集团表示热烈的欢迎。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ jǐn dài biǎo wǔ xīng diàn qì jí tuán biǎoshì rè liè de huān yíng.<\/span><span>أمثّل مجموعة النجوم الخمس وأرحّب بحرارة.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"为了大家的健康干杯！\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">为了大家的健康干杯！<\/span><span class=\"mut py\" dir=\"ltr\">Wèi le dà jiā de jiàn kāng gānbēi!<\/span><span>نخباً لصحة الجميع!<\/span><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">كرّر بعدي<\/h3><div class=\"card\"><p class=\"mut\">استمع لكل جملة ثم كرّرها بصوت عالٍ.<\/p><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我谨代表五星电器集团对史密斯先生的到来表示热烈的欢迎！\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我谨代表五星电器集团对史密斯先生的到来表示热烈的欢迎！<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ jǐn dài biǎo wǔ xīng diàn qì jí tuán duì shǐ mì sī xiānsheng de dào lái biǎoshì rè liè de huān yíng!<\/span><span>أمثّل مجموعة النجوم الخمس وأرحّب بحرارة بقدوم السيد سميث!<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这家饭店是北京有名的老字号，菜做得很地道。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这家饭店是北京有名的老字号，菜做得很地道。<\/span><span class=\"mut py\" dir=\"ltr\">Zhè jiā fàndiàn shì Běijīng yǒumíng de lǎozìhào, cài zuò dé hěn dìdào.<\/span><span>هذا المطعم علامة عريقة في بكين وأطباقه أصيلة.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"为了我们的友谊、为了大家的健康干杯！\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">为了我们的友谊、为了大家的健康干杯！<\/span><span class=\"mut py\" dir=\"ltr\">Wèi le wǒmen de yǒuyì, wèi le dà jiā de jiàn kāng gānbēi!<\/span><span>نخباً لصداقتنا ولصحة الجميع!<\/span><\/div><\/div><\/div><\/div>","disc":[{"q":"请你邀请一位客人出席公司的晚宴，并问清楚时间和有哪些人参加。","ar":"ادعُ ضيفاً إلى مأدبة الشركة واسأل عن الوقت والحاضرين.","frames":["您明天晚上有空吗？","我们公司在……举行晚宴，","请您光临。","出席的除了……以外，还有……","晚宴……点开始。"],"use":["晚宴","邀请","出席","除了","左右"],"model":"您明天晚上有空吗？我们公司在和平饭店举行晚宴，请您光临。出席的除了王总以外，还有几位部门经理，一共10个人左右。晚宴6点开始。｜هل أنت متفرغ مساء الغد؟ تقيم شركتنا مأدبة عشاء في فندق السلام، نرجو حضورك. من يحضر إضافةً إلى المدير وانغ عدة مديري أقسام، نحو ١٠ أشخاص. تبدأ المأدبة في السادسة."},{"q":"请写一段简短的祝酒辞：欢迎客人、感谢出席，最后请大家干杯。","ar":"اكتب كلمة نخب قصيرة: ترحيب بالضيوف وشكر على الحضور، ثم دعوة للنخب.","frames":["今天我们在这里……，","我谨代表……","对……表示热烈的欢迎。","非常感谢各位……","为了……，干杯！"],"use":["谨","代表","欢迎","感谢","干杯"],"model":"今天我们在这里举行宴会欢迎各位客人。我谨代表我们公司对各位表示热烈的欢迎，非常感谢各位能出席。为了我们的友谊、为了大家的健康，干杯！｜نقيم اليوم هذه المأدبة لاستقبال الضيوف. أمثّل شركتنا وأرحّب بكم بحرارة وأشكركم على الحضور. نخباً لصداقتنا ولصحة الجميع!"}],"minc":20};
+var VOCAB=D.vocab,TOKPY=D.tokpy,DLG=D.dlg,TXT=D.txt,CQ={},SENT=D.sent,FILL=D.fill,CHARS=D.chars,SPK=D.spk,PITCH=D.pitch,ACTS=D.acts;
+function pitchOf(w){return PITCH[w]||1}
+function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
+function picHtml(){return ''}
+var CLASSX=[];
+var BADGES={
+ first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'听',n:'المستمع'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
+};
+/* ---------- progress / badges ---------- */
+function award(id){if(!S.badges[id]){S.badges[id]=1;save();toast('وسام جديد: '+BADGES[id].n)}}
+function knownCount(){return VOCAB.filter(function(_,i){return S.known[i]}).length}
+function progress(){
+  var k=knownCount()/VOCAB.length,h=Object.keys(S.heard).length/DLG.length,a=ACTS.filter(function(x){return S.best[x]}).length/ACTS.length;
+  return Math.round((k+h+a)/3*100);
+}
+function updateProg(){$('#gprog').style.width=progress()+'%'}
+
+/* ---------- tabs ---------- */
+var TABS=['vocab','dialogue','grammar','writing','practice'];
+var tab='vocab';
+var RENDER={vocab:renderVocab,dialogue:renderDialogue,grammar:renderGrammar,writing:renderWriting,practice:renderPractice};
+function setTab(name,fromHash){
+  if(TABS.indexOf(name)<0)name='vocab';
+  tab=name;
+  stopSpeech();stopAll();closeSheet();
+  $$('.tab').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.tab===name))});
+  TABS.forEach(function(t){$('#p-'+t).hidden=(t!==name)});
+  RENDER[name]();
+  if(!fromHash){try{history.replaceState(null,'','#'+name)}catch(e){location.hash=name}}
+  window.scrollTo(0,0);
+  var sel=$('.tab[aria-selected="true"]');if(sel&&sel.scrollIntoView){try{sel.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}
+}
+
+/* ---------- vocab ---------- */
+function renderVocab(){
+  var w=VOCAB[S.card];
+  var rows=VOCAB.map(function(v,i){
+    return '<div class="row'+(i===S.card?' cur':'')+'" data-act="jump" data-i="'+i+'">'+
+      '<div class="rp">'+picHtml(v.zh,'pt')+'</div><div class="rz" dir="ltr">'+han(v.zh,v.py)+'</div>'+
+      '<div><div class="rpy'+(S.py?'':' off')+'" dir="ltr">'+pyhtml(v.py)+'</div><div class="rar'+(S.ar?'':' off')+'">'+v.ar+(v.sup?'<span class="tag">تكميلية</span>':'')+'</div></div>'+
+      '<span class="kn'+(S.known[i]?' on':'')+'" aria-label="'+(S.known[i]?'محفوظة':'غير محفوظة')+'">'+ic('check',14)+'</span>'+
+      spkBtn(v.zh,'sm')+'</div>';
+  }).join('');
+  $('#p-vocab').innerHTML=
+    '<div class="sec-h"><h2>بطاقات المفردات</h2><p>'+VOCAB.length+' كلمة · اضغط البطاقة لقلبها · عرفتَ <b>'+knownCount()+'</b> منها</p></div>'+
+    '<div class="fc" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة">'+
+      '<div class="face front"'+(S.flip?' hidden':'')+'>'+spkBtn(w.zh)+
+        '<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div></div>'+
+      '<div class="face back"'+(S.flip?'':' hidden')+'>'+spkBtn(w.zh)+
+        picHtml(w.zh,'pb')+'<div class="pyl" dir="ltr">'+pyhtml(w.py)+'</div>'+
+        '<div class="meaning">'+w.ar+'</div>'+(w.note?'<div class="note">'+w.note+'</div>':'')+
+        '<div class="ex" dir="ltr"><div class="exzh">'+w.ex[0]+'</div><div class="expy">'+w.ex[1]+'</div><div class="exar" dir="rtl">'+w.ex[2]+'</div></div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="navrow"><button class="btn ghost sm" data-act="prev">السابقة</button><span class="cnt">'+(S.card+1)+' / '+VOCAB.length+'</span><button class="btn ghost sm" data-act="next">التالية</button></div>'+
+    '<div class="actrow"><button class="btn ghost" data-act="again">'+ic('redo',18)+' أراجعها لاحقاً</button><button class="btn primary" data-act="know">'+ic('check',18)+' أعرفها</button></div>'+
+    '<h3 class="sub-h">قائمة الكلمات</h3>'+
+    '<div class="tools"><button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy">拼音 البينيين</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar">الترجمة</button></div>'+
+    '<div>'+rows+'</div>';
+}
+
+/* ---------- dialogue ---------- */
+var playing=false;
+function cqHtml(t){var out='';if(!window.__cqs){window.__cqs=1;[1,2,3].forEach(function(k){(CQ[k]||[]).forEach(function(c){var ans=c.o[c.a];c.o=shuffle(c.o);c.a=c.o.indexOf(ans)})})}(CQ[t]||[]).forEach(function(c,i){out+='<div class="cq" id="cq'+t+'_'+i+'"><b><span class="han ltr" style="font-size:19px">'+(i+1)+'. '+c.q.zh+'</span><span class="py mut ltr">'+c.q.py+'</span></b><div class="o">'+c.o.map(function(o,j){return '<button class="chip cqo" data-act="cq" data-q="'+t+'" data-i="'+i+'" data-o="'+j+'"><span class="han" style="font-size:18px">'+o.zh+'</span><span class="py mut">'+o.py+'</span></button>'}).join('')+'</div></div>'});return out?'<h3 class="sub-h">问题 · أسئلة</h3>'+out:''}
+function renderDialogue(){
+  var out='',lastText=0;
+  DLG.forEach(function(L,i){
+    if(L.text!==lastText){if(lastText)out+=cqHtml(lastText);lastText=L.text;out+='<h3 class="sub-h" style="margin-bottom:0">'+TXT[L.text].h+'</h3>'+TXT[L.text].scene}
+    var groups=[];
+    L.tok.forEach(function(t,j){
+      if(t.length===1){if(groups.length)groups[groups.length-1]+='<span class="punc">'+t[0]+'</span>';else groups.push('<span class="punc">'+t[0]+'</span>')}
+      else groups.push('<button class="tok" data-act="tok" data-l="'+i+'" data-k="'+j+'"><span class="py">'+pyhtml(t[1])+'</span><span class="zh">'+han(t[0],t[1])+'</span></button>');
+    });
+    var toks=groups.map(function(g){return '<span class="tg">'+g+'</span>'}).join('');
+    var sp=SPK[L.who];
+    out+='<div class="line '+L.who+'" id="ln'+i+'"><div class="who"><span class="av" lang="zh">'+sp.a+'</span>'+sp.n+spkBtn(L.zh,'sm').replace('data-act="say"','data-act="sayline" data-l="'+i+'"')+'</div>'+
+      '<div class="zhline">'+toks+'</div><div class="arline">'+L.ar+'</div></div>';
+  });
+  out+=cqHtml(lastText);
+  var cx=CLASSX.map(function(c){
+    return '<div class="m">'+spkBtn(c.zh,'sm')+'<div class="t"><span class="z" dir="ltr">'+c.zh+'</span><span class="mut py" dir="ltr">'+c.py+'</span><span>'+c.ar+'</span></div></div>';
+  }).join('');
+  $('#p-dialogue').innerHTML=
+    '<div class="sec-h"><h2>نصوص الدرس</h2><p>اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جملة.</p></div>'+
+    '<div class="tools"><button class="btn primary sm" id="playall" data-act="playall">'+ic('play',16)+' تشغيل النصوص كاملة</button>'+
+    '<button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy2">拼音</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar2">الترجمة</button></div>'+
+    '<div class="lines'+(S.py?'':' nopy')+(S.ar?'':' noar')+'" id="lines">'+out+'</div>'+
+    
+    (cx?'<h3 class="sub-h">عبارات الصف</h3><div class="qa" style="margin-top:0">'+cx+'</div>':'');
+  syncLines();
+}
+function syncLines(){var l=$('#lines');if(!l)return;l.classList.toggle('nopy',!S.py);l.classList.toggle('noar',!S.ar)}
+function openSheet(tk){
+  $('#sheet').innerHTML='<div class="sheet-in">'+spkBtn(tk[0])+'<div class="sh-main"><div class="sh-zh" dir="ltr">'+han(tk[0],tk[1])+'</div><div class="sh-py" dir="ltr">'+pyhtml(tk[1])+'</div></div><div class="sh-ar">'+tk[2]+'</div><button class="ibtn" data-act="closesheet" aria-label="إغلاق">'+ic('x',16)+'</button></div>';
+  $('#sheet').hidden=false;
+  speak(tk[0]);
+}
+function closeSheet(){var s=$('#sheet');if(s)s.hidden=true}
+function markLine(i){$$('.line').forEach(function(el,j){el.classList.toggle('playing',j===i)})}
+function setPlayBtn(){var b=$('#playall');if(b)b.innerHTML=playing?ic('stop',16)+' إيقاف':ic('play',16)+' تشغيل النصوص كاملة'}
+function stopAll(){playing=false;markLine(-1);setPlayBtn()}
+function playAll(){
+  if(playing){stopSpeech();stopAll();return}
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');return}
+  playing=true;setPlayBtn();
+  var i=0;
+  var next=function(){
+    if(!playing||i>=DLG.length){stopAll();checkListener();return}
+    var L=DLG[i];markLine(i);S.heard[i]=1;i++;save();updateProg();
+    speak(L.zh,function(){setTimeout(next,350)},pitchOf(L.who));
+  };
+  next();
+}
+function checkListener(){if(Object.keys(S.heard).length>=DLG.length)award('listener')}
+
+/* ---------- grammar ---------- */
+function renderGrammar(){$('#p-grammar').innerHTML=D.gram}
+/* ---------- writing ---------- */
+var W={i:0,strokes:[],cur:null,ghost:true};
+function renderWriting(){
+  var c=CHARS[W.i];
+  var chips=CHARS.map(function(x,i){return '<button class="chip tgl'+(i===W.i?' on':'')+'" data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  $('#p-writing').innerHTML=
+    '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
+    '<div class="chips">'+chips+'</div>'+
+    '<div class="winfo"><span class="big han">'+c.c+'</span><div><div class="py" style="font-size:20px">'+c.py+'</div><div>'+c.ar+'</div><div class="mut">من كلمة: <span class="han" dir="ltr">'+esc(c.w)+'</span></div></div>'+spkBtn(c.c)+'</div>'+
+    '<div class="cvwrap"><canvas id="cv" width="640" height="640" aria-label="مساحة الكتابة"></canvas></div>'+
+    '<div class="tools" style="margin-top:14px;justify-content:center"><button class="btn ghost sm" data-act="wclear">'+ic('redo',16)+' مسح</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>'+
+    '<p class="mut" style="margin-top:12px;text-align:center">قاعدة عامة في ترتيب الخطوط: من الأعلى إلى الأسفل، ومن اليسار إلى اليمين.</p>'+writingExtra();
+  var cv=$('#cv');
+  cv.addEventListener('pointerdown',function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}W.cur=[pt(e)];W.strokes.push(W.cur);drawCanvas()});
+  cv.addEventListener('pointermove',function(e){if(!W.cur)return;W.cur.push(pt(e));drawCanvas()});
+  var end=function(){W.cur=null};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+  drawCanvas();
+  if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+}
+function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
+function drawCanvas(){
+  var cv=$('#cv');if(!cv)return;
+  var ctx=cv.getContext('2d'),cs=getComputedStyle(document.documentElement),w=cv.width,h=cv.height;
+  var col=function(n){return cs.getPropertyValue(n).trim()};
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle=col('--surface');ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle=col('--line');ctx.lineWidth=3;ctx.setLineDash([14,12]);
+  ctx.beginPath();ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.moveTo(0,0);ctx.lineTo(w,h);ctx.moveTo(w,0);ctx.lineTo(0,h);ctx.stroke();
+  ctx.setLineDash([]);
+  if(W.ghost){
+    ctx.globalAlpha=0.16;ctx.fillStyle=col('--fg');
+    ctx.font='500 '+Math.round(w*0.76)+'px "Noto Serif SC","Songti SC","STSong",serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(CHARS[W.i].c,w/2,h/2+h*0.03);
+    ctx.globalAlpha=1;
+  }
+  ctx.strokeStyle=col('--fg');ctx.lineWidth=18;ctx.lineCap='round';ctx.lineJoin='round';
+  W.strokes.forEach(function(s){
+    ctx.beginPath();ctx.moveTo(s[0].x,s[0].y);
+    if(s.length===1)ctx.lineTo(s[0].x+0.1,s[0].y+0.1);
+    for(var i=1;i<s.length;i++)ctx.lineTo(s[i].x,s[i].y);
+    ctx.stroke();
+  });
+}
+
+function writingExtra(){
+  var r=[['من الأعلى إلى الأسفل','上到下','مثل 三 و 二: الخط الأعلى أولاً.'],['من اليسار إلى اليمين','左到右','مثل 你 و 好: الجزء الأيسر أولاً.'],['الأفقي قبل العمودي','先横后竖','مثل 十 و 干: الخط الأفقي أولاً.'],['الوسط قبل الجانبين','先中间后两边','مثل 小 و 水: الخط الأوسط أولاً.'],['من الخارج إلى الداخل ثم الإغلاق','先外后内再封口','مثل 日 و 国: الإطار أولاً ثم الداخل ثم الإغلاق.']];
+  return '<div class="card" style="margin-top:18px"><h3 style="font-size:16px;margin-bottom:6px">قواعد ترتيب الخطوط</h3><div class="qa" style="margin-top:0">'+r.map(function(x){return '<div class="m"><div class="t"><span class="z" dir="ltr">'+x[1]+'</span><span>'+x[0]+'</span><span class="mut">'+x[2]+'</span></div></div>'}).join('')+'</div></div>';
+}
+
+/* ---------- practice / quiz ---------- */
+var Q=null;
+var OKM=['أحسنت!','ممتاز!','صحيح!','رائع!'];
+function stars(n,size){var o='';for(var i=1;i<=3;i++)o+='<span class="'+(i<=n?'on':'')+'">'+ic('star',size||16)+'</span>';return '<span class="stars">'+o+'</span>'}
+function renderPractice(){
+  if(Q){renderQ();return}
+  var lvl=Math.floor(S.xp/100)+1,pct=S.xp%100;
+  var bd=Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('');
+  var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],lesson:['أسئلة الدرس','أسئلة متنوعة على نص الدرس'],write:['تحدّث واكتب','اكتب جملاً بالصينية بمساعدة نماذج']};
+  var cards=ACTS.map(function(k){return '<button class="act" data-act="start" data-k="'+k+'"><strong>'+info[k][0]+'</strong><small>'+info[k][1]+'</small>'+stars(S.best[k]||0)+'</button>'}).join('');
+  var wn=Object.keys(S.wrong).length;
+  $('#p-practice').innerHTML=
+    '<div class="sec-h"><h2>تمارين الدرس</h2><p>كل إجابة صحيحة تمنحك 10 نقاط.</p></div>'+
+    '<div class="card stats"><div class="xprow"><strong>المستوى '+lvl+'</strong><div class="xpbar"><i style="width:'+pct+'%"></i></div><span class="cnt">'+S.xp+' XP</span></div><div class="badges">'+bd+'</div></div>'+
+    '<h3 class="sub-h">اختر نشاطاً</h3>'+
+    '<div class="acts"><button class="act feat" data-act="start" data-k="all"><strong>الاختبار الشامل</strong><small>'+build('all').length+' سؤالاً من كل الأنواع</small>'+(S.best.all?stars(S.best.all,16):'')+'</button>'+cards+
+    (wn?'<button class="act" data-act="start" data-k="review"><strong>مراجعة أخطائي</strong><small>'+wn+' كلمة تحتاج مراجعة</small></button>':'')+'</div>';
+}
+function fbWord(w){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+han(w.zh,w.py)+'</span><span class="py ltr">'+pyhtml(w.py)+'</span><span>= '+w.ar+'</span>'+spkBtn(w.zh,'sm')+'</div>'}
+function fbSent(s){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+esc(s.zh)+'</span>'+spkBtn(s.zh,'sm')+'</div><div class="py mut ltr">'+s.py+'</div><div>'+s.ar+'</div>'}
+function qMeaning(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="mut">ما معنى هذه الكلمة؟</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qListen(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],audio:w.zh,prompt:spkBtn(w.zh,'big')+'<div class="mut">استمع ثم اختر المعنى</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qTone(w){
+  var o=shuffle(toneVariants(w.py));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+esc(w.zh)+'</div><div class="mut">اختر النطق الصحيح بالنغمات</div>',
+    opts:o.map(function(v){return {html:'<span class="pyopt ltr">'+v.replace(/ /g,'')+'</span>',ok:v===w.py}}),fb:fbWord(w)};
+}
+function qOrder(s){return {type:'order',s:s,wid:s.tokens.map(vid).filter(function(i){return i>=0})}}
+function qFill(f){return {type:'fill',f:f,wid:[vid(f.ans)].filter(function(i){return i>=0})}}
+function qMatch(n){return {type:'match',words:pick(VOCAB,n||5)}}
+function rnd(n){return Math.floor(Math.random()*n)}
+function qRead(kind){
+  var arr=kind==='num'?NUMS:AMTS;
+  var f=arr[rnd(arr.length)];
+  var wrong=shuffle(arr.filter(function(o){return o!==f})).slice(0,3);
+  var opts=shuffle([f].concat(wrong));
+  return {type:'mc',wid:[],
+    prompt:'<div class="han ltr" style="font-size:34px;font-weight:700">'+f[0]+'</div><div class="mut">'+(kind==='num'?'كيف يُقرأ هذا الرقم بالصينية؟':'كيف يُقرأ هذا المبلغ بالصينية؟')+'</div>',
+    opts:opts.map(function(o){return {html:'<span class="han ltr" style="font-size:19px">'+o[1]+'</span> <span class="py ltr mut">'+o[2]+'</span>',ok:o===f}}),
+    fb:'<div class="fw"><span class="han ltr" style="font-size:22px">'+f[0]+' = '+f[1]+'</span>'+spkBtn(f[1],'sm')+'</div><div class="py mut ltr">'+f[2]+'</div>'};
+}
+function qNum(){return qRead('num')}
+function qMoney(){return qRead('money')}
+function qPic(w){
+  var pool=PICQ.map(function(z){return VOCAB[vid(z)]}).filter(function(v){return v!==w});
+  var o=shuffle([w].concat(pick(pool,3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],
+    prompt:'<div class="picbig">'+picHtml(w.zh)+'</div><div class="mut">ما الكلمة المناسبة للصورة؟</div>',
+    opts:o.map(function(x){return {html:'<span class="han ltr" style="font-size:24px">'+esc(x.zh)+'</span> <span class="py ltr mut">'+x.py.replace(/ /g,'')+'</span>',ok:x===w}}),
+    fb:fbWord(w)};
+}
+function picW(z){return qPic(VOCAB[vid(z)])}
+function cloneQ(q){return JSON.parse(JSON.stringify(q))}
+function fromSpec(sp){var q=cloneQ(sp);if(q.type==='mc'&&q.sp){q.audio=q.sp;q.prompt=q.prompt.replace('@@SPK@@',spkBtn(q.sp,'big'))}if(q.type==='mc'&&!q.fix)q.opts=shuffle(q.opts);return q}
+window.__q=function(){return Q};
+function build(kind){
+  var LQ=D.lq||[];
+  switch(kind){
+    case 'match':return [qMatch(5),qMatch(5),qMatch(5)];
+    case 'listen':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qListen);
+    case 'meaning':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qMeaning);
+    case 'tone':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qTone);
+    case 'order':return pick(SENT,Math.min(4,SENT.length)).map(qOrder);
+    case 'fill':return pick(FILL,Math.min(5,FILL.length)).map(qFill);
+    case 'lesson':return LQ.map(fromSpec);
+    case 'all':return [qMatch(5)].concat(pick(VOCAB,2).map(qListen),pick(VOCAB,2).map(qMeaning),pick(VOCAB,2).map(qTone),SENT.length?pick(SENT,Math.min(2,SENT.length)).map(qOrder):[],FILL.length?pick(FILL,Math.min(2,FILL.length)).map(qFill):[],pick(LQ,Math.min(3,LQ.length)).map(fromSpec));
+    case 'review':return pick(Object.keys(S.wrong).map(function(i){return VOCAB[+i]}).filter(Boolean),8).map(function(w,i){return i%2?qListen(w):qMeaning(w)});
+  }
+  return [];
+}
+/* ---------- write & speak ---------- */
+function ccount(v){return v.replace(/\s/g,'').length}
+function renderWrite(){
+  S.txt=S.txt||{};
+  $('#p-practice').innerHTML='<div class="qtop"><button class="btn ghost sm" data-act="qexit">رجوع</button><strong>تحدّث واكتب</strong></div>'+
+  D.disc.map(function(d,i){var ms=d.model.split('｜');
+    return '<section class="card wr" data-wd="'+i+'" style="margin-bottom:12px"><div class="qprompt" style="justify-items:start;text-align:start"><div class="han ltr" style="font-size:22px">'+(i+1)+'. '+esc(d.q)+'</div><div class="mut">'+esc(d.ar)+'</div></div>'+
+    '<div class="chips">'+d.frames.map(function(f,k){return '<button class="chip" data-act="wfr" data-d="'+i+'" data-k="'+k+'"><span class="han" style="font-size:17px">'+esc(f)+'</span></button>'}).join('')+'</div>'+
+    '<textarea data-wta="'+i+'" lang="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
+    '<div class="mut" style="margin:6px 0"><span data-wcc="'+i+'">0</span> / '+D.minc+' حرفاً · الكلمات المقترحة:</div><div class="us">'+d.use.map(function(u){return '<span data-wu="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
+    '<details class="md"><summary>نموذج إجابة</summary><div class="han ltr" style="font-size:20px;margin-top:8px">'+esc(ms[0])+'</div><div class="mut">'+esc(ms[1]||'')+'</div><button class="btn ghost sm" data-act="wsay" data-d="'+i+'" style="margin-top:8px">'+ic('spk',16)+' استمع</button></details></section>'}).join('');
+  D.disc.forEach(function(d,i){var ta=$('[data-wta="'+i+'"]');ta.value=S.txt[i]||'';wchk(i)});
+}
+function wchk(i){var ta=$('[data-wta="'+i+'"]'),el=$('[data-wd="'+i+'"]');if(!ta)return;var v=ta.value,n=ccount(v);$('[data-wcc="'+i+'"]').textContent=n;
+  $$('[data-wu]',el).forEach(function(s){s.classList.toggle('on',v.indexOf(s.dataset.wu)>-1)});
+  S.wdone=S.wdone||{};
+  if(n>=D.minc&&!S.wdone[i]){S.wdone[i]=1;S.xp+=20;toast('أحسنت! +20 نقطة')}
+  var dn=Object.keys(S.wdone).length;S.best.write=dn>=D.disc.length?3:(dn?2:0);save();updateProg()}
+function startQuiz(kind){
+  if(kind==='write'){renderWrite();return}
+  var list=build(kind);
+  if(!list.length){toast('لا توجد أسئلة الآن');return}
+  Q={kind:kind,list:list,i:0,score:0,gain:0,fin:false};
+  renderQ();
+}
+function qShell(){
+  $('#p-practice').innerHTML=
+    '<div class="qtop"><button class="btn ghost sm" data-act="qexit">خروج</button><div class="qbar"><i id="qprog"></i></div><span class="cnt" id="qcount"></span></div>'+
+    '<div id="qbody"></div><div id="qfb"></div><button class="btn primary wide" id="qnext" data-act="qnext" hidden>التالي</button>';
+}
+function renderQ(){
+  if(!$('#qbody'))qShell();
+  var q=Q.list[Q.i];
+  Q.fin=false;
+  $('#qprog').style.width=(Q.i/Q.list.length*100)+'%';
+  $('#qcount').textContent=(Q.i+1)+' / '+Q.list.length;
+  $('#qfb').innerHTML='';$('#qnext').hidden=true;
+  R[q.type](q,$('#qbody'));
+}
+var R={};
+R.mc=function(q,b){
+  b.innerHTML='<div class="qprompt">'+q.prompt+'</div><div class="opts">'+q.opts.map(function(o,i){return '<button class="opt" data-act="opt" data-i="'+i+'">'+o.html+'</button>'}).join('')+'</div>';
+  if(q.audio)setTimeout(function(){speak(q.audio)},200);
+};
+R.order=function(q,b){q.picked=[];q.pool=shuffle(q.s.tokens.map(function(t,i){return {t:t,i:i}}));q.done=false;drawOrder(q,b)};
+function chipHtml(p,act){var py=TOKPY[p.t]||'';return '<button class="chip'+(act==='unpick'?' pick':'')+'" data-act="'+act+'" data-i="'+p.i+'">'+(S.py&&py?'<span class="py">'+py.replace(/ /g,'')+'</span>':'')+'<span class="zh">'+p.t+'</span></button>'}
+function drawOrder(q,b){
+  var left=q.pool.filter(function(p){return q.picked.indexOf(p)<0});
+  b.innerHTML='<div class="qprompt"><span class="mut">رتّب الجملة الصينية</span><div class="ar-s">'+q.s.ar+'</div></div>'+
+    '<div class="slot">'+(q.picked.length?q.picked.map(function(p){return chipHtml(p,'unpick')}).join(''):'<span class="ph">اضغط الكلمات بالترتيب الصحيح</span>')+'</div>'+
+    '<div class="pool">'+left.map(function(p){return chipHtml(p,'pick')}).join('')+'</div>'+
+    '<button class="btn primary wide" data-act="checkorder"'+(left.length?' disabled':'')+'>تحقّق</button>';
+}
+R.fill=function(q,b){
+  var opts=shuffle(q.f.opts);
+  b.innerHTML='<div class="qprompt"><span class="mut">أكمل الجملة</span><div class="ar-s">'+q.f.ar+'</div><div class="fillsent">'+esc(q.f.pre)+'<span class="blank" id="blank">&nbsp;</span>'+esc(q.f.post)+'</div></div>'+
+    '<div class="pool">'+opts.map(function(o){return '<button class="chip" data-act="fill" data-o="'+esc(o)+'"><span class="zh">'+o+'</span></button>'}).join('')+'</div>';
+};
+R.match=function(q,b){
+  q.sel=null;q.done={};q.err=0;q.errIds={};
+  q.left=shuffle(q.words);q.right=shuffle(q.words);
+  b.innerHTML='<div class="qprompt"><span class="mut">اربط كل كلمة صينية بمعناها العربي</span></div><div class="mrow">'+
+    '<div class="mcol" dir="ltr">'+q.left.map(function(w){return '<button class="mi" data-act="ml" data-i="'+q.words.indexOf(w)+'"><span class="zh">'+esc(w.zh)+'</span><span class="py">'+(S.py?w.py.replace(/ /g,''):'')+'</span></button>'}).join('')+'</div>'+
+    '<div class="mcol">'+q.right.map(function(w){return '<button class="mi" data-act="mr" data-i="'+q.words.indexOf(w)+'">'+w.ar+'</button>'}).join('')+'</div></div>';
+};
+function finishQ(ok,wids,extra){
+  if(Q.fin)return;Q.fin=true;
+  if(ok){
+    Q.score++;S.xp+=10;Q.gain+=10;
+    (wids||[]).forEach(function(i){if(S.wrong[i]){S.wrong[i]--;if(S.wrong[i]<=0)delete S.wrong[i]}});
+  }else{(wids||[]).forEach(function(i){S.wrong[i]=(S.wrong[i]||0)+1})}
+  save();
+  $('#qfb').innerHTML='<div class="fb '+(ok?'good':'bad')+'"><strong>'+(ok?OKM[Math.floor(Math.random()*OKM.length)]:'ليست الإجابة الصحيحة')+'</strong>'+(extra||'')+'</div>';
+  var nb=$('#qnext');nb.textContent=(Q.i===Q.list.length-1)?'عرض النتيجة':'التالي';nb.hidden=false;
+  try{nb.scrollIntoView({block:'nearest'})}catch(e){}
+}
+function endQuiz(){
+  var n=Q.list.length,pct=Math.round(Q.score/n*100),st=pct>=90?3:(pct>=60?2:1),kind=Q.kind;
+  var before=Math.floor((S.xp-Q.gain)/100)+1,after=Math.floor(S.xp/100)+1;
+  if(kind!=='review')S.best[kind]=Math.max(S.best[kind]||0,st);
+  award('first');
+  if(pct===100)award('perfect');
+  if(kind==='all'&&pct>=80)award('master');
+  save();updateProg();
+  var msg=pct>=90?'ممتاز! أتقنتَ هذا الجزء':(pct>=60?'جيد، راجع الأخطاء وأعد المحاولة':'تحتاج إلى مراجعة، ارجع إلى البطاقات والحوار');
+  $('#p-practice').innerHTML='<div class="res"><div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>'+
+    '<h3>'+msg+'</h3><div class="sc">'+Q.score+' / '+n+'</div><p class="mut">كسبتَ '+Q.gain+' نقطة'+(after>before?' · وصلتَ إلى المستوى '+after:'')+'</p>'+
+    '<div class="tools" style="justify-content:center"><button class="btn primary" data-act="start" data-k="'+kind+'">'+ic('redo',18)+' أعد المحاولة</button><button class="btn ghost" data-act="qexit">كل التمارين</button></div></div>';
+  Q=null;
+  if(after>before)toast('مستوى جديد: '+after);
+}
+
+/* ---------- events ---------- */
+var A={};
+A.tab=function(t){setTab(t.dataset.tab)};
+A.slow=function(){S.slow=!S.slow;save();syncSlow();toast(S.slow?'صوت بطيء: مفعّل':'صوت بطيء: متوقف')};
+A.theme=function(){
+  var d=document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  var n=d==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',n);
+  try{localStorage.setItem(KEY+'-theme',n)}catch(e){}
+  if(tab==='writing')drawCanvas();
+};
+A.say=function(t){speak(t.dataset.t)};
+A.sayline=function(t){var L=DLG[+t.dataset.l];if(speak(L.zh,null,pitchOf(L.who))){S.heard[+t.dataset.l]=1;save();updateProg();checkListener();var s=$('#p-dialogue .sec-h p');if(s)s.textContent='اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جمل.'}};
+A.tok=function(t){openSheet(DLG[+t.dataset.l].tok[+t.dataset.k])};
+A.closesheet=closeSheet;
+A.playall=playAll;
+A.tpy=function(){S.py=!S.py;save();renderVocab()};
+A.tar=function(){S.ar=!S.ar;save();renderVocab()};
+A.tpy2=function(){S.py=!S.py;save();renderDialogue()};
+A.tar2=function(){S.ar=!S.ar;save();renderDialogue()};
+A.flip=function(){
+  S.flip=!S.flip;
+  var f=$('#fc .front'),b=$('#fc .back');if(f)f.hidden=S.flip;if(b)b.hidden=!S.flip;
+};
+A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab()};
+A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab()};
+function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};if(on){if(!h.dues[CRS][zh])h.dues[CRS][zh]={i:0,t:Date.now()}}localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
+A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
+A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
+A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
+A.cq=function(t){
+  var q=+t.dataset.q,i=+t.dataset.i,o=+t.dataset.o,c=CQ[q][i];
+  $$('#cq'+q+'_'+i+' .chip').forEach(function(b,j){b.disabled=true;if(j===c.a)b.classList.add('good');else if(j===o)b.classList.add('bad')});
+  if(o===c.a){speak(c.o[c.a].zh)}
+};
+A.s=function(t){G.s=+t.dataset.i;renderGrammar()};
+A.adv=function(t){G.a=+t.dataset.i;renderGrammar()};
+A.pred=function(t){G.p=+t.dataset.i;renderGrammar()};
+A.num=function(t){G.num=+t.dataset.i;renderGrammar()};
+A.rmb=function(t){G.rmb=+t.dataset.i;renderGrammar()};
+A.it=function(t){G.it=+t.dataset.i;renderGrammar()};
+A.pat=function(t){G.pat=+t.dataset.i;renderGrammar()};
+A.mw=function(t){G.mw=+t.dataset.i;renderGrammar()};
+
+A.gtok=function(t){openSheet([t.dataset.z,t.dataset.p,t.dataset.a||''])};
+A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i)};
+A.wsay=function(t){speak(D.disc[+t.dataset.d].model.split('｜')[0])};
+A.wch=function(t){W.i=+t.dataset.i;W.strokes=[];W.cur=null;renderWriting()};
+A.wclear=function(){W.strokes=[];W.cur=null;drawCanvas()};
+A.wghost=function(){W.ghost=!W.ghost;renderWriting()};
+A.start=function(t){startQuiz(t.dataset.k)};
+A.qexit=function(){Q=null;stopSpeech();renderPractice()};
+A.qnext=function(){Q.i++;if(Q.i>=Q.list.length)endQuiz();else{$('#qbody').innerHTML='';renderQ()}};
+A.opt=function(t){
+  if(!Q||Q.fin)return;
+  var q=Q.list[Q.i],i=+t.dataset.i,ok=q.opts[i].ok;
+  $$('#qbody .opt').forEach(function(el,j){el.disabled=true;if(q.opts[j].ok)el.classList.add('good');else if(j===i)el.classList.add('bad')});
+  finishQ(ok,q.wid,q.fb);
+};
+A.pick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  var p=q.pool.filter(function(x){return x.i===+t.dataset.i})[0];q.picked.push(p);drawOrder(q,$('#qbody'));
+};
+A.unpick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  q.picked=q.picked.filter(function(x){return x.i!==+t.dataset.i});drawOrder(q,$('#qbody'));
+};
+A.checkorder=function(){
+  var q=Q.list[Q.i];if(q.done)return;q.done=true;
+  var ok=q.picked.every(function(p,k){return p.i===k});
+  $$('#qbody .slot .chip').forEach(function(c){c.disabled=true;c.classList.add(ok?'good':'bad')});
+  $$('#qbody [data-act="checkorder"]').forEach(function(c){c.disabled=true});
+  finishQ(ok,q.wid,fbSent(q.s));
+  if(ok)speak(q.s.zh);
+};
+A.fill=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  var o=t.dataset.o,ok=o===q.f.ans,bl=$('#blank');
+  bl.textContent=o;bl.classList.add(ok?'good':'bad');
+  $$('#qbody .pool .chip').forEach(function(c){c.disabled=true;if(c.dataset.o===q.f.ans)c.classList.add('good');else if(c===t)c.classList.add('bad')});
+  finishQ(ok,q.wid,fbSent({zh:q.f.pre+q.f.ans+q.f.post,py:q.f.py,ar:q.f.ar}));
+  if(ok)speak(q.f.pre+q.f.ans+q.f.post);
+};
+A.ml=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  if(q.done[t.dataset.i])return;
+  $$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+  t.classList.add('sel');q.sel=t.dataset.i;
+};
+A.mr=function(t){
+  var q=Q.list[Q.i];if(Q.fin||q.sel===null||q.done[t.dataset.i])return;
+  var i=t.dataset.i,L=$('#qbody [data-act="ml"][data-i="'+q.sel+'"]');
+  if(i===q.sel){
+    q.done[i]=1;t.classList.add('ok');L.classList.remove('sel');L.classList.add('ok');t.disabled=true;L.disabled=true;
+    speak(q.words[+i].zh);
+    if(Object.keys(q.done).length===q.words.length){
+      var errIds=Object.keys(q.errIds).map(Number);
+      errIds.forEach(function(k){var vi=VOCAB.indexOf(q.words[k]);if(vi>=0)S.wrong[vi]=(S.wrong[vi]||0)+1});
+      finishQ(q.err<=1,[],'<div>عدد الأخطاء: '+q.err+'</div>');
+    }
+  }else{
+    q.err++;q.errIds[q.sel]=1;
+    t.classList.add('no');L.classList.add('no');
+    setTimeout(function(){t.classList.remove('no');L.classList.remove('no')},450);
+  }
+  q.sel=null;$$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+};
+
+var app=$('#app');
+app.addEventListener('click',function(e){
+  var t=e.target.closest('[data-act]');
+  if(!e.target.closest('#sheet')&&!e.target.closest('.tok')&&!$('#sheet').hidden)closeSheet();
+  if(!t||!app.contains(t))return;
+  var f=A[t.dataset.act];if(f)f(t,e);
+});
+app.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.wta!=null){var i=+ta.dataset.wta;S.txt[i]=ta.value;wchk(i)}});
+app.addEventListener('keydown',function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.id==='fc'){e.preventDefault();A.flip()}
+});
+window.addEventListener('hashchange',function(){var h=location.hash.replace('#','');if(h&&h!==tab)setTab(h,true)});
+function syncSlow(){$('#slowbtn').setAttribute('aria-pressed',String(S.slow))}
+syncSlow();updateProg();
+setTab(location.hash.replace('#','')||'vocab',true);
+})();
+</script>
+</body></html>
