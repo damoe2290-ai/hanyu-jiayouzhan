@@ -1,0 +1,295 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><title>الدرس ١٠ · أشتري الأقراص هنا · 我在这儿买光盘</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
+<style>
+:root{--bg:#FBF6EE;--surface:#FFFDF9;--surface2:#F3EBDD;--fg:#2B1D18;--muted:#7B6A5E;--line:#E8DCC8;--accent:#B8322A;--accent-fg:#fff;--accent-soft:#F8E4DF;--seal:#B8322A;--seal-fg:#fff;--gold:#C98A0A;--good:#2E7D4F;--good-soft:#DDF0E2;--bad:#B3261E;--bad-soft:#F7DBD8;--c1:#7A4FA3;--c2:#E0952B;--c3:#2F6DB5;--c4:#2E8B57;--t1:#C0392B;--t2:#A66A00;--t3:#1D7A45;--t4:#2759B8;--t5:#6A7B77;
+--font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;--font-han:'Noto Serif SC','Songti SC',serif;--font-py:'IBM Plex Sans','Segoe UI',sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0D1A17;--surface:#152622;--surface2:#1C312C;--fg:#EEF3EF;--muted:#9DB3AB;--line:#2A413B;--accent:#E0645B;--accent-fg:#2A0E0B;--accent-soft:#2B3A33;--seal:#E0645B;--seal-fg:#2A0E0B;--gold:#E8B64A;--good:#5CCB8A;--good-soft:#173626;--bad:#F08A82;--bad-soft:#3E1D1A;--c1:#A98BD0;--c2:#EBB058;--c3:#7FA8F5;--c4:#5CCB8A;--t1:#F0847A;--t2:#E3B04B;--t3:#5CCB8A;--t4:#7FA8F5;--t5:#93A8A3;color-scheme:dark}
+
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font:16px/1.7 var(--font-ui);padding:0 max(16px,env(safe-area-inset-left)) 90px}
+button{font:inherit;color:inherit;cursor:pointer}a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:820px;margin:0 auto}h1,h2,h3,p{margin:0}
+.han{font-family:var(--font-han)}.py{font-family:var(--font-py)}.mut{color:var(--muted);font-size:14px}
+.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
+.hdr{position:sticky;top:0;z-index:20;background:var(--bg);padding-block:10px 0}
+.top{display:flex;align-items:center;gap:10px}
+.top h1{flex:1;font-size:17px;line-height:1.3}
+.ib{font-size:20px;line-height:1;min-width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--fg)}
+.pg{height:6px;border-radius:9px;background:var(--surface2);margin-top:8px;overflow:hidden}.pg i{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+.tabs{display:flex;gap:4px;margin-top:8px;padding-bottom:8px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tab{flex:1;min-height:44px;padding:0 12px;border:0;border-radius:12px;background:none;color:var(--muted);font-weight:600;white-space:nowrap}
+.tab[aria-selected=true]{background:var(--accent);color:var(--accent-fg)}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.sw{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:14px}
+.sw[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.banner{border-radius:20px;margin-top:12px;padding:22px 18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:linear-gradient(135deg,var(--accent-soft),var(--surface2))}
+.banner .big{font:700 52px/1 var(--font-han);color:var(--accent);min-width:1.6em;text-align:center}
+.banner h2{font-size:22px;line-height:1.3}.banner p{color:var(--muted);font-size:15px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:12px}
+.sec{margin-top:26px}
+.sec>h2{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-size:21px;line-height:1.35;border-inline-start:5px solid var(--accent);padding-inline-start:10px}
+.sec>h2 .har{font-size:14px;color:var(--muted);font-weight:500;font-family:var(--font-ui)}
+.zb{display:block}.zb .t{display:block}
+.pyl{display:none;font:14px/1.5 var(--font-py);color:var(--muted);direction:ltr;text-align:left;margin-top:1px}
+body.py .pyl{display:block}
+.ar2{display:none;color:var(--muted);font-size:15px;line-height:1.7;margin-top:2px}
+body.ar .ar2{display:block}
+.zh{font-family:var(--font-han);font-size:19px;line-height:1.95;direction:ltr;text-align:left;display:block}
+.blk{margin-top:12px}
+.p .zh{font-size:19px}
+.g{border-bottom:2px dotted var(--accent);cursor:pointer;padding-bottom:1px}.g:hover,.g.on{background:var(--accent-soft)}
+.key{border-inline-start:5px solid var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--surface));border-radius:10px;padding:10px 14px}
+.key:before{content:'重点 · نقطة مهمة';display:block;font-size:12px;font-weight:700;color:var(--gold);margin-bottom:2px}
+ul.ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+ul.ul li{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 12px}
+.tl{display:grid;gap:0;position:relative;margin:0;padding:0;list-style:none}
+.tl li{display:grid;grid-template-columns:96px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.tl li:last-child{border:0}
+.tl .lb{font:700 15px/1.3 var(--font-han);color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:6px 8px;text-align:center;align-self:start;direction:ltr}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.cd{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
+.cd .hd{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.cd .hd b{font:700 24px/1.2 var(--font-han);direction:ltr}.cd .hd .ar{font-size:13px;color:var(--muted)}
+.cd .zh{font-size:16px;line-height:1.75}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:480px;background:var(--surface)}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);vertical-align:top;text-align:start}
+th{background:var(--accent-soft);font-family:var(--font-han)}td:first-child{font-weight:700;background:var(--surface2)}
+tr:last-child td{border-bottom:0}
+td .zh,th .zh{font-size:16px;line-height:1.7}
+.btn{min-height:44px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);font-weight:600}
+.btn.p{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.sm{min-width:40px;min-height:40px;border-radius:10px;border:1px solid var(--line);background:var(--surface2)}
+.sm.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+/* terms */
+.tg{display:grid;gap:8px;margin-top:12px}
+.tm{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 12px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.tm .z{font:700 26px/1.2 var(--font-han);direction:ltr;min-width:2em;text-align:center}
+.tm .ex{grid-column:1/-1;border-top:1px dashed var(--line);padding-top:6px;font-size:14px}
+.tm .ex .han{font-size:17px;direction:ltr;display:block;text-align:left}
+.tm .pp{font-family:var(--font-py);direction:ltr;text-align:start}
+/* practice */
+.pq{position:relative}
+.qh{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+.qn{width:28px;height:28px;border-radius:8px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 14px var(--font-py)}
+.qty{font-size:12px;color:var(--muted);background:var(--surface2);border-radius:99px;padding:0 10px}
+.qs{margin-inline-start:auto;font-size:13px;font-weight:700}.qs.ok{color:var(--good)}.qs.no{color:var(--bad)}
+.q .zh{font-size:19px}
+.opts{display:grid;gap:8px;margin-top:10px}
+.op{display:block;width:100%;text-align:start;min-height:48px;padding:8px 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface)}
+.op .zh{font-size:17px;line-height:1.7}
+.op.sel{border-color:var(--accent);background:var(--accent-soft)}
+.op.good{border-color:var(--good);background:var(--good-soft)}
+.op.bad{border-color:var(--bad);background:var(--bad-soft)}
+.op:disabled{cursor:default}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.fb{margin-top:10px;padding:8px 12px;border-radius:10px;font-size:15px}
+.fb.ok{background:var(--good-soft);color:var(--good)}.fb.no{background:var(--bad-soft);color:var(--bad)}
+.fb .ar{color:var(--fg)}
+.mt{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.mt .col{display:grid;gap:8px;align-content:start}
+.mt .op{min-height:52px;padding:6px 10px}
+.mt .op.done{opacity:.55;border-color:var(--good);background:var(--good-soft)}
+.mt .op.flash{border-color:var(--bad);background:var(--bad-soft)}
+.line{min-height:58px;border:2px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;direction:ltr;align-items:flex-start}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;direction:ltr}
+.chip{border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 12px;text-align:start;max-width:100%}
+.chip .zh{font-size:16px;line-height:1.6}
+.chip.bad{border-color:var(--bad);background:var(--bad-soft)}.chip.good{border-color:var(--good);background:var(--good-soft)}
+.chip .nn{display:inline-block;width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;background:var(--seal);color:var(--seal-fg);font:700 12px var(--font-py);margin-inline-end:6px}
+.rows{display:grid;gap:8px;margin-top:10px}
+.rw{border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;background:var(--surface)}
+.rw.good{border-color:var(--good);background:var(--good-soft)}.rw.bad{border-color:var(--bad);background:var(--bad-soft)}
+.rw .cs{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.cs button{min-height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);font:600 15px var(--font-han)}
+.cs button.sel{background:var(--accent);color:var(--accent-fg);border-color:var(--accent)}
+.cz{font:19px/2.4 var(--font-han);direction:ltr;text-align:left;margin-top:8px}
+.cz select{font:inherit;font-size:16px;min-height:38px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:0 6px;margin:0 3px;max-width:100%}
+.cz select.good{border-color:var(--good);background:var(--good-soft)}.cz select.bad{border-color:var(--bad);background:var(--bad-soft)}
+.act{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.sum{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.sum b{font:700 22px var(--font-py)}
+/* discuss */
+textarea{width:100%;min-height:130px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:10px 12px;font:19px/1.8 var(--font-han);margin-top:10px;resize:vertical;direction:ltr;text-align:left}
+.fr{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.fr button{min-height:38px;padding:0 12px;border-radius:999px;border:1px dashed var(--accent);background:var(--accent-soft);color:var(--accent);font:600 15px var(--font-han);direction:ltr}
+.us{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.us span{font:600 14px var(--font-han);padding:2px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+details.md{margin-top:10px;border:1px solid var(--line);border-radius:12px;padding:8px 12px;background:var(--surface2)}
+details.md summary{cursor:pointer;font-weight:600;min-height:32px}
+.arx{display:block;font-size:16px;line-height:1.7}
+/* dialogue */
+.dl{display:grid;grid-template-columns:104px 1fr auto;gap:10px;padding:9px 0;border-bottom:1px dashed var(--line);align-items:start}.dl:last-child{border:0}
+.dlg{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:6px 14px}
+.sk .zh{font-size:15px;color:var(--accent);line-height:1.5;font-weight:700}
+.sli{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}.sli>div{flex:1;min-width:0}
+ul.sl li{padding:6px 12px}
+@media(max-width:520px){.dl{grid-template-columns:78px 1fr auto}}
+/* popover */
+#pop{position:fixed;inset-inline:12px;bottom:12px;z-index:30;max-width:560px;margin-inline:auto;background:var(--surface);border:1.5px solid var(--accent);border-radius:18px;padding:14px;box-shadow:0 12px 40px rgba(0,0,0,.25)}
+#pop .r{display:flex;align-items:center;gap:12px}
+#pop .zz{font:700 30px/1.2 var(--font-han);direction:ltr;white-space:nowrap}#pop .r>div:nth-child(2){min-width:0;flex:1}
+#pop .cl{flex:none}
+.toast{position:fixed;inset:auto 16px 90px;margin:auto;max-width:360px;background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:12px;text-align:center;z-index:40}
+.foot{text-align:center;margin-top:36px;padding-top:14px;border-top:1px solid var(--line)}
+@media(max-width:520px){.mt{grid-template-columns:1fr}.tl li{grid-template-columns:70px 1fr}.banner{grid-template-columns:1fr;text-align:center}}
+</style>
+<div class="wrap" dir="rtl" lang="ar">
+<header class="hdr"><div class="top"><a class="ib" href="index.html" aria-label="العودة إلى الدروس">→</a><h1 id="ttl"></h1><button class="ib" id="th" aria-label="الوضع الليلي">◐</button></div>
+<div class="pg" aria-hidden="true"><i id="pgb"></i></div>
+<div class="tabs" role="tablist" id="tabs"></div></header>
+<main id="main"></main>
+<footer class="foot mut">© 2026 أ. محمود الصديق (<span class="han">大漠</span>) · جميع الحقوق محفوظة · المحتوى للتعلّم الشخصي ولا يجوز نسخه أو إعادة نشره.</footer>
+</div>
+<div id="pop" hidden></div><div class="toast" id="toast" hidden></div>
+<script>
+(function(){
+var D={"n":10,"course":"prac","cname":"القراءة ١","big":"买","title_zh":"我在这儿买光盘","title_ar":"الدرس ١٠ · أشتري الأقراص هنا","intro_ar":"المساومة والتسوّق جزء من الحياة في الصين. تتعلّم في هذا الدرس العملة الصينية، وكيف تتحدث عن أذواقك وهواياتك، وماذا تفعل حين لا تعرف كيف تقول شيئاً.","defpy":1,"minc":12,"tword":"كلمة","tabs":[["read","📖 الدرس"],["terms","🔤 الكلمات"],["prac","✍️ التدريبات"],["disc","💬 تحدّث"]],"sections":[{"h":"一、课文（一）","ar":"النص ١: في المجمّع التجاري","b":[{"dlg":[["王小云｜وانغ شياويون","大为，你在这儿买什么？｜داوي، ماذا تشتري هنا؟"],["马大为｜ما داوي","我买音乐光盘。｜أشتري أقراص موسيقى."],["王小云｜وانغ شياويون","你常常来这儿吗？｜هل تأتي إلى هنا كثيراً؟"],["马大为｜ما داوي","我不常来这儿。星期天我常常跟林娜去小商场。这个商场很大。｜لا آتي إلى هنا كثيراً. يوم الأحد أذهب كثيراً مع لين نا إلى المجمع الصغير. هذا المجمع كبير جداً."],["王小云｜وانغ شياويون","你喜欢什么音乐？｜أي موسيقى تحب؟"],["马大为｜ما داوي","我喜欢中国音乐。这张光盘怎么样？｜أحب الموسيقى الصينية. كيف هذا القرص؟"],["王小云｜وانغ شياويون","这张很好，是《梁祝》，很有名。｜هذا جيد جداً، إنه «ليانغ تشو»، مشهور جداً."],["马大为｜ما داوي","好，我买这张。这儿有没有书和报？｜جيد، سأشتري هذا. هل توجد هنا كتب وصحف؟"],["王小云｜وانغ شياويون","这儿没有书，也没有报。｜لا توجد هنا كتب ولا صحف."],["马大为｜ما داوي","本子呢？｜والدفاتر؟"],["王小云｜وانغ شياويون","有，在那儿买。跟我来，我也买本子。｜نعم، تُباع هناك. تعال معي، أنا أيضاً سأشتري دفاتر."]]}]},{"h":"一、课文（二）","ar":"النص ٢: في السوق (المساومة)","b":[{"dlg":[["师傅｜البائع","先生，您要什么？｜سيدي، ماذا تريد؟"],["丁力波｜دينغ ليبو","你好，师傅。请问，这是什么？｜مرحباً أيها الأخ. عفواً، ما هذا؟"],["师傅｜البائع","您不认识吗？这是香蕉苹果。｜ألا تعرفه؟ هذا «تفاح الموز»."],["丁力波｜دينغ ليبو","对不起，我是问：这个汉语怎么说？｜آسف، أسأل: كيف يُقال هذا بالصينية؟"],["师傅｜البائع","啊，您是外国人。您在哪儿工作？｜آه، أنت أجنبي. أين تعمل؟"],["丁力波｜دينغ ليبو","我在语言学院学习。｜أنا أدرس في معهد اللغات."],["师傅｜البائع","您学习汉语，是不是？您跟我学，很容易：这叫香蕉，这叫香蕉苹果，这也是苹果，那是葡萄……｜أنت تدرس الصينية، أليس كذلك؟ تعلّم معي، الأمر سهل جداً: هذا يسمى موز، وهذا تفاح الموز، وهذا أيضاً تفاح، وذلك عنب…"],["丁力波｜دينغ ليبو","香蕉、苹果、香蕉苹果……，一斤苹果多少钱？｜موز، تفاح، تفاح الموز… كم سعر جين (نصف كيلو) من التفاح؟"],["师傅｜البائع","一斤三块二毛钱。｜جين واحد بثلاثة يوان وعشرين ماو."],["丁力波｜دينغ ليبو","您的苹果真贵。｜تفاحكم غالٍ حقاً."],["师傅｜البائع","一斤三块二不贵。您看，我的苹果大。好，做个朋友，三块钱一斤。｜ثلاثة يوان واثنان ماو ليس غالياً. انظر، تفاحي كبير. حسناً، لنكن أصدقاء، ثلاثة يوان للجين."],["丁力波｜دينغ ليبو","一斤香蕉多少钱？｜كم سعر جين الموز؟"],["师傅｜البائع","两块七毛五分一斤，五块钱两斤。｜يوانان وسبعة ماو وخمسة فن للجين، وخمسة يوان للجينين."],["丁力波｜دينغ ليبو","我买三斤香蕉和两斤香蕉苹果。｜أشتري ثلاثة جين موز وجينين من تفاح الموز."],["师傅｜البائع","一共十四块钱。再送您一个苹果。您还要什么？｜المجموع أربعة عشر يوان. وأهديك تفاحة أخرى. هل تريد شيئاً آخر؟"],["丁力波｜دينغ ليبو","不要了，谢谢。给你钱。｜لا شكراً، لا أريد شيئاً آخر. تفضل المال."],["师傅｜البائع","好，您给我二十块钱，我找您六块钱。再见。｜حسناً، أعطيتني عشرين يواناً وأرجع لك ستة يوان. إلى اللقاء."],["丁力波｜دينغ ليبو","再见！｜إلى اللقاء!"]]}]},{"h":"二、注释","ar":"الملاحظات","b":[{"p":"① 这个商场很大。｜إذا جاء اسم الإشارة «这/那» صفةً للاسم فإننا نضع بينهما كلمة عدّ: 这张光盘، 那个朋友، 那瓶酒."},{"p":"② 先生，您要什么？｜«先生» لقب لمخاطبة الرجل البالغ، ويُستعمل أيضاً احتراماً لعالم أو متخصص رجلاً كان أو امرأة. «您要什么؟» و«您还要什么؟» يقولهما البائعون وموظفو الفنادق لعرض المساعدة."},{"p":"③ 你好，师傅。｜«师傅» صيغة احترام لمخاطبة العمال وأصحاب المهن الخدمية: سائق التاكسي والحافلة، بائع التذاكر، الطباخ، موظف الفندق، وصار استعمالها أوسع اليوم."},{"p":"④ 我是问：这个汉语怎么说？｜«怎么 + فعل» تسأل عن طريقة فعل شيء: 怎么说؟ 怎么做؟ 怎么去؟ 怎么介绍؟"},{"p":"⑤ 您学习汉语，是不是？｜النمط «……，是不是؟» لإبداء رأي أو تخمين مع انتظار رد. الجواب المثبت «是啊»، والمنفي «不（是）». مثال: A: 你喜欢中国音乐，是吗؟ B: 是啊。"},{"p":"⑥ 一斤苹果多少钱？｜«كم سعر جين التفاح؟» والجين (斤) نصف كيلو. يمكن قلب الجملة: 多少钱一斤؟ ← 三块二一斤. في المتاجر الكبرى لا يساوم الناس عادةً، لكن في الأسواق الحرّة والأكشاك كثيراً ما يساومون."},{"p":"⑦ 一斤三块二毛钱。｜وحدات العملة (人民币): 元 (يوان) وتُنطق في الكلام 块، و角 وتُنطق 毛، و分 (فن). وإذا انتهى المبلغ بـ毛 أو 分 يمكن حذف «毛钱/分钱». مثال: 1.75元 ← 一块七毛五. وإذا بدأ المبلغ بـ٢毛 نقول 两毛، وإذا انتهى بـ٢分 نقول 二分: 0.22元 ← 两毛二."},{"key":"不要了，谢谢。｜معناها: «لا، شكراً (لا أريد المزيد)»."}]},{"h":"三、人民币","ar":"العملة الصينية","b":[{"table":{"head":["书面｜الكتابة","口语｜في الكلام","价值｜القيمة"],"rows":[["元","块","١ يوان"],["角","毛","١/١٠ يوان"],["分","分","١/١٠٠ يوان"]]}},{"sl":["一块七毛五｜١.٧٥ يوان","四块八｜٤.٨٠ يوان","两毛二｜٠.٢٢ يوان","三块二毛｜٣.٢٠ يوان","两块七毛五分｜٢.٧٥ يوان","二十块｜٢٠ يوان"]},{"p":"补充词｜كلمات إضافية:"},{"sl":["元｜يوان (كتابياً)","笔｜قلم","支｜كلمة عدّ للأقلام","份｜كلمة عدّ للصحف","本｜كلمة عدّ للكتب والدفاتر","杯｜كوب","售货员｜بائع","作家｜كاتب","便宜｜رخيص","书店｜مكتبة","体育馆｜صالة رياضية","卖｜يبيع"]}]},{"h":"四、关键句","ar":"الجمل المفتاحية","b":[{"sl":["这个商场很大。｜هذا المجمع كبير جداً.","一斤香蕉多少钱？｜كم سعر جين الموز؟","两块七毛五一斤。｜يوانان وسبعة ماو وخمسة فن للجين.","您在哪儿工作？｜أين تعمل؟","我常常跟他来这儿。｜أنا آتي إلى هنا كثيراً معه.","我送你一个苹果。｜أهديك تفاحة.","您给我二十块钱。｜أعطيتني عشرين يواناً.","这个汉语怎么说？｜كيف يُقال هذا بالصينية؟"]}]}],"terms":[{"zh":"在","ar":"في / عند","py":"zài","ex":"我在这儿买光盘。｜أشتري الأقراص هنا."},{"zh":"这儿","ar":"هنا","py":"zhèér","ex":"我常常来这儿。｜آتي إلى هنا كثيراً."},{"zh":"光盘","ar":"قرص (CD)","py":"guāngpán","ex":"我买音乐光盘。｜أشتري أقراص موسيقى."},{"zh":"音乐","ar":"موسيقى","py":"yīnyuè","ex":"我喜欢中国音乐。｜أحب الموسيقى الصينية."},{"zh":"商场","ar":"مجمع تجاري","py":"shāngchǎng","ex":"这个商场很大。｜هذا المجمع كبير جداً."},{"zh":"常常","ar":"كثيراً / غالباً","py":"chángcháng","ex":"我常常来这儿。｜آتي إلى هنا كثيراً."},{"zh":"跟","ar":"مع / يتبع","py":"gēn","ex":"跟我来。｜تعال معي."},{"zh":"有名","ar":"مشهور","py":"yǒumíng","ex":"很有名。｜مشهور جداً."},{"zh":"书","ar":"كتاب","py":"shū","ex":"这儿没有书。｜لا توجد هنا كتب."},{"zh":"报","ar":"صحيفة","py":"bào","ex":"这儿没有报。｜لا توجد هنا صحف."},{"zh":"本子","ar":"دفتر","py":"běnzi","ex":"本子在那儿买。｜الدفاتر تُباع هناك."},{"zh":"那儿","ar":"هناك","py":"nàér","ex":"在那儿买。｜اشترِ هناك."},{"zh":"先生","ar":"سيد / أستاذ","py":"xiānsheng","ex":"先生，您要什么？｜سيدي، ماذا تريد؟"},{"zh":"要","ar":"يريد","py":"yào","ex":"您要什么？｜ماذا تريد؟"},{"zh":"师傅","ar":"أيها الأخ (احتراماً للعامل)","py":"shīfu","ex":"你好，师傅。｜مرحباً أيها الأخ."},{"zh":"香蕉苹果","ar":"تفاح الموز (نوع)","py":"xiāngjiāo píngguǒ","ex":"这是香蕉苹果。｜هذا تفاح الموز."},{"zh":"香蕉","ar":"موز","py":"xiāngjiāo","ex":"一斤香蕉｜جين موز"},{"zh":"苹果","ar":"تفاح","py":"píngguǒ","ex":"一斤苹果多少钱？｜كم سعر جين التفاح؟"},{"zh":"对不起","ar":"آسف","py":"duìbùqǐ","ex":"对不起，请再说一遍。｜آسف، أعد من فضلك."},{"zh":"怎么","ar":"كيف","py":"zěn me","ex":"这个汉语怎么说？｜كيف يُقال هذا بالصينية؟"},{"zh":"容易","ar":"سهل","py":"róngyì","ex":"学汉语很容易。｜تعلّم الصينية سهل."},{"zh":"葡萄","ar":"عنب","py":"pútáo","ex":"那是葡萄。｜ذاك عنب."},{"zh":"钱","ar":"مال / نقود","py":"qián","ex":"多少钱？｜كم السعر؟"},{"zh":"斤","ar":"جين (نصف كيلو)","py":"jīn","ex":"一斤苹果｜جين تفاح"},{"zh":"块","ar":"يوان (كلاماً)","py":"kuài","ex":"三块钱一斤｜ثلاثة يوان للجين"},{"zh":"毛","ar":"ماو (١/١٠ يوان)","py":"máo","ex":"两毛钱｜ماوان"},{"zh":"贵","ar":"غالٍ","py":"guì","ex":"您的苹果真贵。｜تفاحكم غالٍ حقاً."},{"zh":"分","ar":"فن (١/١٠٠ يوان)","py":"fēn","ex":"五分钱｜خمسة فن"},{"zh":"送","ar":"يهدي","py":"sòng","ex":"再送您一个苹果。｜وأهديك تفاحة."},{"zh":"给","ar":"يعطي","py":"gěi","ex":"给你钱。｜أعطيك المال."},{"zh":"找","ar":"يرجع الباقي / يبحث","py":"zhǎo","ex":"我找您六块钱。｜أرجع لك ستة يوان."}],"practice":[{"t":"mcq","q":"“一斤香蕉多少钱？”可以怎么回答？","o":["两块七毛五一斤。","我在商场买。","我很喜欢香蕉。","这是香蕉。"],"a":0,"why":"«多少钱» سؤال عن السعر ← الجواب بالمبلغ."},{"t":"match","q":"صِل الكلمة بمعناها","p":[["商场","مجمع تجاري"],["光盘","قرص CD"],["苹果","تفاح"],["钱","مال"],["贵","غالٍ"],["送","يهدي"]]},{"t":"cloze","q":"您___我二十块钱，我___您六块钱。","a":["给","找"],"bank":["给","找","送","买"]},{"t":"order","q":"رتّب الجملة: كم سعر جين التفاح؟","items":["一斤","苹果","多少","钱","？"]},{"t":"mcq","q":"“一块七毛五”是多少钱？","o":["1.75元","17.5元","1.57元","7.15元"],"a":0,"why":"一块 = ١ يوان، 七毛 = ٠.٧، 五 = ٠.٠٥ → ١.٧٥."},{"t":"tf","q":"大为常常来这个商场买光盘。","a":false,"why":"«我不常来这儿» — داوي لا يأتي كثيراً إلى هذا المكان."},{"t":"mcq","q":"丁力波想问“这个汉语怎么说？”因为他：","o":["不知道苹果的汉语怎么说","不想买苹果","很忙","不认识师傅"],"a":0,"why":"لأنه يريد أن يعرف الاسم الصيني."},{"t":"mcq","q":"哪一个对？","o":["这张光盘","这个光盘","这瓶光盘","这本光盘"],"a":0,"why":"كلمة عدّ القرص هي «张»."},{"t":"listen","q":"استمع ثم اختر الجملة التي سمعتها","say":"一斤香蕉多少钱？","o":["一斤香蕉多少钱？","一斤苹果多少钱？","两斤香蕉多少钱？"],"a":0},{"t":"say","q":"استمع لكل جملة ثم كرّرها بصوت عالٍ","items":["这个汉语怎么说？｜كيف يُقال هذا بالصينية؟","一斤苹果多少钱？｜كم سعر جين التفاح؟","不要了，谢谢。给你钱。｜لا شكراً. تفضل المال."]}],"discuss":[{"q":"你在市场买东西：问价钱，然后买。","ar":"تتسوّق في السوق: اسأل عن السعر ثم اشترِ.","frames":["师傅，","一斤……多少钱？","我买……斤。","一共……钱。","给你钱。"],"use":["多少钱","一共","给","买"],"model":"师傅，一斤苹果多少钱？三块钱一斤。我买两斤。一共六块钱。给你钱。｜أيها الأخ، كم سعر جين التفاح؟ ثلاثة يوان للجين. أشتري جينين. المجموع ستة يوان. تفضل المال."},{"q":"你喜欢什么音乐？你常常去哪儿买东西？","ar":"أي موسيقى تحب؟ وأين تتسوق عادةً؟","frames":["我喜欢……音乐。","我常常去……","我常常跟……去。","这个……很大。"],"use":["喜欢","音乐","常常","跟"],"model":"我喜欢中国音乐。我常常去商场，我常常跟朋友去。这个商场很大。｜أحب الموسيقى الصينية. أذهب كثيراً إلى المجمع، وأذهب مع أصدقائي. هذا المجمع كبير جداً."}],"py":{"买":"mǎi","我在这儿买光盘":"wǒ zài zhèér mǎi guāngpán","一、课文（一）":"yì, kèwén (yì)","王小云":"Wáng Xiǎoyún","大为，你在这儿买什么？":"dà wèi, nǐ zài zhèér mǎi shénme?","马大为":"Mǎ Dàwéi","我买音乐光盘。":"wǒ mǎi yīnyuè guāngpán.","你常常来这儿吗？":"nǐ chángcháng lái zhèér ma?","我不常来这儿。星期天我常常跟林娜去小商场。这个商场很大。":"wǒ bù cháng lái zhèér. xīngqītiān wǒ chángcháng gēn Lín Nà qù xiǎo shāngchǎng. zhè gè shāngchǎng hěn dà.","你喜欢什么音乐？":"nǐ xǐhuan shénme yīnyuè?","我喜欢中国音乐。这张光盘怎么样？":"wǒ xǐhuan Zhōngguó yīnyuè. zhè Zhāng guāngpán zěnmeyàng?","这张很好，是《梁祝》，很有名。":"zhè Zhāng hěn hǎo, shì “Liáng Zhù”, hěn yǒumíng.","好，我买这张。这儿有没有书和报？":"hǎo, wǒ mǎi zhè Zhāng. zhèér yǒu méi yǒu shū hé bào?","这儿没有书，也没有报。":"zhèér méi yǒu shū, yě méi yǒu bào.","本子呢？":"běnzi ne?","有，在那儿买。跟我来，我也买本子。":"yǒu, zài nàér mǎi. gēn wǒ lái, wǒ yě mǎi běnzi.","一、课文（二）":"yì, kèwén (èr)","师傅":"shīfu","先生，您要什么？":"xiānsheng, nín yào shénme?","丁力波":"Dīng Lìbō","你好，师傅。请问，这是什么？":"nǐ hǎo, shīfu. qǐng wèn, zhè shì shénme?","您不认识吗？这是香蕉苹果。":"nín bú rènshi ma? zhè shì xiāngjiāopíngguǒ.","对不起，我是问：这个汉语怎么说？":"duìbùqǐ, wǒ shì wèn: zhè gè Hànyǔ zěnme shuō?","啊，您是外国人。您在哪儿工作？":"a, nín shì wàiguó rén. nín zài nǎér gōngzuò?","我在语言学院学习。":"wǒ zài Yǔyán Xuéyuàn xuéxí.","您学习汉语，是不是？您跟我学，很容易：这叫香蕉，这叫香蕉苹果，这也是苹果，那是葡萄……":"nín xuéxí Hànyǔ, shì búshì? nín gēn wǒ xué, hěn róngyì: zhè jiào xiāngjiāo, zhè jiào xiāngjiāopíngguǒ, zhè yě shì píngguǒ, nà shì pútáo … …","香蕉、苹果、香蕉苹果……，一斤苹果多少钱？":"xiāngjiāo, píngguǒ, xiāngjiāopíngguǒ … …, yì jīn píngguǒ duōshǎo qián?","一斤三块二毛钱。":"yì jīn sān kuài èr máo qián.","您的苹果真贵。":"nín de píngguǒ zhēn guì.","一斤三块二不贵。您看，我的苹果大。好，做个朋友，三块钱一斤。":"yì jīn sān kuài èr bú guì. nín kàn, wǒ de píngguǒ dà. hǎo, zuò gè péngyou, sān kuài qián yì jīn.","一斤香蕉多少钱？":"yì jīn xiāngjiāo duōshǎo qián?","两块七毛五分一斤，五块钱两斤。":"liǎng kuài qī máo wǔ fēn yì jīn, wǔ kuài qián liǎng jīn.","我买三斤香蕉和两斤香蕉苹果。":"wǒ mǎi sān jīn xiāngjiāo hé liǎng jīn xiāngjiāopíngguǒ.","一共十四块钱。再送您一个苹果。您还要什么？":"yígòng shí sì kuài qián. zài sòng nín yí gè píngguǒ. nín hái yào shénme?","不要了，谢谢。给你钱。":"bú yào le, xièxie. gěi nǐ qián.","好，您给我二十块钱，我找您六块钱。再见。":"hǎo, nín gěi wǒ èrshí kuài qián, wǒ zhǎo nín liù kuài qián. zàijiàn.","再见！":"zàijiàn!","二、注释":"èr, zhù shì","① 这个商场很大。":"① zhè gè shāngchǎng hěn dà.","② 先生，您要什么？":"② xiānsheng, nín yào shénme?","③ 你好，师傅。":"③ nǐ hǎo, shīfu.","④ 我是问：这个汉语怎么说？":"④ wǒ shì wèn: zhè gè Hànyǔ zěnme shuō?","⑤ 您学习汉语，是不是？":"⑤ nín xuéxí Hànyǔ, shì búshì?","⑥ 一斤苹果多少钱？":"⑥ yì jīn píngguǒ duōshǎo qián?","⑦ 一斤三块二毛钱。":"⑦ yì jīn sān kuài èr máo qián.","不要了，谢谢。":"bú yào le, xièxie.","三、人民币":"sān, rén mín bì","书面":"shū miàn","口语":"kǒu yǔ","价值":"jià zhí","元":"yuán","块":"kuài","角":"jiǎo","毛":"máo","分":"fēn","一块七毛五":"yí kuài qī máo wǔ","四块八":"sì kuài bā","两毛二":"liǎng máo èr","三块二毛":"sān kuài èr máo","两块七毛五分":"liǎng kuài qī máo wǔ fēn","二十块":"èrshí kuài","补充词":"bǔ chōng cí","笔":"bǐ","支":"zhī","份":"fèn","本":"běn","杯":"bēi","售货员":"shòu huò yuán","作家":"zuò jiā","便宜":"biàn yí","书店":"shūdiàn","体育馆":"tǐ yù guǎn","卖":"mài","四、关键句":"sì, guān jiàn jù","这个商场很大。":"zhè gè shāngchǎng hěn dà.","两块七毛五一斤。":"liǎng kuài qī máo wǔ yì jīn.","您在哪儿工作？":"nín zài nǎér gōngzuò?","我常常跟他来这儿。":"wǒ chángcháng gēn tā lái zhèér.","我送你一个苹果。":"wǒ sòng nǐ yí gè píngguǒ.","您给我二十块钱。":"nín gěi wǒ èrshí kuài qián.","这个汉语怎么说？":"zhè gè Hànyǔ zěnme shuō?","“一斤香蕉多少钱？”可以怎么回答？":"“yì jīn xiāngjiāo duōshǎo qián?” kě yǐ zěnme huí dá?","我在商场买。":"wǒ zài shāngchǎng mǎi.","我很喜欢香蕉。":"wǒ hěn xǐhuan xiāngjiāo.","这是香蕉。":"zhè shì xiāngjiāo.","商场":"shāngchǎng","光盘":"guāngpán","苹果":"píngguǒ","钱":"qián","贵":"guì","送":"sòng","您___我二十块钱，我___您六块钱。":"nín _ _ _ wǒ èrshí kuài qián, wǒ _ _ _ nín liù kuài qián.","您＿＿我二十块钱，我＿＿您六块钱。":"nín ＿ ＿ wǒ èrshí kuài qián, wǒ ＿ ＿ nín liù kuài qián.","给":"gěi","找":"zhǎo","一斤":"yì jīn","多少":"duōshǎo","“一块七毛五”是多少钱？":"“yí kuài qī máo wǔ” shì duōshǎo qián?","大为常常来这个商场买光盘。":"dà wèi chángcháng lái zhè gè shāngchǎng mǎi guāngpán.","丁力波想问“这个汉语怎么说？”因为他：":"Dīng Lìbō xiǎng wèn “zhè gè Hànyǔ zěnme shuō?” yīn wèi tā:","不知道苹果的汉语怎么说":"bù zhī dào píngguǒ de Hànyǔ zěnme shuō","不想买苹果":"bù xiǎng mǎi píngguǒ","很忙":"hěn máng","不认识师傅":"bú rènshi shīfu","哪一个对？":"nǎ yí gè duì?","这张光盘":"zhè Zhāng guāngpán","这个光盘":"zhè gè guāngpán","这瓶光盘":"zhè píng guāngpán","这本光盘":"zhè běn guāngpán","一斤苹果多少钱？":"yì jīn píngguǒ duōshǎo qián?","两斤香蕉多少钱？":"liǎng jīn xiāngjiāo duōshǎo qián?","你在市场买东西：问价钱，然后买。":"nǐ zài shì chǎng mǎi dōng xī: wèn jià qián, rán hòu mǎi.","师傅，":"shīfu,","一斤……多少钱？":"yì jīn … … duōshǎo qián?","我买……斤。":"wǒ mǎi … … jīn.","一共……钱。":"yígòng … … qián.","给你钱。":"gěi nǐ qián.","多少钱":"duōshǎo qián","一共":"yígòng","师傅，一斤苹果多少钱？三块钱一斤。我买两斤。一共六块钱。给你钱。":"shīfu, yì jīn píngguǒ duōshǎo qián? sān kuài qián yì jīn. wǒ mǎi liǎng jīn. yígòng liù kuài qián. gěi nǐ qián.","你喜欢什么音乐？你常常去哪儿买东西？":"nǐ xǐhuan shénme yīnyuè? nǐ chángcháng qù nǎér mǎi dōng xī?","我喜欢……音乐。":"wǒ xǐhuan … … yīnyuè.","我常常去……":"wǒ chángcháng qù … …","我常常跟……去。":"wǒ chángcháng gēn … … qù.","这个……很大。":"zhè gè … … hěn dà.","喜欢":"xǐhuan","音乐":"yīnyuè","常常":"chángcháng","跟":"gēn","我喜欢中国音乐。我常常去商场，我常常跟朋友去。这个商场很大。":"wǒ xǐhuan Zhōngguó yīnyuè. wǒ chángcháng qù shāngchǎng, wǒ chángcháng gēn péngyou qù. zhè gè shāngchǎng hěn dà.","我在这儿买光盘。":"wǒ zài zhèér mǎi guāngpán.","我常常来这儿。":"wǒ chángcháng lái zhèér.","我喜欢中国音乐。":"wǒ xǐhuan Zhōngguó yīnyuè.","跟我来。":"gēn wǒ lái.","很有名。":"hěn yǒumíng.","这儿没有书。":"zhèér méi yǒu shū.","这儿没有报。":"zhèér méi yǒu bào.","本子在那儿买。":"běnzi zài nàér mǎi.","在那儿买。":"zài nàér mǎi.","您要什么？":"nín yào shénme?","你好，师傅。":"nǐ hǎo, shīfu.","这是香蕉苹果。":"zhè shì xiāngjiāopíngguǒ.","一斤香蕉":"yì jīn xiāngjiāo","对不起，请再说一遍。":"duìbùqǐ, qǐng zài shuō yí biàn.","学汉语很容易。":"xué Hànyǔ hěn róngyì.","那是葡萄。":"nà shì pútáo.","多少钱？":"duōshǎo qián?","一斤苹果":"yì jīn píngguǒ","三块钱一斤":"sān kuài qián yì jīn","两毛钱":"liǎng máo qián","五分钱":"wǔ fēn qián","再送您一个苹果。":"zài sòng nín yí gè píngguǒ.","我找您六块钱。":"wǒ zhǎo nín liù kuài qián."}},PY=D.py,CRS=D.course,KEY='noor-'+D.course+D.n+'-v1',HUB='zh-hub-v1';
+var S={prac:{},txt:{},ui:{}};try{var o=JSON.parse(localStorage.getItem(KEY)||'{}');for(var k in o)S[k]=o[k]}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function $(s,r){return (r||document).querySelector(s)}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(function(){t.hidden=true},2200)}
+var voice=null;function pick(){var v=(window.speechSynthesis&&speechSynthesis.getVoices())||[];voice=v.filter(function(x){return /^zh/i.test(x.lang)})[0]||null}
+if(window.speechSynthesis){pick();speechSynthesis.onvoiceschanged=pick}
+function speak(t){if(!window.speechSynthesis){toast('الصوت غير متاح');return}speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t.replace(/[“”《》]/g,''));u.lang='zh-CN';if(voice)u.voice=voice;u.rate=.85;speechSynthesis.speak(u)}
+function toneOf(s){var d=s.normalize('NFD');if(/̄/.test(d))return 1;if(/́/.test(d))return 2;if(/̌/.test(d))return 3;if(/̀/.test(d))return 4;return 5}
+function pyh(py){return py.split(' ').map(function(x){return '<span class="t'+toneOf(x)+'">'+esc(x)+'</span>'}).join(' ')}
+/* glossary */
+var TERMS=D.terms,TI={};TERMS.forEach(function(t,i){TI[t.zh]=i});
+var TRE=null;(function(){var a=TERMS.map(function(t){return t.zh}).sort(function(x,y){return y.length-x.length}).map(function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')});if(a.length)TRE=new RegExp(a.join('|'),'g')})();
+function gl(z){var e=esc(z);return TRE?e.replace(TRE,function(m){return '<span class="g" data-g="'+TI[m]+'" tabindex="0" role="button">'+m+'</span>'}):e}
+function sp(s){var i=s.indexOf('｜');return i<0?[s,'']:[s.slice(0,i),s.slice(i+1)]}
+function Z(zh,cls){if(/[\u0600-\u06ff]/.test(zh)&&!/[\u4e00-\u9fff]/.test(zh))return '<span class="arx">'+esc(zh)+'</span>';return '<span class="zb"><span class="zh '+(cls||'')+'" lang="zh">'+gl(zh)+'</span><span class="pyl">'+esc(PY[zh]||'')+'</span></span>'}
+function ZA(s,cls){var p=sp(s);return Z(p[0],cls)+(p[1]?'<span class="ar2">'+esc(p[1])+'</span>':'')}
+function ZP(zh){return '<span class="zb"><span class="han" lang="zh" dir="ltr">'+esc(zh)+'</span><span class="pyl">'+esc(PY[zh]||'')+'</span></span>'}
+/* hub review */
+function addRev(zh){var h={};try{h=JSON.parse(localStorage.getItem(HUB)||'{}')||{}}catch(e){}h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};var has=!!h.dues[CRS][zh];if(has)delete h.dues[CRS][zh];else h.dues[CRS][zh]={i:0,t:Date.now()};try{localStorage.setItem(HUB,JSON.stringify(h))}catch(e){}return !has}
+function inRev(zh){try{var h=JSON.parse(localStorage.getItem(HUB)||'{}');return !!(h.dues&&h.dues[CRS]&&h.dues[CRS][zh])}catch(e){return false}}
+var SAYS=[];function sayBtn(z){SAYS.push(z);return '<button class="sm" data-sz="'+(SAYS.length-1)+'" aria-label="استمع">🔊</button>'}
+/* ---------- reading ---------- */
+function block(b){
+ if(b.p)return '<div class="blk p">'+ZA(b.p)+'</div>';
+ if(b.key)return '<div class="blk key">'+ZA(b.key)+'</div>';
+ if(b.ul)return '<ul class="ul blk">'+b.ul.map(function(x){return '<li>'+ZA(x)+'</li>'}).join('')+'</ul>';
+ if(b.tl)return '<ol class="tl blk">'+b.tl.map(function(x){return '<li><span class="lb">'+esc(x[0])+'</span><div>'+ZA(x[1])+'</div></li>'}).join('')+'</ol>';
+ if(b.cards)return '<div class="cards blk">'+b.cards.map(function(c){return '<div class="cd"><div class="hd"><b>'+gl(c[0])+'</b><span class="ar">'+esc(c[1])+'</span></div>'+(c[2]?ZA(c[2]):'')+'</div>'}).join('')+'</div>';
+ if(b.table){var t=b.table;return '<div class="tw blk"><table><thead><tr>'+t.head.map(function(h){return '<th>'+ZA(h)+'</th>'}).join('')+'</tr></thead><tbody>'+t.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+ZA(c)+'</td>'}).join('')+'</tr>'}).join('')+'</tbody></table></div>'}
+ if(b.dlg)return '<div class="dlg blk">'+b.dlg.map(function(l){var q=sp(l[0]),t=sp(l[1]);return '<div class="dl"><div class="sk">'+Z(q[0])+(q[1]?'<span class="ar2">'+esc(q[1])+'</span>':'')+'</div><div class="tx">'+ZA(l[1])+'</div>'+sayBtn(t[0])+'</div>'}).join('')+'</div>';
+ if(b.sl)return '<ul class="ul blk sl">'+b.sl.map(function(x){return '<li><div class="sli"><div>'+ZA(x)+'</div>'+sayBtn(sp(x)[0])+'</div></li>'}).join('')+'</ul>';
+ return '';
+}
+function reading(){
+ return '<div class="banner"><div class="big" aria-hidden="true">'+esc(D.big)+'</div><div><h2>'+esc(D.title_ar)+'</h2><p>'+esc(D.intro_ar)+'</p></div></div>'+
+ D.sections.map(function(s){return '<section class="sec"><h2><span class="han" lang="zh" dir="ltr">'+gl(s.h)+'</span><span class="har">'+esc(s.ar)+'</span></h2>'+(PY[s.h]?'<div class="pyl" style="margin-inline-start:15px">'+esc(PY[s.h])+'</div>':'')+s.b.map(block).join('')+
+  '<div class="act"><button class="btn" data-say-sec="'+D.sections.indexOf(s)+'">🔊 استمع للقسم</button></div></section>'}).join('');
+}
+function secText(i){var s=D.sections[i],t=[s.h];s.b.forEach(function(b){['p','key'].forEach(function(k){if(b[k])t.push(sp(b[k])[0])});if(b.ul)b.ul.forEach(function(x){t.push(sp(x)[0])});if(b.tl)b.tl.forEach(function(x){t.push(sp(x[1])[0])});if(b.cards)b.cards.forEach(function(c){t.push(c[0]);if(c[2])t.push(sp(c[2])[0])})});return t.join('。')}
+/* ---------- terms ---------- */
+var tf='';
+function termsTab(){
+ return '<div class="card"><b>'+TERMS.length+' '+(D.tword||'مصطلحاً أساسياً')+'</b><p class="mut">اضغط «+» لإضافة الكلمة إلى مفردات «'+D.cname+'» (للمراجعة بالتكرار المتباعد في الصفحة الرئيسية).</p><div class="act"><button class="btn p" id="addall">أضف كل المصطلحات</button></div></div><div class="tg">'+
+ TERMS.map(function(t,i){var on=inRev(t.zh);return '<div class="tm"><div class="z">'+esc(t.zh)+'</div><div><div class="pp">'+pyh(t.py)+'</div><div>'+esc(t.ar)+'</div></div><div style="display:flex;gap:6px"><button class="sm" data-say-t="'+i+'" aria-label="استمع">🔊</button><button class="sm'+(on?' on':'')+'" data-add-t="'+i+'" aria-label="مراجعة">'+(on?'✓':'+')+'</button></div>'+(t.ex?'<div class="ex">'+ZP(sp(t.ex)[0])+'<span class="mut">'+esc(sp(t.ex)[1])+'</span></div>':'')+'</div>'}).join('')+'</div>';
+}
+/* ---------- practice ---------- */
+var TY={listen:'استماع',say:'قراءة بصوت عالٍ',mcq:'اختيار من متعدد',tf:'صح أو خطأ',match:'مطابقة',order:'ترتيب',cls:'تصنيف',cloze:'إكمال'};
+var B={};
+function rec(i,ok){if(!S.prac[i]){S.prac[i]={c:ok?1:0};save();upd()}var q=$('#s'+i);if(q){var r=S.prac[i];q.className='qs '+(r.c?'ok':'no');q.textContent=r.c?'✓ من أول محاولة':'أُنجز'}}
+function fb(el,ok,msg){var f=$('.fb',el);f.hidden=false;f.className='fb '+(ok?'ok':'no');f.innerHTML=(ok?'أحسنت! ':'')+(msg?'<span class="ar">'+esc(msg)+'</span>':'')}
+B.mcq=function(el,it,i){var b=$('.qb',el),ord=shuf(it.o.map(function(_,k){return k}));
+ b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="opts">'+ord.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.o[k])+'</button>'}).join('')+'</div>';
+ b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var k=+x.dataset.k,ok=k===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if(+o.dataset.k===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why)}};
+B.listen=function(el,it,i){var b=$('.qb',el),ord=shuf(it.o.map(function(_,k){return k}));
+ b.innerHTML='<div class="q"><p>'+esc(it.q||'استمع ثم اختر الإجابة الصحيحة')+'</p><div class="act">'+sayBtn(it.say).replace('class="sm"','class="btn p"').replace('>🔊<','>🔊 استمع<')+'</div></div><div class="opts">'+ord.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.o[k])+'</button>'}).join('')+'</div>';
+ b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var k=+x.dataset.k,ok=k===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if(+o.dataset.k===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why||('الجملة المسموعة: '+it.say))}};
+B.say=function(el,it,i){var b=$('.qb',el);
+ b.innerHTML='<div class="q"><p>'+esc(it.q||'استمع ثم كرّر بصوت عالٍ')+'</p></div><ul class="ul sl" style="margin-top:10px">'+it.items.map(function(x){return '<li><div class="sli"><div>'+ZA(x)+'</div>'+sayBtn(sp(x)[0])+'</div></li>'}).join('')+'</ul><div class="act"><button class="btn p" data-done="1">أنهيتُ القراءة بصوت عالٍ ✓</button></div>';
+ b.onclick=function(e){var t=e.target.closest('[data-done]');if(!t)return;rec(i,true);fb(el,true,'أحسنت! كرّر التمرين حتى تصبح القراءة سلسة.')}};
+B.tf=function(el,it,i){var b=$('.qb',el);
+ b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="tf"><button class="op" data-v="1"><span class="zh" style="text-align:center">对 ✓</span></button><button class="op" data-v="0"><span class="zh" style="text-align:center">错 ✗</span></button></div>';
+ b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.disabled)return;var v=x.dataset.v==='1',ok=v===it.a;[].forEach.call(b.querySelectorAll('.op'),function(o){o.disabled=true;if((o.dataset.v==='1')===it.a)o.classList.add('good')});if(!ok)x.classList.add('bad');rec(i,ok);fb(el,ok,it.why)}};
+B.match=function(el,it,i){var b=$('.qb',el),R=shuf(it.p.map(function(_,k){return k})),sel=null,left=it.p.length,miss=0;
+ b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="mt"><div class="col" id="L'+i+'">'+it.p.map(function(p,k){return '<button class="op" data-k="'+k+'">'+Z(p[0])+'</button>'}).join('')+'</div><div class="col" id="R'+i+'">'+R.map(function(k){return '<button class="op" data-k="'+k+'">'+Z(it.p[k][1])+'</button>'}).join('')+'</div></div>';
+ b.onclick=function(e){var x=e.target.closest('.op');if(!x||x.classList.contains('done'))return;var side=x.parentNode.id.charAt(0);
+  if(side==='L'){[].forEach.call(b.querySelectorAll('#L'+i+' .op'),function(o){o.classList.remove('sel')});x.classList.add('sel');sel=x;return}
+  if(!sel){toast('اختر من العمود الأول أولاً');return}
+  if(sel.dataset.k===x.dataset.k){sel.classList.remove('sel');sel.classList.add('done');x.classList.add('done');sel=null;left--;if(!left){rec(i,miss===0);fb(el,miss===0,miss?'عدد الأخطاء: '+miss:'')}}
+  else{miss++;x.classList.add('flash');setTimeout(function(){x.classList.remove('flash')},500)}}};
+B.order=function(el,it,i){var b=$('.qb',el),n=it.items.length,pool=shuf(it.items.map(function(_,k){return k})),pl=[],tries=0;
+ if(n>1&&pool.join()===it.items.map(function(_,k){return k}).join())pool.reverse();
+ function draw(){b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="line" aria-label="الترتيب">'+pl.map(function(k,j){return '<button class="chip" data-r="'+j+'"><span class="nn">'+(j+1)+'</span>'+Z(it.items[k])+'</button>'}).join('')+(pl.length?'':'<span class="mut">اضغط على العناصر بالترتيب الصحيح</span>')+'</div><div class="pool">'+pool.map(function(k){return '<button class="chip" data-p="'+k+'">'+Z(it.items[k])+'</button>'}).join('')+'</div><div class="act"><button class="btn p" data-chk="1"'+(pool.length?' disabled':'')+'>تحقق</button><button class="btn" data-rs="1">إعادة</button><button class="btn" data-sol="1">أظهر الحل</button></div>'}
+ draw();
+ b.onclick=function(e){var t=e.target.closest('button');if(!t)return;
+  if(t.dataset.p!=null){var k=+t.dataset.p;pool.splice(pool.indexOf(k),1);pl.push(k);draw()}
+  else if(t.dataset.r!=null){pool.push(pl.splice(+t.dataset.r,1)[0]);draw()}
+  else if(t.dataset.rs){pool=pool.concat(pl);pl=[];draw();$('.fb',el).hidden=true}
+  else if(t.dataset.sol){pl=it.items.map(function(_,k){return k});pool=[];draw();[].forEach.call(b.querySelectorAll('.line .chip'),function(c){c.classList.add('good')});rec(i,false);fb(el,false,'هذا هو الترتيب الصحيح.')}
+  else if(t.dataset.chk){var ok=true;[].forEach.call(b.querySelectorAll('.line .chip'),function(c,j){var g=it.items[pl[j]]===it.items[j];if(!g)ok=false;c.classList.add(g?'good':'bad')});tries++;rec(i,ok&&tries===1);fb(el,ok,ok?'':'بعض العناصر في غير موضعها (الأحمر). اضغط «إعادة» وجرّب مجدداً.')}}};
+B.cls=function(el,it,i){var b=$('.qb',el),ch=[];
+ b.innerHTML='<div class="q">'+Z(it.q)+'</div><div class="rows">'+it.items.map(function(x,k){return '<div class="rw" data-k="'+k+'">'+Z(x[0])+'<div class="cs">'+it.cats.map(function(c,j){return '<button data-j="'+j+'">'+esc(c)+'</button>'}).join('')+'</div></div>'}).join('')+'</div><div class="act"><button class="btn p" data-chk="1">تحقق</button></div>';
+ b.onclick=function(e){var t=e.target.closest('button');if(!t)return;
+  if(t.dataset.j!=null){var rw=t.closest('.rw'),k=+rw.dataset.k;ch[k]=+t.dataset.j;[].forEach.call(rw.querySelectorAll('button'),function(x){x.classList.toggle('sel',x===t)});rw.classList.remove('good','bad')}
+  else if(t.dataset.chk){var good=0,all=it.items.length;if(ch.filter(function(x){return x!=null}).length<all){toast('صنّف كل العناصر أولاً');return}
+   [].forEach.call(b.querySelectorAll('.rw'),function(rw){var k=+rw.dataset.k,g=ch[k]===it.items[k][1];if(g)good++;rw.classList.remove('good','bad');rw.classList.add(g?'good':'bad')});
+   rec(i,good===all);fb(el,good===all,good+' من '+all+(good<all?' — صحّح العناصر الحمراء وأعد التحقق.':''))}}};
+B.cloze=function(el,it,i){var b=$('.qb',el),parts=it.q.split('___'),bank=shuf(it.bank||it.a),h='';
+ parts.forEach(function(p,k){h+=esc(p);if(k<parts.length-1)h+='<select data-k="'+k+'" aria-label="الفراغ '+(k+1)+'"><option value="">…</option>'+bank.map(function(w){return '<option>'+esc(w)+'</option>'}).join('')+'</select>'});
+ b.innerHTML='<div class="q">'+Z(it.q.replace(/___/g,'＿＿'))+'</div><div class="cz">'+h+'</div><div class="act"><button class="btn p" data-chk="1">تحقق</button></div>';
+ b.onclick=function(e){var t=e.target.closest('[data-chk]');if(!t)return;var sels=b.querySelectorAll('select'),good=0;[].forEach.call(sels,function(s,k){var g=s.value===it.a[k];if(g)good++;s.classList.remove('good','bad');s.classList.add(g?'good':'bad')});rec(i,good===sels.length);fb(el,good===sels.length,good+' من '+sels.length)}};
+function practice(){return '<div class="card sum"><div><b id="psc">0</b> <span class="mut">/ '+D.practice.length+' أُنجزت</span></div><div class="mut" id="pok"></div><button class="btn" id="prs">إعادة التدريبات</button></div>'+D.practice.map(function(it,i){return '<section class="card pq" data-i="'+i+'"><div class="qh"><span class="qn">'+(i+1)+'</span><span class="qty">'+TY[it.t]+'</span><span class="qs" id="s'+i+'"></span></div><div class="qb"></div><div class="fb" hidden></div></section>'}).join('')}
+function initPractice(){D.practice.forEach(function(it,i){var el=$('.pq[data-i="'+i+'"]');B[it.t](el,it,i);var r=S.prac[i];if(r){var q=$('#s'+i);q.className='qs '+(r.c?'ok':'no');q.textContent=r.c?'✓ من أول محاولة':'أُنجز'}})}
+/* ---------- discuss ---------- */
+function discuss(){return D.discuss.map(function(d,i){return '<section class="card" data-d="'+i+'"><div class="qh"><span class="qn">'+(i+1)+'</span><span class="qty">نقاش وكتابة</span></div><div class="q">'+Z(d.q)+'</div><p class="mut" style="margin-top:4px">'+esc(d.ar)+'</p>'+
+ '<div class="fr">'+d.frames.map(function(f,k){return '<button data-fr="'+k+'">'+esc(f)+'</button>'}).join('')+'</div>'+
+ '<textarea data-ta="'+i+'" placeholder="اكتب إجابتك بالصينية…" lang="zh" aria-label="إجابتك"></textarea>'+
+ '<div class="mut" style="margin-top:4px"><span data-cc="'+i+'">0</span> حرفاً · المصطلحات المستخدمة:</div><div class="us">'+d.use.map(function(u){return '<span data-u="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
+ '<details class="md"><summary>نموذج إجابة</summary>'+ZA(d.model)+'<div class="act"><button class="btn" data-say-m="'+i+'">🔊 استمع</button></div></details></section>'}).join('')}
+function initDisc(){D.discuss.forEach(function(d,i){var ta=$('[data-ta="'+i+'"]'),v=S.txt[i]||'';ta.value=v;chk(i)})}
+function chk(i){var ta=$('[data-ta="'+i+'"]'),el=$('[data-d="'+i+'"]'),v=ta.value;$('[data-cc="'+i+'"]').textContent=v.replace(/\s/g,'').length;[].forEach.call(el.querySelectorAll('[data-u]'),function(s){s.classList.toggle('on',v.indexOf(s.dataset.u)>-1)})}
+/* ---------- shell ---------- */
+var TABS=D.tabs||[['read','📖 القراءة'],['terms','🔤 المصطلحات'],['prac','✍️ التدريبات'],['disc','💬 نقاش']],tab=S.ui.tab||'read';
+function upd(){var pd=Object.keys(S.prac).length,ok=0,k;for(k in S.prac)if(S.prac[k].c)ok++;var dn=D.discuss.filter(function(d,i){return (S.txt[i]||'').replace(/\s/g,'').length>=(D.minc||50)}).length,tot=D.practice.length+D.discuss.length;
+ $('#pgb').style.width=Math.round((pd+dn)/tot*100)+'%';var a=$('#psc');if(a){a.textContent=pd;$('#pok').textContent=pd?'من أول محاولة: '+ok+' من '+pd:''}}
+function show(t){$('#pop').hidden=true;tab=t;S.ui.tab=t;save();[].forEach.call(document.querySelectorAll('.pane'),function(p){p.hidden=p.id!=='p-'+t});$('#tabs').innerHTML=TABS.map(function(x){return '<button class="tab" role="tab" aria-selected="'+(x[0]===t)+'" data-tab="'+x[0]+'">'+x[1]+'</button>'}).join('');window.scrollTo(0,0)}
+function init(){
+ document.title=D.title_ar+' · '+D.title_zh;$('#ttl').innerHTML='<span class="han" lang="zh" dir="ltr">'+esc(D.title_zh)+'</span><span class="mut" style="display:block;font-size:12px;font-weight:400">'+esc(D.title_ar)+'</span>';
+ var tools='<div class="tools"><button class="sw" id="spy" aria-pressed="false">拼音 · البينيين</button><button class="sw" id="sar" aria-pressed="false">الترجمة العربية</button><span class="mut">المصطلحات المسطّرة بنقط: اضغط عليها لمعناها</span></div>';
+ $('.ib').href='index.html#'+D.course;
+ $('#main').innerHTML='<div id="p-read" class="pane">'+tools+reading()+'</div><div id="p-terms" class="pane" hidden>'+termsTab()+'</div><div id="p-prac" class="pane" hidden>'+practice()+'</div><div id="p-disc" class="pane" hidden>'+discuss()+'</div>';
+ initPractice();initDisc();
+ if(S.ui.py==null?D.defpy:S.ui.py)document.body.classList.add('py');if(S.ui.ar)document.body.classList.add('ar');syncSw();show(tab);upd();
+}
+function syncSw(){$('#spy').setAttribute('aria-pressed',document.body.classList.contains('py'));$('#sar').setAttribute('aria-pressed',document.body.classList.contains('ar'))}
+var cur=-1;
+function pop(i){var t=TERMS[i];cur=i;var p=$('#pop');p.hidden=false;p.innerHTML='<div class="r"><div class="zz">'+esc(t.zh)+'</div><div><div class="pp" style="font-family:var(--font-py);direction:ltr">'+pyh(t.py)+'</div><div>'+esc(t.ar)+'</div></div><div class="cl" style="display:flex;gap:6px"><button class="sm" data-pop="say" aria-label="استمع">🔊</button><button class="sm'+(inRev(t.zh)?' on':'')+'" data-pop="add" aria-label="مراجعة">'+(inRev(t.zh)?'✓':'+')+'</button><button class="sm" data-pop="x" aria-label="إغلاق">✕</button></div></div>'+(t.ex?'<div style="margin-top:8px;border-top:1px dashed var(--line);padding-top:6px">'+ZP(sp(t.ex)[0])+'<span class="mut">'+esc(sp(t.ex)[1])+'</span></div>':'')}
+document.addEventListener('click',function(e){
+ var t=e.target.closest('[data-g],[data-tab],[data-pop],[data-say-sec],[data-say-t],[data-add-t],#addall,#spy,#sar,#prs,[data-fr],[data-say-m],[data-sz]');
+ if(!t){if(!e.target.closest('#pop')){$('#pop').hidden=true}return}
+ var d=t.dataset;
+ if(d.g!=null){speak(TERMS[+d.g].zh);pop(+d.g)}
+ else if(d.tab)show(d.tab);
+ else if(d.pop){if(d.pop==='x')$('#pop').hidden=true;else if(d.pop==='say')speak(TERMS[cur].zh);else{var on=addRev(TERMS[cur].zh);pop(cur);toast(on?'أُضيف إلى مفردات '+D.cname:'أُزيل من المراجعة');refreshTerms()}}
+ else if(d.saySec!=null)speak(secText(+d.saySec));
+ else if(d.sayT!=null)speak(TERMS[+d.sayT].zh);
+ else if(d.addT!=null){var on2=addRev(TERMS[+d.addT].zh);toast(on2?'أُضيف إلى مفردات '+D.cname:'أُزيل من المراجعة');refreshTerms()}
+ else if(t.id==='addall'){TERMS.forEach(function(x){if(!inRev(x.zh))addRev(x.zh)});toast('أُضيفت كل المصطلحات');refreshTerms()}
+ else if(t.id==='spy'||t.id==='sar'){var c=t.id==='spy'?'py':'ar';document.body.classList.toggle(c);S.ui[c]=document.body.classList.contains(c)?1:0;save();syncSw()}
+ else if(t.id==='prs'){if(confirm('مسح نتائج التدريبات وإعادتها؟')){S.prac={};save();initPractice();[].forEach.call(document.querySelectorAll('.qs'),function(q){q.textContent='';q.className='qs'});[].forEach.call(document.querySelectorAll('.fb'),function(f){f.hidden=true});upd()}}
+ else if(d.fr!=null){var sec=t.closest('[data-d]'),i=+sec.dataset.d,ta=$('textarea',sec),f=D.discuss[i].frames[+d.fr],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);ta.focus();ta.dispatchEvent(new Event('input',{bubbles:true}))}
+ else if(d.sz!=null)speak(SAYS[+d.sz]);
+ else if(d.sayM!=null)speak(sp(D.discuss[+d.sayM].model)[0]);
+});
+function refreshTerms(){var y=window.scrollY;$('#p-terms').innerHTML=termsTab();window.scrollTo(0,y)}
+document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('g')){e.preventDefault();e.target.click()}});
+document.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.ta!=null){var i=+ta.dataset.ta;S.txt[i]=ta.value;save();chk(i);upd()}});
+$('#th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark')};
+init();
+})();
+</script>
+</body></html>
