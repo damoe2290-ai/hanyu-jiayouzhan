@@ -350,6 +350,7 @@ def make(name):
     m=importlib.import_module(name);L=m.L
     if L.get('legacy'):   # frozen lesson: no generated data, everything lesson-specific comes from the slots
         data={'lq':[],'disc':[],'minc':12,'gram':''};nz=L['seal'];na=NA[L['n']]
+        if L.get('hanzi_writer'): data['hw']=1   # stroke order: the frozen writing snippet calls hwInit() (see legacy/g*.writing.js)
     else:
         data,nz,na=build(L)
     tpl=open('tpl.html',encoding='utf8').read()

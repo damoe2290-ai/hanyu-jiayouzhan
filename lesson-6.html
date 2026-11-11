@@ -447,7 +447,7 @@ function han(zh,py){
 function pyhtml(py){return py.split(' ').map(function(s){return '<span class="t'+toneOf(s)+'">'+esc(s)+'</span>'}).join('')}
 
 /* ---------- content ---------- */
-var D={"lq":[],"disc":[],"minc":12,"gram":""};
+var D={"lq":[],"disc":[],"minc":12,"gram":"","hw":1};
 var VOCAB=D.vocab,TOKPY=D.tokpy,DLG=D.dlg,TXT=D.txt,CQ={},SENT=D.sent,FILL=D.fill,CHARS=D.chars,SPK=D.spk,PITCH=D.pitch,ACTS=D.acts;
 function pitchOf(w){return PITCH[w]||1}
 function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
@@ -853,7 +853,7 @@ function writingExtra(){
 var W={i:0,strokes:[],cur:null,ghost:true};
 function renderWriting(){
   var c=CHARS[W.i];
-  var chips=CHARS.map(function(x,i){return '<button class="chip tgl'+(i===W.i?' on':'')+'" data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  var chips=CHARS.map(function(x,i){var wd=D.hw&&S.hw&&S.hw.done&&S.hw.done[x.c];return '<button class="chip tgl'+(i===W.i?' on':'')+(wd?' wdone':'')+'"'+(wd?' aria-label="'+x.c+' (أنجزتَ كتابته)"':'')+' data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
   $('#p-writing').innerHTML=
     '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
     '<div class="chips">'+chips+'</div>'+
@@ -868,6 +868,7 @@ function renderWriting(){
   cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
   drawCanvas();
   if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+  if(D.hw)hwInit();
 }
 function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
 function drawCanvas(){
