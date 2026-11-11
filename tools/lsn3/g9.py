@@ -103,3 +103,10 @@ L['practice']=[
 L['discuss']=[
 {'q':'请说一说你一天的活动：几点起床、几点上课、下午和晚上做什么。','ar':'احكِ عن يومك: متى تستيقظ، متى تدرس، وماذا تفعل بعد الظهر والمساء.','frames':['我每天……点起床。','起床以后，我先……，然后……','我……点开始上课。','下午我常常……','晚上我……，有时候……'],'use':['每天','先','然后','常常','有时候'],'model':'我每天六点半起床。起床以后我先洗澡，然后吃早饭。我八点开始上课。下午我常常去图书馆看书。晚上我学习汉语，有时候看电视。｜أستيقظ كل يوم في السادسة والنصف. بعد الاستيقاظ أستحم أولاً ثم أفطر. أبدأ الدراسة في الثامنة. بعد الظهر أذهب غالباً إلى المكتبة لأقرأ. مساءً أدرس الصينية وأحياناً أشاهد التلفاز.'},
 {'q':'你给朋友打电话，问他今天有什么安排，并请他看电影。','ar':'تتصل بصديق لتسأله عن برنامجه اليوم وتدعوه لمشاهدة فيلم.','frames':['你今天有什么安排？','我想请你看……','电影几点开始？','我们……点……去吧。'],'use':['安排','电影','开始','再见'],'model':'你今天有什么安排？我想请你看中国电影。电影下午两点半开始，我们两点一刻去吧。好，再见！｜ما برنامجك اليوم؟ أريد دعوتك لمشاهدة فيلم صيني. يبدأ الفيلم في الثانية والنصف، فلنذهب في الثانية والربع. حسناً، إلى اللقاء!'}]
+# Levels challenge (Phase 2 sample): easy / medium / hard session with typed answers on the hard level.
+# Banks are derived from this lesson's vocabulary, example sentences and fill-in items (build3.lv_banks).
+# Optional manual questions go here, e.g.:
+#   L['lv_extra']=[{'kind':'type_sent','ar':'<Arabic sentence>','ans':'<Chinese sentence>','py':'<pinyin>'}]
+L['levels']=True
+# Stroke order with Hanzi Writer in the Writing tab (vendored in vendor/hanzi-writer/; falls back to the free-drawing canvas).
+L['hanzi_writer']=True

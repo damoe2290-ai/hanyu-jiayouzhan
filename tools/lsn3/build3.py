@@ -140,6 +140,47 @@ def lnav_html(course,items,i):
     if i+1<len(items): parts.append(card('zh-next',items[i+1][0],'الدرس التالي',items[i+1][1]))
     else: parts.append(card('zh-next','index.html#'+course,'أنهيت آخر درس متاح حالياً','العودة إلى قائمة الدروس'))
     return '<nav class="zh-lnav" aria-label="التنقل بين الدروس">'+''.join(parts)+'</nav>'
+# ---------- levels challenge (Phase 2): banks for the typed and true/false questions ----------
+LV_KINDS={'tf':('zh','py','ar','a'),'type_py':('zh','py','ar'),'type_zh':('py','ar','ans'),'type_sent':('ar','ans'),'type_cloze':('pre','post','ans','ar')}
+def _even(lst,k):
+    """k items spread evenly over lst, deterministic (no random numbers: that would change other lessons' output)"""
+    if len(lst)<=k: return list(lst)
+    return [lst[int(i*len(lst)/k)] for i in range(k)]
+def lv_banks(vocab,fills,L):
+    """Question banks derived from the lesson's own vocabulary, example sentences and fill-in items.
+    The browser picks from them at random each session. Manual questions go in the lesson's data file as
+    L['lv_extra']=[{'kind':'type_sent','ar':'...','ans':'...'}, ...] (kinds and required fields: LV_KINDS).
+    L['lv_pass'] sets the pass rate (default 0.75)."""
+    ok=[i for i,v in enumerate(vocab) if v['zh'] and not v['ar'].startswith('(') and len(v['ar'])<=40]
+    uniq=lambda i: sum(1 for v in vocab if v['ar']==vocab[i]['ar'])==1
+    tf=[]
+    for k,i in enumerate(ok):
+        v=vocab[i]
+        if k%2==0: tf.append({'zh':v['zh'],'py':v['py'],'ar':v['ar'],'a':1,'w':i})
+        else:   # false statement: another word's meaning (chosen by position, never the same gloss)
+            j=i
+            for off in range(max(1,len(ok)//2),len(ok)+1):
+                j=ok[(k+off)%len(ok)]
+                if vocab[j]['ar']!=v['ar']: break
+            tf.append({'zh':v['zh'],'py':v['py'],'ar':vocab[j]['ar'],'a':0,'w':i})
+    py=[{'zh':vocab[i]['zh'],'py':vocab[i]['py'],'ar':vocab[i]['ar'],'w':i} for i in ok]
+    zh=[{'py':vocab[i]['py'],'ar':vocab[i]['ar'],'ans':vocab[i]['zh'],'w':i} for i in ok if len(vocab[i]['zh'])<=3 and uniq(i)]
+    sent=[];seen=set()
+    for i,v in enumerate(vocab):
+        ex=v.get('ex')
+        if not ex or ex[0] in seen: continue
+        n=len([c for c in ex[0] if CJK.match(c)])
+        if 4<=n<=16: seen.add(ex[0]);sent.append({'ans':ex[0],'py':ex[1],'ar':ex[2],'w':i})
+    cloze=[{'pre':f['pre'],'post':f['post'],'ans':f['ans'],'ar':f['ar'],'py':f['py']} for f in fills]
+    tf=[x for pair in zip(_even([x for x in tf if x['a']],10),_even([x for x in tf if not x['a']],10)) for x in pair]   # balanced: 10 true, 10 false
+    bank={'tf':tf,'py':_even(py,20),'zh':_even(zh,20),'sent':_even(sent,20),'cloze':cloze}
+    key={'tf':'tf','type_py':'py','type_zh':'zh','type_sent':'sent','type_cloze':'cloze'}
+    for e in L.get('lv_extra',[]):
+        k=e.get('kind');assert k in LV_KINDS,('unknown lv_extra kind',k,sorted(LV_KINDS))
+        miss=[f for f in LV_KINDS[k] if f not in e];assert not miss,('lv_extra %s needs %s'%(k,miss))
+        bank[key[k]].append(dict({f:v for f,v in e.items() if f!='kind'},manual=1))
+    bank['pass']=L.get('lv_pass',0.75)
+    return bank
 SPKEYS=['S','X','L','C','A','Y']
 PIT={'S':1.0,'X':0.9,'L':1.1,'C':0.95,'A':1.05,'Y':0.9,'N':1.0}
 def avatar(n):
@@ -296,6 +337,8 @@ def build(L):
     if lq: acts.append('lesson')
     acts.append('write')
     data={'vocab':vocab,'tokpy':tokpy,'dlg':dlg,'txt':txt,'sent':sents,'fill':fills,'chars':chars,'spk':spk,'pitch':PIT,'acts':acts,'lq':lq,'gram':g,'disc':L['discuss'],'minc':L.get('minc',12)}
+    if L.get('levels'): data['lv']=lv_banks(vocab,fills,L)
+    if L.get('hanzi_writer'): data['hw']=1   # stroke-order mode in the Writing tab (vendor/hanzi-writer/)
     return data,NZ[n],NA[n]
 SLOTS=('data','grammar','writing','quiz','events')
 def slots_for(L):
