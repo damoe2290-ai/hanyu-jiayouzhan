@@ -9,7 +9,7 @@ Layout mirrors the original working dir (scripts use relative paths: `../hub.htm
 - Lesson data: `g9.py g10.py` (gram/fl, via `gcm.py`), `b4-b6.py` (biz, via `cmb.py`), `cl*.py` (culture), prac/lis data in `r*.py` `s*.py`.
 - `hub9.py`, `hubbiz.py` – examples of patching the hub (LESSONS array, VOCAB, dictionary chips).
 - Tests (playwright-core, Chrome, `--no-sandbox`): `t3.js <lesson.html…>` auto-solves all activities at 390 and 1100px; `hubt/tg.js`, `hubt/th.js` test the hub.
-- Lessons 6, 7, 8 (gram/fl) are the older hand-built pages: **no generator**, edit the HTML directly.
+- Lessons 6, 7, 8 (gram/fl) were hand-built; they now go through `tpl.html` too, with their lesson-specific code frozen in `lsn3/legacy/` (see "Extras slots" below). Build them with `build3.py g6 g7 g8`; do not edit the generated HTML.
 - Wrap step: `python3 lsn/wrap2.py <file.html>` → `w-<file>.html` (the hosted copy; moves the leading `<title>/<meta>/<link>/<style>/<script src>` run into a real `<head>`) → copy over the repo file.
 - Shared hub storage key: `zh-hub-v1`; `S.dues[course][word]`. gram and fl share lesson files; lessons write dues to both (`CRS='gram,fl'`).
 
@@ -30,3 +30,17 @@ Layout mirrors the original working dir (scripts use relative paths: `../hub.htm
 ## Tests
 `t3.js` (lessons), `t5.js` (culture topic pages), `hubt/tg.js`, `hubt/th.js` (hub) need `playwright` or `playwright-core` and a Chrome/Chromium. Environment variables: `CHROME` (browser path; defaults to `/usr/bin/google-chrome` or `/opt/pw-browsers/chromium`), `PAGE_PREFIX` (default `w-`; use an empty value to test the repo pages directly), `HUB` (hub file for the hub tests, default `hubt/index.html`). `t5.js` and `hubt/th.js` write screenshots (`t_*.png`, `hubt/home_*.png`) into the current directory: delete them before committing. Example from the repo root:
 `PAGE_PREFIX= node tools/lsn3/t3.js lesson-9.html` and `HUB=index.html node tools/hubt/tg.js`.
+
+## Extras slots (hand-built lessons 6-8)
+`tpl.html` has empty-by-default slots that `build3.py` fills from `lsn3/legacy/g<N>.<slot>.js` when a lesson module has `L['legacy']` (`g6.py`, `g7.py`, `g8.py`):
+- `%%X_DATA%%` (after the generated content block): vocabulary, drawings (`ICON`, `WORDPIC`, `PICQ`, `picHtml`, `scene`), dialogue data, sentence/fill/character data, `BADGES`, `ACTS`. It redefines the variables the template filled from `D`; later function declarations win.
+- `%%X_GRAMMAR%%`: the interactive grammar section (its `renderGrammar` replaces the template's).
+- `%%X_WRITING%%`: the lesson's writing section (stroke notes, character panel).
+- `%%X_QUIZ%%`: extra quiz kinds: helper builders (`qWhere`, `qDate`...), `X.info` (activity-card labels) and `X.build(kind)` (cases the template does not know: `pic`, the lesson's special kind, `all`). `build()` and `renderPractice()` in the template call these hooks; both are no-ops when `X` is empty.
+- `%%X_EVENTS%%` (right after `var A={}`): the lesson's grammar widget handlers (`A.<name>=...`).
+These lessons have no data for the "lesson questions" and "write and speak" activities, so those cards do not appear for them. `L['key']` keeps each page's original localStorage key (`noor-lesson<N>-v1`) and `L['sub']` its original subtitle.
+The snippets were extracted once from the old pages (commit `501fc2e`) by `lsn3/mk_legacy.py` and are now the source of truth. `lsn3/parity.js <old dir> <new dir>` compares old and new pages tab by tab (every tab panel, vocabulary-card clicks, word sheets, every grammar widget state, every writing character, the first question of each quiz kind with a re-seeded random generator). Last result: 332 of 332 checks identical for lessons 6, 7 and 8.
+
+## Other shared behaviour
+- Hub theme: the hub remembers its light/dark choice in `zh-hub-v1-theme` (same pattern as `<lesson key>-theme` in the lessons); `zh-hub-v1` itself is untouched.
+- No-Chinese-voice hint (`zh-ui.js`): a dismissible bar, shown only when the browser lists voices but none is Chinese, or has no speech support at all. A device that lists no voices at first says nothing (no false alarm). Dismissal is stored in `zh-ui-v1.voiceHint`. Not tested on real phones (speech engines were simulated).

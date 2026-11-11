@@ -297,15 +297,26 @@ def build(L):
     acts.append('write')
     data={'vocab':vocab,'tokpy':tokpy,'dlg':dlg,'txt':txt,'sent':sents,'fill':fills,'chars':chars,'spk':spk,'pitch':PIT,'acts':acts,'lq':lq,'gram':g,'disc':L['discuss'],'minc':L.get('minc',12)}
     return data,NZ[n],NA[n]
+SLOTS=('data','grammar','writing','quiz','events')
+def slots_for(L):
+    """Extras slots of tpl.html. Generated lessons leave them empty; hand-built lessons 6-8 (L['legacy'])
+    carry their lesson-specific code frozen as readable snippets in legacy/<name>.<slot>.js."""
+    if not L.get('legacy'): return {k:'' for k in SLOTS}
+    return {k:open('legacy/%s.%s.js'%(L['legacy'],k),encoding='utf8').read().rstrip('\n') for k in SLOTS}
 def make(name):
     m=importlib.import_module(name);L=m.L
-    data,nz,na=build(L)
+    if L.get('legacy'):   # frozen lesson: no generated data, everything lesson-specific comes from the slots
+        data={'lq':[],'disc':[],'minc':12,'gram':''};nz=L['seal'];na=NA[L['n']]
+    else:
+        data,nz,na=build(L)
     tpl=open('tpl.html',encoding='utf8').read()
     course=L['course']
     fn=({'prac':'prac-%d.html','lis':'lis-%d.html','biz':'biz-%d.html','gram':'lesson-%d.html'}[course])%L['n']
     items=series_items(course);lnav=lnav_html(course,items,[u for u,_ in items].index(fn))
-    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%','noor-%s%d-v1'%(course,L['n'])).replace('%%LNAV%%',lnav).replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
+    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L.get('sub') or L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%',L.get('key') or 'noor-%s%d-v1'%(course,L['n'])).replace('%%LNAV%%',lnav)
+    for k,v in slots_for(L).items(): out=out.replace('%%X_'+k.upper()+'%%',v)
+    out=out.replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     open(fn,'w',encoding='utf8').write(out);
-    print(fn,len(out),'vocab',len(data['vocab']),'dlg',len(data['dlg']),'sent',len(data['sent']),'fill',len(data['fill']),'lq',len(data['lq']),'chars',len(data['chars']))
+    print(fn,len(out),'vocab',len(data.get('vocab',[])),'dlg',len(data.get('dlg',[])),'sent',len(data.get('sent',[])),'fill',len(data.get('fill',[])),'lq',len(data['lq']),'chars',len(data.get('chars',[])))
 if __name__=='__main__':
     for a in sys.argv[1:]: make(a)

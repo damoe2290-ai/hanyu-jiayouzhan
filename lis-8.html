@@ -433,9 +433,11 @@ function pitchOf(w){return PITCH[w]||1}
 function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
 function picHtml(){return ''}
 var CLASSX=[];
+var X={};/* extras for hand-built lessons: X.build, X.info (see tools/README.md); empty for generated lessons */
 var BADGES={
  first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'听',n:'المستمع'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
 };
+
 /* ---------- progress / badges ---------- */
 function award(id){if(!S.badges[id]){S.badges[id]=1;save();toast('وسام جديد: '+BADGES[id].n)}}
 function knownCount(){return VOCAB.filter(function(_,i){return S.known[i]}).length}
@@ -545,6 +547,7 @@ function checkListener(){if(Object.keys(S.heard).length>=DLG.length)award('liste
 
 /* ---------- grammar ---------- */
 function renderGrammar(){$('#p-grammar').innerHTML=D.gram}
+
 /* ---------- writing ---------- */
 var W={i:0,strokes:[],cur:null,ghost:true};
 function renderWriting(){
@@ -596,6 +599,7 @@ function writingExtra(){
   return '<div class="card" style="margin-top:18px"><h3 style="font-size:16px;margin-bottom:6px">قواعد ترتيب الخطوط</h3><div class="qa" style="margin-top:0">'+r.map(function(x){return '<div class="m"><div class="t"><span class="z" dir="ltr">'+x[1]+'</span><span>'+x[0]+'</span><span class="mut">'+x[2]+'</span></div></div>'}).join('')+'</div></div>';
 }
 
+
 /* ---------- practice / quiz ---------- */
 var Q=null;
 var OKM=['أحسنت!','ممتاز!','صحيح!','رائع!'];
@@ -605,6 +609,7 @@ function renderPractice(){
   var lvl=Math.floor(S.xp/100)+1,pct=S.xp%100;
   var bd=Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('');
   var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],lesson:['أسئلة الدرس','أسئلة متنوعة على نص الدرس'],write:['تحدّث واكتب','اكتب جملاً بالصينية بمساعدة نماذج']};
+  if(X.info)Object.keys(X.info).forEach(function(k){info[k]=X.info[k]});
   var cards=ACTS.map(function(k){return '<button class="act" data-act="start" data-k="'+k+'"><strong>'+info[k][0]+'</strong><small>'+info[k][1]+'</small>'+stars(S.best[k]||0)+'</button>'}).join('');
   var wn=Object.keys(S.wrong).length;
   $('#p-practice').innerHTML=
@@ -661,6 +666,7 @@ function fromSpec(sp){var q=cloneQ(sp);if(q.type==='mc'&&q.sp){q.audio=q.sp;q.pr
 window.__q=function(){return Q};
 function build(kind){
   var LQ=D.lq||[];
+  if(X.build){var xr=X.build(kind);if(xr)return xr}
   switch(kind){
     case 'match':return [qMatch(5),qMatch(5),qMatch(5)];
     case 'listen':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qListen);
@@ -674,6 +680,7 @@ function build(kind){
   }
   return [];
 }
+
 /* ---------- write & speak ---------- */
 function ccount(v){return v.replace(/\s/g,'').length}
 function renderWrite(){
@@ -768,6 +775,7 @@ function endQuiz(){
 
 /* ---------- events ---------- */
 var A={};
+
 A.tab=function(t){setTab(t.dataset.tab)};
 A.slow=function(){S.slow=!S.slow;save();syncSlow();toast(S.slow?'صوت بطيء: مفعّل':'صوت بطيء: متوقف')};
 A.theme=function(){
