@@ -1,7 +1,8 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><title>الدرس العاشر 我在这儿买光盘</title>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style>
+<title>الدرس العاشر 我在这儿买光盘</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap">
 <style>
 /* Layout concept: a study sheet on cool jade-grey paper. Hanzi are the large ink forms, coloured by tone;
    one red seal (课) is the only loud mark. Single column, sticky tab bar, everything else stays quiet. */
@@ -302,12 +303,16 @@ textarea{width:100%;min-height:96px;margin-top:10px;padding:10px 12px;border:1.5
 .us{display:flex;gap:6px;flex-wrap:wrap}.us span{padding:2px 10px;border-radius:99px;border:1px solid var(--line);font:500 16px var(--font-han);color:var(--muted)}.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
 details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
 </style>
+<link rel="stylesheet" href="zh-ui.css">
+<script src="zh-ui.js" defer></script>
+</head><body>
 
 <div class="wrap" id="app" dir="rtl" lang="ar">
   <header class="hdr">
     <div class="top">
-      <a class="seal" href="index.html#prac" aria-label="العودة إلى الدروس" lang="zh" style="text-decoration:none">十</a>
-      <div class="ttl"><h1>الدرس العاشر</h1><p>我在这儿买光盘</p></div>
+      <a class="zh-ib zh-back" href="index.html#prac" aria-label="العودة إلى قائمة الدروس"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+      <a class="seal" href="index.html" aria-label="الصفحة الرئيسية" lang="zh-CN">十</a>
+      <div class="ttl"><h1>الدرس العاشر</h1><p lang="zh-CN">我在这儿买光盘</p></div>
       <button class="pill" id="slowbtn" data-act="slow" aria-pressed="false">صوت بطيء</button>
       <button class="ibtn" data-act="theme" aria-label="تبديل المظهر الفاتح والداكن"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
     </div>
@@ -327,6 +332,7 @@ details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
     <section id="p-writing" class="panel" hidden></section>
     <section id="p-practice" class="panel" hidden></section>
   </main>
+  <nav class="zh-lnav" aria-label="التنقل بين الدروس"><a class="zh-prev" href="prac-9.html"><small>الدرس السابق</small><b>الدرس التاسع · <bdi lang="zh-CN">他今年二十岁</bdi></b></a><a class="zh-next" href="index.html#prac"><small>أنهيت آخر درس متاح حالياً</small><b>العودة إلى قائمة الدروس</b></a></nav>
   <div id="sheet" class="sheet" hidden></div>
   <div id="toast" class="toast" role="status" hidden></div>
 </div>
@@ -786,7 +792,7 @@ A.flip=function(){
 };
 A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab()};
 A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab()};
-function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};if(on){if(!h.dues[CRS][zh])h.dues[CRS][zh]={i:0,t:Date.now()}}localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
+function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};CRS.split(',').forEach(function(c){h.dues[c]=h.dues[c]||{};if(on){if(!h.dues[c][zh])h.dues[c][zh]={i:0,t:Date.now()}}});localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
 A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
 A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
 A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};

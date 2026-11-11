@@ -1,0 +1,16 @@
+# Build-time Python dependencies for the lesson generators (tools/lsn3/*.py).
+# Verified: with exactly these versions on Python 3.13, the generators reproduce
+# the committed lesson pages byte-for-byte (see tools/README.md, "Reproducible build").
+#
+# NOTE: the generated pages themselves have NO runtime dependencies.
+#
+# jieba 0.42.1 is pure Python, but its legacy setup.py fails to build with pip on
+# Python 3.12+ ("Failed to build jieba"). If `pip install -r requirements.txt` fails
+# on jieba, download the sdist and put it on PYTHONPATH instead:
+#   pip download jieba==0.42.1 --no-deps --no-binary :all: -d /tmp/jb
+#   mkdir /tmp/jbx && tar xzf /tmp/jb/jieba-0.42.1.tar.gz -C /tmp/jbx
+#   export PYTHONPATH=/tmp/jbx/jieba-0.42.1
+# (jieba only segments text with a custom dictionary built from the lesson words,
+#  so its bundled default dictionary is not used.)
+jieba==0.42.1
+pypinyin==0.55.0

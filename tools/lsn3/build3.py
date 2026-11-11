@@ -121,6 +121,25 @@ def render_blocks(blocks):
             out+='<div class="tiles" style="margin-top:8px">'+''.join(tile(c[0],c[1]) for c in b['cards'])+'</div>'
         i+=1
     return out
+# ---------- lesson numerals + prev/next navigation (plain <a> links, work without JS) ----------
+NZ=['','一','二','三','四','五','六','七','八','九','十'];NA=['','الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر']
+def zhspan(t): return '<bdi lang="zh-CN">%s</bdi>'%esc(t)
+def series_items(course):
+    """[(url, label_html)] for every lesson of a course, in order; labels match the hub's lesson list."""
+    import order
+    out=[]
+    for n,t in order.LESSONS[course]:
+        lab=('الدرس %s · %s'%(NA[n],zhspan(t))) if course!='cult' else ('第%s课 · %s'%(NZ[n],zhspan(t)))
+        out.append((order.FILES[course]%n,lab))
+    return out
+def lnav_html(course,items,i):
+    """Previous / next lesson block. The last lesson links back to the course list instead of a next lesson."""
+    def card(cls,href,small,label): return '<a class="%s" href="%s"><small>%s</small><b>%s</b></a>'%(cls,href,small,label)
+    parts=[]
+    if i>0: parts.append(card('zh-prev',items[i-1][0],'الدرس السابق',items[i-1][1]))
+    if i+1<len(items): parts.append(card('zh-next',items[i+1][0],'الدرس التالي',items[i+1][1]))
+    else: parts.append(card('zh-next','index.html#'+course,'أنهيت آخر درس متاح حالياً','العودة إلى قائمة الدروس'))
+    return '<nav class="zh-lnav" aria-label="التنقل بين الدروس">'+''.join(parts)+'</nav>'
 SPKEYS=['S','X','L','C','A','Y']
 PIT={'S':1.0,'X':0.9,'L':1.1,'C':0.95,'A':1.05,'Y':0.9,'N':1.0}
 def avatar(n):
@@ -276,7 +295,6 @@ def build(L):
     if len(fills)>=3: acts.append('fill')
     if lq: acts.append('lesson')
     acts.append('write')
-    NZ=['','一','二','三','四','五','六','七','八','九','十'];NA=['','الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر']
     data={'vocab':vocab,'tokpy':tokpy,'dlg':dlg,'txt':txt,'sent':sents,'fill':fills,'chars':chars,'spk':spk,'pitch':PIT,'acts':acts,'lq':lq,'gram':g,'disc':L['discuss'],'minc':L.get('minc',12)}
     return data,NZ[n],NA[n]
 def make(name):
@@ -284,8 +302,9 @@ def make(name):
     data,nz,na=build(L)
     tpl=open('tpl.html',encoding='utf8').read()
     course=L['course']
-    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%','noor-%s%d-v1'%(course,L['n'])).replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     fn=({'prac':'prac-%d.html','lis':'lis-%d.html','biz':'biz-%d.html','gram':'lesson-%d.html'}[course])%L['n']
+    items=series_items(course);lnav=lnav_html(course,items,[u for u,_ in items].index(fn))
+    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%','noor-%s%d-v1'%(course,L['n'])).replace('%%LNAV%%',lnav).replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     open(fn,'w',encoding='utf8').write(out);
     print(fn,len(out),'vocab',len(data['vocab']),'dlg',len(data['dlg']),'sent',len(data['sent']),'fill',len(data['fill']),'lq',len(data['lq']),'chars',len(data['chars']))
 if __name__=='__main__':
