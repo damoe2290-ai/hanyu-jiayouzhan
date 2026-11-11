@@ -604,7 +604,7 @@ function renderWriting(){
     '<div class="chips">'+chips+'</div>'+
     '<div class="winfo"><span class="big han">'+c.c+'</span><div><div class="py" style="font-size:20px">'+c.py+'</div><div>'+c.ar+'</div><div class="mut">من كلمة: <span class="han" dir="ltr">'+esc(c.w)+'</span></div></div>'+spkBtn(c.c)+'</div>'+
     '<div class="cvwrap"><canvas id="cv" width="640" height="640" aria-label="مساحة الكتابة"></canvas></div>'+
-    '<div class="tools" style="margin-top:14px;justify-content:center"><button class="btn ghost sm" data-act="wclear">'+ic('redo',16)+' مسح</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>'+
+    '<div class="tools" style="margin-top:14px;justify-content:center"><button class="btn ghost sm" data-act="wundo">تراجع</button><button class="btn ghost sm" data-act="wclear">'+ic('redo',16)+' مسح الكل</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>'+
     '<p class="mut" style="margin-top:12px;text-align:center">قاعدة عامة في ترتيب الخطوط: من الأعلى إلى الأسفل، ومن اليسار إلى اليمين.</p>'+writingExtra();
   var cv=$('#cv');
   cv.addEventListener('pointerdown',function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}W.cur=[pt(e)];W.strokes.push(W.cur);drawCanvas()});
@@ -731,7 +731,7 @@ function renderWrite(){
   D.disc.map(function(d,i){var ms=d.model.split('｜');
     return '<section class="card wr" data-wd="'+i+'" style="margin-bottom:12px"><div class="qprompt" style="justify-items:start;text-align:start"><div class="han ltr" style="font-size:22px">'+(i+1)+'. '+esc(d.q)+'</div><div class="mut">'+esc(d.ar)+'</div></div>'+
     '<div class="chips">'+d.frames.map(function(f,k){return '<button class="chip" data-act="wfr" data-d="'+i+'" data-k="'+k+'"><span class="han" style="font-size:17px">'+esc(f)+'</span></button>'}).join('')+'</div>'+
-    '<textarea data-wta="'+i+'" lang="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
+    '<textarea data-wta="'+i+'" lang="zh" data-zh-editor="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
     '<div class="mut" style="margin:6px 0"><span data-wcc="'+i+'">0</span> / '+D.minc+' حرفاً · الكلمات المقترحة:</div><div class="us">'+d.use.map(function(u){return '<span data-wu="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
     '<details class="md"><summary>نموذج إجابة</summary><div class="han ltr" style="font-size:20px;margin-top:8px">'+esc(ms[0])+'</div><div class="mut">'+esc(ms[1]||'')+'</div><button class="btn ghost sm" data-act="wsay" data-d="'+i+'" style="margin-top:8px">'+ic('spk',16)+' استمع</button></details></section>'}).join('');
   D.disc.forEach(function(d,i){var ta=$('[data-wta="'+i+'"]');ta.value=S.txt[i]||'';wchk(i)});
@@ -774,6 +774,7 @@ function drawOrder(q,b){
   b.innerHTML='<div class="qprompt"><span class="mut">رتّب الجملة الصينية</span><div class="ar-s">'+q.s.ar+'</div></div>'+
     '<div class="slot">'+(q.picked.length?q.picked.map(function(p){return chipHtml(p,'unpick')}).join(''):'<span class="ph">اضغط الكلمات بالترتيب الصحيح</span>')+'</div>'+
     '<div class="pool">'+left.map(function(p){return chipHtml(p,'pick')}).join('')+'</div>'+
+    '<div class="tools" style="margin:8px 0;justify-content:center"><button class="btn ghost sm" data-act="unpicklast"'+(q.picked.length?'':' disabled')+'>تراجع</button><button class="btn ghost sm" data-act="unpickall"'+(q.picked.length?'':' disabled')+'>مسح الكل</button></div>'+
     '<button class="btn primary wide" data-act="checkorder"'+(left.length?' disabled':'')+'>تحقّق</button>';
 }
 R.fill=function(q,b){
@@ -860,10 +861,11 @@ A.pat=function(t){G.pat=+t.dataset.i;renderGrammar()};
 A.mw=function(t){G.mw=+t.dataset.i;renderGrammar()};
 
 A.gtok=function(t){openSheet([t.dataset.z,t.dataset.p,t.dataset.a||''])};
-A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i)};
+A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i);ta.dispatchEvent(new Event('input',{bubbles:true}))};
 A.wsay=function(t){speak(D.disc[+t.dataset.d].model.split('｜')[0])};
 A.wch=function(t){W.i=+t.dataset.i;W.strokes=[];W.cur=null;renderWriting()};
 A.wclear=function(){W.strokes=[];W.cur=null;drawCanvas()};
+A.wundo=function(){if(!W.strokes.length)return;W.strokes.pop();W.cur=null;drawCanvas()};
 A.wghost=function(){W.ghost=!W.ghost;renderWriting()};
 A.start=function(t){startQuiz(t.dataset.k)};
 A.qexit=function(){Q=null;stopSpeech();renderPractice()};
@@ -882,6 +884,8 @@ A.unpick=function(t){
   var q=Q.list[Q.i];if(q.done)return;
   q.picked=q.picked.filter(function(x){return x.i!==+t.dataset.i});drawOrder(q,$('#qbody'));
 };
+A.unpicklast=function(){var q=Q.list[Q.i];if(q.done||!q.picked.length)return;q.picked.pop();drawOrder(q,$('#qbody'))};
+A.unpickall=function(){var q=Q.list[Q.i];if(q.done)return;q.picked=[];drawOrder(q,$('#qbody'))};
 A.checkorder=function(){
   var q=Q.list[Q.i];if(q.done)return;q.done=true;
   var ok=q.picked.every(function(p,k){return p.i===k});

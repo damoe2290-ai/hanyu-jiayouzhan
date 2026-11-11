@@ -82,7 +82,9 @@ function tagText(t){
 }
 function processNode(n){
   if(n.nodeType===3){if(!skip(n)){convertText(n);tagText(n)}return}
-  if(n.nodeType!==1||SKIPTAG[n.nodeName]===1)return;
+  if(n.nodeType!==1)return;
+  enhanceEditors(n);                       /* before the skip below: a field added on its own must still get its tools */
+  if(SKIPTAG[n.nodeName]===1)return;
   var tw=document.createTreeWalker(n,NodeFilter.SHOW_TEXT,null),x,list=[];
   while((x=tw.nextNode()))list.push(x);
   list.forEach(function(t){if(!skip(t)){convertText(t);tagText(t)}});
@@ -171,6 +173,67 @@ function addGear(){
   opener.setAttribute('data-zh','open');opener.setAttribute('aria-label','الإعدادات');opener.setAttribute('aria-haspopup','dialog');
   opener.innerHTML=ICON.sliders;top.appendChild(opener);
   opener.addEventListener('click',openSheet);
+}
+
+/* ---------- typing helper: delete one character / syllable, undo, clear all ----------
+   Any field marked data-zh-editor="zh" (Chinese text) or "pinyin" gets a small toolbar. Works with phrase chips that
+   insert text: the page dispatches an 'input' event after changing the value, which is what the undo history records.
+   Without this file the field is still a normal textarea/input. */
+var PY_VOWELS='aeiouüv\u0101\u00e1\u01ce\u00e0\u0113\u00e9\u011b\u00e8\u012b\u00ed\u01d0\u00ec\u014d\u00f3\u01d2\u00f2\u016b\u00fa\u01d4\u00f9\u01d6\u01d8\u01da\u01dc';
+var PY_SYL=new RegExp('(?:(?:zh|ch|sh|[bpmfdtnlgkhjqxrzcsyw])?[' +PY_VOWELS+ ']+(?:ng|n|r)?[1-5]?|[1-5]|\\s+|[\\s\\S])$','i');
+/* how many UTF-16 units to remove from the end of s: one pinyin syllable, or one character (surrogate pairs count once) */
+function lastUnit(s,mode){
+  if(!s)return 0;
+  if(mode==='pinyin'){var m=PY_SYL.exec(s);return m?m[0].length:1}
+  var n=s.length-1;
+  if(n>0&&/[\uDC00-\uDFFF]/.test(s.charAt(n))&&/[\uD800-\uDBFF]/.test(s.charAt(n-1)))return 2;
+  return 1;
+}
+function setField(el,val,caret){
+  el.value=val;
+  try{el.setSelectionRange(caret,caret)}catch(x){}
+  el.dispatchEvent(new Event('input',{bubbles:true}));
+}
+function backspaceField(el,mode){
+  var a=el.selectionStart==null?el.value.length:el.selectionStart,b=el.selectionEnd==null?a:el.selectionEnd,v=el.value;
+  if(a!==b){setField(el,v.slice(0,a)+v.slice(b),a);return}
+  var n=lastUnit(v.slice(0,a),mode);if(!n)return;
+  setField(el,v.slice(0,a-n)+v.slice(a),a-n);
+}
+function attachEditor(el){
+  if(el.__zhEd||!el.parentNode)return;el.__zhEd=true;
+  var mode=el.getAttribute('data-zh-editor')==='pinyin'?'pinyin':'zh';
+  var st={stack:[],prev:el.value,skip:false};
+  var bar=document.createElement('div');bar.className='zh-ed';bar.setAttribute('role','group');bar.setAttribute('aria-label','أدوات الكتابة');
+  bar.innerHTML='<button type="button" data-zh-ed="bs" aria-label="'+(mode==='pinyin'?'حذف آخر مقطع':'حذف آخر حرف')+'">'+(mode==='pinyin'?'حذف مقطع':'حذف حرف')+'</button>'+
+    '<button type="button" data-zh-ed="undo" aria-label="التراجع عن آخر تعديل">تراجع</button>'+
+    '<button type="button" data-zh-ed="clear" aria-label="مسح كل النص">مسح الكل</button>';
+  el.parentNode.insertBefore(bar,el.nextSibling);
+  var bBs=bar.children[0],bUndo=bar.children[1],bClear=bar.children[2];
+  function sync(){bBs.disabled=bClear.disabled=!el.value;bUndo.disabled=!st.stack.length}
+  el.addEventListener('input',function(){
+    if(st.skip){st.skip=false}
+    else if(el.value!==st.prev){st.stack.push(st.prev);if(st.stack.length>60)st.stack.shift()}
+    st.prev=el.value;sync();
+  });
+  /* keep the keyboard open and the caret in place: a tap on a toolbar button must not take focus from the field */
+  bar.addEventListener('mousedown',function(e){e.preventDefault()});
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button');if(!b||b.disabled)return;
+    var act=b.getAttribute('data-zh-ed');
+    if(act==='bs')backspaceField(el,mode);
+    else if(act==='clear')setField(el,'',0);
+    else if(act==='undo'&&st.stack.length){var v=st.stack.pop();st.skip=true;setField(el,v,v.length)}
+    sync();
+  });
+  sync();
+}
+function enhanceEditors(root){
+  if(!root||root.nodeType!==1||!cssLoaded())return;
+  var list=[];
+  if(root.matches&&root.matches('[data-zh-editor]'))list.push(root);
+  if(root.querySelectorAll){var q2=root.querySelectorAll('[data-zh-editor]');for(var i=0;i<q2.length;i++)list.push(q2[i])}
+  list.forEach(attachEditor);
 }
 
 /* ---------- quiet hint when the device has no Chinese voice ---------- */

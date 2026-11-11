@@ -9,6 +9,11 @@ const fs=require('fs');const EXE=process.env.CHROME||['/usr/bin/google-chrome','
 const [OLD,NEW,...rest]=process.argv.slice(2);const LESSONS=rest.length?rest:['6','7','8'];
 const SEED="(function(){var s=12345;Math.random=function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296};Math.__reseed=function(){s=12345}})();";
 const norm=t=>t.replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim();
+/* Intended additions since the migration (typing tools): the writing canvas and the sentence-order questions got an undo button and
+   'clear all' (the old canvas button was just 'مسح'). Ignore exactly those labels, nothing else. */
+const TOOLS=l=>{l=l.trim();return l==='تراجع'||l==='مسح الكل'};
+const normW=t=>norm(t).split('\n').filter(l=>!TOOLS(l)&&true).map(l=>l).join('\n').replace(/(^|\n)مسح(?=\n|$)/g,'');
+
 async function open(b,dir,n){const ctx=await b.newContext({viewport:{width:390,height:844}});const p=await ctx.newPage();const errs=[];
   p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/fonts|net::|Failed to load|ERR_/.test(m.text()))errs.push(m.text())});
   await p.addInitScript(SEED);await p.goto('file://'+dir+'/lesson-'+n+'.html');await p.waitForTimeout(500);return {ctx,p,errs}}
@@ -19,7 +24,7 @@ const res=[];
 for(const n of LESSONS){const o=await open(b,OLD,n),w=await open(b,NEW,n);
   const check=(name,a,c)=>{total++;if(a===c){res.push(['ok',n,name]);return}bad++;res.push(['DIFF',n,name,firstDiff(a,c)])};
   const tabs=['vocab','dialogue','grammar','writing','practice'];
-  for(const t of tabs){await o.p.click('[data-tab='+t+']');await w.p.click('[data-tab='+t+']');await o.p.waitForTimeout(120);await w.p.waitForTimeout(120);check('tab '+t,await panel(o.p,t),await panel(w.p,t))}
+  for(const t of tabs){await o.p.click('[data-tab='+t+']');await w.p.click('[data-tab='+t+']');await o.p.waitForTimeout(120);await w.p.waitForTimeout(120);check('tab '+t,t==='writing'?normW(await panel(o.p,t)):await panel(o.p,t),t==='writing'?normW(await panel(w.p,t)):await panel(w.p,t))}
   // vocabulary card interactions
   await o.p.click('[data-tab=vocab]');await w.p.click('[data-tab=vocab]');
   for(const act of ['#fc','[data-act=know]','[data-act=again]','[data-act=next]','[data-act=prev]']){await o.p.click(act);await w.p.click(act);check('vocab '+act,await panel(o.p,'vocab'),await panel(w.p,'vocab'))}
@@ -42,7 +47,7 @@ for(const n of LESSONS){const o=await open(b,OLD,n),w=await open(b,NEW,n);
   // writing: pick every character button
   await o.p.click('[data-tab=writing]');await w.p.click('[data-tab=writing]');
   const wch=await o.p.$$eval('#p-writing [data-act=wch]',e=>e.length);check('writing char buttons',String(wch),String(await w.p.$$eval('#p-writing [data-act=wch]',e=>e.length)));
-  for(let i=0;i<wch;i++){const a=await o.p.$$('#p-writing [data-act=wch]'),c=await w.p.$$('#p-writing [data-act=wch]');await a[i].click();await c[i].click();check('writing char #'+i,await panel(o.p,'writing'),await panel(w.p,'writing'))}
+  for(let i=0;i<wch;i++){const a=await o.p.$$('#p-writing [data-act=wch]'),c=await w.p.$$('#p-writing [data-act=wch]');await a[i].click();await c[i].click();check('writing char #'+i,normW(await panel(o.p,'writing')),normW(await panel(w.p,'writing')))}
   // quiz kinds: first question of each
   await o.p.click('[data-tab=practice]');await w.p.click('[data-tab=practice]');
   const kinds=await o.p.$$eval('#p-practice .act[data-k]',e=>e.map(x=>x.dataset.k));const kindsN=await w.p.$$eval('#p-practice .act[data-k]',e=>e.map(x=>x.dataset.k));
@@ -50,7 +55,7 @@ for(const n of LESSONS){const o=await open(b,OLD,n),w=await open(b,NEW,n);
   for(const k of kinds){if(!kindsN.includes(k))continue;
     await o.p.evaluate(()=>Math.__reseed());await w.p.evaluate(()=>Math.__reseed());  /* same random sequence for both builders */
     await o.p.click('#p-practice .act[data-k='+k+']');await w.p.click('#p-practice .act[data-k='+k+']');await o.p.waitForTimeout(80);await w.p.waitForTimeout(80);
-    check('quiz '+k+' first question',norm(await o.p.$eval('#qbody',e=>e.innerText)),norm(await w.p.$eval('#qbody',e=>e.innerText)));
+    check('quiz '+k+' first question',normW(await o.p.$eval('#qbody',e=>e.innerText)),normW(await w.p.$eval('#qbody',e=>e.innerText)));
     await o.p.click('[data-act=qexit]');await w.p.click('[data-act=qexit]');}
   check('page errors','[]',JSON.stringify(w.errs)==='[]'?'[]':JSON.stringify(w.errs));
   if(o.errs.length)res.push(['info',n,'OLD page errors',JSON.stringify(o.errs)]);
