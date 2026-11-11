@@ -7,3 +7,6 @@ L={'course':'gram','n':8,'title_zh':'今天几号','seal':'八','sub':'第八课
 # Stroke order with Hanzi Writer in the Writing tab (vendored in vendor/hanzi-writer/; falls back to the free-drawing canvas).
 # The frozen snippet legacy/g8.writing.js calls hwInit() (the only change to it: done marker on the chips + that call).
 L['hanzi_writer']=True
+# Levels challenge (rolled out after the Lesson 9 sample was approved). The banks are generated from VOCAB and FILL in
+# legacy/g8.data.js (build3.legacy_lv_banks). Hand-written questions, if any, go ONLY in L['lv_extra']; none written.
+L['levels']=True
