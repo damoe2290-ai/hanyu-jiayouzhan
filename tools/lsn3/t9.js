@@ -4,7 +4,7 @@
    its real stroke paths (the library's own grading must accept it), wrong strokes, hint, persistence, switch to free drawing,
    other characters, and every fallback to the free-drawing canvas (library blocked, data missing, offline, no zh-ui.js). */
 const PAGE=process.env.PAGE||'lesson-9.html';
-const KEY='noor-'+(PAGE.match(/^lesson-(\d+)/)?'gram'+RegExp.$1:PAGE.replace(/^(prac|lis|biz)-(\d+)\.html$/,'$1$2'))+'-v1';
+const KEY='noor-'+(PAGE.match(/^lesson-(\d+)/)?(+RegExp.$1<=8?'lesson':'gram')+RegExp.$1:PAGE.replace(/^(prac|lis|biz)-(\d+)\.html$/,'$1$2'))+'-v1';
 const http=require('http'),path=require('path'),fs=require('fs');
 let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
 const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));

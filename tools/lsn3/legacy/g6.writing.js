@@ -2,7 +2,7 @@
 var W={i:0,strokes:[],cur:null,ghost:true};
 function renderWriting(){
   var c=CHARS[W.i];
-  var chips=CHARS.map(function(x,i){return '<button class="chip tgl'+(i===W.i?' on':'')+'" data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  var chips=CHARS.map(function(x,i){var wd=D.hw&&S.hw&&S.hw.done&&S.hw.done[x.c];return '<button class="chip tgl'+(i===W.i?' on':'')+(wd?' wdone':'')+'"'+(wd?' aria-label="'+x.c+' (أنجزتَ كتابته)"':'')+' data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
   $('#p-writing').innerHTML=
     '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
     '<div class="chips">'+chips+'</div>'+
@@ -17,6 +17,7 @@ function renderWriting(){
   cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
   drawCanvas();
   if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+  if(D.hw)hwInit();
 }
 function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
 function drawCanvas(){

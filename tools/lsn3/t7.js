@@ -5,7 +5,7 @@
    without zh-ui.js, lessons without levels, and the layout on a short phone viewport (touch). */
 let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
 const fs=require('fs');const PAGE=process.env.PAGE||'lesson-9.html';
-const KEY='noor-'+(PAGE.match(/^lesson-(\d+)/)?'gram'+RegExp.$1:PAGE.replace(/^(prac|lis|biz)-(\d+)\.html$/,'$1$2'))+'-v1';const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
+const KEY='noor-'+(PAGE.match(/^lesson-(\d+)/)?(+RegExp.$1<=8?'lesson':'gram')+RegExp.$1:PAGE.replace(/^(prac|lis|biz)-(\d+)\.html$/,'$1$2'))+'-v1';const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
 const PFX=process.env.PAGE_PREFIX===undefined?'w-':process.env.PAGE_PREFIX;
 const URL=n=>'file://'+process.cwd()+'/'+PFX+n;
 let fails=0;const ok=(name,cond,extra)=>{console.log((cond?'ok   ':'FAIL ')+name+(extra!==undefined&&extra!==''?'  '+extra:''));if(!cond)fails++};

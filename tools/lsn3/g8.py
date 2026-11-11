@@ -3,3 +3,7 @@
 # is frozen as readable snippets in legacy/g8.*.js (extracted once by mk_legacy.py); build3.py puts them into the
 # extras slots of the template. 'key' keeps the page's original localStorage key so saved progress survives.
 L={'course':'gram','n':8,'title_zh':'今天几号','seal':'八','sub':'第八课 · 今天几号','key':'noor-lesson8-v1','legacy':'g8'}
+
+# Stroke order with Hanzi Writer in the Writing tab (vendored in vendor/hanzi-writer/; falls back to the free-drawing canvas).
+# The frozen snippet legacy/g8.writing.js calls hwInit() (the only change to it: done marker on the chips + that call).
+L['hanzi_writer']=True
