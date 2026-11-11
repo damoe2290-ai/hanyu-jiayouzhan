@@ -1,4 +1,8 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><title>汉语加油站</title>
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style>
+<title>汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap">
 <style>
 :root{--bg:#FBF6EE;--surface:#FFFDF9;--surface2:#F3EBDD;--fg:#2B1D18;--muted:#7B6A5E;--line:#E8DCC8;--accent:#B8322A;--accent-fg:#fff;--accent-soft:#F8E4DF;--seal:#B8322A;--seal-fg:#fff;--gold:#C98A0A;--good:#2E7D4F;--good-soft:#DDF0E2;--bad:#B3261E;--bad-soft:#F7DBD8;--c1:#7A4FA3;--c2:#E0952B;--c3:#2F6DB5;--c4:#2E8B57;--c5:#C2410C;--c6:#7C3AED;--t1:#C0392B;--t2:#A66A00;--t3:#1D7A45;--t4:#2759B8;--t5:#6A7B77;
 --font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;--font-han:'Noto Serif SC','Songti SC',serif;--font-py:'IBM Plex Sans','Segoe UI',sans-serif}
@@ -52,6 +56,7 @@ input[type=search]{width:100%;min-height:48px;border-radius:12px;border:1px soli
 :root[data-theme=dark] .banner{background:linear-gradient(180deg,#1E332D,#152622 80%,var(--bg))}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]) .banner{background:linear-gradient(180deg,#1E332D,#152622 80%,var(--bg))}}
 .banner h2{font-size:clamp(22px,4.5vw,32px);position:relative}.banner p{position:relative;color:var(--muted)}
+.banner h2,.banner p{padding-inline:44px}/* keep clear of the vertical 加油！ slogan */
 .banner svg.bg{position:absolute;inset:0;width:100%;height:100%;opacity:.16;pointer-events:none}
 .banner .jy{position:absolute;inset-block-start:16px;inset-inline-end:16px;writing-mode:vertical-rl;font:700 22px var(--font-han);color:var(--accent);opacity:.8}
 .cgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:-52px;position:relative}
@@ -80,12 +85,15 @@ input[type=search]{width:100%;min-height:48px;border-radius:12px;border:1px soli
 .feat .ic{color:var(--accent);width:26px;height:26px}
 .toast{position:fixed;inset:auto 16px 20px;margin:auto;max-width:360px;background:var(--fg);color:var(--bg);padding:10px 14px;border-radius:12px;text-align:center;z-index:20}
 </style>
+<link rel="stylesheet" href="zh-ui.css">
+<script src="zh-ui.js" defer></script>
+</head><body>
 <div class="wrap" dir="rtl" lang="ar">
-<header class="hdr"><div class="top"><div class="seal" aria-hidden="true">汉</div><h1><span class="han" dir="ltr">汉语加油站</span> <span class="mut" style="display:block;font-size:13px;font-weight:400">منصة تعليم اللغة الصينية التفاعلية</span></h1>
-<button class="ib" id="th" aria-label="تبديل الوضع الليلي">◐</button></div>
+<header class="hdr"><div class="top"><div class="seal" aria-hidden="true" lang="zh-CN">汉</div><h1><span class="han" dir="ltr" lang="zh-CN">汉语加油站</span> <span class="mut" style="display:block;font-size:13px;font-weight:400">منصة تعليم اللغة الصينية التفاعلية</span></h1>
+<button class="ib" id="th" aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button></div>
 <div class="tabs" role="tablist" id="tabs"></div></header>
 <main id="main"></main>
-<footer class="mut" style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--line)" dir="ltr">© 2026 Dr. Mahmod Alsideig · <span class="han">大漠老师</span> · All rights reserved.<br>Content is for personal learning only and may not be copied or republished without permission.</footer>
+<footer class="mut" style="text-align:center;margin-top:32px;padding-top:16px;border-top:1px solid var(--line)" dir="ltr">© 2026 Dr. Mahmod Alsideig · <span class="han" lang="zh-CN">大漠老师</span> · All rights reserved.<br>Content is for personal learning only and may not be copied or republished without permission.</footer>
 </div>
 <div class="toast" id="toast" hidden></div>
 <script>
@@ -181,7 +189,7 @@ function home(){
  var st=allStats(),all={length:st.all},learned=st.learned,dn=st.due,w=wotd(),wid=VOCAB.indexOf(w),last=LESSONS[S.last||0]||LESSONS[0],on=DUE('gram')[w.zh];
  var cards=MATS.map(function(m,i){
   var col='var(--c'+(i+1)+')',NL=(LB[m.id]||[]).length,pct=m.total?Math.round(NL/m.total*100):0;
-  return '<div class="cc'+(m.on?'':' soon')+'"><div class="r1"><div class="cover han" style="background:'+col+'">'+m.cv+'</div><div><b>'+m.t+'</b><span class="mut han" dir="ltr">'+m.s.replace(' · قريباً','')+'</span></div></div>'+
+  return '<div class="cc'+(m.on?'':' soon')+'"><div class="r1"><div class="cover han" lang="zh-CN" style="background:'+col+'">'+m.cv+'</div><div><b>'+m.t+'</b><span class="mut han" dir="ltr">'+m.s.replace(' · قريباً','')+'</span></div></div>'+
   (m.on?'<div><div class="bar"><i style="width:'+Math.max(pct,4)+'%;background:'+col+'"></i></div><div class="mut" style="margin-top:4px">'+NL+' دروس متاحة من '+m.total+'</div></div>':'')+
   '<button class="btn p"'+(m.on?' data-crs="'+m.id+'">ادخل المادة':' disabled>قريباً')+'</button></div>'}).join('');
  return '<div class="banner"><svg class="bg" viewBox="0 0 240 170" preserveAspectRatio="xMinYMax meet">'+PAGODA.replace(/^<svg[^>]*>/,'').replace('</svg>','')+'</svg><div class="jy" aria-hidden="true">加油！</div><h2>مرحباً بك في رحلتك مع اللغة الصينية</h2><p>تعلّم بذكاء، وتدرّب بتفاعل، وحقّق أهدافك.</p></div>'+
@@ -227,7 +235,7 @@ function rate(r){
  s.t=Date.now()+STEP[s.i]*60000*(r===1?.6:1);markDay();save();flip=false;card=null;render();
 }
 function tea(){
- return '<div class="card"><h3 style="font-size:17px">كيف تستخدم المنصة؟</h3><ul class="road"><li>١. ادخل مادتك من الصفحة الرئيسية، ثم اختر الدرس.</li><li>٢. في كل درس: تعلّم المفردات، ثم الحوار والقواعد، ثم تدرّب في «التمارين».</li><li>٣. اضغط أي كلمة صينية لترى معناها ونطقها، واضغط السماعة لتسمعها.</li><li>٤. أضف الكلمات الصعبة إلى «مفرداتي» لتراجعها لاحقاً.</li></ul></div>'+
+ return '<div class="card"><h3 style="font-size:17px">كيف تستخدم المنصة؟</h3><ul class="road"><li>1. ادخل مادتك من الصفحة الرئيسية، ثم اختر الدرس.</li><li>2. في كل درس: تعلّم المفردات، ثم الحوار والقواعد، ثم تدرّب في «التمارين».</li><li>3. اضغط أي كلمة صينية لترى معناها ونطقها، واضغط السماعة لتسمعها.</li><li>4. أضف الكلمات الصعبة إلى «مفرداتي» لتراجعها لاحقاً.</li></ul></div>'+
  '<div class="card"><h3 style="font-size:17px">المراجعة المتباعدة</h3><p class="mut">كلما أجبت على كلمة بشكل صحيح تتأخر مراجعتها، وكلما أخطأت ترجع قريبة. هكذا تثبت الكلمات في الذاكرة بأقل وقت. ادخل «مفرداتي» كل يوم دقائق قليلة.</p></div>'+
  '<div class="card"><h3 style="font-size:17px">نصائح للتعلّم</h3><ul class="road"><li>🎧 استمع للجملة ثم كرّرها بصوت عالٍ.</li><li>✍️ اكتب الحروف باليد في تبويب الكتابة.</li><li>🔁 تدرّب قليلاً كل يوم أفضل من كثير مرة واحدة.</li></ul></div>';
 }
@@ -250,7 +258,9 @@ document.addEventListener('click',function(e){
  else if(d.rate!=null)rate(+d.rate);
 });
 document.addEventListener('input',function(e){if(e.target.id==='q'){q=e.target.value;var p=e.target.selectionStart;render();var i=document.getElementById('q');i.focus();i.setSelectionRange(p,p)}});
-document.getElementById('th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark')};
+/* theme is remembered like in the lessons: '<state key>-theme' (here 'zh-hub-v1-theme'); the state key itself is untouched */
+try{var savedTheme=localStorage.getItem(KEY+'-theme');if(savedTheme==='dark'||savedTheme==='light')document.documentElement.setAttribute('data-theme',savedTheme)}catch(e){}
+document.getElementById('th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches),n=d?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem(KEY+'-theme',n)}catch(e){}};
 if(/^#(gram|fl|prac|lis|biz|cult)$/.test(location.hash)){var cm=MATS.filter(function(x){return '#'+x.id===location.hash})[0];if(cm&&cm.on)crs=cm.id}
 window.addEventListener('focus',function(){try{var n=JSON.parse(localStorage.getItem(KEY));if(n&&n.dues){S.dues=n.dues;['gram','fl','cult','prac','lis','biz'].forEach(function(k){S.dues[k]=S.dues[k]||{}});render()}}catch(e){}});
 render();

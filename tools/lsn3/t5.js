@@ -1,8 +1,9 @@
-const {chromium}=require('/opt/npm-tools/node_modules/playwright-core');
-(async()=>{const b=await chromium.launch({executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']});
+let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
+const fs=require('fs');const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
+(async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
 for(const f of process.argv.slice(2)){for(const vw of [390,1100]){
 const p=await b.newPage({viewport:{width:vw,height:850}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/fonts|net::|Failed to load/.test(m.text()))errs.push(m.text())});
-await p.goto('file://'+process.cwd()+'/w-'+f);await p.waitForTimeout(300);
+await p.goto('file://'+process.cwd()+'/'+(process.env.PAGE_PREFIX===undefined?'w-':process.env.PAGE_PREFIX)+f);await p.waitForTimeout(300);
 const ov=[];const log={};
 async function chkov(n){const o=await p.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);if(o>1)ov.push(n+':'+o)}
 // tabs

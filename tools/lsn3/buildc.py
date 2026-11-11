@@ -92,7 +92,8 @@ def make(n):
     data['h']={'lesson':p_lesson(L,C),'defs':p_defs(L,C),'timeline':p_tl(L,C),'people':p_people(L,C),'compare':p_cmp(L,C)}
     data['acts']=[a for a in data['acts'] if a!='tone']
     tpl=open('tplc.html',encoding='utf8').read()
-    out=tpl.replace('%%TITLE%%',esc('الدرس %s · %s'%(na,L['title_ar'].split('·')[-1].strip()))).replace('%%COURSE%%','cult').replace('%%SEAL%%',L.get('big','文')[:2]).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L['title_ar'].split('·')[-1].strip())).replace('%%PTAB%%',C['ptab']).replace('%%KEY%%','noor-cult%d-v1'%n).replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
+    items=series_items('cult');lnav=lnav_html('cult',items,[u for u,_ in items].index('cult-%d.html'%n))
+    out=tpl.replace('%%TITLE%%',esc('الدرس %s · %s'%(na,L['title_ar'].split('·')[-1].strip()))).replace('%%COURSE%%','cult').replace('%%SEAL%%',L.get('big','文')[:2]).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L['title_ar'].split('·')[-1].strip())).replace('%%PTAB%%',C['ptab']).replace('%%KEY%%','noor-cult%d-v1'%n).replace('%%LNAV%%',lnav).replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     open('cult-%d.html'%n,'w',encoding='utf8').write(out)
     print(n,len(out),{k:len(v) for k,v in data['h'].items()},'vocab',len(data['vocab']),'sent',len(data['sent']),'fill',len(data['fill']),'lq',len(data['lq']),'acts',data['acts'])
 if __name__=='__main__':

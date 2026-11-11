@@ -84,8 +84,9 @@ def make(n):
     data['h']={'hub':hub(n,L,C),'topics':[topic_html(n,i,tp,C,L) for i,tp in enumerate(ckt.T[n])],'compare':cmp_html(n,L,C),'lesson':lesson_html(L,C)}
     data['acts']=[a for a in data['acts'] if a!='tone']
     tpl=open('tplt.html',encoding='utf8').read()
+    items=series_items('cult');lnav=lnav_html('cult',items,[u for u,_ in items].index('cult-%d.html'%n))
     sub=L['title_zh']
-    out=tpl.replace('%%TITLE%%',esc('第%s课 · %s'%(nz,sub))).replace('%%COURSE%%','cult').replace('%%SEAL%%',L.get('big','文')[:2]).replace('%%H1%%','第%s课'%nz).replace('%%SUB%%',esc(sub)).replace('%%KEY%%','noor-cult%d-v1'%n).replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
+    out=tpl.replace('%%TITLE%%',esc('第%s课 · %s'%(nz,sub))).replace('%%COURSE%%','cult').replace('%%SEAL%%',L.get('big','文')[:2]).replace('%%H1%%','第%s课'%nz).replace('%%SUB%%',esc(sub)).replace('%%KEY%%','noor-cult%d-v1'%n).replace('%%LNAV%%',lnav).replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     open('cult-%d.html'%n,'w',encoding='utf8').write(out)
     print(n,len(out))
 if __name__=='__main__':

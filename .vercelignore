@@ -1,0 +1,3 @@
+# Files in this repo that must not be published on the website.
+# docs/ holds planning documents (e.g. ROADMAP.md) for contributors and future sessions only.
+docs/

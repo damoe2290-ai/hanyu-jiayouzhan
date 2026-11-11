@@ -1,8 +1,8 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style></head><body><meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style>
 <title>الدرس السابع 中国银行在哪儿</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Serif+SC:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap">
 <style>
 /* Layout concept: a study sheet on cool jade-grey paper. Hanzi are the large ink forms, coloured by tone;
    one red seal (课) is the only loud mark. Single column, sticky tab bar, everything else stays quiet. */
@@ -291,13 +291,28 @@ h1,h2,h3,p{margin:0}
 .cqo{display:inline-flex;flex-direction:column;align-items:center;line-height:1.3;height:auto;padding-block:6px}
 .cqo .py{font-size:12px}
 .cq>b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+
+table{border-collapse:collapse;width:100%;min-width:420px;background:var(--surface)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);text-align:start;vertical-align:top}
+th{background:var(--accent-soft)}td:first-child{background:var(--surface2);font-weight:600}tr:last-child td{border-bottom:0}
+.sh2{font-size:15px;font-weight:700;margin:18px 0 6px}
+.tiles .tile .han{font-size:24px}
+.pair{display:grid;gap:6px;margin-top:8px}.pair .tiles{grid-template-columns:1fr 1fr}
+textarea{width:100%;min-height:96px;margin-top:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);font:500 20px/1.6 var(--font-han);resize:vertical}
+.us{display:flex;gap:6px;flex-wrap:wrap}.us span{padding:2px 10px;border-radius:99px;border:1px solid var(--line);font:500 16px var(--font-han);color:var(--muted)}.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
 </style>
+<link rel="stylesheet" href="zh-ui.css">
+<script src="zh-ui.js" defer></script>
+</head><body>
 
 <div class="wrap" id="app" dir="rtl" lang="ar">
   <header class="hdr">
     <div class="top">
-      <div class="seal" aria-hidden="true" lang="zh">七</div>
-      <div class="ttl"><h1>الدرس السابع</h1><p>第七课 · 中国银行在哪儿</p></div>
+      <a class="zh-ib zh-back" href="index.html#gram" aria-label="العودة إلى قائمة الدروس"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+      <a class="seal" href="index.html" aria-label="الصفحة الرئيسية" lang="zh-CN">七</a>
+      <div class="ttl"><h1>الدرس السابع</h1><p lang="zh-CN">第七课 · 中国银行在哪儿</p></div>
       <button class="pill" id="slowbtn" data-act="slow" aria-pressed="false">صوت بطيء</button>
       <button class="ibtn" data-act="theme" aria-label="تبديل المظهر الفاتح والداكن"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
     </div>
@@ -317,6 +332,7 @@ h1,h2,h3,p{margin:0}
     <section id="p-writing" class="panel" hidden></section>
     <section id="p-practice" class="panel" hidden></section>
   </main>
+  <nav class="zh-lnav" aria-label="التنقل بين الدروس"><a class="zh-prev" href="lesson-6.html"><small>الدرس السابق</small><b>الدرس السادس · <bdi lang="zh-CN">香蕉多少钱一斤</bdi></b></a><a class="zh-next" href="lesson-8.html"><small>الدرس التالي</small><b>الدرس الثامن · <bdi lang="zh-CN">今天几号</bdi></b></a></nav>
   <div id="sheet" class="sheet" hidden></div>
   <div id="toast" class="toast" role="status" hidden></div>
 </div>
@@ -331,7 +347,7 @@ var shuffle=function(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.flo
 var pick=function(a,n){return shuffle(a).slice(0,n)};
 
 /* ---------- state ---------- */
-var KEY='noor-lesson7-v1';
+var KEY='noor-lesson7-v1',HUBK='zh-hub-v1',CRS='gram,fl';
 var S={known:{},wrong:{},xp:0,best:{},badges:{},heard:{},py:true,ar:true,slow:false,card:0};
 try{var raw=localStorage.getItem(KEY);if(raw){Object.assign(S,JSON.parse(raw))}}catch(e){}
 S.flip=false;
@@ -411,12 +427,22 @@ function han(zh,py){
 function pyhtml(py){return py.split(' ').map(function(s){return '<span class="t'+toneOf(s)+'">'+esc(s)+'</span>'}).join('')}
 
 /* ---------- content ---------- */
+var D={"lq":[],"disc":[],"minc":12,"gram":""};
+var VOCAB=D.vocab,TOKPY=D.tokpy,DLG=D.dlg,TXT=D.txt,CQ={},SENT=D.sent,FILL=D.fill,CHARS=D.chars,SPK=D.spk,PITCH=D.pitch,ACTS=D.acts;
+function pitchOf(w){return PITCH[w]||1}
+function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
+function picHtml(){return ''}
+var CLASSX=[];
+var X={};/* extras for hand-built lessons: X.build, X.info (see tools/README.md); empty for generated lessons */
+var BADGES={
+ first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'听',n:'المستمع'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
+};
+/* ---------- content ---------- */
 var VOCAB=[{"zh": "教学楼", "py": "jiào xué lóu", "ar": "مبنى الدراسة", "ex": ["我们在教学楼。", "Wǒmen zài jiàoxuélóu.", "نحن في مبنى الدراسة."]}, {"zh": "教学", "py": "jiào xué", "ar": "تدريس / يُدرّس", "ex": ["他教学。", "Tā jiàoxué.", "هو يدرّس."]}, {"zh": "楼", "py": "lóu", "ar": "مبنى متعدد الطوابق", "ex": ["这是一座楼。", "Zhè shì yí zuò lóu.", "هذا مبنى."]}, {"zh": "在", "py": "zài", "ar": "يقع في / موجود في", "ex": ["图书馆在这儿。", "Túshūguǎn zài zhèr.", "المكتبة هنا."], "note": "تأتي بعد المبتدأ وقبل المكان: 图书馆在这儿."}, {"zh": "这儿", "py": "zhèr", "ar": "هنا", "ex": ["我在这儿。", "Wǒ zài zhèr.", "أنا هنا."], "note": "الحرف 儿 يندمج مع المقطع قبله: zhèr."}, {"zh": "图书馆", "py": "tú shū guǎn", "ar": "مكتبة (الجامعة)", "ex": ["图书馆在哪儿？", "Túshūguǎn zài nǎr?", "أين المكتبة؟"]}, {"zh": "……边", "py": "biān", "ar": "جهة / جانب (لاحقة)", "ex": ["东边", "dōngbian", "الشرق"], "note": "تُضاف إلى كلمات الاتجاه: 东边 北边 前边."}, {"zh": "北边", "py": "běi bian", "ar": "الشمال", "ex": ["图书馆在北边。", "Túshūguǎn zài běibian.", "المكتبة في الشمال."]}, {"zh": "西边", "py": "xī bian", "ar": "الغرب", "ex": ["体育馆在西边。", "Tǐyùguǎn zài xībian.", "الصالة الرياضية في الغرب."]}, {"zh": "南边", "py": "nán bian", "ar": "الجنوب", "ex": ["超市在南边。", "Chāoshì zài nánbian.", "السوبرماركت في الجنوب."]}, {"zh": "运动场", "py": "yùn dòng chǎng", "ar": "ملعب", "ex": ["运动场在这儿。", "Yùndòngchǎng zài zhèr.", "الملعب هنا."]}, {"zh": "体育馆", "py": "tǐ yù guǎn", "ar": "صالة رياضية", "ex": ["体育馆在西边。", "Tǐyùguǎn zài xībian.", "الصالة الرياضية في الغرب."]}, {"zh": "饭馆", "py": "fàn guǎn", "ar": "مطعم", "ex": ["这儿有一个饭馆。", "Zhèr yǒu yí ge fànguǎn.", "هنا يوجد مطعم."]}, {"zh": "还", "py": "hái", "ar": "أيضاً / كذلك", "ex": ["我有书，还有笔。", "Wǒ yǒu shū, hái yǒu bǐ.", "عندي كتاب، وعندي أيضاً قلم."], "note": "تأتي قبل الفعل."}, {"zh": "超市", "py": "chāo shì", "ar": "سوبرماركت", "ex": ["我去超市。", "Wǒ qù chāoshì.", "أنا أذهب إلى السوبرماركت."]}, {"zh": "去", "py": "qù", "ar": "يذهب", "ex": ["你去哪儿？", "Nǐ qù nǎr?", "إلى أين تذهب؟"]}, {"zh": "哪儿", "py": "nǎr", "ar": "أين", "ex": ["银行在哪儿？", "Yínháng zài nǎr?", "أين البنك؟"]}, {"zh": "银行", "py": "yín háng", "ar": "بنك", "ex": ["银行在超市东边。", "Yínháng zài chāoshì dōngbian.", "البنك شرق السوبرماركت."]}, {"zh": "知道", "py": "zhī dào", "ar": "يعرف", "ex": ["我知道，你知道吗？", "Wǒ zhīdào, nǐ zhīdào ma?", "أنا أعرف، هل تعرف؟"]}, {"zh": "东边", "py": "dōng bian", "ar": "الشرق", "ex": ["银行在东边。", "Yínháng zài dōngbian.", "البنك في الشرق."]}, {"zh": "跟", "py": "gēn", "ar": "مع", "ex": ["我跟你去。", "Wǒ gēn nǐ qù.", "أنا أذهب معك."]}, {"zh": "吧", "py": "ba", "ar": "أداة اقتراح (هيا / لنفعل)", "ex": ["我们一起去吧。", "Wǒmen yìqǐ qù ba.", "هيا نذهب معاً."], "note": "تأتي في آخر الجملة للاقتراح أو التشاور."}, {"zh": "太", "py": "tài", "ar": "جداً / للغاية", "ex": ["太好了！", "Tài hǎo le!", "رائع جداً!"], "note": "غالباً مع 了: 太……了."}, {"zh": "了", "py": "le", "ar": "أداة (مع 太)", "ex": ["太好了！", "Tài hǎo le!", "رائع!"]}, {"zh": "卫生间", "py": "wèi shēng jiān", "ar": "دورة المياه", "ex": ["卫生间在哪儿？", "Wèishēngjiān zài nǎr?", "أين دورة المياه؟"]}, {"zh": "对不起", "py": "duì bu qǐ", "ar": "آسف / المعذرة", "ex": ["对不起，我不知道。", "Duìbuqǐ, wǒ bù zhīdào.", "آسف، لا أعرف."]}, {"zh": "没关系", "py": "méi guān xi", "ar": "لا بأس / لا مشكلة", "ex": ["没关系。", "Méi guānxi.", "لا بأس."], "note": "جواب شائع على 对不起."}, {"zh": "商店", "py": "shāng diàn", "ar": "متجر", "ex": ["商店里边有卫生间。", "Shāngdiàn lǐbian yǒu wèishēngjiān.", "داخل المتجر توجد دورة مياه."]}, {"zh": "里边", "py": "lǐ bian", "ar": "الداخل", "ex": ["商店里边有人。", "Shāngdiàn lǐbian yǒu rén.", "داخل المتجر أناس."]}, {"zh": "地方", "py": "dì fang", "ar": "مكان", "ex": ["这是什么地方？", "Zhè shì shénme dìfang?", "ما هذا المكان؟"]}, {"zh": "前边", "py": "qián bian", "ar": "الأمام", "ex": ["卫生间在前边。", "Wèishēngjiān zài qiánbian.", "دورة المياه في الأمام."]}, {"zh": "看", "py": "kàn", "ar": "ينظر / يرى", "ex": ["你看！", "Nǐ kàn!", "انظر!"]}, {"zh": "那儿", "py": "nàr", "ar": "هناك", "ex": ["银行在那儿。", "Yínháng zài nàr.", "البنك هناك."]}, {"zh": "就", "py": "jiù", "ar": "بالضبط / هو نفسه", "ex": ["那儿就是银行。", "Nàr jiù shì yínháng.", "هناك هو البنك بالضبط."]}, {"zh": "中国银行", "py": "Zhōng guó Yín háng", "ar": "بنك الصين (اسم علم)", "ex": ["中国银行在哪儿？", "Zhōngguó Yínháng zài nǎr?", "أين بنك الصين؟"]}, {"zh": "上边", "py": "shàng bian", "ar": "الأعلى / فوق", "ex": ["书在桌子上边。", "Shū zài zhuōzi shàngbian.", "الكتاب فوق الطاولة."], "sup": 1}, {"zh": "下边", "py": "xià bian", "ar": "الأسفل / تحت", "ex": ["笔在书下边。", "Bǐ zài shū xiàbian.", "القلم تحت الكتاب."], "sup": 1}, {"zh": "后边", "py": "hòu bian", "ar": "الخلف", "ex": ["超市在银行后边。", "Chāoshì zài yínháng hòubian.", "السوبرماركت خلف البنك."], "sup": 1}, {"zh": "左边", "py": "zuǒ bian", "ar": "اليسار", "ex": ["饭馆在左边。", "Fànguǎn zài zuǒbian.", "المطعم على اليسار."], "sup": 1}, {"zh": "右边", "py": "yòu bian", "ar": "اليمين", "ex": ["银行在右边。", "Yínháng zài yòubian.", "البنك على اليمين."], "sup": 1}, {"zh": "外边", "py": "wài bian", "ar": "الخارج", "ex": ["他在外边。", "Tā zài wàibian.", "هو في الخارج."], "sup": 1}, {"zh": "旁边", "py": "páng biān", "ar": "بجانب", "ex": ["商店在银行旁边。", "Shāngdiàn zài yínháng pángbiān.", "المتجر بجانب البنك."], "sup": 1}, {"zh": "书店", "py": "shū diàn", "ar": "مكتبة (متجر كتب)", "ex": ["书店在哪儿？", "Shūdiàn zài nǎr?", "أين متجر الكتب؟"], "sup": 1}, {"zh": "邮局", "py": "yóu jú", "ar": "مكتب البريد", "ex": ["邮局在银行旁边。", "Yóujú zài yínháng pángbiān.", "مكتب البريد بجانب البنك."], "sup": 1}, {"zh": "桌子", "py": "zhuō zi", "ar": "طاولة / مكتب", "ex": ["书在桌子上。", "Shū zài zhuōzi shang.", "الكتاب على الطاولة."], "sup": 1}, {"zh": "书包", "py": "shū bāo", "ar": "حقيبة مدرسية", "ex": ["书包在桌子下边。", "Shūbāo zài zhuōzi xiàbian.", "الحقيبة تحت الطاولة."], "sup": 1}, {"zh": "宿舍", "py": "sù shè", "ar": "سكن الطلاب", "ex": ["宿舍在留学生楼北边。", "Sùshè zài liúxuéshēng lóu běibian.", "السكن شمال مبنى الطلاب الدوليين."], "sup": 1}];
 var TOKPY={};VOCAB.forEach(function(v){TOKPY[v.zh]=v.py});
 var EXTRA={'教学一楼':'jiào xué yī lóu','留学生楼':'liú xué shēng lóu','一个':'yí ge','我':'wǒ','你':'nǐ','他':'tā','她':'tā','们':'men','好':'hǎo','请问':'qǐng wèn','不':'bù','是':'shì','有':'yǒu','和':'hé','什么':'shén me','吗':'ma','哪儿':'nǎr','不客气':'bú kè qi','谢谢':'xiè xie','山田':'Shān tián','阿明':'Ā míng','马丁':'Mǎ dīng','我们':'wǒ men','一起':'yì qǐ','买':'mǎi','书':'shū','笔':'bǐ','学习':'xué xí','汉语':'Hàn yǔ'};
 Object.keys(EXTRA).forEach(function(k){if(!TOKPY[k])TOKPY[k]=EXTRA[k]});
 function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
-
 /* ---------- illustrations (original drawings) ---------- */
 var ICON={
  cal:function(){return '<rect class="w" x="9" y="13" width="46" height="42" rx="6"/><path class="r" d="M9 19a6 6 0 0 1 6-6h34a6 6 0 0 1 6 6v7H9z"/><path d="M22 8v10M42 8v10"/><path d="M18 35h6M29 35h6M40 35h6M18 45h6M29 45h6"/>'},
@@ -474,7 +500,6 @@ function mapSvg(){
    bx(60,176,100,38,'留学生楼')+bx(10,176,46,38,'饭馆',12)+bx(10,218,46,26,'超市',12)+
    '</svg>';
 }
-
 /* ---------- dialogue ---------- */
 var SPK={M:{n:'مارتن',a:'马'},S:{n:'ياماداً',a:'山'},A:{n:'أمينغ',a:'明'},X:{n:'طالب أ',a:'甲'},Y:{n:'طالب ب',a:'乙'},N:{n:'الراوي',a:'文'}};
 var PITCH={M:0.9,S:1.0,A:1.05,X:1.2,Y:0.95,N:1.0};
@@ -509,7 +534,6 @@ var CLASSX=[
  {zh:'周一交作业。',py:'Zhōuyī jiāo zuòyè.',ar:'سلّموا الواجب يوم الاثنين.'},
  {zh:'做课后练习三。',py:'Zuò kè hòu liànxí sān.',ar:'حلّوا التمرين الثالث بعد النصوص.'}
 ];
-
 /* ---------- exercises ---------- */
 var SENT=[
  {tokens:['图书馆','在','教学一楼','北边'],zh:'图书馆在教学一楼北边。',py:'Túshūguǎn zài jiàoxué yī lóu běibian.',ar:'المكتبة شمال مبنى الدراسة الأول.'},
@@ -552,8 +576,6 @@ var BADGES={
  first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'听',n:'المستمع'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
 };
 var ACTS=['match','listen','meaning','pic','tone','order','fill','where'];
-
-
 /* ---------- progress / badges ---------- */
 function award(id){if(!S.badges[id]){S.badges[id]=1;save();toast('وسام جديد: '+BADGES[id].n)}}
 function knownCount(){return VOCAB.filter(function(_,i){return S.known[i]}).length}
@@ -634,7 +656,7 @@ function renderDialogue(){
     '<button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy2">拼音</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar2">الترجمة</button></div>'+
     '<div class="lines'+(S.py?'':' nopy')+(S.ar?'':' noar')+'" id="lines">'+out+'</div>'+
     
-    '<h3 class="sub-h">عبارات الصف</h3><div class="qa" style="margin-top:0">'+cx+'</div>';
+    (cx?'<h3 class="sub-h">عبارات الصف</h3><div class="qa" style="margin-top:0">'+cx+'</div>':'');
   syncLines();
 }
 function syncLines(){var l=$('#lines');if(!l)return;l.classList.toggle('nopy',!S.py);l.classList.toggle('noar',!S.ar)}
@@ -661,6 +683,8 @@ function playAll(){
 }
 function checkListener(){if(Object.keys(S.heard).length>=DLG.length)award('listener')}
 
+/* ---------- grammar ---------- */
+function renderGrammar(){$('#p-grammar').innerHTML=D.gram}
 /* ---------- grammar ---------- */
 var G={th:0,ld:0,ps:0,hai:0,haiOn:false,wq:0,ba:{},cp:0,pl:0,pos:0};
 var THING=[
@@ -772,7 +796,56 @@ function renderGrammar(){
 
   $('#p-grammar').innerHTML=h;
 }
+/* ---------- writing ---------- */
+var W={i:0,strokes:[],cur:null,ghost:true};
+function renderWriting(){
+  var c=CHARS[W.i];
+  var chips=CHARS.map(function(x,i){return '<button class="chip tgl'+(i===W.i?' on':'')+'" data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  $('#p-writing').innerHTML=
+    '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
+    '<div class="chips">'+chips+'</div>'+
+    '<div class="winfo"><span class="big han">'+c.c+'</span><div><div class="py" style="font-size:20px">'+c.py+'</div><div>'+c.ar+'</div><div class="mut">من كلمة: <span class="han" dir="ltr">'+esc(c.w)+'</span></div></div>'+spkBtn(c.c)+'</div>'+
+    '<div class="cvwrap"><canvas id="cv" width="640" height="640" aria-label="مساحة الكتابة"></canvas></div>'+
+    '<div class="tools" style="margin-top:14px;justify-content:center"><button class="btn ghost sm" data-act="wclear">'+ic('redo',16)+' مسح</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>'+
+    '<p class="mut" style="margin-top:12px;text-align:center">قاعدة عامة في ترتيب الخطوط: من الأعلى إلى الأسفل، ومن اليسار إلى اليمين.</p>'+writingExtra();
+  var cv=$('#cv');
+  cv.addEventListener('pointerdown',function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}W.cur=[pt(e)];W.strokes.push(W.cur);drawCanvas()});
+  cv.addEventListener('pointermove',function(e){if(!W.cur)return;W.cur.push(pt(e));drawCanvas()});
+  var end=function(){W.cur=null};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+  drawCanvas();
+  if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+}
+function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
+function drawCanvas(){
+  var cv=$('#cv');if(!cv)return;
+  var ctx=cv.getContext('2d'),cs=getComputedStyle(document.documentElement),w=cv.width,h=cv.height;
+  var col=function(n){return cs.getPropertyValue(n).trim()};
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle=col('--surface');ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle=col('--line');ctx.lineWidth=3;ctx.setLineDash([14,12]);
+  ctx.beginPath();ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.moveTo(0,0);ctx.lineTo(w,h);ctx.moveTo(w,0);ctx.lineTo(0,h);ctx.stroke();
+  ctx.setLineDash([]);
+  if(W.ghost){
+    ctx.globalAlpha=0.16;ctx.fillStyle=col('--fg');
+    ctx.font='500 '+Math.round(w*0.76)+'px "Noto Serif SC","Songti SC","STSong",serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(CHARS[W.i].c,w/2,h/2+h*0.03);
+    ctx.globalAlpha=1;
+  }
+  ctx.strokeStyle=col('--fg');ctx.lineWidth=18;ctx.lineCap='round';ctx.lineJoin='round';
+  W.strokes.forEach(function(s){
+    ctx.beginPath();ctx.moveTo(s[0].x,s[0].y);
+    if(s.length===1)ctx.lineTo(s[0].x+0.1,s[0].y+0.1);
+    for(var i=1;i<s.length;i++)ctx.lineTo(s[i].x,s[i].y);
+    ctx.stroke();
+  });
+}
 
+function writingExtra(){
+  var r=[['من الأعلى إلى الأسفل','上到下','مثل 三 و 二: الخط الأعلى أولاً.'],['من اليسار إلى اليمين','左到右','مثل 你 و 好: الجزء الأيسر أولاً.'],['الأفقي قبل العمودي','先横后竖','مثل 十 و 干: الخط الأفقي أولاً.'],['الوسط قبل الجانبين','先中间后两边','مثل 小 و 水: الخط الأوسط أولاً.'],['من الخارج إلى الداخل ثم الإغلاق','先外后内再封口','مثل 日 و 国: الإطار أولاً ثم الداخل ثم الإغلاق.']];
+  return '<div class="card" style="margin-top:18px"><h3 style="font-size:16px;margin-bottom:6px">قواعد ترتيب الخطوط</h3><div class="qa" style="margin-top:0">'+r.map(function(x){return '<div class="m"><div class="t"><span class="z" dir="ltr">'+x[1]+'</span><span>'+x[0]+'</span><span class="mut">'+x[2]+'</span></div></div>'}).join('')+'</div></div>';
+}
 
 /* ---------- writing ---------- */
 var W={i:0,strokes:[],cur:null,ghost:true};
@@ -833,7 +906,6 @@ function writingExtra(){
     '<div class="m">'+sd('<rect x="6" y="6" width="28" height="28"/><path d="M15 6v28M25 6v28"/>')+'<div class="t"><span class="z" dir="ltr">左中右结构</span><span>يسار ووسط ويمين</span></div><span class="han" style="font-size:26px" dir="ltr">谢 谁</span></div>'+
     '</div></div>';
 }
-
 /* ---------- practice / quiz ---------- */
 var Q=null;
 var OKM=['أحسنت!','ممتاز!','صحيح!','رائع!'];
@@ -842,14 +914,15 @@ function renderPractice(){
   if(Q){renderQ();return}
   var lvl=Math.floor(S.xp/100)+1,pct=S.xp%100;
   var bd=Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('');
-  var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],pic:['الصور','اختر الكلمة المناسبة للصورة'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],where:['الأماكن','اقرأ الخريطة وأجب بالصينية']};
+  var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],lesson:['أسئلة الدرس','أسئلة متنوعة على نص الدرس'],write:['تحدّث واكتب','اكتب جملاً بالصينية بمساعدة نماذج']};
+  if(X.info)Object.keys(X.info).forEach(function(k){info[k]=X.info[k]});
   var cards=ACTS.map(function(k){return '<button class="act" data-act="start" data-k="'+k+'"><strong>'+info[k][0]+'</strong><small>'+info[k][1]+'</small>'+stars(S.best[k]||0)+'</button>'}).join('');
   var wn=Object.keys(S.wrong).length;
   $('#p-practice').innerHTML=
     '<div class="sec-h"><h2>تمارين الدرس</h2><p>كل إجابة صحيحة تمنحك 10 نقاط.</p></div>'+
     '<div class="card stats"><div class="xprow"><strong>المستوى '+lvl+'</strong><div class="xpbar"><i style="width:'+pct+'%"></i></div><span class="cnt">'+S.xp+' XP</span></div><div class="badges">'+bd+'</div></div>'+
     '<h3 class="sub-h">اختر نشاطاً</h3>'+
-    '<div class="acts"><button class="act feat" data-act="start" data-k="all"><strong>الاختبار الشامل</strong><small>13 سؤالاً من كل الأنواع'+(S.best.all?'':'')+'</small>'+(S.best.all?stars(S.best.all,16):'')+'</button>'+cards+
+    '<div class="acts"><button class="act feat" data-act="start" data-k="all"><strong>الاختبار الشامل</strong><small>'+build('all').length+' سؤالاً من كل الأنواع</small>'+(S.best.all?stars(S.best.all,16):'')+'</button>'+cards+
     (wn?'<button class="act" data-act="start" data-k="review"><strong>مراجعة أخطائي</strong><small>'+wn+' كلمة تحتاج مراجعة</small></button>':'')+'</div>';
 }
 function fbWord(w){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+han(w.zh,w.py)+'</span><span class="py ltr">'+pyhtml(w.py)+'</span><span>= '+w.ar+'</span>'+spkBtn(w.zh,'sm')+'</div>'}
@@ -873,6 +946,47 @@ function qOrder(s){return {type:'order',s:s,wid:s.tokens.map(vid).filter(functio
 function qFill(f){return {type:'fill',f:f,wid:[vid(f.ans)].filter(function(i){return i>=0})}}
 function qMatch(n){return {type:'match',words:pick(VOCAB,n||5)}}
 function rnd(n){return Math.floor(Math.random()*n)}
+function qRead(kind){
+  var arr=kind==='num'?NUMS:AMTS;
+  var f=arr[rnd(arr.length)];
+  var wrong=shuffle(arr.filter(function(o){return o!==f})).slice(0,3);
+  var opts=shuffle([f].concat(wrong));
+  return {type:'mc',wid:[],
+    prompt:'<div class="han ltr" style="font-size:34px;font-weight:700">'+f[0]+'</div><div class="mut">'+(kind==='num'?'كيف يُقرأ هذا الرقم بالصينية؟':'كيف يُقرأ هذا المبلغ بالصينية؟')+'</div>',
+    opts:opts.map(function(o){return {html:'<span class="han ltr" style="font-size:19px">'+o[1]+'</span> <span class="py ltr mut">'+o[2]+'</span>',ok:o===f}}),
+    fb:'<div class="fw"><span class="han ltr" style="font-size:22px">'+f[0]+' = '+f[1]+'</span>'+spkBtn(f[1],'sm')+'</div><div class="py mut ltr">'+f[2]+'</div>'};
+}
+function qNum(){return qRead('num')}
+function qMoney(){return qRead('money')}
+function qPic(w){
+  var pool=PICQ.map(function(z){return VOCAB[vid(z)]}).filter(function(v){return v!==w});
+  var o=shuffle([w].concat(pick(pool,3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],
+    prompt:'<div class="picbig">'+picHtml(w.zh)+'</div><div class="mut">ما الكلمة المناسبة للصورة؟</div>',
+    opts:o.map(function(x){return {html:'<span class="han ltr" style="font-size:24px">'+esc(x.zh)+'</span> <span class="py ltr mut">'+x.py.replace(/ /g,'')+'</span>',ok:x===w}}),
+    fb:fbWord(w)};
+}
+function picW(z){return qPic(VOCAB[vid(z)])}
+function cloneQ(q){return JSON.parse(JSON.stringify(q))}
+function fromSpec(sp){var q=cloneQ(sp);if(q.type==='mc'&&q.sp){q.audio=q.sp;q.prompt=q.prompt.replace('@@SPK@@',spkBtn(q.sp,'big'))}if(q.type==='mc'&&!q.fix)q.opts=shuffle(q.opts);return q}
+window.__q=function(){return Q};
+function build(kind){
+  var LQ=D.lq||[];
+  if(X.build){var xr=X.build(kind);if(xr)return xr}
+  switch(kind){
+    case 'match':return [qMatch(5),qMatch(5),qMatch(5)];
+    case 'listen':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qListen);
+    case 'meaning':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qMeaning);
+    case 'tone':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qTone);
+    case 'order':return pick(SENT,Math.min(4,SENT.length)).map(qOrder);
+    case 'fill':return pick(FILL,Math.min(5,FILL.length)).map(qFill);
+    case 'lesson':return LQ.map(fromSpec);
+    case 'all':return [qMatch(5)].concat(pick(VOCAB,2).map(qListen),pick(VOCAB,2).map(qMeaning),pick(VOCAB,2).map(qTone),SENT.length?pick(SENT,Math.min(2,SENT.length)).map(qOrder):[],FILL.length?pick(FILL,Math.min(2,FILL.length)).map(qFill):[],pick(LQ,Math.min(3,LQ.length)).map(fromSpec));
+    case 'review':return pick(Object.keys(S.wrong).map(function(i){return VOCAB[+i]}).filter(Boolean),8).map(function(w,i){return i%2?qListen(w):qMeaning(w)});
+  }
+  return [];
+}
+/* ---------- lesson-specific quiz kinds (extras: X.info labels, X.build cases) ---------- */
 function qWhere(){
   var f=MAPQ[rnd(MAPQ.length)];
   var wrong=shuffle(OPTS.filter(function(o){return o[0]!==f.a})).slice(0,3);
@@ -883,32 +997,35 @@ function qWhere(){
     opts:opts.map(function(o){return {html:'<span class="han ltr" style="font-size:20px">'+o[0]+'</span> <span class="py ltr mut">'+o[1]+'</span>',ok:o[0]===f.a}}),
     fb:'<div class="fw"><span class="han ltr" style="font-size:22px">'+f.q.replace('在哪儿？','')+'在'+f.a+'。</span>'+spkBtn(f.q.replace('在哪儿？','')+'在'+f.a+'。','sm')+'</div><div class="py mut ltr">'+f.py.replace(' zài nǎr?','')+' zài '+right[1]+'.</div>'};
 }
-function qPic(w){
-  var pool=PICQ.map(function(z){return VOCAB[vid(z)]}).filter(function(v){return v!==w});
-  var o=shuffle([w].concat(pick(pool,3)));
-  return {type:'mc',wid:[VOCAB.indexOf(w)],
-    prompt:'<div class="picbig">'+picHtml(w.zh)+'</div><div class="mut">ما الكلمة المناسبة للصورة؟</div>',
-    opts:o.map(function(x){return {html:'<span class="han ltr" style="font-size:24px">'+esc(x.zh)+'</span> <span class="py ltr mut">'+x.py.replace(/ /g,'')+'</span>',ok:x===w}}),
-    fb:fbWord(w)};
-}
-function picW(z){return qPic(VOCAB[vid(z)])}
-function build(kind){
+X.info={pic:['الصور','اختر الكلمة المناسبة للصورة'],where:['الأماكن','اقرأ الخريطة وأجب بالصينية']};
+X.build=function(kind){
   switch(kind){
-    case 'match':return [qMatch(5),qMatch(5),qMatch(5)];
-    case 'listen':return pick(VOCAB,5).map(qListen);
-    case 'meaning':return pick(VOCAB,5).map(qMeaning);
     case 'pic':return pick(PICQ,5).map(picW);
-    case 'tone':return pick(VOCAB,5).map(qTone);
-    case 'order':return pick(SENT,4).map(qOrder);
-    case 'fill':return pick(FILL,5).map(qFill);
     case 'where':return [qWhere(),qWhere(),qWhere(),qWhere(),qWhere()];
     case 'all':return [qMatch(6)].concat(pick(VOCAB,2).map(qListen),pick(PICQ,2).map(picW),pick(VOCAB,2).map(qTone),pick(SENT,2).map(qOrder),pick(FILL,2).map(qFill),[qWhere(),qWhere()]);
-    case 'review':return pick(Object.keys(S.wrong).map(function(i){return VOCAB[+i]}).filter(Boolean),8).map(function(w,i){return i%2?qListen(w):qMeaning(w)});
   }
-  return [];
+  return null;
+};
+/* ---------- write & speak ---------- */
+function ccount(v){return v.replace(/\s/g,'').length}
+function renderWrite(){
+  S.txt=S.txt||{};
+  $('#p-practice').innerHTML='<div class="qtop"><button class="btn ghost sm" data-act="qexit">رجوع</button><strong>تحدّث واكتب</strong></div>'+
+  D.disc.map(function(d,i){var ms=d.model.split('｜');
+    return '<section class="card wr" data-wd="'+i+'" style="margin-bottom:12px"><div class="qprompt" style="justify-items:start;text-align:start"><div class="han ltr" style="font-size:22px">'+(i+1)+'. '+esc(d.q)+'</div><div class="mut">'+esc(d.ar)+'</div></div>'+
+    '<div class="chips">'+d.frames.map(function(f,k){return '<button class="chip" data-act="wfr" data-d="'+i+'" data-k="'+k+'"><span class="han" style="font-size:17px">'+esc(f)+'</span></button>'}).join('')+'</div>'+
+    '<textarea data-wta="'+i+'" lang="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
+    '<div class="mut" style="margin:6px 0"><span data-wcc="'+i+'">0</span> / '+D.minc+' حرفاً · الكلمات المقترحة:</div><div class="us">'+d.use.map(function(u){return '<span data-wu="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
+    '<details class="md"><summary>نموذج إجابة</summary><div class="han ltr" style="font-size:20px;margin-top:8px">'+esc(ms[0])+'</div><div class="mut">'+esc(ms[1]||'')+'</div><button class="btn ghost sm" data-act="wsay" data-d="'+i+'" style="margin-top:8px">'+ic('spk',16)+' استمع</button></details></section>'}).join('');
+  D.disc.forEach(function(d,i){var ta=$('[data-wta="'+i+'"]');ta.value=S.txt[i]||'';wchk(i)});
 }
-
+function wchk(i){var ta=$('[data-wta="'+i+'"]'),el=$('[data-wd="'+i+'"]');if(!ta)return;var v=ta.value,n=ccount(v);$('[data-wcc="'+i+'"]').textContent=n;
+  $$('[data-wu]',el).forEach(function(s){s.classList.toggle('on',v.indexOf(s.dataset.wu)>-1)});
+  S.wdone=S.wdone||{};
+  if(n>=D.minc&&!S.wdone[i]){S.wdone[i]=1;S.xp+=20;toast('أحسنت! +20 نقطة')}
+  var dn=Object.keys(S.wdone).length;S.best.write=dn>=D.disc.length?3:(dn?2:0);save();updateProg()}
 function startQuiz(kind){
+  if(kind==='write'){renderWrite();return}
   var list=build(kind);
   if(!list.length){toast('لا توجد أسئلة الآن');return}
   Q={kind:kind,list:list,i:0,score:0,gain:0,fin:false};
@@ -951,8 +1068,8 @@ R.match=function(q,b){
   q.sel=null;q.done={};q.err=0;q.errIds={};
   q.left=shuffle(q.words);q.right=shuffle(q.words);
   b.innerHTML='<div class="qprompt"><span class="mut">اربط كل كلمة صينية بمعناها العربي</span></div><div class="mrow">'+
-    '<div class="mcol" dir="ltr">'+q.left.map(function(w){return '<button class="mi" data-act="ml" data-i="'+VOCAB.indexOf(w)+'"><span class="zh">'+esc(w.zh)+'</span><span class="py">'+(S.py?w.py.replace(/ /g,''):'')+'</span></button>'}).join('')+'</div>'+
-    '<div class="mcol">'+q.right.map(function(w){return '<button class="mi" data-act="mr" data-i="'+VOCAB.indexOf(w)+'">'+w.ar+'</button>'}).join('')+'</div></div>';
+    '<div class="mcol" dir="ltr">'+q.left.map(function(w){return '<button class="mi" data-act="ml" data-i="'+q.words.indexOf(w)+'"><span class="zh">'+esc(w.zh)+'</span><span class="py">'+(S.py?w.py.replace(/ /g,''):'')+'</span></button>'}).join('')+'</div>'+
+    '<div class="mcol">'+q.right.map(function(w){return '<button class="mi" data-act="mr" data-i="'+q.words.indexOf(w)+'">'+w.ar+'</button>'}).join('')+'</div></div>';
 };
 function finishQ(ok,wids,extra){
   if(Q.fin)return;Q.fin=true;
@@ -983,6 +1100,16 @@ function endQuiz(){
 
 /* ---------- events ---------- */
 var A={};
+/* ---------- lesson-specific grammar widget handlers ---------- */
+A.th=function(t){G.th=+t.dataset.i;renderGrammar()};
+A.ld=function(t){G.ld=+t.dataset.i;renderGrammar()};
+A.ps=function(t){G.ps=+t.dataset.i;renderGrammar()};
+A.hai=function(t){G.hai=+t.dataset.i;renderGrammar()};
+A.haion=function(){G.haiOn=!G.haiOn;renderGrammar()};
+A.bapick=function(t){G.pos=+t.dataset.i;renderGrammar()};
+A.baon=function(){var k=G.pos%BA.length;G.ba[k]=!G.ba[k];renderGrammar()};
+A.cp=function(t){G.cp=+t.dataset.i;renderGrammar()};
+A.pl=function(t){G.pl=+t.dataset.i;renderGrammar()};
 A.tab=function(t){setTab(t.dataset.tab)};
 A.slow=function(){S.slow=!S.slow;save();syncSlow();toast(S.slow?'صوت بطيء: مفعّل':'صوت بطيء: متوقف')};
 A.theme=function(){
@@ -1007,24 +1134,27 @@ A.flip=function(){
 };
 A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab()};
 A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab()};
+function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};CRS.split(',').forEach(function(c){h.dues[c]=h.dues[c]||{};if(on){if(!h.dues[c][zh])h.dues[c][zh]={i:0,t:Date.now()}}});localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
 A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
-A.again=function(){delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
+A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
 A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
 A.cq=function(t){
   var q=+t.dataset.q,i=+t.dataset.i,o=+t.dataset.o,c=CQ[q][i];
   $$('#cq'+q+'_'+i+' .chip').forEach(function(b,j){b.disabled=true;if(j===c.a)b.classList.add('good');else if(j===o)b.classList.add('bad')});
   if(o===c.a){speak(c.o[c.a].zh)}
 };
-A.th=function(t){G.th=+t.dataset.i;renderGrammar()};
-A.ld=function(t){G.ld=+t.dataset.i;renderGrammar()};
-A.ps=function(t){G.ps=+t.dataset.i;renderGrammar()};
-A.hai=function(t){G.hai=+t.dataset.i;renderGrammar()};
-A.haion=function(){G.haiOn=!G.haiOn;renderGrammar()};
-A.bapick=function(t){G.pos=+t.dataset.i;renderGrammar()};
-A.baon=function(){var k=G.pos%BA.length;G.ba[k]=!G.ba[k];renderGrammar()};
-A.cp=function(t){G.cp=+t.dataset.i;renderGrammar()};
-A.pl=function(t){G.pl=+t.dataset.i;renderGrammar()};
+A.s=function(t){G.s=+t.dataset.i;renderGrammar()};
+A.adv=function(t){G.a=+t.dataset.i;renderGrammar()};
+A.pred=function(t){G.p=+t.dataset.i;renderGrammar()};
+A.num=function(t){G.num=+t.dataset.i;renderGrammar()};
+A.rmb=function(t){G.rmb=+t.dataset.i;renderGrammar()};
+A.it=function(t){G.it=+t.dataset.i;renderGrammar()};
+A.pat=function(t){G.pat=+t.dataset.i;renderGrammar()};
+A.mw=function(t){G.mw=+t.dataset.i;renderGrammar()};
 
+A.gtok=function(t){openSheet([t.dataset.z,t.dataset.p,t.dataset.a||''])};
+A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i)};
+A.wsay=function(t){speak(D.disc[+t.dataset.d].model.split('｜')[0])};
 A.wch=function(t){W.i=+t.dataset.i;W.strokes=[];W.cur=null;renderWriting()};
 A.wclear=function(){W.strokes=[];W.cur=null;drawCanvas()};
 A.wghost=function(){W.ghost=!W.ghost;renderWriting()};
@@ -1072,10 +1202,10 @@ A.mr=function(t){
   var i=t.dataset.i,L=$('#qbody [data-act="ml"][data-i="'+q.sel+'"]');
   if(i===q.sel){
     q.done[i]=1;t.classList.add('ok');L.classList.remove('sel');L.classList.add('ok');t.disabled=true;L.disabled=true;
-    speak(VOCAB[+i].zh);
+    speak(q.words[+i].zh);
     if(Object.keys(q.done).length===q.words.length){
       var errIds=Object.keys(q.errIds).map(Number);
-      errIds.forEach(function(k){S.wrong[k]=(S.wrong[k]||0)+1});
+      errIds.forEach(function(k){var vi=VOCAB.indexOf(q.words[k]);if(vi>=0)S.wrong[vi]=(S.wrong[vi]||0)+1});
       finishQ(q.err<=1,[],'<div>عدد الأخطاء: '+q.err+'</div>');
     }
   }else{
@@ -1093,6 +1223,7 @@ app.addEventListener('click',function(e){
   if(!t||!app.contains(t))return;
   var f=A[t.dataset.act];if(f)f(t,e);
 });
+app.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.wta!=null){var i=+ta.dataset.wta;S.txt[i]=ta.value;wchk(i)}});
 app.addEventListener('keydown',function(e){
   if((e.key==='Enter'||e.key===' ')&&e.target.id==='fc'){e.preventDefault();A.flip()}
 });
