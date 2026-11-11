@@ -173,6 +173,35 @@ function addGear(){
   opener.addEventListener('click',openSheet);
 }
 
+/* ---------- quiet hint when the device has no Chinese voice ---------- */
+var voiceChecked=false;
+function showVoiceHint(msg){
+  var hdr=q('.hdr');if(!hdr||q('.zh-voice'))return;
+  var bar=document.createElement('div');bar.className='zh-voice';bar.setAttribute('role','status');
+  bar.innerHTML='<span></span><button type="button" aria-label="إخفاء التنبيه">إخفاء</button>';
+  bar.firstChild.textContent=msg;
+  bar.lastChild.addEventListener('click',function(){cfg.voiceHint='off';save(cfg);if(bar.parentNode)bar.parentNode.removeChild(bar)});
+  hdr.parentNode.insertBefore(bar,hdr.nextSibling);
+}
+function checkVoice(){
+  if(voiceChecked||cfg.voiceHint==='off')return;
+  var ss=window.speechSynthesis;
+  if(!ss){voiceChecked=true;showVoiceHint('هذا المتصفح لا يدعم النطق الصوتي، لذلك لن تسمع الجمل. جرّب متصفحاً حديثاً مثل Chrome أو Safari.');return}
+  function decide(final){
+    if(voiceChecked)return;
+    var v=ss.getVoices?ss.getVoices():[];
+    if(!v.length){return}                       /* voices not listed (yet): say nothing rather than raise a false alarm */
+    voiceChecked=true;
+    var zh=false;for(var i=0;i<v.length;i++){if(/^(zh|cmn|yue)/i.test(v[i].lang||'')){zh=true;break}}
+    if(!zh)showVoiceHint('لم نجد صوتاً صينياً على جهازك، لذلك قد لا يعمل النطق. ثبّت صوت اللغة الصينية من إعدادات الصوت في جهازك، أو جرّب متصفحاً آخر.');
+  }
+  decide();
+  if(!voiceChecked){
+    if(ss.addEventListener)ss.addEventListener('voiceschanged',function(){decide()});else ss.onvoiceschanged=function(){decide()};
+    setTimeout(decide,2500);
+  }
+}
+
 /* ---------- init ---------- */
 function cssLoaded(){return !!getComputedStyle(root).getPropertyValue('--zh-ui').trim()}
 function init(){
@@ -181,6 +210,7 @@ function init(){
   watch();
   if(cssLoaded()){addGear();root.classList.add('zh-ui')}
   else window.addEventListener('load',function(){if(cssLoaded()&&!root.classList.contains('zh-ui')){addGear();root.classList.add('zh-ui')}});
+  if(cssLoaded())checkVoice();
 }
 if(cfg.tone!=='color')root.setAttribute('data-tone',cfg.tone);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();

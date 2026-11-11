@@ -161,3 +161,8 @@ a.seal:hover,a.seal:focus-visible{transform:rotate(-4deg) scale(1.06)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+/* ---------- no-Chinese-voice hint (built by zh-ui.js) ---------- */
+.zh-voice{display:flex;gap:var(--sp-2);align-items:center;justify-content:space-between;margin-top:var(--sp-2);padding:4px 4px 4px 12px;
+  border-radius:var(--r-12);background:var(--warning-soft);color:var(--fg);font-size:var(--fs-14);line-height:1.5}
+.zh-voice button{appearance:none;flex:none;border:0;background:none;color:var(--muted);min-width:var(--tap);min-height:var(--tap);cursor:pointer;font:inherit;font-weight:600}

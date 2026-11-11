@@ -256,7 +256,9 @@ document.addEventListener('click',function(e){
  else if(d.rate!=null)rate(+d.rate);
 });
 document.addEventListener('input',function(e){if(e.target.id==='q'){q=e.target.value;var p=e.target.selectionStart;render();var i=document.getElementById('q');i.focus();i.setSelectionRange(p,p)}});
-document.getElementById('th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches);r.setAttribute('data-theme',d?'light':'dark')};
+/* theme is remembered like in the lessons: '<state key>-theme' (here 'zh-hub-v1-theme'); the state key itself is untouched */
+try{var savedTheme=localStorage.getItem(KEY+'-theme');if(savedTheme==='dark'||savedTheme==='light')document.documentElement.setAttribute('data-theme',savedTheme)}catch(e){}
+document.getElementById('th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches),n=d?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem(KEY+'-theme',n)}catch(e){}};
 if(/^#(gram|fl|prac|lis|biz|cult)$/.test(location.hash)){var cm=MATS.filter(function(x){return '#'+x.id===location.hash})[0];if(cm&&cm.on)crs=cm.id}
 window.addEventListener('focus',function(){try{var n=JSON.parse(localStorage.getItem(KEY));if(n&&n.dues){S.dues=n.dues;['gram','fl','cult','prac','lis','biz'].forEach(function(k){S.dues[k]=S.dues[k]||{}});render()}}catch(e){}});
 render();
