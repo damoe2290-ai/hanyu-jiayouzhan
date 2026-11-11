@@ -32,7 +32,8 @@ def raises(extra):
     except AssertionError: return True
 ok('unknown manual kind is rejected',raises({'kind':'nope'}))
 ok('manual question with a missing field is rejected',raises({'kind':'type_zh','py':'hǎo','ar':'جيد'}))
-d10,_,_=build3.build(copy.deepcopy(g10.L))
-ok('lessons without L[levels] get no banks (lesson 10)','lv' not in d10)
+L10=copy.deepcopy(g10.L);L10.pop('levels',None)
+d10,_,_=build3.build(L10)
+ok('a lesson without L[levels] gets no banks (lesson 10 with the flag removed)','lv' not in d10)
 print('all passed' if not fails else '%d FAILED'%fails)
 sys.exit(1 if fails else 0)

@@ -1,10 +1,11 @@
-/* Levels challenge test (Phase 2 sample).   PAGE_PREFIX= node tools/lsn3/t7.js     (run from the repo root; tests lesson-9.html)
+/* Levels challenge test.   PAGE=lesson-10.html PAGE_PREFIX= node tools/lsn3/t7.js     (run from the repo root; PAGE defaults to lesson-9.html)
    Plays complete sessions with an oracle that reads each question's answer from the page, and checks: gating of levels,
    the 75% pass rate as a progress marker only (never a lock; the Hard level opens first on a fresh lesson), retry, typed answers (ni3 = nǐ, spaces/punctuation ignored, wrong tone = close, pinyin typed
    instead of characters = close), hints and their point penalty, repeat of missed questions, persistence, fallback
    without zh-ui.js, lessons without levels, and the layout on a short phone viewport (touch). */
 let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
-const fs=require('fs');const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
+const fs=require('fs');const PAGE=process.env.PAGE||'lesson-9.html';
+const KEY='noor-'+(PAGE.match(/^lesson-(\d+)/)?'gram'+RegExp.$1:PAGE.replace(/^(prac|lis|biz)-(\d+)\.html$/,'$1$2'))+'-v1';const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
 const PFX=process.env.PAGE_PREFIX===undefined?'w-':process.env.PAGE_PREFIX;
 const URL=n=>'file://'+process.cwd()+'/'+PFX+n;
 let fails=0;const ok=(name,cond,extra)=>{console.log((cond?'ok   ':'FAIL ')+name+(extra!==undefined&&extra!==''?'  '+extra:''));if(!cond)fails++};
@@ -23,11 +24,11 @@ async function playLevel(p,rightFn){
   for(;;){const q=await info(p);if(!q)break;await answer(p,q,rightFn(q.i,q));await p.click('#qnext');await p.waitForTimeout(30)}
   await p.waitForSelector('.res');return p.$eval('.res',e=>e.innerText.replace(/\s+/g,' '));
 }
-const state=p=>p.evaluate(()=>JSON.parse(localStorage.getItem('noor-gram9-v1')||'{}'));
+const state=p=>p.evaluate(k=>JSON.parse(localStorage.getItem(k)||'{}'),KEY);
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
 let ctx=await b.newContext({viewport:{width:390,height:844}});let p=await ctx.newPage();const errs=[];
 p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/fonts|net::|Failed to load|ERR_/.test(m.text()))errs.push(m.text())});
-await p.goto(URL('lesson-9.html'));await p.waitForTimeout(500);await p.click('[data-tab=practice]');
+await p.goto(URL(PAGE));await p.waitForTimeout(500);await p.click('[data-tab=practice]');
 
 console.log('--- levels hub and gating');
 ok('levels card is on the practice tab',(await p.$$('.lvfeat')).length===1);
@@ -48,7 +49,7 @@ ok('level bar shows level 1 as current',await p.$eval('#lvbar .cur',e=>e.textCon
 let res=await playLevel(p,()=>true);
 ok('all correct passes level 1 (8 / 8)',res.indexOf('اجتزتَ المستوى 1')>=0&&res.indexOf('8 / 8')>=0,res.slice(0,70));
 ok('"next level" is offered',!!(await p.$('[data-act=lvnext]')));
-let S=await state(p);ok('pass is saved in the lesson state (existing key noor-gram9-v1)',!!(S.lv&&S.lv.passed&&S.lv.passed['1']===true));
+let S=await state(p);ok('pass is saved in the lesson state (existing key (key from PAGE))',!!(S.lv&&S.lv.passed&&S.lv.passed['1']===true));
 
 console.log('--- the pass rate marks progress and recommends the next level');
 await p.click('[data-act=lvhub]');
@@ -108,28 +109,28 @@ await p.click('[data-act=lvhub]');
 ok('all three levels show the passed badge after reload (and none is recommended or locked)',(await p.$$eval('.lvc .tag',e=>e.map(x=>x.textContent.trim()))).join()==='اجتزته,اجتزته,اجتزته'&&(await p.$$eval('.lvc',e=>e.every(x=>!x.classList.contains('rec')&&!x.classList.contains('lock')))));
 S=await state(p);
 const keys=await p.evaluate(()=>Object.keys(localStorage));
-ok('level progress lives inside the existing state key (no new storage key was added)',!!S.lv&&keys.every(k=>k==='noor-gram9-v1'||k==='noor-gram9-v1-theme'||k.indexOf('zh-')===0),keys.join(','));
+ok('level progress lives inside the existing state key (no new storage key was added)',!!S.lv&&keys.every(k=>k===KEY||k===KEY.replace(/-v1$/,'-theme')||k.indexOf('-theme')>0||k.indexOf('zh-')===0),keys.join(','));
 ok('no page errors in the whole session',errs.length===0,errs.join(' | '));
 await ctx.close();
 
 console.log('--- fallback: shared files blocked');
 ctx=await b.newContext({viewport:{width:390,height:844}});p=await ctx.newPage();const e2=[];p.on('pageerror',e=>e2.push(e.message));
-await p.route(/zh-ui\.(css|js)$/,r=>r.abort());await p.goto(URL('lesson-9.html'));await p.waitForTimeout(400);await p.click('[data-tab=practice]');
+await p.route(/zh-ui\.(css|js)$/,r=>r.abort());await p.goto(URL(PAGE));await p.waitForTimeout(400);await p.click('[data-tab=practice]');
 ok('without zh-ui.js there is no levels card (nothing half-working)',(await p.$$('.lvfeat')).length===0);
 await p.click('.act[data-k=meaning]');ok('the other activities still work',!!(await info(p)));ok('no page errors',e2.length===0,e2.join(' | '));
 await ctx.close();
 
 console.log('--- lessons without levels');
-for(const f of ['lesson-10.html','prac-9.html','lesson-6.html']){
+for(const f of ['lesson-6.html','lesson-7.html','lesson-8.html','prac-6.html','prac-7.html','prac-8.html','prac-9.html','prac-10.html','lis-6.html','lis-9.html','biz-4.html','biz-6.html'].filter(f=>f!==PAGE&&!/"lv":\{/.test(fs.readFileSync(f,'utf8')))){
   ctx=await b.newContext({viewport:{width:390,height:844}});p=await ctx.newPage();await p.goto(URL(f));await p.waitForTimeout(300);await p.click('[data-tab=practice]');
-  ok(f+': no levels card (sample is Lesson 9 only)',(await p.$$('.lvfeat')).length===0);await ctx.close();
+  ok(f+': no levels card (lesson has not opted in yet)',(await p.$$('.lvfeat')).length===0);await ctx.close();
 }
 
 console.log('--- phone layout (390x340 touch, keyboard-height viewport): typed question');
 ctx=await b.newContext({viewport:{width:390,height:340},hasTouch:true,isMobile:true});
-await ctx.addInitScript(()=>{if(!localStorage.getItem('noor-gram9-v1'))localStorage.setItem('noor-gram9-v1',JSON.stringify({lv:{passed:{1:true,2:true},best:{}}}))});
+await ctx.addInitScript(k=>{if(!localStorage.getItem(k))localStorage.setItem(k,JSON.stringify({lv:{passed:{1:true,2:true},best:{}}}))},KEY);
 p=await ctx.newPage();const e3=[];p.on('pageerror',e=>e3.push(e.message));
-await p.goto(URL('lesson-9.html'));await p.waitForTimeout(400);await p.tap('[data-tab=practice]');await p.tap('[data-act=lvhub]');
+await p.goto(URL(PAGE));await p.waitForTimeout(400);await p.tap('[data-tab=practice]');await p.tap('[data-act=lvhub]');
 ok('an earlier session\'s progress only marks levels: all open, level 3 is the recommended next',JSON.stringify(await p.$$eval('.lvc',e=>e.map(x=>({lock:x.classList.contains('lock')||x.querySelector('[data-act=lvstart]').disabled,rec:x.classList.contains('rec')}))))==='[{"lock":false,"rec":false},{"lock":false,"rec":false},{"lock":false,"rec":true}]');
 await p.tap('[data-act=lvstart][data-n="3"]');await p.waitForTimeout(300);
 ok('the answer field takes focus (the phone keyboard opens)',await p.evaluate(()=>document.activeElement&&document.activeElement.hasAttribute('data-tin')));
