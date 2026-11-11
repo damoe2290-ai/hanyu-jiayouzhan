@@ -82,7 +82,8 @@ function tagText(t){
 }
 function processNode(n){
   if(n.nodeType===3){if(!skip(n)){convertText(n);tagText(n)}return}
-  if(n.nodeType!==1||SKIPTAG[n.nodeName]===1)return;
+  if(n.nodeType!==1)return;
+  if(SKIPTAG[n.nodeName]===1)return;
   var tw=document.createTreeWalker(n,NodeFilter.SHOW_TEXT,null),x,list=[];
   while((x=tw.nextNode()))list.push(x);
   list.forEach(function(t){if(!skip(t)){convertText(t);tagText(t)}});
@@ -172,6 +173,31 @@ function addGear(){
   opener.innerHTML=ICON.sliders;top.appendChild(opener);
   opener.addEventListener('click',openSheet);
 }
+
+/* ---------- pinyin helpers for typed answers (Phase 2) - no visible UI ----------
+   Typed fields use the phone's own keyboard (it already has backspace and undo), so nothing is attached to them.
+   These helpers are exposed as window.zhUI for tolerant grading and for splitting pinyin into syllables. */
+var PY_VOWELS='aeiouüv\u0101\u00e1\u01ce\u00e0\u0113\u00e9\u011b\u00e8\u012b\u00ed\u01d0\u00ec\u014d\u00f3\u01d2\u00f2\u016b\u00fa\u01d4\u00f9\u01d6\u01d8\u01da\u01dc';
+var PY_SYL=new RegExp('(?:(?:zh|ch|sh|[bpmfdtnlgkhjqxrzcsyw])?[' +PY_VOWELS+ ']+(?:ng|n|r)?[1-5]?|[1-5]|\\s+|[\\s\\S])$','i');
+/* how many UTF-16 units to remove from the end of s: one pinyin syllable, or one character (surrogate pairs count once) */
+function lastUnit(s,mode){
+  if(!s)return 0;
+  if(mode==='pinyin'){var m=PY_SYL.exec(s);return m?m[0].length:1}
+  var n=s.length-1;
+  if(n>0&&/[\uDC00-\uDFFF]/.test(s.charAt(n))&&/[\uD800-\uDBFF]/.test(s.charAt(n-1)))return 2;
+  return 1;
+}
+/* "nǐhǎo" -> ["nǐ","hǎo"]; "ni3 hao3" -> ["ni3","hao3"] (spaces dropped) */
+function syllables(s){
+  s=String(s||'');var out=[];
+  while(s){var n=lastUnit(s,'pinyin');var part=s.slice(s.length-n);s=s.slice(0,s.length-n);if(part.replace(/\s+/g,''))out.unshift(part.replace(/\s+/g,''))}
+  return out;
+}
+/* canonical form for comparing typed pinyin: "nǐ hǎo" = "ni3hao3" = "Ni3 Hao3"; neutral tone "ma" = "ma5"; "lv4" = "lü4" */
+function normPinyin(s){
+  return toNumbers(String(s||'')).toLowerCase().replace(/v/g,'\u00fc').replace(/[\s'\u2019\-.,;:!?\u3002\uff0c\uff01\uff1f]+/g,'').replace(/5/g,'');
+}
+window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit};
 
 /* ---------- quiet hint when the device has no Chinese voice ---------- */
 var voiceChecked=false;
