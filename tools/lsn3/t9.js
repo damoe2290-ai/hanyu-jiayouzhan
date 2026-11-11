@@ -1,8 +1,10 @@
-/* Stroke-order (Hanzi Writer) test for Lesson 9.   node tools/lsn3/t9.js     (run from the repo root; starts its own static server)
+/* Stroke-order (Hanzi Writer) test for (PAGE=lesson-N.html, default lesson-9.html).   node tools/lsn3/t9.js     (run from the repo root; starts its own static server)
    A server is needed only because the stroke data is loaded with fetch(), which browsers do not allow from file://
    (the deployed site is served over HTTPS). Checks: no external request, animation, writing a character by drawing along
    its real stroke paths (the library's own grading must accept it), wrong strokes, hint, persistence, switch to free drawing,
    other characters, and every fallback to the free-drawing canvas (library blocked, data missing, offline, no zh-ui.js). */
+const PAGE=process.env.PAGE||'lesson-9.html';
+const KEY='noor-'+(PAGE.match(/^lesson-(\d+)/)?'gram'+RegExp.$1:PAGE.replace(/^(prac|lis|biz)-(\d+)\.html$/,'$1$2'))+'-v1';
 const http=require('http'),path=require('path'),fs=require('fs');
 let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
 const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
@@ -17,7 +19,7 @@ const strokesOf=c=>JSON.parse(fs.readFileSync(path.join(root,'vendor/hanzi-write
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port+'/';
 const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
-const open=async(opts={},page='lesson-9.html')=>{const ctx=await b.newContext(Object.assign({viewport:{width:390,height:844}},opts));const p=await ctx.newPage();
+const open=async(opts={},page=PAGE)=>{const ctx=await b.newContext(Object.assign({viewport:{width:390,height:844}},opts));const p=await ctx.newPage();
   const st={reqs:[],errs:[]};p.on('request',r=>st.reqs.push(r.url()));p.on('pageerror',e=>st.errs.push(e.message));
   p.on('console',m=>{if(m.type()==='error'&&!/fonts|net::|Failed to load|ERR_|404/.test(m.text()))st.errs.push(m.text())});
   await p.goto(base+page);await p.waitForTimeout(400);return {ctx,p,st}};
@@ -94,8 +96,8 @@ ok('every stroke drawn along its real path is accepted and the character is comp
 m=await ms(p);
 ok('after completion "اكتب بنفسك" stays red and pressed; the hint is disabled because nothing is left to hint, and it is not red',same(m.pressed,['hwquiz'])&&same(m.red,['hwquiz'])&&m.hintDisabled&&!m.hintRed,JSON.stringify(m));
 ok('the finished character is marked in the character list',await p.$eval('#p-writing [data-act=wch][data-i="0"]',e=>e.classList.contains('wdone')));
-let S=JSON.parse(await p.evaluate(()=>localStorage.getItem('noor-gram9-v1')));
-ok('completion is saved inside the lesson\'s existing state key',!!(S.hw&&S.hw.done&&S.hw.done[c0])&&(await p.evaluate(()=>Object.keys(localStorage))).every(k=>k==='noor-gram9-v1'||k.indexOf('zh-')===0||k.indexOf('noor-')===0));
+let S=JSON.parse(await p.evaluate(k=>localStorage.getItem(k),KEY));
+ok('completion is saved inside the lesson\'s existing state key',!!(S.hw&&S.hw.done&&S.hw.done[c0])&&(await p.evaluate(()=>Object.keys(localStorage))).every(k=>k===KEY||k.indexOf('zh-')===0||k.indexOf('noor-')===0));
 await p.click('[data-act=hwreset]');m=await ms(p);
 ok('"من جديد" returns to the model view (only "إظهار النموذج" red) and the hint works again',same(m.pressed,['hwmodel'])&&same(m.red,['hwmodel'])&&!m.hintDisabled&&!m.hintRed,JSON.stringify(m));
 
@@ -150,10 +152,10 @@ await fallbackOk('offline after the page loaded',async o=>{await o.ctx.setOfflin
 
 console.log('--- opened from disk (file://): nothing to try, nothing logged');
 { const ctx2=await b.newContext({viewport:{width:390,height:844}});const p2=await ctx2.newPage();const e2=[];p2.on('pageerror',e=>e2.push(e.message));p2.on('console',m=>{if(m.type()==='error')e2.push(m.text())});
-  await p2.goto('file://'+root+'/lesson-9.html');await p2.waitForTimeout(400);await p2.click('[data-tab=writing]');await sleep(800);
+  await p2.goto('file://'+root+'/'+PAGE);await p2.waitForTimeout(400);await p2.click('[data-tab=writing]');await sleep(800);
   ok('file://: free-drawing canvas only, no switch, no library request, no console error',!(await p2.$('#hwswitch'))&&!!(await p2.$('#cv'))&&e2.length===0,e2.join(' | '));await ctx2.close();}
 console.log('--- lessons that did not opt in');
-for(const f of ['lesson-10.html','lesson-6.html','prac-9.html']){
+for(const f of ['lesson-6.html','lesson-7.html','lesson-8.html','prac-6.html','prac-7.html','prac-8.html','prac-9.html','prac-10.html','lis-6.html','lis-9.html','biz-4.html','biz-6.html'].filter(f=>f!==PAGE&&!/"hw":1/.test(fs.readFileSync(path.join(root,f),'utf8')))){
   const o=await open({},f);await o.p.click('[data-tab=writing]').catch(()=>{});await sleep(600);
   ok(f+': Writing tab unchanged (no switch, canvas visible)',!(await o.p.$('#hwswitch'))&&!!(await o.p.$('#cv'))&&!o.st.reqs.some(u=>u.indexOf('hanzi-writer')>=0));await o.ctx.close();}
 
