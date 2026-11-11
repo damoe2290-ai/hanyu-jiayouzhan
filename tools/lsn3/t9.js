@@ -32,6 +32,11 @@ async function screenPts(p,medians){ // transform stroke medians (character coor
     return m.map(s=>{const out=[];for(let i=0;i<s.length-1;i++){const a=tr(s[i]),b=tr(s[i+1]);for(let k=0;k<10;k++)out.push({x:a.x+(b.x-a.x)*k/10,y:a.y+(b.y-a.y)*k/10})}out.push(tr(s[s.length-1]));return out})},medians);   /* dense path like a real finger */
 }
 
+/* state of the three mode buttons (aria-pressed + red "primary" class) and of the hint */
+const ms=pg=>pg.evaluate(()=>{const q=n=>document.querySelector('[data-act='+n+']');const modes=['hwanim','hwquiz','hwmodel'];
+  return {pressed:modes.filter(n=>q(n).getAttribute('aria-pressed')==='true'),red:modes.filter(n=>q(n).classList.contains('primary')),
+    hintDisabled:q('hwhint').disabled,hintRed:q('hwhint').classList.contains('primary'),outline:q('hwoutline').getAttribute('aria-pressed')}});
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 console.log('--- stroke-order mode appears (no external requests)');
 let {ctx,p,st}=await open();await gotoWriting(p);
 await p.waitForSelector('#hwswitch:not([hidden])',{timeout:8000}).catch(()=>{});
@@ -45,11 +50,30 @@ const external=st.reqs.filter(u=>!u.startsWith(base)&&!/fonts\.(googleapis|gstat
 ok('no request to any external host (only the pages\' own Google Fonts)',external.length===0,external.join(', '));
 ok('library is not loaded before the Writing tab is opened',await (async()=>{const x=await open();const r=x.st.reqs.every(u=>u.indexOf('hanzi-writer')<0);await x.ctx.close();return r})());
 
+let m=await ms(p);
+ok('first view: only "إظهار النموذج" is pressed and red (the character is shown, nothing is running)',same(m.pressed,['hwmodel'])&&same(m.red,['hwmodel']),JSON.stringify(m));
+ok('hint is secondary (never red) and usable: the writer is mounted, nothing is playing, the character is not complete',!m.hintRed&&!m.hintDisabled);
 console.log('--- animation');
 await p.click('[data-act=hwanim]');
+m=await ms(p);
+ok('while the animation plays: only "شاهد الكتابة" is pressed and red; the hint is disabled because it cannot help',same(m.pressed,['hwanim'])&&same(m.red,['hwanim'])&&m.hintDisabled&&!m.hintRed,JSON.stringify(m));
 await p.waitForFunction(()=>document.querySelector('#hwmsg').textContent.indexOf('الآن جرّب')>=0,null,{timeout:30000}).catch(()=>{});
+m=await ms(p);
+ok('after the animation: "شاهد الكتابة" stays the current mode and the hint works again',same(m.pressed,['hwanim'])&&same(m.red,['hwanim'])&&!m.hintDisabled&&!m.hintRed,JSON.stringify(m));
 ok('"شاهد الكتابة" animates the strokes and then invites the student to try',(await p.$eval('#hwmsg',e=>e.textContent)).indexOf('الآن جرّب')>=0);
 
+console.log('--- the red button always follows the current mode');
+await p.click('[data-act=hwquiz]');m=await ms(p);
+ok('starting to write: only "اكتب بنفسك" is red and pressed',same(m.pressed,['hwquiz'])&&same(m.red,['hwquiz'])&&!m.hintDisabled&&!m.hintRed,JSON.stringify(m));
+await p.click('[data-act=hwmodel]');m=await ms(p);
+ok('"إظهار النموذج": only it is red and pressed, and the exercise is stopped',same(m.pressed,['hwmodel'])&&same(m.red,['hwmodel']),JSON.stringify(m));
+await p.click('[data-act=hwquiz]');await p.click('[data-act=hwanim]');m=await ms(p);
+ok('switching from writing to watching moves the red button',same(m.pressed,['hwanim'])&&same(m.red,['hwanim'])&&m.hintDisabled,JSON.stringify(m));
+await p.click('[data-act=hwquiz]');await sleep(3000);m=await ms(p);
+ok('writing while the animation was playing: the cancelled animation cannot move the highlight back',same(m.pressed,['hwquiz'])&&same(m.red,['hwquiz'])&&!m.hintDisabled,JSON.stringify(m));
+const o0=m.outline;await p.click('[data-act=hwoutline]');m=await ms(p);
+ok('the outline toggle changes aria-pressed ('+o0+' -> '+m.outline+') without taking the red mode highlight',m.outline!==o0&&same(m.red,['hwquiz']),JSON.stringify(m));
+await p.click('[data-act=hwoutline]');
 console.log('--- writing the character stroke by stroke');
 await p.click('[data-act=hwquiz]');await p.evaluate(()=>document.querySelector('#hwt').scrollIntoView({block:'center'}));await sleep(200);
 ok('hint button is enabled during the exercise',await p.$eval('[data-act=hwhint]',e=>!e.disabled));
@@ -67,11 +91,13 @@ for(let i=0;i<strokes.length;i++){
 }
 const fin=await p.$eval('#hwmsg',e=>e.textContent);
 ok('every stroke drawn along its real path is accepted and the character is completed',fin.indexOf('أتممتَ الحرف')>=0||fin.indexOf('ممتاز')>=0,fin);
+m=await ms(p);
+ok('after completion "اكتب بنفسك" stays red and pressed; the hint is disabled because nothing is left to hint, and it is not red',same(m.pressed,['hwquiz'])&&same(m.red,['hwquiz'])&&m.hintDisabled&&!m.hintRed,JSON.stringify(m));
 ok('the finished character is marked in the character list',await p.$eval('#p-writing [data-act=wch][data-i="0"]',e=>e.classList.contains('wdone')));
 let S=JSON.parse(await p.evaluate(()=>localStorage.getItem('noor-gram9-v1')));
 ok('completion is saved inside the lesson\'s existing state key',!!(S.hw&&S.hw.done&&S.hw.done[c0])&&(await p.evaluate(()=>Object.keys(localStorage))).every(k=>k==='noor-gram9-v1'||k.indexOf('zh-')===0||k.indexOf('noor-')===0));
-await p.click('[data-act=hwreset]');
-ok('"من جديد" resets the exercise (hint disabled again)',await p.$eval('[data-act=hwhint]',e=>e.disabled));
+await p.click('[data-act=hwreset]');m=await ms(p);
+ok('"من جديد" returns to the model view (only "إظهار النموذج" red) and the hint works again',same(m.pressed,['hwmodel'])&&same(m.red,['hwmodel'])&&!m.hintDisabled&&!m.hintRed,JSON.stringify(m));
 
 console.log('--- switching to free drawing and back');
 await p.click('[data-act=hwmode][data-m=free]');
