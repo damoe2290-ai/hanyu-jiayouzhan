@@ -228,6 +228,16 @@ function checkVoice(){
   }
 }
 
+/* ---------- back arrow of lessons shared by Grammar and Foreign Language ----------
+   lesson-N.html belongs to both courses, so its static back arrow points at Grammar. The hub remembers the last course the
+   student opened (zh-hub-v1.lastCourse); if that was Foreign Language the arrow is sent there instead. Default stays Grammar,
+   and lessons of every other course are never changed. */
+function backToLastCourse(){
+  var a=q('.zh-back');if(!a)return;
+  if((a.getAttribute('href')||'').indexOf('#gram')<0)return;
+  try{var s=JSON.parse(localStorage.getItem('zh-hub-v1')||'{}');if(s&&s.lastCourse==='fl')a.setAttribute('href','index.html#fl')}catch(e){}
+}
+
 /* ---------- init ---------- */
 function cssLoaded(){return !!getComputedStyle(root).getPropertyValue('--zh-ui').trim()}
 function init(){
@@ -236,6 +246,7 @@ function init(){
   watch();
   if(cssLoaded()){addGear();root.classList.add('zh-ui')}
   else window.addEventListener('load',function(){if(cssLoaded()&&!root.classList.contains('zh-ui')){addGear();root.classList.add('zh-ui')}});
+  backToLastCourse();
   if(cssLoaded())checkVoice();
 }
 if(cfg.tone!=='color')root.setAttribute('data-tone',cfg.tone);

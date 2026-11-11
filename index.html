@@ -156,6 +156,9 @@ function speak(t){if(!window.speechSynthesis){toast('الصوت غير متاح'
 var TABS=[['home','الرئيسية'],['dict','القاموس'],['rev','مفرداتي'],['tea','عن المنصة']],tab='home',q='',card=null,flip=false;
 function go(t){tab=t;render()}
 function render(){
+ /* remember the course the student is in, so a lesson shared by Grammar and Foreign Language can send the back arrow there.
+    S.lastCourse lives inside zh-hub-v1 (NOT S.last: that is the index of the last lesson, used by the 'continue' chip); lessons keep it when they write their review data */
+ if(crs&&crs!==S.lastCourse){S.lastCourse=crs;save()}
  document.getElementById('tabs').innerHTML=tabsNow().map(function(t){return '<button class="tab" role="tab" aria-selected="'+(t[0]===tab)+'" data-go="'+t[0]+'">'+ic(({home:'home',dict:'book',rev:'repeat',tea:'tool'})[t[0]])+t[1]+(t[0]==='rev'&&dueList().length?'<span class="tag">'+dueList().length+'</span>':'')+'</button>'}).join('');
  var m=document.getElementById('main');
  var hh=({home:home,dict:dict,rev:rev,tea:tea})[tab]();m.innerHTML=(tab==='home')?hh:'<div class="narrow">'+hh+'</div>';
