@@ -338,6 +338,7 @@ def build(L):
     acts.append('write')
     data={'vocab':vocab,'tokpy':tokpy,'dlg':dlg,'txt':txt,'sent':sents,'fill':fills,'chars':chars,'spk':spk,'pitch':PIT,'acts':acts,'lq':lq,'gram':g,'disc':L['discuss'],'minc':L.get('minc',12)}
     if L.get('levels'): data['lv']=lv_banks(vocab,fills,L)
+    if L.get('hanzi_writer'): data['hw']=1   # stroke-order mode in the Writing tab (vendor/hanzi-writer/)
     return data,NZ[n],NA[n]
 SLOTS=('data','grammar','writing','quiz','events')
 def slots_for(L):

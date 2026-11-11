@@ -313,6 +313,13 @@ details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
 .thint{min-height:24px;margin-top:8px;text-align:center}
 .fb.close{background:color-mix(in srgb,var(--star) 14%,var(--surface));border:1px solid var(--star)}
 .tyl{font:500 30px var(--font-py)}
+.hwseg{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.hwbox{display:grid;gap:10px;justify-items:center;margin-top:12px}
+#hwt{width:min(100%,340px);aspect-ratio:1/1;background-color:var(--surface);border:1px solid var(--line);border-radius:16px;touch-action:none;
+  background-image:linear-gradient(to right,transparent calc(50% - 1px),var(--line) calc(50% - 1px),var(--line) calc(50% + 1px),transparent calc(50% + 1px)),linear-gradient(to bottom,transparent calc(50% - 1px),var(--line) calc(50% - 1px),var(--line) calc(50% + 1px),transparent calc(50% + 1px))}
+#hwt svg{width:100%;height:100%;display:block}
+.hwmsg{min-height:24px;text-align:center}
+.chip.wdone{border-color:var(--good);background:var(--good-soft)}
 </style>
 <link rel="stylesheet" href="zh-ui.css">
 <script src="zh-ui.js" defer></script>
@@ -562,7 +569,7 @@ function renderGrammar(){$('#p-grammar').innerHTML=D.gram}
 var W={i:0,strokes:[],cur:null,ghost:true};
 function renderWriting(){
   var c=CHARS[W.i];
-  var chips=CHARS.map(function(x,i){return '<button class="chip tgl'+(i===W.i?' on':'')+'" data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  var chips=CHARS.map(function(x,i){var wd=D.hw&&S.hw&&S.hw.done&&S.hw.done[x.c];return '<button class="chip tgl'+(i===W.i?' on':'')+(wd?' wdone':'')+'"'+(wd?' aria-label="'+x.c+' (أنجزتَ كتابته)"':'')+' data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
   $('#p-writing').innerHTML=
     '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
     '<div class="chips">'+chips+'</div>'+
@@ -577,6 +584,7 @@ function renderWriting(){
   cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
   drawCanvas();
   if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+  if(D.hw)hwInit();
 }
 function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
 function drawCanvas(){
@@ -900,6 +908,74 @@ R.type=function(q,b){
   setTimeout(function(){var i=$('[data-tin]');if(i)i.focus()},60);
 };
 
+/* ---------- stroke order with Hanzi Writer (D.hw = the lesson opts in) ----------
+   Library and stroke data are vendored in vendor/hanzi-writer/ (no external request) and loaded only when the Writing tab opens.
+   If the library or the data of this character fails to load, nothing changes: the free-drawing canvas stays as before. */
+var HW={state:0,cbs:[],w:null,mode:'hw',next:0,miss:0,cache:{}};
+var HWDIR='vendor/hanzi-writer/';
+function hwHex(c){return c.codePointAt(0).toString(16)}
+function hwAlpha(col,a){var m=/^#([0-9a-f]{6})$/i.exec(col);if(!m)return col;var n=parseInt(m[1],16);return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'}
+function hwLib(cb){
+  if(HW.state===2){cb(true);return}
+  if(HW.state===-1){cb(false);return}
+  HW.cbs.push(cb);if(HW.state===1)return;HW.state=1;
+  var el=document.createElement('script');el.src=HWDIR+'hanzi-writer.min.js';
+  var done=function(ok){HW.state=ok&&window.HanziWriter?2:-1;HW.cbs.splice(0).forEach(function(f){f(HW.state===2)})};
+  el.onload=function(){done(true)};el.onerror=function(){done(false)};
+  document.head.appendChild(el);
+}
+function hwLoader(ch,onLoad,onError){
+  if(HW.cache[ch]){onLoad(HW.cache[ch]);return}
+  if(!window.fetch){onError();return}
+  fetch(HWDIR+'data/'+hwHex(ch)+'.json').then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(d){HW.cache[ch]=d;onLoad(d)},function(e){onError(e)});
+}
+function hwMsg(t){var e=$('#hwmsg');if(e)e.textContent=t}
+function hwStop(){try{if(HW.w)HW.w.cancelQuiz()}catch(e){}HW.w=null}
+function hwShow(m){
+  var hb=$('#hwbox'),fb=$('#freebox');if(!hb||!fb)return;
+  hb.hidden=(m!=='hw');fb.hidden=(m==='hw');
+  $$('#hwswitch [data-m]').forEach(function(b){b.classList.toggle('on',b.dataset.m===m)});
+  if(m==='free')drawCanvas();
+}
+function hwWrap(){   /* wrap the existing canvas + its buttons (unchanged) and add the switch and the stroke-order box next to them */
+  var cw=$('#p-writing .cvwrap');if(!cw||$('#freebox'))return;
+  var tl=cw.nextElementSibling,fb=document.createElement('div');fb.id='freebox';
+  cw.parentNode.insertBefore(fb,cw);fb.appendChild(cw);if(tl&&tl.classList.contains('tools'))fb.appendChild(tl);
+  var sw=document.createElement('div');sw.id='hwswitch';sw.className='hwseg';sw.hidden=true;
+  sw.innerHTML='<button class="chip tgl" data-act="hwmode" data-m="hw">ترتيب الخطوط</button><button class="chip tgl" data-act="hwmode" data-m="free">رسم حر</button>';
+  var bx=document.createElement('div');bx.id='hwbox';bx.className='hwbox';bx.hidden=true;
+  bx.innerHTML='<div id="hwt" dir="ltr"></div><div id="hwmsg" class="mut hwmsg" role="status" aria-live="polite"></div>'+
+    '<div class="tools" style="justify-content:center"><button class="btn ghost sm" data-act="hwanim">شاهد الكتابة</button><button class="btn primary sm" data-act="hwquiz">اكتب بنفسك</button><button class="btn ghost sm" data-act="hwhint" disabled>تلميح</button><button class="btn ghost sm" data-act="hwreset">من جديد</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>';
+  fb.parentNode.insertBefore(sw,fb);fb.parentNode.insertBefore(bx,fb);
+}
+function hwMount(c){
+  var host=$('#hwt');if(!host||!HW.cache[c])return;
+  host.innerHTML='';
+  var cs=getComputedStyle(document.documentElement),fg=cs.getPropertyValue('--fg').trim(),ac=cs.getPropertyValue('--accent').trim();
+  var size=Math.max(200,Math.min(340,host.clientWidth||300));
+  try{
+    HW.w=HanziWriter.create(host,c,{width:size,height:size,padding:14,strokeColor:fg,outlineColor:hwAlpha(fg,0.18),highlightColor:ac,drawingColor:fg,
+      drawingWidth:Math.round(size/14),showOutline:!!W.ghost,showCharacter:true,strokeAnimationSpeed:1.1,delayBetweenStrokes:250,charDataLoader:hwLoader});
+  }catch(e){HW.w=null;var sw=$('#hwswitch');if(sw)sw.hidden=true;hwShow('free');return}
+  HW.next=0;HW.miss=0;
+  hwMsg('عدد خطوط هذا الحرف: '+HW.cache[c].strokes.length+'. اضغط «شاهد الكتابة» ثم «اكتب بنفسك».');
+}
+function hwInit(){
+  if(!D.hw||location.protocol==='file:')return;   /* stroke data is loaded with fetch(): impossible from file://, so do not try (the canvas stays, nothing is logged) */
+  hwStop();hwWrap();
+  var c=CHARS[W.i].c;
+  hwLib(function(ok){
+    if(!ok||!$('#hwbox'))return;                        /* library missing: the canvas stays */
+    hwLoader(c,function(){
+      if(!$('#hwbox')||CHARS[W.i].c!==c)return;
+      $('#hwswitch').hidden=false;
+      if(HW.mode==='free'){hwShow('free');return}
+      hwShow('hw');hwMount(c);
+    },function(){});                                     /* no data for this character: the canvas stays */
+  });
+}
+function hwQuizUi(on){var h=$('[data-act=hwhint]');if(h)h.disabled=!on}
+
 /* ---------- events ---------- */
 var A={};
 %%X_EVENTS%%
@@ -923,6 +999,31 @@ A.tcheck=function(){
   else if(g.res==='close')finishQ(false,q.wid,'<div>'+g.msg+'</div>'+q.fbh,{score:.5,xp:hint?0:5,cls:'close',msg:'قريب! تحصل على نصف النقاط'});
   else finishQ(false,q.wid,q.fbh);
 };
+A.hwmode=function(t){
+  HW.mode=t.dataset.m;
+  if(HW.mode==='free'){hwStop();hwShow('free')}else{hwShow('hw');hwMount(CHARS[W.i].c)}
+};
+A.hwanim=function(){
+  if(!HW.w)return;
+  HW.w.cancelQuiz();hwQuizUi(false);hwMsg('شاهد ترتيب الخطوط…');
+  HW.w.animateCharacter({onComplete:function(){hwMsg('الآن جرّب بنفسك: اضغط «اكتب بنفسك».')}});
+};
+A.hwquiz=function(){
+  if(!HW.w)return;
+  var c=CHARS[W.i].c,n=HW.cache[c].strokes.length;
+  HW.next=0;HW.miss=0;hwQuizUi(true);hwMsg('اكتب الخط الأول (1 من '+n+')');
+  HW.w.quiz({showHintAfterMisses:2,leniency:1.1,
+    onCorrectStroke:function(d){HW.next=d.strokeNum+1;hwMsg(d.strokesRemaining?'صحيح! الخط التالي ('+(HW.next+1)+' من '+n+')':'صحيح!')},
+    onMistake:function(){HW.miss++;hwMsg('ليس هذا هو الخط، حاول مرة أخرى (أخطاء: '+HW.miss+')')},
+    onComplete:function(d){
+      hwQuizUi(false);
+      S.hw=S.hw||{done:{}};S.hw.done=S.hw.done||{};S.hw.done[c]={miss:d.totalMistakes};save();
+      var chip=$('#p-writing [data-act=wch][data-i="'+W.i+'"]');if(chip)chip.classList.add('wdone');
+      hwMsg(d.totalMistakes?'أتممتَ الحرف! عدد الأخطاء: '+d.totalMistakes:'ممتاز! كتبتَ الحرف بلا أخطاء.');
+    }});
+};
+A.hwhint=function(){if(HW.w)HW.w.highlightStroke(HW.next)};
+A.hwreset=function(){if(!HW.w)return;HW.w.cancelQuiz();hwQuizUi(false);HW.w.showCharacter();HW.next=0;HW.miss=0;hwMsg('عدد خطوط هذا الحرف: '+HW.cache[CHARS[W.i].c].strokes.length+'.')};
 A.thint=function(){
   if(!Q||Q.fin)return;
   var q=Q.list[Q.i];if(q.hint)return;q.hint=true;
@@ -941,7 +1042,7 @@ A.theme=function(){
   var n=d==='dark'?'light':'dark';
   document.documentElement.setAttribute('data-theme',n);
   try{localStorage.setItem(KEY+'-theme',n)}catch(e){}
-  if(tab==='writing')drawCanvas();
+  if(tab==='writing'){drawCanvas();if(D.hw)hwInit()}
 };
 A.say=function(t){speak(t.dataset.t)};
 A.sayline=function(t){var L=DLG[+t.dataset.l];if(speak(L.zh,null,pitchOf(L.who))){S.heard[+t.dataset.l]=1;save();updateProg();checkListener();var s=$('#p-dialogue .sec-h p');if(s)s.textContent='اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جمل.'}};

@@ -108,3 +108,5 @@ L['discuss']=[
 # Optional manual questions go here, e.g.:
 #   L['lv_extra']=[{'kind':'type_sent','ar':'<Arabic sentence>','ans':'<Chinese sentence>','py':'<pinyin>'}]
 L['levels']=True
+# Stroke order with Hanzi Writer in the Writing tab (vendored in vendor/hanzi-writer/; falls back to the free-drawing canvas).
+L['hanzi_writer']=True
