@@ -307,7 +307,7 @@ details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
 .lvbar .done{background:var(--good-soft);color:var(--good)}
 .lvbar .cur{background:var(--accent);color:var(--accent-fg)}
 .act.lvfeat{grid-column:1/-1;background:var(--accent-soft);border-color:var(--accent);color:var(--fg)}
-.lvc{margin-top:12px}.lvc.lock{opacity:.6}.lvc .lvh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.lvc{margin-top:12px}.lvc.rec{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}.lvc .lvh{display:flex;justify-content:space-between;align-items:center;gap:8px}.lvc .tag svg{vertical-align:-2px}
 .tin{width:100%;min-height:56px;padding:0 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);color:var(--fg);font:500 24px var(--font-han);text-align:center}
 .tin:focus{outline:3px solid var(--accent);outline-offset:2px}
 .tin.good{border-color:var(--good);background:var(--good-soft)}.tin.close{border-color:var(--star)}.tin.bad{border-color:var(--bad);background:var(--bad-soft)}
@@ -1148,15 +1148,19 @@ function lvBarHtml(){
   if(cur==='r')segs+='<span class="cur">مراجعة الأخطاء</span>';
   return '<div class="lvbar" role="group" aria-label="مستويات التحدي">'+segs+'</div>';
 }
+function lvRec(){for(var n=1;n<=3;n++)if(!S.lv.passed[n])return n;return 0}   /* the recommended next level: the first one not passed yet (0 = all passed) */
 function renderLevels(){
+  /* No locking, ever: every level is open from the start. Reaching the pass rate only marks the level and recommends the next one. */
+  var rec=lvRec();
   var cards=[1,2,3].map(function(n){
-    var open=n===1||!!S.lv.passed[n-1],pass=!!S.lv.passed[n],best=S.lv.best[n];
-    return '<section class="card lvc'+(open?'':' lock')+'"><div class="lvh"><strong>المستوى '+n+' · '+LVN[n][0]+'</strong><span class="tag">'+(pass?'اجتزته':(open?'مفتوح':'مقفل'))+'</span></div>'+
-      '<p class="mut">'+LVN[n][1]+'</p><div class="mut">'+LVLEN+' أسئلة · تحتاج '+lvNeed()+' للانتقال'+(best!=null?' · أفضل نتيجة: '+(Math.round(best*2)/2)+' / '+LVLEN:'')+'</div>'+
-      '<button class="btn '+(open?'primary':'ghost')+' sm" data-act="lvstart" data-n="'+n+'"'+(open?'':' disabled')+' style="margin-top:8px">'+(pass?'أعد المستوى':'ابدأ')+'</button></section>';
+    var pass=!!S.lv.passed[n],best=S.lv.best[n],isRec=n===rec;
+    var badge=pass?'<span class="tag">'+ic('check',14)+' اجتزته</span>':(isRec?'<span class="tag">المقترح التالي</span>':'');
+    return '<section class="card lvc'+(isRec?' rec':'')+'"><div class="lvh"><strong>المستوى '+n+' · '+LVN[n][0]+'</strong>'+badge+'</div>'+
+      '<p class="mut">'+LVN[n][1]+'</p><div class="mut">'+LVLEN+' أسئلة · علامة «اجتزته» عند '+lvNeed()+' أو أكثر'+(best!=null?' · أفضل نتيجة: '+(Math.round(best*2)/2)+' / '+LVLEN:'')+'</div>'+
+      '<button class="btn '+(isRec?'primary':'ghost')+' sm" data-act="lvstart" data-n="'+n+'" style="margin-top:8px">'+(pass?'أعد المستوى':'ابدأ')+'</button></section>';
   }).join('');
   $('#p-practice').innerHTML='<div class="qtop"><button class="btn ghost sm" data-act="qexit">رجوع</button><strong>التحدي بالمستويات</strong></div>'+
-    '<p class="mut" style="margin-bottom:6px">'+(LVLEN*3)+' سؤالاً في ثلاثة مستويات. تنتقل إلى المستوى التالي عندما تحصل على '+lvNeed()+' من '+LVLEN+' أو أكثر. الأسئلة التي أخطأتَ فيها تُعاد في نهاية الجلسة. في المستوى الصعب تكتب إجاباتك بنفسك، والتلميح يخصم نقاطاً.</p>'+cards;
+    '<p class="mut" style="margin-bottom:6px">'+(LVLEN*3)+' سؤالاً في ثلاثة مستويات، وكلها مفتوحة دائماً: ابدأ من أي مستوى. عندما تحصل على '+lvNeed()+' من '+LVLEN+' أو أكثر تظهر علامة «اجتزته» ويُقترح عليك المستوى التالي، لكن لا شيء يُغلق. الأسئلة التي أخطأتَ فيها تُعاد في جولة مراجعة. في المستوى الصعب تكتب إجاباتك بنفسك، والتلميح يخصم نقاطاً.</p>'+cards;
 }
 function lvRes(pct,msg,body,btns){
   var st=pct>=90?3:(pct>=60?2:1);
@@ -1172,12 +1176,12 @@ function lvDone(){
     S.lv.best[n]=Math.max(S.lv.best[n]||0,sc);if(pass)S.lv.passed[n]=true;
     award('first');save();updateProg();
     var miss=lvMissed().length,btns=[];
-    if(pass&&n<3)btns.push(['lvnext','المستوى '+(n+1),1]);
     if(!pass)btns.push(['lvretry','أعد المستوى '+n,1]);
-    if(miss&&(!pass||n===3))btns.push(['lvreview','راجع أخطاءك ('+miss+')',pass&&n===3?1:0]);
+    if(n<3)btns.push(['lvnext','المستوى '+(n+1),pass?1:0]);          /* never blocked: recommended (red) when passed, still available when not */
+    if(miss)btns.push(['lvreview','راجع أخطاءك ('+miss+')',pass&&n===3?1:0]);
     btns.push(['lvhub','كل المستويات',0]);
-    html=lvRes(pct,pass?(n<3?'اجتزتَ المستوى '+n+'!':'أتممتَ التحدي كله!'):'لم تصل إلى '+need+' من '+len,
-      '<div class="sc">'+half(sc)+' / '+len+'</div><p class="mut">'+(pass?'':'تحتاج '+need+' للانتقال · ')+'كسبتَ '+gain+' نقطة</p>',btns);
+    html=lvRes(pct,pass?(n<3?'اجتزتَ المستوى '+n+'!':'أتممتَ التحدي كله!'):'لم تصل إلى '+need+' من '+len+' بعد',
+      '<div class="sc">'+half(sc)+' / '+len+'</div><p class="mut">'+(pass?'':'علامة «اجتزته» عند '+need+' من '+len+'. أعد المستوى متى شئت، أو انتقل إلى أي مستوى · ')+'كسبتَ '+gain+' نقطة</p>',btns);
   }
   $('#p-practice').innerHTML=html;Q=null;
 }

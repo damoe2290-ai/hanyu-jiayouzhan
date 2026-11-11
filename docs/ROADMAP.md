@@ -20,6 +20,7 @@
 8. Be honest: if you cannot test something (e.g. speech recognition on iPhone), say so; never claim it works.
 9. Do not bring any educational content (Chinese text, translations) from outside the book files in the project. Writing questions and Arabic explanations is allowed, but tell me when you do.
 10. **No server, no accounts:** no Supabase, no database, no login, no API keys, no in-site AI lesson builder. The site stays static; progress lives only on the student's device (`localStorage`). If a feature seems to need a server, stop and ask me instead of adding one.
+11. **No locking, anywhere:** every course, lesson, level and activity is open from the start. Pass rates, XP and progress may mark and recommend (a badge, a "recommended next" highlight) but must never block opening anything, and no control may be disabled because of progress.
 
 ## Phase 0A: Quick wins (from the UI/UX audit; do this first)
 Measurements come from the audit at 390px and 1280px; re-measure after fixing.
@@ -56,7 +57,7 @@ Measurements come from the audit at 390px and 1280px; re-measure after fixing.
    - Easy: multiple choice, matching, true/false.
    - Medium: sentence ordering, multiple-choice cloze, listening.
    - Hard: typing pinyin, typing characters, typing sentences, typed cloze.
-   - Shown progressively with a level bar; advancing after a pass-rate threshold; missed questions repeated at the end of the session.
+   - Shown with a level bar; the pass-rate threshold only marks progress ("passed" badge) and recommends the next level (**recommended next, never locked**: every level is open from the start); missed questions repeated at the end of the session.
    - First build **a complete sample on Lesson 9 (Grammar 1)** and show it to me before rolling out. Extend `tools/lsn3/build3.py` so it auto-generates part of the questions from vocabulary and sentences, with the option to add manual questions in the lesson's data file.
 6. **Step-by-step character writing (stroke order):** use Hanzi Writer (pinned version, CDN allowed) to animate stroke order, then let the student write with wrong-stroke correction and hints. Inspect how the current "Writing" tab works first, then decide how to integrate. Without internet or if the library fails to load, fall back to the current display.
 

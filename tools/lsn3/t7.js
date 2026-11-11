@@ -1,6 +1,6 @@
 /* Levels challenge test (Phase 2 sample).   PAGE_PREFIX= node tools/lsn3/t7.js     (run from the repo root; tests lesson-9.html)
    Plays complete sessions with an oracle that reads each question's answer from the page, and checks: gating of levels,
-   the 75% pass rate with retry, typed answers (ni3 = nǐ, spaces/punctuation ignored, wrong tone = close, pinyin typed
+   the 75% pass rate as a progress marker only (never a lock; the Hard level opens first on a fresh lesson), retry, typed answers (ni3 = nǐ, spaces/punctuation ignored, wrong tone = close, pinyin typed
    instead of characters = close), hints and their point penalty, repeat of missed questions, persistence, fallback
    without zh-ui.js, lessons without levels, and the layout on a short phone viewport (touch). */
 let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
@@ -32,9 +32,13 @@ await p.goto(URL('lesson-9.html'));await p.waitForTimeout(500);await p.click('[d
 console.log('--- levels hub and gating');
 ok('levels card is on the practice tab',(await p.$$('.lvfeat')).length===1);
 await p.click('[data-act=lvhub]');
-const locks=await p.$$eval('.lvc',e=>e.map(x=>x.classList.contains('lock')));
-ok('level 1 open, levels 2 and 3 locked on a fresh lesson',JSON.stringify(locks)==='[false,true,true]',JSON.stringify(locks));
-ok('locked level buttons are disabled',await p.$$eval('.lvc.lock [data-act=lvstart]',e=>e.every(x=>x.disabled)));
+ok('all three levels are open on a fresh lesson: no lock class, no disabled start button, no "locked" wording',await p.$$eval('.lvc',e=>e.length===3&&e.every(x=>!x.classList.contains('lock')&&!x.querySelector('[data-act=lvstart]').disabled&&x.innerText.indexOf('مقفل')<0)));
+ok('level 1 is the recommended next one (highlight); 2 and 3 are open but not highlighted',JSON.stringify(await p.$$eval('.lvc',e=>e.map(x=>x.classList.contains('rec'))))==='[true,false,false]');
+console.log('--- the Hard level can be opened first (nothing gates it)');
+await p.click('[data-act=lvstart][data-n="3"]');await p.waitForTimeout(150);
+const first=await info(p);
+ok('Hard level opens on a fresh lesson: a typed question comes first and the level bar shows level 3',!!first&&first.type==='type'&&first.mode==='py'&&first.lv===3&&await p.$eval('#lvbar .cur',e=>e.textContent.indexOf('3')>=0),JSON.stringify(first&&[first.type,first.mode,first.lv]));
+await p.click('[data-act=qexit]');await p.click('[data-act=lvhub]');
 
 console.log('--- level 1 (easy): multiple choice, matching, true/false');
 await p.click('[data-act=lvstart][data-n="1"]');await p.waitForTimeout(100);
@@ -46,16 +50,20 @@ ok('all correct passes level 1 (8 / 8)',res.indexOf('اجتزتَ المستوى
 ok('"next level" is offered',!!(await p.$('[data-act=lvnext]')));
 let S=await state(p);ok('pass is saved in the lesson state (existing key noor-gram9-v1)',!!(S.lv&&S.lv.passed&&S.lv.passed['1']===true));
 
+console.log('--- the pass rate marks progress and recommends the next level');
+await p.click('[data-act=lvhub]');
+const tags=await p.$$eval('.lvc',e=>e.map(x=>({badge:/اجتزته/.test(x.querySelector('.tag')?x.querySelector('.tag').textContent:''),rec:x.classList.contains('rec'),lock:x.classList.contains('lock')||x.querySelector('[data-act=lvstart]').disabled})));
+ok('after passing level 1: it shows the "passed" badge, level 2 is the recommended next, nothing is locked',tags[0].badge&&!tags[0].rec&&!tags[1].badge&&tags[1].rec&&!tags[2].rec&&tags.every(t=>!t.lock),JSON.stringify(tags));
 console.log('--- level 2 (medium): below 75% fails, retry');
-await p.click('[data-act=lvnext]');await p.waitForTimeout(100);
+await p.click('[data-act=lvstart][data-n="2"]');await p.waitForTimeout(100);
 types=await p.evaluate(()=>window.__q().list.map(q=>q.type));
 ok('level 2 = 3 order + 3 fill + 2 listening',types.length===8&&types.filter(t=>t==='order').length===3&&types.filter(t=>t==='fill').length===3&&types.filter(t=>t==='mc').length===2,types.join(','));
 res=await playLevel(p,i=>i>=3);
 ok('5 / 8 is below the 75% pass rate: not passed',res.indexOf('لم تصل إلى 6 من 8')>=0&&res.indexOf('5 / 8')>=0,res.slice(0,90));
-ok('retry is offered, next level is not',!!(await p.$('[data-act=lvretry]'))&&!(await p.$('[data-act=lvnext]')));
+ok('retry is offered (red) and the next level is still offered (not red): a failed level never blocks',await p.evaluate(()=>{const r=document.querySelector('[data-act=lvretry]'),n=document.querySelector('[data-act=lvnext]');return !!r&&!!n&&r.classList.contains('primary')&&!n.classList.contains('primary')&&!n.disabled}));
 S=await state(p);ok('failed level is not saved as passed',!S.lv.passed['2']);
 await p.click('[data-act=lvhub]');
-ok('level 3 stays locked after the failed level 2',(await p.$$eval('.lvc',e=>e.map(x=>x.classList.contains('lock'))))[2]===true);
+ok('after the failed level 2: level 3 is open, level 2 is still the recommended next',JSON.stringify(await p.$$eval('.lvc',e=>e.map(x=>({lock:x.classList.contains('lock')||x.querySelector('[data-act=lvstart]').disabled,rec:x.classList.contains('rec')}))))==='[{"lock":false,"rec":false},{"lock":false,"rec":true},{"lock":false,"rec":false}]');
 await p.click('[data-act=lvstart][data-n="2"]');await p.waitForTimeout(100);
 res=await playLevel(p,()=>true);ok('retry with all correct passes level 2',res.indexOf('اجتزتَ المستوى 2')>=0&&res.indexOf('8 / 8')>=0);
 
@@ -97,7 +105,7 @@ console.log('--- persistence');
 await p.reload();await p.waitForTimeout(400);await p.click('[data-tab=practice]');
 ok('card shows stars after reload (3 levels passed)',(await p.$$eval('.lvfeat .stars .on',e=>e.length))===3);
 await p.click('[data-act=lvhub]');
-ok('all three levels show as passed after reload',(await p.$$eval('.lvc .tag',e=>e.map(x=>x.textContent))).join()==='اجتزته,اجتزته,اجتزته');
+ok('all three levels show the passed badge after reload (and none is recommended or locked)',(await p.$$eval('.lvc .tag',e=>e.map(x=>x.textContent.trim()))).join()==='اجتزته,اجتزته,اجتزته'&&(await p.$$eval('.lvc',e=>e.every(x=>!x.classList.contains('rec')&&!x.classList.contains('lock')))));
 S=await state(p);
 const keys=await p.evaluate(()=>Object.keys(localStorage));
 ok('level progress lives inside the existing state key (no new storage key was added)',!!S.lv&&keys.every(k=>k==='noor-gram9-v1'||k==='noor-gram9-v1-theme'||k.indexOf('zh-')===0),keys.join(','));
@@ -122,7 +130,7 @@ ctx=await b.newContext({viewport:{width:390,height:340},hasTouch:true,isMobile:t
 await ctx.addInitScript(()=>{if(!localStorage.getItem('noor-gram9-v1'))localStorage.setItem('noor-gram9-v1',JSON.stringify({lv:{passed:{1:true,2:true},best:{}}}))});
 p=await ctx.newPage();const e3=[];p.on('pageerror',e=>e3.push(e.message));
 await p.goto(URL('lesson-9.html'));await p.waitForTimeout(400);await p.tap('[data-tab=practice]');await p.tap('[data-act=lvhub]');
-ok('progress saved by an earlier session unlocks level 3',(await p.$$eval('.lvc',e=>e.map(x=>x.classList.contains('lock')))).join()==='false,false,false');
+ok('an earlier session\'s progress only marks levels: all open, level 3 is the recommended next',JSON.stringify(await p.$$eval('.lvc',e=>e.map(x=>({lock:x.classList.contains('lock')||x.querySelector('[data-act=lvstart]').disabled,rec:x.classList.contains('rec')}))))==='[{"lock":false,"rec":false},{"lock":false,"rec":false},{"lock":false,"rec":true}]');
 await p.tap('[data-act=lvstart][data-n="3"]');await p.waitForTimeout(300);
 ok('the answer field takes focus (the phone keyboard opens)',await p.evaluate(()=>document.activeElement&&document.activeElement.hasAttribute('data-tin')));
 const lay=await p.evaluate(()=>{const f=s=>{const e=document.querySelector(s),r=e.getBoundingClientRect();return {top:Math.round(r.top),bottom:Math.round(r.bottom),h:Math.round(r.height)}};return {input:f('[data-tin]'),hint:f('[data-act=thint]'),check:f('[data-act=tcheck]'),vh:innerHeight}});
