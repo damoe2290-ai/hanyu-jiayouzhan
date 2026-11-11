@@ -744,7 +744,7 @@ function renderWrite(){
   D.disc.map(function(d,i){var ms=d.model.split('｜');
     return '<section class="card wr" data-wd="'+i+'" style="margin-bottom:12px"><div class="qprompt" style="justify-items:start;text-align:start"><div class="han ltr" style="font-size:22px">'+(i+1)+'. '+esc(d.q)+'</div><div class="mut">'+esc(d.ar)+'</div></div>'+
     '<div class="chips">'+d.frames.map(function(f,k){return '<button class="chip" data-act="wfr" data-d="'+i+'" data-k="'+k+'"><span class="han" style="font-size:17px">'+esc(f)+'</span></button>'}).join('')+'</div>'+
-    '<textarea data-wta="'+i+'" lang="zh" data-zh-editor="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
+    '<textarea data-wta="'+i+'" lang="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
     '<div class="mut" style="margin:6px 0"><span data-wcc="'+i+'">0</span> / '+D.minc+' حرفاً · الكلمات المقترحة:</div><div class="us">'+d.use.map(function(u){return '<span data-wu="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
     '<details class="md"><summary>نموذج إجابة</summary><div class="han ltr" style="font-size:20px;margin-top:8px">'+esc(ms[0])+'</div><div class="mut">'+esc(ms[1]||'')+'</div><button class="btn ghost sm" data-act="wsay" data-d="'+i+'" style="margin-top:8px">'+ic('spk',16)+' استمع</button></details></section>'}).join('');
   D.disc.forEach(function(d,i){var ta=$('[data-wta="'+i+'"]');ta.value=S.txt[i]||'';wchk(i)});
@@ -878,7 +878,7 @@ A.pat=function(t){G.pat=+t.dataset.i;renderGrammar()};
 A.mw=function(t){G.mw=+t.dataset.i;renderGrammar()};
 
 A.gtok=function(t){openSheet([t.dataset.z,t.dataset.p,t.dataset.a||''])};
-A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i);ta.dispatchEvent(new Event('input',{bubbles:true}))};
+A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i)};
 A.wsay=function(t){speak(D.disc[+t.dataset.d].model.split('｜')[0])};
 A.wch=function(t){W.i=+t.dataset.i;W.strokes=[];W.cur=null;renderWriting()};
 A.wclear=function(){W.strokes=[];W.cur=null;drawCanvas()};

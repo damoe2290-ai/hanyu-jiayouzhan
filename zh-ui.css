@@ -167,13 +167,6 @@ a.seal:hover,a.seal:focus-visible{transform:rotate(-4deg) scale(1.06)}
   border-radius:var(--r-12);background:var(--warning-soft);color:var(--fg);font-size:var(--fs-14);line-height:1.5}
 .zh-voice button{appearance:none;flex:none;border:0;background:none;color:var(--muted);min-width:var(--tap);min-height:var(--tap);cursor:pointer;font:inherit;font-weight:600}
 
-/* ---------- typing tools (built by zh-ui.js): delete one character/syllable, undo, clear all ---------- */
-.zh-ed{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:6px}
-.zh-ed button{appearance:none;flex:1 1 auto;min-width:var(--tap);min-height:var(--tap);padding:0 14px;border:1.5px solid var(--line);border-radius:var(--r-12);
-  background:var(--surface2);color:var(--fg);font:inherit;font-weight:600;font-size:var(--fs-14);cursor:pointer}
-.zh-ed button:disabled{opacity:.45;cursor:default}
-.zh-ed button:not(:disabled):hover{border-color:var(--accent)}
-
 /* ---------- toast: must never cover or block the typing tools ----------
    It ignores taps, and while a typing field has focus (on a phone: the keyboard is open) it is shown at the top. */
 .toast{pointer-events:none}
