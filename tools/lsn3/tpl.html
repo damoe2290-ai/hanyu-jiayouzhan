@@ -829,7 +829,8 @@ function qTyCloze(t){var full=t.pre+t.ans+t.post;return {type:'type',mode:'cloze
   fbh:fbSent({zh:full,py:t.py||'',ar:t.ar})}}
 function levelQs(n){
   var B=D.lv,lq=(D.lq||[]).filter(function(x){return x.type==='mc'&&!x.sp});
-  if(n===1)return shuffle([qMatch(5)].concat(pick(VOCAB,3).map(qMeaning),pick(B.tf,2).map(qTF),pick(lq,2).map(fromSpec)));
+  if(n===1){var lqn=Math.min(2,lq.length);   /* hand-built lessons have no lesson questions: top up with true/false so a level always has 8 */
+    return shuffle([qMatch(5)].concat(pick(VOCAB,3).map(qMeaning),pick(B.tf,2+2-lqn).map(qTF),pick(lq,lqn).map(fromSpec)))}
   if(n===2)return shuffle(pick(SENT,3).map(qOrder).concat(pick(FILL,3).map(qFill),pick(VOCAB,2).map(qListen)));
   return pick(B.py,2).map(qTyPy).concat(pick(B.zh,2).map(qTyZh),pick(B.cloze,2).map(qTyCloze),pick(B.sent,2).map(qTySent));
 }

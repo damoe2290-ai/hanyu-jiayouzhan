@@ -9,7 +9,7 @@ const fs=require('fs');const EXE=process.env.CHROME||['/usr/bin/google-chrome','
 const [OLD,NEW,...rest]=process.argv.slice(2);const LESSONS=rest.length?rest:['6','7','8'];
 const SEED="(function(){var s=12345;Math.random=function(){s=(s*1664525+1013904223)%4294967296;return s/4294967296};Math.__reseed=function(){s=12345}})();";
 const norm=t=>t.replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim();
-/* Intended additions since the migration (typing tools): the writing canvas and the sentence-order questions got an undo button and
+/* Intended additions since the migration (levels card, see panel() below; typing tools): the writing canvas and the sentence-order questions got an undo button and
    'clear all' (the old canvas button was just 'مسح'). Ignore exactly those labels, nothing else. */
 const TOOLS=l=>{l=l.trim();return l==='تراجع'||l==='مسح الكل'};
 const normW=t=>norm(t).split('\n').filter(l=>!TOOLS(l)&&true).map(l=>l).join('\n').replace(/(^|\n)مسح(?=\n|$)/g,'');
@@ -17,7 +17,8 @@ const normW=t=>norm(t).split('\n').filter(l=>!TOOLS(l)&&true).map(l=>l).join('\n
 async function open(b,dir,n){const ctx=await b.newContext({viewport:{width:390,height:844}});const p=await ctx.newPage();const errs=[];
   p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/fonts|net::|Failed to load|ERR_/.test(m.text()))errs.push(m.text())});
   await p.addInitScript(SEED);await p.goto('file://'+dir+'/lesson-'+n+'.html');await p.waitForTimeout(500);return {ctx,p,errs}}
-const panel=(p,t)=>p.$eval('#p-'+t,e=>e.innerText).then(norm).catch(()=>'<missing>');
+/* Intended addition since the migration: the levels-challenge card on the practice tab (data-act=lvhub). It is hidden before the text is read, so exactly that card is ignored and nothing else. */
+const panel=(p,t)=>p.$eval('#p-'+t,e=>{e.querySelectorAll('[data-act=lvhub]').forEach(x=>x.style.display='none');return e.innerText}).then(norm).catch(()=>'<missing>');
 function firstDiff(a,b){const x=a.split('\n'),y=b.split('\n');for(let i=0;i<Math.max(x.length,y.length);i++)if(x[i]!==y[i])return 'line '+i+': OLD «'+(x[i]||'')+'» / NEW «'+(y[i]||'')+'»';return ''}
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));let bad=0,total=0;
 const res=[];

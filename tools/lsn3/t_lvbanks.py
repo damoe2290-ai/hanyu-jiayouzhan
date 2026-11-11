@@ -35,5 +35,17 @@ ok('manual question with a missing field is rejected',raises({'kind':'type_zh','
 L10=copy.deepcopy(g10.L);L10.pop('levels',None)
 d10,_,_=build3.build(L10)
 ok('a lesson without L[levels] gets no banks (lesson 10 with the flag removed)','lv' not in d10)
+# hand-built lessons 6-8: the banks are read out of the frozen snippet by jslit.py
+import jslit,g6,g7,g8
+ok('jslit reads quotes, bare keys, escapes, trailing commas and comments',jslit.var("var A=[ {x:'a\\'b',\"y\":[1,2.5,],z:true}, // c\n null ];",'A')==[{'x':"a'b",'y':[1,2.5],'z':True},None])
+for m in (g6,g7,g8):
+    snip=open('legacy/%s.data.js'%m.L['legacy'],encoding='utf8').read()
+    v,f=jslit.var(snip,'VOCAB'),jslit.var(snip,'FILL')
+    lv=build3.legacy_lv_banks(m.L)
+    ok('lesson %d: banks come from its own VOCAB (%d words) and FILL (%d items), same size rules as generated lessons'%(m.L['n'],len(v),len(f)),
+       len(lv['cloze'])==len(f) and all(len(lv[k])>=8 for k in ('tf','py','zh','sent')) and all(t['w']<len(v) for t in lv['tf']) and lv==build3.legacy_lv_banks(m.L))
+    ok('lesson %d: every bank answer exists in its own data (typed characters are lesson words, sentences are lesson examples)'%m.L['n'],
+       all(x['ans'] in [w['zh'] for w in v] for x in lv['zh']) and all(x['ans'] in [w['ex'][0] for w in v if w.get('ex')] for x in lv['sent']))
+    ok('lesson %d: no hand-written questions (nothing flagged manual)'%m.L['n'],not any(x.get('manual') for k in ('tf','py','zh','sent','cloze') for x in lv[k]))
 print('all passed' if not fails else '%d FAILED'%fails)
 sys.exit(1 if fails else 0)

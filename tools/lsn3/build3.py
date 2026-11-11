@@ -346,11 +346,20 @@ def slots_for(L):
     carry their lesson-specific code frozen as readable snippets in legacy/<name>.<slot>.js."""
     if not L.get('legacy'): return {k:'' for k in SLOTS}
     return {k:open('legacy/%s.%s.js'%(L['legacy'],k),encoding='utf8').read().rstrip('\n') for k in SLOTS}
+def legacy_lv_banks(L):
+    """Levels banks for a hand-built lesson: read VOCAB and FILL out of legacy/<name>.data.js (jslit.py), then use the same
+    generator as the generated lessons. Hand-written extras still go only in L['lv_extra']."""
+    import jslit
+    src=open('legacy/%s.data.js'%L['legacy'],encoding='utf8').read()
+    vocab=[{'zh':v['zh'],'py':v['py'],'ar':v['ar'],'ex':v.get('ex') or ['','','']} for v in jslit.var(src,'VOCAB')]
+    fills=[{'pre':f['pre'],'post':f['post'],'ans':f['ans'],'ar':f['ar'],'py':f['py']} for f in jslit.var(src,'FILL')]
+    return lv_banks(vocab,fills,L)
 def make(name):
     m=importlib.import_module(name);L=m.L
     if L.get('legacy'):   # frozen lesson: no generated data, everything lesson-specific comes from the slots
         data={'lq':[],'disc':[],'minc':12,'gram':''};nz=L['seal'];na=NA[L['n']]
         if L.get('hanzi_writer'): data['hw']=1   # stroke order: the frozen writing snippet calls hwInit() (see legacy/g*.writing.js)
+        if L.get('levels'): data['lv']=legacy_lv_banks(L)   # banks from the frozen snippet's own VOCAB and FILL
     else:
         data,nz,na=build(L)
     tpl=open('tpl.html',encoding='utf8').read()
