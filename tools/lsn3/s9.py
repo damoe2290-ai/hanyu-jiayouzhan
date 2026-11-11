@@ -83,3 +83,7 @@ L['discuss']=[
 
 # Stroke order with Hanzi Writer in the Writing tab (vendored in vendor/hanzi-writer/; falls back to the free-drawing canvas).
 L['hanzi_writer']=True
+
+# Levels challenge (rolled out after the Lesson 9 sample was approved): banks are generated from this lesson's own data (build3.lv_banks).
+# Hand-written questions, if any, go ONLY in L['lv_extra'] (flagged manual:1); none written.
+L['levels']=True
