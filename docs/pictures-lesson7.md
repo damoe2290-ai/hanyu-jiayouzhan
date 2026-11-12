@@ -58,3 +58,17 @@ Words with **no picture at all** before: the 11 position and distance words 左�
 1. All place nouns got photos, including four whose icons were already clear (饭馆 超市 商店 宿舍), so the places read as one set. Revert any of them by deleting its entry from `PHOTO` in `g7.data.js`.
 2. Three photos carry a visible shop or bank name (Freebirds, US Bank, Newcastle United stand) and one a small distant crowd (sports hall). They were chosen over alternatives because they read most clearly; swap them if you prefer.
 3. Several photos are CC BY-SA, which requires the same licence for the resized copies; this is recorded and credited.
+
+## Phase 4b pilot: illustrated scenes for 图书馆, 银行, 邮局
+
+Feedback: the photos do not appeal. Two illustrated versions were built for the three places and can be compared on the real page with a preview switch (to be removed after the decision):
+
+| Link | Shows |
+|---|---|
+| `lesson-7.html` or `?pics=a` | **A**: scenes drawn for the site (`tools/scenes.py`, 5-11 KB each) |
+| `?pics=b` | **B**: Openclipart public-domain clip art (`tools/illus_b.py`, 23-126 KB each) |
+| `?pics=photo` | the Phase 4a photos, for comparison |
+
+Fallback chain if a scene cannot load: the photo, then the old icon. Arabic alt text, lazy loading, width/height and the fixed frames are unchanged. Side-by-side screenshots at 360 px: `docs/screenshots/pics4b-light.png`, `pics4b-dark.png`.
+
+Source check for B: unDraw is reachable but its licence forbids automated downloading, searching or scraping without consent, so nothing was fetched from it; Pixabay is blocked by a Cloudflare challenge (API needs a key), not bypassed; Wikimedia Commons was rate limiting at test time; Openclipart is reachable and CC0, and was used. Its results are single figures in mixed styles, not scenes, so B is a weak comparison.

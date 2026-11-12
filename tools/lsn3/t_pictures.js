@@ -25,7 +25,7 @@ ok('only lesson-7 uses the photos (no other page references vendor/images)',othe
 
 const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
 const open=async(o={})=>{const c=await b.newContext({viewport:{width:360,height:780},hasTouch:true,colorScheme:o.dark?'dark':'light'});const p=await c.newPage();p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));
-  if(o.block)await p.route(/vendor\/images\/.*\.webp/,r=>r.abort());await p.goto(R+'lesson-7.html');await p.waitForTimeout(500);return {c,p}};
+  if(o.block)await p.route(/vendor\/images\/.*\.webp/,r=>r.abort());await p.goto(R+'lesson-7.html'+(o.q||''));await p.waitForTimeout(500);return {c,p}};
 console.log('--- in the page (vocabulary cards, picture quiz, flashcard)');
 {const {c,p}=await open();
  const imgs=await p.$$eval('#p-vocab .row img.pimg',e=>e.map(x=>({src:x.getAttribute('src'),alt:x.alt,w:x.getAttribute('width'),h:x.getAttribute('height'),lazy:x.getAttribute('loading'),dec:x.getAttribute('decoding')})));
@@ -52,14 +52,55 @@ console.log('--- in the page (vocabulary cards, picture quiz, flashcard)');
   await p.waitForTimeout(80);if(await p.$('[data-act=qexit]'))await p.click('[data-act=qexit]').catch(()=>{});}
  ok('the picture quiz shows photos (with Arabic alt text) and drawings, inside the 140px frame',sawPhoto>0&&sawDrawing>0&&okAlt,{sawPhoto,sawDrawing});
  ok('no page errors',p.errs.length===0,p.errs);await c.close()}
-console.log('--- fallback: when the images cannot load the old icons show');
-{const {c,p}=await open({block:true});
+console.log('--- fallback: when the images cannot load the old icons show (photo mode: ?pics=photo)');
+{const {c,p}=await open({block:true,q:'?pics=photo'});
  await p.evaluate(()=>{document.querySelectorAll('#p-vocab .row img.pimg').forEach(i=>{i.loading='eager'})});await p.waitForTimeout(700);
  const r=await p.$$eval('#p-vocab .row .pic.pf',e=>e.map(x=>{const im=x.querySelector('img.pimg'),sv=x.querySelector('svg.il'),r=sv.getBoundingClientRect();return {failed:im.classList.contains('failed')&&getComputedStyle(im).display==='none',icon:r.width>=20&&r.height>=20&&getComputedStyle(sv).display!=='none'}}));
  ok('all 13 blocked photos are hidden and their old icon is visible instead',r.length===13&&r.every(x=>x.failed&&x.icon),r);
  await c.close()}
 {const {c,p}=await open({dark:true});
  ok('dark theme: the photo frames and drawings render (frames have the theme background, no errors)',await p.$$eval('#p-vocab .row .pic.pf',e=>e.length===13)&&p.errs.length===0);await c.close()}
+console.log('--- Phase 4b pilot: illustrated scenes for library, bank, post office (A drawn, B Openclipart)');
+{const places={library:['图书馆'],bank:['银行','中国银行'],post:['邮局']};
+ const ass=v=>Object.keys(places).map(k=>path.join(root,'vendor/images/lesson7',v,k+'.svg'));
+ const aS=ass('a').map(f=>fs.existsSync(f)?fs.readFileSync(f,'utf8'):''),bS=ass('b').map(f=>fs.existsSync(f)?fs.readFileSync(f,'utf8'):'');
+ ok('version A: three SVG files, each under 12 KB, 480x360, no text and no external references (drawn for the site)',aS.every(t=>t&&Buffer.byteLength(t)<12*1024&&/viewBox="0 0 480 360"/.test(t)&&!/<text|<image|href=|@import|<script/.test(t)),aS.map(t=>Buffer.byteLength(t)));
+ ok('version B: three SVG files, each under 130 KB, 480x360, no scripts or external references',bS.every(t=>t&&Buffer.byteLength(t)<130*1024&&/viewBox="0 0 480 360"/.test(t)&&!/<script|http-equiv|<image[^>]*href="http/.test(t)),bS.map(t=>Buffer.byteLength(t)));
+ ok('both versions start with an opaque full-size backdrop, so they look right on the light and the dark page',[...aS,...bS].every(t=>/<rect[^>]*(width="480" height="360"|x="0" y="0" width="480" height="360")[^>]*fill="#[0-9A-Fa-f]{6}"|<rect width="480" height="360" fill="#[0-9A-Fa-f]{6}"/.test(t.slice(t.indexOf('<rect'),t.indexOf('<rect')+140))));
+ ok('NOTICE.md records version A as drawn for the site and version B with author, CC0 licence and Openclipart URL',/drawn for this site/.test(notice)&&['330620','330655','327170'].every(i=>notice.includes('openclipart.org/detail/'+i))&&(notice.match(/CC0 1\.0/g)||[]).length>=3&&notice.includes('oksmith')&&notice.includes('j4p4n'));
+ for(const [v,dir] of [['default','a'],['a','a'],['b','b'],['photo',null]]){
+  const c=await b.newContext({viewport:{width:360,height:780},hasTouch:true});const p=await c.newPage();p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));
+  await p.goto(R+'lesson-7.html'+(v==='default'?'':'?pics='+v));await p.waitForTimeout(400);
+  const rows=await p.$$eval('#p-vocab .row',e=>e.map(r=>{const im=r.querySelector('img.pimg');return {w:r.querySelector('.rz').textContent.replace(/\s/g,''),src:im&&im.getAttribute('src'),alt:im&&im.alt,wd:im&&im.getAttribute('width'),ht:im&&im.getAttribute('height'),lazy:im&&im.getAttribute('loading')}}));
+  const ill=Object.entries(places).flatMap(([k,ws])=>ws.map(w=>[k,w]));
+  ok('?pics='+(v==='default'?'(none: default)':v)+': the three places use '+(dir?'the '+dir.toUpperCase()+' scenes':'the photos')+', other places keep their photos',
+    ill.every(([k,w])=>{const r=rows.find(x=>x.w===w);return r&&r.src===(dir?'vendor/images/lesson7/'+dir+'/'+k+'.svg':'vendor/images/lesson7/'+k+'.webp')})&&rows.filter(r=>r.src&&!ill.some(i=>i[1]===r.w)).every(r=>/\.webp$/.test(r.src)),ill.map(([k,w])=>rows.find(x=>x.w===w)&&rows.find(x=>x.w===w).src));
+  ok('  every scene has Arabic alt text, width/height 480x360 and lazy loading; the files exist',ill.every(([k,w])=>{const r=rows.find(x=>x.w===w);return /[؀-ۿ]{4,}/.test(r.alt)&&r.wd==='480'&&r.ht==='360'&&r.lazy==='lazy'&&fs.existsSync(path.join(root,r.src))}));
+  ok('  no page errors',p.errs.length===0,p.errs);await c.close()}
+ // scenes are readable at the 44px size and fill the frame (no layout shift): same frame size as the photos
+ {const c=await b.newContext({viewport:{width:360,height:780}});const p=await c.newPage();await p.goto(R+'lesson-7.html?pics=a');await p.waitForTimeout(300);
+  ok('scenes sit in the same fixed 44px frame as the photos (no layout shift)',await p.$$eval('#p-vocab .row .pic.pf',e=>e.every(x=>{const r=x.getBoundingClientRect();return Math.round(r.width)===44&&Math.round(r.height)===44})));
+  ok('the vocabulary list still fits the 360px screen with the scenes',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await c.close()}
+ // fallback chain: scene -> photo -> old icon
+ for(const v of ['a','b']){
+  let c=await b.newContext({viewport:{width:360,height:780}});let p=await c.newPage();await p.route(/vendor\/images\/lesson7\/[ab]\/.*\.svg/,r=>r.abort());await p.goto(R+'lesson-7.html?pics='+v);
+  await p.evaluate(()=>document.querySelectorAll('#p-vocab .row img.pimg').forEach(i=>{i.loading='eager'}));await p.waitForTimeout(800);
+  const r=await p.$$eval('#p-vocab .row',e=>e.filter(x=>/图书馆|银行|邮局/.test(x.querySelector('.rz').textContent)).map(x=>{const im=x.querySelector('img.pimg');return {src:im.getAttribute('src'),failed:im.classList.contains('failed'),alt:im.alt}}));
+  ok('version '+v.toUpperCase()+': if a scene cannot load, the photo is shown instead (with its own Arabic alt)',r.length===4&&r.every(x=>/\.webp$/.test(x.src)&&!x.failed&&/[؀-ۿ]{4,}/.test(x.alt)),r);await c.close();
+  c=await b.newContext({viewport:{width:360,height:780}});p=await c.newPage();await p.route(/vendor\/images\/lesson7\/.*\.(svg|webp)/,r=>r.abort());await p.goto(R+'lesson-7.html?pics='+v);
+  await p.evaluate(()=>document.querySelectorAll('#p-vocab .row img.pimg').forEach(i=>{i.loading='eager'}));await p.waitForTimeout(900);
+  const r2=await p.$$eval('#p-vocab .row',e=>e.filter(x=>/图书馆|银行|邮局/.test(x.querySelector('.rz').textContent)).map(x=>{const im=x.querySelector('img.pimg'),sv=x.querySelector('svg.il');return {failed:im.classList.contains('failed')&&getComputedStyle(im).display==='none',icon:sv.getBoundingClientRect().width>=20}}));
+  ok('version '+v.toUpperCase()+': if the scene and the photo both fail, the old icon shows',r2.length===4&&r2.every(x=>x.failed&&x.icon),r2);await c.close()}
+ // themes + flashcard + picture quiz with scenes
+ for(const dark of [false,true]){const c=await b.newContext({viewport:{width:360,height:780},hasTouch:true,colorScheme:dark?'dark':'light'});const p=await c.newPage();p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));await p.goto(R+'lesson-7.html?pics=a');await p.waitForTimeout(400);
+  await p.click('#p-vocab .row:nth-child(1)');await p.click('#fc');await p.waitForTimeout(150);
+  const ok1=await p.evaluate(()=>{const rows=[...document.querySelectorAll('#p-vocab .row')];return rows.length>0});
+  let seen=0;for(let k=0;k<14&&!seen;k++){await p.click('[data-tab=practice]');await p.waitForTimeout(100);await p.click('[data-act=start][data-k=pic]');await p.waitForTimeout(100);
+   for(let q=0;q<5;q++){const r=await p.evaluate(()=>{const im=document.querySelector('#qbody .picbig img.pimg');return im?{src:im.getAttribute('src'),w:Math.round(im.closest('.picbig').getBoundingClientRect().width)}:null});if(r&&/\/a\/[a-z]+\.svg$/.test(r.src)&&r.w>=130)seen++;
+    const opt=await p.evaluate(()=>{const q=window.__q();const it=q.list[q.i];return it.opts.findIndex(o=>o.ok)});await p.click('#qbody .opt:nth-child('+(opt+1)+')');await p.click('#qnext');await p.waitForTimeout(30)}
+   await p.waitForTimeout(60);if(await p.$('[data-act=qexit]'))await p.click('[data-act=qexit]').catch(()=>{});}
+  ok((dark?'dark':'light')+' theme: scenes render in the flashcard and the picture quiz (140px frame), no errors',ok1&&seen>0&&p.errs.length===0,{seen,errs:p.errs});await c.close()}
+}
 console.log('--- credits on the hub About tab');
 {const c=await b.newContext({viewport:{width:360,height:780},isMobile:true});const p=await c.newPage();await p.goto(R+'index.html');await p.waitForTimeout(400);await p.click('[data-go=tea]');await p.waitForTimeout(150);
  const li=await p.$$eval('#credits li',e=>e.map(x=>({txt:x.textContent,links:[...x.querySelectorAll('a')].map(a=>a.href)})));

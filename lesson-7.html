@@ -523,15 +523,23 @@ function ico(k,a,b){return '<svg class="il" viewBox="0 0 64 64" aria-hidden="tru
 /* ---------- photos (vendor/images/lesson7/*.webp, credits in vendor/images/NOTICE.md): real places; the old icon stays underneath and shows if a photo fails ---------- */
 var PHOTO={'教学楼':'teaching','楼':'teaching','图书馆':'library','运动场':'field','体育馆':'gym','饭馆':'restaurant','超市':'supermarket','银行':'bank','中国银行':'bank','商店':'shop','书店':'bookshop','邮局':'post','宿舍':'dorm'};
 var PH_ALT={teaching:'صورة مبنى دراسي في جامعة',library:'صورة قاعة مكتبة جامعية وفيها رفوف الكتب',field:'صورة ملعب رياضي',gym:'صورة صالة رياضية مغطاة',restaurant:'صورة مطعم وفيه طاولات',supermarket:'صورة سوبرماركت وفيه رفوف البضائع',bank:'صورة فرع بنك',shop:'صورة واجهة متجر',bookshop:'صورة مكتبة لبيع الكتب',post:'صورة مبنى مكتب بريد',dorm:'صورة مبنى سكن الطلاب'};
+/* Phase 4b pilot: illustrated scenes for three places. ?pics=a (drawn for the site, default) | b (Openclipart, CC0) | photo (the Phase 4a photos); preview switch, to be removed once the version is chosen.
+   Fallback chain when an illustration cannot load: the photo, then the old icon. */
+var PICS=(function(){try{var m=/[?&]pics=(a|b|photo)\b/.exec(location.search);return m?m[1]:'a'}catch(e){return 'a'}})();
+var ILLUS={'图书馆':'library','银行':'bank','中国银行':'bank','邮局':'post'};
+var ILLUS_POS={library:'50% 50%',bank:'62% 50%',post:'56% 50%'};/* square frames cut the sides of the 4:3 art: keep the people in view */
+var ILLUS_ALT={library:'رسم ملوّن لمكتبة: أمينة المكتبة عند المكتب ورفوف الكتب وطفلة تقرأ',bank:'رسم ملوّن لبنك: موظف خلف الكاونتر وعملات ذهبية وزبونة معها كيس نقود',post:'رسم ملوّن لمكتب بريد: صندوق بريد أحمر وساعي بريد وطرود على الرفوف'};
 function picHtml(zh,cls){
   var p=WORDPIC[zh],f=PHOTO[zh],icon=p?ico(p[0],p[1],p[2]):'';
   if(!p&&!f)return '';
   if(!f)return '<span class="pic '+(cls||'')+'">'+icon+'</span>';
-  return '<span class="pic pf '+(cls||'')+'">'+icon+'<img class="pimg" src="vendor/images/lesson7/'+f+'.webp" width="480" height="360" loading="lazy" decoding="async" alt="'+PH_ALT[f]+'"></span>';
+  var ph='vendor/images/lesson7/'+f+'.webp',il=ILLUS[zh],src=ph,alt=PH_ALT[f],fb='';
+  if(il&&PICS!=='photo'){src='vendor/images/lesson7/'+PICS+'/'+il+'.svg';alt=ILLUS_ALT[il];fb=' style="object-position:'+ILLUS_POS[il]+'" data-fb="'+ph+'" data-fbalt="'+PH_ALT[f]+'"'}
+  return '<span class="pic pf '+(cls||'')+'">'+icon+'<img class="pimg" src="'+src+'" width="480" height="360" loading="lazy" decoding="async" alt="'+alt+'"'+fb+'></span>';
 }
 /* the two #p-vocab .row rules below fix a layout overflow at 360px (rows 运动场 and 中国银行 were wider than the screen and pushed the speaker button off it) */
 (function(){var st=document.createElement('style');st.textContent='.pic.pf{position:relative;overflow:hidden;border-radius:10px;background:var(--surface2)}.pic.pf>.il{position:absolute;inset:0;padding:10%;box-sizing:border-box}.pic.pf .pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.pic.pf .pimg.failed{display:none}.pic.pf.pt{border-radius:8px}#p-vocab .row{grid-template-columns:44px auto minmax(0,1fr) 24px 44px;column-gap:8px}#p-vocab .row .rpy,#p-vocab .row .rar{overflow-wrap:anywhere}';document.head.appendChild(st);
-  document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.classList.contains('pimg'))t.classList.add('failed')},true)})();
+  document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.classList.contains('pimg')){if(t.dataset.fb){t.src=t.dataset.fb;t.alt=t.dataset.fbalt;t.style.objectPosition='';delete t.dataset.fb}else t.classList.add('failed')}},true)})();
 function scene(items){return '<div class="scene" aria-hidden="true">'+items.map(function(it){return '<figure><div class="sci">'+ico(it[0],it[1],it[2])+'</div><figcaption>'+it[3]+'</figcaption></figure>'}).join('')+'</div>'}
 /* campus map drawn from text 1 (north is up) */
 function mapSvg(){
