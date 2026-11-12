@@ -21,6 +21,7 @@ trap 'rm -rf "$TMP"' EXIT
 export PYTHONDONTWRITEBYTECODE=1 PYTHONWARNINGS=ignore
 
 cp -r "$HERE/lsn" "$HERE/lsn3" "$HERE/hub.html" "$HERE/levels.json" "$TMP/"
+if [ -f "$ROOT/vendor/images/credits.json" ]; then mkdir -p "$TMP/vendor/images"; cp "$ROOT/vendor/images/credits.json" "$TMP/vendor/images/"; fi   # photo credits for the About tab
 cd "$TMP/lsn3"
 
 python3 build3.py g6 g7 g8                                      # frozen hand-built lessons (no random state used)

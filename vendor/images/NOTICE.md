@@ -1,0 +1,22 @@
+# Image credits
+
+Photos used on the lesson pages. Every photo comes from Wikimedia Commons under a free licence and was cropped to 4:3, resized and converted to WebP
+(see `tools/images.py`, which writes this file from the licence data of each file). Other pictures on the site are original drawings.
+
+| Image | Used for | Author | Licence | Source |
+|---|---|---|---|---|
+| `teaching.webp` | 教学楼 楼 | w_lemay | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [Humanities Classroom Building, University of South Carolina, Greene Street, Columbia, SC - 53398434014.jpg](https://commons.wikimedia.org/wiki/File:Humanities_Classroom_Building,_University_of_South_Carolina,_Greene_Street,_Columbia,_SC_-_53398434014.jpg) |
+| `library.webp` | 图书馆 | Szalax | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [University of Miskolc Library Reading Room 2025 03.jpg](https://commons.wikimedia.org/wiki/File:University_of_Miskolc_Library_Reading_Room_2025_03.jpg) |
+| `field.webp` | 运动场 | Steve F-E-Cameron (Merlin-UK) | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0) | [SFEC UK StJames Newcastle 01.JPG](https://commons.wikimedia.org/wiki/File:SFEC_UK_StJames_Newcastle_01.JPG) |
+| `gym.webp` | 体育馆 | Globetrotter19 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Fußballspiel, Halle, Sportstrasse, 2026 Rácalmás.jpg](https://commons.wikimedia.org/wiki/File:Fu%C3%9Fballspiel,_Halle,_Sportstrasse,_2026_R%C3%A1calm%C3%A1s.jpg) |
+| `restaurant.webp` | 饭馆 | Basile Morin | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Restaurant room of Amantaka luxury Resort & Hotel in Luang Prabang Laos.jpg](https://commons.wikimedia.org/wiki/File:Restaurant_room_of_Amantaka_luxury_Resort_%26_Hotel_in_Luang_Prabang_Laos.jpg) |
+| `supermarket.webp` | 超市 | Wilfredor | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Aisle in L Intermarche supermarket in Quebec City.jpg](https://commons.wikimedia.org/wiki/File:Aisle_in_L_Intermarche_supermarket_in_Quebec_City.jpg) |
+| `bank.webp` | 银行 中国银行 | Warren LeMay from Chicago, IL, United States | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0) | [US Bank Building, 4th Street, Danville, KY (52000771478).jpg](https://commons.wikimedia.org/wiki/File:US_Bank_Building,_4th_Street,_Danville,_KY_(52000771478).jpg) |
+| `shop.webp` | 商店 | The Bushranger | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Freebirds store.jpg](https://commons.wikimedia.org/wiki/File:Freebirds_store.jpg) |
+| `bookshop.webp` | 书店 | Nick-D | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [Shelves in Constant Reader bookshop May 2026.jpg](https://commons.wikimedia.org/wiki/File:Shelves_in_Constant_Reader_bookshop_May_2026.jpg) |
+| `post.webp` | 邮局 | Huugo | [CC0](http://creativecommons.org/publicdomain/zero/1.0/deed.en) | [Former Tonoi Post Office Building - front facade.jpg](https://commons.wikimedia.org/wiki/File:Former_Tonoi_Post_Office_Building_-_front_facade.jpg) |
+| `dorm.webp` | 宿舍 | Windmemories | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) | [20250110 Student dormitory building of Henan University of Technology Songshan Road Campus.jpg](https://commons.wikimedia.org/wiki/File:20250110_Student_dormitory_building_of_Henan_University_of_Technology_Songshan_Road_Campus.jpg) |
+
+Changes made to every image: cropped to 4:3, resized to 480x360, converted to WebP.
+
+Share-alike (CC BY-SA) images stay under the same licence in the form used here; attribution to the authors above is required.

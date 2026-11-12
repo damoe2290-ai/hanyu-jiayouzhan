@@ -47,6 +47,9 @@ def build(levels_path='../levels.json'):
         for l in c.get('lessons', []):
             l['size'] = size_of(l['file'])
             l['sents'] = sents_of(l['file'])
+    cp = '../vendor/images/credits.json'       # photo credits written by tools/images.py (author, licence, source), shown on the About tab
+    if os.path.exists(cp):
+        doc['credits'] = json.load(open(cp, encoding='utf8'))
     return doc
 
 if __name__ == '__main__':

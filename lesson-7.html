@@ -502,10 +502,36 @@ ICON.eye=function(){return '<path class="w" d="M6 32c8-14 44-14 52 0-8 14-44 14-
 ICON.know=function(){return '<circle class="y" cx="32" cy="26" r="14"/><path d="M26 44h12M28 50h8"/>'};
 ICON.compass=function(d){function p(i,s){return '<path class="'+(i===d?'r':'w')+'" d="'+s+'"/>'}return '<circle class="b" cx="32" cy="32" r="24"/>'+p(0,'M32 8l8 20H24z')+p(1,'M56 32l-20 8V24z')+p(2,'M32 56l-8-20h16z')+p(3,'M8 32l20-8v16z')};
 ICON.map=function(){return '<path class="a" d="M6 14l16-6 20 6 16-6v42l-16 6-20-6-16 6z"/><path d="M22 8v42M42 14v42"/>'};
-var WORDPIC={'教学楼':['school'],'楼':['school'],'图书馆':['book'],'运动场':['field'],'体育馆':['gym'],'饭馆':['bowl'],'超市':['cart'],'银行':['bank'],'中国银行':['bank'],'商店':['shop'],'书店':['shop'],'卫生间':['wc'],'邮局':['invite'],'书包':['bag'],'桌子':['desk'],'宿舍':['dorm'],'看':['eye'],'知道':['know'],'去':['arrow'],'哪儿':['question'],'北边':['compass',0],'东边':['compass',1],'南边':['compass',2],'西边':['compass',3],'没关系':['smile'],'地方':['map']};
-var PICQ=['教学楼','图书馆','运动场','体育馆','饭馆','超市','银行','商店','卫生间','邮局','书包','桌子','宿舍','看','北边','东边','南边','西边'];
+/* ---------- new illustrations (Pictures pilot): position and concept words, drawn for this lesson in one style: a red ball and a pink box,
+   64x64, the same stroke and palette classes as the icons above (a pink, b grey, r red, y gold, w white, k solid). ---------- */
+ICON.up=function(){return '<rect class="a" x="10" y="38" width="40" height="18" rx="3"/><circle class="r" cx="30" cy="25" r="10"/><path d="M56 32V10M50 16l6-6 6 6"/>'};
+ICON.down=function(){return '<rect class="a" x="10" y="8" width="40" height="18" rx="3"/><circle class="r" cx="30" cy="42" r="10"/><path d="M56 32v22M50 48l6 6 6-6"/>'};
+ICON.inn=function(){return '<rect class="b" x="7" y="12" width="50" height="42" rx="6"/><circle class="r" cx="32" cy="33" r="10"/>'};
+ICON.out=function(){return '<rect class="b" x="5" y="12" width="36" height="42" rx="6"/><circle class="r" cx="51" cy="33" r="8"/><path d="M14 33h20M27 26l7 7-7 7"/>'};
+ICON.left=function(){return '<rect class="a" x="28" y="20" width="28" height="28" rx="3"/><circle class="r" cx="13" cy="34" r="8"/><path d="M46 57H14M22 51l-8 6 8 6"/>'};
+ICON.right=function(){return '<rect class="a" x="8" y="20" width="28" height="28" rx="3"/><circle class="r" cx="51" cy="34" r="8"/><path d="M18 57h32M42 51l8 6-8 6"/>'};
+ICON.front=function(){return '<ellipse class="b" cx="32" cy="55" rx="24" ry="5"/><rect class="a" x="14" y="8" width="36" height="28" rx="3"/><circle class="r" cx="32" cy="42" r="12"/>'};
+ICON.back=function(){return '<ellipse class="b" cx="32" cy="55" rx="24" ry="5"/><circle class="r" cx="32" cy="22" r="11"/><rect class="a" x="10" y="26" width="44" height="26" rx="3"/>'};
+ICON.beside=function(){return '<rect class="a" x="6" y="24" width="26" height="28" rx="3"/><circle class="r" cx="45" cy="40" r="10"/><path d="M6 58h48M6 54v8M54 54v8"/>'};
+ICON.here=function(){return '<ellipse class="b" cx="32" cy="55" rx="20" ry="6"/><path class="r" d="M32 52C22 40 17 34 17 25a15 15 0 0 1 30 0c0 9-5 15-15 27z"/><circle class="w" cx="32" cy="25" r="6"/>'};
+ICON.there=function(){return '<circle class="w" cx="11" cy="49" r="4"/><path d="M11 53v7M5 56h12"/><path d="M17 44C26 38 34 30 42 24" stroke-dasharray="3 4"/><path class="r" d="M50 28C45 22 42 18 42 14a8 8 0 0 1 16 0c0 4-3 8-8 14z"/><circle class="w" cx="50" cy="14" r="3"/>'};
+ICON.know=function(){return '<circle class="a" cx="32" cy="26" r="16"/><path d="M12 58c2-11 10-15 20-15s18 4 20 15"/><path d="M24 26l6 7 11-13" style="stroke:var(--seal);stroke-width:4.5"/>'};
+ICON.ok=function(){return '<rect class="b" x="6" y="30" width="12" height="26" rx="2"/><path class="y" d="M22 32l9-17c2-3 8-1 7 4l-2 10h13c4 0 6 3 5 7l-4 17c-1 3-3 4-6 4H22z"/>'};
+var WORDPIC={'教学楼':['school'],'楼':['school'],'图书馆':['book'],'运动场':['field'],'体育馆':['gym'],'饭馆':['bowl'],'超市':['cart'],'银行':['bank'],'中国银行':['bank'],'商店':['shop'],'书店':['shop'],'卫生间':['wc'],'邮局':['invite'],'书包':['bag'],'桌子':['desk'],'宿舍':['dorm'],'看':['eye'],'知道':['know'],'去':['arrow'],'哪儿':['question'],'这儿':['here'],'那儿':['there'],'北边':['compass',0],'东边':['compass',1],'南边':['compass',2],'西边':['compass',3],'左边':['left'],'右边':['right'],'前边':['front'],'后边':['back'],'上边':['up'],'下边':['down'],'里边':['inn'],'外边':['out'],'旁边':['beside'],'没关系':['ok'],'地方':['map']};
+var PICQ=['教学楼','图书馆','运动场','体育馆','饭馆','超市','银行','商店','卫生间','邮局','书包','桌子','宿舍','看','北边','东边','南边','西边','左边','右边','前边','后边','上边','下边','里边','外边','旁边','这儿','那儿'];
 function ico(k,a,b){return '<svg class="il" viewBox="0 0 64 64" aria-hidden="true">'+ICON[k](a,b)+'</svg>'}
-function picHtml(zh,cls){var p=WORDPIC[zh];return p?'<span class="pic '+(cls||'')+'">'+ico(p[0],p[1],p[2])+'</span>':''}
+/* ---------- photos (vendor/images/lesson7/*.webp, credits in vendor/images/NOTICE.md): real places; the old icon stays underneath and shows if a photo fails ---------- */
+var PHOTO={'教学楼':'teaching','楼':'teaching','图书馆':'library','运动场':'field','体育馆':'gym','饭馆':'restaurant','超市':'supermarket','银行':'bank','中国银行':'bank','商店':'shop','书店':'bookshop','邮局':'post','宿舍':'dorm'};
+var PH_ALT={teaching:'صورة مبنى دراسي في جامعة',library:'صورة قاعة مكتبة جامعية وفيها رفوف الكتب',field:'صورة ملعب رياضي',gym:'صورة صالة رياضية مغطاة',restaurant:'صورة مطعم وفيه طاولات',supermarket:'صورة سوبرماركت وفيه رفوف البضائع',bank:'صورة فرع بنك',shop:'صورة واجهة متجر',bookshop:'صورة مكتبة لبيع الكتب',post:'صورة مبنى مكتب بريد',dorm:'صورة مبنى سكن الطلاب'};
+function picHtml(zh,cls){
+  var p=WORDPIC[zh],f=PHOTO[zh],icon=p?ico(p[0],p[1],p[2]):'';
+  if(!p&&!f)return '';
+  if(!f)return '<span class="pic '+(cls||'')+'">'+icon+'</span>';
+  return '<span class="pic pf '+(cls||'')+'">'+icon+'<img class="pimg" src="vendor/images/lesson7/'+f+'.webp" width="480" height="360" loading="lazy" decoding="async" alt="'+PH_ALT[f]+'"></span>';
+}
+/* the two #p-vocab .row rules below fix a layout overflow at 360px (rows 运动场 and 中国银行 were wider than the screen and pushed the speaker button off it) */
+(function(){var st=document.createElement('style');st.textContent='.pic.pf{position:relative;overflow:hidden;border-radius:10px;background:var(--surface2)}.pic.pf>.il{position:absolute;inset:0;padding:10%;box-sizing:border-box}.pic.pf .pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}.pic.pf .pimg.failed{display:none}.pic.pf.pt{border-radius:8px}#p-vocab .row{grid-template-columns:44px auto minmax(0,1fr) 24px 44px;column-gap:8px}#p-vocab .row .rpy,#p-vocab .row .rar{overflow-wrap:anywhere}';document.head.appendChild(st);
+  document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&t.classList.contains('pimg'))t.classList.add('failed')},true)})();
 function scene(items){return '<div class="scene" aria-hidden="true">'+items.map(function(it){return '<figure><div class="sci">'+ico(it[0],it[1],it[2])+'</div><figcaption>'+it[3]+'</figcaption></figure>'}).join('')+'</div>'}
 /* campus map drawn from text 1 (north is up) */
 function mapSvg(){
