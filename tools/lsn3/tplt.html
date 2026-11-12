@@ -541,7 +541,7 @@ function renderVocab(){
     '<div class="sec-h"><h2>بطاقات المفردات</h2><p>'+VOCAB.length+' كلمة · اضغط البطاقة لقلبها · عرفتَ <b>'+knownCount()+'</b> منها</p></div>'+
     '<div class="fc'+fcCls()+'" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة"><div class="fci">'+
       '<div class="face front"'+(S.flip?' hidden':'')+'>'+spkBtn(w.zh)+
-        '<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div></div>'+
+        '<div class="bigzh" dir="ltr" style="--n:'+Math.max(2,Array.from(w.zh).length)+'">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div></div>'+
       '<div class="face back"'+(S.flip?'':' hidden')+'>'+spkBtn(w.zh)+
         picHtml(w.zh,'pb')+'<div class="pyl" dir="ltr">'+pyhtml(w.py)+'</div>'+
         '<div class="meaning">'+w.ar+'</div>'+(w.note?'<div class="note">'+w.note+'</div>':'')+
