@@ -1,0 +1,46 @@
+{
+"schema": 1,
+"settings": {"daily_goal": 50, "done_at": 90},
+"levels": [
+ {"n": 1, "year": 1, "semester": 1, "title": "المستوى الأول", "sub": "الفصل الدراسي الأول", "courses": ["gram", "prac"]},
+ {"n": 3, "year": 2, "semester": 1, "title": "المستوى الثالث", "sub": "الفصل الدراسي الثالث", "courses": ["lis"]},
+ {"n": 5, "year": 3, "semester": 1, "title": "المستوى الخامس", "sub": "الفصل الدراسي الخامس", "courses": ["biz"]},
+ {"n": 7, "year": 4, "semester": 1, "title": "المستوى السابع", "sub": "الفصل الدراسي السابع", "courses": ["cult"]}
+],
+"extra": {"title": "مسارات إضافية", "sub": "خارج المستويات الثمانية", "courses": ["fl"]},
+"courses": {
+ "gram": {"name": "قواعد ١", "book": "《发展汉语初级综合1》", "cover": "发展<br>汉语<br><small>初级1</small>", "color": 1, "lessons": [
+  {"no": 6, "n": "六", "title": "الدرس السادس · 香蕉多少钱一斤", "desc": "الأسعار والأعداد والنقود: 想 و 多少钱", "file": "lesson-6.html", "key": "noor-lesson6-v1"},
+  {"no": 7, "n": "七", "title": "الدرس السابع · 中国银行在哪儿", "desc": "الأماكن والاتجاهات: 在 و 有", "file": "lesson-7.html", "key": "noor-lesson7-v1"},
+  {"no": 8, "n": "八", "title": "الدرس الثامن · 今天几号", "desc": "التاريخ والأيام وعيد الميلاد", "file": "lesson-8.html", "key": "noor-lesson8-v1"},
+  {"no": 9, "n": "九", "title": "الدرس التاسع · 你今天有什么安排", "desc": "الساعة والبرنامج اليومي: 先…然后…", "file": "lesson-9.html", "key": "noor-gram9-v1"},
+  {"no": 10, "n": "十", "title": "الدرس العاشر · 这个星期天你忙不忙", "desc": "الصفات وأسئلة 忙不忙 و 一下 و 一点儿", "file": "lesson-10.html", "key": "noor-gram10-v1"}
+ ]},
+ "prac": {"name": "القراءة ١", "book": "《新实用汉语课本1》", "cover": "新实用<br>汉语", "color": 3, "lessons": [
+  {"no": 6, "n": "六", "title": "الدرس السادس · 我们去游泳，好吗", "desc": "الاقتراح والقبول والرفض", "file": "prac-6.html", "key": "noor-prac6-v1"},
+  {"no": 7, "n": "七", "title": "الدرس السابع · 你认识不认识他", "desc": "التعارف: 认识 و 不…不", "file": "prac-7.html", "key": "noor-prac7-v1"},
+  {"no": 8, "n": "八", "title": "الدرس الثامن · 你们家有几口人", "desc": "العائلة والأعداد: 几 و 口", "file": "prac-8.html", "key": "noor-prac8-v1"},
+  {"no": 9, "n": "九", "title": "الدرس التاسع · 他今年二十岁", "desc": "العمر والسؤال بـ 多大", "file": "prac-9.html", "key": "noor-prac9-v1"},
+  {"no": 10, "n": "十", "title": "الدرس العاشر · 我在这儿买光盘", "desc": "الشراء والعبارات المهذبة", "file": "prac-10.html", "key": "noor-prac10-v1"}
+ ]},
+ "lis": {"name": "الاستماع ١", "book": "《发展汉语初级听力1》", "cover": "听力", "color": 4, "lessons": [
+  {"no": 6, "n": "六", "title": "الدرس السادس · 苹果多少钱一斤", "desc": "سماع الأسعار والأعداد", "file": "lis-6.html", "key": "noor-lis6-v1"},
+  {"no": 7, "n": "七", "title": "الدرس السابع · 留学生楼在哪儿", "desc": "سماع الأماكن والاتجاهات", "file": "lis-7.html", "key": "noor-lis7-v1"},
+  {"no": 8, "n": "八", "title": "الدرس الثامن · 今天星期几", "desc": "سماع الأيام والتواريخ", "file": "lis-8.html", "key": "noor-lis8-v1"},
+  {"no": 9, "n": "九", "title": "الدرس التاسع · 你每天几点起床", "desc": "سماع الساعة والروتين اليومي", "file": "lis-9.html", "key": "noor-lis9-v1"},
+  {"no": 10, "n": "十", "title": "الدرس العاشر · 你们小区真漂亮", "desc": "سماع وصف الأماكن", "file": "lis-10.html", "key": "noor-lis10-v1"}
+ ]},
+ "biz": {"name": "اللغة الصينية العملية", "book": "《新丝路·中级速成商务汉语1》", "cover": "商务<br>汉语", "color": 5, "lessons": [
+  {"no": 4, "n": "四", "title": "الدرس الرابع · 我想约个时间和您见面", "desc": "تحديد المواعيد وتغييرها وإلغاؤها", "file": "biz-4.html", "key": "noor-biz4-v1"},
+  {"no": 5, "n": "五", "title": "الدرس الخامس · 为了大家的健康干杯", "desc": "المآدب والدعوات وكلمة النخب", "file": "biz-5.html", "key": "noor-biz5-v1"},
+  {"no": 6, "n": "六", "title": "الدرس السادس · 还有其他颜色吗", "desc": "التسوق والتخفيضات والفواتير", "file": "biz-6.html", "key": "noor-biz6-v1"}
+ ]},
+ "cult": {"name": "الثقافة الصينية", "book": "中国文化", "cover": "中国<br>文化", "color": 6, "lessons": [
+  {"no": 1, "n": "一", "title": "الدرس الأول · 中国的哲学家", "desc": "فلاسفة الصين: كونفوشيوس ولاوتسي", "file": "cult-1.html", "key": "noor-cult1-v1"},
+  {"no": 2, "n": "二", "title": "الدرس الثاني · 中国的节日", "desc": "الأعياد الصينية الأربعة الكبرى", "file": "cult-2.html", "key": "noor-cult2-v1"},
+  {"no": 3, "n": "三", "title": "الدرس الثالث · 伊斯兰教与中国穆斯林民族", "desc": "الإسلام والقوميات المسلمة: الهوي والأويغور", "file": "cult-3.html", "key": "noor-cult3-v1"},
+  {"no": 4, "n": "四", "title": "الدرس الرابع · 中国四大发明", "desc": "الورق والطباعة والبوصلة والبارود", "file": "cult-4.html", "key": "noor-cult4-v1"}
+ ]},
+ "fl": {"name": "لغة أجنبية", "book": "《发展汉语初级综合1》", "cover": "发展<br>汉语<br><small>初级1</small>", "color": 2, "lessons_from": "gram"}
+}
+}
