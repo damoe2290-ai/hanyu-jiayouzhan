@@ -100,6 +100,10 @@ a.seal:hover,a.seal:focus-visible{transform:rotate(-4deg) scale(1.06)}
   display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;
   transition:color var(--dur-1) var(--ease),border-color var(--dur-2) var(--ease)}
 .tabs .tab:hover{color:var(--fg)}
+/* five tabs must fit a 360px screen (they overflowed by 31px, so the first or the last tab was clipped) */
+@media (max-width:420px){.tabs .tab{padding:0 9px}}
+/* counters like "1 / 5": an isolated left-to-right run, otherwise the RTL page prints "5 / 1" */
+.cnt,#qcount{direction:ltr;unicode-bidi:isolate;display:inline-block}
 .tabs .tab[aria-selected="true"]{background:none;box-shadow:none;color:var(--fg);border-bottom-color:var(--accent)}
 .tabs .tab .tag{background:var(--gold);color:#fff}
 :root[data-theme="dark"] .tabs .tab .tag{color:#1A1210}
