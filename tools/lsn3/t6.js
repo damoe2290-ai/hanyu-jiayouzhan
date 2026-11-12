@@ -48,7 +48,7 @@ for(const f of process.argv.slice(2)){
       different:[['mā','má'],['nǐhǎo','nihao3']].map(x=>!eq(x[0],x[1])),
       syl:[['nǐhǎo',['nǐ','hǎo']],['xiàwǔ',['xià','wǔ']],['ni3hao3',['ni3','hao3']],['Wáng Xiǎoyún',['Wáng','Xiǎo','yún']],['zhōngguó',['zhōng','guó']]].map(x=>JSON.stringify(z.syllables(x[0]))===JSON.stringify(x[1])),
       nums:z.toNumbers('měitiān')==='mei3tian1',pair:z.lastUnit('a\u{20000}','zh')===2}});
-  ok('window.zhUI exposes the pinyin helpers',U&&U.api==='badges,can3d,dayKey,lastUnit,normPinyin,pref,setPref,stamp,summary,swipe,syllables,toNumbers,track,voiceStatus',U&&U.api);
+  ok('window.zhUI exposes the pinyin helpers',U&&U.api==='audioPrime,badges,can3d,cardDrag,dayKey,lastUnit,normPinyin,pref,setPref,setSound,soundOn,stamp,summary,swipe,swish,syllables,toNumbers,track,voiceStatus',U&&U.api);
   ok('normPinyin treats nǐhǎo = ni3hao3 = Ni3 Hao3, lv4 = lǜ, ma = ma5',U&&U.same.every(Boolean),U&&JSON.stringify(U.same));
   ok('normPinyin keeps different tones apart',U&&U.different.every(Boolean));
   ok('syllables() splits marked and numbered pinyin',U&&U.syl.every(Boolean),U&&JSON.stringify(U.syl));
