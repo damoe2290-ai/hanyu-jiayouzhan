@@ -33,13 +33,39 @@ const links=await p.$$eval('.lrow',e=>e.map(x=>x.getAttribute('href')));
 ok('every lesson of every course is linked (Foreign Language repeats the Grammar lessons) and old URLs are unchanged',new Set(links).size===allFiles.length&&allFiles.every(f=>links.includes(f))&&links.length===allFiles.length+LV.courses.gram.lessons.length,links.length);
 ok('NO locking, no "coming soon", no placeholder tiles, nothing disabled',(await p.$$eval('button[disabled],.soon,.lock,[aria-disabled=true]',e=>e.length))===0&&!/قريباً|قريبا/.test(await p.$eval('#main',e=>e.innerText)));
 ok('only the first level is open for a visitor with no history',JSON.stringify(await openLv(p))===JSON.stringify([String(LV.levels[0].n)]));
-await p.click('details.lvl[data-lv="5"] summary');ok('a closed level opens when tapped (all levels stay open to everybody)',(await openLv(p)).includes('5')&&await p.isVisible('details.lvl[data-lv="5"] .lrow'));
+await p.click('details.lvl[data-lv="5"] summary');ok('a closed level opens when tapped (all levels stay open to everybody)',(await openLv(p)).includes('5')&&await p.isVisible('details.lvl[data-lv="5"] .cbh'));
 await p.click('[data-go=tea]');await p.click('[data-go=home]');ok('the hand-opened level stays open after leaving the home tab and coming back',(await openLv(p)).includes('5'));
 await p.click('details.lvl[data-lv="5"] summary');ok('and it closes again',!(await openLv(p)).includes('5'));
 ok('no horizontal scrolling at 360px',await p.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
 ok('quick dictionary/review tiles are collapsed by default and open on tap',await p.$eval('details.tools',e=>!e.open)&&(await p.click('details.tools summary'),await p.$eval('details.tools',e=>e.open)));
 ok('fresh dashboard: continue card offers the first lesson, daily ring 0, 28-day calendar, no streak',await p.$eval('.cont .go',e=>e.getAttribute('href'))===allFiles[0]&&/ابدأ/.test(await p.$eval('.cont .go',e=>e.textContent))&&await p.$eval('.ring .rtx',e=>e.textContent)==='0'&&(await p.$$('.cal .cd')).length===28&&/^0 /.test(await p.$$eval('.dgi',e=>e[1].innerText)));
 ok('every lesson shows a state badge, all "not started" for a fresh visitor',await p.$$eval('.lrow .st',e=>e.length>0&&e.every(x=>x.classList.contains('new'))));
+console.log('--- three tiers, one tap each: level (course cards only) -> course card (collapsed) -> lessons inside the open course only');
+const vis=sel=>p.$$eval(sel,e=>e.filter(x=>x.offsetParent!==null).length);
+ok('a fresh visit shows NO lesson row at all (levels and courses are collapsed or closed)',await vis('.lrow')===0);
+ok('the open level shows only course cards (compact buttons), every course collapsed',await p.$$eval('details.lvl[open] .lvb > *',e=>e.length>0&&e.every(x=>x.classList.contains('cb')&&!x.classList.contains('open')&&x.querySelector('.cbh').getAttribute('aria-expanded')==='false'))&&await vis('details.lvl[open] .cbh')===LV.levels[0].courses.length);
+ok('a course card holds a cover thumbnail, the Arabic name, the book title, ONE progress bar with "x من y دروس مكتملة" and a chevron',await p.$$eval('.cbh',e=>e.every(x=>x.querySelector('.cover')&&x.querySelector('.ci b')&&x.querySelector('.ci .bk')&&x.querySelectorAll('.bar').length===1&&/\d+ من \d+ دروس مكتملة/.test(x.textContent)&&x.querySelector('.chev'))));
+ok('course cards are compact (at most 100px high at 360px)',await p.$$eval('details.lvl[open] .cbh',e=>e.every(x=>x.getBoundingClientRect().height<=100)));
+const gramLessons=LV.courses.gram.lessons.length;
+await p.click('.cbh[data-cacc="gram"]');
+ok('tapping a course expands its lessons inline, and only that course\'s lessons are visible',await vis('.lrow')===gramLessons&&await p.$eval('.cbh[data-cacc="gram"]',e=>e.getAttribute('aria-expanded'))==='true'&&await p.$$eval('.cb.open .lrow',e=>e.length)===gramLessons);
+ok('lesson rows are compact: number badge, Chinese title, ONE-line Arabic subtitle with ellipsis, state badge, nothing else',await p.$$eval('.cb.open .lrow',e=>e.every(x=>{const ch=[...x.children].map(y=>y.className.split(' ')[0]);const sub=x.querySelector('.sub'),cs=getComputedStyle(sub),h=x.getBoundingClientRect().height;return ch.join()==='n,lt,st'&&x.querySelector('.lt').children.length===2&&cs.whiteSpace==='nowrap'&&cs.textOverflow==='ellipsis'&&sub.getBoundingClientRect().height<=20&&h<=60&&x.scrollWidth<=x.clientWidth+1})));
+ok('the lesson rows still link to the unchanged lesson files',JSON.stringify(await p.$$eval('.cb.open .lrow',e=>e.map(x=>x.getAttribute('href'))))===JSON.stringify(LV.courses.gram.lessons.map(l=>l.file)));
+await p.click('.cbh[data-cacc="prac"]');
+ok('accordion: opening another course of the same level closes the first (one lesson list visible at a time)',await p.$eval('.cbh[data-cacc="gram"]',e=>e.getAttribute('aria-expanded'))==='false'&&await p.$eval('.cbh[data-cacc="prac"]',e=>e.getAttribute('aria-expanded'))==='true'&&await vis('.lrow')===LV.courses.prac.lessons.length);
+await p.click('details.lvl[data-lv="3"] summary');await p.click('.cbh[data-cacc="lis"]');
+ok('the accordion works per level: a course open in another level stays open',await vis('.lrow')===LV.courses.prac.lessons.length+LV.courses.lis.lessons.length);
+await p.click('[data-go=tea]');await p.click('[data-go=home]');
+ok('which course is open is remembered while the student moves around the hub',await vis('.lrow')===LV.courses.prac.lessons.length+LV.courses.lis.lessons.length);
+await p.click('.cbh[data-cacc="prac"]');ok('tapping an open course closes it',await vis('.lrow')===LV.courses.lis.lessons.length);
+await p.click('.cbh[data-cacc="lis"]');
+ok('the dictionary/review button of a course is inside its expanded part only',await p.isVisible('.cb[data-course="gram"] [data-crs]')===false);
+await p.click('.cbh[data-cacc="gram"]');ok('...and appears once the course is open',await p.isVisible('.cb[data-course="gram"] [data-crs="gram"]'));
+await p.click('.cb[data-course="gram"] [data-crs="gram"]');ok('...opening the course page with its lessons, dictionary and review tabs',await p.$eval('.tab[aria-selected=true]',e=>/الدروس/.test(e.textContent))&&(await p.$$('a.course')).length===gramLessons);
+await p.click('[data-crs=""]');
+ok('the continue card stays on top of the hub and goes straight to a lesson (no level needs opening)',await p.evaluate(()=>{const c=document.querySelector('.cont'),l=document.querySelector('.lvls');return !!c.querySelector('a.go[href$=".html"]')&&!!(c.compareDocumentPosition(l)&Node.DOCUMENT_POSITION_FOLLOWING)}));
+const sk=await p.evaluate(()=>JSON.parse(localStorage.getItem('zh-hub-v1')||'{}'));
+ok('open/closed state of courses is not written to storage (courses always start collapsed on the next visit)',!('openCourse' in sk)&&!('oc' in sk)&&!JSON.stringify(sk).includes('cacc'));
 ok('no page errors',p.errs.length===0,JSON.stringify(p.errs));
 await c.close();
 
@@ -78,8 +104,8 @@ console.log('--- real completion % = the lesson page\'s own progress bar (22 les
 
 console.log('--- course and level percentages, badges in the page');
 {const {c,p}=await fresh();await hub(p);
- const v=await p.evaluate(()=>{var kn={};for(var i=0;i<18;i++)kn[i]=1;localStorage.setItem('noor-lis6-v1',JSON.stringify({xp:5,known:kn,heard:{0:1,1:1,2:1,3:1},best:{match:2,listen:2,meaning:2,tone:2}}));render();return [...document.querySelectorAll('details[data-lv="3"] .cb .ci .mut')].map(e=>e.textContent)});
- ok('one started lesson raises its course percentage (average over the course\'s lessons) and shows "in progress" in the page',/^[1-9]\d*%/.test(v[v.length-1])&&await p.$eval('details[data-lv="3"] .lrow .st.prog',e=>/قيد التقدم/.test(e.textContent)));
+ const v=await p.evaluate(()=>{var kn={};for(var i=0;i<18;i++)kn[i]=1;localStorage.setItem('noor-lis6-v1',JSON.stringify({xp:5,known:kn,heard:{0:1,1:1,2:1,3:1},best:{match:2,listen:2,meaning:2,tone:2}}));render();return +document.querySelector('details[data-lv="3"] .cb .bar').getAttribute('aria-valuenow')});
+ ok('one started lesson raises its course percentage (average over the course\'s lessons) and shows "in progress" in the page',v>=1&&await p.$eval('details[data-lv="3"] .lrow .st.prog',e=>/^\d+%$/.test(e.textContent)&&/قيد التقدم/.test(e.getAttribute('aria-label'))));
  ok('level percentage equals the average of its lessons',await p.evaluate(()=>{var lv=LV.levels[1],all=[];lv.courses.forEach(function(c){all=all.concat(LB[c])});return document.querySelector('details[data-lv="3"] .pc').textContent===avgPct(all)+'%'}));
  await c.close()}
 
@@ -118,7 +144,7 @@ console.log('--- migration: an OLD pre-populated state (before this phase)');
  await p.reload();await p.waitForTimeout(350);
  ok('the old state loads without errors; continue card follows the old S.last (lesson 9) and the old lastCourse (Foreign Language)',p.errs.length===0&&await p.$eval('.cont .go',e=>e.getAttribute('href'))==='lesson-9.html'&&/لغة أجنبية/.test(await p.$eval('.cont',e=>e.innerText)),JSON.stringify(p.errs));
  ok('the old lesson state still gives its progress (Lesson 9: some words, one activity) on the lesson row',await p.$eval('details[data-lv="1"] .lrow[href="lesson-9.html"] .st',e=>e.classList.contains('prog')));
- await p.click('[data-wadd]');await p.waitForTimeout(100);await p.click('.lrow[href="lesson-9.html"]').catch(()=>{});
+ await p.click('[data-wadd]');await p.waitForTimeout(100);await p.click('.cont .go');   /* the continue card goes straight to the lesson (new tab) and saves lastLesson */
  const after=await p.evaluate(()=>{const o={};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);o[k]=localStorage.getItem(k)}return o});
  const st=JSON.parse(after['zh-hub-v1']);
  ok('after the hub saved, every old field is still there (dues, last, lastCourse, days) and the old review word is intact',!!st.dues.gram['好']&&st.last===3&&st.lastCourse==='fl'&&st.days.includes('2024-05-01')&&st.days.includes('2024-05-02'),JSON.stringify(st).slice(0,200));

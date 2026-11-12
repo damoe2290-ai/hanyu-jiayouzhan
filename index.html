@@ -109,18 +109,26 @@ details.lvl[open]>summary::after{transform:rotate(-135deg)}
 .lvt{flex:1;display:grid}.lvt b{font-size:17px}.pc{font:700 15px var(--font-py);color:var(--accent)}
 .lvb{display:grid;gap:12px;padding:0 12px 14px}
 @media(min-width:900px){.lvb{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}}
-.cb{display:grid;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:12px}
-.cb .r1{display:flex;gap:12px;align-items:center}.cb .ci{display:grid;gap:4px;flex:1;min-width:0}.cb .ci b{font-size:17px}
-.cb .cover{width:52px;height:70px;font-size:13px}
+.cb{background:var(--bg);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.cb.open{border-color:var(--accent)}
+.cbh{display:flex;gap:12px;align-items:center;width:100%;min-height:72px;padding:10px 12px;background:none;border:0;text-align:start;cursor:pointer}
+.cbh .cover{flex:none;width:38px;height:52px;font-size:11px;border-radius:4px 7px 7px 4px;box-shadow:inset 4px 0 0 rgba(0,0,0,.18)}
+.cbh .ci{display:grid;gap:3px;flex:1;min-width:0}.cbh .ci b{font-size:16px;line-height:1.35}
+.cbh .bk{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;font-size:12px}
+.cbh .bar{display:block;height:6px}
+.chev{flex:none;width:10px;height:10px;border:solid var(--muted);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.cb.open .chev{transform:rotate(-135deg)}
+.cbody{display:grid;gap:8px;padding:0 10px 12px}
 .lrows{display:grid;gap:8px}
-.lrow{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 10px;min-height:56px}
-.lrow .n{width:40px;height:40px;border-radius:8px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 22px var(--font-han)}
-.lrow .lt{display:grid;min-width:0;justify-items:start}.lrow .lt b{font-size:16px;line-height:1.4}.lrow .lt .mut{font-size:13px}
+.lrow{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;text-decoration:none;color:inherit;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 10px;min-height:52px}
+.lrow .n{width:34px;height:34px;border-radius:7px;background:var(--seal);color:var(--seal-fg);display:grid;place-items:center;font:700 19px var(--font-han)}
+.lrow .lt{display:grid;min-width:0;justify-items:start}
+.lrow .lt b{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:15px;line-height:1.4}
+.lrow .lt .sub{display:block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:var(--muted)}
 .st{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;border-radius:999px;padding:2px 10px;white-space:nowrap;background:var(--surface2);color:var(--muted)}
 .st .ic{width:14px;height:14px}.st.prog{background:var(--accent-soft);color:var(--accent)}.st.done{background:var(--good-soft);color:var(--good)}
 .course .st{margin-top:4px}
 details.tools>summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
-@media(max-width:420px){.lrow{grid-template-columns:36px 1fr}.lrow .st{grid-column:2;justify-self:start}.lrow .n{width:36px;height:36px;font-size:20px}}
 </style>
 <link rel="stylesheet" href="zh-ui.css">
 <script src="zh-ui.js" defer></script>
@@ -210,7 +218,7 @@ function lessonProg(l){
   return {pct:pct,st:pct>=DONE_AT?'done':(started?'prog':'new'),xp:xp};
 }
 function avgPct(ls){if(!ls.length)return 0;var t=0;ls.forEach(function(l){t+=lessonProg(l).pct});return Math.round(t/ls.length)}
-function badge(p){return p.st==='done'?'<span class="st done">'+ic('check')+'أُنجز</span>':p.st==='prog'?'<span class="st prog">قيد التقدم · '+p.pct+'%</span>':'<span class="st new">لم يبدأ</span>'}
+function badge(p,compact){return p.st==='done'?'<span class="st done">'+ic('check')+'أُنجز</span>':p.st==='prog'?'<span class="st prog"'+(compact?' title="قيد التقدم" aria-label="قيد التقدم '+p.pct+'%"':'')+'>'+(compact?p.pct+'%':'قيد التقدم · '+p.pct+'%')+'</span>':'<span class="st new">لم يبدأ</span>'}
 function totalXp(){var t=0,seen={};Object.keys(LB).forEach(function(id){LB[id].forEach(function(l){if(!seen[l.key]){seen[l.key]=1;t+=lessonProg(l).xp}})});return t}
 function findLesson(file){var order=Object.keys(LB);for(var i=0;i<order.length;i++){var ls=LB[order[i]];for(var j=0;j<ls.length;j++)if(ls[j].url===file)return {c:order[i],l:ls[j],i:j}}return null}
 /* the "continue" target: the last lesson opened (zh-hub-v1.lastLesson, written by the lessons and by the hub), shared lessons go to the
@@ -239,18 +247,23 @@ function dashboard(){
    '<div class="dg2"><span>'+ic('star')+'مجموع نقاطك <b>'+totalXp()+'</b></span></div></div></section>';
 }
 function tparts(t){var k=t.indexOf(' · ');return k<0?{ar:'',zh:t}:{ar:t.slice(0,k),zh:t.slice(k+3)}}
-function lrow(id,l,i){var p=lessonProg(l),t=tparts(l.t);return '<a class="lrow" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+((id==='gram'||id==='fl')?i:-1)+'" data-file="'+l.url+'"><span class="n">'+l.n+'</span><span class="lt"><b class="han ltr" lang="zh-CN">'+esc(t.zh)+'</b><span class="mut">'+t.ar+' · '+l.d+'</span></span>'+badge(p)+'</a>'}
-function courseBlock(id){
-  var m=MATS.filter(function(x){return x.id===id})[0],ls=LB[id],pct=avgPct(ls),col='var(--c'+m.color+')',dn=ls.filter(function(l){return lessonProg(l).st==='done'}).length;
-  return '<div class="cb" data-course="'+id+'"><div class="r1"><div class="cover han" lang="zh-CN" style="background:'+col+'">'+m.cv+'</div><div class="ci"><b>'+m.t+'</b><span class="mut han" dir="ltr">'+m.s+'</span>'+
-   '<div class="bar"><i style="width:'+Math.max(pct,3)+'%;background:'+col+'"></i></div><span class="mut">'+pct+'% · '+dn+' من '+ls.length+' دروس مكتملة</span></div></div>'+
-   '<div class="lrows">'+ls.map(function(l,i){return lrow(id,l,i)}).join('')+'</div>'+
-   '<button class="btn" data-crs="'+id+'">القاموس ومفردات المراجعة</button></div>';
+/* Three tiers, one tap each: level (only course cards) -> course card (collapsed; opening it shows its lessons, one course open per level)
+   -> lesson rows (number, Chinese title, one-line Arabic subtitle, state badge). Which course is open is remembered for this visit only. */
+var OPENC={};
+function lrow(id,l,i){var p=lessonProg(l),t=tparts(l.t);return '<a class="lrow" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+((id==='gram'||id==='fl')?i:-1)+'" data-file="'+l.url+'"><span class="n">'+l.n+'</span><span class="lt"><b class="han ltr" lang="zh-CN">'+esc(t.zh)+'</b><span class="sub">'+l.d+'</span></span>'+badge(p,true)+'</a>'}
+function courseBlock(id,lk){
+  var m=MATS.filter(function(x){return x.id===id})[0],ls=LB[id],pct=avgPct(ls),col='var(--c'+m.color+')',dn=ls.filter(function(l){return lessonProg(l).st==='done'}).length,open=OPENC[lk]===id;
+  return '<div class="cb'+(open?' open':'')+'" data-course="'+id+'">'+
+   '<button class="cbh" data-cacc="'+id+'" data-lk="'+lk+'" aria-expanded="'+open+'" aria-controls="ls-'+id+'"><span class="cover han" lang="zh-CN" style="background:'+col+'">'+m.cv+'</span>'+
+   '<span class="ci"><b>'+m.t+'</b><span class="mut han ltr bk">'+m.s+'</span><span class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'" aria-label="'+m.t+'"><i style="width:'+Math.max(pct,3)+'%;background:'+col+'"></i></span>'+
+   '<span class="mut">'+dn+' من '+ls.length+' دروس مكتملة</span></span><span class="chev" aria-hidden="true"></span></button>'+
+   '<div class="cbody" id="ls-'+id+'"'+(open?'':' hidden')+'><div class="lrows">'+ls.map(function(l,i){return lrow(id,l,i)}).join('')+'</div>'+
+   '<button class="btn" data-crs="'+id+'">القاموس ومفردات المراجعة</button></div></div>';
 }
 function levelHtml(lv,open){
   var all=[];lv.courses.forEach(function(c){all=all.concat(LB[c])});
   return '<details class="lvl" data-lv="'+lv.n+'"'+(open?' open':'')+'><summary><span class="lvn" aria-hidden="true">'+lv.n+'</span><span class="lvt"><b>'+lv.title+'</b><span class="mut">'+lv.sub+'</span></span><span class="pc">'+avgPct(all)+'%</span></summary>'+
-   '<div class="lvb">'+lv.courses.map(courseBlock).join('')+'</div></details>';
+   '<div class="lvb">'+lv.courses.map(function(c){return courseBlock(c,String(lv.n))}).join('')+'</div></details>';
 }
 function home(){
   if(crs){
@@ -266,7 +279,7 @@ function home(){
   if(!openN&&!extraOpen)openN=LV.levels[0].n;
   var lvls=LV.levels.map(function(lv){return levelHtml(lv,OPEN['l'+lv.n]!=null?OPEN['l'+lv.n]:lv.n===openN)}).join('');
   var ex=LV.extra,eo=OPEN.extra!=null?OPEN.extra:extraOpen,eall=[];ex.courses.forEach(function(c){eall=eall.concat(LB[c])});
-  var extra='<details class="lvl extra" data-lv="extra"'+(eo?' open':'')+'><summary><span class="lvn" aria-hidden="true">+</span><span class="lvt"><b>'+ex.title+'</b><span class="mut">'+ex.sub+'</span></span><span class="pc">'+avgPct(eall)+'%</span></summary><div class="lvb">'+ex.courses.map(courseBlock).join('')+'</div></details>';
+  var extra='<details class="lvl extra" data-lv="extra"'+(eo?' open':'')+'><summary><span class="lvn" aria-hidden="true">+</span><span class="lvt"><b>'+ex.title+'</b><span class="mut">'+ex.sub+'</span></span><span class="pc">'+avgPct(eall)+'%</span></summary><div class="lvb">'+ex.courses.map(function(c){return courseBlock(c,'extra')}).join('')+'</div></details>';
   var tools=MATS.map(function(m){return '<button data-open="'+m.id+':dict">'+ic('book')+'قاموس '+m.t+'</button><button data-open="'+m.id+':rev">'+ic('repeat')+'مفردات '+m.t+'</button>'}).join('');
   return '<div class="banner"><svg class="bg" viewBox="0 0 240 170" preserveAspectRatio="xMinYMax meet">'+PAGODA.replace(/^<svg[^>]*>/,'').replace('</svg>','')+'</svg><div class="jy" aria-hidden="true">加油！</div><h2>مرحباً بك في رحلتك مع اللغة الصينية</h2><p>تعلّم بذكاء، وتدرّب بتفاعل، وحقّق أهدافك.</p></div>'+
   dashboard()+
@@ -317,8 +330,11 @@ function tea(){
  '<div class="card"><h3 style="font-size:17px">نصائح للتعلّم</h3><ul class="road"><li>🎧 استمع للجملة ثم كرّرها بصوت عالٍ.</li><li>✍️ اكتب الحروف باليد في تبويب الكتابة.</li><li>🔁 تدرّب قليلاً كل يوم أفضل من كثير مرة واحدة.</li></ul></div>';
 }
 document.addEventListener('click',function(e){
- var t=e.target.closest('[data-wn],[data-wsay],[data-wadd],[data-lf],[data-open],[data-lesson],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
+ var t=e.target.closest('[data-wn],[data-wsay],[data-wadd],[data-lf],[data-open],[data-lesson],[data-cacc],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
  if(d.wn!=null){wi=(wotd(),(wi+ +d.wn+VOCAB.length)%VOCAB.length);render()}
+ else if(d.cacc){var lk=d.lk;OPENC[lk]=OPENC[lk]===d.cacc?null:d.cacc;
+  t.closest('.lvb').querySelectorAll('.cb').forEach(function(cb){var on=cb.dataset.course===OPENC[lk];cb.classList.toggle('open',on);cb.querySelector('.cbh').setAttribute('aria-expanded',on);cb.querySelector('.cbody').hidden=!on});
+  if(OPENC[lk])t.scrollIntoView({block:'nearest'})}
  else if(d.lesson!=null){if(+d.lesson>=0)S.last=+d.lesson;if(d.file)S.lastLesson=d.file;save();return}
  else if(d.crs!=null){crs=d.crs;lf=0;tab='home';render();window.scrollTo(0,0)}
  else if(d.go)go(d.go);
