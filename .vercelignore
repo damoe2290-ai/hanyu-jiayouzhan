@@ -1,3 +1,5 @@
 # Files in this repo that must not be published on the website.
 # docs/ holds planning documents (e.g. ROADMAP.md) for contributors and future sessions only.
 docs/
+# .claude/ holds agent skills and settings (e.g. .claude/skills/ui-ux-pro-max); not part of the site.
+.claude/
