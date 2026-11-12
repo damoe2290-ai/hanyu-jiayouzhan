@@ -1,0 +1,108 @@
+{
+ "out": "vendor/images/lesson7",
+ "max_px": 480,
+ "max_kb": 36,
+ "images": [
+  {
+   "id": "teaching",
+   "words": [
+    "教学楼",
+    "楼"
+   ],
+   "file": "File:Humanities Classroom Building, University of South Carolina, Greene Street, Columbia, SC - 53398434014.jpg",
+   "alt": "صورة مبنى دراسي في جامعة",
+   "crop": "center"
+  },
+  {
+   "id": "library",
+   "words": [
+    "图书馆"
+   ],
+   "file": "File:University of Miskolc Library Reading Room 2025 03.jpg",
+   "alt": "صورة قاعة مكتبة جامعية وفيها رفوف الكتب",
+   "crop": "center"
+  },
+  {
+   "id": "field",
+   "words": [
+    "运动场"
+   ],
+   "file": "File:SFEC UK StJames Newcastle 01.JPG",
+   "alt": "صورة ملعب رياضي كبير وأرضه خضراء",
+   "crop": "center"
+  },
+  {
+   "id": "gym",
+   "words": [
+    "体育馆"
+   ],
+   "file": "File:Fußballspiel, Halle, Sportstrasse, 2026 Rácalmás.jpg",
+   "alt": "صورة صالة رياضية مغطاة بأرضية خشبية",
+   "crop": "center"
+  },
+  {
+   "id": "restaurant",
+   "words": [
+    "饭馆"
+   ],
+   "file": "File:Restaurant room of Amantaka luxury Resort & Hotel in Luang Prabang Laos.jpg",
+   "alt": "صورة مطعم وفيه طاولات",
+   "crop": "center"
+  },
+  {
+   "id": "supermarket",
+   "words": [
+    "超市"
+   ],
+   "file": "File:Aisle in L Intermarche supermarket in Quebec City.jpg",
+   "alt": "صورة سوبرماركت وفيه رفوف البضائع",
+   "crop": "center"
+  },
+  {
+   "id": "bank",
+   "words": [
+    "银行",
+    "中国银行"
+   ],
+   "file": "File:US Bank Building, 4th Street, Danville, KY (52000771478).jpg",
+   "alt": "صورة فرع بنك",
+   "crop": "center"
+  },
+  {
+   "id": "shop",
+   "words": [
+    "商店"
+   ],
+   "file": "File:Freebirds store.jpg",
+   "alt": "صورة واجهة متجر",
+   "crop": "center"
+  },
+  {
+   "id": "bookshop",
+   "words": [
+    "书店"
+   ],
+   "file": "File:Shelves in Constant Reader bookshop May 2026.jpg",
+   "alt": "صورة مكتبة لبيع الكتب",
+   "crop": "center"
+  },
+  {
+   "id": "post",
+   "words": [
+    "邮局"
+   ],
+   "file": "File:Former Tonoi Post Office Building - front facade.jpg",
+   "alt": "صورة مبنى مكتب بريد وأمامه صندوق بريد أحمر",
+   "crop": "center"
+  },
+  {
+   "id": "dorm",
+   "words": [
+    "宿舍"
+   ],
+   "file": "File:20250110 Student dormitory building of Henan University of Technology Songshan Road Campus.jpg",
+   "alt": "صورة مبنى سكن الطلاب",
+   "crop": "center"
+  }
+ ]
+}

@@ -187,6 +187,7 @@ details.tools>summary{cursor:pointer;min-height:44px;display:flex;align-items:ce
 .chipw.built{display:inline-flex;align-items:center;background:var(--accent-soft);border-color:var(--accent)}
 .chipw[disabled]{opacity:.3}.chipw.hint,.btn.hint{outline:3px solid var(--accent);outline-offset:2px}
 .gdi h3{font-size:22px}.sm1 .gz3{font-size:20px}
+.credits li{font-size:13px;line-height:1.7;margin:6px 0}.credits .cw{font-size:15px}
 </style>
 <link rel="stylesheet" href="zh-ui.css">
 <script src="zh-ui.js" defer></script>
@@ -894,10 +895,16 @@ document.addEventListener('keydown',function(e){
  if(e.key==='Escape'){gameClose();return}
  if(e.key==='Enter'&&e.target&&e.target.id==='gin'){e.preventDefault();if(G.done){G.timers.forEach(clearTimeout);roundNext()}else typeCheck(false)}
 });
+/* photo credits (author, licence, source), written from the files' own licence data by tools/images.py */
+function creditsHtml(){
+ var c=LV.credits||[];if(!c.length)return '';
+ return '<div class="card" id="credits"><h3 style="font-size:17px">حقوق الصور</h3><p class="mut">صور الدرس السابع من ويكيميديا كومنز بتراخيص حرة؛ قُصّت وصُغّرت لتناسب الصفحة. الرسوم الأخرى في المنصة رسوم أصلية.</p><ul class="road credits">'+
+  c.map(function(x){return '<li><span class="cw">'+x.words.map(function(w){return '<bdi lang="zh-CN" class="han">'+esc(w)+'</bdi>'}).join(' ')+'</span> · <span class="ltr">'+esc(x.author)+'</span> · <a class="ltr" href="'+esc(x.licence_url||x.page_url)+'" target="_blank" rel="noopener">'+esc(x.licence)+'</a> · <a class="ltr" href="'+esc(x.page_url)+'" target="_blank" rel="noopener">Wikimedia Commons</a></li>'}).join('')+'</ul></div>';
+}
 function tea(){
  return '<div class="card"><h3 style="font-size:17px">كيف تستخدم المنصة؟</h3><ul class="road"><li>1. ادخل مادتك من الصفحة الرئيسية، ثم اختر الدرس.</li><li>2. في كل درس: تعلّم المفردات، ثم الحوار والقواعد، ثم تدرّب في «التمارين».</li><li>3. اضغط أي كلمة صينية لترى معناها ونطقها، واضغط السماعة لتسمعها.</li><li>4. أضف الكلمات الصعبة إلى «مفرداتي» لتراجعها لاحقاً.</li></ul></div>'+
  '<div class="card"><h3 style="font-size:17px">المراجعة المتباعدة</h3><p class="mut">كلما أجبت على كلمة بشكل صحيح تتأخر مراجعتها، وكلما أخطأت ترجع قريبة. هكذا تثبت الكلمات في الذاكرة بأقل وقت. ادخل «مفرداتي» كل يوم دقائق قليلة.</p></div>'+
- '<div class="card"><h3 style="font-size:17px">نصائح للتعلّم</h3><ul class="road"><li>🎧 استمع للجملة ثم كرّرها بصوت عالٍ.</li><li>✍️ اكتب الحروف باليد في تبويب الكتابة.</li><li>🔁 تدرّب قليلاً كل يوم أفضل من كثير مرة واحدة.</li></ul></div>';
+ '<div class="card"><h3 style="font-size:17px">نصائح للتعلّم</h3><ul class="road"><li>🎧 استمع للجملة ثم كرّرها بصوت عالٍ.</li><li>✍️ اكتب الحروف باليد في تبويب الكتابة.</li><li>🔁 تدرّب قليلاً كل يوم أفضل من كثير مرة واحدة.</li></ul></div>'+creditsHtml();
 }
 document.addEventListener('click',function(e){
  var t=e.target.closest('[data-gstart],[data-wn],[data-wsay],[data-wadd],[data-lf],[data-open],[data-lesson],[data-cacc],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
