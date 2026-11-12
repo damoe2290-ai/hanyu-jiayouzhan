@@ -129,6 +129,37 @@ details.lvl[open]>summary::after{transform:rotate(-135deg)}
 .st .ic{width:14px;height:14px}.st.prog{background:var(--accent-soft);color:var(--accent)}.st.done{background:var(--good-soft);color:var(--good)}
 .course .st{margin-top:4px}
 details.tools>summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
+
+/* Phase 3a: review games */
+.gh{font-size:17px;margin-top:16px}.gh2{font-size:16px;margin-top:16px}
+.games{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:8px}
+@media(min-width:700px){.games{grid-template-columns:repeat(4,1fr)}}
+.gcard{display:grid;justify-items:start;align-content:start;gap:2px;min-height:96px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-align:start}
+.gcard .ic{color:var(--accent);width:24px;height:24px}.gcard b{font-size:15px}.gcard .mut{font-size:12px;line-height:1.4}
+.gnote{margin-top:8px}
+.gm{position:fixed;inset:0;z-index:40;background:var(--bg);overflow-y:auto;padding:0 max(16px,env(safe-area-inset-left)) 28px;animation:gfade .15s ease-out}
+@keyframes gfade{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.gm{animation:none}}
+.gm-in{max-width:560px;margin:0 auto}
+.ghd{position:sticky;top:0;z-index:1;background:var(--bg);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 0}
+.ghd .btn{display:inline-flex;align-items:center;gap:6px}.ghd .btn .ic{transform:scaleX(-1)}
+.gst{display:flex;align-items:center;gap:14px;font-weight:600}.gst span{display:inline-flex;align-items:center;gap:4px}.gst b{font-family:var(--font-py);font-size:18px}.gst .ic{width:18px;height:18px;color:var(--accent)}
+.gq{display:grid;gap:10px;text-align:center}
+.ghan{font-size:68px;line-height:1.3;margin-top:12px}.gc{margin-top:0}
+.gopts{display:grid;gap:10px;margin-top:6px}
+.gopt{min-height:58px;border:1px solid var(--line);border-radius:14px;background:var(--surface);font-size:18px;padding:8px 14px;text-align:center}
+.gopt.ok{background:var(--good-soft);border-color:var(--good)}.gopt.bad{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 14%,var(--surface))}
+.gpy{font-size:30px;margin-top:8px}.gar{font-size:24px;line-height:1.5;margin-top:8px}
+.gin{width:100%;min-height:62px;font:500 30px var(--font-han);text-align:center;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--fg);margin-top:12px;padding:0 12px}
+.gin:focus{border-color:var(--accent);outline:none}
+.gbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:6px}.gbtns .btn{min-width:130px}
+.gfb{padding:10px 12px;border-radius:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;justify-content:center;flex-wrap:wrap}
+.gfb.ok{background:var(--good-soft);color:var(--good)}.gfb.bad{background:color-mix(in srgb,var(--bad) 12%,var(--surface));color:var(--fg);display:grid;gap:2px}.gfb.hint{background:var(--surface2)}
+.gans{font-size:30px}
+.gend h3{font-size:22px}.gstats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gmiss{display:grid;gap:8px;text-align:start}
+.gm1{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 12px;min-height:56px}
+.gm1 .gz{font-size:28px;line-height:1.2}.gm1 .gt{display:grid;min-width:0}.gm1 .btn{min-height:44px;font-size:13px;padding:0 10px}
 </style>
 <link rel="stylesheet" href="zh-ui.css">
 <script src="zh-ui.js" defer></script>
@@ -161,12 +192,17 @@ var VOCAB_CULT=[{"zh": "思想家", "py": "sī xiǎng jiā", "ar": "مفكّر",
 var KEY='zh-hub-v1',S={dues:{gram:{},fl:{},cult:{},prac:{},lis:{},biz:{}}};
 try{S=JSON.parse(localStorage.getItem(KEY))||S}catch(e){}
 if(S.due&&!S.dues){S.dues={gram:S.due,fl:{}};delete S.due}S.dues=S.dues||{};['gram','fl','cult','prac','lis','biz'].forEach(function(k){S.dues[k]=S.dues[k]||{}});
-/* zh-ui.js (loaded by every lesson) writes lastLesson, pts, xpSum and days into this same key while a lesson is open; take those
-   over before every save so the hub never overwrites them with an older in-memory copy. */
+/* zh-ui.js (loaded by every lesson) writes lastLesson, pts, xpSum and days into this same key while a lesson is open. Before every save the
+   hub takes those over from storage, and then re-applies what the hub itself changed since its last save (PEND: points it added, the
+   lesson it opened), so neither side overwrites the other. */
+var PEND={pts:{},last:null};
 function syncTracker(){try{var n=JSON.parse(localStorage.getItem(KEY));if(!n||typeof n!=='object')return false;
-  ['pts','xpSum','lastLesson'].forEach(function(k){if(n[k]!=null)S[k]=n[k]});
+  if(n.xpSum!=null)S.xpSum=n.xpSum;
+  if(n.lastLesson!=null&&PEND.last==null)S.lastLesson=n.lastLesson;
+  S.pts=n.pts?JSON.parse(JSON.stringify(n.pts)):{};
+  Object.keys(PEND.pts).forEach(function(t){S.pts[t]=(S.pts[t]||0)+PEND.pts[t]});
   if(n.days){S.days=S.days||[];n.days.forEach(function(d){if(S.days.indexOf(d)<0)S.days.push(d)});S.days.sort()}return true}catch(e){return false}}
-function save(){syncTracker();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(){syncTracker();try{localStorage.setItem(KEY,JSON.stringify(S));PEND={pts:{},last:null}}catch(e){}}
 var VOCAB_BY={gram:VOCAB,fl:VOCAB,cult:VOCAB_CULT,prac:VOCAB_PRAC,lis:VOCAB_LIS,biz:VOCAB_BIZ};
 function CV(){return VOCAB_BY[crs]||[]}
 function DUE(c){var k=c||crs;if(!k)return {};return S.dues[k]||(S.dues[k]={})}
@@ -194,13 +230,14 @@ function render(){
 }
 var crs='';
 var IC={home:'<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',book:'<path d="M4 4h6a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H4zM20 4h-6a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h7z"/>',cards:'<rect x="3" y="6" width="14" height="14" rx="2"/><path d="M7 3h13a1 1 0 0 1 1 1v13"/>',tool:'<path d="M14 6l4 4M4 20l9-9M15 4a4 4 0 0 0 5 5l-9 9-5-5z"/>',flame:'<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-5 1-9z"/>',star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',cup:'<path d="M8 4h8v6a4 4 0 0 1-8 0zM8 6H4v2a3 3 0 0 0 4 3M16 6h4v2a3 3 0 0 1-4 3M12 14v4M8 20h8"/>',head:'<path d="M4 15v-3a8 8 0 0 1 16 0v3M4 15h3v5H5a1 1 0 0 1-1-1zM20 15h-3v5h2a1 1 0 0 0 1-1z"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',repeat:'<path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3"/>',phone:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>',spk:'<path d="M4 9v6h4l5 4V5L8 9zM16 8a5 5 0 0 1 0 8"/>',play:'<path d="M7 4l13 8-13 8z"/>',chart:'<path d="M5 20V10M12 20V4M19 20v-7"/>',bot:'<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 4v4M9 14h.01M15 14h.01"/>',next:'<path d="M15 6l-6 6 6 6"/>',prev:'<path d="M9 6l6 6-6 6"/>',plus:'<path d="M12 5v14M5 12h14"/>',check:'<path d="M5 12l5 5 9-10"/>'};
+IC.timer='<circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/>';IC.eye='<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>';IC.kbd='<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/>';
 function ic(n){return '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">'+IC[n]+'</svg>'}
 function ymd(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function today(){return ymd(new Date())}
 function streak(){var d=S.days||[],n=0,t=new Date();while(d.indexOf(ymd(t))>-1){n++;t.setDate(t.getDate()-1)}if(!n){t=new Date();t.setDate(t.getDate()-1);while(d.indexOf(ymd(t))>-1){n++;t.setDate(t.getDate()-1)}}return n}
 function markDay(){S.days=S.days||[];var t=today();if(S.days.indexOf(t)<0){S.days.push(t);S.days=S.days.slice(-400)}}
 var REVIEW_PTS=2;   /* a reviewed word counts toward the daily goal, like points earned in lessons */
-function addPts(n){S.pts=S.pts||{};var t=today();S.pts[t]=(S.pts[t]||0)+n;var ks=Object.keys(S.pts).sort();while(ks.length>90)delete S.pts[ks.shift()]}
+function addPts(n){S.pts=S.pts||{};var t=today();S.pts[t]=(S.pts[t]||0)+n;PEND.pts[t]=(PEND.pts[t]||0)+n;var ks=Object.keys(S.pts).sort();while(ks.length>90)delete S.pts[ks.shift()]}
 var wi=-1;
 function wotd(){if(wi<0){var d=new Date();wi=(d.getFullYear()*400+d.getMonth()*31+d.getDate())%VOCAB.length}return VOCAB[wi]}
 var PAGODA='<svg viewBox="0 0 240 170" preserveAspectRatio="xMidYMax slice"><circle cx="190" cy="40" r="22" fill="#E0645B" opacity=".5"/><path d="M0 130c40-30 70-10 110-35s80-5 130-25v100H0z" fill="#B8322A" opacity=".12"/><g fill="#B8322A"><path d="M90 140h60v6H90z"/><path d="M100 120h40v20h-40z" opacity=".85"/><path d="M82 120h76l-10-8H92z"/><path d="M104 100h32v12h-32z" opacity=".85"/><path d="M90 100h60l-8-8H98z"/><path d="M110 82h20v10h-20z" opacity=".85"/><path d="M100 82h40l-8-8h-24z"/><path d="M119 52h2v22h-2zM110 76l10-24 10 24z"/></g><g stroke="#B8322A" stroke-width="2" fill="none" opacity=".5"><path d="M30 150c10-30 8-60 22-90M52 60c-8 4-14 2-18-4M52 60c6-8 14-8 18-4"/></g></svg>';
@@ -307,6 +344,7 @@ function dueList(){var now=Date.now(),d=DUE();return Object.keys(d).filter(funct
 function rev(){
  var D=DUE(),all=Object.keys(D),d=dueList(),learned=all.filter(function(k){return D[k].i>=6}).length,V=CV();
  var h=cbar()+'<div class="stats" style="margin-top:12px"><div class="stat"><b>'+d.length+'</b><span class="mut">مستحقة الآن</span></div><div class="stat"><b>'+all.length+'</b><span class="mut">في المراجعة</span></div><div class="stat"><b>'+learned+'</b><span class="mut">راسخة</span></div></div>';
+ h+=gamesRow();
  if(!all.length)return h+'<div class="card"><p>لا توجد كلمات بعد في مفردات هذه المادة. أضف كلمات من القاموس، أو أضف كل كلمات المادة دفعة واحدة.</p><div style="margin-top:10px;display:flex;gap:8px"><button class="btn p" data-addall="1">أضف كل كلمات المادة</button><button class="btn" data-go="dict">القاموس</button></div></div>';
  if(!d.length){var nx=Math.min.apply(null,all.map(function(k){return D[k].t}));var mins=Math.max(1,Math.round((nx-Date.now())/60000));return h+'<div class="card"><h3>أحسنت، انتهت مراجعة اليوم</h3><p class="mut">الكلمة التالية بعد '+(mins<90?mins+' دقيقة':mins<2880?Math.round(mins/60)+' ساعة':Math.round(mins/1440)+' يوماً')+'.</p><button class="btn" style="margin-top:10px" data-addall="1">أضف كل كلمات المادة</button></div>'}
  if(!card||d.indexOf(card)<0)card=d[Math.floor(Math.random()*d.length)];
@@ -319,23 +357,209 @@ function rev(){
  return h;
 }
 var STEP=[1,10,60*24,60*24*3,60*24*7,60*24*16,60*24*40]; // minutes
-function rate(r){
- var s=DUE()[card];if(!s)return;
+/* the spaced schedule of one word: r = 0 again, 1 hard, 2 good, 3 easy. The flashcard buttons and the review games both call this. */
+function schedule(zh,r){
+ var s=DUE()[zh];if(!s)return false;
  if(r===0)s.i=0;else if(r===1)s.i=Math.max(0,s.i);else if(r===2)s.i=Math.min(STEP.length-1,s.i+1);else s.i=Math.min(STEP.length-1,s.i+2);
- s.t=Date.now()+STEP[s.i]*60000*(r===1?.6:1);markDay();addPts(REVIEW_PTS);save();flip=false;card=null;render();
+ s.t=Date.now()+STEP[s.i]*60000*(r===1?.6:1);return true;
 }
+function rate(r){
+ if(!schedule(card,r))return;
+ markDay();addPts(REVIEW_PTS);save();flip=false;card=null;render();
+}
+/* ---------- review games (Phase 3a) ----------
+   Four short games on the words of the course the student is in. Every answer goes through schedule() (the function behind the
+   flashcard buttons): a right answer = "good" (2), a wrong one or a skip = "again" (0), for words that are in the review list.
+   Points: time attack 2 per right answer x streak multiplier (x1 for streak 1-2, x2 for 3-5, x3 from 6); read without help 2 per word
+   known; type from pinyin 4 per word; type from Arabic 5 per word. They are added to the daily goal (addPts) like review points. */
+var GPTS={ta:2,read:2,typepy:4,typear:5},GTIME=60,GROUND=10;
+var GMODES=[
+ {id:'ta',t:'تحدي الوقت',d:'60 ثانية: اختر الجواب الصحيح',ic:'timer'},
+ {id:'read',t:'اقرأ بدون بينيين',d:'الحروف فقط ثم قيّم نفسك',ic:'eye'},
+ {id:'typepy',t:'اكتب من البينيين',d:'اكتب الحروف الصينية',ic:'kbd'},
+ {id:'typear',t:'اكتب من الترجمة',d:'اكتب الكلمة من معناها',ic:'cards'}];
+var G=null;
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function cjk(s){return (String(s).match(/[㐀-鿿豈-﫿]/g)||[]).join('')}
+function arNorm(s){return String(s).replace(/[ً-ٰٟـ]/g,'').replace(/[إأآٱ]/g,'ا').replace(/\s+/g,' ').trim()}
+function npy(s){return window.zhUI&&zhUI.normPinyin?zhUI.normPinyin(s):norm(s)}
+/* the words a game uses: due for review first, then other words already in the review list, then the words of lessons the student has
+   progressed in. Under 4 words: one Arabic line says which lessons to open, and the games use all words of the lessons already started
+   (or of the whole course when none is) so a game never starts empty. */
+function gamePool(){
+ var V=CV(),D=DUE(),now=Date.now(),seen={},A=[],B=[],C=[],ls=LB[crs]||[];
+ var met=ls.filter(function(l){return lessonProg(l).st!=='new'}).map(function(l){return l.no});
+ V.forEach(function(w){if(seen[w.zh])return;seen[w.zh]=1;var s=D[w.zh];if(s&&s.t<=now)A.push(w);else if(s)B.push(w);else if(met.indexOf(w.l)>-1)C.push(w)});
+ var words=shuf(A).concat(shuf(B),shuf(C)),note='';
+ if(words.length<4){   /* every word of a started lesson is already in the pool, so under 4 words no lesson has progress: use the whole course */
+  var first=ls.filter(function(l){return lessonProg(l).st==='new'}).slice(0,2).map(function(l){return '«'+tparts(l.t).ar+'»'});
+  note='عدد كلماتك قليل: افتح أولاً '+first.join(' أو ')+' من هذه المادة وتعلّم مفرداته. حتى ذلك الحين تُلعب الألعاب بكل مفردات المادة.';
+  seen={};words=[];V.forEach(function(w){if(!seen[w.zh]){seen[w.zh]=1;words.push(w)}});words=shuf(words);
+ }
+ return {words:words,note:note};
+}
+function gamesRow(){
+ var p=gamePool();
+ return '<h3 class="gh">ألعاب المراجعة</h3><div class="games">'+GMODES.map(function(m){return '<button class="gcard" data-gstart="'+m.id+'">'+ic(m.ic)+'<b>'+m.t+'</b><span class="mut">'+m.d+'</span></button>'}).join('')+'</div>'+(p.note?'<p class="mut gnote">'+p.note+'</p>':'');
+}
+/* typed answers: the shown word plus any other word of the course with the same Arabic meaning (type from Arabic) or the same pinyin
+   with tones (type from pinyin); characters only, spaces and punctuation ignored */
+function acceptSet(mode,w){
+ var V=CV(),set={};set[cjk(w.zh)]=1;
+ if(mode==='typear'){var k=arNorm(w.ar);V.forEach(function(x){if(arNorm(x.ar)===k)set[cjk(x.zh)]=1})}
+ else{var p=npy(w.py);V.forEach(function(x){if(npy(x.py)===p)set[cjk(x.zh)]=1})}
+ return set;
+}
+/* one answer: schedule it (words in the review list), count it, give the points */
+function gAnswer(w,ok,pts){
+ if(DUE()[w.zh])schedule(w.zh,ok?2:0);
+ markDay();
+ if(ok){G.correct++;G.score+=pts;addPts(pts)}
+ else{G.wrong++;G.streak=0;if(G.missed.indexOf(w.zh)<0){G.missed.push(w.zh);G.missedW.push(w)}}
+ save();
+}
+function gEl(){return document.getElementById('game')}
+function gBody(html){var b=gEl().querySelector('.gbody');b.innerHTML=html}
+function gHead(mid){return '<div class="ghd"><button class="btn" data-gexit="1">'+ic('next')+' خروج</button><div class="gst">'+mid+'</div></div>'}
+function gameOpen(mode){
+ var pool=gamePool();
+ G={mode:mode,pool:pool.words,score:0,correct:0,wrong:0,streak:0,missed:[],missedW:[],timers:[]};
+ var m=GMODES.filter(function(x){return x.id===mode})[0],el=document.createElement('div');
+ el.id='game';el.className='gm';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-label',m.t);
+ el.innerHTML='<div class="gm-in"><div class="ghh"></div><div class="gbody"></div></div>';
+ document.body.appendChild(el);document.documentElement.style.overflow='hidden';
+ if(mode==='ta')taStart();else roundStart();
+}
+function gameClose(){
+ if(G){G.over=true;G.timers.forEach(function(t){clearTimeout(t);clearInterval(t)})}
+ var el=gEl();if(el)el.remove();document.documentElement.style.overflow='';G=null;render();
+}
+function gTimer(fn,ms,every){var t=every?setInterval(fn,ms):setTimeout(fn,ms);G.timers.push(t);return t}
+/* ----- time attack: 60 seconds, 4 options (pinyin or meaning of the shown word) ----- */
+function taMult(){return G.streak>=6?3:G.streak>=3?2:1}
+function taStart(){
+ G.end=Date.now()+GTIME*1000;G.bag=[];G.last=null;G.lock=false;
+ gEl().querySelector('.gm-in').firstChild.outerHTML=gHead('<span>'+ic('timer')+' <b id="gtime">'+GTIME+'</b></span><span>'+ic('star')+' <b id="gscore">0</b></span><span id="gmul" class="mut ltr">×1</span>');
+ taNext();gTimer(taTick,200,true);
+}
+function taTick(){
+ if(!G||G.over)return;
+ var left=Math.max(0,Math.ceil((G.end-Date.now())/1000)),el=document.getElementById('gtime');if(el)el.textContent=left;
+ if(Date.now()>=G.end)gEnd();
+}
+function taNext(){
+ if(!G||G.over)return;
+ if(!G.bag.length)G.bag=shuf(G.pool);
+ var w=G.bag.pop();if(w===G.last&&G.bag.length){var w2=G.bag.pop();G.bag.unshift(w);w=w2}
+ G.last=w;G.lock=false;
+ var kind=Math.random()<.5?'py':'ar',key=kind==='py'?function(x){return npy(x.py)}:function(x){return arNorm(x.ar)},seen={},out=[];seen[key(w)]=1;
+ shuf(CV()).forEach(function(x){if(out.length>=3)return;var k=key(x);if(seen[k])return;seen[k]=1;out.push(x)});
+ var opts=shuf([{w:w,ok:true}].concat(out.map(function(x){return {w:x,ok:false}})));
+ G.q={w:w,kind:kind,opts:opts};
+ gBody('<div class="gq"><div class="ghan"><bdi lang="zh-CN" class="han" dir="ltr">'+esc(w.zh)+'</bdi></div><p class="mut gc">'+(kind==='py'?'اختر البينيين الصحيح':'اختر المعنى الصحيح')+'</p><div class="gopts">'+
+  opts.map(function(o,i){return '<button class="gopt" data-gopt="'+i+'">'+(kind==='py'?'<span class="py ltr">'+pyh(o.w.py)+'</span>':esc(o.w.ar))+'</button>'}).join('')+'</div></div>');
+}
+function taPick(i){
+ if(!G||G.over||G.lock)return;G.lock=true;
+ var q=G.q,ok=q.opts[i].ok,btns=gEl().querySelectorAll('.gopt');
+ btns.forEach(function(b,k){if(q.opts[k].ok)b.classList.add('ok');else if(k===i)b.classList.add('bad')});
+ if(ok){G.streak++;gAnswer(q.w,true,GPTS.ta*taMult())}else gAnswer(q.w,false,0);
+ var sc=document.getElementById('gscore'),mu=document.getElementById('gmul');if(sc)sc.textContent=G.score;if(mu)mu.textContent='×'+taMult();
+ gTimer(taNext,ok?350:700);
+}
+/* ----- rounds of 10 words: read without help, type from pinyin, type from Arabic. A word answered wrong comes back once at the end. ----- */
+function roundStart(){
+ G.queue=G.pool.slice(0,Math.min(GROUND,G.pool.length));G.i=0;G.rep={};roundShow();
+}
+function roundShow(){
+ if(G.i>=G.queue.length)return gEnd();
+ var w=G.queue[G.i];G.cur=w;G.done=false;G.rev=false;
+ gEl().querySelector('.gm-in').firstChild.outerHTML=gHead('<span class="ltr"><b>'+(G.i+1)+'</b> / '+G.queue.length+'</span><span>'+ic('star')+' <b id="gscore">'+G.score+'</b></span>');
+ if(G.mode==='read'){
+  gBody('<div class="gq"><div class="ghan"><bdi lang="zh-CN" class="han" dir="ltr">'+esc(w.zh)+'</bdi></div><div id="grev"></div><div class="gbtns" id="gact"><button class="btn p" data-greveal="1">إظهار البينيين والمعنى</button></div></div>');
+ }else{
+  var pr=G.mode==='typepy'?'<p class="mut gc">اكتب الكلمة بالحروف الصينية</p><div class="gpy py ltr">'+pyh(w.py)+'</div>':'<p class="mut gc">اكتب الكلمة الصينية لهذا المعنى</p><div class="gar">'+esc(w.ar)+'</div>';
+  gBody('<div class="gq">'+pr+'<input class="gin" id="gin" type="text" lang="zh-CN" dir="ltr" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" aria-label="الإجابة"><div class="gbtns" id="gact"><button class="btn p" data-gcheck="1">تحقّق</button><button class="btn" data-gskip="1">تخطَّ</button></div><div id="gfb" role="status" aria-live="polite"></div></div>');
+  var inp=document.getElementById('gin');if(inp)inp.focus();
+ }
+}
+function roundDone(ok){
+ var w=G.cur;gAnswer(w,ok,GPTS[G.mode]);
+ if(!ok&&!G.rep[w.zh]){G.rep[w.zh]=1;G.queue.push(w)}
+ var sc=document.getElementById('gscore');if(sc)sc.textContent=G.score;
+}
+function roundNext(){if(!G||G.over)return;G.i++;roundShow()}
+function readReveal(){
+ var w=G.cur;G.rev=true;
+ document.getElementById('grev').innerHTML='<div class="py ltr gpy">'+pyh(w.py)+'</div><div class="gar">'+esc(w.ar)+'</div>';
+ document.getElementById('gact').innerHTML='<button class="btn p" data-gknow="1">'+ic('check')+' عرفتها</button><button class="btn" data-gdont="1">لم أعرفها</button>';
+}
+function typeCheck(skip){
+ if(!G||G.over||G.done)return;
+ var w=G.cur,inp=document.getElementById('gin'),val=inp?inp.value.trim():'',fb=document.getElementById('gfb');
+ if(!skip){
+  if(!val){inp.focus();return}
+  if(!cjk(val)&&npy(val)===npy(w.py)){fb.innerHTML='<div class="gfb hint">اكتب بالحروف الصينية لا بالبينيين</div>';inp.focus();return}   /* typed pinyin instead of characters: a hint, not a mistake */
+ }
+ var ok=!skip&&!!acceptSet(G.mode,w)[cjk(val)];
+ G.done=true;roundDone(ok);inp.readOnly=true;
+ if(ok){
+  fb.innerHTML='<div class="gfb ok">'+ic('check')+' صحيح</div>';
+  document.getElementById('gact').innerHTML='<button class="btn p" data-gnext="1">التالي</button>';
+  gTimer(roundNext,700);
+ }else{
+  fb.innerHTML='<div class="gfb bad">'+(skip?'تخطّيت. ':'ليس صحيحاً. ')+'الإجابة الصحيحة: <bdi lang="zh-CN" class="han gans" dir="ltr">'+esc(w.zh)+'</bdi> <span class="py ltr">'+pyh(w.py)+'</span><div class="mut">'+esc(w.ar)+'</div></div>';
+  document.getElementById('gact').innerHTML='<button class="btn p" data-gnext="1">التالي</button>';
+  var nb=gEl().querySelector('[data-gnext]');if(nb)nb.focus();
+ }
+}
+/* ----- end screen ----- */
+function gEnd(){
+ if(!G||G.over)return;
+ G.over=true;G.timers.forEach(function(t){clearTimeout(t);clearInterval(t)});
+ var tot=G.correct+G.wrong,acc=tot?Math.round(G.correct/tot*100):0,b=(S.gbest=S.gbest||{}),rec=G.score>(b[G.mode]||0)&&G.score>0;
+ if(rec)b[G.mode]=G.score;save();
+ var D=DUE(),miss=G.missedW.map(function(w){
+  return '<div class="gm1"><bdi lang="zh-CN" class="han gz" dir="ltr">'+esc(w.zh)+'</bdi><span class="gt"><span class="py ltr">'+pyh(w.py)+'</span><span class="mut">'+esc(w.ar)+'</span></span>'+(D[w.zh]?'<span class="st prog">في المراجعة</span>':'<button class="btn" data-gadd="'+esc(w.zh)+'">أضف للمراجعة</button>')+'</div>'}).join('');
+ gEl().querySelector('.gm-in').firstChild.outerHTML=gHead('<span>'+ic('star')+' <b>'+G.score+'</b></span>');
+ gBody('<div class="gq gend"><h3>'+(G.mode==='ta'?'انتهى الوقت!':'انتهت الجولة')+'</h3><div class="gstats"><div class="stat"><b id="gfs">'+G.score+'</b><span class="mut">النقاط</span></div><div class="stat"><b id="gfa">'+acc+'%</b><span class="mut">الدقة</span></div><div class="stat"><b class="ltr" style="white-space:nowrap">'+G.correct+' / '+tot+'</b><span class="mut">الصحيحة</span></div></div>'+
+  (rec?'<p class="gfb ok">'+ic('star')+' رقم قياسي جديد في هذه اللعبة</p>':(b[G.mode]?'<p class="mut">أفضل نتيجة: '+b[G.mode]+'</p>':''))+
+  (miss?'<h4 class="gh2">كلمات للتدرّب عليها</h4><div class="gmiss">'+miss+'</div>':'<p class="gfb ok">'+ic('check')+' لم تُخطئ في أي كلمة</p>')+
+  '<div class="gbtns"><button class="btn p" data-gagain="1">العب مرة أخرى</button><button class="btn" data-gexit="1">رجوع</button></div></div>');
+}
+function gAdd(zh){var D=DUE();if(!D[zh])D[zh]={i:0,t:Date.now()};save();var b=gEl().querySelector('[data-gadd="'+zh.replace(/"/g,'\\"')+'"]');if(b){var sp=document.createElement('span');sp.className='st prog';sp.textContent='في المراجعة';b.replaceWith(sp)}}
+function gClick(e){
+ var t=e.target.closest('[data-gexit],[data-gopt],[data-greveal],[data-gknow],[data-gdont],[data-gcheck],[data-gskip],[data-gnext],[data-gadd],[data-gagain]');if(!t||!G)return;var d=t.dataset;
+ if(d.gexit)gameClose();
+ else if(d.gopt!=null)taPick(+d.gopt);
+ else if(d.greveal)readReveal();
+ else if(d.gknow){if(!G.done){G.done=true;roundDone(true);roundNext()}}
+ else if(d.gdont){if(!G.done){G.done=true;roundDone(false);roundNext()}}
+ else if(d.gcheck)typeCheck(false);
+ else if(d.gskip)typeCheck(true);
+ else if(d.gnext){G.timers.forEach(clearTimeout);roundNext()}
+ else if(d.gadd!=null)gAdd(d.gadd);
+ else if(d.gagain){var m=G.mode;gameClose();gameOpen(m)}
+}
+document.addEventListener('click',function(e){if(G&&gEl()&&gEl().contains(e.target))gClick(e)});
+document.addEventListener('keydown',function(e){
+ if(!G||!gEl())return;
+ if(e.key==='Escape'){gameClose();return}
+ if(e.key==='Enter'&&e.target&&e.target.id==='gin'){e.preventDefault();if(G.done){G.timers.forEach(clearTimeout);roundNext()}else typeCheck(false)}
+});
 function tea(){
  return '<div class="card"><h3 style="font-size:17px">كيف تستخدم المنصة؟</h3><ul class="road"><li>1. ادخل مادتك من الصفحة الرئيسية، ثم اختر الدرس.</li><li>2. في كل درس: تعلّم المفردات، ثم الحوار والقواعد، ثم تدرّب في «التمارين».</li><li>3. اضغط أي كلمة صينية لترى معناها ونطقها، واضغط السماعة لتسمعها.</li><li>4. أضف الكلمات الصعبة إلى «مفرداتي» لتراجعها لاحقاً.</li></ul></div>'+
  '<div class="card"><h3 style="font-size:17px">المراجعة المتباعدة</h3><p class="mut">كلما أجبت على كلمة بشكل صحيح تتأخر مراجعتها، وكلما أخطأت ترجع قريبة. هكذا تثبت الكلمات في الذاكرة بأقل وقت. ادخل «مفرداتي» كل يوم دقائق قليلة.</p></div>'+
  '<div class="card"><h3 style="font-size:17px">نصائح للتعلّم</h3><ul class="road"><li>🎧 استمع للجملة ثم كرّرها بصوت عالٍ.</li><li>✍️ اكتب الحروف باليد في تبويب الكتابة.</li><li>🔁 تدرّب قليلاً كل يوم أفضل من كثير مرة واحدة.</li></ul></div>';
 }
 document.addEventListener('click',function(e){
- var t=e.target.closest('[data-wn],[data-wsay],[data-wadd],[data-lf],[data-open],[data-lesson],[data-cacc],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
+ var t=e.target.closest('[data-gstart],[data-wn],[data-wsay],[data-wadd],[data-lf],[data-open],[data-lesson],[data-cacc],[data-crs],[data-go],[data-say],[data-sayx],[data-add],[data-addall],[data-flip],[data-sayc],[data-rate]');if(!t)return;var d=t.dataset;
  if(d.wn!=null){wi=(wotd(),(wi+ +d.wn+VOCAB.length)%VOCAB.length);render()}
+ else if(d.gstart){gameOpen(d.gstart)}
  else if(d.cacc){var lk=d.lk;OPENC[lk]=OPENC[lk]===d.cacc?null:d.cacc;
   t.closest('.lvb').querySelectorAll('.cb').forEach(function(cb){var on=cb.dataset.course===OPENC[lk];cb.classList.toggle('open',on);cb.querySelector('.cbh').setAttribute('aria-expanded',on);cb.querySelector('.cbody').hidden=!on});
   if(OPENC[lk])t.scrollIntoView({block:'nearest'})}
- else if(d.lesson!=null){if(+d.lesson>=0)S.last=+d.lesson;if(d.file)S.lastLesson=d.file;save();return}
+ else if(d.lesson!=null){if(+d.lesson>=0)S.last=+d.lesson;if(d.file){S.lastLesson=d.file;PEND.last=d.file}save();return}
  else if(d.crs!=null){crs=d.crs;lf=0;tab='home';render();window.scrollTo(0,0)}
  else if(d.go)go(d.go);
  else if(d.wsay!=null)speak(VOCAB[+d.wsay].zh);
