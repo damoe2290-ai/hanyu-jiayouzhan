@@ -75,6 +75,8 @@ Measurements come from the audit at 390px and 1280px; re-measure after fixing.
 10. **Remaining lessons:** the book 《发展汉语初级综合1》 has 30 lessons and we are currently at 6-10. Once the Phase 2-3 templates are stable, add lessons gradually (course by course, in small batches), with any lesson open to the student without prerequisites. Ask me which course to start with and give a size estimate first. Sources are the book files I upload (scanned PDFs: read the pages and visually verify OCR).
 
 ## Phase 5: Eight-level structure (display only, no server)
+**Status:** first step done (odd levels only: Level 1 Grammar 1 + Reading 1, Level 3 Listening 1, Level 5 Practical Chinese, Level 7 Chinese Culture; Foreign Language as an extra track): `tools/levels.json`, the Level -> Course -> Lessons hub and the student dashboard (see tools/README.md). Levels 2/4/6/8 are added by data only when the study plan arrives; nothing is shown for missing courses.
+
 The university plan is 4 years x 2 semesters = **8 levels**. Each level contains several courses (grammar, reading, listening, speaking, writing, culture...), and each course has its lessons. Do this after Phases 1-4 pass.
 
 1. **One data file for the structure** (`tools/levels.json` or whatever fits the project) describing: levels (number, year, semester, Arabic name), the courses inside each level (id, Arabic and Chinese names, code, order, status: available / in preparation), and each course's lessons. Do not hard-code the structure in UI code; moving a course between levels must be a one-line edit in this file.

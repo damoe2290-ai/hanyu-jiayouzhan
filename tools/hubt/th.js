@@ -9,7 +9,8 @@ await p.click('[data-go=dict]');console.log('dict',await p.$eval('p.mut',e=>e.te
 await p.click('[data-lf="6"]');console.log('L6',await p.$eval('p.mut',e=>e.textContent));
 await p.click('[data-go=rev]');await p.click('[data-addall]');console.log('rev',await p.$$eval('.stat b',e=>e.map(x=>x.textContent)));
 await p.click('[data-crs=""]');await p.waitForTimeout(100);
-console.log('cards',await p.$$eval('.cc .mut',e=>e.map(x=>x.textContent)));
-await p.screenshot({path:'hubt/home_'+c+'.png',fullPage:true});}
+console.log('courses on the home page (level -> course)',await p.$$eval('details.lvl .cb .ci .mut',e=>e.map(x=>x.textContent)).catch(()=>[]).then(a=>a.length));
+await p.screenshot({path:require('os').tmpdir()+'/hub_home_'+c+'.png',fullPage:true});}
+await p.click('details.tools summary');   /* the quick dictionary/review tiles are collapsed by default */
 await p.click('[data-open="gram:rev"]');console.log('gram rev',await p.$$eval('.stat b',e=>e.map(x=>x.textContent)));
 console.log(errs);await b.close()})();

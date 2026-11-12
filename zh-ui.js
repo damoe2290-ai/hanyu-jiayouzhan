@@ -197,7 +197,7 @@ function syllables(s){
 function normPinyin(s){
   return toNumbers(String(s||'')).toLowerCase().replace(/v/g,'\u00fc').replace(/[\s'\u2019\-.,;:!?\u3002\uff0c\uff01\uff1f]+/g,'').replace(/5/g,'');
 }
-window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit};
+window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey};
 
 /* ---------- quiet hint when the device has no Chinese voice ---------- */
 var voiceChecked=false;
@@ -238,6 +238,40 @@ function backToLastCourse(){
   try{var s=JSON.parse(localStorage.getItem('zh-hub-v1')||'{}');if(s&&s.lastCourse==='fl')a.setAttribute('href','index.html#fl')}catch(e){}
 }
 
+/* ---------- study activity for the hub dashboard ----------
+   Lessons and the hub load this file, so it is the one place that notices study activity without touching any lesson page:
+   - zh-hub-v1.lastLesson = the lesson file the student opened last (the hub's "continue" card);
+   - zh-hub-v1.pts[YYYY-MM-DD] = points earned that day = growth of the XP stored in the lessons' own keys (noor-*-v1);
+     zh-hub-v1.xpSum is the XP total seen last time (the first run only takes a snapshot, nothing is credited retroactively);
+   - zh-hub-v1.days gets today's date (the streak calendar) as soon as there is any activity.
+   Everything lives inside the existing key; old data without these fields keeps working. Dates are local (YYYY-MM-DD). */
+var HUBK='zh-hub-v1';
+function dayKey(d){d=d||new Date();return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
+function hubRead(){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}');return h&&typeof h==='object'?h:{}}catch(e){return {}}}
+function hubWrite(h){try{localStorage.setItem(HUBK,JSON.stringify(h));return true}catch(e){return false}}
+function lessonXp(){var t=0;try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(/^noor-[a-z0-9]+-v1$/.test(k)){var v=JSON.parse(localStorage.getItem(k));if(v&&typeof v.xp==='number')t+=v.xp}}}catch(e){}return t}
+function markDayIn(h){var t=dayKey();h.days=h.days||[];if(h.days.indexOf(t)<0){h.days.push(t);h.days=h.days.slice(-400)}}
+function trimPts(h){var ks=Object.keys(h.pts||{}).sort();while(ks.length>90){delete h.pts[ks.shift()]}}
+function trackActivity(){
+  try{
+    var h=hubRead(),now=lessonXp(),changed=false;
+    if(typeof h.xpSum!=='number'||now<h.xpSum){h.xpSum=now;changed=true}      /* first run (or progress was reset): snapshot only */
+    else if(now>h.xpSum){var t=dayKey();h.pts=h.pts||{};h.pts[t]=(h.pts[t]||0)+(now-h.xpSum);h.xpSum=now;markDayIn(h);trimPts(h);changed=true}
+    if(changed&&hubWrite(h))window.dispatchEvent(new Event('zh-hub-updated'));
+  }catch(e){}
+}
+function markLesson(){
+  var m=/(?:^|\/)((?:lesson|prac|lis|biz|cult)-\d+)(?:\.html)?$/.exec(location.pathname);if(!m)return;
+  var f=m[1]+'.html',h=hubRead();
+  if(h.lastLesson!==f){h.lastLesson=f;hubWrite(h)}
+}
+function startTracking(){
+  markLesson();trackActivity();
+  setInterval(function(){if(!document.hidden)trackActivity()},8000);
+  document.addEventListener('visibilitychange',function(){if(document.hidden)trackActivity()});
+  window.addEventListener('pagehide',trackActivity);
+}
+
 /* ---------- init ---------- */
 function cssLoaded(){return !!getComputedStyle(root).getPropertyValue('--zh-ui').trim()}
 function init(){
@@ -247,6 +281,7 @@ function init(){
   if(cssLoaded()){addGear();root.classList.add('zh-ui')}
   else window.addEventListener('load',function(){if(cssLoaded()&&!root.classList.contains('zh-ui')){addGear();root.classList.add('zh-ui')}});
   backToLastCourse();
+  startTracking();
   if(cssLoaded())checkVoice();
 }
 if(cfg.tone!=='color')root.setAttribute('data-tone',cfg.tone);

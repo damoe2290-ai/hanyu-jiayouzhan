@@ -33,7 +33,8 @@ ok('opening lesson 9 stores S.last = 3 (lesson index) and lastCourse = gram',st3
 await p.click('[data-go=home]').catch(()=>{});await p.goto(R+'index.html');await p.waitForTimeout(400);
 ok('home "continue" chip still points at lesson 9',(await p.evaluate(()=>document.body.innerText)).indexOf('الدرس التاسع')>=0);await c.close();
 ({c,p}=await fresh());await p.goto(R+'index.html#fl');await p.waitForTimeout(300);
-await p.click('[data-crs=""]');await p.click('[data-crs="prac"]');await p.waitForTimeout(300);   // the hub reads the URL hash only at load: use its own buttons
+await p.click('[data-crs=""]');if(!(await p.isVisible('[data-crs="prac"]')))await p.click('details.lvl:has([data-course="prac"]) summary');   /* levels are collapsible: open the one that holds the course, like a student */
+await p.click('[data-crs="prac"]');await p.waitForTimeout(300);   // the hub reads the URL hash only at load: use its own buttons
 await p.goto(R+'lesson-9.html');await p.waitForTimeout(250);
 ok('last course was Reading (not Foreign Language): lesson 9 still goes back to Grammar',await back(p)==='index.html#gram');
 await p.goto(R+'prac-7.html');ok('a Reading lesson always goes back to Reading, whatever was remembered',await back(p)==='index.html#prac');await c.close();

@@ -20,7 +20,7 @@ TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 export PYTHONDONTWRITEBYTECODE=1 PYTHONWARNINGS=ignore
 
-cp -r "$HERE/lsn" "$HERE/lsn3" "$HERE/hub.html" "$TMP/"
+cp -r "$HERE/lsn" "$HERE/lsn3" "$HERE/hub.html" "$HERE/levels.json" "$TMP/"
 cd "$TMP/lsn3"
 
 python3 build3.py g6 g7 g8                                      # frozen hand-built lessons (no random state used)
@@ -31,6 +31,7 @@ python3 buildt.py 1 2 3 4                                       # culture
 
 PAGES="lesson-6 lesson-7 lesson-8 lesson-9 lesson-10 prac-6 prac-7 prac-8 prac-9 prac-10 lis-6 lis-7 lis-8 lis-9 lis-10 biz-4 biz-5 biz-6 cult-1 cult-2 cult-3 cult-4"
 for p in $PAGES; do python3 ../lsn/wrap2.py "$p.html"; done
+python3 hubgen.py                                               # levels.json + measured lesson sizes -> hub.html (temporary copy)
 (cd .. && python3 lsn/wrap2.py hub.html)
 
 changed=0

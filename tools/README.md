@@ -79,3 +79,40 @@ A practice-tab card "التحدي بالمستويات" starts a session of 3 le
 - **Test:** `node tools/lsn3/t9.js` (starts its own static server): no external request, animation, writing a character by drawing along its real stroke paths so the library's own grading accepts it, wrong stroke, hint, persistence, switch to free drawing, another character, dark theme, all fallbacks, `file://`, lessons that did not opt in, vendored files. Not tested: real phones (touch drawing on a phone screen).
 - Run it on any lesson with `PAGE=lesson-10.html node tools/lsn3/t9.js` (default `lesson-9.html`).
 - **Roll-out status (stroke order):** on: lesson-9, lesson-10, prac-6..10 (Reading), lis-6..10 (Listening), biz-4..6 (Practical Chinese), lesson-6..8 (hand-built). Culture lessons have no Writing tab. Lessons 6-8 opt in like the others (`L['hanzi_writer']=True`; `build3.make` then adds `hw:1` to their data); the only change to their frozen `legacy/g*.writing.js` is the done marker on the character chips plus the `hwInit()` call. `parity.js` loads pages from `file://`, where stroke order cannot load its data, so it checks that these lessons are still identical to the old pages in fallback mode (332/332); `t9.js` (served over HTTP) tests the stroke-order mode on them. No points are awarded for stroke order (decision).
+
+## Study-plan structure and student dashboard (Phase 5)
+The hub (`index.html`, generated from `tools/hub.html`) shows **Level -> Course -> Lessons**. The structure is data: `tools/levels.json`. Adding a level, a course or a lesson is a **data-only change** (no code edits); `python3 tools/lsn3/t_levels.py` must keep passing.
+
+### `tools/levels.json` schema (version 1)
+```
+{
+ "schema": 1,
+ "settings": {"daily_goal": 50, "done_at": 90},     points for the daily ring; completion % at which a lesson counts as "done"
+ "levels":  [ {"n": 1, "year": 1, "semester": 1,
+               "title": "المستوى الأول", "sub": "الفصل الدراسي الأول",   Arabic texts shown on the hub (edit freely)
+               "courses": ["gram", "prac"]}, ... ],                      course ids, in display order
+ "extra":   {"title": "...", "sub": "...", "courses": ["fl"]},         tracks shown below the levels (outside the 8 levels)
+ "courses": {
+   "gram": {"name": "قواعد ١",                  existing Arabic course name (unchanged)
+            "book": "《...》", "cover": "...<br>...",   book title and the text on the cover
+            "color": 1,                                 1..6 = the hub's --c1..--c6 cover colours
+            "lessons": [ {"no": 6, "n": "六",          lesson number, seal character
+                          "title": "الدرس السادس · 香蕉多少钱一斤",   '<Arabic ordinal> · <Chinese title>' (the hub splits at ' · ')
+                          "desc": "...", "file": "lesson-6.html",
+                          "key": "noor-lesson6-v1"} ]},    the lesson page's own localStorage key (t_levels.py checks it equals the page's KEY)
+   "fl":   {"name": "...", ..., "lessons_from": "gram"}       a course that shares another course's lessons (no copy)
+ }
+}
+```
+- **To add level 2/4/6/8:** add an object to `levels` (a level must contain at least one course that has lessons: empty levels are not allowed, so nothing like "coming soon" is ever shown). **To move a course** (for example Business Chinese to Level 8) change the `courses` list of the levels: ids and names do not change. **To add a course:** add it to `courses` and list it in exactly one level or in `extra.courses`. **To add a lesson:** build the page, then add it to its course's `lessons`.
+- Course ids (`gram`, `fl`, `prac`, `lis`, `biz`, `cult`) and lesson storage keys are the ones the students' progress already uses; do not rename them.
+- `tools/lsn3/hubgen.py` (run by `rebuild_all.sh`) reads this file and measures each built lesson page (words, dialogue lines or topics, activity names) because the hub needs them for the completion percentage; the result is injected into the hub where the placeholder `%%LEVELS%%` stands in `tools/hub.html` (the tracked file keeps the placeholder; `index.html` has the data).
+- **No locking:** every level and lesson is open; levels are only collapsible. The level that holds the student's last lesson is open by default.
+
+### What the dashboard computes (all on the device, nothing is sent anywhere)
+- **Completion %** of a lesson = exactly the progress bar of the lesson page, `(known words / words + heard dialogue lines / lines (culture: topics seen / topics, max 1) + activities with a best result / activities) / 3`, read from the lesson's existing key. Course and level % = average over their lessons. Badges: *not started* (nothing recorded), *in progress*, *done* (at least `settings.done_at` %). `t10.js` compares the hub value with each lesson page's own `#gprog` bar for all 22 lessons in three states.
+- **Continue card:** `zh-hub-v1.lastLesson` (written by `zh-ui.js` when a lesson opens, and by the hub on click); for old data it falls back to `S.last` (index of the last Grammar lesson) and `S.lastCourse` decides Grammar or Foreign Language for the shared lessons.
+- **Daily goal ring and streak calendar:** `zh-ui.js` (loaded by every lesson and the hub) notices XP growth in the lessons' own keys (`noor-*-v1`) and adds it to `zh-hub-v1.pts[YYYY-MM-DD]` (local dates), marks the day in `zh-hub-v1.days`, and keeps `zh-hub-v1.xpSum` (the XP total seen last). The first run only takes a snapshot, nothing is credited retroactively; a progress reset credits nothing. A reviewed word counts 2 points. The ring shows today's points against `settings.daily_goal`; the calendar shows the last 28 days; the streak counts consecutive days.
+- **Storage:** no new key. New fields (`lastLesson`, `pts`, `xpSum`) live inside the existing `zh-hub-v1`; old state without them works (migration test in `t10.js` with a pre-populated old state: every old field and every other key stays byte-identical). The hub merges those fields before each save so it never overwrites what a lesson wrote.
+- Dictionary and review tiles are collapsed by default ("أدوات سريعة"); each course also has its own dictionary/review page (button inside its block, or `index.html#gram` etc., which keep working).
+- Tests: `python3 tools/lsn3/t_levels.py` (the data), `node tools/lsn3/t10.js` (the hub: structure, completion parity, dashboard, tracker, migration), and the older `HUB=index.html node tools/hubt/tg.js` / `th.js` (print-style checks of the course pages).
