@@ -32,7 +32,7 @@ console.log('--- vocabulary list at 360px (light)');
  ok('the picture frames have a fixed size (44px in the list)',await p.$$eval('#p-vocab .row .pic',e=>e.length>0&&e.every(x=>{const r=x.getBoundingClientRect();return Math.round(r.width)===44&&Math.round(r.height)===44})));
  ok('the list fits a 360px screen: no horizontal overflow and every speaker button is on screen (rows 运动场 and 中国银行 were wider than the screen)',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth&&[...document.querySelectorAll('#p-vocab .row .spk')].every(b=>{const r=b.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth})));
  // flashcard
- await p.click('#p-vocab .row:nth-child(1)');await p.click('#fc');await p.waitForTimeout(150);
+ await p.click('#p-vocab .row:nth-child(1)');await p.click('#fc');await p.waitForTimeout(800);   /* 3D flip: wait for it to finish, a rotating face is narrower */
  ok('the flashcard back shows the 92px icon',await p.$eval('#fc .back .pic',e=>!!e.querySelector('svg.il')&&Math.round(e.getBoundingClientRect().width)>=90));
  // picture quiz
  await p.click('[data-tab=practice]');await p.waitForTimeout(150);

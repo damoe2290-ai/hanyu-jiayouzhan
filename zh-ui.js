@@ -197,7 +197,51 @@ function syllables(s){
 function normPinyin(s){
   return toNumbers(String(s||'')).toLowerCase().replace(/v/g,'\u00fc').replace(/[\s'\u2019\-.,;:!?\u3002\uff0c\uff01\uff1f]+/g,'').replace(/5/g,'');
 }
-window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey,voiceStatus:function(){return voiceStatus()}};
+/* ---------- study helpers (Phase 6a): settings inside zh-ui-v1, swipe, 3D support test, badge stamp, end-of-quiz summary ---------- */
+var study=cfg.study&&typeof cfg.study==='object'?cfg.study:(cfg.study={});
+function pref(k,d){return study[k]===undefined?d:study[k]}
+function setPref(k,v){study[k]=v;save(cfg)}
+function reduced(){try{return matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){return false}}
+function can3d(){try{return root.classList.contains('zh-ui')&&!reduced()&&!!window.CSS&&CSS.supports('transform-style','preserve-3d')&&CSS.supports('backface-visibility','hidden')}catch(e){return false}}
+/* swipe(host, selector, cb): a horizontal drag (at least 45px and clearly more sideways than up/down) on an element matching selector calls cb('left'|'right', element);
+   the tap that follows a swipe is swallowed, so a swipe never also flips a card. Vertical scrolling is untouched (the element needs touch-action:pan-y in CSS). */
+function swipe(host,sel,cb){
+  var x0=0,y0=0,el=null,swiped=false;
+  host.addEventListener('pointerdown',function(e){el=e.target.closest&&e.target.closest(sel);if(!el||(e.pointerType==='mouse'&&e.button!==0)){el=null;return}x0=e.clientX;y0=e.clientY;swiped=false});
+  host.addEventListener('pointerup',function(e){
+    if(!el)return;var dx=e.clientX-x0,dy=e.clientY-y0,t=el;el=null;
+    if(Math.abs(dx)>=45&&Math.abs(dx)>1.6*Math.abs(dy)){swiped=true;cb(dx<0?'left':'right',t);setTimeout(function(){swiped=false},400)}
+  });
+  host.addEventListener('pointercancel',function(){el=null});
+  host.addEventListener('click',function(e){if(swiped&&e.target.closest&&e.target.closest(sel)){swiped=false;e.stopPropagation();e.preventDefault()}},true);
+}
+function esc2(x){return String(x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+/* badges: earned = a red seal stamp, not yet earned = a dashed ring with a padlock (clearly not an empty slot) */
+function badges(list){
+  return '<div class="badges zhb">'+list.map(function(b){
+    return '<div class="badge'+(b.on?' on':'')+(b.isNew?' new':'')+'" role="img" aria-label="'+esc2(b.n)+(b.on?' (مكتسب)':' (مقفل)')+'"><span lang="zh">'+b.g+'</span>'+b.n+'</div>';
+  }).join('')+'</div>';
+}
+var stampT=null;
+function stamp(g,name){
+  var old=document.querySelector('.zh-stamp');if(old)old.remove();clearTimeout(stampT);
+  var d=document.createElement('div');d.className='zh-stamp';d.setAttribute('role','status');
+  d.innerHTML='<div class="zh-seal"><span lang="zh">'+g+'</span></div><b>وسام جديد</b><span>'+esc2(name)+'</span>';
+  document.body.appendChild(d);stampT=setTimeout(function(){d.remove()},3200);
+}
+/* summary(o): the end-of-quiz screen. o: starsHtml, msg, score, n, pct, gain, level (0 or the new level), newBadges [{g,n}], missedHtml, badgesHtml, retryKind, next {href,label} */
+function summary(o){
+  var h='<div class="res sum">'+o.starsHtml+'<h3>'+o.msg+'</h3>'+
+   '<div class="sumrow"><div class="sumbox"><b class="ltr">'+o.score+' / '+o.n+'</b><small>النتيجة</small></div><div class="sumbox"><b class="ltr">'+o.pct+'%</b><small>الدقة</small></div><div class="sumbox"><b class="ltr">+'+o.gain+'</b><small>نقطة</small></div></div>'+
+   (o.level?'<p class="mut">وصلتَ إلى المستوى '+o.level+'</p>':'');
+  if(o.newBadges&&o.newBadges.length)h+='<div class="newb"><b>وسام جديد</b>'+o.newBadges.map(function(b){return '<div class="zh-seal big"><span lang="zh">'+b.g+'</span></div><span>'+esc2(b.n)+'</span>'}).join('')+'</div>';
+  if(o.missedHtml)h+='<div class="miss"><h4>كلمات تحتاج تدريباً</h4>'+o.missedHtml+'<button class="btn ghost" data-act="addmiss">أضفها إلى المراجعة</button></div>';
+  h+='<div class="sumb"><h4>أوسمتك</h4>'+o.badgesHtml+'</div>';
+  h+='<div class="sumact"><button class="btn primary" data-act="start" data-k="'+o.retryKind+'">أعد المحاولة</button><button class="btn ghost" data-act="qexit">كل التمارين</button>'+
+     (o.next?'<a class="btn ghost" href="'+esc2(o.next.href)+'">'+esc2(o.next.label)+'</a>':'')+'</div></div>';
+  return h;
+}
+window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey,voiceStatus:function(){return voiceStatus()},pref:pref,setPref:setPref,can3d:can3d,swipe:swipe,badges:badges,stamp:stamp,summary:summary};
 
 /* ---------- quiet hint when the device has no Chinese voice ---------- */
 var voiceChecked=false;

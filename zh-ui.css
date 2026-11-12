@@ -162,6 +162,80 @@ a.seal:hover,a.seal:focus-visible{transform:rotate(-4deg) scale(1.06)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 
+/* ---------- Phase 6a: study screens ---------- */
+/* dialogue focus mode (one line at a time) */
+.fx{display:grid;gap:14px;margin-top:6px}
+.fxtop{display:flex;align-items:center;gap:10px}
+.fxtop .cnt{margin-inline-start:auto;font-weight:700;font-size:16px}
+.fxcard{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px 12px;min-height:230px;display:grid;align-content:center;justify-items:center;gap:18px;touch-action:pan-y;-webkit-user-select:none;user-select:none;animation:zh-fxin .2s ease-out}
+.fxtop .av.S{background:var(--accent);color:var(--accent-fg)}
+.fxcard.S{background:var(--accent-soft);border-color:transparent}
+.fxcard .zhline{justify-content:center;gap:6px 4px}
+.fxcard .tok .zh{font-size:clamp(32px,10.5vw,50px);line-height:1.2}
+.fxcard .tok .py{font-size:15px}
+.fxcard .punc{font-size:clamp(30px,10vw,44px)}
+.fxcard .arline{font-size:20px;color:var(--fg);text-align:center;line-height:1.6}
+.fxcard.notone .zh [class^="t"],.fxcard.notone .py [class^="t"]{color:inherit}
+.fxrev{appearance:none;min-height:44px;padding:8px 16px;border:1.5px dashed var(--line);border-radius:14px;background:none;color:var(--muted);font:inherit;font-weight:600;cursor:pointer}
+.fxnav{display:flex;align-items:center;justify-content:center;gap:14px}
+.fxnav .btn{min-width:56px;min-height:56px;padding:0 18px;display:inline-flex;align-items:center;justify-content:center}
+.fxnav .btn[disabled]{opacity:.35}
+.fxplay{min-width:72px!important;border-radius:28px}
+@keyframes zh-fxin{from{opacity:.2;transform:translateX(10px)}to{opacity:1;transform:none}}
+/* flashcard: real 3D flip when supported (class f3d added by the lesson script), plain fade otherwise */
+.fci{display:contents}
+.fc{touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.fc.f3d{background:none;border:0;perspective:1200px}
+.fc.f3d .fci{display:grid;position:relative;min-height:310px;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.3,.7,.3,1)}
+.fc.f3d.flipped .fci{transform:rotateY(180deg)}
+.fc.f3d .face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--surface);border:1px solid var(--line);border-radius:20px;animation:none}
+.fc.f3d .face.back{transform:rotateY(180deg)}
+.fc.f3d .face[hidden]{display:flex!important;visibility:hidden}
+.navrow .navb{min-height:48px;flex:1;display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600}
+.kleg{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin:6px 0 4px}
+.kleg .kn{width:20px;height:20px;flex:none}
+.kleg .kn.on{color:var(--bg)}
+/* quiz feedback: colour pulse on right, small shake on wrong; never blocks anything */
+@keyframes zh-pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--good) 55%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+@keyframes zh-shake{0%,100%{transform:none}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+.opt.good,.chip.good,.mi.ok{animation:zh-pulse .6s ease-out}
+.opt.bad,.chip.bad,.mi.no{animation:zh-shake .4s}
+.fb.good{animation:zh-pulse .6s ease-out}
+.fb.bad{animation:zh-shake .4s}
+.fb.good>strong::before{content:"\2713\00a0"}
+.fb.bad>strong::before{content:"\2715\00a0"}
+.fb.close>strong::before{content:"\007e\00a0"}
+/* badges: earned = red seal stamp; not earned = dashed ring + padlock (never an empty-looking slot) */
+.badge,.badge.on{opacity:1;filter:none}
+.badge span{position:relative;border-radius:50%;transition:none}
+.badge.on span{background:var(--seal);color:var(--seal-fg);border:0;border-radius:8px;transform:rotate(-6deg);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--seal-fg) 40%,transparent)}
+.badge:not(.on){color:var(--muted)}
+.badge:not(.on) span{border:2px dashed var(--muted);background:transparent;color:color-mix(in srgb,var(--muted) 55%,transparent)}
+.badge:not(.on) span::after{content:"";position:absolute;inset-inline-end:-6px;bottom:-6px;width:20px;height:20px;border-radius:50%;background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='11' width='14' height='9' rx='2'/%3E%3Cpath d='M8 11V8a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E") center/14px no-repeat;border:1px solid var(--line)}
+@keyframes zh-stampin{0%{opacity:0;transform:scale(2.4) rotate(-28deg)}60%{opacity:1;transform:scale(.92) rotate(-4deg)}100%{opacity:1;transform:scale(1) rotate(-6deg)}}
+.badge.on.new span{animation:zh-stampin .6s cubic-bezier(.2,1.2,.4,1) both}
+.zh-seal{display:grid;place-items:center;width:64px;height:64px;border-radius:8px;background:var(--seal);color:var(--seal-fg);font:700 32px var(--font-han);transform:rotate(-6deg);box-shadow:inset 0 0 0 3px color-mix(in srgb,var(--seal-fg) 40%,transparent);animation:zh-stampin .6s cubic-bezier(.2,1.2,.4,1) both}
+.zh-seal.big{width:88px;height:88px;font-size:44px}
+.zh-stamp{position:fixed;inset-inline:0;margin-inline:auto;width:max-content;max-width:calc(100% - 32px);bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:70;display:grid;grid-template-columns:auto 1fr;align-items:center;gap:2px 12px;padding:10px 16px 10px 20px;pointer-events:none;
+  background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:18px;box-shadow:0 8px 28px rgba(0,0,0,.22)}
+.zh-stamp .zh-seal{grid-row:1/3;width:48px;height:48px;font-size:24px}
+.zh-stamp b{font-size:15px;align-self:end}
+.zh-stamp>span:last-child{align-self:start;color:var(--muted);font-size:14px}
+/* end-of-quiz summary */
+.sum{gap:16px}
+.sumrow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.sumbox{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 4px;display:grid;gap:2px}
+.sumbox b{font:700 22px var(--font-py)}
+.sumbox small{color:var(--muted);font-size:13px}
+.sum h4{font-size:16px;margin:0 0 6px}
+.newb{display:grid;justify-items:center;gap:8px;width:100%;padding:14px;border-radius:16px;background:var(--accent-soft)}
+.miss,.sumb{width:100%;text-align:start}
+.miss .fw{padding:6px 0;border-bottom:1px solid var(--line)}
+.miss .btn{margin-top:10px}
+.sumb .badges{justify-content:center}
+.sumact{display:grid;gap:10px;width:100%}
+.sumact .btn{display:flex;align-items:center;justify-content:center;min-height:48px;text-decoration:none}
+
 /* ---------- no-Chinese-voice hint (built by zh-ui.js) ---------- */
 .zh-voice{display:flex;gap:var(--sp-2);align-items:center;justify-content:space-between;margin-top:var(--sp-2);padding:4px 4px 4px 12px;
   border-radius:var(--r-12);background:var(--warning-soft);color:var(--fg);font-size:var(--fs-14);line-height:1.5}

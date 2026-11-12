@@ -420,7 +420,9 @@ var IC={
   play:'<path d="M7 5l12 7-12 7z" fill="currentColor"/>',
   stop:'<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
   redo:'<path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/>',
-  star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17.3 6.6 20.2l1.1-6.1L3.2 9.9l6.1-.8z"/>'
+  star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17.3 6.6 20.2l1.1-6.1L3.2 9.9l6.1-.8z"/>',
+  chr:'<path d="M9 5l7 7-7 7"/>',
+  chl:'<path d="M15 5l-7 7 7 7"/>'
 };
 function ic(n,s){s=s||20;return '<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
 function spkBtn(t,cls){return '<button class="spk '+(cls||'')+'" data-act="say" data-t="'+esc(t)+'" aria-label="استمع">'+ic('spk',cls==='big'?36:20)+'</button>'}
@@ -495,7 +497,9 @@ var BADGES={
  first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'读',n:'القارئ المستكشف'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
 };
 /* ---------- progress / badges ---------- */
-function award(id){if(!S.badges[id]){S.badges[id]=1;save();toast('وسام جديد: '+BADGES[id].n)}}
+var NEWB=[],LASTMISS=[];
+function award(id){if(!S.badges[id]){S.badges[id]=1;save();NEWB.push(id);if(window.zhUI&&zhUI.stamp)zhUI.stamp(BADGES[id].g,BADGES[id].n);else toast('وسام جديد: '+BADGES[id].n)}}
+function badgeList(isNew){return Object.keys(BADGES).map(function(k){return {g:BADGES[k].g,n:BADGES[k].n,on:!!S.badges[k],isNew:!!(isNew&&isNew.indexOf(k)>=0)}})}
 function knownCount(){return VOCAB.filter(function(_,i){return S.known[i]}).length}
 function progress(){
   var k=knownCount()/VOCAB.length,h=Object.keys(S.seenT||{}).length/(D.nt||1),a=ACTS.filter(function(x){return S.best[x]}).length/ACTS.length;
@@ -522,6 +526,8 @@ function setTab(name,fromHash){
 }
 
 /* ---------- vocab ---------- */
+function fcCls(){return (window.zhUI&&zhUI.can3d&&zhUI.can3d())?' f3d'+(S.flip?' flipped':''):''}
+var flipT=null;
 function renderVocab(){
   var w=VOCAB[S.card];
   var rows=VOCAB.map(function(v,i){
@@ -533,7 +539,7 @@ function renderVocab(){
   }).join('');
   $('#p-vocab').innerHTML=
     '<div class="sec-h"><h2>بطاقات المفردات</h2><p>'+VOCAB.length+' كلمة · اضغط البطاقة لقلبها · عرفتَ <b>'+knownCount()+'</b> منها</p></div>'+
-    '<div class="fc" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة">'+
+    '<div class="fc'+fcCls()+'" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة"><div class="fci">'+
       '<div class="face front"'+(S.flip?' hidden':'')+'>'+spkBtn(w.zh)+
         '<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div></div>'+
       '<div class="face back"'+(S.flip?'':' hidden')+'>'+spkBtn(w.zh)+
@@ -541,10 +547,11 @@ function renderVocab(){
         '<div class="meaning">'+w.ar+'</div>'+(w.note?'<div class="note">'+w.note+'</div>':'')+
         '<div class="ex" dir="ltr"><div class="exzh">'+w.ex[0]+'</div><div class="expy">'+w.ex[1]+'</div><div class="exar" dir="rtl">'+w.ex[2]+'</div></div>'+
       '</div>'+
-    '</div>'+
-    '<div class="navrow"><button class="btn ghost sm" data-act="prev">السابقة</button><span class="cnt">'+(S.card+1)+' / '+VOCAB.length+'</span><button class="btn ghost sm" data-act="next">التالية</button></div>'+
+    '</div></div>'+
+    '<div class="navrow"><button class="btn ghost navb" data-act="prev">'+ic('chr',20)+' السابقة</button><span class="cnt">'+(S.card+1)+' / '+VOCAB.length+'</span><button class="btn ghost navb" data-act="next">التالية '+ic('chl',20)+'</button></div>'+
     '<div class="actrow"><button class="btn ghost" data-act="again">'+ic('redo',18)+' أراجعها لاحقاً</button><button class="btn primary" data-act="know">'+ic('check',18)+' أعرفها</button></div>'+
     '<h3 class="sub-h">قائمة الكلمات</h3>'+
+    '<div class="kleg"><span class="kn on">'+ic('check',12)+'</span> عرفتها <span class="kn"></span> لم تُحفظ بعد</div>'+
     '<div class="tools"><button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy">拼音 البينيين</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar">الترجمة</button></div>'+
     '<div>'+rows+'</div>';
 }
@@ -663,13 +670,13 @@ function stars(n,size){var o='';for(var i=1;i<=3;i++)o+='<span class="'+(i<=n?'o
 function renderPractice(){
   if(Q){renderQ();return}
   var lvl=Math.floor(S.xp/100)+1,pct=S.xp%100;
-  var bd=Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('');
+  var bd=window.zhUI&&zhUI.badges?zhUI.badges(badgeList()):'<div class="badges">'+Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('')+'</div>';
   var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],lesson:['أسئلة الدرس','أسئلة متنوعة على نص الدرس'],write:['تحدّث واكتب','اكتب جملاً بالصينية بمساعدة نماذج']};
   var cards=ACTS.map(function(k){return '<button class="act" data-act="start" data-k="'+k+'"><strong>'+info[k][0]+'</strong><small>'+info[k][1]+'</small>'+stars(S.best[k]||0)+'</button>'}).join('');
   var wn=Object.keys(S.wrong).length;
   $('#p-practice').innerHTML=
     '<div class="sec-h"><h2>تمارين الدرس</h2><p>كل إجابة صحيحة تمنحك 10 نقاط.</p></div>'+
-    '<div class="card stats"><div class="xprow"><strong>المستوى '+lvl+'</strong><div class="xpbar"><i style="width:'+pct+'%"></i></div><span class="cnt">'+S.xp+' XP</span></div><div class="badges">'+bd+'</div></div>'+
+    '<div class="card stats"><div class="xprow"><strong>المستوى '+lvl+'</strong><div class="xpbar"><i style="width:'+pct+'%"></i></div><span class="cnt">'+S.xp+' XP</span></div>'+bd+'</div>'+
     '<h3 class="sub-h">اختر نشاطاً</h3>'+
     '<div class="acts"><button class="act feat" data-act="start" data-k="all"><strong>الاختبار الشامل</strong><small>'+build('all').length+' سؤالاً من كل الأنواع</small>'+(S.best.all?stars(S.best.all,16):'')+'</button>'+cards+
     (wn?'<button class="act" data-act="start" data-k="review"><strong>مراجعة أخطائي</strong><small>'+wn+' كلمة تحتاج مراجعة</small></button>':'')+'</div>';
@@ -802,6 +809,7 @@ R.match=function(q,b){
 };
 function finishQ(ok,wids,extra){
   if(Q.fin)return;Q.fin=true;
+  if(!ok)(wids||[]).forEach(function(i){(Q.miss=Q.miss||{})[i]=1});
   if(ok){
     Q.score++;S.xp+=10;Q.gain+=10;
     (wids||[]).forEach(function(i){if(S.wrong[i]){S.wrong[i]--;if(S.wrong[i]<=0)delete S.wrong[i]}});
@@ -820,9 +828,18 @@ function endQuiz(){
   if(kind==='all'&&pct>=80)award('master');
   save();updateProg();
   var msg=pct>=90?'ممتاز! أتقنتَ هذا الجزء':(pct>=60?'جيد، راجع الأخطاء وأعد المحاولة':'تحتاج إلى مراجعة، ارجع إلى البطاقات والحوار');
-  $('#p-practice').innerHTML='<div class="res"><div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>'+
-    '<h3>'+msg+'</h3><div class="sc">'+Q.score+' / '+n+'</div><p class="mut">كسبتَ '+Q.gain+' نقطة'+(after>before?' · وصلتَ إلى المستوى '+after:'')+'</p>'+
-    '<div class="tools" style="justify-content:center"><button class="btn primary" data-act="start" data-k="'+kind+'">'+ic('redo',18)+' أعد المحاولة</button><button class="btn ghost" data-act="qexit">كل التمارين</button></div></div>';
+  var starsHtml='<div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>';
+  var missed=Object.keys(Q.miss||{}).map(Number).filter(function(i){return VOCAB[i]}),nbs=NEWB.splice(0);LASTMISS=missed;
+  if(window.zhUI&&zhUI.summary){
+    var nx=document.querySelector('.zh-lnav .zh-next'),nxb=nx&&nx.querySelector('b');
+    $('#p-practice').innerHTML=zhUI.summary({starsHtml:starsHtml,msg:msg,score:Q.score,n:n,pct:pct,gain:Q.gain,level:after>before?after:0,
+      newBadges:nbs.map(function(k){return BADGES[k]}),missedHtml:missed.map(function(i){return fbWord(VOCAB[i])}).join(''),badgesHtml:zhUI.badges(badgeList(nbs)),retryKind:kind,
+      next:nx?{href:nx.getAttribute('href'),label:(nxb?nxb.textContent:'الدرس التالي')}:null});
+  }else{
+    $('#p-practice').innerHTML='<div class="res"><div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>'+
+      '<h3>'+msg+'</h3><div class="sc">'+Q.score+' / '+n+'</div><p class="mut">كسبتَ '+Q.gain+' نقطة'+(after>before?' · وصلتَ إلى المستوى '+after:'')+'</p>'+
+      '<div class="tools" style="justify-content:center"><button class="btn primary" data-act="start" data-k="'+kind+'">'+ic('redo',18)+' أعد المحاولة</button><button class="btn ghost" data-act="qexit">كل التمارين</button></div></div>';
+}
   Q=null;
   if(after>before)toast('مستوى جديد: '+after);
 }
@@ -853,12 +870,15 @@ A.tpy2=function(){S.py=!S.py;save();renderDialogue()};
 A.tar2=function(){S.ar=!S.ar;save();renderDialogue()};
 A.flip=function(){
   S.flip=!S.flip;
-  var f=$('#fc .front'),b=$('#fc .back');if(f)f.hidden=S.flip;if(b)b.hidden=!S.flip;
+  var fc=$('#fc'),f=$('#fc .front'),b=$('#fc .back');if(!f||!b)return;
+  if(fc.classList.contains('f3d')){f.hidden=false;b.hidden=false;fc.classList.toggle('flipped',S.flip);clearTimeout(flipT);flipT=setTimeout(function(){f.hidden=S.flip;b.hidden=!S.flip},580)}
+  else{f.hidden=S.flip;b.hidden=!S.flip}
 };
 A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab()};
 A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab()};
 function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};if(on){if(!h.dues[CRS][zh])h.dues[CRS][zh]={i:0,t:Date.now()}}localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
 A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
+A.addmiss=function(t){LASTMISS.forEach(function(i){hubRev(VOCAB[i].zh,true)});toast('أُضيفت '+LASTMISS.length+' كلمة إلى مراجعة المفردات في الصفحة الرئيسية');if(t){t.disabled=true}};
 A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
 A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
 A.cq=function(t){
@@ -931,7 +951,7 @@ A.mr=function(t){
     speak(q.words[+i].zh);
     if(Object.keys(q.done).length===q.words.length){
       var errIds=Object.keys(q.errIds).map(Number);
-      errIds.forEach(function(k){var vi=VOCAB.indexOf(q.words[k]);if(vi>=0)S.wrong[vi]=(S.wrong[vi]||0)+1});
+      errIds.forEach(function(k){var vi=VOCAB.indexOf(q.words[k]);if(vi>=0){S.wrong[vi]=(S.wrong[vi]||0)+1;(Q.miss=Q.miss||{})[vi]=1}});
       finishQ(q.err<=1,[],'<div>عدد الأخطاء: '+q.err+'</div>');
     }
   }else{
@@ -954,6 +974,11 @@ app.addEventListener('keydown',function(e){
   if((e.key==='Enter'||e.key===' ')&&e.target.id==='fc'){e.preventDefault();A.flip()}
 });
 window.addEventListener('hashchange',function(){var h=location.hash.replace('#','');if(h&&h!==tab)setTab(h,true)});
+document.addEventListener('DOMContentLoaded',function(){
+  if(!window.zhUI||!zhUI.swipe)return;
+  zhUI.swipe($('#app'),'#fc',function(d){if(d==='left')A.next();else A.prev()});
+  if(tab==='vocab')RENDER[tab]();
+});
 function syncSlow(){$('#slowbtn').setAttribute('aria-pressed',String(S.slow))}
 syncSlow();updateProg();
 applyAr();setTab(location.hash.replace('#','')||'topics',true);
