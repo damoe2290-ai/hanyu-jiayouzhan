@@ -117,3 +117,22 @@ The hub (`index.html`, generated from `tools/hub.html`) shows **Level -> Course 
 - **Storage:** no new key. New fields (`lastLesson`, `pts`, `xpSum`) live inside the existing `zh-hub-v1`; old state without them works (migration test in `t10.js` with a pre-populated old state: every old field and every other key stays byte-identical). The hub merges those fields before each save so it never overwrites what a lesson wrote.
 - Dictionary and review tiles are collapsed by default ("أدوات سريعة"); each course also has its own dictionary/review page (button inside its block, or `index.html#gram` etc., which keep working).
 - Tests: `python3 tools/lsn3/t_levels.py` (the data), `node tools/lsn3/t10.js` (the hub: structure, completion parity, dashboard, tracker, migration), and the older `HUB=index.html node tools/hubt/tg.js` / `th.js` (print-style checks of the course pages).
+
+## Review games (Phase 3a)
+The review tab of every course has a row "ألعاب المراجعة" with four small cards. A game opens full-screen (Exit button at the top, Escape also closes it) and works on the words of the course the student is in. All four are always available.
+
+| Game | What happens | Points |
+|---|---|---|
+| تحدي الوقت (time attack) | 60 seconds; a word is shown and the student picks its pinyin or its Arabic meaning among 4 options; no round limit, words are cycled | **2 per right answer x streak multiplier**: x1 for a streak of 1-2, x2 for 3-5, x3 from 6; a wrong answer scores 0 and resets the streak |
+| اقرأ بدون بينيين (read without help) | the characters only; "reveal" shows pinyin and meaning; the student rates "عرفتها / لم أعرفها" | **2** per word known |
+| اكتب من البينيين (type from pinyin) | the pinyin is shown (in the student's tone setting); the student types the characters | **4** per correct word |
+| اكتب من الترجمة (type from Arabic) | the Arabic meaning is shown; the student types the characters | **5** per correct word |
+
+- **Points** are added to the daily goal (`S.pts`, inside `zh-hub-v1`) and mark the day for the streak, so the dashboard ring and calendar count them. They are separate from the lesson XP total ("مجموع نقاطك"). The flashcard buttons keep their own 2 review points per rated word (`REVIEW_PTS`); the games do not add that on top. The best score per game is kept in `zh-hub-v1.gbest` (no new storage key; old data without it works).
+- **Rounds** have 10 words (fewer only if the pool is smaller). A word answered wrong (or skipped) comes back once at the end of the round, never twice.
+- **Word pool:** words due for review first, then the other words of the review list, then the words of lessons the student has progressed in (the same lesson progress the dashboard shows). Under 4 words the hub says in one Arabic line which lessons to open first and the games use the whole course, so a game never starts empty.
+- **Scheduling:** every answer goes through `schedule(zh, r)` in `tools/hub.html`, the same function the flashcard buttons use (`rate()` calls it too): right = "good" (2), wrong or skipped = "again" (0). It applies to words that are in the review list; a word that is not in the list is never added silently: it appears on the end screen under "كلمات للتدرّب عليها" with an "add to review" button.
+- **Typed answers:** characters only, spaces and punctuation ignored, exact match. Type from pinyin also accepts any other word of the course with the same pinyin including tones (`zhUI.normPinyin`); typing pinyin instead of characters is only a hint, not a mistake. Type from Arabic accepts any word of the course whose Arabic meaning is the same (vowel marks and alef forms ignored). The input has no autocorrect/autocapitalize/spellcheck, Enter submits, and a "skip" button counts as not known. A wrong answer shows the correct word with pinyin and meaning.
+- No sounds in this batch. Pinyin is always shown through the tone setting of `zh-ui.js` (colours, colour-blind palette, marks, numbers).
+- Test: `node tools/hubt/t11.js` (fake clock for the timer; modes with fresh and pre-populated state; schedule parity with the flashcard buttons; matching; migration from an old state; 44px targets; light/dark).
+
