@@ -30,11 +30,23 @@ def size_of(file):
     snip = open('legacy/g%s.data.js' % num, encoding='utf8').read()
     return {'v': len(jslit.var(snip, 'VOCAB')), 'd': len(jslit.var(snip, 'DLG')), 'acts': jslit.var(snip, 'ACTS'), 'topics': False}
 
+def sents_of(file):
+    """The lesson's own sentences (tokens, text, pinyin, Arabic) for the hub's sentence builder: nothing is invented.
+    Generated lessons keep them in D['sent']; the frozen lessons 6-8 in SENT of legacy/g<N>.data.js; culture lessons have none."""
+    D = page_D(file)
+    if 'vocab' in D:
+        raw = D.get('sent') or []
+    else:
+        num = re.search(r'-(\d+)\.html$', file).group(1)
+        raw = jslit.var(open('legacy/g%s.data.js' % num, encoding='utf8').read(), 'SENT')
+    return [{'t': x['tokens'], 'zh': x['zh'], 'py': x.get('py', ''), 'ar': x.get('ar', '')} for x in raw if x.get('tokens') and len(x['tokens']) >= 2]
+
 def build(levels_path='../levels.json'):
     doc = json.load(open(levels_path, encoding='utf8'))
     for cid, c in doc['courses'].items():
         for l in c.get('lessons', []):
             l['size'] = size_of(l['file'])
+            l['sents'] = sents_of(l['file'])
     return doc
 
 if __name__ == '__main__':
