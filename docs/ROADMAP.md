@@ -62,7 +62,7 @@ Measurements come from the audit at 390px and 1280px; re-measure after fixing.
 6. **Step-by-step character writing (stroke order):** use Hanzi Writer (pinned version, CDN allowed) to animate stroke order, then let the student write with wrong-stroke correction and hints. Inspect how the current "Writing" tab works first, then decide how to integrate. Without internet or if the library fails to load, fall back to the current display.
 
 ## Phase 3: Interaction and review
-**Status (item 7):** the four review mini-games are in the hub's review tab (time attack, read without help, type from pinyin, type from Arabic); details and point values in tools/README.md. Item 8 (speaking) is not started.
+**Status (item 7):** the review tab has a section of real games (time attack, memory match, falling words, listen and pick with tone battle, sentence builder race, daily challenge) and a section of exercises (read without help, type from pinyin, type from Arabic); details and point values in tools/README.md. Earlier note: the four review mini-games are in the hub's review tab (time attack, read without help, type from pinyin, type from Arabic); details and point values in tools/README.md. Item 8 (speaking) is not started.
 
 7. **Review mini-games** inside the hub's review tab, based on spaced-review words (`S.dues`), with at least four modes:
    - Time attack (60 seconds, points and streak).

@@ -197,7 +197,7 @@ function syllables(s){
 function normPinyin(s){
   return toNumbers(String(s||'')).toLowerCase().replace(/v/g,'\u00fc').replace(/[\s'\u2019\-.,;:!?\u3002\uff0c\uff01\uff1f]+/g,'').replace(/5/g,'');
 }
-window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey};
+window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey,voiceStatus:function(){return voiceStatus()}};
 
 /* ---------- quiet hint when the device has no Chinese voice ---------- */
 var voiceChecked=false;
@@ -209,17 +209,29 @@ function showVoiceHint(msg){
   bar.lastChild.addEventListener('click',function(){cfg.voiceHint='off';save(cfg);if(bar.parentNode)bar.parentNode.removeChild(bar)});
   hdr.parentNode.insertBefore(bar,hdr.nextSibling);
 }
+var VOICE_NOSUPPORT='هذا المتصفح لا يدعم النطق الصوتي، لذلك لن تسمع الجمل. جرّب متصفحاً حديثاً مثل Chrome أو Safari.';
+var VOICE_NONE='لم نجد صوتاً صينياً على جهازك، لذلك قد لا يعمل النطق. ثبّت صوت اللغة الصينية من إعدادات الصوت في جهازك، أو جرّب متصفحاً آخر.';
+/* the same detection as the hint below, as a value (used by the hub's listening games):
+   s = 'yes' (a zh/cmn/yue voice exists) | 'no' | 'nosupport' | 'unknown' (voices not listed yet: say nothing rather than raise a false alarm) */
+function voiceStatus(){
+  var ss=window.speechSynthesis;
+  if(!ss)return {s:'nosupport',msg:VOICE_NOSUPPORT,short:'النطق الصوتي غير مدعوم في هذا المتصفح'};
+  var v=ss.getVoices?ss.getVoices():[];
+  if(!v.length)return {s:'unknown'};
+  for(var i=0;i<v.length;i++){if(/^(zh|cmn|yue)/i.test(v[i].lang||''))return {s:'yes'}}
+  return {s:'no',msg:VOICE_NONE,short:'لا يوجد صوت صيني على جهازك'};
+}
 function checkVoice(){
   if(voiceChecked||cfg.voiceHint==='off')return;
   var ss=window.speechSynthesis;
-  if(!ss){voiceChecked=true;showVoiceHint('هذا المتصفح لا يدعم النطق الصوتي، لذلك لن تسمع الجمل. جرّب متصفحاً حديثاً مثل Chrome أو Safari.');return}
+  if(!ss){voiceChecked=true;showVoiceHint(VOICE_NOSUPPORT);return}
   function decide(final){
     if(voiceChecked)return;
     var v=ss.getVoices?ss.getVoices():[];
     if(!v.length){return}                       /* voices not listed (yet): say nothing rather than raise a false alarm */
     voiceChecked=true;
     var zh=false;for(var i=0;i<v.length;i++){if(/^(zh|cmn|yue)/i.test(v[i].lang||'')){zh=true;break}}
-    if(!zh)showVoiceHint('لم نجد صوتاً صينياً على جهازك، لذلك قد لا يعمل النطق. ثبّت صوت اللغة الصينية من إعدادات الصوت في جهازك، أو جرّب متصفحاً آخر.');
+    if(!zh)showVoiceHint(VOICE_NONE);
   }
   decide();
   if(!voiceChecked){
