@@ -1,68 +1,69 @@
-/* Pictures test (Phase 4a pilot: Lesson 7).   node tools/lsn3/t_pictures.js     (run from the repo root)
-   Checks: every image file referenced by lesson-7 exists; every image has Arabic alt text, width/height, lazy loading; the total weight of the
-   lesson's photos is under 400 KB (each under 40 KB); each photo has a credit with a free licence, author and source, a line in
-   vendor/images/NOTICE.md and an entry in the hub's About tab; the fallback works (blocked images show the old icon); position words have
-   drawings; other pages do not reference the images. */
-const fs=require('fs'),path=require('path'),cp=require('child_process');
-let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
+/* Pictures test (Lesson 7: drawn icons only).   node tools/lsn3/t_pictures.js     (run from the repo root)
+   Checks: no photo, image file, image credit or preview switch is left anywhere; every picture of the lesson is an inline SVG icon marked
+   aria-hidden (the word beside it is the text alternative); the 11 position words and 知道 / 没关系 have drawings and are in the picture-quiz pool;
+   the page stays light; at 360px the vocabulary list fits the screen (no horizontal overflow, every speaker button on screen, fixed 44px picture
+   frames); the flashcard and the picture quiz show icons in the light and dark themes; the hub's About tab has no image-credits card. */
+const fs=require('fs'),path=require('path');
+let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright','/opt/node22/lib/node_modules/playwright']){try{({chromium}=require(m));break}catch(e){}}
 const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
 const root=process.cwd(),R='file://'+root+'/';
 let fails=0;const ok=(n,c,x)=>{console.log((c?'ok   ':'FAIL ')+n+(!c&&x!==undefined?'  '+(typeof x==='string'?x:JSON.stringify(x)):''));if(!c)fails++};
-const spec=JSON.parse(fs.readFileSync('tools/images.json','utf8')),credits=JSON.parse(fs.readFileSync('vendor/images/credits.json','utf8'));
+const POS=['左边','右边','前边','后边','上边','下边','里边','外边','旁边','这儿','那儿'];
 (async()=>{
-console.log('--- the files (no browser)');
-const chk=cp.spawnSync('python3',['tools/images.py','check'],{encoding:'utf8'});
-ok('tools/images.py check: every file exists, WebP 480x360, under the size limit, with a free-licence credit',chk.status===0,chk.stdout+chk.stderr);
-const ids=spec.images.map(i=>i.id),files=ids.map(i=>path.join(root,spec.out,i+'.webp'));
-const sizes=files.map(f=>fs.existsSync(f)?fs.statSync(f).size:-1);
-ok('every photo is under 40 KB',sizes.every(s=>s>0&&s<=40*1024),sizes);
-ok('total weight of the lesson\'s photos is under 400 KB ('+Math.round(sizes.reduce((a,b)=>a+b,0)/1024)+' KB)',sizes.reduce((a,b)=>a+b,0)<400*1024);
-const notice=fs.readFileSync('vendor/images/NOTICE.md','utf8');
-ok('every photo has a credit: author, free licence (CC0 / CC BY / CC BY-SA), a commons.wikimedia.org page, and a line in vendor/images/NOTICE.md',credits.length===ids.length&&credits.every(c=>c.author&&/^(CC0|CC BY|Public domain)/i.test(c.licence)&&!/\bN[CD]\b/.test(c.licence)&&c.page_url.startsWith('https://commons.wikimedia.org/wiki/File:')&&notice.includes(path.basename(c.file))&&notice.includes(c.page_url)));
-ok('the data source lists exactly these images (tools/lsn3/legacy/g7.data.js PHOTO map)',await (async()=>{const src=fs.readFileSync('tools/lsn3/legacy/g7.data.js','utf8');const m=/var PHOTO=\{([^}]*)\}/.exec(src);const used=[...new Set([...m[1].matchAll(/:'([a-z]+)'/g)].map(x=>x[1]))].sort();return JSON.stringify(used)===JSON.stringify(ids.slice().sort())})());
-const others=fs.readdirSync(root).filter(f=>/^(lesson|prac|lis|biz|cult)-\d+\.html$/.test(f)&&f!=='lesson-7.html'&&fs.readFileSync(f,'utf8').includes('vendor/images/'));
-ok('only lesson-7 uses the photos (no other page references vendor/images)',others.length===0,others);
+console.log('--- nothing left of the photo / illustration experiments (no browser)');
+ok('no vendor/images folder, no tools/images.py or images.json',!fs.existsSync('vendor/images')&&!fs.existsSync('tools/images.py')&&!fs.existsSync('tools/images.json')&&!fs.existsSync('tools/scenes.py')&&!fs.existsSync('tools/illus_b.py'));
+const pages=fs.readdirSync(root).filter(f=>/\.html$/.test(f));
+const bad=pages.filter(f=>/vendor\/images|\.webp|class="pimg"|pics=|حقوق الصور/.test(fs.readFileSync(f,'utf8')));
+ok('no page (lessons, hub) references image files, photo credits or a preview switch',bad.length===0,bad);
+const src=fs.readFileSync('tools/lsn3/legacy/g7.data.js','utf8');
+ok('the lesson data snippet has no photo or illustration code (PHOTO, PH_ALT, ILLUS, PICS)',!/\bPHOTO\b|\bPH_ALT\b|\bILLUS|\bPICS\b|pimg/.test(src));
+ok('lesson-7.html stays light (under 330 KB, one file, no image requests)',fs.statSync('lesson-7.html').size<330*1024,fs.statSync('lesson-7.html').size);
 
 const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
-const open=async(o={})=>{const c=await b.newContext({viewport:{width:360,height:780},hasTouch:true,colorScheme:o.dark?'dark':'light'});const p=await c.newPage();p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));
-  if(o.block)await p.route(/vendor\/images\/.*\.webp/,r=>r.abort());await p.goto(R+'lesson-7.html');await p.waitForTimeout(500);return {c,p}};
-console.log('--- in the page (vocabulary cards, picture quiz, flashcard)');
+const open=async(o={})=>{const c=await b.newContext({viewport:{width:360,height:780},hasTouch:true,colorScheme:o.dark?'dark':'light'});const p=await c.newPage();p.errs=[];p.reqs=[];p.on('pageerror',e=>p.errs.push(e.message));p.on('request',r=>{if(/\.(webp|png|jpe?g|gif|svg)(\?|$)/i.test(r.url()))p.reqs.push(r.url())});
+  await p.goto(R+'lesson-7.html');await p.waitForTimeout(500);return {c,p}};
+console.log('--- vocabulary list at 360px (light)');
 {const {c,p}=await open();
- const imgs=await p.$$eval('#p-vocab .row img.pimg',e=>e.map(x=>({src:x.getAttribute('src'),alt:x.alt,w:x.getAttribute('width'),h:x.getAttribute('height'),lazy:x.getAttribute('loading'),dec:x.getAttribute('decoding')})));
- ok('the vocabulary list shows the photos of the place words (13 words, 11 files)',imgs.length===13&&new Set(imgs.map(i=>i.src)).size===11,imgs.length);
- ok('every referenced image file exists',imgs.every(i=>fs.existsSync(path.join(root,i.src))),imgs.filter(i=>!fs.existsSync(path.join(root,i.src))).map(i=>i.src));
- ok('every image has Arabic alt text, width and height set (no layout shift) and lazy loading',imgs.every(i=>/[؀-ۿ]{4,}/.test(i.alt)&&i.w==='480'&&i.h==='360'&&i.lazy==='lazy'&&i.dec==='async'),imgs.filter(i=>!(/[؀-ۿ]{4,}/.test(i.alt))).map(i=>i.src));
- ok('the photo frame has a fixed size (44px in the list), so loading changes nothing',await p.$$eval('#p-vocab .row .pic.pf',e=>e.every(x=>{const r=x.getBoundingClientRect();return Math.round(r.width)===44&&Math.round(r.height)===44})));
- ok('every photo keeps its old icon underneath as a fallback (an svg in the same frame)',await p.$$eval('#p-vocab .row .pic.pf',e=>e.every(x=>x.querySelector('svg.il')&&x.querySelector('img.pimg'))));
- ok('the vocabulary list fits a 360px screen: no horizontal overflow and every speaker button is on screen (two rows were wider than the screen before)',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth&&[...document.querySelectorAll('#p-vocab .row .spk')].every(b=>{const r=b.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth})));
- const pos=['左边','右边','前边','后边','上边','下边','里边','外边','旁边','这儿','那儿'];
- ok('the 11 position / distance words now have a drawing each (they had none)',await p.evaluate(pos=>pos.every(w=>{const row=[...document.querySelectorAll('#p-vocab .row')].find(r=>r.querySelector('.rz').textContent.replace(/\s/g,'')===w||r.querySelector('.rz').textContent.includes(w));return row&&row.querySelector('.rp svg.il')}),pos));
- ok('"know" and "no problem" have new drawings; place words with a photo are exactly the ones in the data',await p.$$eval('#p-vocab .row',e=>e.length===47));
+ const rows=await p.$$eval('#p-vocab .row',e=>e.map(r=>({w:r.querySelector('.rz').textContent.replace(/\s/g,''),svg:!!r.querySelector('.rp svg.il'),hid:r.querySelector('.rp svg.il')?r.querySelector('.rp svg.il').getAttribute('aria-hidden')==='true':null,img:!!r.querySelector('img')})));
+ ok('the vocabulary list has 47 words and no <img> at all',rows.length===47&&rows.every(r=>!r.img),rows.filter(r=>r.img).map(r=>r.w));
+ ok('37 words have a drawn icon, each marked aria-hidden',rows.filter(r=>r.svg).length===37&&rows.filter(r=>r.svg).every(r=>r.hid),rows.filter(r=>r.svg).length);
+ ok('the 11 position / distance words each have a drawing',POS.every(w=>{const r=rows.find(x=>x.w===w);return r&&r.svg}),POS.filter(w=>!(rows.find(x=>x.w===w)||{}).svg));
+ ok('the place words 教学楼 图书馆 运动场 体育馆 银行 中国银行 书店 邮局 have their original icon',['教学楼','楼','图书馆','运动场','体育馆','饭馆','超市','银行','中国银行','商店','书店','邮局','宿舍'].every(w=>{const r=rows.find(x=>x.w===w);return r&&r.svg}));
+ ok('the picture frames have a fixed size (44px in the list)',await p.$$eval('#p-vocab .row .pic',e=>e.length>0&&e.every(x=>{const r=x.getBoundingClientRect();return Math.round(r.width)===44&&Math.round(r.height)===44})));
+ ok('the list fits a 360px screen: no horizontal overflow and every speaker button is on screen (rows 运动场 and 中国银行 were wider than the screen)',await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth&&[...document.querySelectorAll('#p-vocab .row .spk')].every(b=>{const r=b.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth})));
  // flashcard
  await p.click('#p-vocab .row:nth-child(1)');await p.click('#fc');await p.waitForTimeout(150);
- ok('the flashcard back shows a larger photo (92px) with alt text',await p.$eval('#fc .back .pic.pf img.pimg',e=>/[؀-ۿ]/.test(e.alt)&&e.closest('.pic').getBoundingClientRect().width>=90));
+ ok('the flashcard back shows the 92px icon',await p.$eval('#fc .back .pic',e=>!!e.querySelector('svg.il')&&Math.round(e.getBoundingClientRect().width)>=90));
  // picture quiz
  await p.click('[data-tab=practice]');await p.waitForTimeout(150);
- let sawPhoto=0,sawDrawing=0,okAlt=true;
- for(let k=0;k<12;k++){await p.click('[data-act=start][data-k=pic]');await p.waitForTimeout(100);
-  for(let q=0;q<5;q++){const r=await p.evaluate(()=>{const pb=document.querySelector('#qbody .picbig');const im=pb&&pb.querySelector('img.pimg');return {photo:!!im,alt:im?im.alt:'',draw:!!(pb&&pb.querySelector('svg.il')&&!im),size:pb?Math.round(pb.getBoundingClientRect().width):0}});
-   if(r.photo){sawPhoto++;if(!/[؀-ۿ]{4,}/.test(r.alt))okAlt=false}if(r.draw)sawDrawing++;
+ let seen=new Set(),icons=0,imgs=0,sizeOk=true;
+ for(let k=0;k<16;k++){await p.click('[data-act=start][data-k=pic]');await p.waitForTimeout(100);
+  for(let q=0;q<5;q++){const r=await p.evaluate(()=>{const pb=document.querySelector('#qbody .picbig');const q=window.__q();const it=q.list[q.i];const ans=it.opts.find(o=>o.ok);return {svg:!!(pb&&pb.querySelector('svg.il')),img:!!(pb&&pb.querySelector('img')),size:pb?Math.round(pb.getBoundingClientRect().width):0,ans:ans?(ans.zh||ans.t||ans.label||JSON.stringify(ans)):''}});
+   if(r.svg)icons++;if(r.img)imgs++;if(r.size&&r.size<130)sizeOk=false;seen.add(r.ans);
    const opt=await p.evaluate(()=>{const q=window.__q();const it=q.list[q.i];return it.opts.findIndex(o=>o.ok)});
-   await p.click('#qbody .opt:nth-child('+(opt+1)+')');await p.click('#qnext');await p.waitForTimeout(40)}
-  await p.waitForTimeout(80);if(await p.$('[data-act=qexit]'))await p.click('[data-act=qexit]').catch(()=>{});}
- ok('the picture quiz shows photos (with Arabic alt text) and drawings, inside the 140px frame',sawPhoto>0&&sawDrawing>0&&okAlt,{sawPhoto,sawDrawing});
- ok('no page errors',p.errs.length===0,p.errs);await c.close()}
-console.log('--- fallback: when the images cannot load the old icons show');
-{const {c,p}=await open({block:true});
- await p.evaluate(()=>{document.querySelectorAll('#p-vocab .row img.pimg').forEach(i=>{i.loading='eager'})});await p.waitForTimeout(700);
- const r=await p.$$eval('#p-vocab .row .pic.pf',e=>e.map(x=>{const im=x.querySelector('img.pimg'),sv=x.querySelector('svg.il'),r=sv.getBoundingClientRect();return {failed:im.classList.contains('failed')&&getComputedStyle(im).display==='none',icon:r.width>=20&&r.height>=20&&getComputedStyle(sv).display!=='none'}}));
- ok('all 13 blocked photos are hidden and their old icon is visible instead',r.length===13&&r.every(x=>x.failed&&x.icon),r);
- await c.close()}
+   await p.click('#qbody .opt:nth-child('+(opt+1)+')');await p.click('#qnext');await p.waitForTimeout(30)}
+  await p.waitForTimeout(60);if(await p.$('[data-act=qexit]'))await p.click('[data-act=qexit]').catch(()=>{});}
+ const hit=POS.filter(w=>[...seen].some(s=>String(s).includes(w)));
+ ok('the picture quiz shows icons (140px frame), never a photo',icons>=40&&imgs===0&&sizeOk,{icons,imgs,sizeOk});
+ ok('position words appear as picture-quiz answers (the pool grew from 18 to 29 words)',hit.length>=3,{hit});
+ ok('no image request was made and no page error',p.reqs.length===0&&p.errs.length===0,{reqs:p.reqs,errs:p.errs});await c.close()}
+{// the place icons are exactly the ones the lesson had before the photo experiment (commit 15e8324 = main before Phase 4a)
+ const cp=require('child_process');const r=cp.spawnSync('git',['show','15e8324:lesson-7.html'],{encoding:'utf8',maxBuffer:1<<28});
+ if(r.status!==0){console.log('skip  original-icon comparison (commit 15e8324 not in this clone)')}else{
+  const tmp=path.join(require('os').tmpdir(),'l7-orig-'+process.pid+'.html');fs.writeFileSync(tmp,r.stdout);
+  const mk=async(f)=>{const c=await b.newContext({viewport:{width:360,height:780}});const p=await c.newPage();await p.goto('file://'+f);await p.waitForTimeout(400);
+   const m=await p.$$eval('#p-vocab .row',e=>Object.fromEntries(e.map(r=>[r.querySelector('.rz').textContent.replace(/\s/g,''),r.querySelector('.rp svg.il')?r.querySelector('.rp svg.il').innerHTML:null])));await c.close();return m};
+  const was=await mk(tmp),now=await mk(root+'/lesson-7.html');fs.unlinkSync(tmp);
+  const same=Object.keys(was).filter(w=>was[w]!==null&&!['知道','没关系'].includes(w));
+  ok('every word that had an icon before Phase 4a still has exactly that icon ('+same.length+' words, 知道 and 没关系 excluded: redrawn on purpose)',same.length>=24&&same.every(w=>now[w]===was[w]),same.filter(w=>now[w]!==was[w]));
+  ok('知道 and 没关系 have the new drawings (different from the old ones)',now['知道']&&now['没关系']&&now['知道']!==was['知道']&&now['没关系']!==was['没关系']);}}
+console.log('--- dark theme');
 {const {c,p}=await open({dark:true});
- ok('dark theme: the photo frames and drawings render (frames have the theme background, no errors)',await p.$$eval('#p-vocab .row .pic.pf',e=>e.length===13)&&p.errs.length===0);await c.close()}
-console.log('--- credits on the hub About tab');
+ ok('dark theme: icons render in the list, no overflow, no errors',await p.$$eval('#p-vocab .row .pic svg.il',e=>e.length===37&&e.every(s=>{const r=s.getBoundingClientRect();return r.width>=20&&r.height>=20}))&&await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)&&p.errs.length===0,p.errs);
+ ok('dark theme: the icon strokes are visible (not the page background colour)',await p.evaluate(()=>{const s=document.querySelector('#p-vocab .row .pic svg.il *');const st=s&&getComputedStyle(s);return !!st&&st.stroke!=='none'&&st.stroke!==getComputedStyle(document.body).backgroundColor}));
+ await c.close()}
+console.log('--- hub About tab');
 {const c=await b.newContext({viewport:{width:360,height:780},isMobile:true});const p=await c.newPage();await p.goto(R+'index.html');await p.waitForTimeout(400);await p.click('[data-go=tea]');await p.waitForTimeout(150);
- const li=await p.$$eval('#credits li',e=>e.map(x=>({txt:x.textContent,links:[...x.querySelectorAll('a')].map(a=>a.href)})));
- ok('the About tab lists every photo: the words, the author, the licence link and the Wikimedia Commons page',li.length===credits.length&&credits.every((c,i)=>li[i].txt.includes(c.author)&&li[i].txt.includes(c.licence)&&li[i].links.includes(c.page_url)));
+ ok('the About tab has no image-credits card',(await p.$('#credits'))===null&&!(await p.evaluate(()=>document.body.innerText.includes('حقوق الصور'))));
  await c.close()}
 await b.close();console.log(fails?fails+' FAILED':'all passed');process.exit(fails?1:0)})();

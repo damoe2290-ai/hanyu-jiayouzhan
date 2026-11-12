@@ -23,7 +23,7 @@ function firstDiff(a,b){const x=a.split('\n'),y=b.split('\n');for(let i=0;i<Math
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));let bad=0,total=0;
 const res=[];
 for(const n of LESSONS){const o=await open(b,OLD,n),w=await open(b,NEW,n);
-  /* Intended difference since the pictures pilot (Lesson 7): the picture quiz pool (PICQ) grew from 18 to 29 words (the position words got drawings),
+  /* Intended difference (Lesson 7): the picture quiz pool (PICQ) grew from 18 to 29 words (the 11 position words got drawings),
      so with the fixed random seed the first question of the 'pic' and 'all' quizzes is another word. Only these two checks, only in lesson 7. */
   const intended=name=>n==='7'&&/^quiz (pic|all) first question$/.test(name);
   const check=(name,a,c)=>{total++;if(a===c){res.push(['ok',n,name]);return}if(intended(name)){res.push(['ok',n,name+' (intended: larger picture pool)']);return}bad++;res.push(['DIFF',n,name,firstDiff(a,c)])};
