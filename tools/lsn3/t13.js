@@ -17,7 +17,7 @@ async function open(o={}){const c=await b.newContext({viewport:{width:o.w||360,h
  if(o.store)await c.addInitScript(([k,v])=>{if(localStorage.getItem('__seeded')===null){localStorage.setItem(k,v);localStorage.setItem('__seeded','1')}},o.store);
  const p=await c.newPage();p.errs=[];p.on('pageerror',e=>p.errs.push(e.message));await p.goto(R+(o.page||PAGE));await p.waitForTimeout(450);return {c,p}}
 const tab=async(p,t)=>{await p.click('[data-tab='+t+']');await p.waitForTimeout(120)};
-const swipe=async(p,sel,dx,dy=0)=>{const bb=await (await p.$(sel)).boundingBox();const x=bb.x+bb.width/2,y=bb.y+bb.height/2;await p.mouse.move(x,y);await p.mouse.down();await p.mouse.move(x+dx/2,y+dy/2,{steps:3});await p.mouse.move(x+dx,y+dy,{steps:3});await p.mouse.up();await p.waitForTimeout(120)};
+const swipe=async(p,sel,dx,dy=0,wait=120)=>{const bb=await (await p.$(sel)).boundingBox();const x=bb.x+bb.width/2,y=bb.y+bb.height/2;await p.mouse.move(x,y);await p.mouse.down();await p.mouse.move(x+dx/2,y+dy/2,{steps:3});await p.mouse.move(x+dx,y+dy,{steps:3});await p.mouse.up();await p.waitForTimeout(wait)};
 const cnt=p=>p.$eval('#p-dialogue .fxtop .cnt',e=>e.textContent.replace(/\s/g,'')).catch(()=>null);
 const noOverflow=p=>p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth);
 
@@ -73,9 +73,9 @@ console.log('--- flashcard');
  ok('after the flip the card is rotated 180 degrees (rotateY) and only the back is shown',/matrix3d/.test(tr)&&await p.evaluate(()=>document.querySelector('#fc .front').hidden&&!document.querySelector('#fc .back').hidden),tr);
  await p.click('#fc');await p.waitForTimeout(800);
  ok('tap again flips back to the front',await p.evaluate(()=>!document.querySelector('#fc .front').hidden&&document.querySelector('#fc .back').hidden&&!document.querySelector('#fc').classList.contains('flipped')));
- const w0=await name();await swipe(p,'#fc',-120);
+ const w0=await name();await swipe(p,'#fc',-120,0,900);
  ok('swipe left = next card (and it does not flip the card)',(await idx()).startsWith('2/')&&await p.evaluate(()=>!document.querySelector('#fc').classList.contains('flipped')),await idx());
- await swipe(p,'#fc',120);ok('swipe right = previous card',(await idx()).startsWith('1/')&&await name()===w0,await idx());
+ await swipe(p,'#fc',120,0,900);ok('swipe right = previous card',(await idx()).startsWith('1/')&&await name()===w0,await idx());
  // review behaviour unchanged
  await p.click('#fc');await p.waitForTimeout(700);
  await p.click('[data-act=again]');await p.waitForTimeout(100);
