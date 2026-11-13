@@ -69,7 +69,7 @@ css='''
 '''
 rep('</style>\n\n<div class="wrap"',css+'</style>\n\n<div class="wrap"')
 rep("var sel=$('.tab[aria-selected=\"true\"]');if(sel&&sel.scrollIntoView){try{sel.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}","var sel=$('.tab[aria-selected=\"true\"]'),nv=$('.tabs');if(sel&&nv){try{nv.scrollLeft+=sel.getBoundingClientRect().left+sel.offsetWidth/2-(nv.getBoundingClientRect().left+nv.clientWidth/2)}catch(e){}}")
-rep('  </main>','  </main>\n  <footer class="cfoot"><span dir="ltr">© 2026 Dr. Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>')
+rep('  </main>','  </main>\n  <footer class="cfoot"><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>')
 rep('</style>\n\n<div class="wrap"','.cfoot{margin:28px 0 12px;padding-top:12px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px;line-height:1.6}\n</style>\n\n<div class="wrap"')
 open('tplc.html','w',encoding='utf8').write(t)
 print(len(t))

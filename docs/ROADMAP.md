@@ -1,7 +1,7 @@
 # Task: Develop the 汉语加油站 platform based on student feedback
 
 ## Context
-- Static HTML site teaching Chinese to Arabic speakers. Instructor: Dr. Mahmod Alsideig (大漠老师), University of Jeddah.
+- Static HTML site teaching Chinese to Arabic speakers. Instructor: Mahmod Alsideig (大漠老师), University of Jeddah.
 - Repo: `damoe2290-ai/hanyu-jiayouzhan` (branch `main`), deployed on Vercel: https://hanyu-jiayouzhan.vercel.app
 - `index.html` = home page (courses, dictionary, spaced review), generated from `tools/hub.html`.
 - Lessons are standalone HTML pages: `lesson-N` (Grammar 1 / Foreign Language, shared files), `prac-N` (Reading 1), `lis-N` (Listening 1), `biz-N` (Practical Chinese), `cult-N` (Culture).
@@ -10,8 +10,8 @@
 - Audience: university students, mostly on phones. Design for 390px first, then 1100px.
 
 ## Fixed constraints (do not violate)
-1. **Do not change name/title strings** ("汉语加油站", "أ. محمود الصديق", "Dr. Mahmod Alsideig · 大漠老师", course names and lesson titles, etc.).
-2. The English copyright footer exists on the home page and the culture lessons: "© 2026 Dr. Mahmod Alsideig · 大漠老师 · All rights reserved." plus a no-copy line. Add it to any new page; ask before rolling it out to all old lessons.
+1. **Do not change name/title strings** ("汉语加油站", "أ. محمود الصديق", "Mahmod Alsideig · 大漠老师", course names and lesson titles, etc.). One explicit exception was made by the owner: the English name is now "Mahmod Alsideig" (the "Dr." was removed everywhere); the Arabic name and honorifics are unchanged.
+2. The English copyright footer exists on the home page and the culture lessons: "© 2026 Mahmod Alsideig · 大漠老师 · All rights reserved." plus a no-copy line. Add it to any new page; ask before rolling it out to all old lessons.
 3. Student-facing UI text is Arabic. Questions directed at me must be multiple-choice (numbered options).
 4. No heavy libraries and no new build step. Pinned-version CDN libraries are allowed, but always with a **graceful fallback that works without them**.
 5. Keep performance: a single lesson file under 250KB where possible.
