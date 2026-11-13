@@ -11,6 +11,10 @@ const R='file://'+process.cwd()+'/',HUBF=process.env.HUB||'index.html';
 let fails=0;const ok=(n,c,x)=>{console.log((c?'ok   ':'FAIL ')+n+(!c&&x!==undefined?'  '+(typeof x==='string'?x:JSON.stringify(x)):''));if(!c)fails++};
 const T0=new Date('2026-06-01T10:00:00Z'),NAMES=['تحدي الوقت','اقرأ بدون بينيين','اكتب من البينيين','اكتب من الترجمة'],MODES=['ta','read','typepy','typear'];
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+/* the first-visit welcome of the hub (Phase 6c) would sit on top of a fresh hub: these older tests are about other things, so every context auto-skips it (t16.js and hubt/t17.js test the welcome itself) */
+{const nw=()=>{document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{const x=document.querySelector('#wel .wl-act [data-wl=skip]');if(x)x.click()},0))};const nc=b.newContext.bind(b),np=b.newPage.bind(b);
+ b.newContext=async o=>{const c=await nc(o);await c.addInitScript(nw);return c};b.newPage=async o=>{const c=await nc(o);await c.addInitScript(nw);return c.newPage()}}
+
 const all=[];
 /* a hub page on the review tab of a course, with a paused fake clock and optional pre-populated localStorage */
 async function open(init={},o={}){

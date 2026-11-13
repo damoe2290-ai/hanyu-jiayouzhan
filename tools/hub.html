@@ -136,6 +136,22 @@ details.tools>summary{cursor:pointer;min-height:44px;display:flex;align-items:ce
 .gcard{display:grid;justify-items:start;align-content:start;gap:2px;min-height:96px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);text-align:start}
 .gcard .ic{color:var(--accent);width:24px;height:24px}.gcard b{font-size:15px}.gcard .mut{font-size:12px;line-height:1.4}
 .gnote{margin-top:8px}
+.wl{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--fg) 45%,transparent);display:flex;align-items:flex-end;justify-content:center;animation:gfade .15s ease-out}
+.wl-in{position:relative;width:100%;max-width:520px;max-height:92vh;overflow-y:auto;background:var(--bg);border-radius:20px 20px 0 0;padding:22px max(18px,env(safe-area-inset-left)) calc(20px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+@media(min-width:560px){.wl{align-items:center}.wl-in{border-radius:20px}}
+.wl-x{position:absolute;top:10px;inset-inline-start:10px;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);display:grid;place-items:center;cursor:pointer;font-size:20px}
+.wl h2{font-size:22px;margin:8px 0 4px;padding-inline-start:48px}
+.wl h3{font-size:15px;margin:18px 0 8px;color:var(--muted)}
+.wl-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wl-opts .wl-opt:last-child{grid-column:1/-1}
+.wl-opt{appearance:none;text-align:start;min-height:48px;padding:8px 14px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);color:var(--fg);font:inherit;cursor:pointer;display:grid;gap:2px}
+.wl-opt small{color:var(--muted);font-size:13px}
+.wl-opt[aria-checked="true"],.wl-opt[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.wl-goals{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.wl-goals .wl-opt{text-align:center;justify-items:center}
+.wl-act{display:grid;gap:10px;margin-top:20px;position:sticky;bottom:calc(-20px - env(safe-area-inset-bottom,0px));padding:12px 0 calc(8px + env(safe-area-inset-bottom,0px));background:var(--bg)}
+.wl-act .btn{min-height:48px;justify-content:center}
+@media(prefers-reduced-motion:reduce){.wl{animation:none}}
 .gm{position:fixed;inset:0;z-index:40;background:var(--bg);overflow-y:auto;padding:0 max(16px,env(safe-area-inset-left)) 28px;animation:gfade .15s ease-out}
 @keyframes gfade{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.gm{animation:none}}
@@ -270,7 +286,8 @@ function wotd(){if(wi<0){var d=new Date();wi=(d.getFullYear()*400+d.getMonth()*3
 var PAGODA='<svg viewBox="0 0 240 170" preserveAspectRatio="xMidYMax slice"><circle cx="190" cy="40" r="22" fill="#E0645B" opacity=".5"/><path d="M0 130c40-30 70-10 110-35s80-5 130-25v100H0z" fill="#B8322A" opacity=".12"/><g fill="#B8322A"><path d="M90 140h60v6H90z"/><path d="M100 120h40v20h-40z" opacity=".85"/><path d="M82 120h76l-10-8H92z"/><path d="M104 100h32v12h-32z" opacity=".85"/><path d="M90 100h60l-8-8H98z"/><path d="M110 82h20v10h-20z" opacity=".85"/><path d="M100 82h40l-8-8h-24z"/><path d="M119 52h2v22h-2zM110 76l10-24 10 24z"/></g><g stroke="#B8322A" stroke-width="2" fill="none" opacity=".5"><path d="M30 150c10-30 8-60 22-90M52 60c-8 4-14 2-18-4M52 60c6-8 14-8 18-4"/></g></svg>';
 /* ---------- completion: the same percentage each lesson page shows in its own progress bar (progress() in tpl.html / tplt.html),
    computed from the lesson's existing localStorage key. sz = {v words, d dialogue lines (culture: topics), acts, topics}. ---------- */
-var DONE_AT=SET.done_at||90,GOAL=SET.daily_goal||50;
+var DONE_AT=SET.done_at||90,GOAL0=SET.daily_goal||50;
+function GOALF(){return +S.goal>0?+S.goal:GOAL0}   /* the daily goal chosen on the welcome screen (zh-hub-v1.goal), else levels.json, else 50 */
 function lessonProg(l){
   var st=null;try{st=JSON.parse(localStorage.getItem(l.key))}catch(e){}
   if(!st||typeof st!=='object')return {pct:0,st:'new',xp:0};
@@ -295,7 +312,7 @@ function lastRef(){
 }
 function levelOf(c){var L=LV.levels.filter(function(v){return v.courses.indexOf(c)>-1})[0];return L?L.n:0}
 var OPEN={};   /* levels/sections the student opened or closed by hand during this visit */
-function ring(p){var r=34,c=2*Math.PI*r,f=Math.min(1,p/GOAL);return '<svg class="ring" viewBox="0 0 80 80" role="img" aria-label="نقاط اليوم '+p+' من '+GOAL+'"><circle cx="40" cy="40" r="34" class="rbg"/><circle cx="40" cy="40" r="34" class="rfg" stroke-dasharray="'+(c*f).toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 40 40)"/><text x="40" y="46" text-anchor="middle" class="rtx">'+p+'</text></svg>'}
+function ring(p){var r=34,c=2*Math.PI*r,f=Math.min(1,p/GOALF());return '<svg class="ring" viewBox="0 0 80 80" role="img" aria-label="نقاط اليوم '+p+' من '+GOALF()+'"><circle cx="40" cy="40" r="34" class="rbg"/><circle cx="40" cy="40" r="34" class="rfg" stroke-dasharray="'+(c*f).toFixed(1)+' '+c.toFixed(1)+'" transform="rotate(-90 40 40)"/><text x="40" y="46" text-anchor="middle" class="rtx">'+p+'</text></svg>'}
 function cal(){var days=S.days||[],out='',d=new Date(),t=today(),n=0;d.setDate(d.getDate()-27);
   for(var i=0;i<28;i++){var k=ymd(d),on=days.indexOf(k)>-1;if(on)n++;out+='<i class="cd'+(on?' on':'')+(k===t?' td':'')+'" title="'+k+'"></i>';d.setDate(d.getDate()+1)}
   return '<div class="cal" role="img" aria-label="أيام الدراسة في آخر 28 يوماً: '+n+'">'+out+'</div>'}
@@ -305,7 +322,7 @@ function dashboard(){
    '<div class="cont card"><span class="mut">'+(r.fresh?'ابدأ من هنا':'تابع من حيث توقفت')+'</span><b class="ct han ltr" lang="zh-CN">'+esc(tparts(r.l.t).zh)+'</b><span class="mut">'+tparts(r.l.t).ar+' · '+cn+' · '+(p.st==='new'?'لم يبدأ':p.pct+'% مكتمل')+'</span>'+
    '<div class="bar"><i style="width:'+Math.max(p.pct,3)+'%;background:var(--accent)"></i></div>'+
    '<a class="btn p go" href="'+r.l.url+'" target="_blank" rel="noopener" data-lesson="'+((r.c==='gram'||r.c==='fl')?r.i:-1)+'" data-file="'+r.l.url+'">'+ic('play')+(r.fresh?' ابدأ الدرس':' تابع')+'</a></div>'+
-   '<div class="dg card"><div class="dgi">'+ring(pt)+'<div><b>هدف اليوم</b><span class="mut">'+(pt>=GOAL?'أحسنت! أتممت هدفك':pt+' من '+GOAL+' نقطة')+'</span></div></div>'+
+   '<div class="dg card"><div class="dgi">'+ring(pt)+'<div><b>هدف اليوم</b><span class="mut">'+(pt>=GOALF()?'أحسنت! أتممت هدفك':pt+' من '+GOALF()+' نقطة')+'</span></div></div>'+
    '<div class="dgi">'+ic('flame')+'<div><b>'+sk+' '+(sk===1?'يوم':'أيام')+' متتالية</b><span class="mut">آخر 4 أسابيع</span></div></div>'+cal()+
    '<div class="dg2"><span>'+ic('repeat')+'كلمات للمراجعة الآن <b>'+due+'</b></span>'+(due&&dc?'<button class="btn" data-open="'+dc.id+':rev">راجع</button>':'')+'</div>'+
    '<div class="dg2"><span>'+ic('star')+'مجموع نقاطك <b>'+totalXp()+'</b></span></div></div></section>';
@@ -339,7 +356,7 @@ function home(){
   ''+'</div></div>';
   }
   var st=allStats(),all={length:st.all},learned=st.learned,dn=st.due,w=wotd(),wid=VOCAB.indexOf(w),on=DUE('gram')[w.zh];
-  var r=lastRef(),openN=levelOf(r.c),extraOpen=!openN&&LV.extra.courses.indexOf(r.c)>-1;
+  var r=lastRef(),openN=(r.fresh&&S.startLevel)||levelOf(r.c),extraOpen=!openN&&LV.extra.courses.indexOf(r.c)>-1;
   if(!openN&&!extraOpen)openN=LV.levels[0].n;
   var lvls=LV.levels.map(function(lv){return levelHtml(lv,OPEN['l'+lv.n]!=null?OPEN['l'+lv.n]:lv.n===openN)}).join('');
   var ex=LV.extra,eo=OPEN.extra!=null?OPEN.extra:extraOpen,eall=[];ex.courses.forEach(function(c){eall=eall.concat(LB[c])});
@@ -469,6 +486,7 @@ function gGive(pts){
  return g;
 }
 function gAnswer(w,ok,pts){
+ if(window.zhUI&&zhUI.play)zhUI.play(ok?'ok':'no');
  if(!G.nosched&&DUE()[w.zh])schedule(w.zh,ok?2:0);
  if(!G.practice)markDay();
  if(ok){G.correct++;G.score+=gGive(pts)}
@@ -738,6 +756,7 @@ function sentPool(){
 function sentWords(s){var z=cjk(s.zh),seen={},o=[];CV().forEach(function(w){var c=cjk(w.zh);if(c&&z.indexOf(c)>-1&&!seen[w.zh]){seen[w.zh]=1;o.push(w)}});return o}
 /* a sentence answer schedules the review words it contains (right = good, wrong = again) */
 function gAnswerS(s,ok,pts){
+ if(window.zhUI&&zhUI.play)zhUI.play(ok?'ok':'no');
  if(!G.nosched)sentWords(s).forEach(function(w){if(DUE()[w.zh])schedule(w.zh,ok?2:0)});
  if(!G.practice)markDay();
  if(ok){G.correct++;G.score+=gGive(pts)}
@@ -846,6 +865,7 @@ function dailyGo(){
 function gEnd(){
  if(!G||G.over)return;
  G.over=true;G.timers.forEach(function(t){clearTimeout(t);clearInterval(t)});if(G.raf)GCLK.caf(G.raf);
+ if(window.zhUI&&zhUI.play)zhUI.play('done');
  var bonus='';
  if(G.mode==='daily'&&!G.practice){   /* the one scored attempt of the day: record it and pay the points (answers + bonus) */
   var rec=G.daily;rec.hist=rec.hist||{};rec.hist[today()]=G.correct;
@@ -933,4 +953,63 @@ document.addEventListener('toggle',function(e){var t=e.target;if(t&&t.classList&
 window.addEventListener('zh-hub-updated',function(){if(syncTracker()&&tab==='home'&&!crs)render()});
 document.addEventListener('visibilitychange',function(){if(!document.hidden&&syncTracker()&&tab==='home'&&!crs)render()});
 render();
+
+/* ---------- first visit: optional, skippable welcome (choices live in zh-hub-v1: welcome, goal, startLevel; nothing is locked or hidden) ---------- */
+function hasProgress(){
+  if((S.days&&S.days.length)||(S.pts&&Object.keys(S.pts).length)||S.lastLesson||(S.last!=null)||(+S.xpSum>0)||(S.daily&&Object.keys(S.daily).length)||(S.gbest&&Object.keys(S.gbest).length))return true;
+  var d=S.dues||{};if(Object.keys(d).some(function(c){return Object.keys(d[c]||{}).length}))return true;
+  try{return Object.keys(LB).some(function(c){return LB[c].some(function(l){return localStorage.getItem(l.key)!==null})})}catch(e){return false}
+}
+function isFresh(){return !S.welcome&&!hasProgress()}
+var W=null;
+function welHtml(){
+  var lv=LV.levels.map(function(l){var cs=l.courses.map(function(c){var m=MATS.filter(function(x){return x.id===c})[0];return m?m.t:c}).join(' · ');
+    return '<button type="button" class="wl-opt" role="radio" aria-checked="'+(W.lv===l.n)+'" data-wl="lv" data-n="'+l.n+'"><b>'+l.title+'</b><small>'+cs+'</small></button>'}).join('');
+  var goals=[30,50,80].map(function(g){return '<button type="button" class="wl-opt" role="radio" aria-checked="'+(W.goal===g)+'" data-wl="goal" data-n="'+g+'"><b class="ltr">'+g+'</b><small>نقطة</small></button>'}).join('');
+  return '<div class="wl-in"><button type="button" class="wl-x" data-wl="skip" aria-label="إغلاق">&times;</button>'+
+   '<h2 id="wel-t">أهلاً بك! لنُعدّ بدايتك</h2><p class="mut">خطوة سريعة اختيارية: لا شيء يُقفل ولا يُخفى، ويمكنك التغيير لاحقاً من الإعدادات.</p>'+
+   '<h3>من أين تريد أن تبدأ؟</h3><div class="wl-opts" role="radiogroup" aria-label="المستوى">'+lv+
+   '<button type="button" class="wl-opt" role="radio" aria-checked="'+(W.lv===0)+'" data-wl="lv" data-n="0"><b>لا أعرف / ابدأ من الأول</b><small>سنفتح لك المستوى الأول</small></button></div>'+
+   '<h3>هدفك اليومي</h3><div class="wl-goals" role="radiogroup" aria-label="الهدف اليومي">'+goals+'</div>'+
+   '<h3>الأصوات (اختياري)</h3><button type="button" class="wl-opt" data-wl="snd" aria-pressed="'+W.snd+'"><b>أصوات خفيفة للإجابات والإنجازات</b><small>'+(W.snd?'مفعّلة':'متوقفة')+'</small></button>'+
+   '<div class="wl-act"><button type="button" class="btn p" data-wl="go">ابدأ</button><button type="button" class="btn" data-wl="skip">تخطي</button></div></div>';
+}
+function welcomeOpen(rerun){
+  var old=document.getElementById('wel');if(old)old.remove();
+  W={lv:S.startLevel||0,goal:+S.goal>0?+S.goal:GOAL0,snd:!!(window.zhUI&&zhUI.soundOn&&zhUI.soundOn()),rerun:!!rerun,from:document.activeElement};
+  if([30,50,80].indexOf(W.goal)<0)W.goal=50;
+  var el=document.createElement('div');el.id='wel';el.className='wl';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-labelledby','wel-t');
+  el.innerHTML=welHtml();document.body.appendChild(el);document.documentElement.style.overflow='hidden';
+  var f=el.querySelector('[aria-checked="true"]')||el.querySelector('button');if(f)f.focus();
+}
+function welcomeClose(apply){
+  var el=document.getElementById('wel');if(!el||!W)return;
+  if(apply){
+    S.welcome={done:1,at:Date.now(),level:W.lv,goal:W.goal};S.goal=W.goal;S.startLevel=W.lv||0;
+    OPEN={};if(W.lv)OPEN['l'+W.lv]=true;else if(LV.levels.length)OPEN['l'+LV.levels[0].n]=true;   /* only the chosen level is open; the others stay one tap away */
+    if(window.zhUI&&zhUI.setSound&&zhUI.soundOn&&zhUI.soundOn()!==W.snd)zhUI.setSound(W.snd);   /* the sound choice is applied only by "ابدأ", never by skipping */
+    save();
+  }else if(!S.welcome){S.welcome={done:1,skipped:1,at:Date.now()};save()}
+  var from=W.from;W=null;el.remove();document.documentElement.style.overflow='';
+  render();if(from&&from.focus&&document.body.contains(from))try{from.focus()}catch(e){}
+}
+window.zhHubWelcome=function(){welcomeOpen(true)};
+document.addEventListener('click',function(e){
+  var t=e.target.closest&&e.target.closest('#wel [data-wl],#wel');if(!t)return;
+  if(t.id==='wel'){welcomeClose(false);return}
+  var a=t.dataset.wl,n=+t.dataset.n;
+  if(a==='skip'){welcomeClose(false)}else if(a==='go'){welcomeClose(true)}
+  else if(a==='lv'){W.lv=n;document.getElementById('wel').innerHTML=welHtml();var f=document.querySelector('#wel [aria-checked="true"]');if(f)f.focus()}
+  else if(a==='goal'){W.goal=n;document.getElementById('wel').innerHTML=welHtml();var g=document.querySelector('#wel [aria-checked="true"][data-wl=goal]');if(g)g.focus()}
+  else if(a==='snd'){W.snd=!W.snd;document.getElementById('wel').innerHTML=welHtml();var b=document.querySelector('#wel [data-wl=snd]');if(b)b.focus()}
+});
+document.addEventListener('keydown',function(e){
+  var el=document.getElementById('wel');if(!el)return;
+  if(e.key==='Escape'){e.preventDefault();welcomeClose(false);return}
+  if(e.key!=='Tab')return;
+  var f=el.querySelectorAll('button'),first=f[0],last=f[f.length-1];
+  if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+});
+document.addEventListener('DOMContentLoaded',function(){if(isFresh())welcomeOpen(false)});   /* after the deferred zh-ui.js, so the sound state can be read */
 </script>

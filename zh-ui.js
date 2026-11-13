@@ -129,7 +129,8 @@ function buildSheet(){
   var h='<div class="zh-sheet" role="document"><h2><span id="zh-set-t">الإعدادات</span><button type="button" class="zh-ib" data-zh="close" aria-label="إغلاق">'+ICON.close+'</button></h2>';
   h+='<h3>المظهر</h3><button type="button" class="zh-row" data-zh="theme" aria-pressed="false"><span>الوضع الليلي</span><span data-zh="themestate"></span></button>';
   if(slowBtn())h+='<h3>الصوت</h3><button type="button" class="zh-row" data-zh="slow" aria-pressed="false"><span>صوت بطيء</span><span data-zh="slowstate"></span></button>';
-  if(q('#p-vocab'))h+='<h3>بطاقات المفردات</h3><button type="button" class="zh-row" data-zh="swish" aria-pressed="false"><span>صوت تقليب البطاقة</span><span data-zh="swishstate"></span></button>';
+  h+='<h3>الأصوات</h3><button type="button" class="zh-row" data-zh="swish" aria-pressed="false"><span>أصوات خفيفة<small class="zh-sub">تقليب البطاقة، الإجابات، إتمام الاختبار والأوسمة</small></span><span data-zh="swishstate"></span></button>';
+  if(window.zhHubWelcome)h+='<h3>البداية</h3><button type="button" class="zh-row" data-zh="welcome"><span>إعادة إعداد</span></button>';
   h+='<h3>عرض النغمات</h3><div class="zh-seg" role="group" aria-label="عرض النغمات">';
   TONE_LABELS.forEach(function(t){h+='<button type="button" data-zh-tone="'+t[0]+'" aria-pressed="false">'+t[1]+'<small>'+t[2]+'</small></button>'});
   h+='</div><div class="zh-sample" lang="en" aria-hidden="true"><span class="t1">mā</span><span class="t2">má</span><span class="t3">mǎ</span><span class="t4">mà</span><span class="t5">ma</span></div></div>';
@@ -143,6 +144,7 @@ function buildSheet(){
     if(tone){cfg.tone=tone;save(cfg);applyTone();syncSheet();return}
     if(act==='close')closeSheet();
     else if(act==='theme'){var t=themeBtn();if(t)t.click();setTimeout(syncSheet,30)}
+    else if(act==='welcome'){closeSheet();if(window.zhHubWelcome)window.zhHubWelcome()}
     else if(act==='swish'){setSound(!soundOn());syncSheet();var sb2=q('.fcsnd');if(sb2){var on2=soundOn();sb2.setAttribute('aria-pressed',String(on2));sb2.innerHTML=sb2.innerHTML.replace(/<svg[\s\S]*<\/svg>/,on2?SND_ON:SND_OFF)}}
     else if(act==='slow'){var s=slowBtn();if(s)s.click();setTimeout(syncSheet,30)}
   });
@@ -232,6 +234,7 @@ function stamp(g,name){
   var d=document.createElement('div');d.className='zh-stamp';d.setAttribute('role','status');
   d.innerHTML='<div class="zh-seal"><span lang="zh">'+g+'</span></div><b>وسام جديد</b><span>'+esc2(name)+'</span>';
   document.body.appendChild(d);stampT=setTimeout(function(){d.remove()},3200);
+  window.zhUI.play('done');
 }
 /* summary(o): the end-of-quiz screen. o: starsHtml, msg, score, n, pct, gain, level (0 or the new level), newBadges [{g,n}], missedHtml, badgesHtml, retryKind, next {href,label} */
 function summary(o){
@@ -256,17 +259,33 @@ function audioPrime(){
     if(AC.state==='suspended'&&AC.resume){var r=AC.resume();if(r&&r.catch)r.catch(function(){})}
   }catch(e){acFail=true;AC=null}
 }
-function swish(){
+function tone(t,f0,f1,dur,type,gain,lp){
+  var o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);if(f1&&f1!==f0)o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  if(lp){var f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=lp;o.connect(f);f.connect(g)}else o.connect(g);
+  g.connect(AC.destination);o.start(t);o.stop(t+dur+.02);
+}
+function noise(t){
+  var dur=.17,n=Math.max(1,Math.floor(AC.sampleRate*dur)),buf=AC.createBuffer(1,n,AC.sampleRate),d=buf.getChannelData(0);
+  for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);
+  var src=AC.createBufferSource();src.buffer=buf;
+  var f=AC.createBiquadFilter();f.type='bandpass';f.Q.value=.9;f.frequency.setValueAtTime(650,t);f.frequency.exponentialRampToValueAtTime(2800,t+dur);
+  var g=AC.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.14,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  src.connect(f);f.connect(g);g.connect(AC.destination);src.start(t);src.stop(t+dur+.02);
+}
+/* play(kind): the one place that makes sound. 'swish' = page turn (filtered noise), 'ok' = soft two-note chime, 'no' = soft low tone (not harsh),
+   'done' = small three-note flourish for a finished quiz or a new badge. Each is under 400ms and quiet. Nothing plays unless the master switch is on. */
+function play(kind){
   if(!soundOn()||!AC||acFail)return;
   try{
-    var t=AC.currentTime,dur=.17,n=Math.max(1,Math.floor(AC.sampleRate*dur)),buf=AC.createBuffer(1,n,AC.sampleRate),d=buf.getChannelData(0);
-    for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);
-    var src=AC.createBufferSource();src.buffer=buf;
-    var f=AC.createBiquadFilter();f.type='bandpass';f.Q.value=.9;f.frequency.setValueAtTime(650,t);f.frequency.exponentialRampToValueAtTime(2800,t+dur);
-    var g=AC.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.14,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
-    src.connect(f);f.connect(g);g.connect(AC.destination);src.start(t);src.stop(t+dur+.02);
+    var t=AC.currentTime;
+    if(kind==='swish')noise(t);
+    else if(kind==='ok'){tone(t,880,0,.16,'sine',.09);tone(t+.09,1320,0,.22,'sine',.07)}
+    else if(kind==='no')tone(t,240,170,.26,'triangle',.08,700);
+    else if(kind==='done'){[660,880,1175].forEach(function(f,i){tone(t+i*.085,f,0,.17,'sine',.075)})}
   }catch(e){}
 }
+function swish(){play('swish')}
 function setSound(on){setPref('sound',on?1:0);if(on)audioPrime()}
 document.addEventListener('pointerdown',audioPrime,true);document.addEventListener('keydown',audioPrime,true);
 /* cardDrag(host, o): the flashcard turns like a page under the finger. o: sel (the card), enabled(), under('next'|'prev') -> html of the card that is revealed, commit('next'|'prev').
@@ -319,7 +338,7 @@ function cardDrag(host,o){
   host.addEventListener('pointercancel',function(e){end(e,true)});
   host.addEventListener('click',function(e){if((swiped||busy)&&e.target.closest&&e.target.closest(o.sel)){e.stopPropagation();e.preventDefault()}},true);
 }
-window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey,voiceStatus:function(){return voiceStatus()},pref:pref,setPref:setPref,can3d:can3d,swipe:swipe,badges:badges,stamp:stamp,summary:summary,soundOn:soundOn,setSound:setSound,audioPrime:audioPrime,swish:swish,cardDrag:cardDrag};
+window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey,voiceStatus:function(){return voiceStatus()},pref:pref,setPref:setPref,can3d:can3d,swipe:swipe,badges:badges,stamp:stamp,summary:summary,soundOn:soundOn,setSound:setSound,audioPrime:audioPrime,swish:swish,play:play,cardDrag:cardDrag};
 
 /* ---------- quiet hint when the device has no Chinese voice ---------- */
 var voiceChecked=false;

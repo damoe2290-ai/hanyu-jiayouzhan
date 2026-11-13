@@ -156,6 +156,7 @@ a.seal:hover,a.seal:focus-visible{transform:rotate(-4deg) scale(1.06)}
 .zh-row{flex-direction:row;justify-content:space-between;width:100%;margin-top:var(--sp-2)}
 .zh-row[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
 .zh-sample{display:flex;justify-content:center;gap:10px;margin-top:var(--sp-2);font:500 var(--fs-18) var(--font-py);direction:ltr}
+.zh-row .zh-sub{display:block;font-weight:400;font-size:var(--fs-12);color:var(--muted);margin-top:2px}
 .zh-hint{margin-top:var(--sp-2);padding:var(--sp-2) var(--sp-3);border-radius:var(--r-12);background:var(--info-soft);color:var(--fg);font-size:var(--fs-14)}
 /* when zh-ui.js has moved theme / slow-voice into the settings sheet */
 .zh-ui .hdr .top > [data-act="theme"],.zh-ui .hdr .top > #slowbtn,.zh-ui .hdr .top > #th{display:none}

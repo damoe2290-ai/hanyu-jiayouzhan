@@ -20,6 +20,10 @@ ok('the lesson data snippet has no photo or illustration code (PHOTO, PH_ALT, IL
 ok('lesson-7.html stays light (under 330 KB, one file, no image requests)',fs.statSync('lesson-7.html').size<330*1024,fs.statSync('lesson-7.html').size);
 
 const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+/* the first-visit welcome of the hub (Phase 6c) would sit on top of a fresh hub: these older tests are about other things, so every context auto-skips it (t16.js and hubt/t17.js test the welcome itself) */
+{const nw=()=>{document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{const x=document.querySelector('#wel .wl-act [data-wl=skip]');if(x)x.click()},0))};const nc=b.newContext.bind(b),np=b.newPage.bind(b);
+ b.newContext=async o=>{const c=await nc(o);await c.addInitScript(nw);return c};b.newPage=async o=>{const c=await nc(o);await c.addInitScript(nw);return c.newPage()}}
+
 const open=async(o={})=>{const c=await b.newContext({viewport:{width:360,height:780},hasTouch:true,colorScheme:o.dark?'dark':'light'});const p=await c.newPage();p.errs=[];p.reqs=[];p.on('pageerror',e=>p.errs.push(e.message));p.on('request',r=>{if(/\.(webp|png|jpe?g|gif|svg)(\?|$)/i.test(r.url()))p.reqs.push(r.url())});
   await p.goto(R+'lesson-7.html');await p.waitForTimeout(500);return {c,p}};
 console.log('--- vocabulary list at 360px (light)');

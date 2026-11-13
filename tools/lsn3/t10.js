@@ -15,6 +15,10 @@ const ymd=d=>d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.get
 const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return ymd(d)};
 const allFiles=Object.values(LV.courses).flatMap(c=>(c.lessons||[]).map(l=>l.file));
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+/* the first-visit welcome of the hub (Phase 6c) would sit on top of a fresh hub: these older tests are about other things, so every context auto-skips it (t16.js and hubt/t17.js test the welcome itself) */
+{const nw=()=>{document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{const x=document.querySelector('#wel .wl-act [data-wl=skip]');if(x)x.click()},0))};const nc=b.newContext.bind(b),np=b.newPage.bind(b);
+ b.newContext=async o=>{const c=await nc(o);await c.addInitScript(nw);return c};b.newPage=async o=>{const c=await nc(o);await c.addInitScript(nw);return c.newPage()}}
+
 const ctxs=[];
 const fresh=async(w=360,init)=>{const c=await b.newContext({viewport:{width:w,height:780},isMobile:w<500,hasTouch:w<500});ctxs.push(c);if(init)await c.addInitScript(init.fn,init.arg);
   const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/fonts|net::|Failed to load|ERR_/.test(m.text()))errs.push(m.text())});p.errs=errs;return {c,p}};
@@ -130,9 +134,12 @@ console.log('--- activity tracker (zh-ui.js)');
  await xp(p,0,true);h=await H();ok('a progress reset credits nothing and resets the snapshot',h.pts[t]===45&&h.xpSum===0);
  const hp=await c.newPage();await hp.goto(R+HUBF);await hp.waitForTimeout(300);
  ok('the hub shows those points in the ring and the day in the calendar',await hp.$eval('.ring .rtx',e=>e.textContent)==='45'&&(await hp.$$('.cal .cd.on')).length===1);
- await xp(p,15);await hp.evaluate(()=>window.dispatchEvent(new Event('focus')));await hp.waitForTimeout(150);
- ok('a lesson open in another tab updates the hub when it regains focus (no overwrite of tracker fields on the hub\'s own save)',await hp.$eval('.ring .rtx',e=>e.textContent)==='60');
- await hp.evaluate(()=>{S.dues.gram['好']={i:0,t:Date.now()};save()});h=await H();ok('the hub saving its own data keeps the tracker fields (pts, xpSum, lastLesson)',h.pts[t]===60&&h.xpSum===15&&h.lastLesson==='lesson-9.html'&&!!h.dues.gram['好'],JSON.stringify(h));
+ await xp(p,15);
+ /* localStorage writes of one page reach another page of the same site asynchronously (a few ms to some tens of ms; this test used to read after a fixed 150ms and failed now and then):
+    the focus event is repeated until the hub has seen the write, at most 3 seconds, so the check is about the behaviour, not about the browser's propagation speed */
+ let ring='';for(let i=0;i<30&&ring!=='60';i++){await hp.evaluate(()=>window.dispatchEvent(new Event('focus')));await hp.waitForTimeout(100);ring=await hp.$eval('.ring .rtx',e=>e.textContent)}
+ ok('a lesson open in another tab updates the hub when it regains focus (no overwrite of tracker fields on the hub\'s own save)',ring==='60',ring);
+ await hp.evaluate(()=>{S.dues.gram['好']={i:0,t:Date.now()};save()});for(let i=0;i<30;i++){h=await H();if(h.dues&&h.dues.gram&&h.dues.gram['好'])break;await p.waitForTimeout(100)}ok('the hub saving its own data keeps the tracker fields (pts, xpSum, lastLesson)',h.pts[t]===60&&h.xpSum===15&&h.lastLesson==='lesson-9.html'&&!!h.dues.gram['好'],JSON.stringify(h));
  await c.close()}
 
 console.log('--- migration: an OLD pre-populated state (before this phase)');

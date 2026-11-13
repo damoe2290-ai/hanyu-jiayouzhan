@@ -1108,6 +1108,7 @@ function finishQ(ok,wids,extra,part){
   else if(!part){(wids||[]).forEach(function(i){S.wrong[i]=(S.wrong[i]||0)+1})}
   if(Q.lv&&Q.lv!=='r'&&sc<1&&LV){var mq=Q.list[Q.i];if(mq&&mq.src)LV.miss[Q.lv].push(mq.src)}
   save();
+  if(window.zhUI&&zhUI.play)zhUI.play(ok||(part&&part.score>=.5)?'ok':'no');
   $('#qfb').innerHTML='<div class="fb '+(ok?'good':(part&&part.cls)||'bad')+'"><strong>'+(ok?OKM[Math.floor(Math.random()*OKM.length)]:(part&&part.msg)||'ليست الإجابة الصحيحة')+'</strong>'+(extra||'')+'</div>';
   var nb=$('#qnext');nb.textContent=(Q.i===Q.list.length-1)?'عرض النتيجة':'التالي';nb.hidden=false;
   try{nb.scrollIntoView({block:'nearest'})}catch(e){}
@@ -1124,6 +1125,7 @@ function endQuiz(){
   var msg=pct>=90?'ممتاز! أتقنتَ هذا الجزء':(pct>=60?'جيد، راجع الأخطاء وأعد المحاولة':'تحتاج إلى مراجعة، ارجع إلى البطاقات والحوار');
   var starsHtml='<div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>';
   var missed=Object.keys(Q.miss||{}).map(Number).filter(function(i){return VOCAB[i]}),nbs=NEWB.splice(0);LASTMISS=missed;
+  if(window.zhUI&&zhUI.play&&!nbs.length&&st>=2)zhUI.play('done');   /* a new badge plays its own flourish (zhUI.stamp) */
   if(window.zhUI&&zhUI.summary){
     var nx=document.querySelector('.zh-lnav .zh-next'),nxb=nx&&nx.querySelector('b');
     $('#p-practice').innerHTML=zhUI.summary({starsHtml:starsHtml,msg:msg,score:Q.score,n:n,pct:pct,gain:Q.gain,level:after>before?after:0,
@@ -1214,7 +1216,7 @@ function lvDone(){
     html=lvRes(pct,'انتهت جولة المراجعة','<div class="sc">'+half(sc)+' / '+len+'</div><p class="mut">كسبتَ '+gain+' نقطة</p>',[['lvhub','كل المستويات',1],['qexit','كل التمارين',0]]);
   }else{
     var need=lvNeed(),pass=sc>=need;
-    S.lv.best[n]=Math.max(S.lv.best[n]||0,sc);if(pass)S.lv.passed[n]=true;
+    S.lv.best[n]=Math.max(S.lv.best[n]||0,sc);if(pass){S.lv.passed[n]=true;if(window.zhUI&&zhUI.play)zhUI.play('done')}
     award('first');save();updateProg();
     var miss=lvMissed().length,btns=[];
     if(!pass)btns.push(['lvretry','أعد المستوى '+n,1]);
@@ -1443,13 +1445,14 @@ A.flip=function(){
   var fc=$('#fc'),f=$('#fc .front'),b=$('#fc .back');if(!f||!b)return;
   if(fc.classList.contains('f3d')){f.hidden=false;b.hidden=false;fc.classList.add('turning');fc.classList.toggle('flipped',S.flip);clearTimeout(flipT);flipT=setTimeout(function(){f.hidden=S.flip;b.hidden=!S.flip;fc.classList.remove('turning')},700)}
   else{f.hidden=S.flip;b.hidden=!S.flip}
-  if(window.zhUI&&zhUI.swish)zhUI.swish();
+  if(window.zhUI&&zhUI.play)zhUI.play('swish');
 };
-A.fcsound=function(t){if(!window.zhUI||!zhUI.setSound)return;zhUI.setSound(!zhUI.soundOn());var on=zhUI.soundOn();t.setAttribute('aria-pressed',String(on));t.innerHTML=ic(on?'snd':'mute',20);if(on)zhUI.swish()};
-A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab();if(window.zhUI&&zhUI.swish)zhUI.swish()};
+A.fcsound=function(t){if(!window.zhUI||!zhUI.setSound)return;zhUI.setSound(!zhUI.soundOn());var on=zhUI.soundOn();t.setAttribute('aria-pressed',String(on));t.innerHTML=ic(on?'snd':'mute',20);if(on)zhUI.play('swish')};
+A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab();var sk=CSND;CSND='swish';if(window.zhUI&&zhUI.play)zhUI.play(sk)};
 A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab();if(window.zhUI&&zhUI.swish)zhUI.swish()};
 function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};CRS.split(',').forEach(function(c){h.dues[c]=h.dues[c]||{};if(on){if(!h.dues[c][zh])h.dues[c][zh]={i:0,t:Date.now()}}});localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
-A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
+var CSND='swish';
+A.know=function(){CSND='ok';S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
 A.addmiss=function(t){LASTMISS.forEach(function(i){hubRev(VOCAB[i].zh,true)});toast('أُضيفت '+LASTMISS.length+' كلمة إلى مراجعة المفردات في الصفحة الرئيسية');if(t){t.disabled=true}};
 A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
 A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
