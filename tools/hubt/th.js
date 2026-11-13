@@ -1,6 +1,7 @@
 let chromium;for(const m of ['/opt/npm-tools/node_modules/playwright-core','playwright-core','playwright']){try{({chromium}=require(m));break}catch(e){}}
 const fs=require('fs');const EXE=process.env.CHROME||['/usr/bin/google-chrome','/opt/pw-browsers/chromium'].find(p=>fs.existsSync(p));
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+
 const p=await b.newPage({viewport:{width:390,height:800}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
 for(const c of ['prac','lis','biz']){
 await p.goto('file://'+process.cwd()+'/'+(process.env.HUB||'hubt/index.html')+'#'+c);await p.reload();await p.waitForTimeout(300);

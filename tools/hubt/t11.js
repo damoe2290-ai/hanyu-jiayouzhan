@@ -11,6 +11,7 @@ const R='file://'+process.cwd()+'/',HUBF=process.env.HUB||'index.html';
 let fails=0;const ok=(n,c,x)=>{console.log((c?'ok   ':'FAIL ')+n+(!c&&x!==undefined?'  '+(typeof x==='string'?x:JSON.stringify(x)):''));if(!c)fails++};
 const T0=new Date('2026-06-01T10:00:00Z'),NAMES=['تحدي الوقت','اقرأ بدون بينيين','اكتب من البينيين','اكتب من الترجمة'],MODES=['ta','read','typepy','typear'];
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+
 const all=[];
 /* a hub page on the review tab of a course, with a paused fake clock and optional pre-populated localStorage */
 async function open(init={},o={}){

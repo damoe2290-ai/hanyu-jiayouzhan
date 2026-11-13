@@ -5,6 +5,7 @@ const fs=require('fs');const EXE=process.env.CHROME||['/usr/bin/google-chrome','
 const PFX=process.env.PAGE_PREFIX===undefined?'w-':process.env.PAGE_PREFIX;const R='file://'+process.cwd()+'/'+PFX;
 let fails=0;const ok=(n,c,x)=>{console.log((c?'ok   ':'FAIL ')+n+(x?'  '+x:''));if(!c)fails++};
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+
 const fresh=async()=>{const c=await b.newContext({viewport:{width:390,height:844}});return {c,p:await c.newPage()}};
 const back=p=>p.$eval('.zh-back',e=>e.getAttribute('href'));
 console.log('--- every course: logo and back arrow');

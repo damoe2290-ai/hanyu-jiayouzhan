@@ -16,6 +16,7 @@ const lum=([r,g,b])=>{const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.0
 const cr=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
 const mix=(a,b,t)=>[a[0]*(1-t)+b[0]*t,a[1]*(1-t)+b[1]*t,a[2]*(1-t)+b[2]*t];
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+
 async function open(page,o={}){const c=await b.newContext({viewport:{width:o.w||360,height:780},hasTouch:true,colorScheme:o.dark?'dark':'light',reducedMotion:o.reduced?'reduce':'no-preference'});
  await c.addInitScript(speechInit);
  if(o.store)await c.addInitScript(([k,v])=>{if(localStorage.getItem('__seeded')===null){localStorage.setItem(k,v);localStorage.setItem('__seeded','1')}},o.store);

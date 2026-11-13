@@ -120,6 +120,7 @@ var TONE_LABELS=[
   ['numbers','الأرقام','ma3']
 ];
 var sheet=null,opener=null,lastFocus=null;
+var SND_ON='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9.5v5M20 7.5v9"/></svg>',SND_OFF='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9.5l5 5M22 9.5l-5 5"/></svg>';
 function q(s,r){return (r||document).querySelector(s)}
 function themeBtn(){return q('.hdr [data-act="theme"]')||q('#th')}
 function slowBtn(){return q('#slowbtn')}
@@ -128,6 +129,7 @@ function buildSheet(){
   var h='<div class="zh-sheet" role="document"><h2><span id="zh-set-t">الإعدادات</span><button type="button" class="zh-ib" data-zh="close" aria-label="إغلاق">'+ICON.close+'</button></h2>';
   h+='<h3>المظهر</h3><button type="button" class="zh-row" data-zh="theme" aria-pressed="false"><span>الوضع الليلي</span><span data-zh="themestate"></span></button>';
   if(slowBtn())h+='<h3>الصوت</h3><button type="button" class="zh-row" data-zh="slow" aria-pressed="false"><span>صوت بطيء</span><span data-zh="slowstate"></span></button>';
+  h+='<h3>الأصوات</h3><button type="button" class="zh-row" data-zh="swish" aria-pressed="false"><span>أصوات خفيفة<small class="zh-sub">تقليب البطاقة، الإجابات، إتمام الاختبار والأوسمة</small></span><span data-zh="swishstate"></span></button>';
   h+='<h3>عرض النغمات</h3><div class="zh-seg" role="group" aria-label="عرض النغمات">';
   TONE_LABELS.forEach(function(t){h+='<button type="button" data-zh-tone="'+t[0]+'" aria-pressed="false">'+t[1]+'<small>'+t[2]+'</small></button>'});
   h+='</div><div class="zh-sample" lang="en" aria-hidden="true"><span class="t1">mā</span><span class="t2">má</span><span class="t3">mǎ</span><span class="t4">mà</span><span class="t5">ma</span></div></div>';
@@ -141,6 +143,7 @@ function buildSheet(){
     if(tone){cfg.tone=tone;save(cfg);applyTone();syncSheet();return}
     if(act==='close')closeSheet();
     else if(act==='theme'){var t=themeBtn();if(t)t.click();setTimeout(syncSheet,30)}
+    else if(act==='swish'){setSound(!soundOn());syncSheet();var sb2=q('.fcsnd');if(sb2){var on2=soundOn();sb2.setAttribute('aria-pressed',String(on2));sb2.innerHTML=sb2.innerHTML.replace(/<svg[\s\S]*<\/svg>/,on2?SND_ON:SND_OFF)}}
     else if(act==='slow'){var s=slowBtn();if(s)s.click();setTimeout(syncSheet,30)}
   });
   sheet.addEventListener('keydown',function(e){
@@ -157,6 +160,7 @@ function syncSheet(){
   var tb=q('[data-zh="theme"]',sheet),sb=q('[data-zh="slow"]',sheet),sl=slowBtn();
   setPressed(tb,isDark());q('[data-zh="themestate"]',sheet).textContent=isDark()?'مفعّل':'متوقف';
   if(sb&&sl){var on=sl.getAttribute('aria-pressed')==='true';setPressed(sb,on);q('[data-zh="slowstate"]',sheet).textContent=on?'مفعّل':'متوقف'}
+  var wb=q('[data-zh="swish"]',sheet);if(wb){setPressed(wb,soundOn());q('[data-zh="swishstate"]',sheet).textContent=soundOn()?'مفعّل':'متوقف'}
   var bs=sheet.querySelectorAll('[data-zh-tone]');
   for(var i=0;i<bs.length;i++)setPressed(bs[i],bs[i].getAttribute('data-zh-tone')===cfg.tone);
 }
@@ -228,6 +232,7 @@ function stamp(g,name){
   var d=document.createElement('div');d.className='zh-stamp';d.setAttribute('role','status');
   d.innerHTML='<div class="zh-seal"><span lang="zh">'+g+'</span></div><b>وسام جديد</b><span>'+esc2(name)+'</span>';
   document.body.appendChild(d);stampT=setTimeout(function(){d.remove()},3200);
+  window.zhUI.play('done');
 }
 /* summary(o): the end-of-quiz screen. o: starsHtml, msg, score, n, pct, gain, level (0 or the new level), newBadges [{g,n}], missedHtml, badgesHtml, retryKind, next {href,label} */
 function summary(o){
@@ -241,7 +246,97 @@ function summary(o){
      (o.next?'<a class="btn ghost" href="'+esc2(o.next.href)+'">'+esc2(o.next.label)+'</a>':'')+'</div></div>';
   return h;
 }
-window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey,voiceStatus:function(){return voiceStatus()},pref:pref,setPref:setPref,can3d:can3d,swipe:swipe,badges:badges,stamp:stamp,summary:summary};
+/* ---------- page-turn sound: a short filtered-noise swish made with Web Audio (no audio files). OFF by default, saved in zh-ui-v1 (study.sound).
+   The AudioContext is created / resumed only inside a user gesture (a pointerdown or key press), and only when the sound is on; any failure is silent. ---------- */
+var AC=null,acFail=false;
+function soundOn(){return !!pref('sound',0)}
+function audioPrime(){
+  if(!soundOn()||acFail)return;
+  try{
+    if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(!C){acFail=true;return}AC=new C()}
+    if(AC.state==='suspended'&&AC.resume){var r=AC.resume();if(r&&r.catch)r.catch(function(){})}
+  }catch(e){acFail=true;AC=null}
+}
+function tone(t,f0,f1,dur,type,gain,lp){
+  var o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);if(f1&&f1!==f0)o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+  g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(gain,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  if(lp){var f=AC.createBiquadFilter();f.type='lowpass';f.frequency.value=lp;o.connect(f);f.connect(g)}else o.connect(g);
+  g.connect(AC.destination);o.start(t);o.stop(t+dur+.02);
+}
+function noise(t){
+  var dur=.17,n=Math.max(1,Math.floor(AC.sampleRate*dur)),buf=AC.createBuffer(1,n,AC.sampleRate),d=buf.getChannelData(0);
+  for(var i=0;i<n;i++)d[i]=(Math.random()*2-1)*(1-i/n);
+  var src=AC.createBufferSource();src.buffer=buf;
+  var f=AC.createBiquadFilter();f.type='bandpass';f.Q.value=.9;f.frequency.setValueAtTime(650,t);f.frequency.exponentialRampToValueAtTime(2800,t+dur);
+  var g=AC.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.14,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  src.connect(f);f.connect(g);g.connect(AC.destination);src.start(t);src.stop(t+dur+.02);
+}
+/* play(kind): the one place that makes sound. 'swish' = page turn (filtered noise), 'ok' = soft two-note chime, 'no' = soft low tone (not harsh),
+   'done' = small three-note flourish for a finished quiz or a new badge. Each is under 400ms and quiet. Nothing plays unless the master switch is on. */
+function play(kind){
+  if(!soundOn()||!AC||acFail)return;
+  try{
+    var t=AC.currentTime;
+    if(kind==='swish')noise(t);
+    else if(kind==='ok'){tone(t,880,0,.16,'sine',.09);tone(t+.09,1320,0,.22,'sine',.07)}
+    else if(kind==='no')tone(t,240,170,.26,'triangle',.08,700);
+    else if(kind==='done'){[660,880,1175].forEach(function(f,i){tone(t+i*.085,f,0,.17,'sine',.075)})}
+  }catch(e){}
+}
+function swish(){play('swish')}
+function setSound(on){setPref('sound',on?1:0);if(on)audioPrime()}
+document.addEventListener('pointerdown',audioPrime,true);document.addEventListener('keydown',audioPrime,true);
+/* cardDrag(host, o): the flashcard turns like a page under the finger. o: sel (the card), enabled(), under('next'|'prev') -> html of the card that is revealed, commit('next'|'prev').
+   While a horizontal drag runs (pointer events + setPointerCapture, rAF updates) the card rotates around its vertical edge nearest the swipe direction by dx/width*180 degrees.
+   On release: past 35% of the width, or a fast flick, the turn completes (about 620ms, ease-in-out); otherwise it springs back. The element needs touch-action:pan-y so vertical scrolling stays native. */
+function cardDrag(host,o){
+  var st=null,raf=0,dx=0,busy=false,swiped=false;
+  function W(){return (st&&st.el.clientWidth)||320}
+  function prep(dir){st.dir=dir;var u=st.el.querySelector('.fcu');if(u)u.innerHTML=o.under(dir<0?'next':'prev')}
+  function paint(a,dir){var pg=st.pg;pg.style.transformOrigin=dir<0?'0% 50%':'100% 50%';pg.style.transform='rotateY('+a.toFixed(2)+'deg)';st.el.classList.toggle('past',Math.abs(a)>90);st.el.style.setProperty('--sh',Math.sin(Math.abs(a)*Math.PI/180).toFixed(3))}
+  function frame(){raf=0;if(!st||!st.drag)return;var a=Math.max(-180,Math.min(180,dx/W()*180)),dir=dx<0?-1:1;if(dir!==st.dir)prep(dir);paint(a,dir)}
+  function clear(el){el.classList.remove('dragging','settling','past');el.style.removeProperty('--sh');var pg=el.querySelector('.fcp');if(pg){pg.style.transition='';pg.style.transform='';pg.style.transformOrigin=''}var u=el.querySelector('.fcu');if(u)u.innerHTML=''}
+  host.addEventListener('pointerdown',function(e){
+    if(busy||!o.enabled()||(e.pointerType==='mouse'&&e.button!==0))return;
+    var el=e.target.closest&&e.target.closest(o.sel);if(!el||e.target.closest('button,a,input,textarea'))return;
+    var pg=el.querySelector('.fcp');if(!pg)return;
+    st={el:el,pg:pg,id:e.pointerId,x0:e.clientX,y0:e.clientY,drag:false,dir:0,s:[[e.timeStamp,e.clientX]]};dx=0;
+  });
+  host.addEventListener('pointermove',function(e){
+    if(!st||e.pointerId!==st.id)return;
+    dx=e.clientX-st.x0;var dy=e.clientY-st.y0;st.s.push([e.timeStamp,e.clientX]);while(st.s.length>2&&e.timeStamp-st.s[0][0]>120)st.s.shift();
+    if(!st.drag){
+      if(Math.abs(dx)>8&&Math.abs(dx)>1.3*Math.abs(dy)){st.drag=true;try{st.el.setPointerCapture(st.id)}catch(x){}st.el.classList.add('dragging');st.pg.style.transition='none';prep(dx<0?-1:1)}
+      else return;
+    }
+    if(!raf)raf=requestAnimationFrame(frame);
+  });
+  function end(e,cancel){
+    if(!st||e.pointerId!==st.id)return;var s=st;st=null;
+    if(!s.drag)return;
+    if(raf){cancelAnimationFrame(raf);raf=0}
+    try{s.el.releasePointerCapture(s.id)}catch(x){}
+    swiped=true;setTimeout(function(){swiped=false},450);
+    var w=s.el.clientWidth||320,dir=dx<0?-1:1,a0=Math.max(-180,Math.min(180,dx/w*180));
+    var a=s.s[0],b=s.s[s.s.length-1],v=b[0]>a[0]?(b[1]-a[1])/(b[0]-a[0]):0;if(e.timeStamp-b[0]>80)v=0;   /* the finger rested before letting go: not a flick */
+    var go=!cancel&&(Math.abs(dx)>.35*w||(Math.abs(v)>.5&&Math.sign(v)===dir));
+    st=s;paint(a0,dir);st=null;
+    var pg=s.pg;busy=true;void pg.offsetWidth;
+    if(go){
+      pg.style.transition='transform .62s cubic-bezier(.45,0,.55,1)';pg.style.transform='rotateY('+(dir*180)+'deg)';s.el.classList.add('settling');
+      if(Math.abs(a0)<=90)setTimeout(function(){s.el.classList.add('past')},310*(90-Math.abs(a0))/(180-Math.abs(a0))+10);
+      setTimeout(function(){busy=false;o.commit(dir<0?'next':'prev')},650);
+    }else{
+      pg.style.transition='transform .42s cubic-bezier(.22,1.25,.4,1)';pg.style.transform='rotateY(0deg)';s.el.style.setProperty('--sh','0');
+      setTimeout(function(){busy=false;clear(s.el)},460);
+      setTimeout(function(){s.el.classList.remove('past')},120);
+    }
+  }
+  host.addEventListener('pointerup',function(e){end(e,false)});
+  host.addEventListener('pointercancel',function(e){end(e,true)});
+  host.addEventListener('click',function(e){if((swiped||busy)&&e.target.closest&&e.target.closest(o.sel)){e.stopPropagation();e.preventDefault()}},true);
+}
+window.zhUI={toNumbers:toNumbers,normPinyin:normPinyin,syllables:syllables,lastUnit:lastUnit,track:function(){trackActivity()},dayKey:dayKey,voiceStatus:function(){return voiceStatus()},pref:pref,setPref:setPref,can3d:can3d,swipe:swipe,badges:badges,stamp:stamp,summary:summary,soundOn:soundOn,setSound:setSound,audioPrime:audioPrime,swish:swish,play:play,cardDrag:cardDrag};
 
 /* ---------- quiet hint when the device has no Chinese voice ---------- */
 var voiceChecked=false;

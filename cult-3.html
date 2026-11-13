@@ -424,7 +424,9 @@ var IC={
   redo:'<path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/>',
   star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17.3 6.6 20.2l1.1-6.1L3.2 9.9l6.1-.8z"/>',
   chr:'<path d="M9 5l7 7-7 7"/>',
-  chl:'<path d="M15 5l-7 7 7 7"/>'
+  chl:'<path d="M15 5l-7 7 7 7"/>',
+  snd:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9.5v5M20 7.5v9"/>',
+  mute:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9.5l5 5M22 9.5l-5 5"/>'
 };
 function ic(n,s){s=s||20;return '<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
 function spkBtn(t,cls){return '<button class="spk '+(cls||'')+'" data-act="say" data-t="'+esc(t)+'" aria-label="استمع">'+ic('spk',cls==='big'?36:20)+'</button>'}
@@ -530,6 +532,8 @@ function setTab(name,fromHash){
 /* ---------- vocab ---------- */
 function fcCls(){return (window.zhUI&&zhUI.can3d&&zhUI.can3d())?' f3d'+(S.flip?' flipped':''):''}
 var flipT=null;
+function frontInner(w){return spkBtn(w.zh)+'<div class="bigzh" dir="ltr" style="--n:'+Math.max(2,Array.from(w.zh).length)+'">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div>'}
+function sndBtn(){var on=!!(window.zhUI&&zhUI.soundOn&&zhUI.soundOn());return '<button class="fcsnd" data-act="fcsound" aria-pressed="'+(on?'true':'false')+'" aria-label="صوت تقليب البطاقة" title="صوت تقليب البطاقة">'+ic(on?'snd':'mute',20)+'</button>'}
 function renderVocab(){
   var w=VOCAB[S.card];
   var rows=VOCAB.map(function(v,i){
@@ -541,15 +545,14 @@ function renderVocab(){
   }).join('');
   $('#p-vocab').innerHTML=
     '<div class="sec-h"><h2>بطاقات المفردات</h2><p>'+VOCAB.length+' كلمة · اضغط البطاقة لقلبها · عرفتَ <b>'+knownCount()+'</b> منها</p></div>'+
-    '<div class="fc'+fcCls()+'" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة"><div class="fci">'+
-      '<div class="face front"'+(S.flip?' hidden':'')+'>'+spkBtn(w.zh)+
-        '<div class="bigzh" dir="ltr" style="--n:'+Math.max(2,Array.from(w.zh).length)+'">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div></div>'+
+    '<div class="fc'+fcCls()+'" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة"><div class="fcu" aria-hidden="true"></div><div class="fcp"><div class="fci">'+
+      '<div class="face front"'+(S.flip?' hidden':'')+'>'+frontInner(w)+'</div>'+
       '<div class="face back"'+(S.flip?'':' hidden')+'>'+spkBtn(w.zh)+
         picHtml(w.zh,'pb')+'<div class="pyl" dir="ltr">'+pyhtml(w.py)+'</div>'+
         '<div class="meaning">'+w.ar+'</div>'+(w.note?'<div class="note">'+w.note+'</div>':'')+
         '<div class="ex" dir="ltr"><div class="exzh">'+w.ex[0]+'</div><div class="expy">'+w.ex[1]+'</div><div class="exar" dir="rtl">'+w.ex[2]+'</div></div>'+
       '</div>'+
-    '</div></div>'+
+    '</div><div class="fcpb" aria-hidden="true"></div></div><div class="fcs" aria-hidden="true"></div>'+sndBtn()+'</div>'+
     '<div class="navrow"><button class="btn ghost navb" data-act="prev">'+ic('chr',20)+' السابقة</button><span class="cnt">'+(S.card+1)+' / '+VOCAB.length+'</span><button class="btn ghost navb" data-act="next">التالية '+ic('chl',20)+'</button></div>'+
     '<div class="actrow"><button class="btn ghost" data-act="again">'+ic('redo',18)+' أراجعها لاحقاً</button><button class="btn primary" data-act="know">'+ic('check',18)+' أعرفها</button></div>'+
     '<h3 class="sub-h">قائمة الكلمات</h3>'+
@@ -817,6 +820,7 @@ function finishQ(ok,wids,extra){
     (wids||[]).forEach(function(i){if(S.wrong[i]){S.wrong[i]--;if(S.wrong[i]<=0)delete S.wrong[i]}});
   }else{(wids||[]).forEach(function(i){S.wrong[i]=(S.wrong[i]||0)+1})}
   save();
+  if(window.zhUI&&zhUI.play)zhUI.play(ok?'ok':'no');
   $('#qfb').innerHTML='<div class="fb '+(ok?'good':'bad')+'"><strong>'+(ok?OKM[Math.floor(Math.random()*OKM.length)]:'ليست الإجابة الصحيحة')+'</strong>'+(extra||'')+'</div>';
   var nb=$('#qnext');nb.textContent=(Q.i===Q.list.length-1)?'عرض النتيجة':'التالي';nb.hidden=false;
   try{nb.scrollIntoView({block:'nearest'})}catch(e){}
@@ -832,6 +836,7 @@ function endQuiz(){
   var msg=pct>=90?'ممتاز! أتقنتَ هذا الجزء':(pct>=60?'جيد، راجع الأخطاء وأعد المحاولة':'تحتاج إلى مراجعة، ارجع إلى البطاقات والحوار');
   var starsHtml='<div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>';
   var missed=Object.keys(Q.miss||{}).map(Number).filter(function(i){return VOCAB[i]}),nbs=NEWB.splice(0);LASTMISS=missed;
+  if(window.zhUI&&zhUI.play&&!nbs.length&&st>=2)zhUI.play('done');   /* a new badge plays its own flourish (zhUI.stamp) */
   if(window.zhUI&&zhUI.summary){
     var nx=document.querySelector('.zh-lnav .zh-next'),nxb=nx&&nx.querySelector('b');
     $('#p-practice').innerHTML=zhUI.summary({starsHtml:starsHtml,msg:msg,score:Q.score,n:n,pct:pct,gain:Q.gain,level:after>before?after:0,
@@ -873,13 +878,16 @@ A.tar2=function(){S.ar=!S.ar;save();renderDialogue()};
 A.flip=function(){
   S.flip=!S.flip;
   var fc=$('#fc'),f=$('#fc .front'),b=$('#fc .back');if(!f||!b)return;
-  if(fc.classList.contains('f3d')){f.hidden=false;b.hidden=false;fc.classList.toggle('flipped',S.flip);clearTimeout(flipT);flipT=setTimeout(function(){f.hidden=S.flip;b.hidden=!S.flip},580)}
+  if(fc.classList.contains('f3d')){f.hidden=false;b.hidden=false;fc.classList.add('turning');fc.classList.toggle('flipped',S.flip);clearTimeout(flipT);flipT=setTimeout(function(){f.hidden=S.flip;b.hidden=!S.flip;fc.classList.remove('turning')},700)}
   else{f.hidden=S.flip;b.hidden=!S.flip}
+  if(window.zhUI&&zhUI.play)zhUI.play('swish');
 };
-A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab()};
-A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab()};
+A.fcsound=function(t){if(!window.zhUI||!zhUI.setSound)return;zhUI.setSound(!zhUI.soundOn());var on=zhUI.soundOn();t.setAttribute('aria-pressed',String(on));t.innerHTML=ic(on?'snd':'mute',20);if(on)zhUI.play('swish')};
+A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab();var sk=CSND;CSND='swish';if(window.zhUI&&zhUI.play)zhUI.play(sk)};
+A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab();if(window.zhUI&&zhUI.swish)zhUI.swish()};
 function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};h.dues[CRS]=h.dues[CRS]||{};if(on){if(!h.dues[CRS][zh])h.dues[CRS][zh]={i:0,t:Date.now()}}localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
-A.know=function(){S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
+var CSND='swish';
+A.know=function(){CSND='ok';S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
 A.addmiss=function(t){LASTMISS.forEach(function(i){hubRev(VOCAB[i].zh,true)});toast('أُضيفت '+LASTMISS.length+' كلمة إلى مراجعة المفردات في الصفحة الرئيسية');if(t){t.disabled=true}};
 A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
 A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
@@ -978,7 +986,11 @@ app.addEventListener('keydown',function(e){
 window.addEventListener('hashchange',function(){var h=location.hash.replace('#','');if(h&&h!==tab)setTab(h,true)});
 document.addEventListener('DOMContentLoaded',function(){
   if(!window.zhUI||!zhUI.swipe)return;
-  zhUI.swipe($('#app'),'#fc',function(d){if(d==='left')A.next();else A.prev()});
+  /* 3D: the card follows the finger and turns like a page (zhUI.cardDrag); no 3D / reduced motion: a plain swipe changes the card */
+  if(zhUI.cardDrag)zhUI.cardDrag($('#app'),{sel:'#fc',enabled:function(){var c=$('#fc');return !!c&&c.classList.contains('f3d')},
+    under:function(d){var i=(S.card+(d==='next'?1:VOCAB.length-1))%VOCAB.length;return '<div class="face front">'+frontInner(VOCAB[i])+'</div>'},
+    commit:function(d){if(d==='next')A.next();else A.prev()}});
+  zhUI.swipe($('#app'),'#fc',function(d){var c=$('#fc');if(c&&c.classList.contains('f3d'))return;if(d==='left')A.next();else A.prev()});
   if(tab==='vocab')RENDER[tab]();
 });
 function syncSlow(){$('#slowbtn').setAttribute('aria-pressed',String(S.slow))}

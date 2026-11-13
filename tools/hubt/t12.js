@@ -13,6 +13,7 @@ let fails=0;const ok=(n,c,x)=>{console.log((c?'ok   ':'FAIL ')+n+(!c&&x!==undefi
 const T0=new Date('2026-06-01T10:00:00Z');
 const GAMES=['تحدي الوقت','بطاقات الذاكرة','كلمات تتساقط','استمع واختر','ركّب الجملة','تحدي اليوم'],EXER=['اقرأ بدون بينيين','اكتب من البينيين','اكتب من الترجمة'];
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
+
 const all=[];
 function speechInit([mode]){
  const sp=[];window.__spoken=sp;window.SpeechSynthesisUtterance=function(t){this.text=t;this.lang=''};
@@ -196,6 +197,9 @@ const lpick=async(p,right,wait)=>{const idx=await p.evaluate(r=>G.q.opts.findInd
  await g.c.close();await f.c.close()}
 
 console.log('--- sentence builder race (the lessons\' own sentences)');
+/* an order of the chips that is certainly WRONG (the old tests clicked the reverse order, which is right for a one-word or palindromic sentence, so they failed now and then, whatever the load):
+   swap the first two chips whose words differ; null when the sentence has no two different words */
+const wrongOrder=async p=>p.evaluate(()=>{const t=G.cs.s.t.map(x=>Array.isArray(x)?x[0]:x),n=t.length;for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)if(t[i]!==t[j]){const o=[...Array(n).keys()];o[i]=j;o[j]=i;return o}return null});
 const solve=async(p,order)=>{const n=await p.evaluate(()=>G.cs.s.t.length);const idx=order||[...Array(n).keys()];for(const i of idx)await p.click('[data-gchip="'+i+'"]')};
 {const {c,p}=await open(POP);await start(p,'sent');
  const g=await p.evaluate(()=>({n:G.sp.length,note:G.snote,t:G.cs.s.t.slice(),chips:[...document.querySelectorAll('[data-gchip]')].map(x=>x.textContent.trim()),ar:document.querySelector('.gar').textContent,time:document.getElementById('gtime').textContent}));
@@ -208,7 +212,7 @@ const solve=async(p,order)=>{const n=await p.evaluate(()=>G.cs.s.t.length);const
  await solve(p);
  ok('the right order is accepted automatically: +5 points',(await GS(p)).score===5&&/صحيح/.test(await p.$eval('#gfb',e=>e.textContent)));
  await run(p,800);const n=await p.evaluate(()=>G.cs.s.t.length);
- await solve(p,[...Array(n).keys()].reverse());
+ await solve(p,(await wrongOrder(p))||[...Array(n).keys()].reverse());
  const w=await p.evaluate(()=>({wrong:G.wrong,missed:G.missedS.length,score:G.score,fb:document.getElementById('gfb').textContent}));
  ok('a wrong order shows the correct sentence, gives no points and lists the sentence to practise',w.wrong===1&&w.missed===1&&w.score===5&&/الجملة الصحيحة/.test(w.fb),w);
  await c.close()}
@@ -240,12 +244,13 @@ const solve=async(p,order)=>{const n=await p.evaluate(()=>G.cs.s.t.length);const
  ok('a right sentence moves the review words it contains up one step (Good)',ws.length>0&&a1.every((i,k)=>i===ws[k][1]+1),{ws,a1});
  await run(p,800);
  for(let k=0;k<12&&!(await p.evaluate(()=>sentWords(G.cs.s).some(w=>DUE()[w.zh])));k++){await solve(p);await run(p,800)}
- const n=await p.evaluate(()=>G.cs.s.t.length),ws2=await p.evaluate(()=>sentWords(G.cs.s).filter(w=>DUE()[w.zh]).map(w=>w.zh));
- await solve(p,[...Array(n).keys()].reverse());
+ const ws2=await p.evaluate(()=>sentWords(G.cs.s).filter(w=>DUE()[w.zh]).map(w=>w.zh));
+ await solve(p,await wrongOrder(p));
  ok('a wrong sentence sends them back to step 0 (Again)',ws2.length>0&&await p.evaluate(ws=>ws.every(z=>DUE()[z].i===0),ws2));
  await c.close()}
 {const {c,p}=await open({});await start(p,'sent');
- const n=await p.evaluate(()=>G.cs.s.t.length);await solve(p,[...Array(n).keys()].reverse());await run(p,60000);
+ for(let k=0;k<12&&!await wrongOrder(p);k++){await solve(p);await run(p,800)}
+ await solve(p,await wrongOrder(p));await run(p,60000);
  const has=await p.evaluate(()=>sentWords(G.missedS[0]).length>0);
  ok('end screen lists the missed sentence; its button adds the sentence\'s words to the review list',(await p.$$eval('.sm1',e=>e.length))===1&&has&&await (async()=>{const before=Object.keys((await S_(p)).dues.gram).length;await p.click('[data-gadds]');return Object.keys((await S_(p)).dues.gram).length>before})());
  await c.close()}
@@ -256,7 +261,7 @@ async function playDaily(p,wrong){
   const k=await p.evaluate(()=>G.kind),bad=!!(wrong&&wrong(k,guard));
   if(k==='read'){await p.click('[data-greveal]');await p.click(bad?'[data-gdont]':'[data-gknow]')}
   else if(k==='typepy'||k==='typear'){const z=await p.evaluate(()=>G.cur.zh);await p.fill('#gin',bad?'错':z);await p.click('[data-gcheck]');if(bad)await p.click('[data-gnext]');else await run(p,800)}
-  else if(k==='sent'){const n=await p.evaluate(()=>G.cs.s.t.length);await solve(p,bad?[...Array(n).keys()].reverse():null);await run(p,bad?1700:900)}
+  else if(k==='sent'){const n=await p.evaluate(()=>G.cs.s.t.length);await solve(p,bad?(await wrongOrder(p))||[...Array(n).keys()].reverse():null);await run(p,bad?1700:900)}
   else await lpick(p,!bad);
  }
 }
