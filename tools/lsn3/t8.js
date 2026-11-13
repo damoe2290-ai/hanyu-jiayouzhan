@@ -5,9 +5,6 @@ const fs=require('fs');const EXE=process.env.CHROME||['/usr/bin/google-chrome','
 const PFX=process.env.PAGE_PREFIX===undefined?'w-':process.env.PAGE_PREFIX;const R='file://'+process.cwd()+'/'+PFX;
 let fails=0;const ok=(n,c,x)=>{console.log((c?'ok   ':'FAIL ')+n+(x?'  '+x:''));if(!c)fails++};
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
-/* the first-visit welcome of the hub (Phase 6c) would sit on top of a fresh hub: these older tests are about other things, so every context auto-skips it (t16.js and hubt/t17.js test the welcome itself) */
-{const nw=()=>{document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{const x=document.querySelector('#wel .wl-act [data-wl=skip]');if(x)x.click()},0))};const nc=b.newContext.bind(b),np=b.newPage.bind(b);
- b.newContext=async o=>{const c=await nc(o);await c.addInitScript(nw);return c};b.newPage=async o=>{const c=await nc(o);await c.addInitScript(nw);return c.newPage()}}
 
 const fresh=async()=>{const c=await b.newContext({viewport:{width:390,height:844}});return {c,p:await c.newPage()}};
 const back=p=>p.$eval('.zh-back',e=>e.getAttribute('href'));

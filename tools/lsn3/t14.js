@@ -16,9 +16,6 @@ const lum=([r,g,b])=>{const f=v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.0
 const cr=(a,b)=>{const x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)};
 const mix=(a,b,t)=>[a[0]*(1-t)+b[0]*t,a[1]*(1-t)+b[1]*t,a[2]*(1-t)+b[2]*t];
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
-/* the first-visit welcome of the hub (Phase 6c) would sit on top of a fresh hub: these older tests are about other things, so every context auto-skips it (t16.js and hubt/t17.js test the welcome itself) */
-{const nw=()=>{document.addEventListener('DOMContentLoaded',()=>setTimeout(()=>{const x=document.querySelector('#wel .wl-act [data-wl=skip]');if(x)x.click()},0))};const nc=b.newContext.bind(b),np=b.newPage.bind(b);
- b.newContext=async o=>{const c=await nc(o);await c.addInitScript(nw);return c};b.newPage=async o=>{const c=await nc(o);await c.addInitScript(nw);return c.newPage()}}
 
 async function open(page,o={}){const c=await b.newContext({viewport:{width:o.w||360,height:780},hasTouch:true,colorScheme:o.dark?'dark':'light',reducedMotion:o.reduced?'reduce':'no-preference'});
  await c.addInitScript(speechInit);

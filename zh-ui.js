@@ -130,7 +130,6 @@ function buildSheet(){
   h+='<h3>المظهر</h3><button type="button" class="zh-row" data-zh="theme" aria-pressed="false"><span>الوضع الليلي</span><span data-zh="themestate"></span></button>';
   if(slowBtn())h+='<h3>الصوت</h3><button type="button" class="zh-row" data-zh="slow" aria-pressed="false"><span>صوت بطيء</span><span data-zh="slowstate"></span></button>';
   h+='<h3>الأصوات</h3><button type="button" class="zh-row" data-zh="swish" aria-pressed="false"><span>أصوات خفيفة<small class="zh-sub">تقليب البطاقة، الإجابات، إتمام الاختبار والأوسمة</small></span><span data-zh="swishstate"></span></button>';
-  if(window.zhHubWelcome)h+='<h3>البداية</h3><button type="button" class="zh-row" data-zh="welcome"><span>إعادة إعداد</span></button>';
   h+='<h3>عرض النغمات</h3><div class="zh-seg" role="group" aria-label="عرض النغمات">';
   TONE_LABELS.forEach(function(t){h+='<button type="button" data-zh-tone="'+t[0]+'" aria-pressed="false">'+t[1]+'<small>'+t[2]+'</small></button>'});
   h+='</div><div class="zh-sample" lang="en" aria-hidden="true"><span class="t1">mā</span><span class="t2">má</span><span class="t3">mǎ</span><span class="t4">mà</span><span class="t5">ma</span></div></div>';
@@ -144,7 +143,6 @@ function buildSheet(){
     if(tone){cfg.tone=tone;save(cfg);applyTone();syncSheet();return}
     if(act==='close')closeSheet();
     else if(act==='theme'){var t=themeBtn();if(t)t.click();setTimeout(syncSheet,30)}
-    else if(act==='welcome'){closeSheet();if(window.zhHubWelcome)window.zhHubWelcome()}
     else if(act==='swish'){setSound(!soundOn());syncSheet();var sb2=q('.fcsnd');if(sb2){var on2=soundOn();sb2.setAttribute('aria-pressed',String(on2));sb2.innerHTML=sb2.innerHTML.replace(/<svg[\s\S]*<\/svg>/,on2?SND_ON:SND_OFF)}}
     else if(act==='slow'){var s=slowBtn();if(s)s.click();setTimeout(syncSheet,30)}
   });
