@@ -166,3 +166,12 @@ Lesson 7 uses only the site's own drawn SVG icons (`ICON`, `WORDPIC`, `PICQ`, `p
 - **Reduced motion:** the global rule in `zh-ui.css` removes animation durations; the flashcard falls back to the plain switch.
 - Test: `node tools/lsn3/t13.js [page]` (default `lesson-9.html`; also run on `lesson-7.html`, `prac-6.html`, `lis-6.html`). `parity.js` now opens pages with reduced motion and hides the new focus chip and the 'عرفتها' legend before comparing.
 
+## Visual identity (Phase 6b)
+All in `zh-ui.css` (shared by hub and lessons; tests in `tools/lsn3/t14.js`).
+- **Counters** (`.cnt`, `#qcount`) are isolated left-to-right runs, so RTL pages print "1 / 5", not "5 / 1". Five tabs fit a 360px screen (tab padding 9px under 420px); culture pages (7 tabs) still scroll.
+- **Brush underline** under the active tab (`.tabs .tab[aria-selected=true]::after`, clip-path shape, drawn from the right; the global reduced-motion rule makes it instant).
+- **Paper texture:** `--paper`, a 160px inline SVG noise (about 600 bytes, alpha .075), light theme only (`none` in dark). Worst-case contrast with the texture is part of t14.
+- **Calligraphy sheet:** flashcard front character `clamp(48px, min(30vw, (100vw-96px)/(n+.5)), 132px)` where `--n` is the character count (set by the template, so long words shrink instead of overflowing), faint cross guide lines, 64px space above; the focus-mode line has the same guide. Same serif stack as before (`--font-han`), no webfonts.
+- **One loud colour:** the red is used for the primary button, the active tab brush and earned badges; the header seal and progress bars are ink, current rows / speaker highlights are neutral, the comprehensive-quiz card has a red border instead of a red fill.
+- **Tone colours:** muted (55% tone, 45% text colour) inside `.row` and `.line` lists, full on the flashcard and the focus line. Modes `marks` and `numbers` keep `color: inherit` everywhere (not muted).
+

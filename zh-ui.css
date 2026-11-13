@@ -100,6 +100,10 @@ a.seal:hover,a.seal:focus-visible{transform:rotate(-4deg) scale(1.06)}
   display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;
   transition:color var(--dur-1) var(--ease),border-color var(--dur-2) var(--ease)}
 .tabs .tab:hover{color:var(--fg)}
+/* five tabs must fit a 360px screen (they overflowed by 31px, so the first or the last tab was clipped) */
+@media (max-width:420px){.tabs .tab{padding:0 9px}}
+/* counters like "1 / 5": an isolated left-to-right run, otherwise the RTL page prints "5 / 1" */
+.cnt,#qcount{direction:ltr;unicode-bidi:isolate;display:inline-block}
 .tabs .tab[aria-selected="true"]{background:none;box-shadow:none;color:var(--fg);border-bottom-color:var(--accent)}
 .tabs .tab .tag{background:var(--gold);color:#fff}
 :root[data-theme="dark"] .tabs .tab .tag{color:#1A1210}
@@ -235,6 +239,44 @@ a.seal:hover,a.seal:focus-visible{transform:rotate(-4deg) scale(1.06)}
 .sumb .badges{justify-content:center}
 .sumact{display:grid;gap:10px;width:100%}
 .sumact .btn{display:flex;align-items:center;justify-content:center;min-height:48px;text-decoration:none}
+
+/* ---------- Phase 6b: visual identity (shared by hub and lessons) ---------- */
+/* paper texture: a faint fibre noise, light theme only (a tiled 160px inline SVG, about 600 bytes); the dark theme stays clean */
+:root{--paper:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .3 0 0 0 0 .18 0 0 0 .075 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+:root[data-theme="dark"]{--paper:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:none}}
+body{background-image:var(--paper);background-attachment:scroll}
+.hdr{background-image:var(--paper)}
+/* brush-stroke underline under the active tab (CSS only; drawn from the right, the reading side of an RTL page) */
+.tabs .tab{position:relative}
+.tabs .tab[aria-selected="true"]{border-bottom-color:transparent}
+.tabs .tab[aria-selected="true"]::after{content:"";position:absolute;inset-inline:8px;bottom:-1px;height:6px;background:var(--accent);
+  clip-path:polygon(0 70%,3% 35%,14% 18%,38% 28%,66% 12%,88% 22%,98% 8%,100% 45%,97% 78%,80% 95%,52% 82%,28% 100%,9% 88%);
+  transform-origin:100% 50%;animation:zh-brush .35s ease-out}
+@keyframes zh-brush{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+/* calligraphy sheet: a big character with generous white space and a faint cross guide */
+.fc .face.front{padding-block:64px 40px}
+/* the flashcard character grows with the space: 2 characters about 105px at 360px, longer words shrink so they never overflow (--n = number of characters) */
+.fc .face.front .bigzh{font-size:clamp(48px,min(30vw,calc((100vw - 96px)/(var(--n,2) + .5))),132px);line-height:1.2}
+.fc .face.front .bigzh,.fxcard .zhline{background:linear-gradient(color-mix(in srgb,var(--line) 70%,transparent),color-mix(in srgb,var(--line) 70%,transparent)) center/1px 100% no-repeat,
+  linear-gradient(color-mix(in srgb,var(--line) 70%,transparent),color-mix(in srgb,var(--line) 70%,transparent)) center/100% 1px no-repeat}
+.fc .face.front .bigzh{padding:.12em .2em}
+.fxcard{padding-block:32px;gap:24px}
+.fxcard .zhline{padding:.1em .15em}
+/* one loud colour: red is for the primary action and the active element; supporting accents become ink */
+.seal{background:var(--fg);color:var(--bg);outline-color:var(--fg)}
+.prog i,.xpbar i,.qbar i{background:var(--fg)}
+.row.cur,.line.S,.fxcard.S{background:var(--surface2)}
+.S .av,.fxtop .av.S{background:var(--fg);color:var(--bg)}
+.act.feat{background:var(--surface);color:var(--fg);border:2px solid var(--accent)}
+.act.feat small{color:var(--muted);opacity:1}
+/* tone colours: muted in lists, vivid on the flashcard and the focus-mode line. The marks / numbers modes keep their own rules (colour: inherit). */
+.row .t1,.line .t1{color:color-mix(in srgb,var(--t1) 55%,var(--fg))}
+.row .t2,.line .t2{color:color-mix(in srgb,var(--t2) 55%,var(--fg))}
+.row .t3,.line .t3{color:color-mix(in srgb,var(--t3) 55%,var(--fg))}
+.row .t4,.line .t4{color:color-mix(in srgb,var(--t4) 55%,var(--fg))}
+.row .t5,.line .t5{color:color-mix(in srgb,var(--t5) 55%,var(--fg))}
+:root[data-tone="marks"] .row [class^="t"],:root[data-tone="marks"] .line [class^="t"],:root[data-tone="numbers"] .row [class^="t"],:root[data-tone="numbers"] .line [class^="t"]{color:inherit!important}
 
 /* ---------- no-Chinese-voice hint (built by zh-ui.js) ---------- */
 .zh-voice{display:flex;gap:var(--sp-2);align-items:center;justify-content:space-between;margin-top:var(--sp-2);padding:4px 4px 4px 12px;
