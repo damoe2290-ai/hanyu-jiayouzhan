@@ -8,6 +8,7 @@
  {"n": 7, "year": 4, "semester": 1, "title": "المستوى السابع", "sub": "الفصل الدراسي السابع", "courses": ["cult"]}
 ],
 "extra": {"title": "مسارات إضافية", "sub": "خارج المستويات الثمانية", "courses": ["fl"]},
+"beginners": {"title": "دورة المبتدئين", "sub": "٦ أسابيع · ساعتان أسبوعياً · على Zoom", "course": "beg"},
 "courses": {
  "gram": {"name": "قواعد ١", "book": "《发展汉语初级综合1》", "cover": "发展<br>汉语<br><small>初级1</small>", "color": 1, "lessons": [
   {"no": 6, "n": "六", "title": "الدرس السادس · 香蕉多少钱一斤", "desc": "الأسعار والأعداد والنقود: 想 و 多少钱", "file": "lesson-6.html", "key": "noor-lesson6-v1"},
@@ -40,6 +41,14 @@
   {"no": 2, "n": "二", "title": "الدرس الثاني · 中国的节日", "desc": "الأعياد الصينية الأربعة الكبرى", "file": "cult-2.html", "key": "noor-cult2-v1"},
   {"no": 3, "n": "三", "title": "الدرس الثالث · 伊斯兰教与中国穆斯林民族", "desc": "الإسلام والقوميات المسلمة: الهوي والأويغور", "file": "cult-3.html", "key": "noor-cult3-v1"},
   {"no": 4, "n": "四", "title": "الدرس الرابع · 中国四大发明", "desc": "الورق والطباعة والبوصلة والبارود", "file": "cult-4.html", "key": "noor-cult4-v1"}
+ ]},
+ "beg": {"name": "دورة المبتدئين", "book": "初级汉语", "cover": "你好<br><small>مبتدئين</small>", "color": 3, "lessons": [
+  {"no": 1, "n": "١", "title": "مرحباً · 你好！", "desc": "التحية الأولى: 你好 و谢谢 و再见", "file": "beginners-1.html", "key": "noor-beg1-v1"},
+  {"no": 2, "n": "٢", "title": "أنا وأنت · 我叫…", "desc": "التعارف: الاسم والجنسية 我叫 و我是…人", "file": "beginners-2.html", "key": "noor-beg2-v1"},
+  {"no": 3, "n": "٣", "title": "الأسبوع الثالث", "desc": "", "file": null, "key": "noor-beg3-v1", "soon": true},
+  {"no": 4, "n": "٤", "title": "الأسبوع الرابع", "desc": "", "file": null, "key": "noor-beg4-v1", "soon": true},
+  {"no": 5, "n": "٥", "title": "الأسبوع الخامس", "desc": "", "file": null, "key": "noor-beg5-v1", "soon": true},
+  {"no": 6, "n": "٦", "title": "الأسبوع السادس", "desc": "", "file": null, "key": "noor-beg6-v1", "soon": true}
  ]},
  "fl": {"name": "لغة أجنبية", "book": "《发展汉语初级综合1》", "cover": "发展<br>汉语<br><small>初级1</small>", "color": 2, "lessons_from": "gram"}
 }

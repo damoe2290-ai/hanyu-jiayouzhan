@@ -20,10 +20,12 @@ ns = [l['n'] for l in doc['levels']]
 ok('level numbers are unique, ascending, within 1..8', ns == sorted(set(ns)) and all(1 <= n <= 8 for n in ns), ns)
 ok('every level has Arabic title and sub (non-empty, Arabic letters)', all(re.search(r'[؀-ۿ]', l.get('title', '')) and re.search(r'[؀-ۿ]', l.get('sub', '')) for l in doc['levels']))
 ok('extra tracks have an Arabic title', bool(re.search(r'[؀-ۿ]', doc['extra']['title'])))
-placed = [c for l in doc['levels'] for c in l['courses']] + doc['extra']['courses']
+BEG = doc.get('beginners') or {}
+placed = [c for l in doc['levels'] for c in l['courses']] + doc['extra']['courses'] + ([BEG['course']] if BEG else [])
 ok('every placed course id exists in courses', all(c in C for c in placed), [c for c in placed if c not in C])
 ok('a course is placed exactly once (no duplicates, none left out)', sorted(placed) == sorted(C), (sorted(placed), sorted(C)))
 ok('no empty level and no empty extra section', all(l['courses'] for l in doc['levels']) and bool(doc['extra']['courses']))
+ok('the beginners course section (outside the eight levels) has an Arabic title and sub and points at an existing course', bool(BEG) and re.search(r'[؀-ۿ]', BEG.get('title', '')) and re.search(r'[؀-ۿ]', BEG.get('sub', '')) and BEG.get('course') in C)
 def lessons(cid):
     c = C[cid]
     return c['lessons'] if 'lessons' in c else C[c['lessons_from']]['lessons']
@@ -33,6 +35,9 @@ ok('course names, books and covers are non-empty; colour is 1..6', all(c['name']
 files, keys, bad = [], [], []
 for cid, c in C.items():
     for l in c.get('lessons', []):
+        if l.get('soon'):      # the only exception to "no placeholders": the beginners course lists its real upcoming weeks, one line each, without a file
+            if cid != 'beg' or l.get('file') is not None or not re.search(r'[؀-ۿ]', l.get('title', '')): bad.append(('soon', cid, l['no']))
+            keys.append(l['key']); continue
         path = os.path.join(ROOT, l['file'])
         if not os.path.exists(path): bad.append(('missing', l['file'])); continue
         page = open(path, encoding='utf8').read()
@@ -44,7 +49,7 @@ for cid, c in C.items():
 ok('every listed lesson file exists, its storage key is the page\'s own KEY, number and texts are filled', not bad, bad)
 ok('no lesson file or storage key is listed twice', len(set(files)) == len(files) and len(set(keys)) == len(keys))
 ok('every lesson page of the site is listed (no page is left out of the hub)',
-   sorted(f for f in os.listdir(ROOT) if re.match(r'(lesson|prac|lis|biz|cult)-\d+\.html$', f)) == sorted(files))
+   sorted(f for f in os.listdir(ROOT) if re.match(r'(lesson|prac|lis|biz|cult|beginners)-\d+\.html$', f)) == sorted(files))
 ok('lessons within a course are in ascending order', all([l['no'] for l in c.get('lessons', [])] == sorted(l['no'] for l in c.get('lessons', [])) for c in C.values()))
 import order
 mism = []

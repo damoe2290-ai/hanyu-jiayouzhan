@@ -21,7 +21,7 @@ ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT=os.path.join(ROOT,'vendor','hanzi-writer')
 HAN=re.compile('[㐀-䶿一-鿿]')
 PSEUDO={'㐀','鿿'}      # endpoints of CJK ranges that appear inside the pages' code, not real lesson characters
-PAGES=['lesson-*.html','prac-*.html','lis-*.html','biz-*.html','cult-*.html']
+PAGES=['lesson-*.html','prac-*.html','lis-*.html','biz-*.html','cult-*.html','beginners-*.html']
 
 def lesson_chars():
     s=set()
