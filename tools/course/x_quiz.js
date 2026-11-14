@@ -66,7 +66,7 @@ function tprList(){
 }
 BEGR.tpr=function(q,b){
   var c=q.c;q.left=10;Q.streak=Q.streak||0;
-  b.innerHTML='<div class="qprompt bg-tpr"><span class="mut">نفّذ الأمر بجسمك ثم اضغط «نفّذت»</span><div class="bigzh han ltr" lang="zh-CN" dir="ltr">'+esc(c.zh)+'</div><div class="py ltr big">'+pyhtml(c.py)+'</div>'+spkBtn(c.zh,'big')+
+  b.innerHTML='<div class="qprompt bg-tpr"><span class="mut">نفّذ الأمر بجسمك ثم اضغط «نفّذت»</span><div class="bigzh han ltr" lang="zh-CN" dir="ltr">'+esc(c.zh)+'</div><div class="py ltr big">'+pyS(c.py)+'</div>'+spkBtn(c.zh,'big')+
     '<div class="mut bg-tpr-ar" id="tprAr" hidden>'+esc(c.ar)+' · '+esc(c.do)+'</div></div>'+
     '<div class="bg-tbar" aria-hidden="true"><i id="tprT" style="width:100%"></i></div><div class="bg-tcount"><span class="cnt" id="tprC">10</span><span class="bg-streak" title="تتابع الأوامر">🔥 <b id="tprS">'+Q.streak+'</b></span></div>'+
     '<button class="btn primary wide" data-act="tprdone">نفّذت</button><button class="btn ghost sm" data-act="tprhint" style="margin-top:8px">أظهر المعنى</button>';
