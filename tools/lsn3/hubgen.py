@@ -41,12 +41,28 @@ def sents_of(file):
         raw = jslit.var(open('legacy/g%s.data.js' % num, encoding='utf8').read(), 'SENT')
     return [{'t': x['tokens'], 'zh': x['zh'], 'py': x.get('py', ''), 'ar': x.get('ar', '')} for x in raw if x.get('tokens') and len(x['tokens']) >= 2]
 
+def beg_vocab(path='../course/beginners.json'):
+    """words of the beginners course for the hub's dictionary / review / games (same shape as the other courses' lists; l = week number)"""
+    if not os.path.exists(path): return []
+    src = json.load(open(path, encoding='utf8'))
+    out, seen = [], set()
+    for w in src['weeks']:
+        if w.get('soon'): continue
+        for v in w['vocab'] + [{'zh': c['zh'], 'py': c['py'], 'ar': c['ar'], 'note': 'عبارة الفصل'} for c in w['class']]:
+            if v['zh'] in seen or '…' in v['zh']: continue
+            seen.add(v['zh'])
+            ex = ['', '', '']
+            out.append({'zh': v['zh'], 'py': v['py'], 'ar': v['ar'], 'note': v.get('note', ''), 'ex': ex, 'sup': 0, 'l': w['no']})
+    return out
+
 def build(levels_path='../levels.json'):
     doc = json.load(open(levels_path, encoding='utf8'))
     for cid, c in doc['courses'].items():
         for l in c.get('lessons', []):
+            if l.get('soon'): continue      # an upcoming week of the beginners course: no page yet
             l['size'] = size_of(l['file'])
             l['sents'] = sents_of(l['file'])
+    doc['begVocab'] = beg_vocab()
     return doc
 
 if __name__ == '__main__':

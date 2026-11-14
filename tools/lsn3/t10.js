@@ -13,7 +13,7 @@ const LV=JSON.parse(fs.readFileSync('tools/levels.json','utf8'));
 let fails=0;const ok=(n,c,x)=>{console.log((c?'ok   ':'FAIL ')+n+(!c&&x!==undefined?'  '+x:''));if(!c)fails++};
 const ymd=d=>d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);
 const daysAgo=n=>{const d=new Date();d.setDate(d.getDate()-n);return ymd(d)};
-const allFiles=Object.values(LV.courses).flatMap(c=>(c.lessons||[]).map(l=>l.file));
+const allFiles=Object.values(LV.courses).flatMap(c=>(c.lessons||[]).map(l=>l.file)).filter(Boolean);
 (async()=>{const b=await chromium.launch(Object.assign({args:['--no-sandbox']},EXE?{executablePath:EXE}:{}));
 
 const ctxs=[];
@@ -25,14 +25,14 @@ const openLv=p=>p.$$eval('details.lvl',e=>e.filter(x=>x.open).map(x=>x.dataset.l
 
 console.log('--- structure from levels.json (fresh visitor, 360px)');
 let {c,p}=await fresh();await hub(p);
-ok('levels shown are exactly those in levels.json, plus the extra tracks section',JSON.stringify(await p.$$eval('details.lvl',e=>e.map(x=>x.dataset.lv)))===JSON.stringify(LV.levels.map(l=>String(l.n)).concat('extra')));
+ok('levels shown are exactly those in levels.json, plus the extra tracks section',JSON.stringify(await p.$$eval('details.lvl',e=>e.map(x=>x.dataset.lv)))===JSON.stringify(LV.levels.map(l=>String(l.n)).concat('extra','beg')));   /* + the beginners section (Phase: beginners course) */
 ok('level titles and sub-titles come from the file (Arabic)',JSON.stringify(await p.$$eval('details.lvl:not(.extra) .lvt',e=>e.map(x=>[x.querySelector('b').textContent,x.querySelector('.mut').textContent])))===JSON.stringify(LV.levels.map(l=>[l.title,l.sub])));
 ok('extra tracks section is titled from the file',await p.$eval('details.lvl.extra .lvt b',e=>e.textContent)===LV.extra.title);
-ok('courses sit under the right level (and Foreign Language under the extra tracks)',JSON.stringify(await p.$$eval('details.lvl',e=>e.map(x=>[...x.querySelectorAll('.cb')].map(y=>y.dataset.course))))===JSON.stringify(LV.levels.map(l=>l.courses).concat([LV.extra.courses])));
+ok('courses sit under the right level (and Foreign Language under the extra tracks)',JSON.stringify(await p.$$eval('details.lvl',e=>e.map(x=>[...x.querySelectorAll('.cb')].map(y=>y.dataset.course))))===JSON.stringify(LV.levels.map(l=>l.courses).concat([LV.extra.courses],[[]])));   /* the beginners section lists its six weeks directly, no course card */
 ok('course names and books are the existing ones, unchanged',await p.$$eval('.cb',(e,C)=>e.every(x=>x.querySelector('.ci b').textContent===C[x.dataset.course].name&&x.querySelector('.ci .mut').textContent===C[x.dataset.course].book),LV.courses));
-const links=await p.$$eval('.lrow',e=>e.map(x=>x.getAttribute('href')));
+const links=(await p.$$eval('.lrow',e=>e.map(x=>x.getAttribute('href')))).filter(Boolean);   /* weeks of the beginners course that are not built yet are one-line rows without a link */
 ok('every lesson of every course is linked (Foreign Language repeats the Grammar lessons) and old URLs are unchanged',new Set(links).size===allFiles.length&&allFiles.every(f=>links.includes(f))&&links.length===allFiles.length+LV.courses.gram.lessons.length,links.length);
-ok('NO locking, no "coming soon", no placeholder tiles, nothing disabled',(await p.$$eval('button[disabled],.soon,.lock,[aria-disabled=true]',e=>e.length))===0&&!/قريباً|قريبا/.test(await p.$eval('#main',e=>e.innerText)));
+ok('NO locking, nothing disabled, no placeholder tiles; the only "coming soon" are the four upcoming weeks (one line each) inside the beginners section',(await p.$$eval('button[disabled],.lock,[aria-disabled=true]',e=>e.length))===0&&await p.$$eval('.soon',e=>e.length===4&&e.every(x=>x.closest('details.beg')))&&await p.evaluate(()=>[...document.querySelectorAll('#main *')].filter(e=>!e.children.length&&/قريباً|قريبا/.test(e.textContent)).every(e=>e.closest('details.beg'))));
 ok('only the first level is open for a visitor with no history',JSON.stringify(await openLv(p))===JSON.stringify([String(LV.levels[0].n)]));
 await p.click('details.lvl[data-lv="5"] summary');ok('a closed level opens when tapped (all levels stay open to everybody)',(await openLv(p)).includes('5')&&await p.isVisible('details.lvl[data-lv="5"] .cbh'));
 await p.click('[data-go=tea]');await p.click('[data-go=home]');ok('the hand-opened level stays open after leaving the home tab and coming back',(await openLv(p)).includes('5'));
@@ -40,9 +40,9 @@ await p.click('details.lvl[data-lv="5"] summary');ok('and it closes again',!(awa
 ok('no horizontal scrolling at 360px',await p.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth));
 ok('quick dictionary/review tiles are collapsed by default and open on tap',await p.$eval('details.tools',e=>!e.open)&&(await p.click('details.tools summary'),await p.$eval('details.tools',e=>e.open)));
 ok('fresh dashboard: continue card offers the first lesson, daily ring 0, 28-day calendar, no streak',await p.$eval('.cont .go',e=>e.getAttribute('href'))===allFiles[0]&&/ابدأ/.test(await p.$eval('.cont .go',e=>e.textContent))&&await p.$eval('.ring .rtx',e=>e.textContent)==='0'&&(await p.$$('.cal .cd')).length===28&&/^0 /.test(await p.$$eval('.dgi',e=>e[1].innerText)));
-ok('every lesson shows a state badge, all "not started" for a fresh visitor',await p.$$eval('.lrow .st',e=>e.length>0&&e.every(x=>x.classList.contains('new'))));
+ok('every lesson shows a state badge, all "not started" for a fresh visitor',await p.$$eval('.lrow:not(.soon) .st',e=>e.length>0&&e.every(x=>x.classList.contains('new'))));
 console.log('--- three tiers, one tap each: level (course cards only) -> course card (collapsed) -> lessons inside the open course only');
-const vis=sel=>p.$$eval(sel,e=>e.filter(x=>x.offsetParent!==null).length);
+const vis=sel=>p.$$eval(sel,e=>e.filter(x=>x.offsetParent!==null&&!x.closest('details:not([open])')).length);   /* content of a closed <details> is not visible although it has a layout parent */
 ok('a fresh visit shows NO lesson row at all (levels and courses are collapsed or closed)',await vis('.lrow')===0);
 ok('the open level shows only course cards (compact buttons), every course collapsed',await p.$$eval('details.lvl[open] .lvb > *',e=>e.length>0&&e.every(x=>x.classList.contains('cb')&&!x.classList.contains('open')&&x.querySelector('.cbh').getAttribute('aria-expanded')==='false'))&&await vis('details.lvl[open] .cbh')===LV.levels[0].courses.length);
 ok('a course card holds a cover thumbnail, the Arabic name, the book title, ONE progress bar with "x من y دروس مكتملة" and a chevron',await p.$$eval('.cbh',e=>e.every(x=>x.querySelector('.cover')&&x.querySelector('.ci b')&&x.querySelector('.ci .bk')&&x.querySelectorAll('.bar').length===1&&/\d+ من \d+ دروس مكتملة/.test(x.textContent)&&x.querySelector('.chev'))));

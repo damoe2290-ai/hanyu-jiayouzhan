@@ -187,6 +187,7 @@ details.tools>summary{cursor:pointer;min-height:44px;display:flex;align-items:ce
 .chipw.built{display:inline-flex;align-items:center;background:var(--accent-soft);border-color:var(--accent)}
 .chipw[disabled]{opacity:.3}.chipw.hint,.btn.hint{outline:3px solid var(--accent);outline-offset:2px}
 .gdi h3{font-size:22px}.sm1 .gz3{font-size:20px}
+.lrow.soon{display:flex;align-items:center;gap:10px;min-height:44px;padding:8px 12px;border:1px dashed var(--line);border-radius:12px;color:var(--muted)}.lrow.soon .n{font-weight:700}.lrow.soon .lt{flex:1}.lrow.soon .st{font-size:13px;padding:2px 10px;border-radius:10px;background:var(--surface2)}
 </style>
 <link rel="stylesheet" href="zh-ui.css">
 <script src="zh-ui.js" defer></script>
@@ -207,7 +208,7 @@ var CR=LV.courses,SET=LV.settings||{},MATS=[],LB={};
 function lessonsOf(id){var c=CR[id];return c.lessons||CR[c.lessons_from].lessons}
 Object.keys(CR).forEach(function(id){
   var c=CR[id];
-  LB[id]=lessonsOf(id).map(function(l){return {n:l.n,t:l.title,d:l.desc,url:l.file,no:l.no,key:l.key,sz:l.size,sents:l.sents||[]}});
+  LB[id]=lessonsOf(id).map(function(l){return {n:l.n,t:l.title,d:l.desc,url:l.file,no:l.no,key:l.key,sz:l.size,sents:l.sents||[],soon:!!l.soon}});
   MATS.push({id:id,cv:c.cover,t:c.name,s:c.book,color:c.color,on:1});
 });
 var LESSONS=LB.gram;
@@ -219,22 +220,24 @@ var KEY='zh-hub-v1',S={dues:{gram:{},fl:{},cult:{},prac:{},lis:{},biz:{}}};
 try{S=JSON.parse(localStorage.getItem(KEY))||S}catch(e){}
 /* fields written by a welcome screen that no longer exists: ignored and removed (other fields untouched) */
 var STALE_WEL=['welcome','goal','startLevel'].filter(function(k){return S&&typeof S==='object'&&k in S});STALE_WEL.forEach(function(k){delete S[k]});
-if(S.due&&!S.dues){S.dues={gram:S.due,fl:{}};delete S.due}S.dues=S.dues||{};['gram','fl','cult','prac','lis','biz'].forEach(function(k){S.dues[k]=S.dues[k]||{}});
+if(S.due&&!S.dues){S.dues={gram:S.due,fl:{}};delete S.due}S.dues=S.dues||{};['gram','fl','cult','prac','lis','biz','beg'].forEach(function(k){S.dues[k]=S.dues[k]||{}});
 /* zh-ui.js (loaded by every lesson) writes lastLesson, pts, xpSum and days into this same key while a lesson is open. Before every save the
    hub takes those over from storage, and then re-applies what the hub itself changed since its last save (PEND: points it added, the
    lesson it opened), so neither side overwrites the other. */
 var PEND={pts:{},last:null};
 function syncTracker(){try{var n=JSON.parse(localStorage.getItem(KEY));if(!n||typeof n!=='object')return false;
   if(n.xpSum!=null)S.xpSum=n.xpSum;
+  if(n.beg&&typeof n.beg==='object')S.beg=n.beg;   /* beginners course presenter data (names, teams) */
   if(n.lastLesson!=null&&PEND.last==null)S.lastLesson=n.lastLesson;
   S.pts=n.pts?JSON.parse(JSON.stringify(n.pts)):{};
   Object.keys(PEND.pts).forEach(function(t){S.pts[t]=(S.pts[t]||0)+PEND.pts[t]});
   if(n.days){S.days=S.days||[];n.days.forEach(function(d){if(S.days.indexOf(d)<0)S.days.push(d)});S.days.sort()}return true}catch(e){return false}}
 function save(){syncTracker();try{localStorage.setItem(KEY,JSON.stringify(S));PEND={pts:{},last:null}}catch(e){}}
-var VOCAB_BY={gram:VOCAB,fl:VOCAB,cult:VOCAB_CULT,prac:VOCAB_PRAC,lis:VOCAB_LIS,biz:VOCAB_BIZ};
+var VOCAB_BEG=LV.begVocab||[];   /* beginners course words (tools/course/beginners.json, injected by hubgen) */
+var VOCAB_BY={gram:VOCAB,fl:VOCAB,cult:VOCAB_CULT,prac:VOCAB_PRAC,lis:VOCAB_LIS,biz:VOCAB_BIZ,beg:VOCAB_BEG};
 function CV(){return VOCAB_BY[crs]||[]}
 function DUE(c){var k=c||crs;if(!k)return {};return S.dues[k]||(S.dues[k]={})}
-function allStats(){var a=0,l=0,d=0,n=Date.now();['gram','fl','cult','prac','lis','biz'].forEach(function(c){var D=DUE(c),ks=Object.keys(D);a+=ks.length;l+=ks.filter(function(k){return D[k].i>=6}).length;d+=ks.filter(function(k){return D[k].t<=n}).length});return {all:a,learned:l,due:d}}
+function allStats(){var a=0,l=0,d=0,n=Date.now();['gram','fl','cult','prac','lis','biz','beg'].forEach(function(c){var D=DUE(c),ks=Object.keys(D);a+=ks.length;l+=ks.filter(function(k){return D[k].i>=6}).length;d+=ks.filter(function(k){return D[k].t<=n}).length});return {all:a,learned:l,due:d}}
 function tabsNow(){return crs?[['home','الدروس'],['dict','القاموس'],['rev','مفرداتي'],['tea','عن المنصة']]:[['home','الرئيسية'],['tea','عن المنصة']]}
 function cbar(){var m=MATS.filter(function(x){return x.id===crs})[0];return '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap"><b>'+m.t+' <span class="mut han" style="font-weight:400">'+m.s+'</span></b><button class="btn" data-crs="">→ كل المواد</button></div>'}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -274,6 +277,7 @@ var PAGODA='<svg viewBox="0 0 240 170" preserveAspectRatio="xMidYMax slice"><cir
    computed from the lesson's existing localStorage key. sz = {v words, d dialogue lines (culture: topics), acts, topics}. ---------- */
 var DONE_AT=SET.done_at||90,GOAL=SET.daily_goal||50;   /* the daily goal: 50 points, data in levels.json */
 function lessonProg(l){
+  if(l.soon)return {pct:0,st:'soon',xp:0};
   var st=null;try{st=JSON.parse(localStorage.getItem(l.key))}catch(e){}
   if(!st||typeof st!=='object')return {pct:0,st:'new',xp:0};
   var z=l.sz,kn=st.known||{},he=(z.topics?st.seenT:st.heard)||{},be=st.best||{},k=0;
@@ -283,7 +287,7 @@ function lessonProg(l){
   var started=pct>0||xp>0||Object.keys(st.badges||{}).length>0;
   return {pct:pct,st:pct>=DONE_AT?'done':(started?'prog':'new'),xp:xp};
 }
-function avgPct(ls){if(!ls.length)return 0;var t=0;ls.forEach(function(l){t+=lessonProg(l).pct});return Math.round(t/ls.length)}
+function avgPct(ls){ls=ls.filter(function(l){return !l.soon});if(!ls.length)return 0;var t=0;ls.forEach(function(l){t+=lessonProg(l).pct});return Math.round(t/ls.length)}
 function badge(p,compact){return p.st==='done'?'<span class="st done">'+ic('check')+'أُنجز</span>':p.st==='prog'?'<span class="st prog"'+(compact?' title="قيد التقدم" aria-label="قيد التقدم '+p.pct+'%"':'')+'>'+(compact?p.pct+'%':'قيد التقدم · '+p.pct+'%')+'</span>':'<span class="st new">لم يبدأ</span>'}
 function totalXp(){var t=0,seen={};Object.keys(LB).forEach(function(id){LB[id].forEach(function(l){if(!seen[l.key]){seen[l.key]=1;t+=lessonProg(l).xp}})});return t}
 function findLesson(file){var order=Object.keys(LB);for(var i=0;i<order.length;i++){var ls=LB[order[i]];for(var j=0;j<ls.length;j++)if(ls[j].url===file)return {c:order[i],l:ls[j],i:j}}return null}
@@ -316,7 +320,7 @@ function tparts(t){var k=t.indexOf(' · ');return k<0?{ar:'',zh:t}:{ar:t.slice(0
 /* Three tiers, one tap each: level (only course cards) -> course card (collapsed; opening it shows its lessons, one course open per level)
    -> lesson rows (number, Chinese title, one-line Arabic subtitle, state badge). Which course is open is remembered for this visit only. */
 var OPENC={};
-function lrow(id,l,i){var p=lessonProg(l),t=tparts(l.t);return '<a class="lrow" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+((id==='gram'||id==='fl')?i:-1)+'" data-file="'+l.url+'"><span class="n">'+l.n+'</span><span class="lt"><b class="han ltr" lang="zh-CN">'+esc(t.zh)+'</b><span class="sub">'+l.d+'</span></span>'+badge(p,true)+'</a>'}
+function lrow(id,l,i){if(l.soon)return '<div class="lrow soon"><span class="n">'+l.n+'</span><span class="lt"><b>'+esc(l.t)+'</b></span><span class="st">قريباً</span></div>';var p=lessonProg(l),t=tparts(l.t);return '<a class="lrow" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+((id==='gram'||id==='fl')?i:-1)+'" data-file="'+l.url+'"><span class="n">'+l.n+'</span><span class="lt"><b class="han ltr" lang="zh-CN">'+esc(t.zh)+'</b><span class="sub">'+l.d+'</span></span>'+badge(p,true)+'</a>'}
 function courseBlock(id,lk){
   var m=MATS.filter(function(x){return x.id===id})[0],ls=LB[id],pct=avgPct(ls),col='var(--c'+m.color+')',dn=ls.filter(function(l){return lessonProg(l).st==='done'}).length,open=OPENC[lk]===id;
   return '<div class="cb'+(open?' open':'')+'" data-course="'+id+'">'+
@@ -331,13 +335,19 @@ function levelHtml(lv,open){
   return '<details class="lvl" data-lv="'+lv.n+'"'+(open?' open':'')+'><summary><span class="lvn" aria-hidden="true">'+lv.n+'</span><span class="lvt"><b>'+lv.title+'</b><span class="mut">'+lv.sub+'</span></span><span class="pc">'+avgPct(all)+'%</span></summary>'+
    '<div class="lvb">'+lv.courses.map(function(c){return courseBlock(c,String(lv.n))}).join('')+'</div></details>';
 }
+/* beginners course section (outside the eight levels): six weekly cards, weeks not built yet are one-line «قريباً» rows */
+function begSection(){
+  var m=MATS.filter(function(x){return x.id==='beg'})[0],ls=LB.beg;if(!m||!ls||!LV.beginners)return '';
+  var b=LV.beginners,open=OPEN.beg!=null?OPEN.beg:(lastRef().c==='beg'),pct=avgPct(ls);
+  return '<details class="lvl extra beg" data-lv="beg"'+(open?' open':'')+'><summary><span class="lvn" aria-hidden="true">★</span><span class="lvt"><b>'+b.title+'</b><span class="mut">'+b.sub+'</span></span><span class="pc">'+pct+'%</span></summary><div class="lvb"><div class="lrows">'+ls.map(function(l,i){return lrow('beg',l,i)}).join('')+'</div><button class="btn" data-crs="beg">القاموس ومفردات المراجعة</button></div></details>';
+}
 function home(){
   if(crs){
   var m=MATS.filter(function(x){return x.id===crs})[0];
   return '<div class="narrow"><button class="btn" style="margin-top:12px" data-crs="">→ كل المواد</button>'+
   '<div class="card hero"><h2>'+m.t+'</h2><p class="han ltr" style="font-size:15px">'+m.s+'</p></div>'+
   '<h2 style="font-size:17px;margin-top:20px">الدروس</h2><div class="grid">'+
-  LB[crs].map(function(l,i){var p=lessonProg(l);return '<a class="course" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+(crs==='gram'||crs==='fl'?i:-1)+'" data-file="'+l.url+'"><div class="n">'+l.n+'</div><div><b class="han ltr" lang="zh-CN">'+esc(tparts(l.t).zh)+'</b><span class="mut">'+tparts(l.t).ar+' · '+l.d+'</span>'+badge(p)+'</div><span class="btn p">افتح</span></a>'}).join('')+
+  LB[crs].filter(function(l){return !l.soon}).map(function(l,i){var p=lessonProg(l);return '<a class="course" href="'+l.url+'" target="_blank" rel="noopener" data-lesson="'+(crs==='gram'||crs==='fl'?i:-1)+'" data-file="'+l.url+'"><div class="n">'+l.n+'</div><div><b class="han ltr" lang="zh-CN">'+esc(tparts(l.t).zh)+'</b><span class="mut">'+tparts(l.t).ar+' · '+l.d+'</span>'+badge(p)+'</div><span class="btn p">افتح</span></a>'}).join('')+
   ''+'</div></div>';
   }
   var st=allStats(),all={length:st.all},learned=st.learned,dn=st.due,w=wotd(),wid=VOCAB.indexOf(w),on=DUE('gram')[w.zh];
@@ -346,10 +356,11 @@ function home(){
   var lvls=LV.levels.map(function(lv){return levelHtml(lv,OPEN['l'+lv.n]!=null?OPEN['l'+lv.n]:lv.n===openN)}).join('');
   var ex=LV.extra,eo=OPEN.extra!=null?OPEN.extra:extraOpen,eall=[];ex.courses.forEach(function(c){eall=eall.concat(LB[c])});
   var extra='<details class="lvl extra" data-lv="extra"'+(eo?' open':'')+'><summary><span class="lvn" aria-hidden="true">+</span><span class="lvt"><b>'+ex.title+'</b><span class="mut">'+ex.sub+'</span></span><span class="pc">'+avgPct(eall)+'%</span></summary><div class="lvb">'+ex.courses.map(function(c){return courseBlock(c,'extra')}).join('')+'</div></details>';
+  var beg=begSection();
   var tools=MATS.map(function(m){return '<button data-open="'+m.id+':dict">'+ic('book')+'قاموس '+m.t+'</button><button data-open="'+m.id+':rev">'+ic('repeat')+'مفردات '+m.t+'</button>'}).join('');
   return '<div class="banner"><svg class="bg" viewBox="0 0 240 170" preserveAspectRatio="xMinYMax meet">'+PAGODA.replace(/^<svg[^>]*>/,'').replace('</svg>','')+'</svg><div class="jy" aria-hidden="true">加油！</div><h2>مرحباً بك في رحلتك مع اللغة الصينية</h2><p>تعلّم بذكاء، وتدرّب بتفاعل، وحقّق أهدافك.</p></div>'+
   dashboard()+
-  '<h2 class="sec">المستويات الدراسية</h2><div class="lvls">'+lvls+'</div>'+extra+
+  '<h2 class="sec">المستويات الدراسية</h2><div class="lvls">'+lvls+'</div>'+extra+beg+
   '<div class="main2"><section class="card" style="margin:0"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><span class="chip">'+ic('book')+' كلمة اليوم</span></div>'+
  '<div class="tl" style="margin-top:12px"><div class="scene" aria-hidden="true">'+PAGODA+'</div><div style="text-align:center;display:grid;gap:4px;align-content:center"><div class="han" style="font-size:64px;line-height:1.2" dir="ltr">'+esc(w.zh)+'</div><div class="py ltr" style="font-size:22px">'+pyh(w.py)+'</div><div style="font-size:20px">'+esc(w.ar)+'</div>'+
  (w.ex?'<div class="mut ltr han" style="margin-top:4px">'+esc(w.ex[0])+'</div>':'')+
@@ -363,7 +374,7 @@ var lf=0;
 function dict(){
  var V=CV(),D=DUE(),n=norm(q),L=V.filter(function(w){return (!lf||w.l===lf)&&(!n||w.zh.indexOf(q.trim())>-1||norm(w.py).indexOf(n)>-1||w.ar.indexOf(q.trim())>-1)});
  return cbar()+'<div style="margin-top:12px"><input type="search" id="q" placeholder="ابحث: حرف صيني، بينيين، أو كلمة عربية" aria-label="بحث"></div>'+
- '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">'+(crs==='cult'?[0,1,2,3,4]:(crs==='prac'||crs==='lis')?[0,6,7,8,9,10]:(crs==='biz')?[0,4,5,6]:[0,6,7,8,9,10]).map(function(x){return '<button class="btn'+(lf===x?' p':'')+'" data-lf="'+x+'">'+(x?'الدرس '+x:'كل الدروس')+'</button>'}).join('')+'</div>'+
+ '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">'+(crs==='cult'?[0,1,2,3,4]:(crs==='beg')?[0,1,2]:(crs==='prac'||crs==='lis')?[0,6,7,8,9,10]:(crs==='biz')?[0,4,5,6]:[0,6,7,8,9,10]).map(function(x){return '<button class="btn'+(lf===x?' p':'')+'" data-lf="'+x+'">'+(x?'الدرس '+x:'كل الدروس')+'</button>'}).join('')+'</div>'+
  '<p class="mut" style="margin-top:8px">'+L.length+' كلمة</p>'+
  '<div id="list">'+L.map(function(w){var i=V.indexOf(w),on=D[w.zh];return '<div class="w"><div class="z han" dir="ltr">'+esc(w.zh)+'</div><div><div class="py ltr">'+pyh(w.py)+'</div><div>'+esc(w.ar)+(w.sup?'<span class="tag">إضافية</span>':'')+'</div></div><div style="display:flex;gap:6px"><button class="sm" data-say="'+i+'" aria-label="استمع">🔊</button><button class="sm'+(on?' on':'')+'" data-add="'+i+'" aria-label="'+(on?'في المراجعة':'أضف للمراجعة')+'">'+(on?'✓':'+')+'</button></div>'+
  (w.ex?'<div class="ex"><span class="han ltr" style="font-size:17px">'+esc(w.ex[0])+'</span> <button class="sm" style="min-height:32px" data-sayx="'+i+'" aria-label="استمع للجملة">🔊</button><div class="py mut ltr">'+esc(w.ex[1])+'</div><div>'+esc(w.ex[2])+'</div></div>':'')+
@@ -930,8 +941,8 @@ document.addEventListener('input',function(e){if(e.target.id==='q'){q=e.target.v
 /* theme is remembered like in the lessons: '<state key>-theme' (here 'zh-hub-v1-theme'); the state key itself is untouched */
 try{var savedTheme=localStorage.getItem(KEY+'-theme');if(savedTheme==='dark'||savedTheme==='light')document.documentElement.setAttribute('data-theme',savedTheme)}catch(e){}
 document.getElementById('th').onclick=function(){var r=document.documentElement,d=r.getAttribute('data-theme')==='dark'||(!r.getAttribute('data-theme')&&matchMedia('(prefers-color-scheme:dark)').matches),n=d?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem(KEY+'-theme',n)}catch(e){}};
-if(/^#(gram|fl|prac|lis|biz|cult)$/.test(location.hash)){var cm=MATS.filter(function(x){return '#'+x.id===location.hash})[0];if(cm&&cm.on)crs=cm.id}
-window.addEventListener('focus',function(){try{var n=JSON.parse(localStorage.getItem(KEY));if(!n)return;if(n.dues){S.dues=n.dues;['gram','fl','cult','prac','lis','biz'].forEach(function(k){S.dues[k]=S.dues[k]||{}})}syncTracker();render()}catch(e){}});
+if(/^#(gram|fl|prac|lis|biz|cult|beg)$/.test(location.hash)){var cm=MATS.filter(function(x){return '#'+x.id===location.hash})[0];if(cm&&cm.on)crs=cm.id}
+window.addEventListener('focus',function(){try{var n=JSON.parse(localStorage.getItem(KEY));if(!n)return;if(n.dues){S.dues=n.dues;['gram','fl','cult','prac','lis','biz','beg'].forEach(function(k){S.dues[k]=S.dues[k]||{}})}syncTracker();render()}catch(e){}});
 if(window.speechSynthesis&&speechSynthesis.addEventListener)speechSynthesis.addEventListener('voiceschanged',function(){if(!G&&tab==='rev'&&crs)render()});
 document.addEventListener('toggle',function(e){var t=e.target;if(t&&t.classList&&t.classList.contains('lvl')){OPEN[t.dataset.lv==='extra'?'extra':'l'+t.dataset.lv]=t.open}},true);
 /* a lesson open in another tab earned points / was opened: refresh the dashboard (home only, so a search box is never disturbed) */
