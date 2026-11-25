@@ -366,7 +366,7 @@ def make(name):
     course=L['course']
     fn=({'prac':'prac-%d.html','lis':'lis-%d.html','biz':'biz-%d.html','gram':'lesson-%d.html'}[course])%L['n']
     items=series_items(course);lnav=lnav_html(course,items,[u for u,_ in items].index(fn))
-    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L.get('sub') or L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%',L.get('key') or 'noor-%s%d-v1'%(course,L['n'])).replace('%%LNAV%%',lnav)
+    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEALN%%',str(len(nz))).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L.get('sub') or L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%',L.get('key') or 'noor-%s%d-v1'%(course,L['n'])).replace('%%LNAV%%',lnav)
     for k,v in slots_for(L).items(): out=out.replace('%%X_'+k.upper()+'%%',v)
     out=out.replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     open(fn,'w',encoding='utf8').write(out);
