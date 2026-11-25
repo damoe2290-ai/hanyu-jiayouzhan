@@ -1,0 +1,1260 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>html,body{margin:0}img,svg{max-width:100%}</style>
+<title>الدرس الرابع عشر 我买了一件毛衣</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap">
+<style>
+/* Layout concept: a study sheet on cool jade-grey paper. Hanzi are the large ink forms, coloured by tone;
+   one red seal (课) is the only loud mark. Single column, sticky tab bar, everything else stays quiet. */
+:root{
+  --bg:#FBF6EE; --surface:#FFFDF9; --surface2:#F3EBDD; --fg:#2B1D18; --muted:#7B6A5E; --line:#E8DCC8;
+  --accent:#B8322A; --accent-fg:#FFFFFF; --accent-soft:#F8E4DF;
+  --seal:#B8322A; --seal-fg:#FFFFFF; --star:#C98A0A;
+  --good:#2E7D4F; --good-soft:#DDF0E2; --bad:#B3261E; --bad-soft:#F7DBD8;
+  --t1:#C0392B; --t2:#A66A00; --t3:#1D7A45; --t4:#2759B8; --t5:#6A7B77;
+  --font-ui:'IBM Plex Sans Arabic','Segoe UI',Tahoma,sans-serif;
+  --font-han:'Noto Serif SC','Songti SC','STSong','SimSun',serif;
+  --font-py:'IBM Plex Sans','Segoe UI',system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+    --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+    --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+    --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+    --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0D1A17; --surface:#152622; --surface2:#1C312C; --fg:#EEF3EF; --muted:#9DB3AB; --line:#2A413B;
+  --accent:#E0645B; --accent-fg:#2A0E0B; --accent-soft:#2B3A33;
+  --seal:#E0645B; --seal-fg:#2A0E0B; --star:#E8B64A;
+  --good:#5CCB8A; --good-soft:#173626; --bad:#F08A82; --bad-soft:#3E1D1A;
+  --t1:#F0847A; --t2:#E3B04B; --t3:#5CCB8A; --t4:#7FA8F5; --t5:#93A8A3;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg);color:var(--fg);font-family:var(--font-ui);font-size:16px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 64px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+button{font-family:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.mut{color:var(--muted);font-size:14px}
+h1,h2,h3,p{margin:0}
+
+/* header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);
+  box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax)}
+.top{display:flex;align-items:center;gap:12px;padding-block:12px 4px}
+.seal{flex:none;width:40px;height:40px;border-radius:4px;background:var(--seal);color:var(--seal-fg);
+  display:grid;place-items:center;font:700 24px/1 var(--font-han);transform:rotate(-4deg);
+  outline:2px solid var(--seal);outline-offset:2px}
+.ttl{flex:1;min-width:0}
+.ttl h1{font-size:20px;font-weight:700;line-height:1.3}
+.ttl p{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pill{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;
+  padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.pill[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.ibtn{appearance:none;flex:none;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);
+  background:var(--surface);display:grid;place-items:center;cursor:pointer}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;margin-top:4px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:0;background:none;color:var(--muted);font-size:15px;font-weight:600;
+  padding:10px 12px;border-bottom:3px solid transparent;white-space:nowrap;cursor:pointer}
+.tab[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+.prog{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+/* shared */
+.panel{padding-block:20px 24px}
+.sec-h{margin-bottom:14px}
+.sec-h h2{font-size:21px;font-weight:700;line-height:1.35}
+.sec-h p{color:var(--muted);font-size:14px;margin-top:2px}
+.sub-h{font-size:17px;font-weight:700;margin:26px 0 10px}
+.btn{appearance:none;border:0;border-radius:12px;padding:12px 18px;font-size:16px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px}
+.btn.primary{background:var(--accent);color:var(--accent-fg)}
+.btn.ghost{background:var(--surface2);color:var(--fg)}
+.btn.sm{min-height:40px;padding:8px 14px;font-size:14px}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:6px 12px;
+  font-size:15px;font-weight:600;cursor:pointer;display:inline-flex;flex-direction:column;align-items:center;min-height:40px;justify-content:center}
+.chip.tgl.on{background:var(--accent-soft);border-color:var(--accent)}
+.spk{appearance:none;flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--accent-soft);
+  color:var(--accent);display:grid;place-items:center;cursor:pointer}
+.spk.sm{width:34px;height:34px}
+.spk.big{width:84px;height:84px;background:var(--accent);color:var(--accent-fg)}
+.t1{color:var(--t1)}.t2{color:var(--t2)}.t3{color:var(--t3)}.t4{color:var(--t4)}.t5{color:var(--t5)}
+.han{font-family:var(--font-han);font-weight:500}
+.py{font-family:var(--font-py)}
+.off{display:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+
+/* flashcard */
+.fc{background:var(--surface);border:1px solid var(--line);border-radius:20px;cursor:pointer;display:grid;min-height:310px;position:relative}
+.face{grid-area:1/1;padding:48px 18px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;text-align:center;animation:pop .22s ease-out}
+.face .spk{position:absolute;top:12px;inset-inline-end:12px}
+.bigzh{font:500 clamp(64px,22vw,104px)/1.15 var(--font-han)}
+.hint{color:var(--muted);font-size:14px}
+.fc .pyl{font:500 30px/1.2 var(--font-py)}
+.fc .meaning{font-size:26px;font-weight:700;line-height:1.4}
+.fc .note{font-size:14px;color:var(--muted);max-width:30em}
+.ex{width:100%;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px;display:grid;gap:2px;text-align:start}
+.exzh{font:500 22px/1.4 var(--font-han)}
+.expy{font:14px var(--font-py);color:var(--muted)}
+.exar{font-size:15px;direction:rtl;text-align:right}
+@keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.navrow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.cnt{font:500 15px var(--font-py);color:var(--muted)}
+.actrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.row{display:grid;grid-template-columns:5.2em 1fr auto auto;gap:12px;align-items:center;padding:10px 4px;
+  border-bottom:1px solid var(--line);cursor:pointer}
+.row.cur{background:var(--accent-soft);border-radius:10px}
+.rz{font:500 26px/1.2 var(--font-han);text-align:start}
+.rpy{font:15px var(--font-py)}
+.rar{font-size:15px;color:var(--muted)}
+.kn{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line);color:transparent}
+.kn.on{background:var(--good);border-color:var(--good);color:var(--bg)}
+
+/* dialogue */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.lines{display:grid;gap:10px}
+.line{display:grid;gap:8px;padding:14px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.line.S{background:var(--accent-soft);border-color:transparent}
+.line.playing{outline:2.5px solid var(--accent);outline-offset:1px}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--muted)}
+.who .spk{margin-inline-start:auto}
+.av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--font-han);background:var(--fg);color:var(--bg)}
+.S .av{background:var(--accent);color:var(--accent-fg)}
+.zhline{display:flex;flex-wrap:wrap;gap:4px 2px;direction:ltr;align-items:flex-end}
+.tok{appearance:none;background:none;border:0;border-radius:8px;padding:2px 4px;cursor:pointer;display:inline-flex;
+  flex-direction:column;align-items:center;color:inherit;font:inherit}
+.tok:hover,.tok:focus-visible{background:var(--surface2)}
+.tok .py{font-size:12px;line-height:1.5}
+.tok .zh{font:500 26px/1.25 var(--font-han)}
+.nopy .tok .py{display:none}
+.punc{font:500 26px/1.25 var(--font-han);align-self:flex-end;padding-bottom:0}
+.arline{color:var(--muted);font-size:15px}
+.noar .arline{display:none}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);
+  padding:14px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  box-shadow:0 -8px 24px rgba(0,0,0,.12)}
+.sheet-in{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.sh-main{display:grid;gap:0}
+.sh-zh{font:500 34px/1.2 var(--font-han)}
+.sh-py{font:16px var(--font-py)}
+.sh-ar{flex:1;font-size:19px;font-weight:700}
+.cq{display:grid;gap:8px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--surface);margin-bottom:10px}
+.cq b{font-weight:600}
+.cq .o{display:flex;gap:8px;flex-wrap:wrap}
+
+/* grammar */
+.tones{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tn{display:grid;gap:4px;justify-items:center;text-align:center;padding:12px 8px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.tn svg{width:56px;height:56px}
+.tn .pyl{font:500 24px var(--font-py)}
+.tn .nm{font-size:13px;color:var(--muted)}
+.tn .ex1{font:500 20px var(--font-han)}
+.formula{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:6px 0 12px;font-size:15px}
+.fm{padding:4px 10px;border-radius:8px;background:var(--surface2);font-weight:600}
+.fm.k{background:var(--accent);color:var(--accent-fg);font-family:var(--font-han);font-size:18px}
+.sentbox{display:grid;gap:6px;padding:12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);margin-top:10px}
+.sentbox .zhline{align-items:flex-end}
+.qmark{background:var(--accent);color:var(--accent-fg);border-radius:6px;padding:0 4px}
+.qa{display:grid;gap:8px;margin-top:10px}
+.qa .m{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line)}
+.qa .m .t{flex:1;display:grid}
+.qa .m .z{font:500 22px/1.35 var(--font-han)}
+
+/* writing */
+.cvwrap{width:100%;max-width:340px;margin:0 auto}
+#cv{width:100%;aspect-ratio:1;display:block;border-radius:14px;touch-action:none;border:1px solid var(--line);cursor:crosshair}
+.winfo{display:flex;align-items:center;gap:14px;margin:14px 0;flex-wrap:wrap}
+.winfo .big{font:500 44px/1 var(--font-han)}
+
+/* practice */
+.stats{display:grid;gap:12px}
+.xprow{display:flex;align-items:center;gap:12px}
+.xpbar{flex:1;height:10px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.xpbar i{display:block;height:100%;background:var(--accent)}
+.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badge{width:62px;text-align:center;font-size:12px;line-height:1.35;opacity:.38;filter:grayscale(1)}
+.badge.on{opacity:1;filter:none}
+.badge span{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 4px;border-radius:50%;
+  border:2px solid var(--seal);color:var(--seal);font:700 22px var(--font-han);background:var(--surface)}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.act{appearance:none;text-align:start;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px;
+  cursor:pointer;display:grid;gap:4px;align-content:start}
+.act strong{font-size:16px}
+.act small{color:var(--muted);font-size:13px;line-height:1.5}
+.act.feat{grid-column:1/-1;background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.act.feat small{color:inherit;opacity:.85}
+.stars{display:flex;gap:2px;color:var(--line)}
+.stars .on{color:var(--star)}
+.qtop{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.qbar{flex:1;height:8px;border-radius:5px;background:var(--surface2);overflow:hidden}
+.qbar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.qprompt{display:grid;gap:8px;justify-items:center;text-align:center;margin-bottom:18px}
+.qprompt .ar-s{font-size:20px;font-weight:700}
+.opts{display:grid;gap:10px}
+.opt{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;min-height:54px;padding:10px 14px;
+  font-size:18px;font-weight:600;cursor:pointer;text-align:center}
+.opt .pyopt{font:500 22px var(--font-py)}
+.opt.good{background:var(--good-soft);border-color:var(--good)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt:disabled{cursor:default}
+.slot,.pool{display:flex;flex-wrap:wrap;gap:8px;direction:ltr;min-height:64px;align-items:center;padding:10px;border-radius:14px}
+.slot{border:2px dashed var(--line);margin-bottom:12px;background:var(--surface)}
+.slot .ph{direction:rtl;color:var(--muted);font-size:14px;margin:0 auto}
+.pool{margin-bottom:16px;justify-content:center}
+.chip .zh{font:500 24px/1.2 var(--font-han)}
+.chip .py{font-size:11px;color:var(--muted)}
+.chip.pick{background:var(--accent-soft);border-color:var(--accent)}
+.chip.good{background:var(--good-soft);border-color:var(--good)}
+.chip.bad{background:var(--bad-soft);border-color:var(--bad)}
+.fillsent{font:500 30px/1.6 var(--font-han);direction:ltr}
+.blank{display:inline-block;min-width:1.6em;border-bottom:3px solid var(--accent);text-align:center;margin:0 4px}
+.blank.good{border-color:var(--good);color:var(--good)}
+.blank.bad{border-color:var(--bad);color:var(--bad)}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:grid;gap:8px;align-content:start}
+.mi{appearance:none;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;min-height:58px;padding:6px 8px;
+  cursor:pointer;display:grid;place-items:center;font-size:16px;font-weight:600;line-height:1.35}
+.mi .zh{font:500 24px/1.2 var(--font-han)}
+.mi .py{font-size:12px;color:var(--muted)}
+.mi.sel{border-color:var(--accent);background:var(--accent-soft)}
+.mi.ok{border-color:var(--good);background:var(--good-soft);opacity:.7}
+.mi.no{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin:16px 0;padding:14px;border-radius:14px;display:grid;gap:6px}
+.fb.good{background:var(--good-soft);border:1px solid var(--good)}
+.fb.bad{background:var(--bad-soft);border:1px solid var(--bad)}
+.fb .fw{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.res{display:grid;gap:14px;justify-items:center;text-align:center;padding:12px 0}
+.res .stars svg{width:44px;height:44px}
+.res h3{font-size:24px}
+.res .sc{font:700 44px var(--font-py)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;
+  background:var(--fg);color:var(--bg);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:600;max-width:90vw;text-align:center}
+@media (min-width:560px){
+  .tones{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* lesson 8 additions */
+[hidden]{display:none!important}
+.tg{display:inline-flex;align-items:flex-end;white-space:nowrap}
+.il{width:100%;height:100%;display:block;stroke:var(--fg);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.il .a{fill:var(--accent-soft)}.il .b{fill:var(--surface2)}.il .r{fill:var(--seal)}.il .y{fill:var(--star)}.il .w{fill:var(--surface)}.il .k{fill:var(--fg);stroke:none}
+.pic{display:block;width:100%;height:100%}
+.pic.pb{width:92px;height:92px;margin-bottom:2px}
+.pic.pt{width:44px;height:44px}
+.picbig{width:140px;height:140px}
+.rp{width:44px;height:44px}
+.row{grid-template-columns:44px 5.6em 1fr auto auto}
+.tag{display:inline-block;font-size:11px;font-weight:600;border-radius:999px;padding:0 8px;margin-inline-start:6px;background:var(--surface2);color:var(--muted)}
+.scene{display:flex;gap:8px;justify-content:space-around;flex-wrap:wrap;padding:12px;border-radius:16px;background:var(--surface);border:1px solid var(--line);margin:10px 0 6px}
+.scene figure{margin:0;display:grid;justify-items:center;gap:4px;width:84px;text-align:center}
+.scene .sci{width:68px;height:68px}
+.scene figcaption{font-size:12px;color:var(--muted);line-height:1.35}
+.line.N{background:var(--surface);border-style:dashed}
+.line.L{background:var(--accent-soft);border-color:transparent}
+.line.C{background:var(--surface2);border-color:transparent}
+.L .av{background:var(--accent);color:var(--accent-fg)}
+.C .av{background:var(--seal);color:var(--seal-fg)}
+.N .av{background:var(--muted);color:var(--bg)}
+.calcard{display:grid;justify-items:center;border:2px solid var(--fg);border-radius:14px;overflow:hidden;width:150px;background:var(--surface)}
+.calcard .cm{background:var(--seal);color:var(--seal-fg);width:100%;padding:2px 0;font-weight:700;text-align:center}
+.calcard .cd{font:700 56px/1.15 var(--font-py)}
+.calcard .cw{padding-bottom:6px;font-weight:600}
+.stepper{display:flex;align-items:center;gap:12px}
+.stepper b{font:700 28px var(--font-py);min-width:2ch;text-align:center}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.tile{display:grid;justify-items:center;gap:2px;padding:10px 6px;border:1px solid var(--line);border-radius:12px;background:var(--bg);text-align:center}
+.tile .py{font-size:15px}
+.sdg{width:40px;height:40px;flex:none}
+.qa .m .t{min-width:0}
+
+.line.S,.line.A{background:var(--accent-soft);border-color:transparent}
+.line.X,.line.Y{background:var(--surface2);border-color:transparent}
+.S .av,.A .av{background:var(--accent);color:var(--accent-fg)}
+.X .av,.Y .av{background:var(--seal);color:var(--seal-fg)}
+.cqo{display:inline-flex;flex-direction:column;align-items:center;line-height:1.3;height:auto;padding-block:6px}
+.cqo .py{font-size:12px}
+.cq>b{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+
+table{border-collapse:collapse;width:100%;min-width:420px;background:var(--surface)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:10px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);text-align:start;vertical-align:top}
+th{background:var(--accent-soft)}td:first-child{background:var(--surface2);font-weight:600}tr:last-child td{border-bottom:0}
+.sh2{font-size:15px;font-weight:700;margin:18px 0 6px}
+.tiles .tile .han{font-size:24px}
+.pair{display:grid;gap:6px;margin-top:8px}.pair .tiles{grid-template-columns:1fr 1fr}
+textarea{width:100%;min-height:96px;margin-top:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--fg);font:500 20px/1.6 var(--font-han);resize:vertical}
+.us{display:flex;gap:6px;flex-wrap:wrap}.us span{padding:2px 10px;border-radius:99px;border:1px solid var(--line);font:500 16px var(--font-han);color:var(--muted)}.us span.on{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+details.md{margin-top:10px}details.md summary{cursor:pointer;font-weight:600}
+.lvbar{display:flex;gap:6px;margin:0 0 14px}
+.lvbar span{flex:1;text-align:center;padding:6px 4px;border-radius:10px;background:var(--surface2);color:var(--muted);font-size:13px;font-weight:600}
+.lvbar .done{background:var(--good-soft);color:var(--good)}
+.lvbar .cur{background:var(--accent);color:var(--accent-fg)}
+.act.lvfeat{grid-column:1/-1;background:var(--accent-soft);border-color:var(--accent);color:var(--fg)}
+.lvc{margin-top:12px}.lvc.rec{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}.lvc .lvh{display:flex;justify-content:space-between;align-items:center;gap:8px}.lvc .tag svg{vertical-align:-2px}
+.tin{width:100%;min-height:56px;padding:0 16px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);color:var(--fg);font:500 24px var(--font-han);text-align:center}
+.tin:focus{outline:3px solid var(--accent);outline-offset:2px}
+.tin.good{border-color:var(--good);background:var(--good-soft)}.tin.close{border-color:var(--star)}.tin.bad{border-color:var(--bad);background:var(--bad-soft)}
+.thint{min-height:24px;margin-top:8px;text-align:center}
+.fb.close{background:color-mix(in srgb,var(--star) 14%,var(--surface));border:1px solid var(--star)}
+.tyl{font:500 30px var(--font-py)}
+.hwseg{display:flex;gap:8px;justify-content:center;margin-top:12px}
+.hwbox{display:grid;gap:10px;justify-items:center;margin-top:12px}
+#hwt{width:min(100%,340px);aspect-ratio:1/1;background-color:var(--surface);border:1px solid var(--line);border-radius:16px;touch-action:none;
+  background-image:linear-gradient(to right,transparent calc(50% - 1px),var(--line) calc(50% - 1px),var(--line) calc(50% + 1px),transparent calc(50% + 1px)),linear-gradient(to bottom,transparent calc(50% - 1px),var(--line) calc(50% - 1px),var(--line) calc(50% + 1px),transparent calc(50% + 1px))}
+#hwt svg{width:100%;height:100%;display:block}
+.hwmsg{min-height:24px;text-align:center}
+.chip.wdone{border-color:var(--good);background:var(--good-soft)}
+.hwbox .btn[aria-pressed=true]:not(.primary){border:1.5px solid var(--accent)}
+</style>
+<link rel="stylesheet" href="zh-ui.css">
+<script src="zh-ui.js" defer></script>
+</head><body>
+
+<div class="wrap" id="app" dir="rtl" lang="ar">
+  <header class="hdr">
+    <div class="top">
+      <a class="zh-ib zh-back" href="index.html#gram" aria-label="العودة إلى قائمة الدروس"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></a>
+      <a class="seal" href="index.html" aria-label="الصفحة الرئيسية" lang="zh-CN">十四</a>
+      <div class="ttl"><h1>الدرس الرابع عشر</h1><p lang="zh-CN">我买了一件毛衣</p></div>
+      <button class="pill" id="slowbtn" data-act="slow" aria-pressed="false">صوت بطيء</button>
+      <button class="ibtn" data-act="theme" aria-label="تبديل المظهر الفاتح والداكن"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></svg></button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="أقسام الدرس">
+      <button class="tab" role="tab" data-act="tab" data-tab="vocab">المفردات</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="dialogue">الحوار</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="grammar">القواعد</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="writing">الكتابة</button>
+      <button class="tab" role="tab" data-act="tab" data-tab="practice">التمارين</button>
+    </nav>
+    <div class="prog" aria-hidden="true"><i id="gprog"></i></div>
+  </header>
+  <main>
+    <section id="p-vocab" class="panel" hidden></section>
+    <section id="p-dialogue" class="panel" hidden></section>
+    <section id="p-grammar" class="panel" hidden></section>
+    <section id="p-writing" class="panel" hidden></section>
+    <section id="p-practice" class="panel" hidden></section>
+  </main>
+  <nav class="zh-lnav" aria-label="التنقل بين الدروس"><a class="zh-prev" href="lesson-13.html"><small>الدرس السابق</small><b>الدرس الثالث عشر · <bdi lang="zh-CN">我已经搬家了</bdi></b></a><a class="zh-next" href="lesson-15.html"><small>الدرس التالي</small><b>الدرس الخامس عشر · <bdi lang="zh-CN">大学生可以打工吗</bdi></b></a></nav>
+  <div id="sheet" class="sheet" hidden></div>
+  <div id="toast" class="toast" role="status" hidden></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s,r){return (r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+var shuffle=function(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a};
+var pick=function(a,n){return shuffle(a).slice(0,n)};
+
+/* ---------- state ---------- */
+var KEY='noor-gram14-v1',HUBK='zh-hub-v1',CRS='gram,fl';
+var S={known:{},wrong:{},xp:0,best:{},badges:{},heard:{},py:true,ar:true,slow:false,card:0};
+try{var raw=localStorage.getItem(KEY);if(raw){Object.assign(S,JSON.parse(raw))}}catch(e){}
+S.flip=false;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+try{var th=localStorage.getItem(KEY+'-theme');if(th){document.documentElement.setAttribute('data-theme',th)}}catch(e){}
+
+/* ---------- icons ---------- */
+var IC={
+  spk:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/>',
+  check:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  x:'<path d="M6 6l12 12M18 6L6 18"/>',
+  play:'<path d="M7 5l12 7-12 7z" fill="currentColor"/>',
+  stop:'<rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>',
+  redo:'<path d="M20 11a8 8 0 1 0-2.3 6.3M20 4v7h-7"/>',
+  star:'<path fill="currentColor" stroke="none" d="M12 3.5l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17.3 6.6 20.2l1.1-6.1L3.2 9.9l6.1-.8z"/>',
+  chr:'<path d="M9 5l7 7-7 7"/>',
+  chl:'<path d="M15 5l-7 7 7 7"/>',
+  snd:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9.5v5M20 7.5v9"/>',
+  mute:'<path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M17 9.5l5 5M22 9.5l-5 5"/>'
+};
+function ic(n,s){s=s||20;return '<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+IC[n]+'</svg>'}
+function spkBtn(t,cls){return '<button class="spk '+(cls||'')+'" data-act="say" data-t="'+esc(t)+'" aria-label="استمع">'+ic('spk',cls==='big'?36:20)+'</button>'}
+
+/* ---------- speech ---------- */
+var TTS={ok:('speechSynthesis' in window)&&('SpeechSynthesisUtterance' in window),voice:null,warned:false};
+function pickVoice(){
+  if(!TTS.ok)return;
+  var vs=speechSynthesis.getVoices();
+  TTS.voice=vs.filter(function(v){return /^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return /^zh/i.test(v.lang)})[0]||null;
+}
+if(TTS.ok){pickVoice();try{speechSynthesis.onvoiceschanged=pickVoice}catch(e){}}
+function speak(text,done,pitch){
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');if(done)done();return false}
+  try{
+    speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang='zh-CN';
+    if(TTS.voice)u.voice=TTS.voice;
+    else if(!TTS.warned&&speechSynthesis.getVoices().length){TTS.warned=true;toast('لا يوجد صوت صيني على جهازك، ثبّت صوتاً صينياً من إعدادات النظام')}
+    u.rate=S.slow?0.55:0.85;
+    u.pitch=pitch||1;
+    u.onend=function(){if(done)done()};
+    u.onerror=function(){if(done)done()};
+    speechSynthesis.speak(u);
+    return true;
+  }catch(e){if(done)done();return false}
+}
+function stopSpeech(){try{if(TTS.ok)speechSynthesis.cancel()}catch(e){}}
+
+/* ---------- toast ---------- */
+var toastT=null;
+function toast(msg){var t=$('#toast');t.textContent=msg;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(function(){t.hidden=true},2800)}
+
+/* ---------- pinyin helpers ---------- */
+function toneOf(s){var d=s.normalize('NFD');if(/̄/.test(d))return 1;if(/́/.test(d))return 2;if(/̌/.test(d))return 3;if(/̀/.test(d))return 4;return 5}
+var MARK={1:'̄',2:'́',3:'̌',4:'̀'};
+function setTone(s,n){
+  var b=s.normalize('NFD').replace(/[̀́̄̌]/g,'').normalize('NFC');
+  if(n===5)return b;
+  var low=b.toLowerCase(),idx=-1,i;
+  if(/[ae]/.test(low))idx=low.search(/[ae]/);
+  else if(low.indexOf('ou')>-1)idx=low.indexOf('o');
+  else{for(i=low.length-1;i>=0;i--){if('aeiou'.indexOf(low[i])>-1){idx=i;break}}}
+  if(idx<0)return b;
+  return (b.slice(0,idx+1)+MARK[n]+b.slice(idx+1)).normalize('NFC');
+}
+function toneVariants(py){
+  var syl=py.split(' '),out=[syl.join(' ')],guard=0;
+  while(out.length<4&&guard++<80){
+    var i=Math.floor(Math.random()*syl.length),cur=toneOf(syl[i]),n=1+Math.floor(Math.random()*5);
+    if(n===cur)continue;
+    var c=syl.slice();c[i]=setTone(syl[i],n);var j=c.join(' ');
+    if(out.indexOf(j)<0)out.push(j);
+  }
+  return out;
+}
+function han(zh,py){
+  var sy=py.split(' ');
+  return Array.from(zh).map(function(c,i){return '<span class="t'+(sy[i]?toneOf(sy[i]):5)+'">'+esc(c)+'</span>'}).join('');
+}
+function pyhtml(py){return py.split(' ').map(function(s){return '<span class="t'+toneOf(s)+'">'+esc(s)+'</span>'}).join('')}
+
+/* ---------- content ---------- */
+var D={"vocab":[{"zh":"今年","py":"jīn nián","ar":"هذا العام","ex":["今年冬天很冷。","Jīnnián dōngtiān hěn lěng.","شتاء هذا العام بارد جداً."]},{"zh":"冬天","py":"dōng tiān","ar":"الشتاء","ex":["北京的冬天很冷。","Běijīng de dōngtiān hěn lěng.","شتاء بكين بارد جداً."]},{"zh":"特别","py":"tè bié","ar":"خاصةً / جداً","ex":["今天特别冷。","Jīntiān tèbié lěng.","اليوم بارد جداً."]},{"zh":"冷","py":"lěng","ar":"بارد","ex":["天气很冷。","Tiānqì hěn lěng.","الطقس بارد."]},{"zh":"感冒","py":"gǎn mào","ar":"يُصاب بالزكام","ex":["我感冒了。","Wǒ gǎnmào le.","أُصبت بالزكام."]},{"zh":"穿","py":"chuān","ar":"يرتدي","ex":["我穿一件毛衣。","Wǒ chuān yíjiàn máoyī.","أرتدي سترة صوفية."]},{"zh":"厚","py":"hòu","ar":"سميك","ex":["这件衣服很厚。","Zhè jiàn yīfu hěnhòu.","هذه الملابس سميكة."]},{"zh":"衣服","py":"yī fu","ar":"ملابس","ex":["冬天的衣服真多。","Dōngtiān de yīfu zhēn duō.","ملابس الشتاء كثيرة حقاً."]},{"zh":"趟","py":"tàng","ar":"مرة (للذهاب والإياب)","ex":["我去了一趟商场。","Wǒ qù le yítàng shāngchǎng.","ذهبت إلى المركز التجاري مرة."]},{"zh":"商场","py":"shāng chǎng","ar":"مركز تجاري","ex":["商场里有很多衣服。","Shāngchǎng lǐ yǒu hěn duō yīfu.","في المركز التجاري ملابس كثيرة."]},{"zh":"里","py":"lǐ","ar":"داخل","ex":["商场里。","Shāngchǎng lǐ.","داخل المركز التجاري."]},{"zh":"真","py":"zhēn","ar":"حقاً","ex":["衣服真多。","Yīfu zhēn duō.","الملابس كثيرة حقاً."]},{"zh":"件","py":"jiàn","ar":"وحدة عدّ للملابس والأمور","ex":["一件毛衣。","Yíjiàn máoyī.","سترة صوفية."]},{"zh":"毛衣","py":"máo yī","ar":"سترة صوفية","ex":["我买了一件毛衣。","Wǒ mǎi le yíjiàn máoyī.","اشتريت سترة صوفية."]},{"zh":"羽绒服","py":"yǔ róng fú","ar":"سترة منفوخة (ريش)","ex":["我还买了一件羽绒服。","Wǒ hái mǎi le yíjiàn yǔróngfú.","واشتريت أيضاً سترة منفوخة."]},{"zh":"医院","py":"yī yuàn","ar":"مستشفى","ex":["你去医院了吗？","Nǐ qù yīyuàn le ma?","هل ذهبت إلى المستشفى؟"]},{"zh":"看病","py":"kàn bìng","ar":"يراجع الطبيب","ex":["我去医院看病。","Wǒ qù yīyuàn kànbìng.","أذهب إلى المستشفى لأراجع الطبيب."]},{"zh":"就","py":"jiù","ar":"حالاً / فور (للتأكيد)","ex":["我一下课就去。","Wǒ yíxiàkè jiù qù.","أذهب فور انتهاء الحصة."]},{"zh":"药","py":"yào","ar":"دواء","ex":["我吃了很多药。","Wǒ chī le hěn duō yào.","تناولت أدوية كثيرة."]},{"zh":"新","py":"xīn","ar":"جديد","ex":["一件新羽绒服。","Yíjiàn xīn yǔróngfú.","سترة منفوخة جديدة."]},{"zh":"好","py":"hǎo","ar":"يتعافى / جيد","ex":["感冒好了。","Gǎnmào hǎo le.","شُفي من الزكام."]},{"zh":"这么","py":"zhè me","ar":"هكذا / بهذا القدر","ex":["这么快呀！","Zhème kuài ya!","بهذه السرعة!"]},{"zh":"快","py":"kuài","ar":"سريع","ex":["你好得真快。","Nǐ hǎo dé zhēn kuài.","تعافيت بسرعة حقاً."]},{"zh":"呀","py":"ya","ar":"أداة تعجّب","ex":["这么快呀！","Zhème kuài ya!","بهذه السرعة!"]},{"zh":"水果","py":"shuǐ guǒ","ar":"فواكه","ex":["你买了这么多水果。","Nǐ mǎi le zhème duō shuǐguǒ.","اشتريت كثيراً من الفواكه."]},{"zh":"生病","py":"shēng bìng","ar":"يمرض","ex":["我朋友生病了。","Wǒ péngyou shēngbìng le.","صديقي مريض."]},{"zh":"天气","py":"tiān qì","ar":"الطقس","ex":["天气这么冷。","Tiānqì zhème lěng.","الطقس بارد هكذا."]},{"zh":"还","py":"hái","ar":"ما زال","ex":["你还每天跑步吗？","Nǐ hái měitiān pǎobù ma?","هل ما زلت تجري كل يوم؟"]},{"zh":"跑","py":"pǎo","ar":"يجري","ex":["我去跑步。","Wǒ qù pǎobù.","أذهب للجري."]},{"zh":"但是","py":"dàn shì","ar":"لكن","ex":["不是每天跑，但是有空儿就跑。","Búshì měitiān pǎo, dànshì yǒukòngr jiù pǎo.","لا أجري كل يوم، لكن أجري كلما وجدت وقتاً."]},{"zh":"有空儿","py":"yǒu kòng r","ar":"لديه وقت فراغ","ex":["有空儿就去跑步。","Yǒukòngr jiù qù pǎobù.","كلما وجدت وقت فراغ ذهبت للجري."]},{"zh":"空儿","py":"kòng r","ar":"وقت فراغ","ex":["我没有空儿。","Wǒ méiyǒu kòngr.","ليس عندي وقت فراغ."]},{"zh":"行","py":"xíng","ar":"ممتاز / قادر","ex":["你真行！","Nǐ zhēn xíng!","أنت حقاً رائع!"]},{"zh":"北京","py":"Běi jīng","ar":"بكين","ex":["北京冬天很冷。","Běijīng dōngtiān hěn lěng.","شتاء بكين بارد جداً."]},{"zh":"暖和","py":"nuǎn huo","ar":"دافئ","ex":["春天很暖和。","Chūn tiān hěn nuǎnhuo.","الربيع دافئ."]},{"zh":"凉快","py":"liáng kuai","ar":"منعش (بارد قليلاً)","ex":["秋天很凉快。","Qiū tiān hěn liángkuai.","الخريف منعش."]}],"tokpy":{"场":"chǎng","景":"jǐng","我":"wǒ","写":"xiě","北京":"Běi jīng","的":"de","冬天":"dōng tiān","和":"hé","买":"mǎi","衣服":"yī fu","事":"shì","今年":"jīn nián","特别":"tè bié","冷":"lěng","很":"hěn","多":"duō","同学":"tóng xué","都":"dōu","感冒":"gǎn mào","了":"le","也":"yě","我们":"wǒ men","泰国":"Tài guó","不太冷":"bú tài lěng","不用":"bú yòng","穿":"chuān","很厚":"hěn hòu","可是":"kě shì","在":"zài","不":"bù","行":"xíng","昨天":"zuó tiān","去":"qù","一趟":"yí tàng","商场":"shāng chǎng","里":"lǐ","真":"zhēn","一件":"yí jiàn","毛衣":"máo yī","还":"hái","羽绒服":"yǔ róng fú","阿明":"Ā míng","崔浩":"Cuī Hào","聊":"liáo","你":"nǐ","医院":"yī yuàn","看病":"kàn bìng","吗":"ma","没有":"méi yǒu","想":"xiǎng","一下课":"yí xià kè","就":"jiù","怎么样":"zěn me yàng","吃":"chī","药":"yào","又":"yòu","新":"xīn","好":"hǎo","这么":"zhè me","快":"kuài","呀":"ya","林娜":"Lín Nà","路":"lù","上":"shàng","聊天儿":"liáo tiān r","怎么":"zěn me","水果":"shuǐ guǒ","朋友":"péng you","生病":"shēng bìng","看":"kàn","她":"tā","哪儿":"nǎ r","跑步":"pǎo bù","天气":"tiān qì","每天":"měi tiān","不是":"bú shì","跑":"pǎo","但是":"dàn shì","一有空儿":"yì yǒu kòng r","厚":"hòu","趟":"tàng","件":"jiàn","有空儿":"yǒu kòng r","空儿":"kòng r","暖和":"nuǎn huo","凉快":"liáng kuai","什么":"shén me","东西":"dōng xi","时候":"shí hou","没":"méi","一见面":"yí jiàn miàn","说":"shuō","汉语":"Hàn yǔ","他":"tā","一":"yì","来":"lái","走":"zǒu","五":"wǔ","分":"fēn","钟":"zhōng","以后":"yǐ hòu","回":"huí","这个":"zhè ge","地方":"dì fang","大":"dà","喜欢":"xǐ huan","电影":"diàn yǐng","知":"zhī","道":"dào","这":"zhè","明":"míng","年":"nián","现在":"xiàn zài","忙":"máng"},"dlg":[{"text":1,"who":"N","zh":"场景：“我”写北京的冬天和买衣服的事。","ar":"المشهد: «أنا» أحكي عن شتاء بكين وعن شراء الملابس.","tok":[["场","chǎng",""],["景","jǐng",""],["："],["“"],["我","wǒ","أنا"],["”"],["写","xiě",""],["北京","Běi jīng","بكين"],["的","de","أداة الإضافة"],["冬天","dōng tiān",""],["和","hé","و"],["买","mǎi","يشتري"],["衣服","yī fu",""],["的","de","أداة الإضافة"],["事","shì","أمر / شغل"],["。"]]},{"text":1,"who":"S","zh":"今年冬天北京特别冷，很多同学都感冒了，我也感冒了。","ar":"شتاء هذا العام بارد جداً في بكين، أصيب كثير من الزملاء بالزكام وأنا أيضاً.","tok":[["今年","jīn nián","هذا العام"],["冬天","dōng tiān",""],["北京","Běi jīng","بكين"],["特别","tè bié","خاصةً / جداً"],["冷","lěng",""],["，"],["很","hěn","جداً"],["多","duō","كثير"],["同学","tóng xué",""],["都","dōu","جميعاً"],["感冒","gǎn mào",""],["了","le","أداة نغمية / ماضٍ"],["，"],["我","wǒ","أنا"],["也","yě","أيضاً"],["感冒","gǎn mào",""],["了","le","أداة نغمية / ماضٍ"],["。"]]},{"text":1,"who":"S","zh":"我们泰国冬天不太冷，不用穿很厚的衣服，可是在北京不行。","ar":"شتاء بلادنا تايلاند ليس شديد البرودة، فلا حاجة إلى ملابس سميكة، لكن في بكين لا يكفي ذلك.","tok":[["我们","wǒ men","نحن"],["泰国","Tài guó",""],["冬天","dōng tiān",""],["不太冷","bú tài lěng",""],["，"],["不用","bú yòng",""],["穿","chuān",""],["很厚","hěn hòu",""],["的","de","أداة الإضافة"],["衣服","yī fu",""],["，"],["可是","kě shì",""],["在","zài","في / عند"],["北京","Běi jīng","بكين"],["不","bù","لا"],["行","xíng","حسناً / مناسب"],["。"]]},{"text":1,"who":"S","zh":"昨天我去了一趟商场。商场里，冬天的衣服真多。我买了一件毛衣，还买了一件羽绒服。","ar":"أمس ذهبت إلى المركز التجاري. في المركز التجاري ملابس الشتاء كثيرة حقاً. اشتريت سترة صوفية، واشتريت أيضاً سترة منفوخة.","tok":[["昨天","zuó tiān","أمس"],["我","wǒ","أنا"],["去","qù","يذهب"],["了","le","أداة نغمية / ماضٍ"],["一趟","yí tàng",""],["商场","shāng chǎng","مجمع تجاري"],["。"],["商场","shāng chǎng","مجمع تجاري"],["里","lǐ",""],["，"],["冬天","dōng tiān",""],["的","de","أداة الإضافة"],["衣服","yī fu",""],["真","zhēn","حقاً"],["多","duō","كثير"],["。"],["我","wǒ","أنا"],["买","mǎi","يشتري"],["了","le","أداة نغمية / ماضٍ"],["一件","yí jiàn",""],["毛衣","máo yī",""],["，"],["还","hái","أيضاً / بالإضافة"],["买","mǎi","يشتري"],["了","le","أداة نغمية / ماضٍ"],["一件","yí jiàn",""],["羽绒服","yǔ róng fú",""],["。"]]},{"text":2,"who":"N","zh":"场景：阿明和崔浩聊感冒的事。","ar":"المشهد: أمينغ وتسوي هاو يتحدثان عن الزكام.","tok":[["场","chǎng",""],["景","jǐng",""],["："],["阿明","Ā míng",""],["和","hé","و"],["崔浩","Cuī Hào",""],["聊","liáo",""],["感冒","gǎn mào",""],["的","de","أداة الإضافة"],["事","shì","أمر / شغل"],["。"]]},{"text":2,"who":"X","zh":"你去医院看病了吗？","ar":"هل ذهبت إلى المستشفى لتراجع الطبيب؟","tok":[["你","nǐ","أنتَ/أنتِ"],["去","qù","يذهب"],["医院","yī yuàn",""],["看病","kàn bìng",""],["了","le","أداة نغمية / ماضٍ"],["吗","ma","(أداة سؤال)"],["？"]]},{"text":2,"who":"L","zh":"还没有，我想一下课就去。你怎么样？","ar":"ليس بعد، أريد أن أذهب ما إن تنتهي الحصة. وأنت، كيف حالك؟","tok":[["还","hái","أيضاً / بالإضافة"],["没有","méi yǒu","ليس لدي"],["，"],["我","wǒ","أنا"],["想","xiǎng","يريد / يفكر"],["一下课","yí xià kè",""],["就","jiù","بالضبط"],["去","qù","يذهب"],["。"],["你","nǐ","أنتَ/أنتِ"],["怎么样","zěn me yàng","كيف (الحال)؟"],["？"]]},{"text":2,"who":"X","zh":"我吃了很多药，又穿了一件新羽绒服，感冒昨天就好了。","ar":"تناولت أدوية كثيرة، وارتديت سترة منفوخة جديدة، وشُفيت من الزكام أمس.","tok":[["我","wǒ","أنا"],["吃","chī","يأكل"],["了","le","أداة نغمية / ماضٍ"],["很","hěn","جداً"],["多","duō","كثير"],["药","yào",""],["，"],["又","yòu",""],["穿","chuān",""],["了","le","أداة نغمية / ماضٍ"],["一件","yí jiàn",""],["新","xīn","جديد"],["羽绒服","yǔ róng fú",""],["，"],["感冒","gǎn mào",""],["昨天","zuó tiān","أمس"],["就","jiù","بالضبط"],["好","hǎo","جيد"],["了","le","أداة نغمية / ماضٍ"],["。"]]},{"text":2,"who":"L","zh":"这么快呀！","ar":"بهذه السرعة!","tok":[["这么","zhè me","هكذا"],["快","kuài",""],["呀","ya",""],["！"]]},{"text":3,"who":"N","zh":"场景：阿明和林娜在路上聊天儿。","ar":"المشهد: أمينغ ولين نا يتحدثان في الطريق.","tok":[["场","chǎng",""],["景","jǐng",""],["："],["阿明","Ā míng",""],["和","hé","و"],["林娜","Lín Nà",""],["在","zài","في / عند"],["路","lù",""],["上","shàng","صباح/فوق"],["聊天儿","liáo tiān r",""],["。"]]},{"text":3,"who":"X","zh":"林娜，你怎么买了这么多水果？","ar":"لين نا، لماذا اشتريتِ كل هذه الفواكه؟","tok":[["林娜","Lín Nà",""],["，"],["你","nǐ","أنتَ/أنتِ"],["怎么","zěn me","كيف"],["买","mǎi","يشتري"],["了","le","أداة نغمية / ماضٍ"],["这么","zhè me","هكذا"],["多","duō","كثير"],["水果","shuǐ guǒ",""],["？"]]},{"text":3,"who":"C","zh":"我朋友生病了，我去看她。你去哪儿？","ar":"صديقتي مريضة، سأزورها. وإلى أين أنت ذاهب؟","tok":[["我","wǒ","أنا"],["朋友","péng you","صديق"],["生病","shēng bìng",""],["了","le","أداة نغمية / ماضٍ"],["，"],["我","wǒ","أنا"],["去","qù","يذهب"],["看","kàn","ينظر / يرى"],["她","tā","هي"],["。"],["你","nǐ","أنتَ/أنتِ"],["去","qù","يذهب"],["哪儿","nǎ r","أين"],["？"]]},{"text":3,"who":"X","zh":"我去跑步。","ar":"سأذهب للجري.","tok":[["我","wǒ","أنا"],["去","qù","يذهب"],["跑步","pǎo bù",""],["。"]]},{"text":3,"who":"C","zh":"天气这么冷，你还每天跑步吗？","ar":"الطقس بارد هكذا، هل ما زلت تجري كل يوم؟","tok":[["天气","tiān qì","الطقس"],["这么","zhè me","هكذا"],["冷","lěng",""],["，"],["你","nǐ","أنتَ/أنتِ"],["还","hái","أيضاً / بالإضافة"],["每天","měi tiān","كل يوم"],["跑步","pǎo bù",""],["吗","ma","(أداة سؤال)"],["？"]]},{"text":3,"who":"X","zh":"不是每天跑，但是我一有空儿就去跑。","ar":"لا أجري كل يوم، لكن ما إن يكون عندي وقت فراغ أذهب للجري.","tok":[["不是","bú shì",""],["每天","měi tiān","كل يوم"],["跑","pǎo",""],["，"],["但是","dàn shì","لكن"],["我","wǒ","أنا"],["一有空儿","yì yǒu kòng r",""],["就","jiù","بالضبط"],["去","qù","يذهب"],["跑","pǎo",""],["。"]]},{"text":3,"who":"C","zh":"你真行！","ar":"أنت حقاً رائع!","tok":[["你","nǐ","أنتَ/أنتِ"],["真","zhēn","حقاً"],["行","xíng","حسناً / مناسب"],["！"]]}],"txt":{"1":{"h":"النص ١: شتاء بكين","scene":""},"2":{"h":"النص ٢: هل ذهبت إلى المستشفى؟","scene":""},"3":{"h":"النص ٣: أنت حقاً رائع!","scene":""}},"sent":[{"tokens":["你","去","医院","看病","了","吗"],"zh":"你去医院看病了吗？","py":"Nǐ qù yīyuàn kànbìng le ma?","ar":"هل ذهبت إلى المستشفى لتراجع الطبيب؟"},{"tokens":["这么","快","呀"],"zh":"这么快呀！","py":"Zhème kuài ya!","ar":"بهذه السرعة!"},{"tokens":["林娜","你","怎么","买","了","这么","多","水果"],"zh":"林娜，你怎么买了这么多水果？","py":"Lín Nà, nǐ zěnme mǎi le zhème duō shuǐguǒ?","ar":"لين نا، لماذا اشتريتِ كل هذه الفواكه؟"},{"tokens":["我","去","跑步"],"zh":"我去跑步。","py":"Wǒ qù pǎobù.","ar":"سأذهب للجري."},{"tokens":["天气","这么","冷","你","还","每天","跑步","吗"],"zh":"天气这么冷，你还每天跑步吗？","py":"Tiānqì zhème lěng, nǐ hái měitiān pǎobù ma?","ar":"الطقس بارد هكذا، هل ما زلت تجري كل يوم؟"},{"tokens":["你","真","行"],"zh":"你真行！","py":"Nǐ zhēn xíng!","ar":"أنت حقاً رائع!"},{"tokens":["北京","今年","冬天","冷","不","冷"],"zh":"北京今年冬天冷不冷？","py":"Běijīng jīnnián dōngtiān lěng bu lěng?","ar":"هل شتاء هذا العام في بكين بارد؟"},{"tokens":["泰国","的","冬天","冷","不","冷"],"zh":"泰国的冬天冷不冷？","py":"Tàiguó de dōngtiān lěng bu lěng?","ar":"هل شتاء تايلاند بارد؟"},{"tokens":["我","去","商场","买","了","什么","东西"],"zh":"我去商场买了什么东西？","py":"Wǒ qù shāngchǎng mǎi le shénme dōngxi?","ar":"ماذا اشتريت من المركز التجاري؟"},{"tokens":["崔浩","什么","时候","去","医院","看病"],"zh":"崔浩什么时候去医院看病？","py":"Cuī Hào shénme shíhou qù yīyuàn kànbìng?","ar":"متى سيذهب تسوي هاو إلى المستشفى؟"},{"tokens":["阿明","感冒","好","了","吗"],"zh":"阿明感冒好了吗？","py":"Āmíng gǎnmào hǎo le ma?","ar":"هل شُفي أمينغ من الزكام؟"},{"tokens":["林娜","也","生病","了","吗"],"zh":"林娜也生病了吗？","py":"Lín Nà yě shēngbìng le ma?","ar":"هل لين نا مريضة أيضاً؟"},{"tokens":["阿明","每天","跑步","吗"],"zh":"阿明每天跑步吗？","py":"Āmíng měitiān pǎobù ma?","ar":"هل يجري أمينغ كل يوم؟"},{"tokens":["我","没","买","毛衣"],"zh":"我没买毛衣。","py":"Wǒ méi mǎi máoyī.","ar":"لم أشترِ سترة صوفية."}],"fill":[{"pre":"你去","post":"看病了吗？","ans":"医院","opts":["医院","水果","毛衣"],"ar":"هل ذهبت إلى المستشفى لتراجع الطبيب؟","py":"Nǐ qù yīyuàn kànbìng le ma?"},{"pre":"这么","post":"呀！","ans":"快","opts":["快","趟","冷"],"ar":"بهذه السرعة!","py":"Zhème kuài ya!"},{"pre":"林娜，你怎么买了","post":"多水果？","ans":"这么","opts":["这么","商场","衣服"],"ar":"لين نا، لماذا اشتريتِ كل هذه الفواكه؟","py":"Lín Nà, nǐ zěnme mǎi le zhème duō shuǐguǒ?"},{"pre":"我去","post":"步。","ans":"跑","opts":["跑","药","新"],"ar":"سأذهب للجري.","py":"Wǒ qù pǎobù."},{"pre":"天气","post":"冷，你还每天跑步吗？","ans":"这么","opts":["这么","特别","商场"],"ar":"الطقس بارد هكذا، هل ما زلت تجري كل يوم؟","py":"Tiānqì zhème lěng, nǐ hái měitiān pǎobù ma?"},{"pre":"你","post":"行！","ans":"真","opts":["真","药","件"],"ar":"أنت حقاً رائع!","py":"Nǐ zhēn xíng!"},{"pre":"","post":"今年冬天冷不冷？","ans":"北京","opts":["北京","但是","凉快"],"ar":"هل شتاء هذا العام في بكين بارد؟","py":"Běijīng jīnnián dōngtiān lěng bu lěng?"},{"pre":"泰国的","post":"冷不冷？","ans":"冬天","opts":["冬天","特别","今年"],"ar":"هل شتاء تايلاند بارد؟","py":"Tàiguó de dōngtiān lěng bu lěng?"},{"pre":"我去","post":"买了什么东西？","ans":"商场","opts":["商场","天气","水果"],"ar":"ماذا اشتريت من المركز التجاري؟","py":"Wǒ qù shāngchǎng mǎi le shénme dōngxi?"},{"pre":"崔浩什么时候去","post":"看病？","ans":"医院","opts":["医院","今年","生病"],"ar":"متى سيذهب تسوي هاو إلى المستشفى؟","py":"Cuī Hào shénme shíhou qù yīyuàn kànbìng?"},{"pre":"阿明","post":"好了吗？","ans":"感冒","opts":["感冒","暖和","特别"],"ar":"هل شُفي أمينغ من الزكام؟","py":"Āmíng gǎnmào hǎo le ma?"},{"pre":"林娜也","post":"了吗？","ans":"生病","opts":["生病","水果","衣服"],"ar":"هل لين نا مريضة أيضاً؟","py":"Lín Nà yě shēngbìng le ma?"}],"chars":[{"c":"树","py":"shù","ar":"شجرة","w":"树"},{"c":"机","py":"jī","ar":"آلة / مطار","w":"机场"},{"c":"极","py":"jí","ar":"قطب / أقصى","w":"太极拳"},{"c":"杯","py":"bēi","ar":"كوب","w":"杯"},{"c":"校","py":"xiào","ar":"مدرسة","w":"学校"},{"c":"样","py":"yàng","ar":"شكل / كيف","w":"怎么样"},{"c":"经","py":"jīng","ar":"يمر / بالفعل","w":"已经"},{"c":"红","py":"hóng","ar":"أحمر","w":"红茶"}],"spk":{"N":{"n":"المشهد","a":"景"},"S":{"n":"أنا","a":"我"},"X":{"n":"أمينغ","a":"阿"},"L":{"n":"تسوي هاو","a":"崔"},"C":{"n":"لين نا","a":"林"}},"pitch":{"S":1.0,"X":0.9,"L":1.1,"C":0.95,"A":1.05,"Y":0.9,"N":1.0},"acts":["match","listen","meaning","tone","order","fill","lesson","write"],"lq":[{"type":"mc","prompt":"<div class=\"ar-s\">今年冬天北京怎么样？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">特别冷<\/span> <span class=\"py ltr mut\">Tèbié lěng<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不太冷<\/span> <span class=\"py ltr mut\">Bútàilěng<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">很暖和<\/span> <span class=\"py ltr mut\">Hěn nuǎnhuo<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">很热<\/span> <span class=\"py ltr mut\">Hěn rè<\/span>","ok":false}],"fb":"<div>«今年冬天北京特别冷».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">泰国冬天很冷，要穿很厚的衣服。<\/div><div class=\"mut\">صح أم خطأ؟<\/div>","opts":[{"html":"صح","ok":false},{"html":"خطأ","ok":true}],"fix":1,"fb":"<div>«我们泰国冬天不太冷，不用穿很厚的衣服».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">“我”去商场买了什么？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">一件毛衣和一件羽绒服<\/span> <span class=\"py ltr mut\">Yíjiàn máoyī hé yíjiàn yǔróngfú<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">一本书<\/span> <span class=\"py ltr mut\">Yì běn shū<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">很多水果<\/span> <span class=\"py ltr mut\">Hěn duō shuǐguǒ<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">一杯咖啡<\/span> <span class=\"py ltr mut\">Yì bēi kāfēi<\/span>","ok":false}],"fb":"<div>«我买了一件毛衣，还买了一件羽绒服».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">崔浩什么时候去医院？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">一下课就去<\/span> <span class=\"py ltr mut\">Yíxiàkè jiù qù<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">明天去<\/span> <span class=\"py ltr mut\">Míngtiān qù<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">已经去了<\/span> <span class=\"py ltr mut\">Yǐjīng qù le<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不去<\/span> <span class=\"py ltr mut\">Bú qù<\/span>","ok":false}],"fb":"<div>«我想一下课就去».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">阿明怎么好得这么快？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">吃了很多药，又穿了新羽绒服<\/span> <span class=\"py ltr mut\">Chī le hěn duō yào, yòu chuān le xīn yǔróngfú<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">去了医院<\/span> <span class=\"py ltr mut\">Qù le yīyuàn<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">休息了一个月<\/span> <span class=\"py ltr mut\">Xiūxi le yí gè yuè<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">跑步了<\/span> <span class=\"py ltr mut\">Pǎobù le<\/span>","ok":false}],"fb":"<div>«我吃了很多药，又穿了一件新羽绒服».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">阿明的感冒昨天就好了。<\/div><div class=\"mut\">صح أم خطأ؟<\/div>","opts":[{"html":"صح","ok":true},{"html":"خطأ","ok":false}],"fix":1,"fb":"<div>«感冒昨天就好了».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">林娜为什么买了很多水果？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">她朋友生病了<\/span> <span class=\"py ltr mut\">Tā péngyou shēngbìng le<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">她很喜欢水果<\/span> <span class=\"py ltr mut\">Tā hěn xǐhuan shuǐguǒ<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">她要去跑步<\/span> <span class=\"py ltr mut\">Tā yào qù pǎobù<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">她要做饭<\/span> <span class=\"py ltr mut\">Tā yào zuòfàn<\/span>","ok":false}],"fb":"<div>«我朋友生病了，我去看她».<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">阿明每天跑步吗？<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">不是每天，一有空儿就去<\/span> <span class=\"py ltr mut\">Búshì měitiān, yìyǒukòngr jiù qù<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">每天都跑<\/span> <span class=\"py ltr mut\">Měitiān dōu pǎo<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">从来不跑<\/span> <span class=\"py ltr mut\">Cóng lái bù pǎo<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">每个星期跑一次<\/span> <span class=\"py ltr mut\">Měi gè xīngqī pǎo yí cì<\/span>","ok":false}],"fb":"<div>«不是每天跑，但是我一有空儿就去跑».<\/div>","wid":[]},{"type":"match","words":[{"zh":"冬天","py":"dōng tiān","ar":"الشتاء"},{"zh":"感冒","py":"gǎn mào","ar":"الزكام"},{"zh":"毛衣","py":"máo yī","ar":"سترة صوفية"},{"zh":"医院","py":"yī yuàn","ar":"مستشفى"},{"zh":"水果","py":"shuǐ guǒ","ar":"فواكه"},{"zh":"天气","py":"tiān qì","ar":"الطقس"}],"wid":[]},{"type":"match","words":[{"zh":"厚","py":"hòu","ar":"سميك"},{"zh":"特别","py":"tè bié","ar":"خاصةً"},{"zh":"生病","py":"shēng bìng","ar":"يمرض"},{"zh":"看病","py":"kàn bìng","ar":"يراجع الطبيب"},{"zh":"暖和","py":"nuǎn huo","ar":"دافئ"},{"zh":"凉快","py":"liáng kuai","ar":"منعش"}],"wid":[]},{"type":"order","s":{"tokens":["我","买","了","一件","毛衣","。"],"zh":"我买了一件毛衣。","py":"Wǒ mǎi le yíjiàn máoyī.","ar":"رتّب الجملة"},"wid":[]},{"type":"order","s":{"tokens":["我","一","下课","就","去","医院","。"],"zh":"我一下课就去医院。","py":"Wǒ yíxiàkè jiù qù yīyuàn.","ar":"رتّب الجملة"},"wid":[]},{"type":"order","s":{"tokens":["感冒","昨天","就","好","了","。"],"zh":"感冒昨天就好了。","py":"Gǎnmào zuótiān jiù hǎo le.","ar":"رتّب الجملة"},"wid":[]},{"type":"order","s":{"tokens":["你","怎么","买","了","这么","多","水果","？"],"zh":"你怎么买了这么多水果？","py":"Nǐ zěnme mǎi le zhème duō shuǐguǒ?","ar":"رتّب الجملة"},"wid":[]},{"type":"order","s":{"tokens":["天气","这么","冷","，","你","还","跑步","吗","？"],"zh":"天气这么冷，你还跑步吗？","py":"Tiānqì zhème lěng, nǐ hái pǎobù ma?","ar":"رتّب الجملة"},"wid":[]},{"type":"fill","f":{"pre":"我买","post":"一件毛衣。我一下课就去医院。","ans":"了","opts":["了","就","过","才"],"ar":"","py":"Wǒ mǎi le yíjiàn máoyī. wǒ yíxiàkè jiù qù yīyuàn."},"wid":[]},{"type":"fill","f":{"pre":"我买了一件毛衣。我一下课","post":"去医院。","ans":"就","opts":["就","了","过","才"],"ar":"","py":"Wǒ mǎi le yíjiàn máoyī. wǒ yíxiàkè jiù qù yīyuàn."},"wid":[]},{"type":"fill","f":{"pre":"你怎么买了","post":"多水果？你还每天跑步吗？","ans":"这么","opts":["这么","还","那么","又"],"ar":"","py":"Nǐ zěnme mǎi le zhème duō shuǐguǒ? nǐ hái měitiān pǎobù ma?"},"wid":[]},{"type":"fill","f":{"pre":"你怎么买了这么多水果？你","post":"每天跑步吗？","ans":"还","opts":["还","这么","那么","又"],"ar":"","py":"Nǐ zěnme mǎi le zhème duō shuǐguǒ? nǐ hái měitiān pǎobù ma?"},"wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">اختر الجملة الصحيحة لنفي «我买了毛衣»:<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我没买毛衣。<\/span> <span class=\"py ltr mut\">Wǒ méi mǎi máoyī.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我没买了毛衣。<\/span> <span class=\"py ltr mut\">Wǒ méi mǎi le máoyī.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我不买了毛衣。<\/span> <span class=\"py ltr mut\">Wǒ bù mǎi le máoyī.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我买没毛衣。<\/span> <span class=\"py ltr mut\">Wǒ mǎi méi máoyī.<\/span>","ok":false}],"fb":"<div>النفي بـ 没(有) ولا نستعمل 了.<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"ar-s\">ما معنى «我一有空儿就去跑步»؟<\/div>","opts":[{"html":"ما إن يكون عندي وقت فراغ حتى أذهب للجري","ok":true},{"html":"أجري كل يوم","ok":false},{"html":"لا أجري أبداً","ok":false},{"html":"أجري ثم أرتاح","ok":false}],"fb":"<div>一…就… = ما إن… حتى…<\/div>","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">我一下课就去。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"就","ok":true},{"html":"还","ok":false}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">他还不知道这件事。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"就","ok":false},{"html":"还","ok":true}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">感冒昨天就好了。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"就","ok":true},{"html":"还","ok":false}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">现在他还很忙。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"就","ok":false},{"html":"还","ok":true}],"fix":1,"fb":"","wid":[]},{"type":"mc","prompt":"<div class=\"han ltr\" style=\"font-size:26px\">八点上课，他七点就来了。<\/div><div class=\"mut\">ما نوع هذه الجملة؟<\/div>","opts":[{"html":"就","ok":true},{"html":"还","ok":false}],"fix":1,"fb":"","wid":[]},{"type":"mc","sp":"我买了一件毛衣。","prompt":"@@SPK@@<div class=\"mut\">استمع ثم اختر الجملة التي سمعتها<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我买了一件毛衣。<\/span> <span class=\"py ltr mut\">Wǒ mǎi le yíjiàn máoyī.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我想买一件毛衣。<\/span> <span class=\"py ltr mut\">Wǒ xiǎng mǎi yíjiàn máoyī.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我没买毛衣。<\/span> <span class=\"py ltr mut\">Wǒ méi mǎi máoyī.<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">我买了一件毛衣。<\/span><\/div>","wid":[]},{"type":"mc","sp":"你去医院看病了吗？","prompt":"@@SPK@@<div class=\"mut\">استمع للسؤال ثم اختر الجواب المناسب<\/div>","opts":[{"html":"<span class=\"han ltr\" style=\"font-size:19px\">还没有，我想一下课就去。<\/span> <span class=\"py ltr mut\">Hái méiyǒu, wǒ xiǎng yíxiàkè jiù qù.<\/span>","ok":true},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我吃了很多药。<\/span> <span class=\"py ltr mut\">Wǒ chī le hěn duō yào.<\/span>","ok":false},{"html":"<span class=\"han ltr\" style=\"font-size:19px\">我买了一件毛衣。<\/span> <span class=\"py ltr mut\">Wǒ mǎi le yíjiàn máoyī.<\/span>","ok":false}],"fb":"<div class=\"fw\"><span class=\"han ltr\" style=\"font-size:20px\">你去医院看病了吗？<\/span><\/div><div>السؤال: هل ذهبت إلى المستشفى؟<\/div>","wid":[]}],"gram":"<div class=\"sec-h\"><h2>القواعد<\/h2><p>ملاحظات الدرس وأنماط الجمل والجمل المفتاحية. اضغط أي كلمة لترى معناها.<\/p><\/div><h3 class=\"sub-h\">النص ١: شتاء بكين · <span class=\"han\" dir=\"ltr\">一、课文（一）<\/span><\/h3><div class=\"card\"><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"北京今年冬天冷不冷？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">北京今年冬天冷不冷？<\/span><span class=\"mut py\" dir=\"ltr\">Běijīng jīnnián dōngtiān lěng bu lěng?<\/span><span>هل شتاء هذا العام في بكين بارد؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"泰国的冬天冷不冷？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">泰国的冬天冷不冷？<\/span><span class=\"mut py\" dir=\"ltr\">Tàiguó de dōngtiān lěng bu lěng?<\/span><span>هل شتاء تايلاند بارد؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我去商场买了什么东西？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我去商场买了什么东西？<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ qù shāngchǎng mǎi le shénme dōngxi?<\/span><span>ماذا اشتريت من المركز التجاري؟<\/span><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">النص ٢: هل ذهبت إلى المستشفى؟ · <span class=\"han\" dir=\"ltr\">一、课文（二）<\/span><\/h3><div class=\"card\"><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"崔浩什么时候去医院看病？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">崔浩什么时候去医院看病？<\/span><span class=\"mut py\" dir=\"ltr\">Cuī Hào shénme shíhou qù yīyuàn kànbìng?<\/span><span>متى سيذهب تسوي هاو إلى المستشفى؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"阿明感冒好了吗？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">阿明感冒好了吗？<\/span><span class=\"mut py\" dir=\"ltr\">Āmíng gǎnmào hǎo le ma?<\/span><span>هل شُفي أمينغ من الزكام؟<\/span><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">النص ٣: أنت حقاً رائع! · <span class=\"han\" dir=\"ltr\">一、课文（三）<\/span><\/h3><div class=\"card\"><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"林娜也生病了吗？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">林娜也生病了吗？<\/span><span class=\"mut py\" dir=\"ltr\">Lín Nà yě shēngbìng le ma?<\/span><span>هل لين نا مريضة أيضاً؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"阿明每天跑步吗？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">阿明每天跑步吗？<\/span><span class=\"mut py\" dir=\"ltr\">Āmíng měitiān pǎobù ma?<\/span><span>هل يجري أمينغ كل يوم؟<\/span><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">ملاحظات القواعد · <span class=\"han\" dir=\"ltr\">二、综合注释<\/span><\/h3><div class=\"card\"><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">① 我买了一件毛衣。<\/span> · «了» بعد الفعل: تدل على إتمام الفعل أو تحقّقه. النمط الشائع: V + 了 + عدد وكلمة عدّ / صفة / ضمير + O.<\/h4><div class=\"tw\"><table><thead><tr><th>المبتدأ S<\/th><th>V<\/th><th><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/th><th>عدد+كلمة عدّ / صفة / ضمير<\/th><th>O<\/th><\/tr><\/thead><tbody><tr><td><div class=\"han\" dir=\"ltr\">我<\/div><div class=\"mut py\" dir=\"ltr\">Wǒ<\/div><\/td><td><div class=\"han\" dir=\"ltr\">买<\/div><div class=\"mut py\" dir=\"ltr\">Mǎi<\/div><\/td><td><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/td><td><div class=\"han\" dir=\"ltr\">一本<\/div><div class=\"mut py\" dir=\"ltr\">Yì běn<\/div><\/td><td><div class=\"han\" dir=\"ltr\">书。<\/div><div class=\"mut py\" dir=\"ltr\">Shū.<\/div><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">林娜<\/div><div class=\"mut py\" dir=\"ltr\">Lín Nà<\/div><\/td><td><div class=\"han\" dir=\"ltr\">买<\/div><div class=\"mut py\" dir=\"ltr\">Mǎi<\/div><\/td><td><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/td><td><div class=\"han\" dir=\"ltr\">很多<\/div><div class=\"mut py\" dir=\"ltr\">Hěn duō<\/div><\/td><td><div class=\"han\" dir=\"ltr\">水果。<\/div><div class=\"mut py\" dir=\"ltr\">Shuǐguǒ.<\/div><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">我<\/div><div class=\"mut py\" dir=\"ltr\">Wǒ<\/div><\/td><td><div class=\"han\" dir=\"ltr\">吃<\/div><div class=\"mut py\" dir=\"ltr\">Chī<\/div><\/td><td><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/td><td><div class=\"han\" dir=\"ltr\">他的<\/div><div class=\"mut py\" dir=\"ltr\">Tā de<\/div><\/td><td><div class=\"han\" dir=\"ltr\">面包。<\/div><div class=\"mut py\" dir=\"ltr\">Miàn bāo.<\/div><\/td><\/tr><\/tbody><\/table><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我\" data-p=\"wǒ\" data-a=\"أنا\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"买\" data-p=\"mǎi\" data-a=\"يشتري\"><span class=\"py\"><span class=\"t3\">mǎi<\/span><\/span><span class=\"zh\"><span class=\"t3\">买<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"了\" data-p=\"le\" data-a=\"أداة نغمية / ماضٍ\"><span class=\"py\"><span class=\"t5\">le<\/span><\/span><span class=\"zh\"><span class=\"t5\">了<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"一件\" data-p=\"yí jiàn\" data-a=\"\"><span class=\"py\"><span class=\"t2\">yí<\/span><span class=\"t4\">jiàn<\/span><\/span><span class=\"zh\"><span class=\"t2\">一<\/span><span class=\"t4\">件<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"毛衣\" data-p=\"máo yī\" data-a=\"\"><span class=\"py\"><span class=\"t2\">máo<\/span><span class=\"t1\">yī<\/span><\/span><span class=\"zh\"><span class=\"t2\">毛<\/span><span class=\"t1\">衣<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>اشتريت سترة صوفية.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我买了一件毛衣。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><p style=\"margin:10px 0 4px\">إذا وُجد ظرف قبل الفعل، أو جاءت جملة تالية بعد الفعل، يمكن وضع «了» مباشرة بعد الفعل:<\/p><div class=\"tw\"><table><thead><tr><th>المبتدأ S<\/th><th>ظرف Adv<\/th><th>V<\/th><th><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/th><th>O<\/th><th>جملة تالية Clause<\/th><\/tr><\/thead><tbody><tr><td><div class=\"han\" dir=\"ltr\">我<\/div><div class=\"mut py\" dir=\"ltr\">Wǒ<\/div><\/td><td><div class=\"han\" dir=\"ltr\">已经<\/div><div class=\"mut py\" dir=\"ltr\">Yǐjīng<\/div><\/td><td><div class=\"han\" dir=\"ltr\">告诉<\/div><div class=\"mut py\" dir=\"ltr\">Gào sù<\/div><\/td><td><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/td><td><div class=\"han\" dir=\"ltr\">李老师。<\/div><div class=\"mut py\" dir=\"ltr\">Lǐ lǎoshī.<\/div><\/td><td><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">他们<\/div><div class=\"mut py\" dir=\"ltr\">Tāmen<\/div><\/td><td><div class=\"han\" dir=\"ltr\">都<\/div><div class=\"mut py\" dir=\"ltr\">Dōu<\/div><\/td><td><div class=\"han\" dir=\"ltr\">去<\/div><div class=\"mut py\" dir=\"ltr\">Qù<\/div><\/td><td><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/td><td><div class=\"han\" dir=\"ltr\">北京。<\/div><div class=\"mut py\" dir=\"ltr\">Běijīng.<\/div><\/td><td><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">我<\/div><div class=\"mut py\" dir=\"ltr\">Wǒ<\/div><\/td><td><\/td><td><div class=\"han\" dir=\"ltr\">吃<\/div><div class=\"mut py\" dir=\"ltr\">Chī<\/div><\/td><td><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/td><td><div class=\"han\" dir=\"ltr\">药，<\/div><div class=\"mut py\" dir=\"ltr\">Yào,<\/div><\/td><td><div class=\"han\" dir=\"ltr\">感冒就好了。<\/div><div class=\"mut py\" dir=\"ltr\">Gǎnmào jiù hǎo le.<\/div><\/td><\/tr><tr><td><div class=\"han\" dir=\"ltr\">我<\/div><div class=\"mut py\" dir=\"ltr\">Wǒ<\/div><\/td><td><\/td><td><div class=\"han\" dir=\"ltr\">吃<\/div><div class=\"mut py\" dir=\"ltr\">Chī<\/div><\/td><td><div class=\"han\" dir=\"ltr\">了<\/div><div class=\"mut py\" dir=\"ltr\">Le<\/div><\/td><td><div class=\"han\" dir=\"ltr\">饭，<\/div><div class=\"mut py\" dir=\"ltr\">Fàn,<\/div><\/td><td><div class=\"han\" dir=\"ltr\">还喝了茶。<\/div><div class=\"mut py\" dir=\"ltr\">Hái hē le chá.<\/div><\/td><\/tr><\/tbody><\/table><\/div><p style=\"margin:10px 0 4px\">النفي: 没(有) + V(+O)، ولا نستعمل 了：<\/p><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我没买毛衣。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我没买毛衣。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ méi mǎi máoyī.<\/span><span>لم أشترِ سترة صوفية.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我没去商场。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我没去商场。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ méi qù shāngchǎng.<\/span><span>لم أذهب إلى المركز التجاري.<\/span><\/div><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><span class=\"punc\">②<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我\" data-p=\"wǒ\" data-a=\"أنا\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"想\" data-p=\"xiǎng\" data-a=\"يريد / يفكر\"><span class=\"py\"><span class=\"t3\">xiǎng<\/span><\/span><span class=\"zh\"><span class=\"t3\">想<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"一下课\" data-p=\"yí xià kè\" data-a=\"\"><span class=\"py\"><span class=\"t2\">yí<\/span><span class=\"t4\">xià<\/span><span class=\"t4\">kè<\/span><\/span><span class=\"zh\"><span class=\"t2\">一<\/span><span class=\"t4\">下<\/span><span class=\"t4\">课<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"就\" data-p=\"jiù\" data-a=\"بالضبط\"><span class=\"py\"><span class=\"t4\">jiù<\/span><\/span><span class=\"zh\"><span class=\"t4\">就<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"去\" data-p=\"qù\" data-a=\"يذهب\"><span class=\"py\"><span class=\"t4\">qù<\/span><\/span><span class=\"zh\"><span class=\"t4\">去<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>«一……就……»: تربط بين فعلين يقعان متتابعين مباشرة: ما إن… حتى…<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我想一下课就去。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我\" data-p=\"wǒ\" data-a=\"أنا\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"一下课\" data-p=\"yí xià kè\" data-a=\"\"><span class=\"py\"><span class=\"t2\">yí<\/span><span class=\"t4\">xià<\/span><span class=\"t4\">kè<\/span><\/span><span class=\"zh\"><span class=\"t2\">一<\/span><span class=\"t4\">下<\/span><span class=\"t4\">课<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"就\" data-p=\"jiù\" data-a=\"بالضبط\"><span class=\"py\"><span class=\"t4\">jiù<\/span><\/span><span class=\"zh\"><span class=\"t4\">就<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"去\" data-p=\"qù\" data-a=\"يذهب\"><span class=\"py\"><span class=\"t4\">qù<\/span><\/span><span class=\"zh\"><span class=\"t4\">去<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"医院\" data-p=\"yī yuàn\" data-a=\"\"><span class=\"py\"><span class=\"t1\">yī<\/span><span class=\"t4\">yuàn<\/span><\/span><span class=\"zh\"><span class=\"t1\">医<\/span><span class=\"t4\">院<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>ما إن تنتهي الحصة حتى أذهب إلى المستشفى.<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我一下课就去医院。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我们一见面就说汉语。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我们一见面就说汉语。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒmen yíjiànmiàn jiù shuō Hànyǔ.<\/span><span>ما إن نلتقي حتى نتكلم بالصينية.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"他一来，我们就走。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">他一来，我们就走。<\/span><span class=\"mut py\" dir=\"ltr\">Tā yì lái, wǒmen jiù zǒu.<\/span><span>ما إن يأتي حتى نذهب.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我一有空儿就去跑步。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我一有空儿就去跑步。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ yìyǒukòngr jiù qù pǎobù.<\/span><span>ما إن يكون عندي وقت فراغ حتى أذهب للجري.<\/span><\/div><\/div><\/div><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">③ 感冒昨天就好了。<\/span> · «就» تؤكد أن الشيء حدث مبكراً أو بسرعة.<\/h4><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"八点上课，他七点就来了。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">八点上课，他七点就来了。<\/span><span class=\"mut py\" dir=\"ltr\">Bā diǎn shàngkè, tā qī diǎn jiù lái le.<\/span><span>الحصة في الثامنة، وهو جاء في السابعة (مبكراً).<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我五分钟以后就回来。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我五分钟以后就回来。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ wǔ fēn zhōng yǐhòu jiù huí lái.<\/span><span>سأعود بعد خمس دقائق فقط.<\/span><\/div><\/div><\/div><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">④ 这么快呀！<\/span> · «这么» + صفة أو فعل: لبيان درجة الشيء (هكذا / إلى هذا الحد).<\/h4><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这个地方这么大呀！\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这个地方这么大呀！<\/span><span class=\"mut py\" dir=\"ltr\">Zhège dìfang zhème dà ya!<\/span><span>هذا المكان كبير إلى هذا الحد!<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你怎么买了这么多水果？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你怎么买了这么多水果？<\/span><span class=\"mut py\" dir=\"ltr\">Nǐ zěnme mǎi le zhème duō shuǐguǒ?<\/span><span>لماذا اشتريت كل هذه الفواكه؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你怎么这么喜欢看电影？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你怎么这么喜欢看电影？<\/span><span class=\"mut py\" dir=\"ltr\">Nǐ zěnme zhème xǐhuan kàn diànyǐng?<\/span><span>لماذا تحب مشاهدة الأفلام هكذا؟<\/span><\/div><\/div><\/div><h4 class=\"sh2\"><span class=\"han\" dir=\"ltr\">⑤ 你还每天跑步吗？<\/span> · «还» (2): تدل على استمرار الفعل أو الحالة.<\/h4><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"他还不知道这件事。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">他还不知道这件事。<\/span><span class=\"mut py\" dir=\"ltr\">Tā hái bù zhī dào zhè jiàn shì.<\/span><span>هو لا يعرف هذا الأمر بعد.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"明年我还在北京。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">明年我还在北京。<\/span><span class=\"mut py\" dir=\"ltr\">Míng nián wǒ hái zài Běijīng.<\/span><span>في العام القادم سأكون ما زلت في بكين.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"现在他还很忙。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">现在他还很忙。<\/span><span class=\"mut py\" dir=\"ltr\">Xiànzài tā hái hěn máng.<\/span><span>الآن ما زال مشغولاً جداً.<\/span><\/div><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"暖和\" data-p=\"nuǎn huo\" data-a=\"\"><span class=\"py\"><span class=\"t3\">nuǎn<\/span><span class=\"t5\">huo<\/span><\/span><span class=\"zh\"><span class=\"t3\">暖<\/span><span class=\"t5\">和<\/span><\/span><\/button><span class=\"punc\"> <\/span><span class=\"punc\">·<\/span><span class=\"punc\"> <\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"凉快\" data-p=\"liáng kuai\" data-a=\"\"><span class=\"py\"><span class=\"t2\">liáng<\/span><span class=\"t5\">kuai<\/span><\/span><span class=\"zh\"><span class=\"t2\">凉<\/span><span class=\"t5\">快<\/span><\/span><\/button><\/span><\/div><div>مفردات إضافية: دافئ، منعش (بارد قليلاً).<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"暖和 · 凉快\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"日\" data-p=\"rì\" data-a=\"\"><span class=\"py\"><span class=\"t4\">rì<\/span><\/span><span class=\"zh\"><span class=\"t4\">日<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"常\" data-p=\"cháng\" data-a=\"\"><span class=\"py\"><span class=\"t2\">cháng<\/span><\/span><span class=\"zh\"><span class=\"t2\">常<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"用\" data-p=\"yòng\" data-a=\"يستخدم\"><span class=\"py\"><span class=\"t4\">yòng<\/span><\/span><span class=\"zh\"><span class=\"t4\">用<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"语\" data-p=\"yǔ\" data-a=\"\"><span class=\"py\"><span class=\"t3\">yǔ<\/span><\/span><span class=\"zh\"><span class=\"t3\">语<\/span><\/span><\/button><\/span><\/div><div>عبارات يومية:<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"日常用语\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我们\" data-p=\"wǒ men\" data-a=\"نحن\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><span class=\"t5\">men<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><span class=\"t5\">们<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"机场\" data-p=\"jī chǎng\" data-a=\"\"><span class=\"py\"><span class=\"t1\">jī<\/span><span class=\"t3\">chǎng<\/span><\/span><span class=\"zh\"><span class=\"t1\">机<\/span><span class=\"t3\">场<\/span><\/span><\/button><span class=\"punc\">（<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"哈\" data-p=\"hā\" data-a=\"\"><span class=\"py\"><span class=\"t1\">hā<\/span><\/span><span class=\"zh\"><span class=\"t1\">哈<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"尔\" data-p=\"ěr\" data-a=\"\"><span class=\"py\"><span class=\"t3\">ěr<\/span><\/span><span class=\"zh\"><span class=\"t3\">尔<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"滨\" data-p=\"bīn\" data-a=\"\"><span class=\"py\"><span class=\"t1\">bīn<\/span><\/span><span class=\"zh\"><span class=\"t1\">滨<\/span><\/span><\/button><span class=\"punc\">）<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"见\" data-p=\"jiàn\" data-a=\"\"><span class=\"py\"><span class=\"t4\">jiàn<\/span><\/span><span class=\"zh\"><span class=\"t4\">见<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>نلتقي في المطار (في هاربين).<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我们机场（哈尔滨）见。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><div class=\"card\" style=\"background:var(--accent-soft);border-color:transparent;margin-top:12px\"><div class=\"formula\"><span class=\"fm k\">重点<\/span><b>نقطة مهمة<\/b><\/div><div class=\"sentbox\"><div class=\"zhline\"><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"我们\" data-p=\"wǒ men\" data-a=\"نحن\"><span class=\"py\"><span class=\"t3\">wǒ<\/span><span class=\"t5\">men<\/span><\/span><span class=\"zh\"><span class=\"t3\">我<\/span><span class=\"t5\">们<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"电话\" data-p=\"diàn huà\" data-a=\"\"><span class=\"py\"><span class=\"t4\">diàn<\/span><span class=\"t4\">huà<\/span><\/span><span class=\"zh\"><span class=\"t4\">电<\/span><span class=\"t4\">话<\/span><\/span><\/button><span class=\"punc\">（<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"邮\" data-p=\"yóu\" data-a=\"\"><span class=\"py\"><span class=\"t2\">yóu<\/span><\/span><span class=\"zh\"><span class=\"t2\">邮<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"件\" data-p=\"jiàn\" data-a=\"\"><span class=\"py\"><span class=\"t4\">jiàn<\/span><\/span><span class=\"zh\"><span class=\"t4\">件<\/span><\/span><\/button><span class=\"punc\">）<\/span><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"联\" data-p=\"lián\" data-a=\"\"><span class=\"py\"><span class=\"t2\">lián<\/span><\/span><span class=\"zh\"><span class=\"t2\">联<\/span><\/span><\/button><\/span><span class=\"tg\"><button class=\"tok\" data-act=\"gtok\" data-z=\"系\" data-p=\"xì\" data-a=\"قسم\"><span class=\"py\"><span class=\"t4\">xì<\/span><\/span><span class=\"zh\"><span class=\"t4\">系<\/span><\/span><\/button><span class=\"punc\">。<\/span><\/span><\/div><div>نتواصل بالهاتف (بالبريد الإلكتروني).<\/div><div class=\"tools\" style=\"margin:6px 0 0\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我们电话（邮件）联系。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">الجمل المفتاحية · <span class=\"han\" dir=\"ltr\">三、关键句<\/span><\/h3><div class=\"card\"><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"今年冬天北京特别冷。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">今年冬天北京特别冷。<\/span><span class=\"mut py\" dir=\"ltr\">Jīnnián dōngtiān Běijīng tèbié lěng.<\/span><span>شتاء هذا العام بارد جداً في بكين.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"很多同学都感冒了。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">很多同学都感冒了。<\/span><span class=\"mut py\" dir=\"ltr\">Hěn duō tóngxué dōu gǎnmào le.<\/span><span>أصيب كثير من الزملاء بالزكام.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我买了一件毛衣。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我买了一件毛衣。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ mǎi le yíjiàn máoyī.<\/span><span>اشتريت سترة صوفية.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你去医院看病了吗？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你去医院看病了吗？<\/span><span class=\"mut py\" dir=\"ltr\">Nǐ qù yīyuàn kànbìng le ma?<\/span><span>هل ذهبت إلى المستشفى؟<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我想一下课就去。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我想一下课就去。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ xiǎng yíxiàkè jiù qù.<\/span><span>أريد أن أذهب ما إن تنتهي الحصة.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"感冒昨天就好了。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">感冒昨天就好了。<\/span><span class=\"mut py\" dir=\"ltr\">Gǎnmào zuótiān jiù hǎo le.<\/span><span>شُفيت من الزكام أمس.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这么快呀！\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这么快呀！<\/span><span class=\"mut py\" dir=\"ltr\">Zhème kuài ya!<\/span><span>بهذه السرعة!<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"你还每天跑步吗？\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">你还每天跑步吗？<\/span><span class=\"mut py\" dir=\"ltr\">Nǐ hái měitiān pǎobù ma?<\/span><span>هل ما زلت تجري كل يوم؟<\/span><\/div><\/div><\/div><\/div><h3 class=\"sub-h\">كرّر بعدي<\/h3><div class=\"card\"><p class=\"mut\">استمع لكل جملة ثم كرّرها بصوت عالٍ.<\/p><div class=\"qa\"><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"今年冬天北京特别冷。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">今年冬天北京特别冷。<\/span><span class=\"mut py\" dir=\"ltr\">Jīnnián dōngtiān Běijīng tèbié lěng.<\/span><span>شتاء هذا العام بارد جداً في بكين.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我买了一件毛衣。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我买了一件毛衣。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ mǎi le yíjiàn máoyī.<\/span><span>اشتريت سترة صوفية.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"我一下课就去医院。\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">我一下课就去医院。<\/span><span class=\"mut py\" dir=\"ltr\">Wǒ yíxiàkè jiù qù yīyuàn.<\/span><span>ما إن تنتهي الحصة حتى أذهب إلى المستشفى.<\/span><\/div><\/div><div class=\"m\"><button class=\"spk sm\" data-act=\"say\" data-t=\"这么快呀！\" aria-label=\"استمع\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M4 9v6h4l5 4V5L8 9H4z\"/><path d=\"M16.5 8.5a5 5 0 0 1 0 7\"/><path d=\"M19 6a8.5 8.5 0 0 1 0 12\"/><\/svg><\/button><div class=\"t\"><span class=\"z\" dir=\"ltr\">这么快呀！<\/span><span class=\"mut py\" dir=\"ltr\">Zhème kuài ya!<\/span><span>بهذه السرعة!<\/span><\/div><\/div><\/div><\/div>","disc":[{"q":"说一说你们那儿的冬天：冷不冷？你穿什么衣服？你最近买了什么？","ar":"حدّث عن الشتاء عندكم: هل هو بارد؟ ماذا ترتدي؟ وماذا اشتريت مؤخراً؟","frames":["我们那儿冬天……","不用穿……的衣服","昨天我去了一趟……","我买了一件……"],"use":["冬天","冷","穿","商场","买"],"model":"我们那儿冬天不太冷，不用穿很厚的衣服。昨天我去了一趟商场，买了一件毛衣。｜شتاؤنا ليس شديد البرودة، فلا حاجة إلى ملابس سميكة. أمس ذهبت إلى المركز التجاري واشتريت سترة صوفية."},{"q":"朋友感冒了。请问他去医院了吗，吃药了吗，现在怎么样了。","ar":"أصيب صديقك بالزكام. اسأله هل ذهب إلى المستشفى، هل تناول دواء، وكيف حاله الآن.","frames":["你去医院看病了吗？","你吃药了吗？","你现在怎么样？","我一下课就去。"],"use":["感冒","医院","药","好","就"],"model":"你去医院看病了吗？还没有，我想一下课就去。你吃药了吗？吃了。感冒好了吗？好了。｜هل ذهبت إلى المستشفى؟ ليس بعد، أريد أن أذهب ما إن تنتهي الحصة. هل تناولت الدواء؟ نعم. هل شُفيت؟ نعم، شُفيت."}],"minc":14,"lv":{"tf":[{"zh":"今年","py":"jīn nián","ar":"هذا العام","a":1,"w":0},{"zh":"冬天","py":"dōng tiān","ar":"جديد","a":0,"w":1},{"zh":"特别","py":"tè bié","ar":"خاصةً / جداً","a":1,"w":2},{"zh":"冷","py":"lěng","ar":"هكذا / بهذا القدر","a":0,"w":3},{"zh":"厚","py":"hòu","ar":"سميك","a":1,"w":6},{"zh":"衣服","py":"yī fu","ar":"يمرض","a":0,"w":7},{"zh":"里","py":"lǐ","ar":"داخل","a":1,"w":10},{"zh":"真","py":"zhēn","ar":"لكن","a":0,"w":11},{"zh":"羽绒服","py":"yǔ róng fú","ar":"سترة منفوخة (ريش)","a":1,"w":14},{"zh":"医院","py":"yī yuàn","ar":"بكين","a":0,"w":15},{"zh":"药","py":"yào","ar":"دواء","a":1,"w":18},{"zh":"新","py":"xīn","ar":"الشتاء","a":0,"w":19},{"zh":"好","py":"hǎo","ar":"يتعافى / جيد","a":1,"w":20},{"zh":"这么","py":"zhè me","ar":"بارد","a":0,"w":21},{"zh":"水果","py":"shuǐ guǒ","ar":"فواكه","a":1,"w":24},{"zh":"生病","py":"shēng bìng","ar":"ملابس","a":0,"w":25},{"zh":"跑","py":"pǎo","ar":"يجري","a":1,"w":28},{"zh":"但是","py":"dàn shì","ar":"حقاً","a":0,"w":29},{"zh":"行","py":"xíng","ar":"ممتاز / قادر","a":1,"w":32},{"zh":"北京","py":"Běi jīng","ar":"مستشفى","a":0,"w":33}],"py":[{"zh":"今年","py":"jīn nián","ar":"هذا العام","w":0},{"zh":"冬天","py":"dōng tiān","ar":"الشتاء","w":1},{"zh":"冷","py":"lěng","ar":"بارد","w":3},{"zh":"穿","py":"chuān","ar":"يرتدي","w":5},{"zh":"衣服","py":"yī fu","ar":"ملابس","w":7},{"zh":"商场","py":"shāng chǎng","ar":"مركز تجاري","w":9},{"zh":"里","py":"lǐ","ar":"داخل","w":10},{"zh":"件","py":"jiàn","ar":"وحدة عدّ للملابس والأمور","w":12},{"zh":"羽绒服","py":"yǔ róng fú","ar":"سترة منفوخة (ريش)","w":14},{"zh":"看病","py":"kàn bìng","ar":"يراجع الطبيب","w":16},{"zh":"药","py":"yào","ar":"دواء","w":18},{"zh":"新","py":"xīn","ar":"جديد","w":19},{"zh":"这么","py":"zhè me","ar":"هكذا / بهذا القدر","w":21},{"zh":"呀","py":"ya","ar":"أداة تعجّب","w":23},{"zh":"生病","py":"shēng bìng","ar":"يمرض","w":25},{"zh":"还","py":"hái","ar":"ما زال","w":27},{"zh":"跑","py":"pǎo","ar":"يجري","w":28},{"zh":"有空儿","py":"yǒu kòng r","ar":"لديه وقت فراغ","w":30},{"zh":"行","py":"xíng","ar":"ممتاز / قادر","w":32},{"zh":"暖和","py":"nuǎn huo","ar":"دافئ","w":34}],"zh":[{"py":"jīn nián","ar":"هذا العام","ans":"今年","w":0},{"py":"dōng tiān","ar":"الشتاء","ans":"冬天","w":1},{"py":"lěng","ar":"بارد","ans":"冷","w":3},{"py":"chuān","ar":"يرتدي","ans":"穿","w":5},{"py":"yī fu","ar":"ملابس","ans":"衣服","w":7},{"py":"shāng chǎng","ar":"مركز تجاري","ans":"商场","w":9},{"py":"lǐ","ar":"داخل","ans":"里","w":10},{"py":"jiàn","ar":"وحدة عدّ للملابس والأمور","ans":"件","w":12},{"py":"yǔ róng fú","ar":"سترة منفوخة (ريش)","ans":"羽绒服","w":14},{"py":"kàn bìng","ar":"يراجع الطبيب","ans":"看病","w":16},{"py":"yào","ar":"دواء","ans":"药","w":18},{"py":"xīn","ar":"جديد","ans":"新","w":19},{"py":"zhè me","ar":"هكذا / بهذا القدر","ans":"这么","w":21},{"py":"ya","ar":"أداة تعجّب","ans":"呀","w":23},{"py":"shēng bìng","ar":"يمرض","ans":"生病","w":25},{"py":"hái","ar":"ما زال","ans":"还","w":27},{"py":"pǎo","ar":"يجري","ans":"跑","w":28},{"py":"yǒu kòng r","ar":"لديه وقت فراغ","ans":"有空儿","w":30},{"py":"xíng","ar":"ممتاز / قادر","ans":"行","w":32},{"py":"nuǎn huo","ar":"دافئ","ans":"暖和","w":34}],"sent":[{"ans":"今年冬天很冷。","py":"Jīnnián dōngtiān hěn lěng.","ar":"شتاء هذا العام بارد جداً.","w":0},{"ans":"北京的冬天很冷。","py":"Běijīng de dōngtiān hěn lěng.","ar":"شتاء بكين بارد جداً.","w":1},{"ans":"天气很冷。","py":"Tiānqì hěn lěng.","ar":"الطقس بارد.","w":3},{"ans":"我感冒了。","py":"Wǒ gǎnmào le.","ar":"أُصبت بالزكام.","w":4},{"ans":"这件衣服很厚。","py":"Zhè jiàn yīfu hěnhòu.","ar":"هذه الملابس سميكة.","w":6},{"ans":"我去了一趟商场。","py":"Wǒ qù le yítàng shāngchǎng.","ar":"ذهبت إلى المركز التجاري مرة.","w":8},{"ans":"商场里有很多衣服。","py":"Shāngchǎng lǐ yǒu hěn duō yīfu.","ar":"في المركز التجاري ملابس كثيرة.","w":9},{"ans":"一件毛衣。","py":"Yíjiàn máoyī.","ar":"سترة صوفية.","w":12},{"ans":"我还买了一件羽绒服。","py":"Wǒ hái mǎi le yíjiàn yǔróngfú.","ar":"واشتريت أيضاً سترة منفوخة.","w":14},{"ans":"你去医院了吗？","py":"Nǐ qù yīyuàn le ma?","ar":"هل ذهبت إلى المستشفى؟","w":15},{"ans":"我一下课就去。","py":"Wǒ yíxiàkè jiù qù.","ar":"أذهب فور انتهاء الحصة.","w":17},{"ans":"一件新羽绒服。","py":"Yíjiàn xīn yǔróngfú.","ar":"سترة منفوخة جديدة.","w":19},{"ans":"感冒好了。","py":"Gǎnmào hǎo le.","ar":"شُفي من الزكام.","w":20},{"ans":"你好得真快。","py":"Nǐ hǎo dé zhēn kuài.","ar":"تعافيت بسرعة حقاً.","w":22},{"ans":"我朋友生病了。","py":"Wǒ péngyou shēngbìng le.","ar":"صديقي مريض.","w":25},{"ans":"天气这么冷。","py":"Tiānqì zhème lěng.","ar":"الطقس بارد هكذا.","w":26},{"ans":"我去跑步。","py":"Wǒ qù pǎobù.","ar":"أذهب للجري.","w":28},{"ans":"有空儿就去跑步。","py":"Yǒukòngr jiù qù pǎobù.","ar":"كلما وجدت وقت فراغ ذهبت للجري.","w":30},{"ans":"我没有空儿。","py":"Wǒ méiyǒu kòngr.","ar":"ليس عندي وقت فراغ.","w":31},{"ans":"春天很暖和。","py":"Chūn tiān hěn nuǎnhuo.","ar":"الربيع دافئ.","w":34}],"cloze":[{"pre":"你去","post":"看病了吗？","ans":"医院","ar":"هل ذهبت إلى المستشفى لتراجع الطبيب؟","py":"Nǐ qù yīyuàn kànbìng le ma?"},{"pre":"这么","post":"呀！","ans":"快","ar":"بهذه السرعة!","py":"Zhème kuài ya!"},{"pre":"林娜，你怎么买了","post":"多水果？","ans":"这么","ar":"لين نا، لماذا اشتريتِ كل هذه الفواكه؟","py":"Lín Nà, nǐ zěnme mǎi le zhème duō shuǐguǒ?"},{"pre":"我去","post":"步。","ans":"跑","ar":"سأذهب للجري.","py":"Wǒ qù pǎobù."},{"pre":"天气","post":"冷，你还每天跑步吗？","ans":"这么","ar":"الطقس بارد هكذا، هل ما زلت تجري كل يوم؟","py":"Tiānqì zhème lěng, nǐ hái měitiān pǎobù ma?"},{"pre":"你","post":"行！","ans":"真","ar":"أنت حقاً رائع!","py":"Nǐ zhēn xíng!"},{"pre":"","post":"今年冬天冷不冷？","ans":"北京","ar":"هل شتاء هذا العام في بكين بارد؟","py":"Běijīng jīnnián dōngtiān lěng bu lěng?"},{"pre":"泰国的","post":"冷不冷？","ans":"冬天","ar":"هل شتاء تايلاند بارد؟","py":"Tàiguó de dōngtiān lěng bu lěng?"},{"pre":"我去","post":"买了什么东西？","ans":"商场","ar":"ماذا اشتريت من المركز التجاري؟","py":"Wǒ qù shāngchǎng mǎi le shénme dōngxi?"},{"pre":"崔浩什么时候去","post":"看病？","ans":"医院","ar":"متى سيذهب تسوي هاو إلى المستشفى؟","py":"Cuī Hào shénme shíhou qù yīyuàn kànbìng?"},{"pre":"阿明","post":"好了吗？","ans":"感冒","ar":"هل شُفي أمينغ من الزكام؟","py":"Āmíng gǎnmào hǎo le ma?"},{"pre":"林娜也","post":"了吗？","ans":"生病","ar":"هل لين نا مريضة أيضاً؟","py":"Lín Nà yě shēngbìng le ma?"}],"pass":0.75},"hw":1};
+var VOCAB=D.vocab,TOKPY=D.tokpy,DLG=D.dlg,TXT=D.txt,CQ={},SENT=D.sent,FILL=D.fill,CHARS=D.chars,SPK=D.spk,PITCH=D.pitch,ACTS=D.acts;
+function pitchOf(w){return PITCH[w]||1}
+function vid(zh){for(var i=0;i<VOCAB.length;i++){if(VOCAB[i].zh===zh)return i}return -1}
+function picHtml(){return ''}
+var CLASSX=[];
+var X={};/* extras for hand-built lessons: X.build, X.info (see tools/README.md); empty for generated lessons */
+var BADGES={
+ first:{g:'初',n:'أول اختبار'},perfect:{g:'满',n:'علامة كاملة'},listener:{g:'听',n:'المستمع'},scholar:{g:'词',n:'حافظ المفردات'},master:{g:'优',n:'اختبار شامل'}
+};
+
+/* ---------- progress / badges ---------- */
+var NEWB=[],LASTMISS=[];
+function award(id){if(!S.badges[id]){S.badges[id]=1;save();NEWB.push(id);if(window.zhUI&&zhUI.stamp)zhUI.stamp(BADGES[id].g,BADGES[id].n);else toast('وسام جديد: '+BADGES[id].n)}}
+function badgeList(isNew){return Object.keys(BADGES).map(function(k){return {g:BADGES[k].g,n:BADGES[k].n,on:!!S.badges[k],isNew:!!(isNew&&isNew.indexOf(k)>=0)}})}
+function knownCount(){return VOCAB.filter(function(_,i){return S.known[i]}).length}
+function progress(){
+  var k=knownCount()/VOCAB.length,h=Object.keys(S.heard).length/DLG.length,a=ACTS.filter(function(x){return S.best[x]}).length/ACTS.length;
+  return Math.round((k+h+a)/3*100);
+}
+function updateProg(){$('#gprog').style.width=progress()+'%'}
+
+/* ---------- tabs ---------- */
+var TABS=['vocab','dialogue','grammar','writing','practice'];
+var tab='vocab';
+var RENDER={vocab:renderVocab,dialogue:renderDialogue,grammar:renderGrammar,writing:renderWriting,practice:renderPractice};
+function setTab(name,fromHash){
+  if(TABS.indexOf(name)<0)name='vocab';
+  tab=name;
+  stopSpeech();stopAll();closeSheet();
+  $$('.tab').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.tab===name))});
+  TABS.forEach(function(t){$('#p-'+t).hidden=(t!==name)});
+  RENDER[name]();
+  if(!fromHash){try{history.replaceState(null,'','#'+name)}catch(e){location.hash=name}}
+  window.scrollTo(0,0);
+  var sel=$('.tab[aria-selected="true"]');if(sel&&sel.scrollIntoView){try{sel.scrollIntoView({inline:'center',block:'nearest'})}catch(e){}}
+}
+
+/* ---------- vocab ---------- */
+function fcCls(){return (window.zhUI&&zhUI.can3d&&zhUI.can3d())?' f3d'+(S.flip?' flipped':''):''}
+var flipT=null;
+function frontInner(w){return spkBtn(w.zh)+'<div class="bigzh" dir="ltr" style="--n:'+Math.max(2,Array.from(w.zh).length)+'">'+han(w.zh,w.py)+'</div><div class="hint">اضغط لإظهار المعنى</div>'}
+function sndBtn(){var on=!!(window.zhUI&&zhUI.soundOn&&zhUI.soundOn());return '<button class="fcsnd" data-act="fcsound" aria-pressed="'+(on?'true':'false')+'" aria-label="صوت تقليب البطاقة" title="صوت تقليب البطاقة">'+ic(on?'snd':'mute',20)+'</button>'}
+function renderVocab(){
+  var w=VOCAB[S.card];
+  var rows=VOCAB.map(function(v,i){
+    return '<div class="row'+(i===S.card?' cur':'')+'" data-act="jump" data-i="'+i+'">'+
+      '<div class="rp">'+picHtml(v.zh,'pt')+'</div><div class="rz" dir="ltr">'+han(v.zh,v.py)+'</div>'+
+      '<div><div class="rpy'+(S.py?'':' off')+'" dir="ltr">'+pyhtml(v.py)+'</div><div class="rar'+(S.ar?'':' off')+'">'+v.ar+(v.sup?'<span class="tag">تكميلية</span>':'')+'</div></div>'+
+      '<span class="kn'+(S.known[i]?' on':'')+'" aria-label="'+(S.known[i]?'محفوظة':'غير محفوظة')+'">'+ic('check',14)+'</span>'+
+      spkBtn(v.zh,'sm')+'</div>';
+  }).join('');
+  $('#p-vocab').innerHTML=
+    '<div class="sec-h"><h2>بطاقات المفردات</h2><p>'+VOCAB.length+' كلمة · اضغط البطاقة لقلبها · عرفتَ <b>'+knownCount()+'</b> منها</p></div>'+
+    '<div class="fc'+fcCls()+'" id="fc" role="button" tabindex="0" data-act="flip" aria-label="اقلب البطاقة"><div class="fcu" aria-hidden="true"></div><div class="fcp"><div class="fci">'+
+      '<div class="face front"'+(S.flip?' hidden':'')+'>'+frontInner(w)+'</div>'+
+      '<div class="face back"'+(S.flip?'':' hidden')+'>'+spkBtn(w.zh)+
+        picHtml(w.zh,'pb')+'<div class="pyl" dir="ltr">'+pyhtml(w.py)+'</div>'+
+        '<div class="meaning">'+w.ar+'</div>'+(w.note?'<div class="note">'+w.note+'</div>':'')+
+        '<div class="ex" dir="ltr"><div class="exzh">'+w.ex[0]+'</div><div class="expy">'+w.ex[1]+'</div><div class="exar" dir="rtl">'+w.ex[2]+'</div></div>'+
+      '</div>'+
+    '</div><div class="fcpb" aria-hidden="true"></div></div><div class="fcs" aria-hidden="true"></div>'+sndBtn()+'</div>'+
+    '<div class="navrow"><button class="btn ghost navb" data-act="prev">'+ic('chr',20)+' السابقة</button><span class="cnt">'+(S.card+1)+' / '+VOCAB.length+'</span><button class="btn ghost navb" data-act="next">التالية '+ic('chl',20)+'</button></div>'+
+    '<div class="actrow"><button class="btn ghost" data-act="again">'+ic('redo',18)+' أراجعها لاحقاً</button><button class="btn primary" data-act="know">'+ic('check',18)+' أعرفها</button></div>'+
+    '<h3 class="sub-h">قائمة الكلمات</h3>'+
+    '<div class="kleg"><span class="kn on">'+ic('check',12)+'</span> عرفتها <span class="kn"></span> لم تُحفظ بعد</div>'+
+    '<div class="tools"><button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy">拼音 البينيين</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar">الترجمة</button></div>'+
+    '<div>'+rows+'</div>';
+}
+
+/* ---------- dialogue ---------- */
+var playing=false;
+var F={i:0,rev:{}};
+function P(k,d){return window.zhUI&&zhUI.pref?zhUI.pref(k,d):((P.m||{})[k]!==undefined?P.m[k]:d)}
+function setP(k,v){if(window.zhUI&&zhUI.setPref)zhUI.setPref(k,v);else(P.m=P.m||{})[k]=v}
+function renderFocus(){
+  var L=DLG[F.i],sp=SPK[L.who],pyOn=P('dlgPy',0)||F.rev.py===F.i,arOn=P('dlgAr',0)||F.rev.ar===F.i,tn=P('dlgTone',0);
+  var toks=L.tok.map(function(t,j){return t.length===1?'<span class="punc">'+t[0]+'</span>':'<button class="tok" data-act="tok" data-l="'+F.i+'" data-k="'+j+'"><span class="py">'+pyhtml(t[1])+'</span><span class="zh">'+han(t[0],t[1])+'</span></button>'}).join('');
+  var chips=[['py','dlgPy','拼音'],['tone','dlgTone','النغمات'],['ar','dlgAr','الترجمة']].map(function(c){return '<button class="chip tgl'+(P(c[1],0)?' on':'')+'" data-act="fxt" data-t="'+c[0]+'" aria-pressed="'+(P(c[1],0)?'true':'false')+'">'+c[2]+'</button>'}).join('');
+  $('#p-dialogue').innerHTML=
+    '<div class="sec-h"><h2>نصوص الدرس</h2><p>سطر واحد في كل مرة. اضغط السماعة للاستماع، وأظهر البينيين أو الترجمة عند الحاجة.</p></div>'+
+    '<div class="tools"><button class="chip tgl on" data-act="focus" aria-pressed="true">تركيز</button>'+chips+'</div>'+
+    '<div class="fx"><div class="fxtop"><span class="av'+(L.who==='S'?' S':'')+'" lang="zh">'+sp.a+'</span><b>'+sp.n+'</b><span class="cnt"><bdi class="ltr" dir="ltr">'+(F.i+1)+' / '+DLG.length+'</bdi></span></div>'+
+    '<div class="fxcard '+L.who+(pyOn?'':' nopy')+(tn?'':' notone')+'" id="fxcard"><div class="zhline">'+toks+'</div>'+
+      (pyOn?'':'<button class="fxrev" data-act="fxrev" data-w="py">إظهار البينيين</button>')+
+      (arOn?'<div class="arline">'+L.ar+'</div>':'<button class="fxrev" data-act="fxrev" data-w="ar">إظهار الترجمة</button>')+'</div>'+
+    '<div class="fxnav"><button class="btn ghost" data-act="fxprev" aria-label="السطر السابق"'+(F.i?'':' disabled')+'>'+ic('chr',24)+'</button>'+
+      '<button class="btn primary fxplay" data-act="sayline" data-l="'+F.i+'" aria-label="استمع إلى السطر">'+ic('spk',24)+'</button>'+
+      '<button class="btn ghost" data-act="fxnext" aria-label="السطر التالي"'+(F.i<DLG.length-1?'':' disabled')+'>'+ic('chl',24)+'</button></div></div>';
+}
+function cqHtml(t){var out='';if(!window.__cqs){window.__cqs=1;[1,2,3].forEach(function(k){(CQ[k]||[]).forEach(function(c){var ans=c.o[c.a];c.o=shuffle(c.o);c.a=c.o.indexOf(ans)})})}(CQ[t]||[]).forEach(function(c,i){out+='<div class="cq" id="cq'+t+'_'+i+'"><b><span class="han ltr" style="font-size:19px">'+(i+1)+'. '+c.q.zh+'</span><span class="py mut ltr">'+c.q.py+'</span></b><div class="o">'+c.o.map(function(o,j){return '<button class="chip cqo" data-act="cq" data-q="'+t+'" data-i="'+i+'" data-o="'+j+'"><span class="han" style="font-size:18px">'+o.zh+'</span><span class="py mut">'+o.py+'</span></button>'}).join('')+'</div></div>'});return out?'<h3 class="sub-h">问题 · أسئلة</h3>'+out:''}
+function renderDialogue(){
+  if(P('dlgFocus',0)){renderFocus();return}
+  var out='',lastText=0;
+  DLG.forEach(function(L,i){
+    if(L.text!==lastText){if(lastText)out+=cqHtml(lastText);lastText=L.text;out+='<h3 class="sub-h" style="margin-bottom:0">'+TXT[L.text].h+'</h3>'+TXT[L.text].scene}
+    var groups=[];
+    L.tok.forEach(function(t,j){
+      if(t.length===1){if(groups.length)groups[groups.length-1]+='<span class="punc">'+t[0]+'</span>';else groups.push('<span class="punc">'+t[0]+'</span>')}
+      else groups.push('<button class="tok" data-act="tok" data-l="'+i+'" data-k="'+j+'"><span class="py">'+pyhtml(t[1])+'</span><span class="zh">'+han(t[0],t[1])+'</span></button>');
+    });
+    var toks=groups.map(function(g){return '<span class="tg">'+g+'</span>'}).join('');
+    var sp=SPK[L.who];
+    out+='<div class="line '+L.who+'" id="ln'+i+'"><div class="who"><span class="av" lang="zh">'+sp.a+'</span>'+sp.n+spkBtn(L.zh,'sm').replace('data-act="say"','data-act="sayline" data-l="'+i+'"')+'</div>'+
+      '<div class="zhline">'+toks+'</div><div class="arline">'+L.ar+'</div></div>';
+  });
+  out+=cqHtml(lastText);
+  var cx=CLASSX.map(function(c){
+    return '<div class="m">'+spkBtn(c.zh,'sm')+'<div class="t"><span class="z" dir="ltr">'+c.zh+'</span><span class="mut py" dir="ltr">'+c.py+'</span><span>'+c.ar+'</span></div></div>';
+  }).join('');
+  $('#p-dialogue').innerHTML=
+    '<div class="sec-h"><h2>نصوص الدرس</h2><p>اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جملة.</p></div>'+
+    '<div class="tools"><button class="btn primary sm" id="playall" data-act="playall">'+ic('play',16)+' تشغيل النصوص كاملة</button>'+
+    '<button class="chip tgl" data-act="focus" aria-pressed="false">تركيز</button><button class="chip tgl'+(S.py?' on':'')+'" data-act="tpy2">拼音</button><button class="chip tgl'+(S.ar?' on':'')+'" data-act="tar2">الترجمة</button></div>'+
+    '<div class="lines'+(S.py?'':' nopy')+(S.ar?'':' noar')+'" id="lines">'+out+'</div>'+
+    
+    (cx?'<h3 class="sub-h">عبارات الصف</h3><div class="qa" style="margin-top:0">'+cx+'</div>':'');
+  syncLines();
+}
+function syncLines(){var l=$('#lines');if(!l)return;l.classList.toggle('nopy',!S.py);l.classList.toggle('noar',!S.ar)}
+function openSheet(tk){
+  $('#sheet').innerHTML='<div class="sheet-in">'+spkBtn(tk[0])+'<div class="sh-main"><div class="sh-zh" dir="ltr">'+han(tk[0],tk[1])+'</div><div class="sh-py" dir="ltr">'+pyhtml(tk[1])+'</div></div><div class="sh-ar">'+tk[2]+'</div><button class="ibtn" data-act="closesheet" aria-label="إغلاق">'+ic('x',16)+'</button></div>';
+  $('#sheet').hidden=false;
+  speak(tk[0]);
+}
+function closeSheet(){var s=$('#sheet');if(s)s.hidden=true}
+function markLine(i){$$('.line').forEach(function(el,j){el.classList.toggle('playing',j===i)})}
+function setPlayBtn(){var b=$('#playall');if(b)b.innerHTML=playing?ic('stop',16)+' إيقاف':ic('play',16)+' تشغيل النصوص كاملة'}
+function stopAll(){playing=false;markLine(-1);setPlayBtn()}
+function playAll(){
+  if(playing){stopSpeech();stopAll();return}
+  if(!TTS.ok){toast('الصوت غير متاح في هذا المتصفح');return}
+  playing=true;setPlayBtn();
+  var i=0;
+  var next=function(){
+    if(!playing||i>=DLG.length){stopAll();checkListener();return}
+    var L=DLG[i];markLine(i);S.heard[i]=1;i++;save();updateProg();
+    speak(L.zh,function(){setTimeout(next,350)},pitchOf(L.who));
+  };
+  next();
+}
+function checkListener(){if(Object.keys(S.heard).length>=DLG.length)award('listener')}
+
+/* ---------- grammar ---------- */
+function renderGrammar(){$('#p-grammar').innerHTML=D.gram}
+
+/* ---------- writing ---------- */
+var W={i:0,strokes:[],cur:null,ghost:true};
+function renderWriting(){
+  var c=CHARS[W.i];
+  var chips=CHARS.map(function(x,i){var wd=D.hw&&S.hw&&S.hw.done&&S.hw.done[x.c];return '<button class="chip tgl'+(i===W.i?' on':'')+(wd?' wdone':'')+'"'+(wd?' aria-label="'+x.c+' (أنجزتَ كتابته)"':'')+' data-act="wch" data-i="'+i+'"><span class="han" style="font-size:24px;line-height:1.2">'+x.c+'</span></button>'}).join('');
+  $('#p-writing').innerHTML=
+    '<div class="sec-h"><h2>تدريب الكتابة</h2><p>اختر حرفاً، ثم اكتبه بإصبعك فوق النموذج الباهت.</p></div>'+
+    '<div class="chips">'+chips+'</div>'+
+    '<div class="winfo"><span class="big han">'+c.c+'</span><div><div class="py" style="font-size:20px">'+c.py+'</div><div>'+c.ar+'</div><div class="mut">من كلمة: <span class="han" dir="ltr">'+esc(c.w)+'</span></div></div>'+spkBtn(c.c)+'</div>'+
+    '<div class="cvwrap"><canvas id="cv" width="640" height="640" aria-label="مساحة الكتابة"></canvas></div>'+
+    '<div class="tools" style="margin-top:14px;justify-content:center"><button class="btn ghost sm" data-act="wundo">تراجع</button><button class="btn ghost sm" data-act="wclear">'+ic('redo',16)+' مسح الكل</button><button class="btn ghost sm" data-act="wghost">'+(W.ghost?'إخفاء النموذج':'إظهار النموذج')+'</button></div>'+
+    '<p class="mut" style="margin-top:12px;text-align:center">قاعدة عامة في ترتيب الخطوط: من الأعلى إلى الأسفل، ومن اليسار إلى اليمين.</p>'+writingExtra();
+  var cv=$('#cv');
+  cv.addEventListener('pointerdown',function(e){e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}W.cur=[pt(e)];W.strokes.push(W.cur);drawCanvas()});
+  cv.addEventListener('pointermove',function(e){if(!W.cur)return;W.cur.push(pt(e));drawCanvas()});
+  var end=function(){W.cur=null};
+  cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+  drawCanvas();
+  if(document.fonts&&document.fonts.load){document.fonts.load('500 64px "Noto Serif SC"',c.c).then(drawCanvas,function(){})}
+  if(D.hw)hwInit();
+}
+function pt(e){var cv=$('#cv'),r=cv.getBoundingClientRect();return {x:(e.clientX-r.left)*cv.width/r.width,y:(e.clientY-r.top)*cv.height/r.height}}
+function drawCanvas(){
+  var cv=$('#cv');if(!cv)return;
+  var ctx=cv.getContext('2d'),cs=getComputedStyle(document.documentElement),w=cv.width,h=cv.height;
+  var col=function(n){return cs.getPropertyValue(n).trim()};
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle=col('--surface');ctx.fillRect(0,0,w,h);
+  ctx.strokeStyle=col('--line');ctx.lineWidth=3;ctx.setLineDash([14,12]);
+  ctx.beginPath();ctx.moveTo(w/2,0);ctx.lineTo(w/2,h);ctx.moveTo(0,h/2);ctx.lineTo(w,h/2);ctx.moveTo(0,0);ctx.lineTo(w,h);ctx.moveTo(w,0);ctx.lineTo(0,h);ctx.stroke();
+  ctx.setLineDash([]);
+  if(W.ghost){
+    ctx.globalAlpha=0.16;ctx.fillStyle=col('--fg');
+    ctx.font='500 '+Math.round(w*0.76)+'px "Noto Serif SC","Songti SC","STSong",serif';
+    ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.fillText(CHARS[W.i].c,w/2,h/2+h*0.03);
+    ctx.globalAlpha=1;
+  }
+  ctx.strokeStyle=col('--fg');ctx.lineWidth=18;ctx.lineCap='round';ctx.lineJoin='round';
+  W.strokes.forEach(function(s){
+    ctx.beginPath();ctx.moveTo(s[0].x,s[0].y);
+    if(s.length===1)ctx.lineTo(s[0].x+0.1,s[0].y+0.1);
+    for(var i=1;i<s.length;i++)ctx.lineTo(s[i].x,s[i].y);
+    ctx.stroke();
+  });
+}
+
+function writingExtra(){
+  var r=[['من الأعلى إلى الأسفل','上到下','مثل 三 و 二: الخط الأعلى أولاً.'],['من اليسار إلى اليمين','左到右','مثل 你 و 好: الجزء الأيسر أولاً.'],['الأفقي قبل العمودي','先横后竖','مثل 十 و 干: الخط الأفقي أولاً.'],['الوسط قبل الجانبين','先中间后两边','مثل 小 و 水: الخط الأوسط أولاً.'],['من الخارج إلى الداخل ثم الإغلاق','先外后内再封口','مثل 日 و 国: الإطار أولاً ثم الداخل ثم الإغلاق.']];
+  return '<div class="card" style="margin-top:18px"><h3 style="font-size:16px;margin-bottom:6px">قواعد ترتيب الخطوط</h3><div class="qa" style="margin-top:0">'+r.map(function(x){return '<div class="m"><div class="t"><span class="z" dir="ltr">'+x[1]+'</span><span>'+x[0]+'</span><span class="mut">'+x[2]+'</span></div></div>'}).join('')+'</div></div>';
+}
+
+
+/* ---------- practice / quiz ---------- */
+var Q=null;
+var OKM=['أحسنت!','ممتاز!','صحيح!','رائع!'];
+function stars(n,size){var o='';for(var i=1;i<=3;i++)o+='<span class="'+(i<=n?'on':'')+'">'+ic('star',size||16)+'</span>';return '<span class="stars">'+o+'</span>'}
+function renderPractice(){
+  if(Q){renderQ();return}
+  var lvl=Math.floor(S.xp/100)+1,pct=S.xp%100;
+  var bd=window.zhUI&&zhUI.badges?zhUI.badges(badgeList()):'<div class="badges">'+Object.keys(BADGES).map(function(k){return '<div class="badge'+(S.badges[k]?' on':'')+'"><span lang="zh">'+BADGES[k].g+'</span>'+BADGES[k].n+'</div>'}).join('')+'</div>';
+  var info={match:['مطابقة','اربط الكلمة بمعناها'],listen:['استماع','اسمع واختر المعنى'],meaning:['المعنى','اقرأ الكلمة واختر معناها'],tone:['النغمات','اختر النطق الصحيح'],order:['ترتيب الجمل','رتّب كلمات الجملة'],fill:['ملء الفراغ','أكمل الجملة بالكلمة الصحيحة'],lesson:['أسئلة الدرس','أسئلة متنوعة على نص الدرس'],write:['تحدّث واكتب','اكتب جملاً بالصينية بمساعدة نماذج']};
+  if(X.info)Object.keys(X.info).forEach(function(k){info[k]=X.info[k]});
+  var cards=ACTS.map(function(k){return '<button class="act" data-act="start" data-k="'+k+'"><strong>'+info[k][0]+'</strong><small>'+info[k][1]+'</small>'+stars(S.best[k]||0)+'</button>'}).join('');
+  var wn=Object.keys(S.wrong).length;
+  $('#p-practice').innerHTML=
+    '<div class="sec-h"><h2>تمارين الدرس</h2><p>كل إجابة صحيحة تمنحك 10 نقاط.</p></div>'+
+    '<div class="card stats"><div class="xprow"><strong>المستوى '+lvl+'</strong><div class="xpbar"><i style="width:'+pct+'%"></i></div><span class="cnt">'+S.xp+' XP</span></div>'+bd+'</div>'+
+    '<h3 class="sub-h">اختر نشاطاً</h3>'+
+    '<div class="acts">'+lvCard()+'<button class="act feat" data-act="start" data-k="all"><strong>الاختبار الشامل</strong><small>'+build('all').length+' سؤالاً من كل الأنواع</small>'+(S.best.all?stars(S.best.all,16):'')+'</button>'+cards+
+    (wn?'<button class="act" data-act="start" data-k="review"><strong>مراجعة أخطائي</strong><small>'+wn+' كلمة تحتاج مراجعة</small></button>':'')+'</div>';
+}
+function fbWord(w){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+han(w.zh,w.py)+'</span><span class="py ltr">'+pyhtml(w.py)+'</span><span>= '+w.ar+'</span>'+spkBtn(w.zh,'sm')+'</div>'}
+function fbSent(s){return '<div class="fw"><span class="han ltr" style="font-size:24px">'+esc(s.zh)+'</span>'+spkBtn(s.zh,'sm')+'</div><div class="py mut ltr">'+s.py+'</div><div>'+s.ar+'</div>'}
+function qMeaning(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+han(w.zh,w.py)+'</div><div class="mut">ما معنى هذه الكلمة؟</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qListen(w){
+  var o=shuffle([w].concat(pick(VOCAB.filter(function(v){return v!==w}),3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],audio:w.zh,prompt:spkBtn(w.zh,'big')+'<div class="mut">استمع ثم اختر المعنى</div>',
+    opts:o.map(function(x){return {html:x.ar,ok:x===w}}),fb:fbWord(w)};
+}
+function qTone(w){
+  var o=shuffle(toneVariants(w.py));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],prompt:'<div class="bigzh" dir="ltr">'+esc(w.zh)+'</div><div class="mut">اختر النطق الصحيح بالنغمات</div>',
+    opts:o.map(function(v){return {html:'<span class="pyopt ltr">'+v.replace(/ /g,'')+'</span>',ok:v===w.py}}),fb:fbWord(w)};
+}
+function qOrder(s){return {type:'order',s:s,wid:s.tokens.map(vid).filter(function(i){return i>=0})}}
+function qFill(f){return {type:'fill',f:f,wid:[vid(f.ans)].filter(function(i){return i>=0})}}
+function qMatch(n){return {type:'match',words:pick(VOCAB,n||5)}}
+function rnd(n){return Math.floor(Math.random()*n)}
+function qRead(kind){
+  var arr=kind==='num'?NUMS:AMTS;
+  var f=arr[rnd(arr.length)];
+  var wrong=shuffle(arr.filter(function(o){return o!==f})).slice(0,3);
+  var opts=shuffle([f].concat(wrong));
+  return {type:'mc',wid:[],
+    prompt:'<div class="han ltr" style="font-size:34px;font-weight:700">'+f[0]+'</div><div class="mut">'+(kind==='num'?'كيف يُقرأ هذا الرقم بالصينية؟':'كيف يُقرأ هذا المبلغ بالصينية؟')+'</div>',
+    opts:opts.map(function(o){return {html:'<span class="han ltr" style="font-size:19px">'+o[1]+'</span> <span class="py ltr mut">'+o[2]+'</span>',ok:o===f}}),
+    fb:'<div class="fw"><span class="han ltr" style="font-size:22px">'+f[0]+' = '+f[1]+'</span>'+spkBtn(f[1],'sm')+'</div><div class="py mut ltr">'+f[2]+'</div>'};
+}
+function qNum(){return qRead('num')}
+function qMoney(){return qRead('money')}
+function qPic(w){
+  var pool=PICQ.map(function(z){return VOCAB[vid(z)]}).filter(function(v){return v!==w});
+  var o=shuffle([w].concat(pick(pool,3)));
+  return {type:'mc',wid:[VOCAB.indexOf(w)],
+    prompt:'<div class="picbig">'+picHtml(w.zh)+'</div><div class="mut">ما الكلمة المناسبة للصورة؟</div>',
+    opts:o.map(function(x){return {html:'<span class="han ltr" style="font-size:24px">'+esc(x.zh)+'</span> <span class="py ltr mut">'+x.py.replace(/ /g,'')+'</span>',ok:x===w}}),
+    fb:fbWord(w)};
+}
+function picW(z){return qPic(VOCAB[vid(z)])}
+function cloneQ(q){return JSON.parse(JSON.stringify(q))}
+function fromSpec(sp){var q=cloneQ(sp);if(q.type==='mc'&&q.sp){q.audio=q.sp;q.prompt=q.prompt.replace('@@SPK@@',spkBtn(q.sp,'big'))}if(q.type==='mc'&&!q.fix)q.opts=shuffle(q.opts);return q}
+window.__q=function(){return Q};
+function build(kind){
+  var LQ=D.lq||[];
+  if(X.build){var xr=X.build(kind);if(xr)return xr}
+  switch(kind){
+    case 'match':return [qMatch(5),qMatch(5),qMatch(5)];
+    case 'listen':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qListen);
+    case 'meaning':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qMeaning);
+    case 'tone':return pick(VOCAB,Math.min(5,VOCAB.length)).map(qTone);
+    case 'order':return pick(SENT,Math.min(4,SENT.length)).map(qOrder);
+    case 'fill':return pick(FILL,Math.min(5,FILL.length)).map(qFill);
+    case 'lesson':return LQ.map(fromSpec);
+    case 'all':return [qMatch(5)].concat(pick(VOCAB,2).map(qListen),pick(VOCAB,2).map(qMeaning),pick(VOCAB,2).map(qTone),SENT.length?pick(SENT,Math.min(2,SENT.length)).map(qOrder):[],FILL.length?pick(FILL,Math.min(2,FILL.length)).map(qFill):[],pick(LQ,Math.min(3,LQ.length)).map(fromSpec));
+    case 'review':return pick(Object.keys(S.wrong).map(function(i){return VOCAB[+i]}).filter(Boolean),8).map(function(w,i){return i%2?qListen(w):qMeaning(w)});
+  }
+  return [];
+}
+
+/* ---------- write & speak ---------- */
+function ccount(v){return v.replace(/\s/g,'').length}
+function renderWrite(){
+  S.txt=S.txt||{};
+  $('#p-practice').innerHTML='<div class="qtop"><button class="btn ghost sm" data-act="qexit">رجوع</button><strong>تحدّث واكتب</strong></div>'+
+  D.disc.map(function(d,i){var ms=d.model.split('｜');
+    return '<section class="card wr" data-wd="'+i+'" style="margin-bottom:12px"><div class="qprompt" style="justify-items:start;text-align:start"><div class="han ltr" style="font-size:22px">'+(i+1)+'. '+esc(d.q)+'</div><div class="mut">'+esc(d.ar)+'</div></div>'+
+    '<div class="chips">'+d.frames.map(function(f,k){return '<button class="chip" data-act="wfr" data-d="'+i+'" data-k="'+k+'"><span class="han" style="font-size:17px">'+esc(f)+'</span></button>'}).join('')+'</div>'+
+    '<textarea data-wta="'+i+'" lang="zh" placeholder="اكتب إجابتك بالصينية…" aria-label="إجابتك"></textarea>'+
+    '<div class="mut" style="margin:6px 0"><span data-wcc="'+i+'">0</span> / '+D.minc+' حرفاً · الكلمات المقترحة:</div><div class="us">'+d.use.map(function(u){return '<span data-wu="'+esc(u)+'">'+esc(u)+'</span>'}).join('')+'</div>'+
+    '<details class="md"><summary>نموذج إجابة</summary><div class="han ltr" style="font-size:20px;margin-top:8px">'+esc(ms[0])+'</div><div class="mut">'+esc(ms[1]||'')+'</div><button class="btn ghost sm" data-act="wsay" data-d="'+i+'" style="margin-top:8px">'+ic('spk',16)+' استمع</button></details></section>'}).join('');
+  D.disc.forEach(function(d,i){var ta=$('[data-wta="'+i+'"]');ta.value=S.txt[i]||'';wchk(i)});
+}
+function wchk(i){var ta=$('[data-wta="'+i+'"]'),el=$('[data-wd="'+i+'"]');if(!ta)return;var v=ta.value,n=ccount(v);$('[data-wcc="'+i+'"]').textContent=n;
+  $$('[data-wu]',el).forEach(function(s){s.classList.toggle('on',v.indexOf(s.dataset.wu)>-1)});
+  S.wdone=S.wdone||{};
+  if(n>=D.minc&&!S.wdone[i]){S.wdone[i]=1;S.xp+=20;toast('أحسنت! +20 نقطة')}
+  var dn=Object.keys(S.wdone).length;S.best.write=dn>=D.disc.length?3:(dn?2:0);save();updateProg()}
+function startQuiz(kind){
+  if(kind==='write'){renderWrite();return}
+  var list=build(kind);
+  if(!list.length){toast('لا توجد أسئلة الآن');return}
+  Q={kind:kind,list:list,i:0,score:0,gain:0,fin:false};
+  renderQ();
+}
+function qShell(){
+  $('#p-practice').innerHTML=
+    '<div class="qtop"><button class="btn ghost sm" data-act="qexit">خروج</button><div class="qbar"><i id="qprog"></i></div><span class="cnt" id="qcount"></span></div>'+
+    '<div id="lvbar"></div><div id="qbody"></div><div id="qfb"></div><button class="btn primary wide" id="qnext" data-act="qnext" hidden>التالي</button>';
+}
+function renderQ(){
+  if(!$('#qbody'))qShell();
+  var q=Q.list[Q.i];
+  Q.fin=false;
+  $('#qprog').style.width=(Q.i/Q.list.length*100)+'%';
+  $('#qcount').textContent=(Q.i+1)+' / '+Q.list.length;
+  $('#lvbar').innerHTML=Q.lv?lvBarHtml():'';
+  $('#qfb').innerHTML='';$('#qnext').hidden=true;
+  R[q.type](q,$('#qbody'));
+}
+var R={};
+R.mc=function(q,b){
+  b.innerHTML='<div class="qprompt">'+q.prompt+'</div><div class="opts">'+q.opts.map(function(o,i){return '<button class="opt" data-act="opt" data-i="'+i+'">'+o.html+'</button>'}).join('')+'</div>';
+  if(q.audio)setTimeout(function(){speak(q.audio)},200);
+};
+R.order=function(q,b){q.picked=[];q.pool=shuffle(q.s.tokens.map(function(t,i){return {t:t,i:i}}));q.done=false;drawOrder(q,b)};
+function chipHtml(p,act){var py=TOKPY[p.t]||'';return '<button class="chip'+(act==='unpick'?' pick':'')+'" data-act="'+act+'" data-i="'+p.i+'">'+(S.py&&py?'<span class="py">'+py.replace(/ /g,'')+'</span>':'')+'<span class="zh">'+p.t+'</span></button>'}
+function drawOrder(q,b){
+  var left=q.pool.filter(function(p){return q.picked.indexOf(p)<0});
+  b.innerHTML='<div class="qprompt"><span class="mut">رتّب الجملة الصينية</span><div class="ar-s">'+q.s.ar+'</div></div>'+
+    '<div class="slot">'+(q.picked.length?q.picked.map(function(p){return chipHtml(p,'unpick')}).join(''):'<span class="ph">اضغط الكلمات بالترتيب الصحيح</span>')+'</div>'+
+    '<div class="pool">'+left.map(function(p){return chipHtml(p,'pick')}).join('')+'</div>'+
+    '<div class="tools" style="margin:8px 0;justify-content:center"><button class="btn ghost sm" data-act="unpicklast"'+(q.picked.length?'':' disabled')+'>تراجع</button><button class="btn ghost sm" data-act="unpickall"'+(q.picked.length?'':' disabled')+'>مسح الكل</button></div>'+
+    '<button class="btn primary wide" data-act="checkorder"'+(left.length?' disabled':'')+'>تحقّق</button>';
+}
+R.fill=function(q,b){
+  var opts=shuffle(q.f.opts);
+  b.innerHTML='<div class="qprompt"><span class="mut">أكمل الجملة</span><div class="ar-s">'+q.f.ar+'</div><div class="fillsent">'+esc(q.f.pre)+'<span class="blank" id="blank">&nbsp;</span>'+esc(q.f.post)+'</div></div>'+
+    '<div class="pool">'+opts.map(function(o){return '<button class="chip" data-act="fill" data-o="'+esc(o)+'"><span class="zh">'+o+'</span></button>'}).join('')+'</div>';
+};
+R.match=function(q,b){
+  q.sel=null;q.done={};q.err=0;q.errIds={};
+  q.left=shuffle(q.words);q.right=shuffle(q.words);
+  b.innerHTML='<div class="qprompt"><span class="mut">اربط كل كلمة صينية بمعناها العربي</span></div><div class="mrow">'+
+    '<div class="mcol" dir="ltr">'+q.left.map(function(w){return '<button class="mi" data-act="ml" data-i="'+q.words.indexOf(w)+'"><span class="zh">'+esc(w.zh)+'</span><span class="py">'+(S.py?w.py.replace(/ /g,''):'')+'</span></button>'}).join('')+'</div>'+
+    '<div class="mcol">'+q.right.map(function(w){return '<button class="mi" data-act="mr" data-i="'+q.words.indexOf(w)+'">'+w.ar+'</button>'}).join('')+'</div></div>';
+};
+function finishQ(ok,wids,extra,part){
+  /* part (optional): partial credit for typed answers, e.g. {score:.5,xp:5,cls:'close',msg:'...'}; with ok===true it only lowers the points (hint used) */
+  if(Q.fin)return;Q.fin=true;
+  if(!ok)(wids||[]).forEach(function(i){(Q.miss=Q.miss||{})[i]=1});
+  var sc=ok?1:(part?part.score:0),xp=ok?(part&&part.xp!=null?part.xp:10):(part?part.xp:0);
+  if(sc>0){Q.score+=sc;S.xp+=xp;Q.gain+=xp}
+  if(ok){(wids||[]).forEach(function(i){if(S.wrong[i]){S.wrong[i]--;if(S.wrong[i]<=0)delete S.wrong[i]}})}
+  else if(!part){(wids||[]).forEach(function(i){S.wrong[i]=(S.wrong[i]||0)+1})}
+  if(Q.lv&&Q.lv!=='r'&&sc<1&&LV){var mq=Q.list[Q.i];if(mq&&mq.src)LV.miss[Q.lv].push(mq.src)}
+  save();
+  if(window.zhUI&&zhUI.play)zhUI.play(ok||(part&&part.score>=.5)?'ok':'no');
+  $('#qfb').innerHTML='<div class="fb '+(ok?'good':(part&&part.cls)||'bad')+'"><strong>'+(ok?OKM[Math.floor(Math.random()*OKM.length)]:(part&&part.msg)||'ليست الإجابة الصحيحة')+'</strong>'+(extra||'')+'</div>';
+  var nb=$('#qnext');nb.textContent=(Q.i===Q.list.length-1)?'عرض النتيجة':'التالي';nb.hidden=false;
+  try{nb.scrollIntoView({block:'nearest'})}catch(e){}
+}
+function endQuiz(){
+  if(Q&&Q.lv){lvDone();return}
+  var n=Q.list.length,pct=Math.round(Q.score/n*100),st=pct>=90?3:(pct>=60?2:1),kind=Q.kind;
+  var before=Math.floor((S.xp-Q.gain)/100)+1,after=Math.floor(S.xp/100)+1;
+  if(kind!=='review')S.best[kind]=Math.max(S.best[kind]||0,st);
+  award('first');
+  if(pct===100)award('perfect');
+  if(kind==='all'&&pct>=80)award('master');
+  save();updateProg();
+  var msg=pct>=90?'ممتاز! أتقنتَ هذا الجزء':(pct>=60?'جيد، راجع الأخطاء وأعد المحاولة':'تحتاج إلى مراجعة، ارجع إلى البطاقات والحوار');
+  var starsHtml='<div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>';
+  var missed=Object.keys(Q.miss||{}).map(Number).filter(function(i){return VOCAB[i]}),nbs=NEWB.splice(0);LASTMISS=missed;
+  if(window.zhUI&&zhUI.play&&!nbs.length&&st>=2)zhUI.play('done');   /* a new badge plays its own flourish (zhUI.stamp) */
+  if(window.zhUI&&zhUI.summary){
+    var nx=document.querySelector('.zh-lnav .zh-next'),nxb=nx&&nx.querySelector('b');
+    $('#p-practice').innerHTML=zhUI.summary({starsHtml:starsHtml,msg:msg,score:Q.score,n:n,pct:pct,gain:Q.gain,level:after>before?after:0,
+      newBadges:nbs.map(function(k){return BADGES[k]}),missedHtml:missed.map(function(i){return fbWord(VOCAB[i])}).join(''),badgesHtml:zhUI.badges(badgeList(nbs)),retryKind:kind,
+      next:nx?{href:nx.getAttribute('href'),label:(nxb?nxb.textContent:'الدرس التالي')}:null});
+  }else{
+    $('#p-practice').innerHTML='<div class="res"><div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div>'+
+      '<h3>'+msg+'</h3><div class="sc">'+Q.score+' / '+n+'</div><p class="mut">كسبتَ '+Q.gain+' نقطة'+(after>before?' · وصلتَ إلى المستوى '+after:'')+'</p>'+
+      '<div class="tools" style="justify-content:center"><button class="btn primary" data-act="start" data-k="'+kind+'">'+ic('redo',18)+' أعد المحاولة</button><button class="btn ghost" data-act="qexit">كل التمارين</button></div></div>';
+}
+  Q=null;
+  if(after>before)toast('مستوى جديد: '+after);
+}
+
+/* ---------- levels challenge: 3 levels x 8 questions, typed answers on the hard level ----------
+   Needs D.lv (banks from build3.lv_banks) and window.zhUI (zh-ui.js) for tolerant pinyin grading; without them the
+   practice tab shows no levels card and everything else works as before. */
+if(!S.lv)S.lv={passed:{},best:{}};
+var LV=null,LVLEN=8;
+var LVN={1:['سهل','اختيار من متعدد · مطابقة · صح أم خطأ'],2:['متوسط','ترتيب الجمل · إكمال الجملة · استماع'],3:['صعب','كتابة البينيين · الحروف الصينية · الجمل']};
+function lvOk(){return !!(D.lv&&window.zhUI)}
+function lvNeed(){return Math.ceil(LVLEN*((D.lv&&D.lv.pass)||0.75))}
+function lvCard(){
+  if(!lvOk())return '';
+  var p=[1,2,3].filter(function(n){return S.lv.passed[n]}).length;
+  return '<button class="act feat lvfeat" data-act="lvhub"><strong>التحدي بالمستويات</strong><small>'+(LVLEN*3)+' سؤالاً في ثلاثة مستويات: سهل، متوسط، صعب (مع الكتابة)</small>'+(p?stars(p,16):'')+'</button>';
+}
+function qTF(t){
+  var w=t.w==null?null:VOCAB[t.w];
+  return {type:'mc',fix:1,wid:t.w==null?[]:[t.w],
+    prompt:'<div class="bigzh" dir="ltr">'+han(t.zh,t.py)+'</div><div class="mut">هل معنى هذه الكلمة «'+esc(t.ar)+'»؟</div>',
+    opts:[{html:'صح',ok:!!t.a},{html:'خطأ',ok:!t.a}],fb:fbWord(w||{zh:t.zh,py:t.py,ar:t.ar})};
+}
+function qTyPy(t){return {type:'type',mode:'py',wid:[t.w],ans:t.py,say:t.zh,
+  prompt:'<div class="bigzh" dir="ltr">'+esc(t.zh)+'</div><div class="ar-s">'+esc(t.ar)+'</div>',lab:'اكتب البينيين مع النغمات (مثل ni3 hao3 أو nǐ hǎo)',
+  fbh:fbWord({zh:t.zh,py:t.py,ar:t.ar})}}
+function qTyZh(t){return {type:'type',mode:'zh',wid:[t.w],ans:t.ans,py:t.py,say:t.ans,
+  prompt:'<div class="py ltr tyl">'+esc(t.py)+'</div><div class="ar-s">'+esc(t.ar)+'</div>',lab:'اكتب الكلمة بالحروف الصينية',
+  fbh:fbWord({zh:t.ans,py:t.py,ar:t.ar})}}
+function qTySent(t){return {type:'type',mode:'sent',wid:t.w==null?[]:[t.w],ans:t.ans,py:t.py||'',say:t.ans,
+  prompt:'<div class="ar-s">'+esc(t.ar)+'</div>',lab:'اكتب الجملة بالصينية',fbh:fbSent({zh:t.ans,py:t.py||'',ar:t.ar})}}
+function qTyCloze(t){var full=t.pre+t.ans+t.post;return {type:'type',mode:'cloze',wid:[vid(t.ans)].filter(function(i){return i>=0}),ans:t.ans,py:TOKPY[t.ans]||'',say:full,
+  prompt:'<div class="ar-s">'+esc(t.ar)+'</div><div class="fillsent">'+esc(t.pre)+'<span class="blank">&nbsp;</span>'+esc(t.post)+'</div>',lab:'اكتب الكلمة الناقصة بالحروف الصينية',
+  fbh:fbSent({zh:full,py:t.py||'',ar:t.ar})}}
+function levelQs(n){
+  var B=D.lv,lq=(D.lq||[]).filter(function(x){return x.type==='mc'&&!x.sp});
+  if(n===1){var lqn=Math.min(2,lq.length);   /* hand-built lessons have no lesson questions: top up with true/false so a level always has 8 */
+    return shuffle([qMatch(5)].concat(pick(VOCAB,3).map(qMeaning),pick(B.tf,2+2-lqn).map(qTF),pick(lq,lqn).map(fromSpec)))}
+  if(n===2)return shuffle(pick(SENT,3).map(qOrder).concat(pick(FILL,3).map(qFill),pick(VOCAB,2).map(qListen)));
+  return pick(B.py,2).map(qTyPy).concat(pick(B.zh,2).map(qTyZh),pick(B.cloze,2).map(qTyCloze),pick(B.sent,2).map(qTySent));
+}
+function beginLevel(n){
+  if(!LV)LV={miss:{}};
+  LV.n=n;
+  var list=levelQs(n);list.forEach(function(q){q.src=Object.assign({},q);q.src.src=null});
+  LV.miss[n]=[];
+  Q={kind:'lv',lv:n,list:list,i:0,score:0,gain:0,fin:false};renderQ();
+}
+function lvMissed(){var o=[];if(LV)Object.keys(LV.miss).forEach(function(k){o=o.concat(LV.miss[k])});return o}
+function lvBarHtml(){
+  var cur=Q&&Q.lv;
+  var segs=[1,2,3].map(function(n){return '<span class="'+(cur===n?'cur':(S.lv.passed[n]?'done':''))+'">'+n+' · '+LVN[n][0]+'</span>'}).join('');
+  if(cur==='r')segs+='<span class="cur">مراجعة الأخطاء</span>';
+  return '<div class="lvbar" role="group" aria-label="مستويات التحدي">'+segs+'</div>';
+}
+function lvRec(){for(var n=1;n<=3;n++)if(!S.lv.passed[n])return n;return 0}   /* the recommended next level: the first one not passed yet (0 = all passed) */
+function renderLevels(){
+  /* No locking, ever: every level is open from the start. Reaching the pass rate only marks the level and recommends the next one. */
+  var rec=lvRec();
+  var cards=[1,2,3].map(function(n){
+    var pass=!!S.lv.passed[n],best=S.lv.best[n],isRec=n===rec;
+    var badge=pass?'<span class="tag">'+ic('check',14)+' اجتزته</span>':(isRec?'<span class="tag">المقترح التالي</span>':'');
+    return '<section class="card lvc'+(isRec?' rec':'')+'"><div class="lvh"><strong>المستوى '+n+' · '+LVN[n][0]+'</strong>'+badge+'</div>'+
+      '<p class="mut">'+LVN[n][1]+'</p><div class="mut">'+LVLEN+' أسئلة · علامة «اجتزته» عند '+lvNeed()+' أو أكثر'+(best!=null?' · أفضل نتيجة: '+(Math.round(best*2)/2)+' / '+LVLEN:'')+'</div>'+
+      '<button class="btn '+(isRec?'primary':'ghost')+' sm" data-act="lvstart" data-n="'+n+'" style="margin-top:8px">'+(pass?'أعد المستوى':'ابدأ')+'</button></section>';
+  }).join('');
+  $('#p-practice').innerHTML='<div class="qtop"><button class="btn ghost sm" data-act="qexit">رجوع</button><strong>التحدي بالمستويات</strong></div>'+
+    '<p class="mut" style="margin-bottom:6px">'+(LVLEN*3)+' سؤالاً في ثلاثة مستويات، وكلها مفتوحة دائماً: ابدأ من أي مستوى. عندما تحصل على '+lvNeed()+' من '+LVLEN+' أو أكثر تظهر علامة «اجتزته» ويُقترح عليك المستوى التالي، لكن لا شيء يُغلق. الأسئلة التي أخطأتَ فيها تُعاد في جولة مراجعة. في المستوى الصعب تكتب إجاباتك بنفسك، والتلميح يخصم نقاطاً.</p>'+cards;
+}
+function lvRes(pct,msg,body,btns){
+  var st=pct>=90?3:(pct>=60?2:1);
+  return '<div class="res"><div class="stars">'+[1,2,3].map(function(i){return '<span class="'+(i<=st?'on':'')+'">'+ic('star',44)+'</span>'}).join('')+'</div><h3>'+msg+'</h3>'+body+
+    '<div class="tools" style="justify-content:center;flex-wrap:wrap">'+btns.map(function(b){return '<button class="btn '+(b[2]?'primary':'ghost')+'" data-act="'+b[0]+'">'+b[1]+'</button>'}).join('')+'</div></div>';
+}
+function lvDone(){
+  var n=Q.lv,sc=Q.score,len=Q.list.length,gain=Q.gain,pct=Math.round(sc/len*100),half=function(x){return Math.round(x*2)/2},html;
+  if(n==='r'){
+    html=lvRes(pct,'انتهت جولة المراجعة','<div class="sc">'+half(sc)+' / '+len+'</div><p class="mut">كسبتَ '+gain+' نقطة</p>',[['lvhub','كل المستويات',1],['qexit','كل التمارين',0]]);
+  }else{
+    var need=lvNeed(),pass=sc>=need;
+    S.lv.best[n]=Math.max(S.lv.best[n]||0,sc);if(pass){S.lv.passed[n]=true;if(window.zhUI&&zhUI.play)zhUI.play('done')}
+    award('first');save();updateProg();
+    var miss=lvMissed().length,btns=[];
+    if(!pass)btns.push(['lvretry','أعد المستوى '+n,1]);
+    if(n<3)btns.push(['lvnext','المستوى '+(n+1),pass?1:0]);          /* never blocked: recommended (red) when passed, still available when not */
+    if(miss)btns.push(['lvreview','راجع أخطاءك ('+miss+')',pass&&n===3?1:0]);
+    btns.push(['lvhub','كل المستويات',0]);
+    html=lvRes(pct,pass?(n<3?'اجتزتَ المستوى '+n+'!':'أتممتَ التحدي كله!'):'لم تصل إلى '+need+' من '+len+' بعد',
+      '<div class="sc">'+half(sc)+' / '+len+'</div><p class="mut">'+(pass?'':'علامة «اجتزته» عند '+need+' من '+len+'. أعد المستوى متى شئت، أو انتقل إلى أي مستوى · ')+'كسبتَ '+gain+' نقطة</p>',btns);
+  }
+  $('#p-practice').innerHTML=html;Q=null;
+}
+/* typed answers: pinyin accepts nǐ hǎo = ni3hao3 (window.zhUI.normPinyin); characters ignore spaces and punctuation */
+function zhOnly(x){return (String(x).match(/[㐀-鿿豈-﫿]/g)||[]).join('')}
+function lcsLen(a,b){var p=[],i,j,prev,tmp;for(j=0;j<=b.length;j++)p[j]=0;for(i=1;i<=a.length;i++){prev=0;for(j=1;j<=b.length;j++){tmp=p[j];p[j]=a.charAt(i-1)===b.charAt(j-1)?prev+1:Math.max(p[j],p[j-1]);prev=tmp}}return p[b.length]}
+function gradeTyped(q,val){
+  var Z=window.zhUI;
+  if(q.mode==='py'){
+    var a=Z.normPinyin(val),b=Z.normPinyin(q.ans);
+    if(a===b)return {res:'ok'};
+    var la=a.replace(/[1-4]/g,''),lb=b.replace(/[1-4]/g,'');
+    if(la&&la===lb)return {res:'close',msg:/[1-4āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ]/i.test(val)?'الأصوات صحيحة، لكن إحدى النغمات غير صحيحة.':'الأصوات صحيحة، لكن أضف النغمات (مثل ni3 أو nǐ).'};
+    return {res:'bad'};
+  }
+  var t=zhOnly(val),ans=zhOnly(q.ans);
+  if(t&&t===ans)return {res:'ok'};
+  if(!t){
+    if(q.py&&Z.normPinyin(val)===Z.normPinyin(q.py))return {res:'close',msg:'البينيين صحيح، لكن المطلوب الحروف الصينية. فعّل لوحة المفاتيح الصينية في جهازك.'};
+    return {res:'bad'};
+  }
+  if(q.mode==='sent'&&lcsLen(t,ans)/Math.max(t.length,ans.length)>=0.8)return {res:'close',msg:'قريب جداً من الجملة الصحيحة.'};
+  return {res:'bad'};
+}
+R.type=function(q,b){
+  b.innerHTML='<div class="qprompt">'+q.prompt+'<div class="mut">'+q.lab+'</div></div>'+
+    '<input class="tin" data-tin type="text" dir="ltr" lang="'+(q.mode==='py'?'en':'zh-CN')+'" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" aria-label="إجابتك">'+
+    '<div id="thint" class="mut thint" aria-live="polite"></div>'+
+    '<div class="tools" style="margin-top:12px;justify-content:center"><button class="btn ghost sm" data-act="thint">تلميح (−5)</button><button class="btn primary" data-act="tcheck">تحقّق</button></div>';
+  setTimeout(function(){var i=$('[data-tin]');if(i)i.focus()},60);
+};
+
+/* ---------- stroke order with Hanzi Writer (D.hw = the lesson opts in) ----------
+   Library and stroke data are vendored in vendor/hanzi-writer/ (no external request) and loaded only when the Writing tab opens.
+   If the library or the data of this character fails to load, nothing changes: the free-drawing canvas stays as before. */
+var HW={state:0,cbs:[],w:null,mode:'hw',m:'model',anim:false,complete:false,next:0,miss:0,cache:{}};   /* mode = stroke order / free drawing; m = model / watch / write */
+var HWDIR='vendor/hanzi-writer/';
+function hwHex(c){return c.codePointAt(0).toString(16)}
+function hwAlpha(col,a){var m=/^#([0-9a-f]{6})$/i.exec(col);if(!m)return col;var n=parseInt(m[1],16);return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')'}
+function hwLib(cb){
+  if(HW.state===2){cb(true);return}
+  if(HW.state===-1){cb(false);return}
+  HW.cbs.push(cb);if(HW.state===1)return;HW.state=1;
+  var el=document.createElement('script');el.src=HWDIR+'hanzi-writer.min.js';
+  var done=function(ok){HW.state=ok&&window.HanziWriter?2:-1;HW.cbs.splice(0).forEach(function(f){f(HW.state===2)})};
+  el.onload=function(){done(true)};el.onerror=function(){done(false)};
+  document.head.appendChild(el);
+}
+function hwLoader(ch,onLoad,onError){
+  if(HW.cache[ch]){onLoad(HW.cache[ch]);return}
+  if(!window.fetch){onError();return}
+  fetch(HWDIR+'data/'+hwHex(ch)+'.json').then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(d){HW.cache[ch]=d;onLoad(d)},function(e){onError(e)});
+}
+function hwMsg(t){var e=$('#hwmsg');if(e)e.textContent=t}
+function hwStop(){try{if(HW.w)HW.w.cancelQuiz()}catch(e){}HW.w=null}
+function hwShow(m){
+  var hb=$('#hwbox'),fb=$('#freebox');if(!hb||!fb)return;
+  hb.hidden=(m!=='hw');fb.hidden=(m==='hw');
+  $$('#hwswitch [data-m]').forEach(function(b){b.classList.toggle('on',b.dataset.m===m)});
+  if(m==='free')drawCanvas();
+}
+function hwWrap(){   /* wrap the existing canvas + its buttons (unchanged) and add the switch and the stroke-order box next to them */
+  var cw=$('#p-writing .cvwrap');if(!cw||$('#freebox'))return;
+  var tl=cw.nextElementSibling,fb=document.createElement('div');fb.id='freebox';
+  cw.parentNode.insertBefore(fb,cw);fb.appendChild(cw);if(tl&&tl.classList.contains('tools'))fb.appendChild(tl);
+  var sw=document.createElement('div');sw.id='hwswitch';sw.className='hwseg';sw.hidden=true;
+  sw.innerHTML='<button class="chip tgl" data-act="hwmode" data-m="hw">ترتيب الخطوط</button><button class="chip tgl" data-act="hwmode" data-m="free">رسم حر</button>';
+  var bx=document.createElement('div');bx.id='hwbox';bx.className='hwbox';bx.hidden=true;
+  bx.innerHTML='<div id="hwt" dir="ltr"></div><div id="hwmsg" class="mut hwmsg" role="status" aria-live="polite"></div>'+
+    '<div class="tools hwmodes" role="group" aria-label="وضع التدريب" style="justify-content:center"><button class="btn ghost sm" data-act="hwanim" aria-pressed="false">شاهد الكتابة</button><button class="btn ghost sm" data-act="hwquiz" aria-pressed="false">اكتب بنفسك</button><button class="btn primary sm" data-act="hwmodel" aria-pressed="true">إظهار النموذج</button></div>'+
+    '<div class="tools" style="justify-content:center"><button class="btn ghost sm" data-act="hwhint">تلميح</button><button class="btn ghost sm" data-act="hwreset">من جديد</button><button class="btn ghost sm" data-act="hwoutline" aria-pressed="true">الإطار الباهت</button></div>';
+  fb.parentNode.insertBefore(sw,fb);fb.parentNode.insertBefore(bx,fb);
+}
+function hwMount(c){
+  var host=$('#hwt');if(!host||!HW.cache[c])return;
+  host.innerHTML='';
+  var cs=getComputedStyle(document.documentElement),fg=cs.getPropertyValue('--fg').trim(),ac=cs.getPropertyValue('--accent').trim();
+  var size=Math.max(200,Math.min(340,host.clientWidth||300));
+  try{
+    HW.w=HanziWriter.create(host,c,{width:size,height:size,padding:14,strokeColor:fg,outlineColor:hwAlpha(fg,0.18),highlightColor:ac,drawingColor:fg,
+      drawingWidth:Math.round(size/14),showOutline:!!W.ghost,showCharacter:true,strokeAnimationSpeed:1.1,delayBetweenStrokes:250,charDataLoader:hwLoader});
+  }catch(e){HW.w=null;var sw=$('#hwswitch');if(sw)sw.hidden=true;hwShow('free');return}
+  HW.next=0;HW.miss=0;HW.m='model';HW.anim=false;HW.complete=false;hwUi();
+  hwMsg('عدد خطوط هذا الحرف: '+HW.cache[c].strokes.length+'. اضغط «شاهد الكتابة» ثم «اكتب بنفسك».');
+}
+function hwInit(){
+  if(!D.hw||location.protocol==='file:')return;   /* stroke data is loaded with fetch(): impossible from file://, so do not try (the canvas stays, nothing is logged) */
+  hwStop();hwWrap();
+  var c=CHARS[W.i].c;
+  hwLib(function(ok){
+    if(!ok||!$('#hwbox'))return;                        /* library missing: the canvas stays */
+    hwLoader(c,function(){
+      if(!$('#hwbox')||CHARS[W.i].c!==c)return;
+      $('#hwswitch').hidden=false;
+      if(HW.mode==='free'){hwShow('free');return}
+      hwShow('hw');hwMount(c);
+    },function(){});                                     /* no data for this character: the canvas stays */
+  });
+}
+/* keeps the buttons in sync: exactly one mode button is red (aria-pressed) = the current mode; the hint is secondary and disabled only
+   when it cannot help (no writer, the animation is playing, or the character is already complete) */
+function hwUi(){
+  var ids={watch:'hwanim',write:'hwquiz',model:'hwmodel'};
+  Object.keys(ids).forEach(function(m){
+    var b=$('[data-act='+ids[m]+']');if(!b)return;var on=HW.m===m;
+    b.setAttribute('aria-pressed',String(on));b.classList.toggle('primary',on);b.classList.toggle('ghost',!on);
+  });
+  var h=$('[data-act=hwhint]');if(h)h.disabled=!HW.w||HW.anim||HW.complete;
+  var o=$('[data-act=hwoutline]');if(o)o.setAttribute('aria-pressed',String(!!W.ghost));
+}
+
+/* ---------- events ---------- */
+var A={};
+
+A.lvhub=function(){Q=null;renderLevels()};
+A.lvstart=function(t){LV={miss:{}};beginLevel(+t.dataset.n)};
+A.lvnext=function(){beginLevel(LV.n+1)};
+A.lvretry=function(){beginLevel(LV.n)};
+A.lvreview=function(){
+  var m=lvMissed().slice(0,12).map(function(src){var q=Object.assign({},src);delete q.hint;return q});
+  if(!m.length){renderLevels();return}
+  Q={kind:'lv',lv:'r',list:shuffle(m),i:0,score:0,gain:0,fin:false};renderQ();
+};
+A.tcheck=function(){
+  if(!Q||Q.fin)return;
+  var q=Q.list[Q.i],inp=$('[data-tin]');if(!inp)return;
+  var val=inp.value;if(!val.replace(/\s/g,'')){toast('اكتب إجابتك أولاً');return}
+  var g=gradeTyped(q,val),hint=!!q.hint;
+  inp.disabled=true;inp.classList.add(g.res==='ok'?'good':(g.res==='close'?'close':'bad'));
+  $$('[data-act=thint],[data-act=tcheck]').forEach(function(b){b.disabled=true});
+  if(g.res==='ok'){finishQ(true,q.wid,q.fbh,hint?{xp:5}:null);speak(q.say)}
+  else if(g.res==='close')finishQ(false,q.wid,'<div>'+g.msg+'</div>'+q.fbh,{score:.5,xp:hint?0:5,cls:'close',msg:'قريب! تحصل على نصف النقاط'});
+  else finishQ(false,q.wid,q.fbh);
+};
+A.hwmode=function(t){
+  HW.mode=t.dataset.m;
+  if(HW.mode==='free'){hwStop();hwShow('free')}else{hwShow('hw');hwMount(CHARS[W.i].c)}
+};
+A.hwmodel=function(){   /* "إظهار النموذج": the whole character with its outline, no exercise running */
+  if(!HW.w)return;
+  HW.w.cancelQuiz();W.ghost=true;HW.w.showOutline();HW.w.showCharacter();
+  HW.m='model';HW.anim=false;HW.complete=false;HW.next=0;HW.miss=0;hwUi();
+  hwMsg('عدد خطوط هذا الحرف: '+HW.cache[CHARS[W.i].c].strokes.length+'. اضغط «شاهد الكتابة» ثم «اكتب بنفسك».');
+};
+A.hwanim=function(){
+  if(!HW.w)return;
+  HW.w.cancelQuiz();HW.m='watch';HW.anim=true;HW.complete=false;hwUi();hwMsg('شاهد ترتيب الخطوط…');
+  HW.w.animateCharacter({onComplete:function(r){
+    if(r&&r.canceled)return;                         /* another mode took over */
+    HW.anim=false;hwUi();hwMsg('الآن جرّب بنفسك: اضغط «اكتب بنفسك».');
+  }});
+};
+A.hwquiz=function(){
+  if(!HW.w)return;
+  var c=CHARS[W.i].c,n=HW.cache[c].strokes.length;
+  HW.m='write';HW.anim=false;HW.complete=false;HW.next=0;HW.miss=0;hwUi();hwMsg('اكتب الخط الأول (1 من '+n+')');
+  HW.w.quiz({showHintAfterMisses:2,leniency:1.1,
+    onCorrectStroke:function(d){HW.next=d.strokeNum+1;hwMsg(d.strokesRemaining?'صحيح! الخط التالي ('+(HW.next+1)+' من '+n+')':'صحيح!')},
+    onMistake:function(){HW.miss++;hwMsg('ليس هذا هو الخط، حاول مرة أخرى (أخطاء: '+HW.miss+')')},
+    onComplete:function(d){
+      HW.complete=true;hwUi();
+      S.hw=S.hw||{done:{}};S.hw.done=S.hw.done||{};S.hw.done[c]={miss:d.totalMistakes};save();
+      var chip=$('#p-writing [data-act=wch][data-i="'+W.i+'"]');if(chip)chip.classList.add('wdone');
+      hwMsg(d.totalMistakes?'أتممتَ الحرف! عدد الأخطاء: '+d.totalMistakes:'ممتاز! كتبتَ الحرف بلا أخطاء.');
+    }});
+};
+A.hwhint=function(){if(HW.w&&!HW.anim&&!HW.complete)HW.w.highlightStroke(HW.next)};
+A.hwreset=function(){A.hwmodel()};
+A.hwoutline=function(){   /* the faint outline under the writing: visible or hidden (a harder exercise); shared with the free-drawing model */
+  W.ghost=!W.ghost;
+  if(HW.w){if(W.ghost)HW.w.showOutline();else HW.w.hideOutline()}
+  hwUi();
+};
+A.thint=function(){
+  if(!Q||Q.fin)return;
+  var q=Q.list[Q.i];if(q.hint)return;q.hint=true;
+  var h;
+  if(q.mode==='py'){var sy=window.zhUI.syllables(q.ans);h=sy[0]+'…'+(sy.length>1?' (عدد المقاطع: '+sy.length+')':'')}
+  else h=zhOnly(q.ans).slice(0,q.mode==='sent'?2:1)+'…';
+  $('#thint').innerHTML='تلميح: يبدأ بـ <span class="'+(q.mode==='py'?'py':'han')+' ltr" style="font-size:20px">'+esc(h)+'</span>';
+  var hb=$('[data-act=thint]');if(hb){hb.disabled=true;hb.textContent='استُخدم التلميح (−5)'}
+  var inp=$('[data-tin]');if(inp)inp.focus();
+};
+
+A.tab=function(t){setTab(t.dataset.tab)};
+A.slow=function(){S.slow=!S.slow;save();syncSlow();toast(S.slow?'صوت بطيء: مفعّل':'صوت بطيء: متوقف')};
+A.theme=function(){
+  var d=document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+  var n=d==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',n);
+  try{localStorage.setItem(KEY+'-theme',n)}catch(e){}
+  if(tab==='writing'){drawCanvas();if(D.hw)hwInit()}
+};
+A.say=function(t){speak(t.dataset.t)};
+A.sayline=function(t){var L=DLG[+t.dataset.l];if(speak(L.zh,null,pitchOf(L.who))){S.heard[+t.dataset.l]=1;save();updateProg();checkListener();var s=$('#p-dialogue .sec-h p');if(s)s.textContent='اضغط أي كلمة لترى معناها، واضغط السماعة لتسمع الجملة. سمعتَ '+Object.keys(S.heard).length+' من '+DLG.length+' جمل.'}};
+A.tok=function(t){openSheet(DLG[+t.dataset.l].tok[+t.dataset.k])};
+A.closesheet=closeSheet;
+A.playall=playAll;
+A.tpy=function(){S.py=!S.py;save();renderVocab()};
+A.tar=function(){S.ar=!S.ar;save();renderVocab()};
+A.focus=function(){setP('dlgFocus',P('dlgFocus',0)?0:1);F.rev={};renderDialogue()};
+A.fxt=function(t){var k={py:'dlgPy',tone:'dlgTone',ar:'dlgAr'}[t.dataset.t];setP(k,P(k,0)?0:1);renderDialogue()};
+A.fxrev=function(t){F.rev[t.dataset.w]=F.i;renderDialogue()};
+A.fxnext=function(){if(F.i<DLG.length-1){F.i++;F.rev={};renderDialogue()}};
+A.fxprev=function(){if(F.i>0){F.i--;F.rev={};renderDialogue()}};
+A.tpy2=function(){S.py=!S.py;save();renderDialogue()};
+A.tar2=function(){S.ar=!S.ar;save();renderDialogue()};
+A.flip=function(){
+  S.flip=!S.flip;
+  var fc=$('#fc'),f=$('#fc .front'),b=$('#fc .back');if(!f||!b)return;
+  if(fc.classList.contains('f3d')){f.hidden=false;b.hidden=false;fc.classList.add('turning');fc.classList.toggle('flipped',S.flip);clearTimeout(flipT);flipT=setTimeout(function(){f.hidden=S.flip;b.hidden=!S.flip;fc.classList.remove('turning')},700)}
+  else{f.hidden=S.flip;b.hidden=!S.flip}
+  if(window.zhUI&&zhUI.play)zhUI.play('swish');
+};
+A.fcsound=function(t){if(!window.zhUI||!zhUI.setSound)return;zhUI.setSound(!zhUI.soundOn());var on=zhUI.soundOn();t.setAttribute('aria-pressed',String(on));t.innerHTML=ic(on?'snd':'mute',20);if(on)zhUI.play('swish')};
+A.next=function(){S.card=(S.card+1)%VOCAB.length;S.flip=false;save();renderVocab();var sk=CSND;CSND='swish';if(window.zhUI&&zhUI.play)zhUI.play(sk)};
+A.prev=function(){S.card=(S.card-1+VOCAB.length)%VOCAB.length;S.flip=false;save();renderVocab();if(window.zhUI&&zhUI.swish)zhUI.swish()};
+function hubRev(zh,on){try{var h=JSON.parse(localStorage.getItem(HUBK)||'{}')||{};h.dues=h.dues||{};CRS.split(',').forEach(function(c){h.dues[c]=h.dues[c]||{};if(on){if(!h.dues[c][zh])h.dues[c][zh]={i:0,t:Date.now()}}});localStorage.setItem(HUBK,JSON.stringify(h))}catch(e){}}
+var CSND='swish';
+A.know=function(){CSND='ok';S.known[S.card]=true;if(S.wrong[S.card])delete S.wrong[S.card];if(knownCount()===VOCAB.length)award('scholar');save();updateProg();A.next()};
+A.addmiss=function(t){LASTMISS.forEach(function(i){hubRev(VOCAB[i].zh,true)});toast('أُضيفت '+LASTMISS.length+' كلمة إلى مراجعة المفردات في الصفحة الرئيسية');if(t){t.disabled=true}};
+A.again=function(){hubRev(VOCAB[S.card].zh,true);toast('أُضيفت إلى مراجعة المفردات في الصفحة الرئيسية');delete S.known[S.card];S.wrong[S.card]=(S.wrong[S.card]||0)+1;save();updateProg();A.next()};
+A.jump=function(t){S.card=+t.dataset.i;S.flip=false;save();renderVocab();window.scrollTo({top:0,behavior:'smooth'})};
+A.cq=function(t){
+  var q=+t.dataset.q,i=+t.dataset.i,o=+t.dataset.o,c=CQ[q][i];
+  $$('#cq'+q+'_'+i+' .chip').forEach(function(b,j){b.disabled=true;if(j===c.a)b.classList.add('good');else if(j===o)b.classList.add('bad')});
+  if(o===c.a){speak(c.o[c.a].zh)}
+};
+A.s=function(t){G.s=+t.dataset.i;renderGrammar()};
+A.adv=function(t){G.a=+t.dataset.i;renderGrammar()};
+A.pred=function(t){G.p=+t.dataset.i;renderGrammar()};
+A.num=function(t){G.num=+t.dataset.i;renderGrammar()};
+A.rmb=function(t){G.rmb=+t.dataset.i;renderGrammar()};
+A.it=function(t){G.it=+t.dataset.i;renderGrammar()};
+A.pat=function(t){G.pat=+t.dataset.i;renderGrammar()};
+A.mw=function(t){G.mw=+t.dataset.i;renderGrammar()};
+
+A.gtok=function(t){openSheet([t.dataset.z,t.dataset.p,t.dataset.a||''])};
+A.wfr=function(t){var i=+t.dataset.d,ta=$('[data-wta="'+i+'"]'),f=D.disc[i].frames[+t.dataset.k],p=ta.selectionStart==null?ta.value.length:ta.selectionStart;ta.value=ta.value.slice(0,p)+f+ta.value.slice(p);S.txt[i]=ta.value;ta.focus();wchk(i)};
+A.wsay=function(t){speak(D.disc[+t.dataset.d].model.split('｜')[0])};
+A.wch=function(t){W.i=+t.dataset.i;W.strokes=[];W.cur=null;renderWriting()};
+A.wclear=function(){W.strokes=[];W.cur=null;drawCanvas()};
+A.wundo=function(){if(!W.strokes.length)return;W.strokes.pop();W.cur=null;drawCanvas()};
+A.wghost=function(){W.ghost=!W.ghost;renderWriting()};
+A.start=function(t){startQuiz(t.dataset.k)};
+A.qexit=function(){Q=null;stopSpeech();renderPractice()};
+A.qnext=function(){Q.i++;if(Q.i>=Q.list.length)endQuiz();else{$('#qbody').innerHTML='';renderQ()}};
+A.opt=function(t){
+  if(!Q||Q.fin)return;
+  var q=Q.list[Q.i],i=+t.dataset.i,ok=q.opts[i].ok;
+  $$('#qbody .opt').forEach(function(el,j){el.disabled=true;if(q.opts[j].ok)el.classList.add('good');else if(j===i)el.classList.add('bad')});
+  finishQ(ok,q.wid,q.fb);
+};
+A.pick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  var p=q.pool.filter(function(x){return x.i===+t.dataset.i})[0];q.picked.push(p);drawOrder(q,$('#qbody'));
+};
+A.unpick=function(t){
+  var q=Q.list[Q.i];if(q.done)return;
+  q.picked=q.picked.filter(function(x){return x.i!==+t.dataset.i});drawOrder(q,$('#qbody'));
+};
+A.unpicklast=function(){var q=Q.list[Q.i];if(q.done||!q.picked.length)return;q.picked.pop();drawOrder(q,$('#qbody'))};
+A.unpickall=function(){var q=Q.list[Q.i];if(q.done)return;q.picked=[];drawOrder(q,$('#qbody'))};
+A.checkorder=function(){
+  var q=Q.list[Q.i];if(q.done)return;q.done=true;
+  var ok=q.picked.every(function(p,k){return p.i===k});
+  $$('#qbody .slot .chip').forEach(function(c){c.disabled=true;c.classList.add(ok?'good':'bad')});
+  $$('#qbody [data-act="checkorder"]').forEach(function(c){c.disabled=true});
+  finishQ(ok,q.wid,fbSent(q.s));
+  if(ok)speak(q.s.zh);
+};
+A.fill=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  var o=t.dataset.o,ok=o===q.f.ans,bl=$('#blank');
+  bl.textContent=o;bl.classList.add(ok?'good':'bad');
+  $$('#qbody .pool .chip').forEach(function(c){c.disabled=true;if(c.dataset.o===q.f.ans)c.classList.add('good');else if(c===t)c.classList.add('bad')});
+  finishQ(ok,q.wid,fbSent({zh:q.f.pre+q.f.ans+q.f.post,py:q.f.py,ar:q.f.ar}));
+  if(ok)speak(q.f.pre+q.f.ans+q.f.post);
+};
+A.ml=function(t){
+  var q=Q.list[Q.i];if(Q.fin)return;
+  if(q.done[t.dataset.i])return;
+  $$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+  t.classList.add('sel');q.sel=t.dataset.i;
+};
+A.mr=function(t){
+  var q=Q.list[Q.i];if(Q.fin||q.sel===null||q.done[t.dataset.i])return;
+  var i=t.dataset.i,L=$('#qbody [data-act="ml"][data-i="'+q.sel+'"]');
+  if(i===q.sel){
+    q.done[i]=1;t.classList.add('ok');L.classList.remove('sel');L.classList.add('ok');t.disabled=true;L.disabled=true;
+    speak(q.words[+i].zh);
+    if(Object.keys(q.done).length===q.words.length){
+      var errIds=Object.keys(q.errIds).map(Number);
+      errIds.forEach(function(k){var vi=VOCAB.indexOf(q.words[k]);if(vi>=0){S.wrong[vi]=(S.wrong[vi]||0)+1;(Q.miss=Q.miss||{})[vi]=1}});
+      finishQ(q.err<=1,[],'<div>عدد الأخطاء: '+q.err+'</div>');
+    }
+  }else{
+    q.err++;q.errIds[q.sel]=1;
+    t.classList.add('no');L.classList.add('no');
+    setTimeout(function(){t.classList.remove('no');L.classList.remove('no')},450);
+  }
+  q.sel=null;$$('#qbody [data-act="ml"]').forEach(function(b){b.classList.remove('sel')});
+};
+
+var app=$('#app');
+app.addEventListener('click',function(e){
+  var t=e.target.closest('[data-act]');
+  if(!e.target.closest('#sheet')&&!e.target.closest('.tok')&&!$('#sheet').hidden)closeSheet();
+  if(!t||!app.contains(t))return;
+  var f=A[t.dataset.act];if(f)f(t,e);
+});
+app.addEventListener('input',function(e){var ta=e.target;if(ta.dataset&&ta.dataset.wta!=null){var i=+ta.dataset.wta;S.txt[i]=ta.value;wchk(i)}});
+app.addEventListener('keydown',function(e){
+  if((e.key==='Enter'||e.key===' ')&&e.target.id==='fc'){e.preventDefault();A.flip()}
+  if(e.key==='Enter'&&e.target.hasAttribute&&e.target.hasAttribute('data-tin')){e.preventDefault();A.tcheck()}
+});
+window.addEventListener('hashchange',function(){var h=location.hash.replace('#','');if(h&&h!==tab)setTab(h,true)});
+document.addEventListener('DOMContentLoaded',function(){
+  if(!window.zhUI||!zhUI.swipe)return;
+  /* 3D: the card follows the finger and turns like a page (zhUI.cardDrag); no 3D / reduced motion: a plain swipe changes the card */
+  if(zhUI.cardDrag)zhUI.cardDrag($('#app'),{sel:'#fc',enabled:function(){var c=$('#fc');return !!c&&c.classList.contains('f3d')},
+    under:function(d){var i=(S.card+(d==='next'?1:VOCAB.length-1))%VOCAB.length;return '<div class="face front">'+frontInner(VOCAB[i])+'</div>'},
+    commit:function(d){if(d==='next')A.next();else A.prev()}});
+  zhUI.swipe($('#app'),'#fc',function(d){var c=$('#fc');if(c&&c.classList.contains('f3d'))return;if(d==='left')A.next();else A.prev()});
+  zhUI.swipe($('#app'),'#fxcard',function(d){if(d==='left')A.fxnext();else A.fxprev()});
+  if(tab==='vocab'||tab==='dialogue')RENDER[tab]();
+});
+function syncSlow(){$('#slowbtn').setAttribute('aria-pressed',String(S.slow))}
+syncSlow();updateProg();
+setTab(location.hash.replace('#','')||'vocab',true);
+})();
+</script>
+</body></html>

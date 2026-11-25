@@ -54,10 +54,10 @@ def py(s):
                 idx.append(len(syl));syl.append(it[0]);ch.append(t)
         grp.append(idx)
     for k,x in enumerate(syl):
-        if x in('yī','bù') and k+1<len(syl):
+        if x in('yī','bù') and k+1<len(syl) and ch[k] in('一','不'):   # only the characters 一 / 不 (not 衣 医 步 ...)
             n=tone(syl[k+1])
             if x=='bù' and n==4:syl[k]='bú'
-            elif x=='yī' and syl[k+1]!='yī' and ch[k+1] not in NUMS and ch[k+1]!='十':
+            elif x=='yī' and syl[k+1]!='yī' and ch[k+1] not in NUMS and ch[k+1]!='十' and not (k>0 and ch[k-1] in '十期第'):   # 星期一 / 十一 / 第一: ordinal, stays yī
                 syl[k]='yí' if n==4 else 'yì'
     out=[]
     for idx in grp:
