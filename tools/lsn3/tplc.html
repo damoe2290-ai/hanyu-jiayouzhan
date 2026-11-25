@@ -186,7 +186,7 @@ h1,h2,h3,p{margin:0}
 .xprow{display:flex;align-items:center;gap:12px}
 .xpbar{flex:1;height:10px;background:var(--surface2);border-radius:6px;overflow:hidden}
 .xpbar i{display:block;height:100%;background:var(--accent)}
-.badges{display:flex;gap:10px;flex-wrap:wrap}
+.badges{display:flex;gap:10px;flex-wrap:wrap;overflow-x:clip}   /* the new-badge stamp starts at scale(2.4): without this the edge badge pushes the page 24px wider while it plays */
 .badge{width:62px;text-align:center;font-size:12px;line-height:1.35;opacity:.38;filter:grayscale(1)}
 .badge.on{opacity:1;filter:none}
 .badge span{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 4px;border-radius:50%;

@@ -41,10 +41,10 @@ def pytok(s):
         prev=t
     for k,x in enumerate(syl):
         xl=x.lower()
-        if xl in('yī','bù') and k+1<len(syl):
+        if xl in('yī','bù') and k+1<len(syl) and ch[k] in('一','不'):
             n=tone(syl[k+1])
             if xl=='bù' and n==4: syl[k]='bú'
-            elif xl=='yī' and syl[k+1].lower()!='yī' and ch[k+1] not in NUMS and ch[k+1]!='十': syl[k]='yí' if n==4 else 'yì'
+            elif xl=='yī' and syl[k+1].lower()!='yī' and ch[k+1] not in NUMS and ch[k+1]!='十' and not (k>0 and ch[k-1] in '十期第'): syl[k]='yí' if n==4 else 'yì'
     for k in range(2,len(ch)):
         if ch[k]=='了' and ch[k-1] in '不得' and ch[k-2] in '去做来吃办忘完干看听买说写到见': syl[k]='liǎo'
     out=[]
@@ -122,7 +122,7 @@ def render_blocks(blocks):
         i+=1
     return out
 # ---------- lesson numerals + prev/next navigation (plain <a> links, work without JS) ----------
-NZ=['','一','二','三','四','五','六','七','八','九','十'];NA=['','الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر']
+NZ=['','一','二','三','四','五','六','七','八','九','十','十一','十二','十三','十四','十五'];NA=['','الأول','الثاني','الثالث','الرابع','الخامس','السادس','السابع','الثامن','التاسع','العاشر','الحادي عشر','الثاني عشر','الثالث عشر','الرابع عشر','الخامس عشر']
 def zhspan(t): return '<bdi lang="zh-CN">%s</bdi>'%esc(t)
 def series_items(course):
     """[(url, label_html)] for every lesson of a course, in order; labels match the hub's lesson list."""
@@ -366,7 +366,7 @@ def make(name):
     course=L['course']
     fn=({'prac':'prac-%d.html','lis':'lis-%d.html','biz':'biz-%d.html','gram':'lesson-%d.html'}[course])%L['n']
     items=series_items(course);lnav=lnav_html(course,items,[u for u,_ in items].index(fn))
-    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L.get('sub') or L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%',L.get('key') or 'noor-%s%d-v1'%(course,L['n'])).replace('%%LNAV%%',lnav)
+    out=tpl.replace('%%TITLE%%',esc('الدرس %s %s'%(na,L['title_zh']))).replace('%%CRS%%','gram,fl' if course=='gram' else course).replace('%%COURSE%%',course).replace('%%SEALN%%',str(len(nz))).replace('%%SEAL%%',nz).replace('%%H1%%','الدرس '+na).replace('%%SUB%%',esc(L.get('sub') or L['title_zh'])).replace('%%GTAB%%','القواعد' if course in ('prac','biz','gram') else 'الأصوات').replace('%%KEY%%',L.get('key') or 'noor-%s%d-v1'%(course,L['n'])).replace('%%LNAV%%',lnav)
     for k,v in slots_for(L).items(): out=out.replace('%%X_'+k.upper()+'%%',v)
     out=out.replace('%%DATA%%',json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/'))
     open(fn,'w',encoding='utf8').write(out);
