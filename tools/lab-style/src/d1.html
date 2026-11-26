@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>كرّاسة الخط · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Direction 1 — the practice notebook (练习本): white sheet, faint red grid, black ink, the teacher's red pen.
+   One continuous page: read → listen → speak → write → review. */
+:root{--bg:#fbfbf9;--sheet:#ffffff;--ink:#161616;--mut:#5d5d5d;--grid:rgba(200,16,46,.13);--grid2:rgba(200,16,46,.07);--pen:#c8102e;--pen-soft:rgba(200,16,46,.08);--line:#e2dede;--xp:#c8102e;
+  --font-ar:"Amiri",serif;--font-han:"Noto Serif SC","Noto Serif CJK SC",serif;--font-brush:"Ma Shan Zheng","Noto Serif SC",serif;--font-py:Georgia,"Times New Roman",serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--sheet:#181818;--ink:#ece9e4;--mut:#a8a29b;--grid:rgba(255,90,95,.14);--grid2:rgba(255,90,95,.06);--pen:#ff6b6f;--pen-soft:rgba(255,107,111,.10);--line:#2c2a2a;--xp:#ff6b6f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121212;--sheet:#181818;--ink:#ece9e4;--mut:#a8a29b;--grid:rgba(255,90,95,.14);--grid2:rgba(255,90,95,.06);--pen:#ff6b6f;--pen-soft:rgba(255,107,111,.10);--line:#2c2a2a;--xp:#ff6b6f;color-scheme:dark}
+/*BASECSS*/
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:120px}
+body{margin:0;color:var(--ink);font:18px/1.8 var(--font-ar);background:var(--bg);
+  background-image:linear-gradient(var(--grid2) 1px,transparent 1px),linear-gradient(90deg,var(--grid2) 1px,transparent 1px);background-size:28px 28px}
+button{font:inherit;color:inherit}
+.han{font-family:var(--font-han)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 40px}
+.ibtn{min-width:44px;min-height:44px;border:1.5px solid var(--ink);background:var(--sheet);border-radius:2px;display:grid;place-items:center;cursor:pointer}
+.ibtn svg{width:22px;height:22px}
+/* 田字格 cell */
+.cell{position:relative;display:grid;place-items:center;border:1.5px solid var(--pen);background:var(--sheet);
+  background-image:linear-gradient(var(--grid),var(--grid)),linear-gradient(var(--grid),var(--grid));background-size:100% 1px,1px 100%;background-position:center;background-repeat:no-repeat}
+.cell::after{content:"";position:absolute;inset:0;background:linear-gradient(45deg,transparent calc(50% - .5px),var(--grid2) 50%,transparent calc(50% + .5px)),linear-gradient(-45deg,transparent calc(50% - .5px),var(--grid2) 50%,transparent calc(50% + .5px));pointer-events:none}
+/* ---------- home: the notebook's table of contents ---------- */
+.top{display:flex;align-items:center;gap:12px;padding:16px 0 10px}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:400 34px/1.1 var(--font-brush)}
+.top p{margin:0;color:var(--mut);font-size:15px}
+.ribbon{position:relative;margin:8px 0 18px;padding:14px 16px 14px 56px;background:var(--sheet);border:1.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.ribbon::before{content:"";position:absolute;top:-8px;left:16px;width:22px;height:58px;background:var(--pen);clip-path:polygon(0 0,100% 0,100% 100%,50% 80%,0 100%)}
+.ribbon small{color:var(--pen);font-weight:700;font-size:14px}
+.ribbon .t{font:700 21px/1.4 var(--font-ar)}
+.ribbon .t .han{font-weight:500;font-size:18px}
+.btn{min-height:48px;padding:0 18px;border:1.5px solid var(--ink);background:var(--sheet);border-radius:2px;font:700 17px var(--font-ar);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.ink{background:var(--ink);color:var(--sheet)}
+.btn.pen{border-color:var(--pen);color:var(--pen)}
+.chap{margin:22px 0 6px;display:flex;align-items:baseline;gap:10px;border-bottom:2px solid var(--ink);padding-bottom:2px}
+.chap b{font:400 26px var(--font-brush);color:var(--pen)}
+.chap span{font-weight:700;font-size:19px}
+.chap small{color:var(--mut);font-size:14px;margin-inline-start:auto}
+.course{margin:12px 0 2px;font-size:15px;color:var(--mut)}
+.course b{color:var(--ink);font-size:17px}
+.toc{list-style:none;margin:0;padding:0}
+.toc a,.toc button.row{display:flex;align-items:center;gap:10px;width:100%;min-height:58px;padding:6px 0;text-decoration:none;color:inherit;background:none;border:0;border-bottom:1px dashed var(--line);cursor:pointer;text-align:start}
+.toc .cell{flex:none;width:44px;height:44px;font:400 26px var(--font-brush)}
+.toc .nm{min-width:0;flex:1;display:flex;flex-direction:column;line-height:1.35}
+.toc .nm .han{font-size:16px;color:var(--mut)}
+.toc .sq{display:flex;gap:3px;flex:none}
+.toc .sq i{width:9px;height:9px;border:1px solid var(--ink)}
+.toc .sq i.on{background:var(--ink)}
+.toc .here .cell{background-color:var(--pen-soft)}
+/* ---------- lesson ---------- */
+.lhdr{position:sticky;top:0;z-index:20;background:var(--bg);margin:0 -16px;padding:8px 16px 6px;border-bottom:1.5px solid var(--ink)}
+.lhdr .r1{display:flex;align-items:center;gap:10px}
+.lhdr .r1 .sp{flex:1;min-width:0;line-height:1.3}
+.lhdr .r1 b{display:block;font-size:19px}
+.lhdr .r1 .han{font-size:15px;color:var(--mut)}
+.map{display:flex;gap:6px;margin-top:8px;align-items:center}
+.map button{flex:1;height:48px;min-width:44px;border:1.5px solid var(--line);background:var(--sheet);cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;gap:4px;font:600 13px var(--font-ar)}
+.map button .han{font:400 22px var(--font-brush);line-height:1}
+.map button.on{border-color:var(--ink);background:var(--ink);color:var(--sheet)}
+.map button.cur{border-color:var(--pen);box-shadow:inset 0 -3px 0 var(--pen)}
+.xpb{flex:none;min-width:56px;text-align:center;font:700 15px var(--font-py);color:var(--pen)}
+.plan{margin:16px 0;background:var(--sheet);border:1.5px solid var(--ink);padding:12px 14px}
+.plan h2{margin:0;font:700 22px var(--font-ar)}
+.plan ol{margin:6px 0 0;padding:0;list-style:none;counter-reset:s}
+.plan li{display:flex;gap:10px;align-items:center;min-height:40px;border-bottom:1px dashed var(--line);font-size:16.5px}
+.plan li::before{counter-increment:s;content:counter(s);width:26px;height:26px;border:1.5px solid var(--pen);color:var(--pen);display:grid;place-items:center;font:700 14px var(--font-py);flex:none}
+.plan li.on::before{content:"✓";background:var(--pen);color:var(--sheet)}
+.plan li span:last-child{margin-inline-start:auto;color:var(--mut);font-size:14px}
+.sec{margin:26px 0 0}
+.sec>h2{display:flex;align-items:center;gap:12px;margin:0 0 10px;font:700 25px var(--font-ar)}
+.sec>h2 .cell{width:52px;height:52px;font:400 34px var(--font-brush);flex:none}
+.sec>p.lead{margin:-4px 0 12px;color:var(--mut);font-size:16px}
+.sheet{background:var(--sheet);border:1px solid var(--line);padding:14px;margin:10px 0}
+.sheet h3{margin:0 0 4px;font:700 20px var(--font-ar)}
+.scene{color:var(--mut);font-size:15.5px;margin:0 0 6px}
+.tgls{display:flex;gap:8px;margin:0 0 6px;flex-wrap:wrap}
+.tgl{min-height:44px;padding:0 14px;border:1.5px solid var(--line);background:var(--sheet);border-radius:2px;cursor:pointer;font:600 15px var(--font-ar)}
+.tgl[aria-pressed="true"]{border-color:var(--ink);background:var(--ink);color:var(--sheet)}
+.ln{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line)}
+.ln .who{width:44px;height:44px;font:400 22px var(--font-brush)}
+.ln button.say{all:unset;cursor:pointer;display:block;min-height:44px;border-radius:2px}
+.ln button.say:focus-visible{outline:3px solid var(--pen)}
+.ln .z{font:500 23px/1.6 var(--font-han);direction:ltr;text-align:left}
+.ln .p{font:italic 15px/1.4 var(--font-py);color:var(--mut);direction:ltr;text-align:left}
+.ln .a{font-size:16.5px;color:var(--mut)}
+.ln .nm{font-size:13.5px;color:var(--mut)}
+.ln.g .z{text-decoration:underline wavy var(--pen) 1.5px;text-underline-offset:6px}
+.ln .gm{display:inline-flex;align-items:center;gap:4px;margin-top:4px;font-size:14px;color:var(--pen)}
+.ln .gm i{font:normal 700 14px var(--font-py);width:22px;height:22px;border:1.5px solid var(--pen);border-radius:50%;display:grid;place-items:center}
+.ws{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;direction:ltr}
+.ws button{min-height:44px;min-width:44px;border:1px solid var(--line);background:var(--bg);cursor:pointer;padding:2px 10px;display:flex;flex-direction:column;align-items:center;line-height:1.2}
+.ws b{font:500 18px var(--font-han)}.ws small{font-size:12px;color:var(--mut);direction:rtl}
+.margin{margin:12px 0 0;padding:10px 12px;border-inline-start:3px solid var(--pen);background:var(--pen-soft);font-size:16.5px}
+.margin h4{margin:0;color:var(--pen);font-size:17px;display:flex;gap:8px;align-items:center}
+.margin h4 i{font:normal 700 14px var(--font-py);width:24px;height:24px;border:1.5px solid var(--pen);border-radius:50%;display:grid;place-items:center}
+.margin .f{font:600 15px var(--font-py);direction:ltr;text-align:left;color:var(--ink)}
+.margin p{margin:4px 0}
+.margin .eg{direction:ltr;text-align:left}.margin .eg .han{font-size:18px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:10px}
+.vgrid button{min-height:96px;border:0;background:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.vgrid .cell{width:64px;height:64px;font:500 24px var(--font-han);letter-spacing:-2px}
+.vgrid .cell.w3{font-size:18px}
+.vgrid small{font-size:13.5px;color:var(--mut);line-height:1.3;text-align:center}
+.vgrid button.k .cell{border-color:var(--ink);background-color:var(--pen-soft)}
+.shad{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
+.shad .z{font:500 21px/1.5 var(--font-han);direction:ltr;text-align:left}
+.shad .p{font:italic 14.5px var(--font-py);color:var(--mut);direction:ltr;text-align:left}
+.shad .acts{display:flex;gap:6px}
+.done-btn{margin-top:12px;width:100%}
+/* exercises in ink */
+.q{background:var(--sheet);border:1px solid var(--line);padding:14px;margin:10px 0;position:relative}
+.q-p{font-size:17.5px;margin-bottom:8px}.q-p .han{font-size:20px}
+.q-ar{color:var(--mut);font-size:15.5px}
+.q-opts{display:grid;gap:8px}
+.q-row{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+.q-o{min-height:50px;border:1.5px solid var(--line);background:var(--sheet);cursor:pointer;padding:6px 10px;font:600 17px var(--font-ar);text-align:start;position:relative}
+.q-o .han{font-size:19px}
+.q-o.ok{border-color:var(--ink)}
+.q-o.ok::after{content:"";position:absolute;inset:-6px -4px;border:2.5px solid var(--pen);border-radius:50%;transform:rotate(-3deg);opacity:.85}
+.q-o.bad{text-decoration:line-through;text-decoration-color:var(--pen);text-decoration-thickness:2px;color:var(--mut)}
+.q-sent{font:500 23px/2 var(--font-han);text-align:left;margin:4px 0 10px}
+.q-blank{display:inline-block;min-width:70px;border-bottom:2px solid var(--pen);text-align:center}
+.q-ans{min-height:58px;border-bottom:2px solid var(--ink);display:flex;flex-wrap:wrap;gap:6px;padding:6px 0;margin-bottom:10px}
+.q-pool{display:flex;flex-wrap:wrap;gap:6px}
+.q-tok{min-height:48px;min-width:48px;padding:0 10px;border:1.5px solid var(--pen);background:var(--sheet);cursor:pointer;font:500 21px var(--font-han)}
+.q-ans .q-tok{border-color:var(--ink)}
+.q-mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.q-col{display:grid;gap:6px;align-content:start}
+.q-m{min-height:50px;border:1.5px solid var(--line);background:var(--sheet);cursor:pointer;font:600 16px var(--font-ar)}
+.q-m .han{font-size:20px}
+.q-m.sel{border-color:var(--pen);background:var(--pen-soft)}.q-m.ok{border-color:var(--ink);opacity:.55}.q-m.bad{border-color:var(--pen)}
+.q-why{margin-top:10px;font-size:16px;color:var(--mut)}.q-why b{color:var(--pen)}
+.q.is-ok::before{content:"";position:absolute;top:8px;left:10px;width:34px;height:34px;border:2.5px solid var(--pen);border-radius:50%;transform:rotate(-8deg)}
+.end{margin:28px 0 0;padding:18px;border:1.5px solid var(--ink);background:var(--sheet);box-shadow:4px 4px 0 var(--ink);text-align:center}
+.end .big{font:400 54px var(--font-brush);color:var(--pen);line-height:1}
+footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px;text-align:center;font-family:system-ui,sans-serif}
+:focus-visible{outline:3px solid var(--pen);outline-offset:2px}
+@media (min-width:900px){.wrap{max-width:860px}.ln{grid-template-columns:52px 1fr}.vgrid{grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<!-- ======== HOME ======== -->
+<section id="home" aria-label="الفهرس">
+  <header class="top">
+    <div class="sp"><h1 class="han">汉语加油站</h1><p>فهرس الكرّاسة</p></div>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+  </header>
+  <div class="ribbon" id="ribbon"></div>
+  <div id="toc"></div>
+</section>
+
+<!-- ======== LESSON ======== -->
+<section id="lesson" hidden aria-label="الدرس">
+  <div class="lhdr">
+    <div class="r1">
+      <button class="ibtn" id="back" aria-label="الفهرس"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+      <div class="sp"><b id="lt"></b><span class="han" id="lz" lang="zh-CN"></span></div>
+      <span class="xpb" id="xpb" aria-live="polite"></span>
+      <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+    </div>
+    <nav class="map" id="map" aria-label="خريطة الدرس"></nav>
+  </div>
+  <div class="plan" id="plan"></div>
+  <div id="secs"></div>
+  <div class="end" id="end"></div>
+</section>
+<footer><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+<script>var PAGE_KEY='labs-d1',PAGE_LESSON_KEY='noor-gram10-v1';</script>
+<script>/*COMMON*/</script>
+<script>
+(function(){
+'use strict';
+var D=DATA,S=LS.S,$=LS.$,$$=LS.$$,esc=LS.esc;
+var STEPS=[{id:'read',c:'读',n:'اقرأ',m:4},{id:'listen',c:'听',n:'اسمع',m:3},{id:'speak',c:'说',n:'تكلّم',m:3},{id:'write',c:'写',n:'اكتب',m:3},{id:'review',c:'复',n:'راجع',m:2}];
+var NUMS=['','一','二','三','四','五','六','七','八','九','十'];
+$$('[data-theme-btn]').forEach(function(b){b.onclick=LS.toggleTheme});
+
+/* ---------- home ---------- */
+function home(){
+  var step=STEPS.filter(function(s){return s.id===S.pos})[0];
+  var nd=STEPS.filter(function(s){return S.done[s.id]}).length;
+  $('#ribbon').innerHTML='<small>'+(nd?'توقفتَ هنا':'ابدأ من هنا')+'</small><div class="t">'+D.meta.ar+' · <span class="han" lang="zh-CN">'+D.meta.zh+'</span></div>'+
+    '<div style="color:var(--mut);font-size:15px">'+D.meta.course+' · '+(step?'الخطوة: '+step.n:'الخطوة الأولى: اقرأ')+' · '+nd+' من 5</div>'+
+    '<div style="margin-top:10px"><button class="btn ink" id="resume">'+(nd?'تابع من حيث توقفت':'افتح الدرس')+'</button></div>';
+  $('#resume').onclick=function(){open(S.pos)};
+  var h='';
+  D.hub.levels.forEach(function(lv){
+    h+='<div class="chap"><b class="han">第'+NUMS[lv.n]+'册</b><span>'+lv.t+'</span><small>'+lv.s+'</small></div>';
+    lv.c.forEach(function(ck){var c=D.hub.courses[ck];if(!c)return;
+      h+='<div class="course"><b>'+c.name+'</b> · <span class="han" lang="zh-CN">'+c.book+'</span></div><ul class="toc">';
+      c.l.forEach(function(l){var me=l[4]===D.meta.file,parts=l[2].split('·'),x=LS.lessonXp(l[5]),fill=me?nd:Math.min(5,Math.round(x/60));
+        var sq='<span class="sq" aria-label="'+fill+' من 5">'+[0,1,2,3,4].map(function(i){return'<i'+(i<fill?' class="on"':'')+'></i>'}).join('')+'</span>';
+        var inner='<span class="cell han">'+l[1]+'</span><span class="nm"><span>'+parts[0].trim()+'</span><span class="han" lang="zh-CN">'+(parts[1]||'').trim()+'</span></span>'+sq;
+        h+='<li'+(me?' class="here"':'')+'>'+(me?'<button class="row" data-open>'+inner+'</button>':'<a href="../'+l[4]+'">'+inner+'</a>')+'</li>'});
+      h+='</ul>'})});
+  $('#toc').innerHTML=h;$$('[data-open]').forEach(function(b){b.onclick=function(){open(S.pos)}});
+}
+
+/* ---------- lesson ---------- */
+var built=false,showPy=true,showAr=true;
+function open(pos){location.hash='lesson';}
+function render(){
+  if(location.hash==='#lesson'){$('#home').hidden=true;$('#lesson').hidden=false;if(!built)buildLesson();refresh();if(S.pos&&!render.j){render.j=1;var t=document.getElementById('s-'+S.pos);t&&t.scrollIntoView()}else window.scrollTo(0,0)}
+  else{$('#lesson').hidden=true;$('#home').hidden=false;render.j=0;home();window.scrollTo(0,0)}
+}
+addEventListener('hashchange',render);
+$('#back').onclick=function(){location.hash='home'};
+function textWords(t){var all=t.lines.map(function(l){return l.zh}).join('');return D.vocab.filter(function(v){return all.indexOf(v[0])>=0})}
+function lineHtml(l,ti,li){var g=LS.gramOf(l.zh),gi=g.map(function(x){return D.gram.indexOf(x)+1});
+  return'<div class="ln'+(g.length?' g':'')+'"><span class="cell who han" aria-hidden="true">'+l.av+'</span><div><div class="nm">'+l.name+'</div>'+
+    '<button class="say" data-t="'+ti+'" data-l="'+li+'" aria-label="استمع إلى الجملة واعرض كلماتها"><div class="p" data-py>'+esc(LS.linePy(l))+'</div><div class="z han" lang="zh-CN">'+esc(l.zh)+'</div></button>'+
+    '<div class="a" data-ar>'+esc(l.ar)+'</div>'+(gi.length?'<div class="gm">'+gi.map(function(n){return'<i>'+n+'</i>'}).join('')+' في الحاشية</div>':'')+'<div class="ws" hidden></div></div></div>'}
+function buildLesson(){
+  built=true;$('#lt').textContent=D.meta.ar;$('#lz').textContent=D.meta.zh;
+  $('#map').innerHTML=STEPS.map(function(s){return'<button data-go="'+s.id+'" aria-label="'+s.n+'"><span class="han">'+s.c+'</span>'+s.n+'</button>'}).join('');
+  $$('#map button').forEach(function(b){b.onclick=function(){document.getElementById('s-'+b.dataset.go).scrollIntoView({behavior:LS.reduce?'auto':'smooth'})}});
+  var h='';
+  /* ① read */
+  h+='<section class="sec" id="s-read"><h2><span class="cell han">读</span>اقرأ</h2><p class="lead">'+LS.zh(D.meta.intro)+'</p>'+
+    '<div class="tgls"><button class="tgl" id="tPy" aria-pressed="true">البينيين</button><button class="tgl" id="tAr" aria-pressed="true">الترجمة</button></div>';
+  D.texts.forEach(function(t,ti){
+    var gs={};t.lines.forEach(function(l){LS.gramOf(l.zh).forEach(function(g){gs[g.id]=g})});
+    h+='<div class="sheet"><h3>'+esc(t.h)+'</h3><p class="scene">'+esc(t.scene)+'</p>'+t.lines.map(function(l,li){return lineHtml(l,ti,li)}).join('');
+    Object.keys(gs).forEach(function(k){var g=gs[k],n=D.gram.indexOf(g)+1;
+      h+='<div class="margin"><h4><i>'+n+'</i>'+esc(g.t)+'</h4><div class="f">'+esc(g.f)+'</div><p>'+LS.zh(g.ar)+'</p>'+g.ex.slice(0,2).map(function(e){return'<div class="eg"><span class="han" lang="zh-CN">'+esc(e[0])+'</span> <span class="py" style="color:var(--mut);font-size:14px">'+esc(e[1])+'</span></div>'}).join('')+'</div>'});
+    h+='<div class="vgrid">'+textWords(t).map(function(v){return'<button class="vw'+(S.words[v[0]]?' k':'')+'" data-w="'+esc(v[0])+'"><span class="cell han'+(v[0].length>2?' w3':'')+'" lang="zh-CN">'+esc(v[0])+'</span><small><span class="py" dir="ltr">'+esc(v[1])+'</span><br>'+esc(v[2])+'</small></button>'}).join('')+'</div></div>'});
+  h+='<button class="btn ink done-btn" data-fin="read">أنهيت القراءة</button></section>';
+  /* ② listen */
+  h+='<section class="sec" id="s-listen"><h2><span class="cell han">听</span>اسمع</h2><p class="lead">اضغط «استمع» ثم اختر الجملة التي سمعتها.</p><div id="lq"></div></section>';
+  /* ③ speak */
+  var keys=D.gram.map(function(g){return[g.key,g.kpy,g.t]});
+  h+='<section class="sec" id="s-speak"><h2><span class="cell han">说</span>تكلّم</h2><p class="lead">استمع إلى كل جملة مفتاحية، ثم قلها بصوت عالٍ مرتين، واضغط «قلتها».</p><div class="sheet">'+
+    keys.map(function(k,i){return'<div class="shad"><button class="ibtn" data-sayk="'+i+'" aria-label="استمع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg></button><div><div class="z han" lang="zh-CN">'+esc(k[0])+'</div><div class="p">'+esc(k[1])+'</div><div style="font-size:14px;color:var(--mut)">'+esc(k[2])+'</div></div><div class="acts"><button class="btn pen" data-said="'+i+'">قلتها</button></div></div>'}).join('')+'</div></section>';
+  /* ④ write */
+  h+='<section class="sec" id="s-write"><h2><span class="cell han">写</span>اكتب</h2><p class="lead">رتّب الجمل وأكملها بالقلم.</p><div id="wq"></div></section>';
+  /* ⑤ review */
+  h+='<section class="sec" id="s-review"><h2><span class="cell han">复</span>راجع</h2><p class="lead">صِل الكلمات، ثم أجب عن أسئلة النصوص.</p><div id="rq"></div></section>';
+  $('#secs').innerHTML=h;
+  /* wire read */
+  $$('.ln button.say').forEach(function(b){b.onclick=function(){var l=D.texts[+b.dataset.t].lines[+b.dataset.l];LS.say(l.zh);var ws=b.parentNode.querySelector('.ws');
+    if(ws.hidden){ws.innerHTML=LS.lineWords(l).map(function(w){return'<button data-sw="'+esc(w[0])+'"><b lang="zh-CN">'+esc(w[0])+'</b><small>'+esc(w[2])+'</small></button>'}).join('');ws.hidden=false;
+      $$('button',ws).forEach(function(x){x.onclick=function(){LS.say(x.dataset.sw)}})}}});
+  $('#tPy').onclick=function(){showPy=!showPy;this.setAttribute('aria-pressed',showPy);$$('[data-py]').forEach(function(e){e.hidden=!showPy})};
+  $('#tAr').onclick=function(){showAr=!showAr;this.setAttribute('aria-pressed',showAr);$$('[data-ar]').forEach(function(e){e.hidden=!showAr})};
+  $$('.vw').forEach(function(b){b.onclick=function(){LS.say(b.dataset.w);if(!S.words[b.dataset.w]){S.words[b.dataset.w]=1;LS.save();b.classList.add('k');LS.xp(2,b)}}});
+  $$('[data-fin]').forEach(function(b){b.onclick=function(){finish(b.dataset.fin,b)}});
+  /* listen: pick the sentence you heard */
+  var lsn=D.order.slice(0,4),lc=0;
+  lsn.forEach(function(it,i){var others=LS.shuffle(D.order.filter(function(x){return x!==it})).slice(0,2);
+    var q=LS.mcq({q:'جملة رقم '+(i+1),o:[it.zh].concat(others.map(function(x){return x.zh})),a:0,why:it.ar},function(){if(++lc===lsn.length)finish('listen')});
+    var pb=document.createElement('button');pb.className='btn pen';pb.style.marginBottom='8px';pb.innerHTML='استمع';pb.onclick=function(){LS.say(it.zh)};q.insertBefore(pb,q.children[1]);$('#lq').appendChild(q)});
+  /* speak */
+  var said=0;$$('[data-sayk]').forEach(function(b){b.onclick=function(){LS.say(keys[+b.dataset.sayk][0],true)}});
+  $$('[data-said]').forEach(function(b){b.onclick=function(){if(b.disabled)return;b.disabled=true;b.textContent='✓';LS.xp(3,b);if(++said===keys.length)finish('speak')}});
+  /* write */
+  var wc=0,W=[LS.order(D.order[1],wdone),LS.fill(D.fill[0],wdone),LS.order(D.order[5],wdone),LS.fill(D.fill[3],wdone),LS.order(D.order[8],wdone),LS.fill(D.fill[6],wdone)];
+  function wdone(){if(++wc===W.length)finish('write')}W.forEach(function(e){$('#wq').appendChild(e)});
+  /* review */
+  var rc=0,R=[LS.match(D.match[0].slice(0,5),rdone),LS.mcq(D.quiz[0],rdone),LS.mcq(D.quiz[3],rdone),LS.mcq(D.quiz[1],rdone)];
+  function rdone(){if(++rc===R.length)finish('review')}R.forEach(function(e){$('#rq').appendChild(e)});
+  /* where the student is: the section in view */
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){S.pos=e.target.id.slice(2);LS.save();refresh()}})},{rootMargin:'-45% 0px -50% 0px'});
+    STEPS.forEach(function(s){io.observe(document.getElementById('s-'+s.id))})}
+}
+function finish(id,el){if(!S.done[id]){LS.mark(id);LS.xp(10,el||document.getElementById('s-'+id));LS.toast('أتممت خطوة «'+STEPS.filter(function(s){return s.id===id})[0].n+'»')}refresh()}
+function refresh(){
+  $('#xpb').textContent=S.xp+' نقطة';
+  $$('#map button').forEach(function(b){b.classList.toggle('on',!!S.done[b.dataset.go]);b.classList.toggle('cur',S.pos===b.dataset.go&&!S.done[b.dataset.go])});
+  var left=STEPS.filter(function(s){return!S.done[s.id]}).reduce(function(a,s){return a+s.m},0);
+  $('#plan').innerHTML='<h2>خطة اليوم · ١٥ دقيقة</h2><div style="color:var(--mut);font-size:15px">'+(left?'بقي نحو '+left+' دقائق':'أتممت درس اليوم')+' · اليوم '+S.today+' نقطة</div><ol>'+
+    STEPS.map(function(s){return'<li'+(S.done[s.id]?' class="on"':'')+'><span>'+s.n+'</span><span>'+s.m+' د</span></li>'}).join('')+'</ol>';
+  var all=STEPS.every(function(s){return S.done[s.id]});
+  $('#end').innerHTML=all?'<div class="big han">好!</div><p style="margin:6px 0">أتممت الدرس العاشر كاملًا: '+S.xp+' نقطة.</p><button class="btn ink" onclick="location.hash=\'home\'">إلى الفهرس</button>':
+    '<p style="margin:0">حين تُتمّ الخطوات الخمس تُختم صفحة الدرس.</p>';
+  if(all)$('#end').dataset.complete='1';
+}
+document.addEventListener('xp',function(){$('#xpb').textContent=S.xp+' نقطة'});
+render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>النافذة · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Direction 2 — the lattice window: the Arab mashrabiya and the Chinese 窗棂 are both screens of light.
+   The dialogue is the lesson; words and grammar are opened from inside its sentences. */
+:root{--bg:#edf3f5;--pane:#fbfdfd;--pane2:#f2f7f8;--ink:#17222a;--mut:#53626c;--wood:#6b4426;--wood2:#a3734d;--tq:#0b7480;--tq-soft:rgba(11,116,128,.10);--line:#d4e0e4;--xp:#0b7480;--light:rgba(255,230,170,.35);
+  --font-ar:"Readex Pro",system-ui,sans-serif;--font-han:"Noto Sans SC","Noto Sans CJK SC",sans-serif;--font-py:"Readex Pro",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1216;--pane:#131b20;--pane2:#18232a;--ink:#e5eef1;--mut:#97aab3;--wood:#b98656;--wood2:#7d5737;--tq:#43c6cf;--tq-soft:rgba(67,198,207,.12);--line:#25343c;--xp:#43c6cf;--light:rgba(255,200,120,.08);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1216;--pane:#131b20;--pane2:#18232a;--ink:#e5eef1;--mut:#97aab3;--wood:#b98656;--wood2:#7d5737;--tq:#43c6cf;--tq-soft:rgba(67,198,207,.12);--line:#25343c;--xp:#43c6cf;--light:rgba(255,200,120,.08);color-scheme:dark}
+/*BASECSS*/
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--font-ar)}
+button{font:inherit;color:inherit}
+.han{font-family:var(--font-han)}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 40px}
+.lattice{display:block;width:calc(100% + 32px);height:30px;margin:0 -16px}
+.ibtn{min-width:44px;min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--pane);display:grid;place-items:center;cursor:pointer}
+.ibtn svg{width:22px;height:22px}
+.btn{min-height:48px;padding:0 18px;border-radius:10px;border:1.5px solid var(--wood);background:var(--pane);font:600 16px var(--font-ar);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.tq{background:var(--tq);border-color:var(--tq);color:var(--pane)}
+.top{display:flex;align-items:center;gap:12px;padding:10px 0}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:700 26px/1.2 var(--font-han);color:var(--wood)}
+.top p{margin:0;color:var(--mut);font-size:14px}
+/* ---------- home: window of panes ---------- */
+.resume{display:flex;gap:12px;align-items:center;padding:12px;border-radius:14px;background:var(--pane);border:1.5px solid var(--wood);margin:6px 0 14px;
+  background-image:linear-gradient(120deg,var(--light),transparent 60%)}
+.resume .win{flex:none;width:64px;height:64px;border-radius:8px;border:3px solid var(--wood);display:grid;place-items:center;font:700 30px var(--font-han);color:var(--wood);background:var(--pane2)}
+.resume .sp{flex:1;min-width:0;line-height:1.4}
+.resume small{color:var(--tq);font-weight:600}
+.lvls{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin:0 0 10px;scrollbar-width:none}
+.lvls button{flex:none;min-height:44px;padding:0 14px;border-radius:22px;border:1px solid var(--line);background:var(--pane);cursor:pointer;font-size:14.5px}
+.lvls button[aria-pressed="true"]{background:var(--wood);border-color:var(--wood);color:var(--pane)}
+.crs{margin:14px 0}
+.crs h2{margin:0;font:600 18px var(--font-ar)}
+.crs .bk{color:var(--mut);font-size:13.5px}
+.frame{margin-top:8px;padding:8px;border-radius:12px;background:var(--wood);display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.pn{aspect-ratio:1;min-height:44px;border:0;border-radius:6px;background:var(--pane);cursor:pointer;position:relative;display:grid;place-items:center;overflow:hidden;font:700 22px var(--font-han);color:var(--wood)}
+.pn svg{position:absolute;inset:0;width:100%;height:100%;opacity:.0}
+.pn.p1 svg{opacity:.35}.pn.p2 svg{opacity:.7}.pn.p3 svg{opacity:1}
+.pn span{position:relative;background:var(--pane);border-radius:50%;width:38px;height:38px;display:grid;place-items:center}
+.pn.here{outline:3px solid var(--tq);outline-offset:-3px}
+.sheet{position:fixed;inset:auto 0 0 0;z-index:30;background:var(--pane);border-radius:18px 18px 0 0;border-top:3px solid var(--wood);padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.25);max-width:720px;margin:0 auto;transform:translateY(105%);transition:transform .3s}
+.sheet.open{transform:none}
+.sheet:not(.open){visibility:hidden;transition:transform .3s,visibility 0s .3s}
+.sheet h3{margin:0 0 4px;font:700 20px var(--font-ar)}
+.sheet .row{display:flex;gap:8px;margin-top:12px}
+.sheet .row>*{flex:1}
+.scrim{position:fixed;inset:0;z-index:29;background:rgba(0,0,0,.35);opacity:0;pointer-events:none;transition:.3s}
+.scrim.open{opacity:1;pointer-events:auto}
+/* ---------- lesson ---------- */
+.lhdr{position:sticky;top:0;z-index:20;background:var(--bg);margin:0 -16px;padding:8px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line)}
+.lhdr .sp{flex:1;min-width:0;line-height:1.3}
+.lhdr b{display:block;font-size:16.5px}
+.lhdr .han{color:var(--mut);font-size:14px}
+.basketBtn{min-height:44px;padding:0 12px;border-radius:22px;border:1.5px solid var(--tq);background:var(--pane);color:var(--tq);font:600 14px var(--font-ar);cursor:pointer;display:flex;gap:6px;align-items:center}
+.basketBtn b{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:11px;background:var(--tq);color:var(--pane);font-size:12.5px}
+.steps{display:flex;gap:6px;margin:12px 0 4px}
+.steps button{flex:1;min-height:44px;border-radius:8px;border:1px solid var(--line);background:var(--pane);cursor:pointer;font-size:13.5px;color:var(--mut);padding:2px}
+.steps button.on{border-color:var(--wood);color:var(--ink);box-shadow:inset 0 -3px 0 var(--wood)}
+.steps button.ok{background:var(--tq-soft);color:var(--tq);border-color:var(--tq)}
+.xp{font:700 14px var(--font-py);color:var(--tq);min-width:52px;text-align:center}
+.scene{display:none}.scene.cur{display:block;animation:in .35s ease both}
+.scene>h2{margin:10px 0 0;font:700 22px var(--font-ar)}
+.scene .desc{color:var(--mut);margin:0 0 8px}
+.opts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.tg{min-height:44px;padding:0 12px;border-radius:22px;border:1px solid var(--line);background:var(--pane);cursor:pointer;font-size:14px}
+.tg[aria-pressed="true"]{border-color:var(--tq);color:var(--tq);background:var(--tq-soft)}
+.thread{display:grid;gap:10px}
+.who{display:flex;gap:10px;align-items:flex-start}
+.who.r{flex-direction:row-reverse}
+.av{flex:none;width:44px;height:44px;border-radius:10px;background:var(--wood);color:var(--pane);display:grid;place-items:center;font:700 20px var(--font-han);position:relative;overflow:hidden}
+.av::after{content:"";position:absolute;inset:3px;border:1.5px solid rgba(255,255,255,.35);border-radius:7px}
+.pw{flex:1;min-width:0}
+.pw .nm{font-size:12.5px;color:var(--mut);margin:0 4px 2px}
+.pane{display:block;width:100%;text-align:left;direction:ltr;border:1.5px solid var(--line);border-radius:4px 14px 14px 14px;background:var(--pane);padding:10px 12px;cursor:pointer;min-height:48px;position:relative}
+.who.r .pane{border-radius:14px 4px 14px 14px}
+.pane .z{font:500 20px/1.6 var(--font-han)}
+.pane .p{font:400 13.5px/1.4 var(--font-py);color:var(--tq)}
+.pane.open{border-color:var(--wood);background-image:linear-gradient(160deg,var(--light),transparent 55%)}
+.pane.g::before{content:"";position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:2px;background:var(--wood2);transform:rotate(45deg)}
+.inner{margin-top:6px;padding:8px 10px;border-radius:10px;background:var(--pane2)}
+.inner .a{font-size:15.5px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;direction:ltr}
+.chip{min-height:44px;min-width:44px;padding:2px 10px;border-radius:10px;border:1px solid var(--line);background:var(--pane);cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.25}
+.chip b{font:500 17px var(--font-han)}.chip small{font-size:11.5px;color:var(--mut);direction:rtl}
+.chip.in{border-color:var(--tq);background:var(--tq-soft)}
+.lensbtn{margin-top:8px;min-height:44px;width:100%;border-radius:10px;border:1.5px dashed var(--wood);background:none;cursor:pointer;color:var(--wood);font:600 14.5px var(--font-ar);display:flex;align-items:center;justify-content:center;gap:6px}
+.lens{margin-top:8px;padding:10px 12px;border-radius:10px;border:1.5px solid var(--wood);background:var(--pane)}
+.lens h4{margin:0;font:700 16px var(--font-ar);color:var(--wood)}
+.lens .f{font:600 14px var(--font-py);direction:ltr;text-align:left}
+.lens .eg{direction:ltr;text-align:left;font-size:14px;color:var(--mut)}.lens .eg .han{font-size:17px;color:var(--ink)}
+.check{margin-top:18px;padding:12px;border-radius:14px;border:2px solid var(--wood);background:var(--pane)}
+.check>h3{margin:0 0 4px;font:700 18px var(--font-ar);display:flex;align-items:center;gap:8px}
+.next{width:100%;margin-top:12px}
+/* exercises behind glass */
+.q{padding:12px;border-radius:12px;background:var(--pane2);margin:10px 0}
+.q-p{font-weight:600;margin-bottom:8px}.q-p .han{font-size:18px}
+.q-ar{color:var(--mut);font-weight:400}
+.q-opts{display:grid;gap:8px}.q-row{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+.q-o{min-height:48px;border-radius:10px;border:1.5px solid var(--line);background:var(--pane);cursor:pointer;text-align:start;padding:6px 12px;font:500 15.5px var(--font-ar)}
+.q-o .han{font-size:18px}
+.q-o.ok{border-color:var(--tq);background:var(--tq-soft)}.q-o.bad{border-color:#c2410c;opacity:.7}
+.q-sent{font:500 21px/2 var(--font-han);text-align:left}
+.q-blank{display:inline-block;min-width:64px;border-bottom:2px solid var(--wood);text-align:center}
+.q-ans{min-height:56px;border-radius:10px;border:2px dashed var(--wood2);padding:5px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.q-pool{display:flex;flex-wrap:wrap;gap:6px}
+.q-tok{min-height:46px;min-width:46px;padding:0 10px;border-radius:8px;border:1.5px solid var(--wood);background:var(--pane);cursor:pointer;font:500 19px var(--font-han)}
+.q-mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.q-col{display:grid;gap:6px;align-content:start}
+.q-m{min-height:48px;border-radius:10px;border:1.5px solid var(--line);background:var(--pane);cursor:pointer;font-size:15px}
+.q-m .han{font-size:19px}.q-m.sel{border-color:var(--wood)}.q-m.ok{border-color:var(--tq);opacity:.55}.q-m.bad{border-color:#c2410c}
+.q-why{margin-top:8px;font-size:14.5px;color:var(--mut)}.q-why b{color:var(--tq)}
+.done{padding:16px;border-radius:16px;background:var(--pane);border:2px solid var(--tq);text-align:center;margin-top:14px}
+.done .big{font:700 40px var(--font-han);color:var(--tq)}
+/* basket */
+#basket .list{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;max-height:45vh;overflow:auto;margin-top:8px}
+#basket .list button{min-height:52px;border-radius:10px;border:1px solid var(--line);background:var(--pane2);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.3;padding:4px}
+#basket .list b{font:500 18px var(--font-han)}#basket .list small{font-size:12px;color:var(--mut)}
+#basket .list button.in{border-color:var(--tq)}
+footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+:focus-visible{outline:3px solid var(--tq);outline-offset:2px}
+@media (min-width:900px){.wrap{max-width:900px}.frame{grid-template-columns:repeat(10,1fr)}.thread{gap:12px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <pattern id="lat" width="24" height="24" patternUnits="userSpaceOnUse"><rect width="24" height="24" fill="var(--wood)"/><rect x="2" y="2" width="20" height="20" fill="var(--pane)"/><path d="M12 3l9 9-9 9-9-9z" fill="none" stroke="var(--wood)" stroke-width="2"/><rect x="8" y="8" width="8" height="8" fill="none" stroke="var(--wood2)" stroke-width="1.5"/></pattern>
+</defs></svg>
+<div class="wrap">
+<svg class="lattice" viewBox="0 0 480 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="480" height="30" fill="url(#lat)"/></svg>
+<!-- ======== HOME ======== -->
+<section id="home">
+  <header class="top"><div class="sp"><h1>汉语加油站</h1><p>كل نافذة درس. افتح أيّها شئت.</p></div>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button></header>
+  <div class="resume" id="resumeBox"></div>
+  <div class="lvls" id="lvls" role="group" aria-label="المستوى"></div>
+  <div id="frames"></div>
+</section>
+<!-- ======== LESSON ======== -->
+<section id="lesson" hidden>
+  <div class="lhdr">
+    <button class="ibtn" id="back" aria-label="النوافذ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="sp"><b id="lt"></b><span class="han" id="lz" lang="zh-CN"></span></div>
+    <span class="xp" id="xp"></span>
+    <button class="basketBtn" id="basketBtn">سلّتي <b id="bn">0</b></button>
+  </div>
+  <nav class="steps" id="steps" aria-label="المشاهد"></nav>
+  <div id="scenes"></div>
+</section>
+<footer><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="lsheet" role="dialog" aria-modal="true" aria-label="الدرس"></div>
+<div class="sheet" id="basket" role="dialog" aria-modal="true" aria-label="سلّتي">
+  <h3>سلّتي</h3><p style="margin:0;color:var(--mut);font-size:14px" id="bsub"></p><div class="list" id="blist"></div>
+  <div class="row"><button class="btn" id="allWords">كل كلمات الدرس</button><button class="btn tq" id="closeBasket">إغلاق</button></div>
+</div>
+<script>var PAGE_KEY='labs-d2',PAGE_LESSON_KEY='noor-gram10-v1';</script>
+<script>/*COMMON*/</script>
+<script>
+(function(){
+'use strict';
+var D=DATA,S=LS.S,$=LS.$,$$=LS.$$,esc=LS.esc;S.scene=S.scene||0;
+$$('[data-theme-btn]').forEach(function(b){b.onclick=LS.toggleTheme});
+var latSvg='<svg viewBox="0 0 48 48" preserveAspectRatio="none"><rect width="48" height="48" fill="url(#lat)"/></svg>';
+/* ---------- home ---------- */
+var lvSel=1;
+function home(){
+  var sc=['المشهد الأول','المشهد الثاني','المشهد الثالث','الختام'][Math.min(3,S.scene)];
+  $('#resumeBox').innerHTML='<div class="win" aria-hidden="true">'+D.meta.nz+'</div><div class="sp"><small>آخر نافذة فتحتها</small><div><b>'+D.meta.ar+'</b> · <span class="han" lang="zh-CN">'+D.meta.zh+'</span></div><div style="color:var(--mut);font-size:13.5px">'+sc+' · '+S.xp+' نقطة</div></div><button class="btn tq" id="resume">افتح</button>';
+  $('#resume').onclick=function(){location.hash='lesson'};
+  $('#lvls').innerHTML=D.hub.levels.map(function(l){return'<button aria-pressed="'+(l.n===lvSel)+'" data-lv="'+l.n+'">'+l.t+'</button>'}).join('');
+  $$('#lvls button').forEach(function(b){b.onclick=function(){lvSel=+b.dataset.lv;home()}});
+  var lv=D.hub.levels.filter(function(l){return l.n===lvSel})[0],h='';
+  lv.c.forEach(function(ck){var c=D.hub.courses[ck];if(!c)return;
+    h+='<div class="crs"><h2>'+c.name+'</h2><div class="bk han" lang="zh-CN">'+c.book+'</div><div class="frame">';
+    c.l.forEach(function(l,i){var me=l[4]===D.meta.file,x=me?S.xp:LS.lessonXp(l[5]),p=x>=300?3:x>=120?2:x>0?1:0;
+      h+='<button class="pn p'+p+(me?' here':'')+'" data-c="'+ck+'" data-i="'+i+'" aria-label="'+esc(l[2])+'">'+latSvg+'<span>'+l[1]+'</span></button>'});
+    h+='</div></div>'});
+  $('#frames').innerHTML=h+'<p style="color:var(--mut);font-size:13.5px">كلما تقدّمت في درس امتلأت نافذته بالنقش.</p>';
+  $$('.pn').forEach(function(b){b.onclick=function(){var l=D.hub.courses[b.dataset.c].l[+b.dataset.i],me=l[4]===D.meta.file,parts=l[2].split('·');
+    $('#lsheet').innerHTML='<h3>'+esc(parts[0])+' · <span class="han" lang="zh-CN">'+esc((parts[1]||'').trim())+'</span></h3><p style="margin:0;color:var(--mut)">'+esc(l[3])+'</p>'+
+      '<div class="row">'+(me?'<button class="btn tq" id="goL">افتح الدرس</button>':'<a class="btn tq" style="text-decoration:none" href="../'+l[4]+'">افتح الدرس</a>')+'<button class="btn" id="closeL">إغلاق</button></div>';
+    openSheet('lsheet');$('#closeL').onclick=closeSheets;if(me)$('#goL').onclick=function(){closeSheets();location.hash='lesson'}}});
+}
+function openSheet(id){$('#'+id).classList.add('open');$('#scrim').classList.add('open')}
+function closeSheets(){$$('.sheet').forEach(function(s){s.classList.remove('open')});$('#scrim').classList.remove('open')}
+$('#scrim').onclick=closeSheets;
+/* ---------- lesson: the dialogue is the lesson ---------- */
+var built=false,showPy=true,showAr=false;
+var CHECK=[[0,1,'这个星期天我们也去爬山。'],[4,3,'这个星期天你忙不忙？'],[5,2,'我们休息一下吧。']];
+function byZh(z){return D.order.filter(function(o){return o.zh===z})[0]||D.order[0]}
+function buildLesson(){
+  built=true;$('#lt').textContent=D.meta.ar;$('#lz').textContent=D.meta.zh;
+  var names=['المشهد ١','المشهد ٢','المشهد ٣','الختام'];
+  $('#steps').innerHTML=names.map(function(n,i){return'<button data-s="'+i+'">'+n+'</button>'}).join('');
+  $$('#steps button').forEach(function(b){b.onclick=function(){go(+b.dataset.s)}});
+  var h='';
+  D.texts.forEach(function(t,ti){
+    var first=t.lines[0].who;
+    h+='<section class="scene" data-s="'+ti+'"><h2>'+esc(t.h)+'</h2><p class="desc">'+esc(t.scene)+'</p>'+
+      '<div class="opts"><button class="tg" data-tpy aria-pressed="'+showPy+'">البينيين</button><button class="tg" data-tar aria-pressed="'+showAr+'">الترجمة دائمًا</button></div>'+
+      '<p style="margin:0 0 8px;font-size:14px;color:var(--mut)">اضغط أي جملة لتسمعها وتفتح كلماتها. الجمل ذات المعيّن فيها قاعدة.</p><div class="thread">';
+    t.lines.forEach(function(l,li){var g=LS.gramOf(l.zh);
+      h+='<div class="who'+(l.who!==first?' r':'')+'"><span class="av" aria-hidden="true">'+esc(l.av)+'</span><div class="pw"><div class="nm">'+esc(l.name)+'</div>'+
+        '<button class="pane'+(g.length?' g':'')+'" data-t="'+ti+'" data-l="'+li+'"><div class="p" data-py'+(showPy?'':' hidden')+'>'+esc(LS.linePy(l))+'</div><div class="z han" lang="zh-CN">'+esc(l.zh)+'</div></button>'+
+        '<div class="inner" hidden><div class="a">'+esc(l.ar)+'</div><div class="chips">'+LS.lineWords(l).map(function(w){return'<button class="chip'+(S.words[w[0]]?' in':'')+'" data-w="'+esc(w[0])+'" data-g="'+esc(w[2])+'" data-p="'+esc(w[1])+'"><b lang="zh-CN">'+esc(w[0])+'</b><small>'+esc(w[2])+'</small></button>'}).join('')+'</div>'+
+        g.map(function(x){return'<button class="lensbtn" data-gid="'+x.id+'">عدسة القاعدة: '+esc(x.t)+'</button><div class="lens" hidden data-lens="'+x.id+'"><h4>'+esc(x.t)+'</h4><div class="f">'+esc(x.f)+'</div><p style="margin:4px 0">'+LS.zh(x.ar)+'</p>'+x.ex.map(function(e){return'<div class="eg"><span class="han" lang="zh-CN">'+esc(e[0])+'</span> '+esc(e[1])+'</div>'}).join('')+'</div>'}).join('')+
+        '</div><div class="a-al" data-ar'+(showAr?'':' hidden')+' style="font-size:14.5px;color:var(--mut);margin:2px 4px 0">'+esc(l.ar)+'</div></div></div>'});
+    h+='</div><div class="check" id="chk'+ti+'"><h3>تحقّق من المشهد</h3></div><button class="btn tq next" data-next hidden>'+(ti<2?'المشهد التالي':'إلى الختام')+'</button></section>'});
+  h+='<section class="scene" data-s="3"><h2>الختام</h2><p class="desc">صِل كلمات من سلّتك بمعانيها، ثم أجب عن سؤال القواعد.</p><div id="fin"></div><div id="doneBox"></div></section>';
+  $('#scenes').innerHTML=h;
+  $$('.pane').forEach(function(b){b.onclick=function(){var l=D.texts[+b.dataset.t].lines[+b.dataset.l],inn=b.parentNode.querySelector('.inner');LS.say(l.zh);
+    if(inn.hidden){inn.hidden=false;b.classList.add('open');if(!b.dataset.seen){b.dataset.seen=1;LS.xp(1,b)}}else{inn.hidden=true;b.classList.remove('open')}}});
+  $$('.chip').forEach(function(c){c.onclick=function(){LS.say(c.dataset.w);if(!S.words[c.dataset.w]){S.words[c.dataset.w]=[c.dataset.p,c.dataset.g];LS.save();LS.xp(2,c);basketN()}$$('.chip[data-w="'+c.dataset.w+'"]').forEach(function(x){x.classList.add('in')})}});
+  $$('.lensbtn').forEach(function(b){b.onclick=function(){var ln=b.nextElementSibling;ln.hidden=!ln.hidden;if(!ln.hidden&&!S.done['lens-'+b.dataset.gid]){LS.mark('lens-'+b.dataset.gid);LS.xp(3,b)}}});
+  $$('[data-tpy]').forEach(function(b){b.onclick=function(){showPy=!showPy;$$('[data-tpy]').forEach(function(x){x.setAttribute('aria-pressed',showPy)});$$('[data-py]').forEach(function(e){e.hidden=!showPy})}});
+  $$('[data-tar]').forEach(function(b){b.onclick=function(){showAr=!showAr;$$('[data-tar]').forEach(function(x){x.setAttribute('aria-pressed',showAr)});$$('[data-ar]').forEach(function(e){e.hidden=!showAr})}});
+  CHECK.forEach(function(c,ti){var n=0,box=$('#chk'+ti),tot=3,done=function(){if(++n===tot){LS.mark('scene'+ti);$('.scene[data-s="'+ti+'"] [data-next]').hidden=false;steps()}};
+    box.appendChild(LS.mcq(D.quiz[c[0]],done));box.appendChild(LS.mcq(D.quiz[c[1]],done));box.appendChild(LS.order(byZh(c[2]),done))});
+  $$('[data-next]').forEach(function(b){b.onclick=function(){go(S.scene+1)}});
+  var fc=0,fin=function(){if(++fc===2){LS.mark('final');LS.xp(20,$('#fin'));$('#doneBox').innerHTML='<div class="done" data-complete="1"><div class="big han">好!</div><p style="margin:4px 0">فتحت نوافذ الدرس الثلاث: '+S.xp+' نقطة، و'+Object.keys(S.words).length+' كلمة في سلّتك.</p><button class="btn tq" onclick="location.hash=\'home\'">إلى النوافذ</button></div>';steps()}};
+  var picked=Object.keys(S.words).slice(0,5).map(function(w){return[w,S.words[w][1]]});
+  var pairs=picked.length>=3?picked:D.match[0].slice(0,5);
+  $('#fin').appendChild(LS.match(pairs,fin));$('#fin').appendChild(LS.mcq(D.quiz[6],fin));
+  if(S.done.final)fin.call(null,fc=1);
+}
+function go(i){S.scene=Math.max(0,Math.min(3,i));LS.save();$$('.scene').forEach(function(s){s.classList.toggle('cur',+s.dataset.s===S.scene)});steps();window.scrollTo(0,0)}
+function steps(){$$('#steps button').forEach(function(b,i){b.classList.toggle('on',i===S.scene);b.classList.toggle('ok',!!S.done[i<3?'scene'+i:'final'])})}
+function basketN(){$('#bn').textContent=Object.keys(S.words).length}
+$('#basketBtn').onclick=function(){var ks=Object.keys(S.words);$('#bsub').textContent=ks.length?ks.length+' كلمة جمعتها من الحوار. اضغط لتسمع.':'لم تجمع كلمات بعد: افتح جملة واضغط كلماتها.';
+  $('#blist').innerHTML=ks.map(function(w){return'<button data-w="'+esc(w)+'"><b lang="zh-CN">'+esc(w)+'</b><small>'+esc(S.words[w][1]||'')+'</small></button>'}).join('');wireList();openSheet('basket')};
+$('#allWords').onclick=function(){$('#bsub').textContent='كل كلمات الدرس ('+D.vocab.length+'). المحاطة بالفيروزي في سلّتك.';
+  $('#blist').innerHTML=D.vocab.map(function(v){return'<button class="'+(S.words[v[0]]?'in':'')+'" data-w="'+esc(v[0])+'"><b lang="zh-CN">'+esc(v[0])+'</b><small>'+esc(v[2])+'</small></button>'}).join('');wireList()};
+function wireList(){$$('#blist button').forEach(function(b){b.onclick=function(){LS.say(b.dataset.w)}})}
+$('#closeBasket').onclick=closeSheets;
+$('#back').onclick=function(){location.hash='home'};
+document.addEventListener('xp',function(){$('#xp').textContent=S.xp+' نقطة'});
+function render(){closeSheets();if(location.hash==='#lesson'){$('#home').hidden=true;$('#lesson').hidden=false;if(!built)buildLesson();$('#xp').textContent=S.xp+' نقطة';basketN();go(S.scene)}
+  else{$('#lesson').hidden=true;$('#home').hidden=false;home();window.scrollTo(0,0)}}
+addEventListener('hashchange',render);render();
+})();
+</script>
+</body>
+</html>

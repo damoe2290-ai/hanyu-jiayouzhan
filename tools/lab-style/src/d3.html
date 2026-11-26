@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>جلسة الشاي · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;600;700&family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Direction 3 — the tea session: a lesson poured into three cups of about five minutes.
+   One card at a time, celadon glaze and tea liquor, rounded like a cup. */
+:root{--bg:#e8efe9;--card:#f9fbf8;--card2:#eef4ef;--ink:#1d2a22;--mut:#566a5d;--cel:#4f8a6a;--cel-soft:rgba(79,138,106,.13);--tea:#9a5b1d;--tea2:#c98a2b;--line:#cfdcd2;--xp:#9a5b1d;
+  --font-ar:"El Messiri",system-ui,sans-serif;--font-han:"ZCOOL XiaoWei","Noto Serif SC",serif;--font-han2:"Noto Serif SC",serif;--font-py:system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101814;--card:#17221c;--card2:#1d2a23;--ink:#e6efe8;--mut:#9fb5a7;--cel:#88c4a2;--cel-soft:rgba(136,196,162,.13);--tea:#e7a650;--tea2:#f0bf6e;--line:#27372e;--xp:#e7a650;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101814;--card:#17221c;--card2:#1d2a23;--ink:#e6efe8;--mut:#9fb5a7;--cel:#88c4a2;--cel-soft:rgba(136,196,162,.13);--tea:#e7a650;--tea2:#f0bf6e;--line:#27372e;--xp:#e7a650;color-scheme:dark}
+/*BASECSS*/
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 var(--font-ar)}
+button{font:inherit;color:inherit}
+.han{font-family:var(--font-han)}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 40px}
+.ibtn{min-width:44px;min-height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer}
+.ibtn svg{width:22px;height:22px}
+.btn{min-height:50px;padding:0 20px;border-radius:25px;border:1.5px solid var(--cel);background:var(--card);font:600 17px var(--font-ar);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.tea{background:var(--tea);border-color:var(--tea);color:var(--card)}
+.top{display:flex;align-items:center;gap:12px;padding:14px 0 8px}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:400 30px/1.2 var(--font-han);color:var(--cel)}
+.top p{margin:0;color:var(--mut);font-size:15px}
+.cupsvg .liq{transition:transform .5s ease}
+.steam path{stroke:var(--cel);stroke-width:2;fill:none;stroke-linecap:round;opacity:.6;animation:steam 3s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:1s}
+@keyframes steam{0%{transform:translateY(4px);opacity:0}40%{opacity:.6}100%{transform:translateY(-8px);opacity:0}}
+/* ---------- home: today first ---------- */
+.next{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center;padding:16px;border-radius:28px;background:var(--card);border:1px solid var(--line);margin:6px 0 12px}
+.next small{color:var(--tea);font-weight:700}
+.next .t{font-weight:700;font-size:19px;line-height:1.4}
+.next .t .han{font-weight:400}
+.next .m{color:var(--mut);font-size:14.5px}
+.next .go{grid-column:1/-1}
+.day{display:flex;gap:12px;align-items:center;padding:12px 16px;border-radius:24px;background:var(--card2);margin-bottom:12px}
+.day .cups{display:flex;gap:6px}
+.day .cups i{width:30px;height:26px;border-radius:0 0 12px 12px;border:2px solid var(--cel);border-top-width:3px;position:relative;overflow:hidden}
+.day .cups i.on::after{content:"";position:absolute;inset:40% 0 0;background:var(--tea2)}
+.day .sp{flex:1;min-width:0;font-size:15px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:12.5px;color:var(--mut);margin:0 0 18px}
+.week b{display:block;margin:2px auto 0;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line)}
+.week b.on{background:var(--cel);border-color:var(--cel)}
+.week b.today{border-color:var(--tea);border-width:2.5px}
+.shelf h2{margin:16px 0 2px;font:700 19px var(--font-ar)}
+.shelf .bk{color:var(--mut);font-size:13.5px}
+.row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 10px;scrollbar-width:thin}
+.tin{flex:none;width:132px;min-height:150px;scroll-snap-align:start;border-radius:22px;border:1px solid var(--line);background:var(--card);padding:10px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:4px;cursor:pointer;text-align:start}
+.tin .n{font:400 30px var(--font-han);color:var(--cel);line-height:1}
+.tin .zh{font:400 15px var(--font-han);line-height:1.35}
+.tin .c{display:flex;gap:4px;margin-top:auto}
+.tin .c i{width:16px;height:14px;border-radius:0 0 7px 7px;border:1.5px solid var(--cel);position:relative;overflow:hidden}
+.tin .c i.on::after{content:"";position:absolute;inset:35% 0 0;background:var(--tea2)}
+.tin.here{border:2px solid var(--tea)}
+/* ---------- lesson: one card at a time ---------- */
+.lhdr{display:flex;align-items:center;gap:10px;padding:10px 0}
+.lhdr .sp{flex:1;min-width:0;line-height:1.3}
+.lhdr b{font-size:16px;display:block}
+.lhdr .sub{font-size:13.5px;color:var(--mut)}
+.xp{font:700 14px var(--font-py);color:var(--tea)}
+.cupbar{display:flex;gap:8px;margin-bottom:10px}
+.cupbar button{flex:1;min-height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px;position:relative;overflow:hidden}
+.cupbar button i{position:absolute;inset:auto 0 0 0;height:4px;background:var(--tea2);transform-origin:right;transform:scaleX(0);transition:transform .4s}
+.cupbar button.on{border-color:var(--tea);font-weight:700}
+.stage{position:relative;min-height:56vh}
+.card{display:none;border-radius:30px;background:var(--card);border:1px solid var(--line);padding:20px 18px;box-shadow:0 18px 40px -26px rgba(0,0,0,.4)}
+.card.cur{display:block;animation:pour .35s ease both}
+@keyframes pour{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.card .kind{font-size:13.5px;color:var(--cel);font-weight:700;margin-bottom:4px}
+.card h2{margin:0 0 6px;font:700 24px/1.35 var(--font-ar)}
+.big{font:400 72px/1.1 var(--font-han);text-align:center;margin:10px 0 2px}
+.big.l{font-size:30px;line-height:1.7;direction:ltr;text-align:center}
+.pyl{text-align:center;color:var(--cel);font:500 18px var(--font-py);direction:ltr}
+.mean{text-align:center;font-size:20px;margin-top:6px}
+.exs{margin-top:12px;padding:10px 12px;border-radius:18px;background:var(--card2);font-size:15px;color:var(--mut)}
+.exs .han{font-size:18px;color:var(--ink)}
+.flip,.say{min-height:50px}
+.cta{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.cta>*{flex:1}
+.know[aria-pressed="true"]{background:var(--cel);color:var(--card);border-color:var(--cel)}
+.spk-who{display:flex;gap:10px;align-items:center;justify-content:center;color:var(--mut)}
+.spk-who span{width:44px;height:44px;border-radius:50%;background:var(--cel-soft);color:var(--cel);display:grid;place-items:center;font:400 22px var(--font-han)}
+.gf{direction:ltr;text-align:center;font:700 17px var(--font-py);color:var(--tea);margin:4px 0}
+.gk{text-align:center;font:400 24px var(--font-han);direction:ltr}
+.list{display:grid;gap:6px;margin-top:8px}
+.list div{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;border-radius:12px;background:var(--card2);font-size:15px}
+.nav{position:sticky;bottom:0;z-index:5;display:flex;gap:10px;align-items:center;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 30%)}
+.nav .cnt{flex:none;font-size:14px;color:var(--mut);min-width:64px;text-align:center}
+.nav #next{flex:1}
+.nav button[disabled]{opacity:.45}
+/* exercises in the cup */
+.q-p{font-weight:600;font-size:18px;margin-bottom:10px}.q-p .han{font-size:22px;font-family:var(--font-han2)}
+.q-ar{color:var(--mut);font-weight:400;font-size:15.5px}
+.q-opts{display:grid;gap:8px}.q-row{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+.q-o{min-height:52px;border-radius:26px;border:1.5px solid var(--line);background:var(--card);cursor:pointer;padding:6px 16px;font:600 16px var(--font-ar);text-align:center}
+.q-o .han{font-size:19px;font-family:var(--font-han2)}
+.q-o.ok{background:var(--cel);border-color:var(--cel);color:var(--card)}.q-o.bad{border-color:var(--tea);color:var(--tea)}
+.q-sent{font:500 24px/2 var(--font-han2);text-align:center}
+.q-blank{display:inline-block;min-width:70px;border-bottom:3px solid var(--tea2)}
+.q-ans{min-height:58px;border-radius:20px;background:var(--card2);padding:6px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:10px}
+.q-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.q-tok{min-height:48px;min-width:48px;padding:0 12px;border-radius:24px;border:1.5px solid var(--cel);background:var(--card);cursor:pointer;font:500 20px var(--font-han2)}
+.q-why{margin-top:10px;text-align:center;color:var(--mut);font-size:15px}.q-why b{color:var(--cel)}
+.endc{text-align:center}
+.endc .score{font:700 44px var(--font-ar);color:var(--tea);line-height:1.1}
+footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center;font-family:system-ui,sans-serif}
+:focus-visible{outline:3px solid var(--tea);outline-offset:2px}
+@media (min-width:900px){.wrap{max-width:980px}#lesson .grid{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}.cupbar{flex-direction:column}.tin{width:150px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section id="home">
+  <header class="top"><div class="sp"><h1>汉语加油站</h1><p>اليوم</p></div>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button></header>
+  <div class="next" id="nextBox"></div>
+  <div class="day" id="dayBox"></div>
+  <div class="week" id="week" aria-label="هذا الأسبوع"></div>
+  <div id="shelves"></div>
+</section>
+<section id="lesson" hidden>
+  <div class="lhdr">
+    <button class="ibtn" id="back" aria-label="اليوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="sp"><b id="lt"></b><span class="sub han" id="lz" lang="zh-CN"></span></div>
+    <span class="xp" id="xp"></span>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+  </div>
+  <div class="grid">
+    <div><nav class="cupbar" id="cupbar" aria-label="الأكواب"></nav></div>
+    <div><div class="stage" id="stage"></div>
+      <div class="nav"><button class="btn" id="prev" aria-label="السابق">السابق</button><span class="cnt" id="cnt"></span><button class="btn tea" id="next">التالي</button></div></div>
+  </div>
+</section>
+<footer><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+<script>var PAGE_KEY='labs-d3',PAGE_LESSON_KEY='noor-gram10-v1';</script>
+<script>/*COMMON*/</script>
+<script>
+(function(){
+'use strict';
+var D=DATA,S=LS.S,$=LS.$,$$=LS.$$,esc=LS.esc;S.cup=S.cup||0;S.card=S.card||0;S.cups=S.cups||{};S.days=S.days||{};
+$$('[data-theme-btn]').forEach(function(b){b.onclick=LS.toggleTheme});
+function cupSvg(fill,size){var y=18+40*(1-fill);
+  return'<svg class="cupsvg" viewBox="0 0 88 80" width="'+(size||88)+'" height="'+Math.round((size||88)*80/88)+'" aria-hidden="true"><g class="steam"><path d="M34 14c-4-5 4-7 0-12"/><path d="M50 14c-4-5 4-7 0-12"/></g>'+
+    '<defs><clipPath id="cc'+size+'"><path d="M12 18h56l-6 44a14 14 0 0 1-14 12H32a14 14 0 0 1-14-12z"/></clipPath></defs>'+
+    '<rect x="0" y="'+y+'" width="88" height="80" fill="var(--tea2)" clip-path="url(#cc'+size+')" opacity=".9"/>'+
+    '<path d="M12 18h56l-6 44a14 14 0 0 1-14 12H32a14 14 0 0 1-14-12z" fill="none" stroke="var(--cel)" stroke-width="3"/><path d="M68 28h6a8 8 0 0 1 0 16h-8" fill="none" stroke="var(--cel)" stroke-width="3"/></svg>'}
+/* ---------- the three cups, built from the real lesson ---------- */
+var seen={};function wordsIn(lines){var all=lines.map(function(l){return l.zh}).join('');return D.vocab.filter(function(v){if(seen[v[0]]||all.indexOf(v[0])<0)return false;seen[v[0]]=1;return true})}
+function byZh(z){return D.order.filter(function(o){return o.zh===z})[0]||D.order[0]}
+var w1=wordsIn(D.texts[0].lines),w2=wordsIn(D.texts[1].lines),w3=wordsIn(D.texts[2].lines).concat(D.vocab.filter(function(v){return!seen[v[0]]}));
+var CUPS=[
+ {n:'الكوب الأول',t:D.texts[0],w:w1,g:[0],q:[{k:'mcq',d:D.quiz[0]},{k:'mcq',d:D.quiz[1]},{k:'mcq',d:D.quiz[7]}]},
+ {n:'الكوب الثاني',t:D.texts[1],w:w2,g:[1],q:[{k:'mcq',d:D.quiz[2]},{k:'order',d:byZh('这个星期天你忙不忙？')},{k:'mcq',d:D.quiz[6]},{k:'fill',d:D.fill[1]}]},
+ {n:'الكوب الثالث',t:D.texts[2],w:w3,g:[2,3],q:[{k:'mcq',d:D.quiz[5]},{k:'order',d:byZh('我们休息一下吧。')},{k:'mcq',d:D.quiz[8]},{k:'fill',d:D.fill[4]}]}];
+CUPS.forEach(function(c){c.cards=[{k:'intro'}].concat(c.w.map(function(w){return{k:'word',w:w}}),c.t.lines.map(function(l){return{k:'line',l:l}}),c.g.map(function(i){return{k:'gram',g:D.gram[i]}}),c.q.map(function(q){return{k:'q',q:q}}),[{k:'end'}]);
+  c.min=Math.max(4,Math.round(c.cards.length/5))});
+/* ---------- home: what to do today ---------- */
+function home(){
+  var c=CUPS[Math.min(S.cup,2)],all=CUPS.every(function(_,i){return S.cups[i]}),nd=Object.keys(S.cups).length;
+  $('#nextBox').innerHTML=cupSvg(all?1:S.card/c.cards.length,88)+'<div><small>'+(all?'أتممت أكواب الدرس':'جلستك التالية')+'</small><div class="t">'+D.meta.ar+' · <span class="han" lang="zh-CN">'+D.meta.zh+'</span></div><div class="m">'+(all?'راجع الدرس متى شئت':c.n+' من ٣ · نحو '+c.min+' دقائق · '+c.cards.length+' بطاقة')+'</div></div>'+
+    '<button class="btn tea go" id="resume">'+(all?'راجع الدرس':S.card?'تابع الكوب':'ابدأ '+c.n)+'</button>';
+  $('#resume').onclick=function(){if(all){S.cup=0;S.card=0;LS.save()}location.hash='lesson'};
+  var today=S.days[S.day]||0;
+  $('#dayBox').innerHTML='<div class="cups">'+[0,1,2].map(function(i){return'<i'+(i<today?' class="on"':'')+'></i>'}).join('')+'</div><div class="sp"><b>إبريق اليوم:</b> '+today+' من ٣ أكواب · '+S.today+' نقطة</div>';
+  var names=['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'],now=new Date(),h='';
+  for(var i=6;i>=0;i--){var d=new Date(now);d.setDate(now.getDate()-i);var k=d.toISOString().slice(0,10);h+='<div>'+names[d.getDay()]+'<b class="'+(S.days[k]?'on':'')+(i===0?' today':'')+'"></b></div>'}
+  $('#week').innerHTML=h;
+  var sh='';D.hub.levels.forEach(function(lv){lv.c.forEach(function(ck){var co=D.hub.courses[ck];if(!co)return;
+    sh+='<div class="shelf"><h2>'+co.name+' <span style="font-weight:400;color:var(--mut);font-size:14px">· '+lv.t+'</span></h2><div class="bk han" lang="zh-CN">'+co.book+'</div><div class="row">';
+    co.l.forEach(function(l){var me=l[4]===D.meta.file,x=me?0:LS.lessonXp(l[5]),f=me?nd:Math.min(3,Math.floor(x/100)),parts=l[2].split('·');
+      var inner='<span class="n">'+l[1]+'</span><span>'+esc(parts[0].trim())+'</span><span class="zh" lang="zh-CN">'+esc((parts[1]||'').trim())+'</span><span class="c">'+[0,1,2].map(function(i){return'<i'+(i<f?' class="on"':'')+'></i>'}).join('')+'</span>';
+      sh+=me?'<button class="tin here" data-me>'+inner+'</button>':'<a class="tin" href="../'+l[4]+'">'+inner+'</a>'});
+    sh+='</div></div>'})});
+  $('#shelves').innerHTML=sh;$$('[data-me]').forEach(function(b){b.onclick=function(){location.hash='lesson'}});
+}
+/* ---------- lesson ---------- */
+var built=false;
+function cardHtml(c,ci,i){var x;
+  if(c.k==='intro'){var cup=CUPS[ci];return'<div class="kind">'+cup.n+'</div><h2>'+esc(cup.t.h)+'</h2><div style="text-align:center">'+cupSvg(0,120)+'</div><p>'+esc(cup.t.scene)+'</p><div class="list"><div><span>كلمات</span><b>'+cup.w.length+'</b></div><div><span>جمل الحوار</span><b>'+cup.t.lines.length+'</b></div><div><span>قاعدة</span><b>'+cup.g.map(function(g){return esc(D.gram[g].t)}).join('، ')+'</b></div><div><span>أسئلة</span><b>'+cup.q.length+'</b></div></div><p style="color:var(--mut);font-size:15px;margin-bottom:0">نحو '+cup.min+' دقائق. يمكنك التوقف بعد أي بطاقة والعودة إليها.</p>'}
+  if(c.k==='word'){x=c.w;return'<div class="kind">كلمة</div><div class="big" lang="zh-CN">'+esc(x[0])+'</div><div class="pyl">'+esc(x[1])+'</div><div class="back" hidden><div class="mean">'+esc(x[2])+'</div><div class="exs"><span class="han" lang="zh-CN">'+esc(x[3])+'</span><br><span dir="ltr">'+esc(x[4])+'</span><br>'+esc(x[5])+'</div></div>'+
+    '<div class="cta"><button class="btn flip">اقلب البطاقة</button></div><div class="cta" data-k2 hidden><button class="btn know" data-know aria-pressed="false">عرفتها</button><button class="btn" data-later>ليس بعد</button></div>'}
+  if(c.k==='line'){x=c.l;return'<div class="kind">الحوار</div><div class="spk-who"><span lang="zh-CN">'+esc(x.av)+'</span>'+esc(x.name)+'</div><div class="big l" lang="zh-CN">'+esc(x.zh)+'</div><div class="pyl">'+esc(LS.linePy(x))+'</div><div class="mean" data-mean hidden>'+esc(x.ar)+'</div><div class="cta"><button class="btn say">استمع</button><button class="btn" data-showar>المعنى</button></div>'}
+  if(c.k==='gram'){x=c.g;return'<div class="kind">القاعدة</div><h2>'+esc(x.t)+'</h2><div class="gf">'+esc(x.f)+'</div><p>'+LS.zh(x.ar)+'</p><div class="gk" lang="zh-CN">'+esc(x.key)+'</div><div class="pyl" style="font-size:15px">'+esc(x.kpy)+'</div>'+(x.ex.length?'<div class="exs">'+x.ex.map(function(e){return'<span class="han" lang="zh-CN">'+esc(e[0])+'</span> '+esc(e[2])}).join('<br>')+'</div>':'')+'<div class="cta"><button class="btn" data-sayg>استمع</button></div>'}
+  if(c.k==='q')return'<div class="kind">سؤال</div><div data-qslot></div>';
+  return'<div class="endc" data-endslot></div>';
+}
+function buildLesson(){
+  built=true;$('#lt').textContent=D.meta.ar;$('#lz').textContent=D.meta.zh;var h='';
+  CUPS.forEach(function(cup,ci){cup.cards.forEach(function(c,i){h+='<article class="card" data-cup="'+ci+'" data-i="'+i+'" data-k="'+c.k+'"'+(c.k==='end'?' data-end="1"':'')+'>'+cardHtml(c,ci,i)+'</article>'})});
+  $('#stage').innerHTML=h;
+  $$('.card').forEach(function(el){var ci=+el.dataset.cup,c=CUPS[ci].cards[+el.dataset.i];
+    if(c.k==='word'){$('.flip',el).onclick=function(){$('.back',el).hidden=false;$('[data-k2]',el).hidden=false;this.parentNode.hidden=true;LS.say(c.w[0])};
+      $('[data-know]',el).onclick=function(){if(!S.words[c.w[0]]){S.words[c.w[0]]=1;LS.save();LS.xp(2,this)}this.setAttribute('aria-pressed','true');step(1)};
+      $('[data-later]',el).onclick=function(){step(1)}}
+    if(c.k==='line'){$('.say',el).onclick=function(){LS.say(c.l.zh);if(!el.dataset.heard){el.dataset.heard=1;LS.xp(1,this)}};$('[data-showar]',el).onclick=function(){$('[data-mean]',el).hidden=false}}
+    if(c.k==='gram'){$('[data-sayg]',el).onclick=function(){LS.say(c.g.key,true)}}
+    if(c.k==='q'){var q=c.q,mk=q.k==='mcq'?LS.mcq:q.k==='order'?LS.order:LS.fill;$('[data-qslot]',el).appendChild(mk(q.d,function(){el.dataset.ans='1';nav()}))}
+  });
+  $('#cupbar').innerHTML=CUPS.map(function(c,i){return'<button data-c="'+i+'">'+c.n+'<i></i></button>'}).join('');
+  $$('#cupbar button').forEach(function(b){b.onclick=function(){S.cup=+b.dataset.c;S.card=0;show()}});
+}
+function cur(){return $('.card[data-cup="'+S.cup+'"][data-i="'+S.card+'"]')}
+function show(){
+  $$('.card').forEach(function(c){c.classList.remove('cur')});var el=cur();el.classList.add('cur');
+  if(el.dataset.k==='end')endCard(el);
+  LS.save();nav();window.scrollTo(0,0);
+}
+function endCard(el){var ci=S.cup,first=!S.cups[ci];
+  if(first){S.cups[ci]=1;S.days[S.day]=(S.days[S.day]||0)+1;LS.xp(15,el);LS.save()}
+  var all=CUPS.every(function(_,i){return S.cups[i]});
+  $('[data-endslot]',el).innerHTML=cupSvg(1,120)+'<h2>'+(all?'أتممت الأكواب الثلاثة':'شربتَ '+CUPS[ci].n)+'</h2><div class="score">'+S.xp+'</div><div style="color:var(--mut)">نقطة في هذا الدرس</div>'+
+    (all?'<p data-complete="1">انتهى الدرس العاشر. عُد غدًا لمراجعة الكلمات التي قلت عنها «ليس بعد».</p><button class="btn tea" onclick="location.hash=\'home\'">إلى اليوم</button>':
+      '<p>استراحة قصيرة؟ الكوب التالي ينتظرك هنا متى شئت.</p><div class="cta"><button class="btn tea" data-nextcup>'+CUPS[ci+1].n+'</button><button class="btn" onclick="location.hash=\'home\'">استراحة</button></div>');
+  var nb=$('[data-nextcup]',el);if(nb)nb.onclick=function(){S.cup=ci+1;S.card=0;show()};
+}
+function step(d){var n=CUPS[S.cup].cards.length;S.card=Math.max(0,Math.min(n-1,S.card+d));show()}
+function nav(){var cup=CUPS[S.cup],el=cur();
+  $('#cnt').textContent=(S.card+1)+' / '+cup.cards.length;
+  $('#prev').disabled=S.card===0;
+  var needs=el.dataset.k==='q'&&!el.dataset.ans;
+  $('#next').disabled=needs||el.dataset.k==='end';$('#next').textContent=needs?'أجب أولًا':'التالي';
+  $$('#cupbar button').forEach(function(b,i){b.classList.toggle('on',i===S.cup);$('i',b).style.transform='scaleX('+(S.cups[i]?1:i===S.cup?S.card/(CUPS[i].cards.length-1):0)+')'});
+}
+$('#next').onclick=function(){step(1)};$('#prev').onclick=function(){step(-1)};
+$('#back').onclick=function(){location.hash='home'};
+document.addEventListener('xp',function(){$('#xp').textContent=S.xp+' نقطة'});
+function render(){if(location.hash==='#lesson'){$('#home').hidden=true;$('#lesson').hidden=false;if(!built)buildLesson();$('#xp').textContent=S.xp+' نقطة';show()}
+  else{$('#lesson').hidden=true;$('#home').hidden=false;home();window.scrollTo(0,0)}}
+addEventListener('hashchange',render);render();
+})();
+</script>
+</body>
+</html>
