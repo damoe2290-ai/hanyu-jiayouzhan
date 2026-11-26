@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>نَول الحروف · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@400;500;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<style>
+/* Concept C — "the loom": every character is a crossing of two threads.
+   Saffron weft = the meaning half; indigo warp = the sound half. Silk-road brocade, Ruqaa headings. */
+:root{
+  --bg:#e9eee9;--panel:#f8faf7;--panel2:#eef3ee;--ink:#14231f;--mut:#4f625c;--line:#cbd6cf;
+  --weft:#b8770f;--weft-soft:rgba(184,119,15,.14);--warp:#24508a;--warp-soft:rgba(36,80,138,.12);--bad:#9b2c2c;
+  --shadow:0 1px 0 rgba(20,35,31,.05),0 10px 24px -14px rgba(20,35,31,.35);
+  --font-ar:"Tajawal",system-ui,sans-serif;--font-hd:"Aref Ruqaa","Tajawal",serif;--font-han:"Noto Serif SC","Noto Serif CJK SC",serif;
+  color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1715;--panel:#11211e;--panel2:#162a26;--ink:#e6efe9;--mut:#9db3ab;--line:#24403a;
+  --weft:#f0b443;--weft-soft:rgba(240,180,67,.15);--warp:#7fb2ee;--warp-soft:rgba(127,178,238,.14);--bad:#ff9a8f;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 12px 28px -14px rgba(0,0,0,.8);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0b1715;--panel:#11211e;--panel2:#162a26;--ink:#e6efe9;--mut:#9db3ab;--line:#24403a;
+  --weft:#f0b443;--weft-soft:rgba(240,180,67,.15);--warp:#7fb2ee;--warp-soft:rgba(127,178,238,.14);--bad:#ff9a8f;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 12px 28px -14px rgba(0,0,0,.8);color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.7 var(--font-ar)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 32px}
+.band{display:block;width:calc(100% + 32px);height:22px;margin:0 -16px}
+header.top{display:flex;gap:12px;align-items:center;padding:10px 0 4px}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:700 32px/1.15 var(--font-hd)}
+.top p{margin:2px 0 0;color:var(--mut);font-size:14px;line-height:1.5}
+.top a{color:var(--mut)}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.iconbtn svg{width:22px;height:22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:16px;margin-top:14px}
+h2{font:700 25px/1.3 var(--font-hd);margin:0 0 6px}
+.han{font-family:var(--font-han)}
+.lat{direction:ltr;unicode-bidi:isolate}
+.mut{color:var(--mut)}
+.w{color:var(--weft);font-weight:700}.v{color:var(--warp);font-weight:700}
+/* intro demo */
+.demo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 4px}
+.eq{direction:ltr;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 6px;border-radius:14px;background:var(--panel2);font-family:var(--font-han)}
+.eq .p{font-size:26px;line-height:1}.eq .op{color:var(--mut);font-family:var(--font-ar)}.eq .r{font-size:34px;font-weight:900}
+.eq small{display:block;font:500 11.5px var(--font-ar);color:var(--mut);text-align:center}
+/* workshop */
+.top2{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;color:var(--mut)}
+.prompt{display:flex;gap:12px;align-items:center;margin:8px 0 2px}
+.prompt .ar{font:700 24px/1.25 var(--font-ar)}
+.prompt .py{font:600 19px system-ui,sans-serif;color:var(--warp)}
+.ctx{font-size:14px;color:var(--mut);margin:0}
+.loom{position:relative;direction:ltr;display:grid;grid-template-columns:1fr auto 1fr auto 1.25fr;align-items:center;gap:6px;margin:14px 0 6px}
+.slot{height:92px;border-radius:14px;border:2px dashed var(--line);display:grid;place-items:center;font:600 46px/1 var(--font-han);position:relative;background:var(--panel)}
+.slot small{position:absolute;bottom:4px;inset-inline:0;text-align:center;font:500 11.5px var(--font-ar);color:var(--mut)}
+.slot.m{border-color:var(--weft)}.slot.s{border-color:var(--warp)}
+.slot.m.fill{border-style:solid;background:var(--weft-soft)}.slot.s.fill{border-style:solid;background:var(--warp-soft)}
+.slot.cur{box-shadow:0 0 0 4px var(--weft-soft)}
+.slot.s.cur{box-shadow:0 0 0 4px var(--warp-soft)}
+.op{font:500 22px var(--font-ar);color:var(--mut)}
+.res{height:112px;border-radius:16px;display:grid;place-items:center;position:relative;overflow:hidden;background:var(--panel2);border:1px solid var(--line)}
+.res .g{font:900 70px/1 var(--font-han);position:relative;z-index:1}
+.res svg{position:absolute;inset:0;width:100%;height:100%}
+.res .thr{stroke-width:5;stroke-linecap:round;fill:none;stroke-dasharray:200;stroke-dashoffset:200;transition:stroke-dashoffset .7s ease}
+.res.done .thr{stroke-dashoffset:0}
+.res .g.in{animation:knit .55s cubic-bezier(.2,1.3,.4,1) both}
+.ask{font:700 18px var(--font-hd);margin:10px 0 4px}
+.tray{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chip{min-height:84px;border-radius:14px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 2px}
+.chip b{font:600 34px/1 var(--font-han)}
+.chip span{font-size:12.5px;color:var(--mut);line-height:1.25;text-align:center}
+.chip.m:hover{border-color:var(--weft)}.chip.s:hover{border-color:var(--warp)}
+.chip.no{border-color:var(--bad);animation:shake .3s}
+.chip[disabled]{opacity:.4;cursor:default}
+.why{display:none;margin-top:12px;padding:12px;border-radius:14px;background:var(--panel2);border-inline-start:4px solid var(--weft)}
+.why.show{display:block;animation:in .3s ease both}
+.why p{margin:4px 0}
+.hint{min-height:24px;font-size:14.5px;color:var(--bad);margin-top:6px}
+.btn{min-height:50px;padding:0 18px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:700 16px var(--font-ar);display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+.btn svg{width:20px;height:20px}
+.btn.pri{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.row .btn{flex:1}
+/* the cloth: what you have woven so far */
+.cloth{display:flex;flex-wrap:wrap;gap:6px;direction:ltr;margin-top:10px}
+.tile{width:40px;height:40px;border-radius:8px;display:grid;place-items:center;font:600 22px var(--font-han);background:var(--panel2);border:1px solid var(--line);color:var(--mut);position:relative;overflow:hidden}
+.tile.on{color:var(--ink);background:linear-gradient(90deg,transparent 46%,var(--warp-soft) 46% 54%,transparent 54%),linear-gradient(0deg,transparent 46%,var(--weft-soft) 46% 54%,transparent 54%),var(--panel)}
+.tile.cur{outline:2px solid var(--weft);outline-offset:1px}
+/* families */
+.fam{display:grid;gap:10px}
+.fam .f{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:var(--panel2);flex-wrap:wrap}
+.fam .k{flex:none;width:58px;text-align:center;font:600 30px/1 var(--font-han)}
+.fam .k small{display:block;font:500 11.5px var(--font-ar);color:var(--mut);margin-top:3px}
+.fam.mf .k{color:var(--weft)}.fam.sf .k{color:var(--warp)}
+.fam .ms{display:flex;flex-wrap:wrap;gap:6px;flex:1;min-width:0}
+.mem{min-width:48px;min-height:48px;border-radius:10px;border:1px solid var(--line);background:var(--panel);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2px 6px;color:var(--ink)}
+.mem b{font:600 22px/1.1 var(--font-han)}.mem i{font:normal 11px system-ui,sans-serif;color:var(--mut)}
+.mem.lsn{border-color:var(--weft);box-shadow:inset 0 -3px 0 var(--weft)}
+.tabs{display:flex;gap:6px;margin:6px 0 10px}
+.tabs button{flex:1;min-height:46px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--mut);font:700 15px var(--font-ar);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--ink)}
+/* predict */
+.pq{display:flex;gap:14px;align-items:center}
+.pq .big{font:900 72px/1 var(--font-han)}
+.pq .parts{font-size:14.5px;color:var(--mut)}
+.opts{display:grid;gap:8px;margin-top:8px}
+.opts.three{grid-template-columns:repeat(3,1fr)}
+.op2{min-height:52px;border-radius:12px;border:1.5px solid var(--line);background:var(--panel);color:var(--ink);font:600 16px var(--font-ar);cursor:pointer;padding:4px 6px}
+.op2.ok{border-color:var(--warp);background:var(--warp-soft)}.op2.bad{border-color:var(--bad)}
+.note{font-size:13.5px;color:var(--mut);margin-top:10px}
+footer.cfoot{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+@keyframes knit{from{opacity:0;transform:scale(.6) rotate(-8deg)}to{opacity:1;transform:none}}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.res .thr{stroke-dashoffset:0}}
+@media (min-width:900px){.wrap{max-width:1060px}.cols{display:grid;grid-template-columns:1.2fr 1fr;gap:18px;align-items:start}}
+:focus-visible{outline:3px solid var(--weft);outline-offset:2px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+<svg class="band" viewBox="0 0 400 22" preserveAspectRatio="none" aria-hidden="true">
+  <defs><pattern id="weave" width="20" height="22" patternUnits="userSpaceOnUse">
+    <rect width="20" height="22" fill="var(--panel2)"/>
+    <path d="M0 7h8M12 7h8" stroke="var(--weft)" stroke-width="4"/><path d="M0 15h2M6 15h8M18 15h2" stroke="var(--weft)" stroke-width="4"/>
+    <path d="M10 0v22" stroke="var(--warp)" stroke-width="4"/><path d="M10 4v6" stroke="var(--weft)" stroke-width="4" opacity="0"/>
+  </pattern></defs><rect width="400" height="22" fill="url(#weave)"/></svg>
+<header class="top">
+  <div class="sp"><h1>نَول الحروف</h1><p>الدرس العاشر · <span class="han" lang="zh-CN">这个星期天你忙不忙</span> · <a href="index.html">المختبر</a></p></div>
+  <button class="iconbtn" id="theme" aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+</header>
+
+<div class="cols">
+<div>
+<section class="card" id="intro">
+  <h2>الجذر… ونصف الصوت</h2>
+  <p>أنت تعرف أن الجذر في العربية يجمع الكلمات في معنى واحد: <b>كتب، كاتب، مكتبة</b>. والحرف الصيني كثيرًا ما يُنسج من خيطين: <span class="w">نصفٌ يدلّ على حقل المعنى</span> كالجذر، و<span class="v">نصفٌ يلمّح إلى النطق</span>، وهذا لا مقابل له في جذرنا. انظر إلى كلمتين من درسك:</p>
+  <div class="demo">
+    <div class="eq"><div><span class="p w">口</span><small>الفم</small></div><span class="op">+</span><div><span class="p v">曷</span><small>hé</small></div><span class="op">=</span><div><span class="r">喝</span><small>hē يشرب</small></div></div>
+    <div class="eq"><div><span class="p w">氵</span><small>الماء</small></div><span class="op">+</span><div><span class="p v">曷</span><small>hé</small></div><span class="op">=</span><div><span class="r">渴</span><small>kě عطشان</small></div></div>
+  </div>
+  <p class="note">نصف الصوت واحد، فالنطقان متقاربان. ونصف المعنى مختلف، فالمعنيان مختلفان. التلميح الصوتي تقريبي لا قاعدة، وبعض الحروف صورٌ أو معنيان مجتمعان، وستلقى منها حرفين في الدرس.</p>
+</section>
+
+<section class="card" id="work" aria-live="polite">
+  <div class="top2"><span id="count"></span><span id="kind"></span></div>
+  <div class="prompt"><div><div class="ar" id="pAr"></div><div class="py lat" id="pPy"></div></div></div>
+  <p class="ctx" id="pCtx"></p>
+  <div class="loom">
+    <div class="slot m" id="sm"><small>المعنى</small></div><span class="op">+</span>
+    <div class="slot s" id="ss"><small id="ssl">الصوت</small></div><span class="op">=</span>
+    <div class="res" id="res"><svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="thr" d="M-5 50H105" stroke="var(--weft)"/><path class="thr" d="M50 -5V105" stroke="var(--warp)" style="transition-delay:.15s"/></svg><span class="g" id="rg">؟</span></div>
+  </div>
+  <div class="ask" id="ask"></div>
+  <div class="tray" id="tray"></div>
+  <div class="hint" id="hint"></div>
+  <div class="why" id="why"></div>
+  <div class="row" id="navrow" hidden><button class="btn" id="sayBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>استمع</button><button class="btn pri" id="nextBtn">التالي</button></div>
+  <div class="cloth" id="cloth" aria-label="ما نسجته حتى الآن"></div>
+</section>
+
+<section class="card" id="predict" hidden aria-live="polite">
+  <h2>اقرأ ما لم تدرسه</h2>
+  <p class="mut" style="margin:0" id="prc"></p>
+  <div id="pbody"></div>
+</section>
+</div>
+
+<section class="card" id="families">
+  <h2>العائلات</h2>
+  <p class="mut" style="margin:0">كل حرف تنسجه يجد أقاربه من مفردات الموقع. الحروف ذات الخط الأصفر من درسك.</p>
+  <div class="tabs" role="tablist"><button role="tab" id="tM" aria-selected="true">عائلات المعنى</button><button role="tab" id="tS" aria-selected="false">عائلات الصوت</button></div>
+  <div id="famBody"></div>
+</section>
+</div>
+
+<footer class="cfoot"><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- real content: characters of lesson 10, in the order of the lesson's vocabulary ---------- */
+var MEAN={'土':'التراب','囗':'السور','艹':'النبات','日':'الشمس','巾':'القماش','氵':'الماء','穴':'الكهف','爪':'المخلب','口':'الفم','忄':'القلب','亻':'الإنسان','自':'الأنف','饣':'الطعام','冫':'الجليد','讠':'الكلام','辶':'المشي','木':'الشجرة','心':'القلب','扌':'اليد','女':'المرأة'};
+var SOUND={'成':'chéng','元':'yuán','化':'huà','京':'jīng','尚':'shàng','票':'piào','工':'gōng','巴':'bā','乎':'hū','亡':'wáng','官':'guān','曷':'hé','令':'lìng','我':'wǒ','青':'qīng','包':'bāo','方':'fāng','马':'mǎ'};
+var ITEMS=[
+ {c:'城',py:'chéng',ar:'مدينة / سور المدينة',w:'城市',wpy:'chéngshì',m:'土',s:'成',why:'أسوار المدن القديمة كانت من التراب المدكوك.'},
+ {c:'园',py:'yuán',ar:'حديقة',w:'公园',wpy:'gōngyuán',m:'囗',s:'元',why:'سورٌ يحيط بالمكان، ونصف الصوت يُنطق مثله تمامًا.'},
+ {c:'花',py:'huā',ar:'زهرة',w:'花',wpy:'huā',m:'艹',s:'化',why:'عشبتان فوق الحرف: إنه من النبات.'},
+ {c:'景',py:'jǐng',ar:'منظر',w:'风景',wpy:'fēngjǐng',m:'日',s:'京',why:'ضوء الشمس هو ما يكشف المنظر.'},
+ {c:'常',py:'cháng',ar:'دائم / عادي',w:'非常',wpy:'fēicháng',m:'巾',s:'尚',why:'أصله قطعة قماش طويلة (راية). المعنى بعيد اليوم، لكن الصوت ما زال يلمّح: shàng ← cháng.'},
+ {c:'漂',py:'piào',ar:'(في) جميل',w:'漂亮',wpy:'piàoliang',m:'氵',s:'票',why:'أصله «يطفو على الماء»، ثم استُعير في 漂亮.'},
+ {c:'空',py:'kōng',ar:'فارغ / هواء',w:'空气',wpy:'kōngqì',m:'穴',s:'工',why:'الكهف فجوة فارغة.'},
+ {c:'爬',py:'pá',ar:'يتسلّق',w:'爬山',wpy:'páshān',m:'爪',s:'巴',why:'التسلّق بالمخالب والأيدي.'},
+ {c:'呼',py:'hū',ar:'يزفر',w:'呼吸',wpy:'hūxī',m:'口',s:'乎',why:'النَّفَس يخرج من الفم.'},
+ {c:'忙',py:'máng',ar:'مشغول',w:'忙',wpy:'máng',m:'忄',s:'亡',why:'القلب المشغول. و忄 هي صورة 心 «القلب» حين تقف على يسار الحرف.'},
+ {c:'休',py:'xiū',ar:'يستريح',w:'休息',wpy:'xiūxi',m:'亻',s:'木',hy:1,why:'إنسانٌ يستند إلى شجرة: هذا هو «الاستراحة». نصفان للمعنى، ولا نصف للصوت.'},
+ {c:'息',py:'xī',ar:'نَفَس / راحة',w:'休息',wpy:'xiūxi',m:'自',s:'心',hy:1,why:'«自» في أصله صورة الأنف: نَفَسٌ من الأنف إلى القلب.'},
+ {c:'馆',py:'guǎn',ar:'دار / بيت',w:'茶馆',wpy:'cháguǎn',m:'饣',s:'官',why:'أصله دار ضيافة يُقدَّم فيها الطعام.'},
+ {c:'喝',py:'hē',ar:'يشرب',w:'喝',wpy:'hē',m:'口',s:'曷',why:'الشرب بالفم.'},
+ {c:'冷',py:'lěng',ar:'بارد',w:'冷',wpy:'lěng',m:'冫',s:'令',why:'النقطتان على اليسار جليد. قارنها بـ 氵 الماء: ثلاث نقاط.'},
+ {c:'饿',py:'è',ar:'جائع',w:'饿',wpy:'è',m:'饣',s:'我',why:'الجائع يحتاج الطعام. والصوت تاريخي: wǒ ← è.'},
+ {c:'渴',py:'kě',ar:'عطشان',w:'渴',wpy:'kě',m:'氵',s:'曷',why:'العطشان يحتاج الماء. وهو أخو 喝 في الصوت.'}];
+/* the lesson's sentences, for context */
+var CTX={'城':'这个城市西边有一个公园。','园':'这个城市西边有一个公园，叫西山公园。','花':'那里有山，有水，有树，有花。','景':'风景非常漂亮。','常':'风景非常漂亮。','漂':'风景非常漂亮。','空':'空气也非常新鲜。','爬':'这个星期天我们也去爬山。','呼':'每天都有很多人去那儿爬山，看风景，呼吸新鲜空气。','忙':'这个星期天你忙不忙？','休':'我们休息一下吧。','息':'我们休息一下吧。','馆':'前边有一个小茶馆。','喝':'我们去那儿喝一点儿茶，好不好？','冷':'今天很冷。','饿':'你饿不饿？','渴':'你渴不渴？'};
+/* families: lesson characters + relatives that appear in the site's vocabulary */
+var PY={'吃':'chī','吧':'ba','听':'tīng','没':'méi','洋':'yáng','清':'qīng','酒':'jiǔ','海':'hǎi','饭':'fàn','饱':'bǎo','茶':'chá','草':'cǎo','苹':'píng','药':'yào','明':'míng','星':'xīng','时':'shí','早':'zǎo','晚':'wǎn','情':'qíng','快':'kuài','怪':'guài','地':'dì','块':'kuài','场':'chǎng','国':'guó','图':'tú','穿':'chuān','请':'qǐng','跑':'pǎo','抱':'bào','爸':'bà','红':'hóng','功':'gōng','远':'yuǎn','院':'yuàn','堂':'táng','说':'shuō','语':'yǔ','课':'kè','谁':'shéi','这':'zhè','还':'hái','送':'sòng','道':'dào'};
+var MFAM=[['口','呼喝吃吧听'],['氵','漂渴没洋清酒海'],['饣','馆饿饭饱'],['艹','花茶草苹药'],['日','景明星时早晚'],['忄','忙情快怪'],['土','城地块场'],['囗','园国图'],['穴','空穿'],['讠','请说语课谁'],['辶','远这还送道']];
+var SFAM=[['曷','喝渴'],['青','请情清'],['包','饱跑抱'],['巴','爬爸吧'],['工','空红功'],['元','园远院'],['尚','常堂']];
+var PRED=[
+ {c:'请',py:'qǐng',ar:'يدعو / من فضلك',w:'请',m:'讠',s:'青',mo:['الكلام','الماء','الطعام'],po:['qǐng','bāo','hē'],src:'قواعد ١ · الدرس 8'},
+ {c:'饱',py:'bǎo',ar:'شبعان',w:'大饱口福',m:'饣',s:'包',mo:['الطعام','الشمس','المشي'],po:['bǎo','qīng','yuán'],src:'الصينية العملية · الدرس 5'},
+ {c:'清',py:'qīng',ar:'صافٍ / نقي',w:'清真',m:'氵',s:'青',mo:['الماء','الفم','القلب'],po:['qīng','hū','gōng'],src:'الثقافة · الدرس 3'},
+ {c:'远',py:'yuǎn',ar:'بعيد',w:'远',m:'辶',s:'元',mo:['المشي','النبات','الجليد'],po:['yuǎn','lìng','bā'],src:'استماع ١ · الدرس 7'}];
+var ALLC={};ITEMS.forEach(function(i){ALLC[i.c]=i.py});PRED.forEach(function(i){ALLC[i.c]=i.py});for(var k in PY)ALLC[k]=PY[k];
+
+/* ---------- state ---------- */
+var KEY='lab-loom-v1',S={done:{}};
+try{var raw=localStorage.getItem(KEY);if(raw){S=JSON.parse(raw)||S;S.done=S.done||{}}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var $=function(id){return document.getElementById(id)},cur=0,step=0,miss=0;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- theme ---------- */
+try{var th=localStorage.getItem('lab-theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
+$('theme').onclick=function(){var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('lab-theme',d.dataset.theme)}catch(e){}};
+
+/* ---------- speech ---------- */
+var voice=null,warned=false;
+function pickVoice(){if(!('speechSynthesis' in window))return;var vs=speechSynthesis.getVoices();
+  voice=vs.filter(function(v){return /^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return /^zh/i.test(v.lang)&&!/HK|TW/i.test(v.lang)})[0]||null}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(t){if(!('speechSynthesis' in window)||!voice){if(!warned){warned=true;$('hint').style.color='var(--mut)';$('hint').textContent='لا يوجد صوت صيني على هذا الجهاز؛ اقرأ النطق المكتوب. (يمكن تثبيته من إعدادات تحويل النص إلى كلام.)'}return}
+  speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.voice=voice;u.rate=.8;speechSynthesis.speak(u)}
+
+/* ---------- workshop ---------- */
+function render(){
+  var it=ITEMS[cur];step=0;miss=0;
+  $('count').textContent='الحرف '+(cur+1)+' من '+ITEMS.length;
+  $('kind').textContent=it.hy?'معنى + معنى':'معنى + صوت';
+  $('pAr').textContent=it.ar;$('pPy').textContent=it.py;
+  $('pCtx').innerHTML='في الدرس: <span class="han" lang="zh-CN">'+CTX[it.c]+'</span>';
+  $('sm').className='slot m cur';$('sm').innerHTML='<small>المعنى</small>';
+  $('ss').className='slot s';$('ss').innerHTML='<small>'+(it.hy?'معنى ثانٍ':'الصوت')+'</small>';
+  $('res').className='res';$('rg').textContent='؟';$('rg').className='g';
+  $('why').className='why';$('navrow').hidden=true;$('hint').textContent='';$('hint').style.color='';
+  tray();cloth();
+}
+function tray(){
+  var it=ITEMS[cur],isM=step===0,good=isM?it.m:it.s,pool;
+  if(isM)pool=Object.keys(MEAN).filter(function(k){return k!==good&&k!=='心'&&k!=='木'});
+  else pool=it.hy?['木','心','女','口','日','土'].filter(function(k){return k!==good&&k!==it.m}):Object.keys(SOUND).filter(function(k){return k!==good});
+  var opts=shuffle([good].concat(shuffle(pool).slice(0,3)));
+  $('ask').innerHTML=isM?'اختر <span class="w">نصف المعنى</span>: هذا الحرف عن ماذا؟':(it.hy?'اختر <span class="v">النصف الثاني</span>، وهو معنى أيضًا':'اختر <span class="v">نصف الصوت</span>: أيّها يُنطق قريبًا من <span class="lat">'+it.py+'</span>؟');
+  $('tray').innerHTML=opts.map(function(o){var lab=isM||it.hy?(MEAN[o]||''):'<span class="lat">'+SOUND[o]+'</span>';
+    return'<button class="chip '+(isM?'m':'s')+'" data-o="'+o+'"><b lang="zh-CN">'+o+'</b><span>'+lab+'</span></button>'}).join('');
+  [].forEach.call($('tray').children,function(b){b.onclick=function(){pick(b)}});
+}
+function pick(b){
+  var it=ITEMS[cur],o=b.dataset.o,good=step===0?it.m:it.s;
+  if(o!==good){miss++;b.classList.add('no');b.disabled=true;
+    $('hint').textContent=step===0?'ليس هذا. الحرف معناه «'+it.ar+'»: أيّ حقلٍ أقرب؟':(it.hy?'فكّر في الصورة: ما الذي يكمل المعنى؟':'ليس هذا. ابحث عن نصف يُنطق قريبًا من '+it.py+'.');return}
+  $('hint').textContent='';
+  if(step===0){$('sm').className='slot m fill';$('sm').innerHTML='<span lang="zh-CN">'+o+'</span><small>'+MEAN[o]+'</small>';$('ss').classList.add('cur');step=1;tray();return}
+  $('ss').className='slot s fill';$('ss').innerHTML='<span lang="zh-CN">'+o+'</span><small>'+(it.hy?MEAN[o]:'<span class="lat">'+SOUND[o]+'</span>')+'</small>';
+  $('tray').innerHTML='';$('ask').textContent='';
+  knit();
+}
+function knit(){
+  var it=ITEMS[cur];$('rg').textContent=it.c;$('rg').classList.add('in');$('rg').setAttribute('lang','zh-CN');
+  requestAnimationFrame(function(){$('res').classList.add('done')});
+  S.done[it.c]=Math.max(S.done[it.c]||0,miss===0?2:1);save();
+  var snd=it.hy?'':'<p><span class="v">'+it.s+'</span> يُنطق <span class="lat">'+SOUND[it.s]+'</span>، والحرف يُنطق <span class="lat">'+it.py+'</span>'+(SOUND[it.s].replace(/[^a-z]/g,'')===it.py.replace(/[^a-z]/g,'')?': التطابق تام.':'. التلميح تقريبي.')+'</p>';
+  $('why').innerHTML='<div class="eq" style="background:var(--panel)"><div><span class="p w">'+it.m+'</span><small>'+MEAN[it.m]+'</small></div><span class="op">+</span><div><span class="p v">'+it.s+'</span><small>'+(it.hy?MEAN[it.s]:SOUND[it.s])+'</small></div><span class="op">=</span><div><span class="r" lang="zh-CN">'+it.c+'</span><small>'+it.py+'</small></div></div>'+
+    '<p>'+it.why+'</p>'+snd+'<p class="mut">الكلمة: <span class="han" lang="zh-CN">'+it.w+'</span> <span class="lat">'+it.wpy+'</span></p>';
+  $('why').className='why show';$('navrow').hidden=false;
+  $('nextBtn').textContent=cur===ITEMS.length-1?'اقرأ ما لم تدرسه':'التالي';
+  say(it.w);cloth();renderFam();
+  $('nextBtn').focus({preventScroll:true});
+}
+$('sayBtn').onclick=function(){say(ITEMS[cur].w)};
+$('nextBtn').onclick=function(){if(cur<ITEMS.length-1){cur++;render()}else startPredict()};
+function cloth(){$('cloth').innerHTML=ITEMS.map(function(it,i){return'<span class="tile'+(S.done[it.c]?' on':'')+(i===cur?' cur':'')+'" lang="zh-CN">'+it.c+'</span>'}).join('')}
+
+/* ---------- predict: read characters you have not studied ---------- */
+var pi=0,pstep=0,pscore=0;
+function startPredict(){$('work').hidden=true;$('intro').hidden=true;$('predict').hidden=false;pi=0;pscore=0;showP();$('predict').scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'})}
+function showP(){
+  var q=PRED[pi];pstep=0;
+  $('prc').textContent='حرف من درس آخر في الموقع ('+(pi+1)+' من '+PRED.length+'). استعمل النصفين لتخمّن.';
+  $('pbody').innerHTML='<div class="pq" style="margin-top:12px"><span class="big" lang="zh-CN">'+q.c+'</span><div class="parts">فيه <span class="w han">'+q.m+'</span> و<span class="v han">'+q.s+'</span>'+(SOUND[q.s]?' <span class="lat">('+SOUND[q.s]+')</span>':'')+'</div></div>'+
+    '<div class="ask">١. في أيّ حقل معناه؟</div><div class="opts three" id="pm">'+shuffle(q.mo).map(function(o){return'<button class="op2" data-o="'+o+'">'+o+'</button>'}).join('')+'</div>'+
+    '<div class="ask">٢. كيف يُنطق على الأرجح؟</div><div class="opts three" id="pp">'+shuffle(q.po).map(function(o){return'<button class="op2 lat" data-o="'+o+'">'+o+'</button>'}).join('')+'</div>'+
+    '<div class="why" id="pw"></div><div class="row" id="pnav" hidden><button class="btn" id="psay">استمع</button><button class="btn pri" id="pnext">'+(pi===PRED.length-1?'النتيجة':'التالي')+'</button></div>';
+  bindP('pm',q.mo[0]);bindP('pp',q.po[0]);
+}
+var pans={};
+function bindP(id,good){pans[id]=null;[].forEach.call($(id).children,function(b){b.onclick=function(){if(pans[id]!=null)return;pans[id]=b.dataset.o===good;
+  [].forEach.call($(id).children,function(x){x.disabled=true;if(x.dataset.o===good)x.classList.add('ok');else if(x===b)x.classList.add('bad')});
+  if(pans[id])pscore++;if(pans.pm!=null&&pans.pp!=null)revealP()}})}
+function revealP(){var q=PRED[pi];
+  $('pw').innerHTML='<p style="font:700 19px var(--font-hd)"><span class="han" lang="zh-CN" style="font-size:24px">'+q.c+'</span> <span class="lat">'+q.py+'</span>: '+q.ar+'</p><p class="mut">في الموقع: <span class="han" lang="zh-CN">'+q.w+'</span> · '+q.src+'</p>';
+  $('pw').className='why show';$('pnav').hidden=false;
+  $('psay').onclick=function(){say(q.c)};say(q.c);
+  $('pnext').onclick=function(){pi++;if(pi<PRED.length)showP();else endP()};$('pnext').focus({preventScroll:true})}
+function endP(){
+  $('prc').textContent='';
+  $('pbody').innerHTML='<p style="font:700 22px var(--font-hd);margin:10px 0 4px">'+pscore+' من '+(PRED.length*2)+'</p><p>هذه حروف لم تدرسها في هذا الدرس، وقرأت معناها ونطقها من نصفيها. هذا ما يتيحه النَّول: كل نصف تعرفه يفتح لك حروفًا جديدة.</p>'+
+    '<div class="row"><button class="btn" id="back">ارجع إلى النَّول</button></div>';
+  $('back').onclick=function(){$('predict').hidden=true;$('intro').hidden=false;$('work').hidden=false;cur=0;render()};
+}
+
+/* ---------- families ---------- */
+var famTab='m';
+function renderFam(){
+  var data=famTab==='m'?MFAM:SFAM,lesson={};ITEMS.forEach(function(i){lesson[i.c]=1});
+  $('famBody').innerHTML='<div class="fam '+(famTab==='m'?'mf':'sf')+'">'+data.map(function(f){
+    return'<div class="f"><div class="k"><span lang="zh-CN">'+f[0]+'</span><small>'+(famTab==='m'?MEAN[f[0]]:'<span class="lat">'+SOUND[f[0]]+'</span>')+'</small></div><div class="ms">'+
+      f[1].split('').map(function(c){return'<button class="mem'+(lesson[c]?' lsn':'')+'" data-c="'+c+'"><b lang="zh-CN">'+c+'</b><i>'+(ALLC[c]||'')+'</i></button>'}).join('')+'</div></div>'}).join('')+'</div>';
+  [].forEach.call(document.querySelectorAll('.mem'),function(b){b.onclick=function(){say(b.dataset.c)}});
+}
+$('tM').onclick=function(){famTab='m';$('tM').setAttribute('aria-selected','true');$('tS').setAttribute('aria-selected','false');renderFam()};
+$('tS').onclick=function(){famTab='s';$('tS').setAttribute('aria-selected','true');$('tM').setAttribute('aria-selected','false');renderFam()};
+
+render();renderFam();
+window.__loom={items:ITEMS,pred:PRED,state:function(){return{cur:cur,step:step,done:S.done}}};
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>أذنٌ عربية · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Serif:wght@500;700&family=Noto+Serif+SC:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Concept B — "blue-and-white": cobalt on porcelain. The cobalt of 青花 porcelain travelled from the
+   Arab-Persian world to Jingdezhen; copper-red (釉里红) marks what still needs work. */
+:root{
+  --bg:#f3f6fb;--panel:#ffffff;--panel2:#eef3fb;--ink:#0f1b33;--mut:#4d5b78;--line:#d3ddef;
+  --co:#1b3c8c;--co2:#2f5bc4;--co-soft:rgba(27,60,140,.10);--red:#a3302a;--red-soft:rgba(163,48,42,.10);--ok:#1b3c8c;
+  --shadow:0 1px 0 rgba(15,27,51,.05),0 10px 26px -14px rgba(15,27,51,.35);
+  --font-ar:"Noto Naskh Arabic",serif;--font-hd:"Amiri","Noto Naskh Arabic",serif;--font-lat:"Noto Serif",Georgia,serif;--font-han:"Noto Serif SC","Noto Serif CJK SC",serif;
+  color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#081024;--panel:#0f1a36;--panel2:#132147;--ink:#e7edfb;--mut:#9eb0d6;--line:#22325e;
+  --co:#93b4ff;--co2:#b9ceff;--co-soft:rgba(147,180,255,.12);--red:#ff9184;--red-soft:rgba(255,145,132,.13);--ok:#93b4ff;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 12px 30px -14px rgba(0,0,0,.8);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#081024;--panel:#0f1a36;--panel2:#132147;--ink:#e7edfb;--mut:#9eb0d6;--line:#22325e;
+  --co:#93b4ff;--co2:#b9ceff;--co-soft:rgba(147,180,255,.12);--red:#ff9184;--red-soft:rgba(255,145,132,.13);--ok:#93b4ff;
+  --shadow:0 1px 0 rgba(0,0,0,.4),0 12px 30px -14px rgba(0,0,0,.8);color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.75 var(--font-ar)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 32px}
+/* fret band (回纹) — the porcelain rim */
+.rim{height:14px;margin:0 -16px 10px;background-color:var(--co);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M1 13V1h12v8H5V5h4' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M15 1v12h12V5h-8v4h4' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") repeat-x;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14'%3E%3Cpath d='M1 13V1h12v8H5V5h4' fill='none' stroke='black' stroke-width='2'/%3E%3Cpath d='M15 1v12h12V5h-8v4h4' fill='none' stroke='black' stroke-width='2'/%3E%3C/svg%3E") repeat-x;opacity:.85}
+header.top{display:flex;gap:12px;align-items:center;padding:14px 0 6px}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:700 30px/1.15 var(--font-hd);color:var(--co)}
+.top p{margin:2px 0 0;color:var(--mut);font-size:14px;line-height:1.5}
+.top a{color:var(--mut)}
+.medal{flex:none;width:48px;height:48px}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel);color:var(--co);display:grid;place-items:center;cursor:pointer}
+.iconbtn svg{width:22px;height:22px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:16px;margin-top:14px}
+h2{font:700 23px/1.3 var(--font-hd);margin:0 0 6px;color:var(--co)}
+.mut{color:var(--mut)}
+.han{font-family:var(--font-han)}
+.lat{font-family:var(--font-lat);direction:ltr;unicode-bidi:isolate}
+/* the mouth map */
+svg.map{display:block;width:100%;height:auto;margin:6px 0 2px}
+.map .lab-ar{font:700 15px var(--font-hd);fill:var(--co)}
+.map .lab-zh{font:600 12.5px var(--font-lat);fill:var(--red)}
+.map .cap{font:600 10.5px var(--font-ar);fill:var(--mut)}
+.map .anat{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.8}
+.map .tongue{fill:var(--co-soft);stroke:var(--co);stroke-width:1.6}
+.map .lead{stroke:var(--mut);stroke-width:.8;stroke-dasharray:2 3;opacity:.7}
+.map .zone{stroke:var(--panel);stroke-width:2.5;transition:fill .5s}
+.keys{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--mut);margin-top:4px}
+.keys i{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-inline-end:5px}
+.insight{display:grid;gap:8px;margin:12px 0 0;padding:0;list-style:none;font-size:15px}
+.insight li{padding:10px 12px;border-radius:12px;background:var(--panel2);border-inline-start:3px solid var(--co)}
+.insight li.r{border-color:var(--red)}
+.btn{min-height:50px;padding:0 18px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 16px var(--font-ar);display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer}
+.btn svg{width:20px;height:20px}
+.btn.pri{background:var(--co);border-color:var(--co);color:var(--panel)}
+.btn.wide{width:100%}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+/* trial */
+.trial{text-align:center}
+.meter{height:6px;border-radius:3px;background:var(--panel2);overflow:hidden;margin:2px 0 14px}
+.meter i{display:block;height:100%;background:var(--co);width:0;transition:width .3s}
+.play{width:118px;height:118px;border-radius:50%;margin:6px auto 4px;display:grid;place-items:center;cursor:pointer;border:0;color:var(--panel);
+  background:radial-gradient(circle at 35% 30%,var(--co2),var(--co) 70%);box-shadow:0 0 0 7px var(--co-soft),0 0 0 8px var(--line)}
+.play svg{width:46px;height:46px}
+.play.peek{font:700 34px var(--font-han);color:var(--panel)}
+.small{font-size:14px;color:var(--mut)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:10px;margin:16px 0 0}
+.opt{min-height:86px;border-radius:16px;border:2px solid var(--line);background:var(--panel);color:var(--ink);font:700 32px var(--font-lat);cursor:pointer;direction:ltr}
+.opt:hover{border-color:var(--co2)}
+.opt.ok{border-color:var(--co);background:var(--co-soft)}
+.opt.bad{border-color:var(--red);background:var(--red-soft)}
+.opt[disabled]{cursor:default}
+.reveal{display:none;margin-top:14px;padding:12px;border-radius:14px;background:var(--panel2);text-align:start}
+.reveal.show{display:block;animation:in .3s ease both}
+.reveal .big{display:flex;gap:12px;align-items:center}
+.reveal .big .han{font-size:44px;line-height:1}
+.reveal .tag{display:inline-block;font-size:12.5px;padding:0 10px;border-radius:99px;background:var(--panel);border:1px solid var(--line);color:var(--mut)}
+.verd{font:700 19px var(--font-hd)}
+.verd.ok{color:var(--co)}.verd.bad{color:var(--red)}
+.teacher{display:none;margin-top:12px;padding:10px 12px;border-radius:12px;border:1px dashed var(--red);font-size:14.5px;text-align:start}
+.teacher.show{display:block}
+/* results */
+.front{border:1px solid var(--line);border-radius:16px;padding:12px;margin-top:10px;background:var(--panel)}
+.front .hd{display:flex;align-items:center;gap:10px}
+.front .hd h3{margin:0;font:700 19px var(--font-hd);flex:1;min-width:0}
+.front .pct{font:700 18px var(--font-lat);min-width:52px;text-align:center}
+.front .bar{height:8px;border-radius:4px;background:var(--panel2);margin:8px 0;overflow:hidden}
+.front .bar i{display:block;height:100%}
+.front .sys{font:600 14px var(--font-lat);color:var(--mut);direction:ltr;unicode-bidi:isolate}
+.front p{margin:6px 0;font-size:15px}
+.front details{font-size:15px}
+.front summary{cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--co);font-weight:600}
+.front .anchor{padding:8px 10px;border-radius:10px;background:var(--co-soft)}
+footer.cfoot{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (min-width:900px){.wrap{max-width:1060px}.cols{display:grid;grid-template-columns:1.05fr 1fr;gap:18px;align-items:start}.cols .card{margin-top:14px}}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="rim" aria-hidden="true"></div>
+<header class="top">
+  <svg class="medal" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="22" fill="none" stroke="var(--co)" stroke-width="2"/><circle cx="24" cy="24" r="17" fill="var(--co)"/><path d="M16 27c2-7 6-11 9-11 3 0 5 2 5 5 0 3-2 4-2 7 0 2 1 3 3 3" fill="none" stroke="var(--panel)" stroke-width="2.4" stroke-linecap="round"/></svg>
+  <div class="sp"><h1>أذنٌ عربية</h1><p>خريطة أصوات الصينية كما تسمعها أذن نشأت على العربية · <a href="index.html">المختبر</a></p></div>
+  <button class="iconbtn" id="theme" aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+</header>
+
+<div class="cols">
+<section class="card" id="mapcard">
+  <h2>أين تُصنع الأصوات؟</h2>
+  <p class="mut" style="margin:0">فوقُ حروف العربية، وتحتُ أصوات الصينية، كلٌّ في موضع نطقه من الفم.</p>
+  <svg class="map" id="map" viewBox="0 0 340 300" role="img" aria-label="خريطة مواضع النطق في العربية والصينية"></svg>
+  <div class="keys" id="keys"><span><i style="background:var(--co)"></i>حروف العربية</span><span><i style="background:var(--red)"></i>أصوات الصينية</span></div>
+  <ul class="insight" id="ins">
+    <li><b>الصينية مزدحمة في مقدمة الفم:</b> من الأسنان إلى الحنك ثلاثة مواضع متجاورة (s / sh / x ، z / zh / j) تسمعها أذنك صوتًا أو صوتين.</li>
+    <li class="r"><b>والعربية تملك الحلق وحدها:</b> ق ع ح ء ه لا مقابل لها في الصينية. ولهذا كانت h الصينية (خاء ليّنة) سهلة عليك.</li>
+  </ul>
+</section>
+
+<section class="card" id="stage">
+  <div id="intro">
+    <h2>اختبار الأذن</h2>
+    <p>تسمع مقطعًا صينيًا واحدًا، وتختار ما سمعت. الكلمات كلها من مفردات الموقع. ٢٣ سؤالًا في نحو ثلاث دقائق، ثم ترى خريطتك أنت: ما يسهل عليك، وما يحتاج تدريبًا.</p>
+    <div class="teacher" id="novoice">لا يوجد صوت صيني على هذا الجهاز. ثبّته من إعدادات الجهاز: «تحويل النص إلى كلام» ثم محرّك Google ثم بيانات اللغة الصينية (قد تختلف الأسماء بين الأجهزة). أو استعمل <b>وضع المعلّم</b>: يقرأ المعلّم المقطع بصوته، ويجيب الطلاب.</div>
+    <div class="row">
+      <button class="btn pri wide" id="start"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>ابدأ الاختبار</button>
+      <label class="btn wide" style="font-weight:400"><input type="checkbox" id="tmode" style="width:20px;height:20px;margin:0"> وضع المعلّم (بلا صوت آلي)</label>
+    </div>
+  </div>
+
+  <div id="trial" class="trial" hidden>
+    <div class="small" id="tcount"></div>
+    <div class="meter"><i id="tmeter"></i></div>
+    <button class="play" id="play" aria-label="استمع إلى المقطع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></button>
+    <div class="small" id="playhint">اضغط لتسمع مرة أخرى</div>
+    <div class="opts" id="opts"></div>
+    <div class="reveal" id="reveal"></div>
+  </div>
+
+  <div id="results" hidden>
+    <h2>خريطتك</h2>
+    <p class="mut" style="margin:0" id="rsum"></p>
+    <div id="fronts"></div>
+    <div class="row"><button class="btn" id="redo">أعد الاختبار كاملًا</button></div>
+  </div>
+</section>
+</div>
+
+<footer class="cfoot"><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* real content: every syllable is a character from the site's vocabulary (hub dictionary) */
+var W={"白": ["bái", "bai", "白酒", "bái jiǔ", "البايجيو (مشروب صيني قوي)", "الصينية العملية · الدرس 5"], "排": ["pái", "pai", "安排", "ān pái", "ترتيب / برنامج", "قواعد ١ · الدرس 9"], "东": ["dōng", "dong", "东边", "dōng bian", "الشرق", "قواعد ١ · الدرس 7"], "通": ["tōng", "tong", "通知", "tōng zhī", "يُبلغ / إشعار", "الصينية العملية · الدرس 4"], "到": ["dào", "dao", "周到", "zhōu dào", "دقيق / مراعٍ لكل التفاصيل", "الصينية العملية · الدرس 5"], "套": ["tào", "tao", "套", "tào", "طقم / مجموعة", "الصينية العملية · الدرس 6"], "工": ["gōng", "gong", "工作", "gōngzuò", "عمل", "قراءة ١ · الدرس 8"], "空": ["kōng", "kong", "空气", "kōngqì", "هواء", "قواعد ١ · الدرس 10"], "怪": ["guài", "guai", "怪兽", "guài shòu", "وحش", "الثقافة · الدرس 2"], "快": ["kuài", "kuai", "快乐", "kuài lè", "سعيد", "قواعد ١ · الدرس 8"], "思": ["sī", "si", "有意思", "yǒuyìsi", "ممتع", "قراءة ١ · الدرس 6"], "西": ["xī", "xi", "西瓜", "xī guā", "بطيخ", "قواعد ١ · الدرس 6"], "施": ["shī", "shi", "施礼", "shī lǐ", "يؤدي التحية", "الثقافة · الدرس 3"], "色": ["sè", "se", "粉色", "fěn sè", "وردي", "الصينية العملية · الدرس 6"], "社": ["shè", "she", "社会秩序", "shè huì zhì xù", "النظام الاجتماعي", "الثقافة · الدرس 1"], "三": ["sān", "san", "世界三大宗教", "shì jiè sān dà zōng jiào", "الأديان العالمية الثلاثة الكبرى", "الثقافة · الدرس 3"], "山": ["shān", "shan", "山", "shān", "جبل", "قواعد ١ · الدرس 10"], "书": ["shū", "shu", "书", "shū", "كتاب", "قواعد ١ · الدرس 8"], "需": ["xū", "xu", "需要", "xū yào", "يحتاج", "قواعد ١ · الدرس 6"], "字": ["zì", "zi", "名字", "míngzi", "اسم", "قراءة ١ · الدرس 7"], "志": ["zhì", "zhi", "杂志", "zá zhì", "مجلة", "قواعد ١ · الدرس 8"], "祭": ["jì", "ji", "祭祀", "jì sì", "تقديم القرابين والطقوس", "الثقافة · الدرس 2"], "族": ["zú", "zu", "少数民族", "shǎo shù mín zú", "قومية أقلية", "الثقافة · الدرس 3"], "竹": ["zhú", "zhu", "爆竹", "bào zhú", "مفرقعات", "الثقافة · الدرس 2"], "局": ["jú", "ju", "邮局", "yóu jú", "مكتب البريد", "قواعد ١ · الدرس 7"], "吃": ["chī", "chi", "吃", "chī", "يأكل", "قواعد ١ · الدرس 8"], "期": ["qī", "qi", "星期", "xīng qī", "أسبوع / يوم الأسبوع", "قواعد ١ · الدرس 8"], "物": ["wù", "wu", "礼物", "lǐ wù", "هدية", "قواعد ١ · الدرس 8"], "育": ["yù", "yu", "体育馆", "tǐ yù guǎn", "صالة رياضية", "قواعد ١ · الدرس 7"], "出": ["chū", "chu", "出发", "chū fā", "ينطلق", "قواعد ١ · الدرس 10"], "区": ["qū", "qu", "小区", "xiǎoqū", "حي سكني", "استماع ١ · الدرس 10"], "商": ["shāng", "shang", "商店", "shāng diàn", "متجر", "قواعد ١ · الدرس 7"], "新": ["xīn", "xin", "新鲜", "xīn xiān", "طازج / منعش", "قواعد ١ · الدرس 10"], "星": ["xīng", "xing", "星期", "xīng qī", "أسبوع / يوم الأسبوع", "قواعد ١ · الدرس 8"], "关": ["guān", "guan", "关", "guān", "يغلق", "قواعد ١ · الدرس 9"], "光": ["guāng", "guang", "光盘", "guāngpán", "قرص (CD)", "قراءة ١ · الدرس 10"], "分": ["fēn", "fen", "分", "fēn", "فن (١/١٠٠ يوان)", "قراءة ١ · الدرس 10"], "风": ["fēng", "feng", "风景", "fēng jǐng", "منظر طبيعي", "قواعد ١ · الدرس 10"], "民": ["mín", "min", "先民", "xiān mín", "الأسلاف الأوائل", "الثقافة · الدرس 3"], "明": ["míng", "ming", "明天", "míng tiān", "غداً", "قواعد ١ · الدرس 8"], "日": ["rì", "ri", "日", "rì", "يوم (في التاريخ المكتوب)", "قواعد ١ · الدرس 8"], "力": ["lì", "li", "齐心协力", "qí xīn xié lì", "التعاون بقلب واحد", "الثقافة · الدرس 2"], "荣": ["róng", "rong", "荣幸", "róng xìng", "مشرَّف / شرف", "الصينية العملية · الدرس 5"], "龙": ["lóng", "long", "龙舟", "lóng zhōu", "قارب التنين", "الثقافة · الدرس 2"], "防": ["fáng", "fang", "城防", "chéng fáng", "تحصين المدن", "الثقافة · الدرس 4"], "航": ["háng", "hang", "航海", "háng hǎi", "الملاحة البحرية", "الثقافة · الدرس 4"], "饭": ["fàn", "fan", "饭", "fàn", "طعام / وجبة", "قواعد ١ · الدرس 8"], "函": ["hán", "han", "函谷关", "hán gǔ guān", "ممر هانقو (مكان القصة)", "الثقافة · الدرس 1"]};
+var FRONTS=[
+ {id:'asp',sys:'b–p · d–t · g–k',title:'النَّفَس لا الجهر',zones:['lab','alv','vel'],
+  trap:'في العربية نفرّق بين «د» و«ت» بالجهر: هل تهتز الأحبال الصوتية؟ أما الصينية فتفرّق بالنَّفَس: p و t و k تخرج مع نفخة هواء قوية، و b و d و g بلا نفخة وبلا جهر تقريبًا. لذلك تبدو b لأذنك أحيانًا «پ»، و d «ت».',
+  anchor:'d تاء عربية خفيفة بلا نفخة، و t تاء مع نفخة واضحة. و g كاف بلا نفخة، و k كاف بنفخة.',
+  tip:'ضع كفّك أمام فمك: مع p و t و k تحسّ الهواء، ومع b و d و g لا تحسّه.',
+  items:[['白','排'],['东','通'],['到','套'],['工','空'],['怪','快']]},
+ {id:'sib',sys:'s · sh · x',title:'سين وشين… وثالثٌ بينهما',zones:['alv','ret','pal'],
+  trap:'في العربية «س» و«ش» فقط. الصينية تقسم هذه المنطقة ثلاثة: s سين، و sh شين واللسان ملتفّ إلى الخلف، و x صوت بينهما: وسط اللسان مرتفع وطرفه خلف الأسنان السفلى.',
+  anchor:'s = س تقريبًا. sh ≈ ش مع رفع طرف اللسان إلى الخلف. x لا مقابل له في العربية.',
+  tip:'قل «ش» مبتسمًا ابتسامة عريضة وطرف لسانك على أسنانك السفلى: هذا قريب من x.',
+  items:[['思','西','施'],['色','社'],['三','山'],['书','需']]},
+ {id:'aff',sys:'z · zh · j / c · ch · q',title:'الجيم ليست واحدة',zones:['alv','ret','pal'],
+  trap:'تسمع الأذن العربية zh و j كأنهما «ج»، و ch و q كأنهما «تش». والصينية تفرّق بين ثلاثة مواضع: z و c عند الأسنان، و zh و ch واللسان ملتفّ، و j و q مع وسط اللسان وابتسامة. وكلها مهموسة: لا جهر فيها كجيم العربية.',
+  anchor:'z ≈ «تس» خفيفة، و zh ≈ «تش» واللسان ملتفّ، و j ≈ «تش» مع ابتسامة. و c و ch و q مثلها مع نفخة هواء.',
+  tip:'لاحظ ما يأتي بعدها: j و q و x لا تأتي إلا قبل i أو ü.',
+  items:[['字','志','祭'],['族','竹','局'],['吃','期']]},
+ {id:'yu',sys:'u · ü',title:'الواو المستديرة والياء المستديرة',zones:['lab','pal'],
+  trap:'في العربية «و» و«ي»، وليس فيها صوت بينهما. ü ياءٌ بشفتين مستديرتين. وفخّ الكتابة: بعد j و q و x و y تُكتب u لكنها تُنطق ü، فـ qu تُقرأ «تشيو» مستديرة لا «كو».',
+  anchor:'ü: قل «يي» ثم دوّر شفتيك كأنك تقول «وو»، ولا تحرّك لسانك.',
+  tip:'انظر في المرآة: مع ü شفتاك مستديرتان ولسانك في موضع الياء.',
+  items:[['物','育'],['出','区']]},
+ {id:'ng',sys:'-n · -ng',title:'النون… والإخفاء',zones:['alv','vel'],
+  trap:'تسمع أذن العربي an و ang نونًا واحدة. في الصينية هما صوتان يغيّران المعنى: 山 shān جبل، و 商 shāng تجارة.',
+  anchor:'أنت تعرف ng من التجويد: النون في «مِنْكُم» و«يَنْقَلِبون» تُنطق مُخفاة من مؤخرة الفم عند الكاف والقاف. هذه هي ng.',
+  tip:'مع -n يلمس طرف لسانك اللثة، ومع -ng يبقى طرف اللسان أسفل الفم وترتفع مؤخرته.',
+  items:[['山','商'],['新','星'],['关','光'],['分','风'],['民','明']]},
+ {id:'r',sys:'r · l',title:'راءٌ بلا ترعيد',zones:['ret'],
+  trap:'الراء العربية مكرّرة يهتز فيها طرف اللسان. r الصينية لا اهتزاز فيها: اللسان ملتفّ إلى الخلف دون أن يلمس شيئًا. وحين لا تجد الأذن مكانًا لها تهرب إلى اللام.',
+  anchor:'r ≈ «ژ» خفيفة جدًا. ليست راءً ولا لامًا.',
+  tip:'قل sh وأطلق صوتك في أثنائه: تقترب من r.',
+  items:[['日','力'],['荣','龙']]},
+ {id:'h',sys:'f · h',title:'ميزتك: الخاء',zones:['vel'],easy:true,
+  trap:'h الصينية ليست هاء العربية الخفيفة، بل خاءٌ ليّنة. وهذا صوت تملكه أنت ويفتقده كثير من متعلمي الصينية الآخرين.',
+  anchor:'h ≈ «خ» خفيفة. و f = ف تمامًا.',
+  tip:'لا تُضعف h حتى تصير هاءً؛ اجعلها خاءً لطيفة.',
+  items:[['防','航'],['饭','函']]}];
+
+/* ---------- state ---------- */
+var KEY='lab-ear-v1',S={r:{}};
+try{var raw=localStorage.getItem(KEY);if(raw){S=JSON.parse(raw)||S;S.r=S.r||{}}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var $=function(id){return document.getElementById(id)};
+var Q=[],qi=0,drill=null,answered=false,teacher=false;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ---------- theme ---------- */
+try{var th=localStorage.getItem('lab-theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
+$('theme').onclick=function(){var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('lab-theme',d.dataset.theme)}catch(e){}};
+
+/* ---------- speech ---------- */
+var voice=null;
+function pickVoice(){if(!('speechSynthesis' in window))return;var vs=speechSynthesis.getVoices();
+  voice=vs.filter(function(v){return /^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return /^zh/i.test(v.lang)&&!/HK|TW/i.test(v.lang)})[0]||null;
+  $('novoice').classList.toggle('show',!voice);if(!voice&&!teacher){$('tmode').checked=true;teacher=true}}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}else{$('novoice').classList.add('show');$('tmode').checked=true;teacher=true}
+setTimeout(pickVoice,700);
+function say(ch){if(teacher||!voice)return;speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(ch);u.lang='zh-CN';u.voice=voice;u.rate=.8;speechSynthesis.speak(u)}
+$('tmode').onchange=function(){teacher=this.checked};
+
+/* ---------- the map ---------- */
+var ZONES=[ /* id, label-column x, anatomical point, Arabic letters, Chinese initials */
+ {id:'lab',x:36,p:[44,154],ar:['ب م','ف و'],zh:['b p','m f'],n:'الشفتان'},
+ {id:'alv',x:76,p:[66,147],ar:['ت د','س ز','ن ل ر'],zh:['d t n l','z c s'],n:'الأسنان واللثة'},
+ {id:'ret',x:116,p:[92,139],ar:['ش ج'],zh:['zh ch','sh r'],n:'خلف اللثة'},
+ {id:'pal',x:154,p:[128,132],ar:['ي'],zh:['j q x'],n:'الحنك'},
+ {id:'vel',x:194,p:[180,136],ar:['ك غ خ'],zh:['g k h','ng'],n:'الطبق'},
+ {id:'uvu',x:232,p:[222,163],ar:['ق'],zh:[],n:'اللهاة'},
+ {id:'pha',x:268,p:[247,192],ar:['ع ح'],zh:[],n:'الحلق'},
+ {id:'glo',x:304,p:[247,222],ar:['ء ه'],zh:[],n:'الحنجرة'}];
+function svgMap(scores){
+  var o='';
+  /* anatomy (face to the left) */
+  o+='<path class="anat" d="M100 76C74 78 56 94 54 112L36 132l12 4-2 8c-4 6 0 10 4 12-6 4-4 10 2 12-4 8 2 20 16 22l24 4 6 40"/>';
+  o+='<path class="anat" d="M58 151C90 129 150 124 186 131c16 4 30 14 38 28"/>';
+  o+='<path class="anat" d="M252 140v94"/>';
+  o+='<path class="tongue" d="M62 168C90 152 140 150 180 160c26 8 42 30 46 74H228"/>';
+  ZONES.forEach(function(z){
+    var c=scores&&scores[z.id]!=null?mix(scores[z.id]):(z.zh.length?'var(--red)':'var(--co)');
+    o+='<line class="lead" x1="'+z.x+'" y1="66" x2="'+z.p[0]+'" y2="'+z.p[1]+'"/>';
+    if(z.zh.length)o+='<line class="lead" x1="'+z.x+'" y1="240" x2="'+z.p[0]+'" y2="'+z.p[1]+'"/>';
+    o+='<circle class="zone" data-z="'+z.id+'" cx="'+z.p[0]+'" cy="'+z.p[1]+'" r="'+(scores&&scores[z.id]!=null?9:6)+'" fill="'+c+'"/>';
+    z.ar.forEach(function(l,k){o+='<text class="lab-ar" x="'+z.x+'" y="'+(18+k*19)+'" text-anchor="middle">'+l+'</text>'});
+    if(z.zh.length)z.zh.forEach(function(l,k){o+='<text class="lab-zh" x="'+z.x+'" y="'+(256+k*17)+'" text-anchor="middle" direction="ltr">'+l+'</text>'});
+    else o+='<text class="cap" x="'+z.x+'" y="256" text-anchor="middle">—</text>';
+  });
+  o+='<text class="cap" x="268" y="290" text-anchor="middle">منطقتك وحدك</text><path d="M222 276h92" stroke="var(--co)" stroke-width="1.5"/>';
+  $('map').innerHTML=o;
+}
+function mix(v){return v>=80?'var(--co)':v>=55?'var(--co2)':'var(--red)'}
+
+/* ---------- the test ---------- */
+function buildQ(front){
+  var list=[];
+  FRONTS.forEach(function(f){if(front&&f.id!==front)return;f.items.forEach(function(g){list.push({f:f.id,g:g,t:g[Math.floor(Math.random()*g.length)]})})});
+  if(front){var extra=shuffle(list).map(function(q){return{f:q.f,g:q.g,t:q.g[Math.floor(Math.random()*q.g.length)]}});list=list.concat(extra).slice(0,8)}
+  return shuffle(list);
+}
+function start(front){drill=front||null;Q=buildQ(drill);qi=0;
+  if(!drill){S.r={};save()}
+  $('intro').hidden=true;$('results').hidden=true;$('trial').hidden=false;show();$('stage').scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}
+function show(){
+  answered=false;var q=Q[qi];
+  $('tcount').textContent=(drill?'تدريب: '+frontOf(q.f).title+' · ':'')+'السؤال '+(qi+1)+' من '+Q.length;
+  $('tmeter').style.width=(qi/Q.length*100)+'%';
+  $('reveal').className='reveal';$('reveal').innerHTML='';
+  var play=$('play');
+  if(teacher){play.classList.add('peek');play.innerHTML='<span>؟</span>';play.setAttribute('aria-label','اضغط مطوّلًا ليرى المعلّم المقطع');$('playhint').textContent='للمعلّم: اضغط مطوّلًا لترى المقطع ثم اقرأه بصوتك'}
+  else{play.classList.remove('peek');play.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';play.setAttribute('aria-label','استمع إلى المقطع');$('playhint').textContent='اضغط لتسمع مرة أخرى'}
+  $('opts').innerHTML=shuffle(q.g).map(function(c){return'<button class="opt" data-c="'+c+'">'+W[c][1]+'</button>'}).join('');
+  [].forEach.call($('opts').children,function(b){b.onclick=function(){answer(b)}});
+  setTimeout(function(){say(q.t)},250);
+}
+function frontOf(id){return FRONTS.filter(function(f){return f.id===id})[0]}
+function answer(b){
+  if(answered)return;answered=true;var q=Q[qi],ok=b.dataset.c===q.t,w=W[q.t];
+  [].forEach.call($('opts').children,function(x){x.disabled=true;if(x.dataset.c===q.t)x.classList.add('ok');else if(x===b)x.classList.add('bad')});
+  var r=S.r[q.f]||(S.r[q.f]={c:0,n:0});r.n++;if(ok)r.c++;save();
+  var f=frontOf(q.f),other=ok?'':' — واخترتَ <span class="lat">'+W[b.dataset.c][1]+'</span>';
+  $('reveal').innerHTML='<div class="verd '+(ok?'ok':'bad')+'">'+(ok?'أصبت':'سمعتَ غيرها')+'</div>'+
+    '<div class="big"><span class="han" lang="zh-CN">'+q.t+'</span><div><div class="lat" style="font-size:22px;font-weight:700">'+w[0]+'</div>'+
+    '<div class="small">في كلمة <span class="han" lang="zh-CN">'+w[2]+'</span> <span class="lat">'+w[3]+'</span>: '+w[4]+'</div></div></div>'+
+    '<p style="margin:8px 0 4px"><span class="tag">'+f.title+' · <span class="lat">'+f.sys+'</span></span>'+other+'</p>'+
+    (ok?'':'<p style="margin:4px 0 0;font-size:15px">'+f.tip+'</p>')+
+    '<div class="row"><button class="btn" id="again1">استمع مرة أخرى</button><button class="btn pri" id="nextq" style="flex:1">'+(qi===Q.length-1?'خريطتي':'التالي')+'</button></div>';
+  $('reveal').className='reveal show';
+  $('again1').onclick=function(){if(teacher){$('playhint').textContent='اقرأ المقطع مرة أخرى'}else say(q.t)};
+  $('nextq').onclick=function(){qi++;if(qi<Q.length)show();else results()};
+  $('nextq').focus({preventScroll:true});
+}
+/* play button: speak, or (teacher mode) show the syllable while held */
+var pl=$('play');
+pl.addEventListener('click',function(){if(!teacher&&Q[qi])say(Q[qi].t)});
+function peek(on){if(!teacher||!Q[qi])return;pl.innerHTML=on?'<span class="han">'+Q[qi].t+'</span>':'<span>؟</span>';if(on)$('playhint').innerHTML='اقرأ: <span class="lat">'+W[Q[qi].t][0]+'</span>'}
+pl.addEventListener('pointerdown',function(){peek(true)});['pointerup','pointerleave','pointercancel'].forEach(function(e){pl.addEventListener(e,function(){peek(false)})});
+
+/* ---------- results: the personal map ---------- */
+function pct(id){var r=S.r[id];return r&&r.n?Math.round(100*r.c/r.n):null}
+function results(){
+  $('trial').hidden=true;$('results').hidden=false;
+  var zs={};FRONTS.forEach(function(f){var p=pct(f.id);if(p==null)return;f.zones.forEach(function(z){zs[z]=zs[z]==null?p:Math.min(zs[z],p)})});
+  svgMap(zs);
+  $('keys').innerHTML='<span><i style="background:var(--co)"></i>متمكّن</span><span><i style="background:var(--co2)"></i>قريب</span><span><i style="background:var(--red)"></i>يحتاج تدريبًا</span>';
+  var list=FRONTS.slice().sort(function(a,b){return(pct(a.id)==null?101:pct(a.id))-(pct(b.id)==null?101:pct(b.id))});
+  var weak=list.filter(function(f){return pct(f.id)!=null&&pct(f.id)<70}),strong=list.filter(function(f){return pct(f.id)!=null&&pct(f.id)>=85});
+  $('rsum').innerHTML=(weak.length?'ابدأ من الأعلى: <b>'+weak.map(function(f){return f.title}).join('، ')+'</b>. ':'أذنك تميّز هذه الأصوات جيدًا. ')+(strong.length?'ونقاط قوتك: '+strong.map(function(f){return f.title}).join('، ')+'.':'');
+  $('fronts').innerHTML=list.map(function(f){var p=pct(f.id),c=p==null?'var(--line)':mix(p);
+    return'<article class="front"><div class="hd"><h3>'+f.title+'</h3><span class="pct" style="color:'+c+'">'+(p==null?'—':p+'%')+'</span></div>'+
+      '<div class="sys">'+f.sys+'</div><div class="bar"><i style="width:'+(p||0)+'%;background:'+c+'"></i></div>'+
+      '<p>'+f.trap+'</p><details><summary>المفتاح العربي وطريقة التدريب</summary><p class="anchor">'+f.anchor+'</p><p>'+f.tip+'</p></details>'+
+      '<div class="row"><button class="btn" data-drill="'+f.id+'">تدرّب على هذه</button></div></article>'}).join('');
+  [].forEach.call(document.querySelectorAll('[data-drill]'),function(b){b.onclick=function(){start(b.dataset.drill);$('stage').scrollIntoView({behavior:'smooth',block:'start'})}});
+  $('stage').scrollIntoView({block:'start'});
+}
+$('start').onclick=function(){start(null)};
+$('redo').onclick=function(){$('results').hidden=true;$('intro').hidden=false;svgMap(null)};
+svgMap(null);
+if(Object.keys(S.r).length){var b=document.createElement('button');b.className='btn wide';b.textContent='اعرض خريطتي السابقة';b.style.marginTop='8px';b.onclick=results;$('intro').querySelector('.row').appendChild(b)}
+window.__ear={state:function(){return{q:Q[qi],qi:qi,n:Q.length,r:S.r,teacher:teacher,voice:!!voice}},fronts:FRONTS};
+})();
+</script>
+</body>
+</html>
