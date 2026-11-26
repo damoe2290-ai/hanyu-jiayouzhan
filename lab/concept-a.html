@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مختبر النغمة · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600&family=Noto+Serif+SC:wght@500;700&family=Reem+Kufi:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Concept A — "inkstone & phosphor": a lab instrument drawn on an ink stone.
+   Five-level pitch staff (Chao Yuen Ren's tone letters), jade target band, amber voice trace. */
+:root{
+  --bg:#eef1f0;--panel:#ffffff;--panel2:#f6f8f7;--ink:#14191c;--mut:#56626a;--line:#d3dadd;
+  --jade:#0b7a5f;--jade-band:rgba(11,122,95,.20);--amber:#b04a06;--amber-soft:rgba(176,74,6,.12);
+  --staff:#c9d1d5;--warn:#9a3412;--ok:#0b7a5f;--shadow:0 1px 0 rgba(20,25,28,.06),0 8px 24px -12px rgba(20,25,28,.25);
+  --font-ar:"IBM Plex Sans Arabic",system-ui,sans-serif;--font-hd:"Reem Kufi","IBM Plex Sans Arabic",sans-serif;
+  --font-han:"Noto Serif SC","Noto Serif CJK SC","Songti SC",serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d1114;--panel:#151b1f;--panel2:#1b2227;--ink:#e6edef;--mut:#94a3ab;--line:#28323a;
+  --jade:#3fd0a5;--jade-band:rgba(63,208,165,.18);--amber:#ffb347;--amber-soft:rgba(255,179,71,.14);
+  --staff:#2c363d;--warn:#ffb08a;--ok:#3fd0a5;--shadow:0 1px 0 rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d1114;--panel:#151b1f;--panel2:#1b2227;--ink:#e6edef;--mut:#94a3ab;--line:#28323a;
+  --jade:#3fd0a5;--jade-band:rgba(63,208,165,.18);--amber:#ffb347;--amber-soft:rgba(255,179,71,.14);
+  --staff:#2c363d;--warn:#ffb08a;--ok:#3fd0a5;--shadow:0 1px 0 rgba(0,0,0,.4),0 10px 30px -14px rgba(0,0,0,.7);color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 var(--font-ar);
+  background-image:radial-gradient(circle at 100% 0,var(--amber-soft),transparent 40%),radial-gradient(circle at 0 100%,var(--jade-band),transparent 45%);background-attachment:fixed}
+.wrap{max-width:760px;margin:0 auto;padding:12px 16px 32px}
+header.top{display:flex;align-items:center;gap:12px;padding:6px 0 14px}
+.mark{flex:none;width:44px;height:44px}
+.top h1{margin:0;font:700 24px/1.2 var(--font-hd);letter-spacing:0}
+.top p{margin:2px 0 0;color:var(--mut);font-size:13.5px}
+.top .sp{flex:1;min-width:0}
+.iconbtn{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.iconbtn svg{width:22px;height:22px}
+a.back{color:var(--mut);font-size:13.5px;text-decoration:none;border-bottom:1px dotted var(--mut)}
+.han{font-family:var(--font-han)}
+.ltr{direction:ltr;unicode-bidi:isolate}
+/* stations */
+.stations{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:4px 0 12px}
+.stn{min-height:52px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:12px;padding:6px 8px;font:600 13.5px/1.3 var(--font-ar);cursor:pointer;text-align:center}
+.stn small{display:block;font-weight:400;color:var(--mut);font-size:12px}
+.stn[aria-current="true"]{border-color:var(--jade);box-shadow:inset 0 -3px 0 var(--jade)}
+.dots{display:flex;gap:6px;justify-content:center;margin:0 0 10px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dot.done{background:var(--jade)}
+.dot.cur{outline:2px solid var(--amber);outline-offset:2px}
+/* the instrument */
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:14px}
+.word{display:flex;align-items:flex-end;gap:14px;flex-wrap:wrap}
+.word .zh{font:700 52px/1 var(--font-han)}
+.word .meta{min-width:0;padding-bottom:4px}
+.word .py{font:600 20px/1.2 system-ui,sans-serif;color:var(--jade)}
+.word .py s{color:var(--mut);font-weight:400;text-decoration-thickness:1px;margin-inline-end:6px}
+.word .ar{color:var(--mut);font-size:14.5px}
+.ex{margin:10px 0 0;padding:8px 10px;border-radius:10px;background:var(--panel2);font-size:14px;color:var(--mut)}
+.ex .han{color:var(--ink);font-size:17px}
+.stage{position:relative;margin:12px -4px 0}
+canvas#cv{display:block;width:100%;height:230px;border-radius:12px;background:var(--panel2);touch-action:none}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin:6px 2px 0}
+.legend i{display:inline-block;width:18px;height:6px;border-radius:3px;vertical-align:middle;margin-inline-end:5px}
+.coach{margin:10px 0 0;padding:10px 12px;border-inline-start:3px solid var(--jade);background:var(--panel2);border-radius:8px;font-size:14.5px}
+.coach b{font-family:var(--font-hd);font-weight:500}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{min-height:48px;padding:0 16px;border-radius:12px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 15px var(--font-ar);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.pri{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.btn.rec{background:var(--amber);border-color:var(--amber);color:#fff;flex:1;justify-content:center;min-height:56px;font-size:16.5px}
+:root[data-theme="dark"] .btn.rec{color:#1a1206}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn.rec{color:#1a1206}}
+.btn.rec.on{animation:pulse 1s ease-in-out infinite}
+.btn[disabled]{opacity:.45;cursor:default}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.seg button{min-height:46px;padding:0 14px;border:0;background:none;color:var(--mut);font:600 14px var(--font-ar);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.seg button svg{width:18px;height:18px}
+.seg button[aria-checked="true"]{background:var(--jade);color:var(--panel)}
+.tracehint{flex:1;min-height:56px;display:flex;align-items:center;justify-content:center;text-align:center;border:1px dashed var(--jade);border-radius:12px;color:var(--jade);font-size:14.5px;padding:6px 10px}
+.prog{position:absolute;inset-inline:0;bottom:0;height:4px;background:var(--amber);transform-origin:right;transform:scaleX(0)}
+.result{margin-top:12px;display:none;gap:12px;align-items:center;padding:12px;border-radius:14px;border:1px solid var(--line);background:var(--panel2)}
+.result.show{display:flex}
+.score{flex:none;width:76px;height:76px;position:relative}
+.score svg{width:76px;height:76px;transform:rotate(-90deg)}
+.score b{position:absolute;inset:0;display:grid;place-items:center;font:700 24px var(--font-hd)}
+.result .txt{min-width:0;font-size:14.5px}
+.result .txt strong{display:block;font:500 18px var(--font-hd)}
+.result .txt ul{margin:4px 0 0;padding-inline-start:18px}
+.note{margin-top:10px;font-size:13.5px;color:var(--warn);display:none}
+.note.show{display:block}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:14px}
+/* summary */
+.sum h2{font:700 22px var(--font-hd);margin:0 0 4px}
+.bars{display:grid;gap:10px;margin:14px 0}
+.bar{display:grid;grid-template-columns:96px 1fr 44px;gap:10px;align-items:center;font-size:14px}
+.bar .tr{height:14px;border-radius:7px;background:var(--panel2);border:1px solid var(--line);overflow:hidden}
+.bar .tr i{display:block;height:100%;background:linear-gradient(90deg,var(--jade),var(--amber));width:0}
+.bar b{font:600 15px var(--font-hd);text-align:center}
+.insight{padding:12px;border-radius:12px;background:var(--panel2);border-inline-start:3px solid var(--amber);font-size:14.5px}
+.about{margin-top:16px;font-size:13.5px;color:var(--mut)}
+.about summary{cursor:pointer;color:var(--ink);font-weight:600;min-height:44px;display:flex;align-items:center}
+footer.cfoot{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@keyframes pulse{50%{box-shadow:0 0 0 8px var(--amber-soft)}}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.card,.result.show{animation:rise .35s ease both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (min-width:900px){
+  .wrap{max-width:1040px;padding-top:22px}
+  .layout{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+  canvas#cv{height:300px}
+  .word .zh{font-size:64px}
+}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <svg class="mark" viewBox="0 0 44 44" aria-hidden="true"><rect x="2" y="2" width="40" height="40" rx="11" fill="var(--ink)"/><path d="M9 29c4 0 5-14 9-14s4 9 8 9 4-12 9-12" fill="none" stroke="var(--jade)" stroke-width="3" stroke-linecap="round"/><circle cx="35" cy="12" r="2.6" fill="var(--amber)"/></svg>
+  <div class="sp">
+    <h1>مختبر النغمة</h1>
+    <p>الدرس العاشر · <span class="han" lang="zh-CN">这个星期天你忙不忙</span> · <a class="back" href="index.html">المختبر</a></p>
+  </div>
+  <button class="iconbtn" id="theme" aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+</header>
+
+<nav class="stations" id="stations" aria-label="المحطات"></nav>
+<div class="dots" id="dots" aria-hidden="true"></div>
+
+<div class="layout">
+<main id="main">
+  <section class="card" id="card" aria-live="polite">
+    <div class="word">
+      <div class="zh han" id="zh" lang="zh-CN"></div>
+      <div class="meta"><div class="py ltr" id="py"></div><div class="ar" id="ar"></div></div>
+    </div>
+    <p class="ex" id="ex"></p>
+    <div class="stage">
+      <canvas id="cv" aria-label="لوحة النغمة: الشريط الأخضر هو النغمة الصحيحة والخط البرتقالي هو صوتك"></canvas>
+      <div class="prog" id="prog"></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--jade)"></i>النغمة الصحيحة</span><span><i style="background:var(--amber)"></i>صوتك</span><span id="lgw" hidden><i style="background:var(--mut);opacity:.6"></i>كما تُكتب في القاموس</span></div>
+    <div class="coach" id="coach"></div>
+    <div class="row">
+      <button class="btn" id="say"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg>استمع</button>
+      <button class="btn" id="hum"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 15c3 0 3-6 6-6s3 8 6 8 3-10 6-10"/></svg>اللحن وحده</button>
+      <div class="seg" role="radiogroup" aria-label="طريقة الإجابة">
+        <button role="radio" id="mMic" aria-checked="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>بصوتي</button>
+        <button role="radio" id="mTrace" aria-checked="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 18c4-1 5-11 9-11 3 0 3 6 7 6"/></svg>بإصبعي</button>
+      </div>
+    </div>
+    <div class="row" id="act"></div>
+    <p class="note" id="note"></p>
+    <div class="result" id="result">
+      <div class="score"><svg viewBox="0 0 76 76"><circle cx="38" cy="38" r="32" fill="none" stroke="var(--line)" stroke-width="7"/><circle id="ring" cx="38" cy="38" r="32" fill="none" stroke="var(--jade)" stroke-width="7" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"/></svg><b id="sc">0</b></div>
+      <div class="txt" id="rtxt"></div>
+    </div>
+    <div class="nav"><button class="btn" id="prev">السابق</button><button class="btn pri" id="next">التالي</button></div>
+  </section>
+</main>
+<aside>
+  <details class="about card" open>
+    <summary>كيف يعمل المختبر؟</summary>
+    <p>كل نغمة صينية <b>شكلٌ</b> يرسمه الصوت: ثابت، صاعد، منخفض، هابط. المختبر يلتقط ارتفاع صوتك من الميكروفون داخل المتصفح نفسه، ويرسمه فوق الشكل الصحيح، ثم يقارن الشكلين. لا يُرسل صوتك إلى أي مكان ولا يُحفظ.</p>
+    <p>الدرجات الخمس على اليسار هي سلّم «تشاو» المعروف: ٥ أعلى صوتك المريح و١ أخفضه. المختبر يقارن <b>شكل</b> النغمة، لا علوّها المطلق، لأن لكل صوت طبقته.</p>
+    <p>إن لم يتوفر ميكروفون فاختر «بإصبعي»: استمع ثم ارسم اللحن الذي سمعته.</p>
+  </details>
+</aside>
+</div>
+
+<section class="card sum" id="sum" hidden aria-live="polite">
+  <h2>بصمة نغماتك</h2>
+  <p style="margin:0;color:var(--mut)">أفضل محاولة لك في كل كلمة، مجمّعة حسب النغمة.</p>
+  <div class="bars" id="bars"></div>
+  <div class="insight" id="insight"></div>
+  <div class="row"><button class="btn pri" id="again">ابدأ الجولة من جديد</button></div>
+</section>
+
+<footer class="cfoot"><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ---------- real content: lesson 10 (这个星期天你忙不忙) ---------- */
+var STATIONS=[
+  {n:'النغمات الأربع',s:'كلمة واحدة'},
+  {n:'كلمتان معًا',s:'مقطعان'},
+  {n:'حين تتغيّر النغمة',s:'التحوّل النغمي'}];
+var ITEMS=[
+ {st:0,zh:'花',py:'huā',ar:'زهرة',t:[1],ex:'那里有花。',exar:'هناك زهور.'},
+ {st:0,zh:'茶',py:'chá',ar:'شاي',t:[2],ex:'我喝一点儿茶。',exar:'أشرب قليلاً من الشاي.'},
+ {st:0,zh:'小',py:'xiǎo',ar:'صغير',t:[3],ex:'前边有一个小茶馆。',exar:'في الأمام بيت شاي صغير.'},
+ {st:0,zh:'累',py:'lèi',ar:'متعب',t:[4],ex:'我觉得很累。',exar:'أشعر بتعب شديد.'},
+ {st:1,zh:'城市',py:'chéng shì',ar:'مدينة',t:[2,4],ex:'这个城市很大。',exar:'هذه المدينة كبيرة.'},
+ {st:1,zh:'公园',py:'gōng yuán',ar:'حديقة عامة',t:[1,2],ex:'城市里有一个公园。',exar:'في المدينة حديقة.'},
+ {st:1,zh:'风景',py:'fēng jǐng',ar:'منظر طبيعي',t:[1,3],ex:'风景非常漂亮。',exar:'المنظر جميل جداً.'},
+ {st:1,zh:'漂亮',py:'piào liang',ar:'جميل',t:[4,0],ex:'西山非常漂亮。',exar:'جبل شيشان جميل جداً.'},
+ {st:2,zh:'很冷',py:'hén lěng',dict:'hěn lěng',ar:'بارد جداً',t:[3,3],sp:[2,3],ex:'今天很冷。',exar:'اليوم بارد جداً.',
+  rule:'نغمتان ثالثتان متتاليتان: الأولى تُنطق <b>صاعدة</b> كالثانية، والثانية تبقى ثالثة. يُكتب hěn ويُقال hén.'},
+ {st:2,zh:'一下',py:'yí xià',dict:'yī xià',ar:'قليلاً / لمرة',t:[1,4],sp:[2,4],ex:'我们休息一下吧。',exar:'فلنستَرِح قليلاً.',
+  rule:'«一» في القاموس yī، لكن قبل النغمة الرابعة يُنطق <b>yí</b> صاعدًا.'}];
+var TONE_NAME=['الخفيفة','الأولى','الثانية','الثالثة','الرابعة'];
+var HINT=[
+ 'خفيفة قصيرة بلا جهد، تتبع ما قبلها.',
+ '<b>عالية ثابتة:</b> امدد صوتك على نغمة واحدة عالية، كما تقول «آآآ» عند الطبيب.',
+ '<b>صاعدة:</b> من وسط صوتك إلى أعلاه، كسؤال الاستغراب «نعم؟!».',
+ '<b>منخفضة:</b> انزل إلى أعمق صوتك، وقد تصعد قليلًا في آخرها، كمن يقول «إممم» وهو يفكّر.',
+ '<b>هابطة بقوة:</b> من الأعلى إلى الأسفل دفعة واحدة، كأمر حاسم: «لا!».'];
+
+/* ---------- target contours on the 5-level staff ---------- */
+function shape(t,i,arr){
+  var last=i===arr.length-1,next=arr[i+1],prev=arr[i-1];
+  if(t===1)return{p:[[0,5],[1,5]],w:1};
+  if(t===2)return{p:[[0,3],[1,5]],w:1};
+  if(t===3)return last?{p:[[0,2],[.45,1],[1,4]],w:1.15}:{p:[[0,2],[.6,1],[1,1]],w:.9};
+  if(t===4)return{p:[[0,5],[1,next===4?3:1]],w:.9};
+  var v={1:2,2:3,3:4,4:1}[prev]||3;return{p:[[0,v],[1,v-.4]],w:.5};
+}
+var M=60;
+function target(tones){ /* -> {v:[M levels], seg:[[a,b)...]} */
+  var sh=tones.map(shape),W=sh.reduce(function(s,x){return s+x.w},0),v=[],seg=[],a=0;
+  sh.forEach(function(s,k){
+    var n=k===sh.length-1?M-a:Math.round(M*s.w/W);
+    for(var j=0;j<n;j++){var x=n===1?0:j/(n-1),p=s.p,q=0;while(q<p.length-2&&x>p[q+1][0])q++;
+      var f=(x-p[q][0])/(p[q+1][0]-p[q][0]);v.push(p[q][1]+(p[q+1][1]-p[q][1])*Math.max(0,Math.min(1,f)))}
+    seg.push([a,a+n]);a+=n});
+  return{v:v,seg:seg};
+}
+
+/* ---------- pitch tracking (YIN, in the browser, no server) ---------- */
+function yin(buf,sr){
+  /* decimate by 2 to keep it cheap on phones */
+  var n=buf.length>>1,x=new Float32Array(n),i,rms=0;
+  for(i=0;i<n;i++){x[i]=(buf[2*i]+buf[2*i+1])*.5;rms+=x[i]*x[i]}
+  rms=Math.sqrt(rms/n);sr=sr/2;
+  var W=n>>1,tmin=Math.floor(sr/480),tmax=Math.min(Math.floor(sr/70),W-1),d=new Float32Array(tmax+1),cm=new Float32Array(tmax+1),run=0,tau;
+  for(tau=1;tau<=tmax;tau++){var s=0;for(i=0;i<W;i++){var df=x[i]-x[i+tau];s+=df*df}d[tau]=s;run+=s;cm[tau]=run?s*tau/run:1}
+  var best=-1;
+  for(tau=tmin;tau<=tmax;tau++){if(cm[tau]<.15){while(tau+1<=tmax&&cm[tau+1]<cm[tau])tau++;best=tau;break}}
+  if(best<0){var mn=1;for(tau=tmin;tau<=tmax;tau++)if(cm[tau]<mn){mn=cm[tau];best=tau}if(mn>.3)return{f:0,rms:rms,c:0}}
+  var a=cm[best-1]||cm[best],b=cm[best],c=cm[best+1]||cm[best],den=a-2*b+c,sh=den?(a-c)/(2*den):0;
+  return{f:sr/(best+sh),rms:rms,c:1-b};
+}
+function median(a){var s=a.slice().sort(function(x,y){return x-y});return s.length?s[s.length>>1]:0}
+/* frames [{f,rms}] -> levels array, or null when nothing usable was heard */
+function framesToLevels(fr,gate){
+  var v=fr.map(function(o){return o.f>0&&o.rms>gate?o.f:0});
+  /* drop voiced runs shorter than 4 frames (clicks, noise) */
+  var i=0;while(i<v.length){if(!v[i]){i++;continue}var j=i;while(j<v.length&&v[j])j++;if(j-i<4)for(var k=i;k<j;k++)v[k]=0;i=j}
+  var voiced=v.filter(Boolean);if(voiced.length<8)return null;
+  var m=median(voiced);
+  voiced=voiced.map(function(f){return f>1.7*m?f/2:(f<.6*m?f*2:f)});
+  /* median-5 smoothing */
+  var sm=voiced.map(function(_,k){return median(voiced.slice(Math.max(0,k-2),k+3))});
+  return sm.map(function(f){return 12*Math.log2(f/m)/ST})
+}
+var ST=2.4; /* semitones per staff level: 5 levels ≈ one octave of comfortable speech */
+function resample(a,n){var o=[];for(var i=0;i<n;i++){var x=i*(a.length-1)/(n-1),l=Math.floor(x),f=x-l;o.push(a[l]+((a[l+1]===undefined?a[l]:a[l+1])-a[l])*f)}return o}
+function centre(a){var m=a.reduce(function(s,x){return s+x},0)/a.length;return a.map(function(x){return x-m})}
+function deriv(a){return a.map(function(_,i){var p=a[Math.max(0,i-1)],q=a[Math.min(a.length-1,i+1)];var d=(q-p)/((Math.min(a.length-1,i+1)-Math.max(0,i-1))||1);return Math.max(-.12,Math.min(.12,d))})} /* clamped: jumps between syllables are not slopes */
+var DW=15; /* weight of the slope term: a rising voice must not match a falling or dipping target */
+function dtw(a,b,r){
+  var da=deriv(a),db=deriv(b),n=a.length,m=b.length,INF=1e9,D=new Float64Array((n+1)*(m+1)).fill(INF),L=new Float64Array((n+1)*(m+1)),P=new Int8Array((n+1)*(m+1)),i,j;
+  D[0]=0;
+  for(i=1;i<=n;i++)for(j=Math.max(1,i-r);j<=Math.min(m,i+r);j++){
+    var dd=DW*(da[i-1]-db[j-1]),c=(a[i-1]-b[j-1])*(a[i-1]-b[j-1])+.5*dd*dd,k=i*(m+1)+j,d0=D[(i-1)*(m+1)+j-1],d1=D[(i-1)*(m+1)+j],d2=D[i*(m+1)+j-1],best=d0,p=0;
+    if(d1<best){best=d1;p=1}if(d2<best){best=d2;p=2}
+    D[k]=best+c;P[k]=p;L[k]=(p===0?L[(i-1)*(m+1)+j-1]:p===1?L[(i-1)*(m+1)+j]:L[i*(m+1)+j-1])+1}
+  var path=[];i=n;j=m;while(i>0&&j>0){path.push([i-1,j-1]);var q=P[i*(m+1)+j];if(q===0){i--;j--}else if(q===1)i--;else j--}
+  return{d:D[n*(m+1)+m]/L[n*(m+1)+m],path:path.reverse()};
+}
+/* compare a student contour (levels) with the item's spoken target */
+function score(levels,item,trace){
+  var T=target(item.sp||item.t),t=centre(T.v),s=centre(resample(levels,M)),best=null;
+  var ks=trace?[.8,.9,1,1.1,1.25]:[.75,.85,1,1.15,1.3,1.45];
+  ks.forEach(function(k){var sk=s.map(function(x){return x*k}),r=dtw(sk,t,6);if(!best||r.d<best.d)best={d:r.d,path:r.path,k:k,s:sk}});
+  var rms=Math.sqrt(best.d),sc=Math.round(100*Math.exp(-Math.pow(rms/.85,2)));
+  /* per-syllable slopes along the alignment path */
+  var tips=[],tones=item.sp||item.t;
+  T.seg.forEach(function(sg,k){
+    var vals=best.path.filter(function(p){return p[1]>=sg[0]&&p[1]<sg[1]}).map(function(p){return best.s[p[0]]});
+    if(vals.length<3)return;
+    var a=vals.slice(0,3).reduce(function(x,y){return x+y})/3,b=vals.slice(-3).reduce(function(x,y){return x+y})/3,sl=b-a,mn=Math.min.apply(null,vals),
+        tn=tones[k],ch=item.zh.charAt(k)||item.zh,nm='«'+ch+'»';
+    if(item.sp&&k===0&&item.sp[0]===2){
+      if(sl<.5)tips.push(item.t[0]===3?'قلتَ '+nm+' منخفضة كما تُكتب في القاموس. هنا تصير <b>صاعدة</b> قبل ثالثة أخرى.':'قلتَ '+nm+' ثابتة كما في القاموس (yī). قبل الرابعة تصير <b>صاعدة</b> (yí).');
+      return}
+    if(tn===1&&sl<-1.3)tips.push('صوتك هبط في '+nm+'. النغمة الأولى تبقى عالية ثابتة.');
+    else if(tn===1&&sl>1.3)tips.push('صوتك صعد في '+nm+'. النغمة الأولى لا تتحرك.');
+    else if(tn===2&&sl<.6)tips.push(sl<-.6?'صوتك هبط في '+nm+' والمطلوب أن يصعد، كسؤال «نعم؟!».':''+nm+' خرجت مستوية. اصعد بوضوح من الوسط إلى الأعلى.');
+    else if(tn===3&&mn>=a-.15&&sl>1)tips.push(nm+' خرجت صاعدة كالثانية. ابدأ <b>أخفض</b> وابقَ في القاع قبل أن تصعد.');
+    else if(tn===4&&sl>-1.2)tips.push(sl>.5?'صوتك صعد في '+nm+' والمطلوب سقوط حاد.':nm+' تحتاج سقوطًا أقوى من الأعلى إلى الأسفل.');
+  });
+  return{score:sc,rms:rms,k:best.k,s:best.s,path:best.path,tips:tips};
+}
+
+/* ---------- state ---------- */
+var KEY='lab-tone-v1',S={best:{}};
+try{var raw=localStorage.getItem(KEY);if(raw)S=JSON.parse(raw)||S;S.best=S.best||{}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var cur=0,mode='mic',student=null,live=[],busy=false;
+var $=function(id){return document.getElementById(id)};
+var cv=$('cv'),ctx=cv.getContext('2d');
+
+/* ---------- theme ---------- */
+try{var th=localStorage.getItem('lab-theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
+$('theme').onclick=function(){
+  var d=document.documentElement,dark=d.dataset.theme?d.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  d.dataset.theme=dark?'light':'dark';try{localStorage.setItem('lab-theme',d.dataset.theme)}catch(e){}draw()};
+
+/* ---------- speech synthesis (zh-CN) with honest fallback ---------- */
+var voice=null;
+function pickVoice(){if(!('speechSynthesis' in window))return;var vs=speechSynthesis.getVoices();
+  voice=vs.filter(function(v){return /^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return /^zh/i.test(v.lang)&&!/HK|TW/i.test(v.lang)})[0]||null}
+if('speechSynthesis' in window){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function say(text){
+  if(!('speechSynthesis' in window)||!voice){note('لا يوجد صوت صيني على هذا الجهاز. استمع إلى «اللحن وحده»، أو ثبّت الصوت الصيني من إعدادات تحويل النص إلى كلام في الجهاز.');hum();return}
+  speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(text);u.lang='zh-CN';u.voice=voice;u.rate=.72;speechSynthesis.speak(u)}
+function note(t){var n=$('note');n.innerHTML=t;n.classList.toggle('show',!!t)}
+
+/* ---------- "melody only": hum the target contour with Web Audio ---------- */
+var AC=null;
+function ac(){if(!AC){var C=window.AudioContext||window.webkitAudioContext;if(C)AC=new C()}if(AC&&AC.state==='suspended')AC.resume();return AC}
+function hum(){
+  var a=ac();if(!a)return;var T=target(ITEMS[cur].sp||ITEMS[cur].t),o=a.createOscillator(),lp=a.createBiquadFilter(),g=a.createGain(),t0=a.currentTime+.05,dur=.36*(ITEMS[cur].t.length)+.12;
+  o.type='triangle';lp.type='lowpass';lp.frequency.value=1100;o.connect(lp);lp.connect(g);g.connect(a.destination);
+  var base=165;T.v.forEach(function(l,i){var f=base*Math.pow(2,(l-3)*ST/12),t=t0+dur*i/(T.v.length-1);if(i===0)o.frequency.setValueAtTime(f,t);else o.frequency.linearRampToValueAtTime(f,t)});
+  g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(.22,t0+.04);g.gain.setValueAtTime(.22,t0+dur-.06);g.gain.linearRampToValueAtTime(0,t0+dur);
+  o.start(t0);o.stop(t0+dur+.05);
+  animateHum(dur);
+}
+var humT=0;
+function animateHum(dur){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var st=performance.now();cancelAnimationFrame(humT);
+  (function f(){var p=(performance.now()-st)/1000/dur;draw(Math.min(1,p));if(p<1)humT=requestAnimationFrame(f);else draw()})()}
+
+/* ---------- drawing the instrument ---------- */
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function size(){var r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1;cv.width=Math.round(r.width*d);cv.height=Math.round(r.height*d);ctx.setTransform(d,0,0,d,0,0);return r}
+var PADL=30,PADR=12,PADT=34,PADB=16;
+function geo(){var r=cv.getBoundingClientRect();return{w:r.width,h:r.height,x0:PADL,x1:r.width-PADR,y:function(l){return PADT+(5-l)/4*(r.height-PADT-PADB)}}}
+function draw(humP){
+  var r=size(),g=geo(),it=ITEMS[cur],T=target(it.sp||it.t);
+  ctx.clearRect(0,0,r.width,r.height);
+  ctx.font='600 11px system-ui,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  for(var l=1;l<=5;l++){var y=g.y(l);ctx.strokeStyle=css('--staff');ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(g.x0,y);ctx.lineTo(g.x1,y);ctx.stroke();ctx.fillStyle=css('--mut');ctx.fillText(String(l),14,y)}
+  var X=function(i,n){return g.x0+(g.x1-g.x0)*i/(n-1)};
+  /* syllable dividers + characters */
+  ctx.font='600 17px '+css('--font-han');
+  T.seg.forEach(function(sg,k){var xa=X(sg[0],M),xb=X(sg[1]-1,M);if(k>0){ctx.strokeStyle=css('--line');ctx.setLineDash([3,4]);ctx.beginPath();ctx.moveTo(xa-2,PADT-8);ctx.lineTo(xa-2,r.height-PADB+4);ctx.stroke();ctx.setLineDash([])}
+    ctx.fillStyle=css('--ink');ctx.fillText(it.zh.charAt(k),(xa+xb)/2,15)});
+  /* dictionary (written) contour for tone-sandhi items */
+  if(it.sp){var W=target(it.t);ctx.strokeStyle=css('--mut');ctx.globalAlpha=.55;ctx.lineWidth=2;ctx.setLineDash([6,5]);ctx.beginPath();
+    W.v.forEach(function(v,i){var x=X(i,M),y=g.y(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1}
+  /* target band */
+  ctx.lineCap='round';ctx.lineJoin='round';
+  var path=function(){ctx.beginPath();T.v.forEach(function(v,i){var x=X(i,M),y=g.y(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y)})};
+  ctx.strokeStyle=css('--jade-band');ctx.lineWidth=22;path();ctx.stroke();
+  ctx.strokeStyle=css('--jade');ctx.lineWidth=2.5;path();ctx.stroke();
+  if(humP!==undefined){var hi=Math.round(humP*(M-1));ctx.fillStyle=css('--jade');ctx.beginPath();ctx.arc(X(hi,M),g.y(T.v[hi]),7,0,7);ctx.fill()}
+  /* the student's voice */
+  var sv=null;
+  if(student){var tm=T.v.reduce(function(s,x){return s+x},0)/M;sv=student.s.map(function(x){return x+tm})}
+  else if(live.length>1){sv=live}
+  if(sv){ctx.strokeStyle=css('--amber');ctx.lineWidth=4;ctx.beginPath();
+    sv.forEach(function(v,i){var x=student?X(i,sv.length):(mode==='trace'?trace.xs[i]:X(i,liveN)),y=g.y(Math.max(.6,Math.min(5.4,v)));i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.stroke()}
+}
+var liveN=M;
+
+/* ---------- microphone recording ---------- */
+var stream=null,an=null,src=null;
+async function startMic(){
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.isSecureContext)throw new Error('nomic');
+  if(!stream)stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+  var a=ac();if(!src){src=a.createMediaStreamSource(stream);an=a.createAnalyser();an.fftSize=2048;src.connect(an)}
+}
+function record(){
+  if(busy)return;busy=true;student=null;live=[];showResult(null);note('');
+  var it=ITEMS[cur],dur=900+750*it.t.length,btn=$('rec');
+  startMic().then(function(){
+    btn.classList.add('on');btn.lastChild.textContent='تكلّم الآن…';
+    var a=ac(),buf=new Float32Array(an.fftSize),fr=[],t0=performance.now(),noise=[],ref=0;
+    liveN=Math.round(dur/20);
+    var timer=setInterval(function(){
+      an.getFloatTimeDomainData(buf);var r=yin(buf,a.sampleRate),el=performance.now()-t0;fr.push(r);
+      if(el<160)noise.push(r.rms);
+      var gate=Math.max(.008,3*median(noise));
+      if(r.f>0&&r.rms>gate){if(!ref)ref=r.f;live.push(3+12*Math.log2(r.f/ref)/ST)}else if(live.length)live.push(live[live.length-1]);
+      $('prog').style.transform='scaleX('+Math.min(1,el/dur)+')';draw();
+      if(el>=dur){clearInterval(timer);btn.classList.remove('on');btn.lastChild.textContent='سجّل';$('prog').style.transform='scaleX(0)';busy=false;
+        var lv=framesToLevels(fr,gate);live=[];
+        if(!lv){note('لم أسمع صوتًا واضحًا. اقترب من الميكروفون وقل الكلمة بصوت أعلى قليلًا.');draw();return}
+        finish(lv,false)}
+    },20);
+  }).catch(function(e){busy=false;setMode('trace');note('الميكروفون غير متاح هنا'+(e&&e.name==='NotAllowedError'?' (رُفض الإذن)':'')+'. انتقلنا إلى وضع الإصبع: استمع، ثم ارسم اللحن على اللوحة.')});
+}
+function finish(levels,isTrace){
+  var it=ITEMS[cur];student=score(levels,it,isTrace);draw();showResult(student);
+  var b=S.best[cur]||0;if(student.score>b){S.best[cur]=student.score;save()}renderDots();
+}
+function showResult(r){
+  var box=$('result');if(!r){box.classList.remove('show');return}
+  var v=r.score,verdict=v>=80?'ممتاز، الشكل مطابق':v>=60?'قريب جدًا':v>=40?'الشكل يتكوّن':'لنحاول مرة أخرى';
+  $('sc').textContent=v;$('ring').style.strokeDashoffset=String(201*(1-v/100));$('ring').style.stroke=v>=60?css('--jade'):css('--amber');
+  var tips=r.tips.length?'<ul>'+r.tips.map(function(t){return'<li>'+t+'</li>'}).join('')+'</ul>':(v>=60?'<p style="margin:2px 0 0">قارن خطك البرتقالي بالشريط الأخضر.</p>':'<p style="margin:2px 0 0">استمع مرة أخرى، ثم قلها ببطء ووضوح.</p>');
+  $('rtxt').innerHTML='<strong>'+verdict+'</strong>'+tips;box.classList.add('show');
+}
+
+/* ---------- finger tracing (works with no microphone) ---------- */
+var trace={active:false,xs:[]};
+cv.addEventListener('pointerdown',function(e){if(mode!=='trace')return;e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}
+  trace.active=true;trace.xs=[];live=[];student=null;showResult(null);addPt(e)});
+cv.addEventListener('pointermove',function(e){if(trace.active)addPt(e)});
+function endTrace(){if(!trace.active)return;trace.active=false;var g=geo();
+  var span=trace.xs.length?Math.max.apply(null,trace.xs)-Math.min.apply(null,trace.xs):0;
+  if(live.length<6||span<(g.x1-g.x0)*.35){note('ارسم اللحن من اليسار إلى اليمين على عرض اللوحة، كما تُقرأ الحروف الصينية فوقه.');live=[];draw();return}
+  note('');
+  /* order points by x in reading direction of the staff (left → right, time) */
+  var pts=trace.xs.map(function(x,i){return[x,live[i]]}).sort(function(a,b){return a[0]-b[0]});
+  live=[];finish(pts.map(function(p){return p[1]}),true)}
+cv.addEventListener('pointerup',endTrace);cv.addEventListener('pointercancel',endTrace);
+function addPt(e){var r=cv.getBoundingClientRect(),g=geo(),x=e.clientX-r.left,y=e.clientY-r.top;
+  var l=5-(y-PADT)/(r.height-PADT-PADB)*4;trace.xs.push(Math.max(g.x0,Math.min(g.x1,x)));live.push(l);draw()}
+
+/* ---------- UI ---------- */
+function setMode(m){mode=m;$('mMic').setAttribute('aria-checked',String(m==='mic'));$('mTrace').setAttribute('aria-checked',String(m==='trace'));
+  var act=$('act');
+  if(m==='mic')act.innerHTML='<button class="btn rec" id="rec"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>سجّل</span></button>';
+  else act.innerHTML='<div class="tracehint" id="th">استمع، ثم ارسم بإصبعك على اللوحة شكل اللحن الذي سمعته.</div><button class="btn" id="clr">امسح</button>';
+  if($('rec'))$('rec').onclick=record;
+  if($('clr'))$('clr').onclick=function(){student=null;live=[];showResult(null);draw()};
+}
+$('mMic').onclick=function(){setMode('mic');note('')};$('mTrace').onclick=function(){setMode('trace');note('')};
+$('say').onclick=function(){say(ITEMS[cur].zh)};$('hum').onclick=hum;
+$('prev').onclick=function(){if(cur>0)go(cur-1)};
+$('next').onclick=function(){if(cur<ITEMS.length-1)go(cur+1);else summary()};
+$('again').onclick=function(){$('sum').hidden=true;$('main').parentNode.hidden=false;go(0)};
+function renderStations(){
+  $('stations').innerHTML=STATIONS.map(function(s,k){var its=ITEMS.filter(function(i){return i.st===k});
+    return'<button class="stn" data-k="'+k+'"'+(ITEMS[cur].st===k?' aria-current="true"':'')+'>'+s.n+'<small>'+s.s+' · '+its.length+'</small></button>'}).join('');
+  [].forEach.call($('stations').children,function(b){b.onclick=function(){var k=+b.dataset.k;for(var i=0;i<ITEMS.length;i++)if(ITEMS[i].st===k){go(i);break}}})}
+function renderDots(){$('dots').innerHTML=ITEMS.map(function(_,i){return'<span class="dot'+(S.best[i]?' done':'')+(i===cur?' cur':'')+'"></span>'}).join('')}
+function go(i){
+  cur=i;student=null;live=[];var it=ITEMS[i];
+  $('zh').textContent=it.zh;
+  $('py').innerHTML=(it.dict?'<s>'+it.dict+'</s>':'')+it.py;
+  $('ar').textContent=it.ar;
+  $('ex').innerHTML='<span class="han" lang="zh-CN">'+it.ex+'</span> · '+it.exar;
+  var tones=it.sp||it.t;
+  $('coach').innerHTML=it.rule?it.rule:tones.filter(function(t,k){return tones.indexOf(t)===k}).map(function(t){return'النغمة '+TONE_NAME[t]+' — '+HINT[t]}).join('<br>');
+  $('lgw').hidden=!it.sp;
+  $('next').textContent=i===ITEMS.length-1?'بصمة نغماتك':'التالي';$('prev').disabled=i===0;
+  showResult(null);note('');renderStations();renderDots();draw();
+}
+function summary(){
+  $('main').parentNode.hidden=true;$('sum').hidden=false;
+  var groups=[{n:'الأولى',f:function(it){return it.t.indexOf(1)>=0&&!it.sp}},{n:'الثانية',f:function(it){return it.t.indexOf(2)>=0}},
+    {n:'الثالثة',f:function(it){return it.t.indexOf(3)>=0&&!it.sp}},{n:'الرابعة',f:function(it){return it.t.indexOf(4)>=0&&!it.sp}},{n:'التحوّل',f:function(it){return!!it.sp}}];
+  var res=groups.map(function(g){var v=ITEMS.map(function(it,i){return g.f(it)?S.best[i]:null}).filter(function(x){return x!=null});
+    return{n:g.n,v:v.length?Math.round(v.reduce(function(a,b){return a+b},0)/v.length):null}});
+  $('bars').innerHTML=res.map(function(r){return'<div class="bar"><span>النغمة '+(r.n==='التحوّل'?'المتحوّلة':r.n)+'</span><span class="tr"><i style="width:'+(r.v||0)+'%"></i></span><b>'+(r.v==null?'—':r.v)+'</b></div>'}).join('');
+  var done=res.filter(function(r){return r.v!=null}),weak=done.slice().sort(function(a,b){return a.v-b.v})[0];
+  var advice={'الأولى':'النغمة الأولى عند كثير من الناطقين بالعربية تهبط في آخرها. أمسكها مستوية حتى النهاية.','الثانية':'إن خلطت بين الثانية والثالثة فتذكّر: الثانية تصعد من البداية، والثالثة تنزل أولًا.',
+    'الثالثة':'الثالثة أخفض نغمة في صوتك. لا تخف من النزول، ولا تصعد قبل أن تصل إلى القاع.','الرابعة':'الرابعة تحتاج سقوطًا كاملًا. ابدأ من أعلى مما تظن.','التحوّل':'القاعدة تُحفظ بالأذن: كرّر «很冷» و«一下» حتى تصير الصاعدة طبيعية.'};
+  $('insight').innerHTML=(weak?'<b>أضعف نقطة الآن: النغمة '+weak.n+'.</b> '+advice[weak.n]+'<br>':'لم تسجّل بعد. ارجع وجرّب كلمة واحدة على الأقل.<br>')+
+    '<span style="color:var(--mut)">تنبيه للمتكلم بالعربية: في العربية يرتفع صوتنا في آخر السؤال. في الصينية النغمة ملك الكلمة لا الجملة؛ فلا تجعل آخر كلمة تصعد لمجرد أنك تسأل.</span>';
+  setTimeout(function(){[].forEach.call(document.querySelectorAll('.bar i'),function(i){i.style.width=i.style.width})},30);
+}
+addEventListener('resize',function(){draw()});
+setMode(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.isSecureContext?'mic':'trace');
+go(0);
+/* test hooks (used by the automated checks) */
+window.__lab={yin:yin,score:score,framesToLevels:framesToLevels,items:ITEMS,go:go,target:target,state:function(){return{cur:cur,mode:mode,student:student,best:S.best}}};
+})();
+</script>
+</body>
+</html>
