@@ -1,0 +1,12 @@
+/* shared bits: toast, flying XP, shake, hidden, reduced motion */
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;max-width:520px;margin:0 auto;padding:12px 14px;border-radius:12px;background:var(--ink,#111);color:var(--bg,#fff);font-size:14.5px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s}
+#toast.show{opacity:1;transform:none}
+.xpfly{position:fixed;z-index:60;font:700 16px system-ui,sans-serif;color:var(--xp,#c27c0e);pointer-events:none;animation:xpfly .9s ease-out forwards}
+@keyframes xpfly{to{transform:translateY(-38px);opacity:0}}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.py{font-family:var(--font-py,system-ui,sans-serif)}
+.q-sent,.q-ans,.q-pool{direction:ltr}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

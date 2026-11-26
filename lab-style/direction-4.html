@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>الأطلس · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;700&family=ZCOOL+QingKe+HuangYou&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Direction 4 — the atlas: blue-green landscape painting (青绿山水) turned into a map.
+   The lesson is a board of stations you can enter in any order; a bottom bar is always within reach of the thumb. */
+:root{--bg:#eef2ee;--card:#fbfcfa;--card2:#e9efe9;--ink:#13211f;--mut:#51625d;--az:#1d4f91;--az-soft:rgba(29,79,145,.10);--mal:#2b7a57;--mal-soft:rgba(43,122,87,.12);--och:#b07a24;--line:#d2ddd5;--xp:#b07a24;
+  --font-ar:"Alexandria",system-ui,sans-serif;--font-hd:"ZCOOL QingKe HuangYou","Noto Sans SC",sans-serif;--font-han:"Noto Sans SC","Noto Sans CJK SC",sans-serif;--font-py:"Alexandria",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b141c;--card:#111d27;--card2:#16242f;--ink:#e3ecef;--mut:#93a8b2;--az:#7fb0ff;--az-soft:rgba(127,176,255,.12);--mal:#5fcf9a;--mal-soft:rgba(95,207,154,.12);--och:#e6b25a;--line:#223340;--xp:#e6b25a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b141c;--card:#111d27;--card2:#16242f;--ink:#e3ecef;--mut:#93a8b2;--az:#7fb0ff;--az-soft:rgba(127,176,255,.12);--mal:#5fcf9a;--mal-soft:rgba(95,207,154,.12);--och:#e6b25a;--line:#223340;--xp:#e6b25a;color-scheme:dark}
+/* shared bits: toast, flying XP, shake, hidden, reduced motion */
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;max-width:520px;margin:0 auto;padding:12px 14px;border-radius:12px;background:var(--ink,#111);color:var(--bg,#fff);font-size:14.5px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s}
+#toast.show{opacity:1;transform:none}
+.xpfly{position:fixed;z-index:60;font:700 16px system-ui,sans-serif;color:var(--xp,#c27c0e);pointer-events:none;animation:xpfly .9s ease-out forwards}
+@keyframes xpfly{to{transform:translateY(-38px);opacity:0}}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.py{font-family:var(--font-py,system-ui,sans-serif)}
+.q-sent,.q-ans,.q-pool{direction:ltr}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.7 var(--font-ar)}
+button{font:inherit;color:inherit}
+.han{font-family:var(--font-han)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
+.ibtn{min-width:44px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer}
+.ibtn svg{width:22px;height:22px}
+.btn{min-height:48px;padding:0 18px;border-radius:12px;border:1.5px solid var(--az);background:var(--card);font:500 15.5px var(--font-ar);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:var(--az)}
+.btn.az{background:var(--az);color:var(--card)}
+.ridge{display:block;width:calc(100% + 32px);margin:0 -16px;height:auto}
+/* ---------- home: the atlas ---------- */
+.top{display:flex;align-items:center;gap:12px;padding:12px 0 4px}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:400 30px/1.15 var(--font-hd);color:var(--az)}
+.top p{margin:0;color:var(--mut);font-size:13.5px}
+.lvbadge{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin:8px 0 12px}
+.lvbadge .seal{flex:none;width:52px;height:52px;border-radius:12px;background:var(--mal);color:var(--card);display:grid;place-items:center;font:500 26px var(--font-han)}
+.lvbadge .sp{flex:1;min-width:0;line-height:1.45}
+.lvbadge small{color:var(--mut)}
+.region{margin:18px 0 6px}
+.region h2{margin:0;font:700 19px var(--font-ar);display:flex;align-items:center;gap:8px}
+.region h2 span{font:400 15px var(--font-ar);color:var(--mut)}
+.city{margin:10px 0 0;padding:10px 12px;border-radius:14px;background:var(--card2)}
+.city h3{margin:0;font:500 16px var(--font-ar);color:var(--az)}
+.route{position:relative;list-style:none;margin:6px 0 0;padding:4px 0}
+.route::before{content:"";position:absolute;top:22px;bottom:22px;right:27px;border-right:3px dashed var(--mal)}
+.route li{position:relative}
+.stop{display:flex;align-items:center;gap:12px;min-height:56px;padding:4px 0;width:100%;background:none;border:0;cursor:pointer;text-align:start;text-decoration:none;color:inherit}
+.stop .dot{position:relative;z-index:1;flex:none;width:56px;height:56px;border-radius:50%;background:var(--card);border:3px solid var(--mal);display:grid;place-items:center;font:500 22px var(--font-han);color:var(--mal)}
+.stop.done .dot{background:var(--mal);color:var(--card)}
+.stop .nm{min-width:0;line-height:1.35}
+.stop .nm .han{color:var(--mut);font-size:14px}
+.stop.here .dot{border-color:var(--och);color:var(--och);box-shadow:0 0 0 5px rgba(176,122,36,.18)}
+.pin{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:10px;background:var(--och);color:var(--card);font-size:12px;vertical-align:middle}
+/* ---------- lesson ---------- */
+.lhdr{display:flex;align-items:center;gap:10px;padding:10px 0}
+.lhdr .sp{flex:1;min-width:0;line-height:1.3}
+.lhdr b{display:block;font-size:16px}
+.lhdr .han{color:var(--mut);font-size:13.5px}
+.xp{font:700 14px var(--font-py);color:var(--och)}
+.view{display:none;padding-bottom:96px}.view.cur{display:block;animation:in .3s ease both}
+.banner{border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.banner .t{padding:10px 14px}
+.banner h2{margin:0;font:500 26px/1.3 var(--font-han);color:var(--az)}
+.banner p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.tile{position:relative;min-height:128px;border-radius:16px;border:1px solid var(--line);background:var(--card);padding:12px;cursor:pointer;text-align:start;display:flex;flex-direction:column;gap:2px}
+.tile b{font-size:16.5px}.tile small{color:var(--mut);font-size:13px}
+.tile .ring{position:absolute;top:10px;left:10px;width:40px;height:40px}
+.tile .ring circle{fill:none;stroke-width:5}
+.tile .ic{width:30px;height:30px;color:var(--mal)}
+.tile.sug{border:2px solid var(--och)}
+.tile.sug::after{content:"ابدأ من هنا";position:absolute;bottom:10px;left:10px;font-size:11.5px;color:var(--och);font-weight:700}
+.tile.ok{background:var(--mal-soft);border-color:var(--mal)}
+.hint{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--az-soft);font-size:14px}
+details.txt{margin:10px 0;border-radius:14px;border:1px solid var(--line);background:var(--card);overflow:hidden}
+details.txt summary{min-height:52px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:700;list-style:none}
+details.txt summary::-webkit-details-marker{display:none}
+details.txt summary::after{content:"+";margin-inline-start:auto;font-size:20px;color:var(--az)}
+details[open].txt summary::after{content:"−"}
+.ln{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--line)}
+.ln .say{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--az);background:var(--card);color:var(--az);display:grid;place-items:center;cursor:pointer}
+.ln .say svg{width:20px;height:20px}
+.ln .nm{font-size:12.5px;color:var(--mut)}
+.ln .z{font:500 19px/1.6 var(--font-han);direction:ltr;text-align:left}
+.ln .p{font-size:13px;color:var(--az);direction:ltr;text-align:left}
+.ln .a{font-size:14.5px;color:var(--mut)}
+.gtag{margin-top:6px;min-height:44px;padding:0 12px;border-radius:22px;border:1.5px solid var(--och);background:none;color:var(--och);cursor:pointer;font:500 13.5px var(--font-ar)}
+.filters{display:flex;gap:6px;margin:6px 0 10px;position:sticky;top:0;background:var(--bg);padding:6px 0;z-index:3}
+.filters button{flex:1;min-height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px}
+.filters button[aria-pressed="true"]{background:var(--az);color:var(--card);border-color:var(--az)}
+.wl{display:grid;gap:6px}
+.w{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:56px;padding:6px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);cursor:pointer;text-align:start}
+.w .z{font:500 21px var(--font-han);min-width:64px;text-align:center}
+.w .p{font-size:13px;color:var(--az);direction:ltr;text-align:right}
+.w .k{width:26px;height:26px;border-radius:50%;border:2px solid var(--line)}
+.w.known .k{background:var(--mal);border-color:var(--mal)}
+.round{font-size:13.5px;color:var(--mut);margin:4px 0}
+.tabbar{position:fixed;inset:auto 0 0 0;z-index:25;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding:0 0 env(safe-area-inset-bottom,0px)}
+.tabbar .in{display:flex;width:100%;max-width:760px}
+.tabbar button{flex:1;min-height:62px;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:500 12.5px var(--font-ar);color:var(--mut);position:relative}
+.tabbar svg{width:24px;height:24px}
+.tabbar button[aria-selected="true"]{color:var(--az)}
+.tabbar button[aria-selected="true"]::before{content:"";position:absolute;top:0;inset-inline:22%;height:3px;border-radius:0 0 3px 3px;background:var(--az)}
+.tabbar .bd{position:absolute;top:8px;left:calc(50% - 22px);width:9px;height:9px;border-radius:50%;background:var(--mal);display:none}
+.tabbar button.ok .bd{display:block}
+.sheet{position:fixed;inset:auto 0 0 0;z-index:40;background:var(--card);border-radius:18px 18px 0 0;border-top:3px solid var(--och);padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));max-width:760px;margin:0 auto;transform:translateY(105%);transition:transform .3s;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.sheet.open{transform:none}
+.sheet:not(.open){visibility:hidden;transition:transform .3s,visibility 0s .3s}
+.sheet h3{margin:0;font:700 18px var(--font-ar);color:var(--och)}
+.sheet .f{direction:ltr;text-align:left;font:600 14px var(--font-py)}
+.sheet .eg{direction:ltr;text-align:left;color:var(--mut);font-size:14px}.sheet .eg .han{color:var(--ink);font-size:17px}
+/* exercises on the map table */
+.q{padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);margin:10px 0}
+.q-p{font-weight:500;margin-bottom:8px}.q-p .han{font-size:18px}
+.q-ar{color:var(--mut)}
+.q-opts{display:grid;gap:8px}.q-row{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+.q-o{min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--card2);cursor:pointer;text-align:start;padding:6px 12px;font:500 15px var(--font-ar)}
+.q-o .han{font-size:18px}.q-o.ok{border-color:var(--mal);background:var(--mal-soft)}.q-o.bad{border-color:var(--och);opacity:.7}
+.q-sent{font:500 21px/2 var(--font-han);text-align:left}
+.q-blank{display:inline-block;min-width:64px;border-bottom:2.5px solid var(--az);text-align:center}
+.q-ans{min-height:56px;border-radius:12px;border:2px dashed var(--az);padding:5px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.q-pool{display:flex;flex-wrap:wrap;gap:6px}
+.q-tok{min-height:46px;min-width:46px;padding:0 10px;border-radius:10px;border:1.5px solid var(--mal);background:var(--card);cursor:pointer;font:500 19px var(--font-han)}
+.q-mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.q-col{display:grid;gap:6px;align-content:start}
+.q-m{min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--card2);cursor:pointer;font-size:14.5px}
+.q-m .han{font-size:19px}.q-m.sel{border-color:var(--az)}.q-m.ok{border-color:var(--mal);opacity:.55}.q-m.bad{border-color:var(--och)}
+.q-why{margin-top:8px;font-size:14px;color:var(--mut)}.q-why b{color:var(--mal)}
+.donebox{margin-top:12px;padding:14px;border-radius:16px;border:2px solid var(--mal);background:var(--mal-soft);text-align:center}
+footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+body.lo footer{padding-bottom:84px}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+:focus-visible{outline:3px solid var(--och);outline-offset:2px}
+@media (min-width:900px){.wrap{max-width:980px}.tiles{grid-template-columns:repeat(4,1fr)}.wl{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <symbol id="mtn" viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 70V48l40-22 30 16 46-34 40 28 30-14 52 30 36-18 46 26 34-16 46 22v32z" fill="var(--mal)" opacity=".35"/><path d="M0 70V56l52-18 40 14 56-26 44 24 48-18 40 16 54-22 66 30v14z" fill="var(--az)" opacity=".45"/><path d="M0 70V62c60-10 120 6 200-4s140 8 200-2v14z" fill="var(--mal)" opacity=".6"/></symbol>
+</defs></svg>
+<div class="wrap">
+<section id="home">
+  <header class="top"><div class="sp"><h1>汉语加油站</h1><p>أطلس الدروس</p></div>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button></header>
+  <svg class="ridge" viewBox="0 0 400 70" preserveAspectRatio="none" style="height:56px" aria-hidden="true"><use href="#mtn"/></svg>
+  <div class="lvbadge" id="lvb"></div>
+  <div id="atlas"></div>
+</section>
+<section id="lesson" hidden>
+  <div class="lhdr">
+    <button class="ibtn" id="back" aria-label="الأطلس"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="sp"><b id="lt"></b><span class="han" id="lz" lang="zh-CN"></span></div>
+    <span class="xp" id="xp"></span>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+  </div>
+  <div class="view" id="v-board"></div>
+  <div class="view" id="v-texts"></div>
+  <div class="view" id="v-words"></div>
+  <div class="view" id="v-drills"></div>
+  <nav class="tabbar" role="tablist" aria-label="أقسام الدرس"><div class="in" id="tabs"></div></nav>
+</section>
+<footer><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="القاعدة"><div id="sheetBody"></div><button class="btn az" id="sheetClose" style="width:100%;margin-top:12px">إغلاق</button></div>
+<script>var PAGE_KEY='labs-d4',PAGE_LESSON_KEY='noor-gram10-v1';</script>
+<script>/* Shared engine of the style prototypes: data, storage, theme, zh-CN speech, XP and four exercise types.
+   Each direction styles the generic classes (.q, .q-o, .q-tok ...) in its own way. */
+var DATA={"meta":{"n":10,"nz":"十","zh":"这个星期天你忙不忙","ar":"الدرس العاشر","sub":"هل أنت مشغول هذا الأحد؟","intro":"تتعلم وصف المكان بالصفات (非常漂亮)، وطرح أسئلة «الإيجاب-النفي» (忙不忙؟ 去不去؟)، واستعمال 一下 و 一点儿، ودعوة الأصدقاء للتنزه. من كتاب «发展汉语·初级综合（一）».","course":"قواعد ١","book":"《发展汉语初级综合1》","file":"lesson-10.html"},"vocab":[["城市","chéng shì","مدينة","这个城市很大。","Zhège chéngshì hěn dà.","هذه المدينة كبيرة."],["公园","gōng yuán","حديقة عامة","城市里有一个公园。","Chéngshì lǐ yǒu yí gè gōngyuán.","في المدينة حديقة."],["那里","nà li","هناك","那里有山，有水。","Nàli yǒu shān, yǒu shuǐ.","هناك جبال وماء."],["山","shān","جبل","那里有山。","Nàli yǒu shān.","هناك جبال."],["水","shuǐ","ماء","那里有山，有水。","Nàli yǒu shān, yǒu shuǐ.","هناك جبال وماء."],["树","shù","شجرة","那里有很多树。","Nàli yǒu hěn duō shù.","هناك أشجار كثيرة."],["花","huā","زهرة","那里有花。","Nàli yǒu huā.","هناك زهور."],["风景","fēng jǐng","منظر طبيعي","风景非常漂亮。","Fēngjǐng fēicháng piàoliang.","المنظر جميل جداً."],["非常","fēi cháng","جداً","空气非常新鲜。","Kōngqì fēicháng xīnxiān.","الهواء منعش جداً."],["漂亮","piào liang","جميل","西山非常漂亮。","Xīshān fēicháng piàoliang.","جبل شيشان جميل جداً."],["空气","kōng qì","هواء","这里的空气很新鲜。","Zhè lǐ de kōngqì hěn xīnxiān.","هواء هنا منعش جداً."],["新鲜","xīn xiān","طازج / منعش","空气非常新鲜。","Kōngqì fēicháng xīnxiān.","الهواء منعش جداً."],["多","duō","كثير","每天有很多人去爬山。","Měitiān yǒu hěn duō rén qù páshān.","كل يوم يذهب كثيرون لتسلّق الجبل."],["爬山","pá shān","يتسلّق الجبل","星期天我们去爬山。","Xīngqītiān wǒmen qù páshān.","يوم الأحد نذهب لتسلّق الجبل."],["呼吸","hū xī","يتنفّس","我们去呼吸新鲜空气。","Wǒmen qù hūxī xīnxiān kōngqì.","نذهب لنتنفس هواءً منعشاً."],["忙","máng","مشغول","这个星期天你忙不忙？","Zhège xīngqītiān nǐ máng bu máng?","هل أنت مشغول هذا الأحد؟"],["听说","tīng shuō","سمعتُ أنّ","听说西山非常漂亮。","Tīngshuō Xīshān fēicháng piàoliang.","سمعت أن جبل شيشان جميل جداً."],["出发","chū fā","ينطلق","我们早上八点出发。","Wǒmen zǎoshang bā diǎn chūfā.","ننطلق في الثامنة صباحاً."],["找","zhǎo","يبحث عن / يزور","我七点半去找你。","Wǒ qī diǎn bàn qù zhǎo nǐ.","سآتي إليك في السابعة والنصف."],["大家","dà jiā","الجميع","大家累不累？","Dàjiā lèi bu lèi?","هل أنتم متعبون؟"],["累","lèi","متعب","我觉得很累。","Wǒ juéde hěn lèi.","أشعر بتعب شديد."],["觉得","jué de","يشعر / يرى","我也觉得很累。","Wǒ yě juéde hěn lèi.","أنا أيضاً أشعر بتعب شديد."],["休息","xiū xi","يستريح","我们休息一下吧。","Wǒmen xiūxi yíxià ba.","فلنستَرِح قليلاً."],["一下","yí xià","قليلاً / لمرة (بعد الفعل)","我们休息一下吧。","Wǒmen xiūxi yíxià ba.","فلنستَرِح قليلاً."],["小","xiǎo","صغير","前边有一个小茶馆。","Qiánbiān yǒu yí gè xiǎo cháguǎn.","في الأمام بيت شاي صغير."],["茶馆","chá guǎn","بيت الشاي","我们去茶馆喝茶。","Wǒmen qù cháguǎn hē chá.","نذهب إلى بيت الشاي لنشرب الشاي."],["茶","chá","شاي","我喝一点儿茶。","Wǒ hē yìdiǎnr chá.","أشرب قليلاً من الشاي."],["喝","hē","يشرب","你喝不喝茶？","Nǐ hē bu hē chá?","هل تشرب الشاي؟"],["一点儿","yì diǎnr","قليل / قليلاً","我们喝一点儿茶吧。","Wǒmen hē yìdiǎnr chá ba.","فلنشرب قليلاً من الشاي."],["冷","lěng","بارد","今天很冷。","Jīntiān hěn lěng.","اليوم بارد جداً."],["热","rè","حار","今天很热。","Jīntiān hěn rè.","اليوم حار جداً."],["饿","è","جائع","你饿不饿？","Nǐ è bu è?","هل أنت جائع؟"],["渴","kě","عطشان","你渴不渴？","Nǐ kě bu kě?","هل أنت عطشان؟"],["贵","guì","غالٍ","这本书很贵。","Zhè běn shū hěn guì.","هذا الكتاب غالٍ."],["便宜","pián yi","رخيص","这个很便宜。","Zhège hěn piányi.","هذا رخيص."]],"texts":[{"h":"النص ١: حديقة الجبل الغربي","scene":"المشهد: تعريف بحديقة في المدينة.","lines":[{"who":"S","name":"أنا","av":"我","zh":"这个城市西边有一个公园，叫西山公园。","ar":"في غرب هذه المدينة حديقة اسمها «حديقة شيشان».","tok":[["这个","zhè ge",""],["城市","chéng shì",""],["西边","xī biān","الغرب"],["有","yǒu","يملك / يوجد"],["一","yí","واحد"],["个","gè","كلمة عدّ عامة"],["公园","gōng yuán",""],["，","",""],["叫","jiào","يُدعى"],["西山公园","Xī Shān gōng yuán",""],["。","",""]]},{"who":"S","name":"أنا","av":"我","zh":"那里有山，有水，有树，有花，风景非常漂亮，空气也非常新鲜。","ar":"فيها جبال وماء وأشجار وزهور، والمنظر جميل جداً والهواء منعش جداً.","tok":[["那里","nà li",""],["有","yǒu","يملك / يوجد"],["山","shān",""],["，","",""],["有","yǒu","يملك / يوجد"],["水","shuǐ",""],["，","",""],["有","yǒu","يملك / يوجد"],["树","shù","شجرة"],["，","",""],["有","yǒu","يملك / يوجد"],["花","huā","زهرة"],["，","",""],["风景","fēng jǐng",""],["非常","fēi cháng","جداً"],["漂亮","piào liang","جميل"],["，","",""],["空气","kōng qì",""],["也","yě","أيضاً"],["非常","fēi cháng","جداً"],["新鲜","xīn xiān",""],["。","",""]]},{"who":"S","name":"أنا","av":"我","zh":"每天都有很多人去那儿爬山，看风景，呼吸新鲜空气。","ar":"كل يوم يذهب إليها كثيرون لتسلّق الجبل ومشاهدة المناظر واستنشاق الهواء المنعش.","tok":[["每天","měi tiān","كل يوم"],["都","dōu","جميعاً"],["有","yǒu","يملك / يوجد"],["很","hěn","جداً"],["多","duō","كثير"],["人","rén","شخص"],["去","qù","يذهب"],["那儿","nà ér","هناك"],["爬山","pá shān",""],["，","",""],["看","kàn","ينظر / يرى"],["风景","fēng jǐng",""],["，","",""],["呼吸","hū xī",""],["新鲜","xīn xiān",""],["空气","kōng qì",""],["。","",""]]},{"who":"S","name":"أنا","av":"我","zh":"这个星期天我们也去爬山。","ar":"هذا الأحد سنذهب نحن أيضاً لتسلّق الجبل.","tok":[["这个","zhè ge",""],["星期天","xīng qī tiān",""],["我们","wǒ men","نحن"],["也","yě","أيضاً"],["去","qù","يذهب"],["爬山","pá shān",""],["。","",""]]}]},{"h":"النص ٢: دعوة إلى التنزه","scene":"المشهد: مارتن يدعو صديقه للتنزه يوم الأحد.","lines":[{"who":"X","name":"مارتن","av":"马","zh":"这个星期天你忙不忙？","ar":"هل أنت مشغول هذا الأحد؟","tok":[["这个","zhè ge",""],["星期天","xīng qī tiān",""],["你","nǐ","أنتَ/أنتِ"],["忙","máng","مشغول"],["不","bù","لا"],["忙","máng","مشغول"],["？","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"我不忙。","ar":"لست مشغولاً.","tok":[["我","wǒ","أنا"],["不","bù","لا"],["忙","máng","مشغول"],["。","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"星期天我们去爬山，你去不去？","ar":"يوم الأحد سنذهب لتسلّق الجبل، هل تذهب؟","tok":[["星期天","xīng qī tiān",""],["我们","wǒ men","نحن"],["去","qù","يذهب"],["爬山","pá shān",""],["，","",""],["你","nǐ","أنتَ/أنتِ"],["去","qù","يذهب"],["不","bú","لا"],["去","qù","يذهب"],["？","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"你们去哪儿爬山？","ar":"إلى أين ستذهبون لتسلّق الجبل؟","tok":[["你们","nǐ men","أنتم"],["去","qù","يذهب"],["哪儿","nǎ r","أين"],["爬山","pá shān",""],["？","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"去西山。","ar":"إلى جبل شيشان.","tok":[["去","qù","يذهب"],["西山","Xī shān",""],["。","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"听说西山非常漂亮，我也想跟你们一起去。","ar":"سمعت أن جبل شيشان جميل جداً، وأريد أن أذهب معكم.","tok":[["听说","tīng shuō",""],["西山","Xī shān",""],["非常","fēi cháng","جداً"],["漂亮","piào liang","جميل"],["，","",""],["我","wǒ","أنا"],["也","yě","أيضاً"],["想","xiǎng","يريد / يفكر"],["跟","gēn","مع / يتبع"],["你们","nǐ men","أنتم"],["一起","yì qǐ","معاً"],["去","qù","يذهب"],["。","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"太好了。我们早上八点出发。","ar":"رائع! ننطلق في الثامنة صباحاً.","tok":[["太","tài","جداً / أكثر من اللازم"],["好","hǎo","جيد"],["了","le","أداة نغمية / ماضٍ"],["。","",""],["我们","wǒ men","نحن"],["早上","zǎo shang","الصباح"],["八","bā","ثمانية"],["点","diǎn","ساعة (الوقت)"],["出发","chū fā",""],["。","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"我七点半去找你。","ar":"سآتي إليك في السابعة والنصف.","tok":[["我","wǒ","أنا"],["七","qī","سبعة"],["点","diǎn","ساعة (الوقت)"],["半","bàn","نصف"],["去","qù","يذهب"],["找","zhǎo","يرجع الباقي / يبحث"],["你","nǐ","أنتَ/أنتِ"],["。","",""]]}]},{"h":"النص ٣: استراحة في بيت الشاي","scene":"المشهد: تسوي هاو وأصدقاؤه يتسلقون جبل شيشان معاً.","lines":[{"who":"C","name":"تسوي هاو","av":"崔","zh":"大家累不累？","ar":"هل أنتم متعبون؟","tok":[["大家","dà jiā",""],["累","lèi","متعب"],["不","bú","لا"],["累","lèi","متعب"],["？","",""]]},{"who":"A","name":"لين نا","av":"林","zh":"累！","ar":"متعبة!","tok":[["累","lèi","متعب"],["！","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"我也觉得很累，我们休息一下吧。","ar":"أنا أيضاً أشعر بتعب شديد، فلنستَرِح قليلاً.","tok":[["我","wǒ","أنا"],["也","yě","أيضاً"],["觉得","jué de","يشعر / يرى"],["很","hěn","جداً"],["累","lèi","متعب"],["，","",""],["我们","wǒ men","نحن"],["休息","xiū xi",""],["一下","yí xià","قليلاً / مرة (تلطيف)"],["吧","ba","أداة اقتراح لطيف"],["。","",""]]},{"who":"C","name":"تسوي هاو","av":"崔","zh":"前边有一个小茶馆，我们去那儿喝一点儿茶，好不好？","ar":"في الأمام بيت شاي صغير، فلنذهب إلى هناك ونشرب قليلاً من الشاي، ما رأيكم؟","tok":[["前边","qián biān","الأمام"],["有","yǒu","يملك / يوجد"],["一","yí","واحد"],["个","gè","كلمة عدّ عامة"],["小","xiǎo","صغير"],["茶馆","chá guǎn","مقهى شاي"],["，","",""],["我们","wǒ men","نحن"],["去","qù","يذهب"],["那儿","nà ér","هناك"],["喝","hē","يشرب"],["一点儿","yì diǎn r",""],["茶","chá",""],["，","",""],["好","hǎo","جيد"],["不","bù","لا"],["好","hǎo","جيد"],["？","",""]]},{"who":"Y","name":"الجميع","av":"大","zh":"好啊！","ar":"موافقون!","tok":[["好","hǎo","جيد"],["啊","a","آه (فهم مفاجئ)"],["！","",""]]}]}],"gram":[{"id":"adj","t":"الصفة خبرًا","f":"S + 很/非常 + Adj","ar":"لا نضع «是» بين المبتدأ والصفة، وغالبًا نضع قبل الصفة ظرف درجة مثل «很» أو «非常».","key":"风景非常漂亮。","re":"非常|很","kpy":"Fēngjǐng fēicháng piàoliang.","ex":[]},{"id":"anq","t":"سؤال الإيجاب والنفي","f":"Adj/V + 不 + Adj/V ？","ar":"بدل «你忙吗？» نكرّر الصفة أو الفعل مع «不» بينهما. والجواب: «我不忙» أو «我很忙».","key":"这个星期天你忙不忙？","ex":[["你去不去？","Nǐ qù bu qù?","هل تذهب؟"],["你喝不喝茶？","Nǐ hē bu hē chá?","هل تشرب الشاي؟"],["你看不看电影？","Nǐ kàn bu kàn diànyǐng?","هل تشاهد فيلماً؟"]],"re":"(.)不\\1","kpy":"Zhège xīngqītiān nǐ máng bu máng?"},{"id":"yx","t":"الفعل + 一下","f":"V + 一下","ar":"بعد الفعل تعني «قليلًا / لمرة / جرّب»، فتلطّف الطلب.","key":"我们休息一下吧。","ex":[["我很累，我想休息一下。","Wǒ hěn lèi, wǒ xiǎng xiūxi yíxià.","أنا متعب وأريد أن أستريح قليلاً."],["我去一下卫生间。","Wǒ qù yíxià wèishēngjiān.","سأذهب إلى دورة المياه لحظة."]],"re":"一下","kpy":"Wǒmen xiūxi yíxià ba."},{"id":"ydr","t":"一点儿 + اسم","f":"(一)点儿 + N","ar":"«قليل من» وتأتي قبل الاسم، وفي الكلام نحذف «一» غالبًا.","key":"我们去那儿喝一点儿茶，好不好？","ex":[["我买（一）点儿苹果。","Wǒ mǎi (yì) diǎn ér píngguǒ.","أشتري قليلاً من التفاح."],["我们喝（一）点儿水吧。","Wǒmen hē (yì) diǎn ér shuǐ ba.","فلنشرب قليلاً من الماء."]],"re":"点儿","kpy":"Wǒmen qù nàr hē yìdiǎnr chá, hǎo bu hǎo?"}],"quiz":[{"k":"mcq","q":"西山公园在哪儿？","o":["城市的西边","城市的东边","城市的北边","学校里"],"a":0,"why":"«这个城市西边有一个公园，叫西山公园»."},{"k":"mcq","q":"西山公园的空气非常新鲜。","o":["صحيح","خطأ"],"a":0,"why":"«空气也非常新鲜»."},{"k":"mcq","q":"马丁和朋友星期天去哪儿爬山？","o":["西山","北山","东山","南山"],"a":0,"why":"«去西山»."},{"k":"mcq","q":"他们早上几点出发？","o":["八点","七点半","九点","七点"],"a":0,"why":"«我们早上八点出发»؛ والصديق يأتي في ٧:٣٠."},{"k":"mcq","q":"朋友这个星期天很忙。","o":["صحيح","خطأ"],"a":1,"why":"قال «我不忙»."},{"k":"mcq","q":"他们在哪儿休息、喝茶？","o":["小茶馆","公园","学校","饭馆"],"a":0,"why":"«前边有一个小茶馆»."},{"k":"mcq","q":"اختر الصيغة الصحيحة للسؤال بـ «الإيجاب-النفي»:","o":["你累不累？","你累吗不累？","你不累累？","你累累不？"],"a":0,"why":"الصيغة: الصفة + 不 + الصفة."},{"k":"mcq","q":"«西山非常漂亮» — لماذا لا نقول «西山是非常漂亮»؟","o":["الصفة خبر لا تحتاج إلى 是","لأن 是 للأفعال فقط","لأن 非常 لا تُستعمل","لا فرق"],"a":0,"why":"الصفة تعمل كخبر مباشرة، ونضع قبلها ظرف درجة."},{"k":"mcq","q":"جملة صحيحة تعني «سأنظر في كتابك قليلاً»:","o":["我看一下你的书。","我一下看你的书。","我看你的书一下点。","我一下点看书。"],"a":0,"why":"一下 تأتي بعد الفعل."}],"match":[[["风景","منظر طبيعي"],["空气","هواء"],["爬山","يتسلّق الجبل"],["休息","يستريح"],["茶馆","بيت الشاي"],["出发","ينطلق"]],[["冷","بارد"],["热","حار"],["饿","جائع"],["渴","عطشان"],["贵","غالٍ"],["便宜","رخيص"]]],"order":[{"tok":["这个","星期天","我们","也","去","爬山"],"zh":"这个星期天我们也去爬山。","py":"Zhège xīngqītiān wǒmen yě qù páshān.","ar":"هذا الأحد سنذهب نحن أيضاً لتسلّق الجبل."},{"tok":["这个","星期天","你","忙","不","忙"],"zh":"这个星期天你忙不忙？","py":"Zhège xīngqītiān nǐ máng bu máng?","ar":"هل أنت مشغول هذا الأحد؟"},{"tok":["我","不","忙"],"zh":"我不忙。","py":"Wǒ bù máng.","ar":"لست مشغولاً."},{"tok":["星期天","我们","去","爬山","你","去","不","去"],"zh":"星期天我们去爬山，你去不去？","py":"Xīngqītiān wǒmen qù páshān, nǐ qù bu qù?","ar":"يوم الأحد سنذهب لتسلّق الجبل، هل تذهب؟"},{"tok":["你们","去","哪儿","爬山"],"zh":"你们去哪儿爬山？","py":"Nǐmen qù nǎr páshān?","ar":"إلى أين ستذهبون لتسلّق الجبل؟"},{"tok":["我","七","点","半","去","找","你"],"zh":"我七点半去找你。","py":"Wǒ qī diǎn bàn qù zhǎo nǐ.","ar":"سآتي إليك في السابعة والنصف."},{"tok":["大家","累","不","累"],"zh":"大家累不累？","py":"Dàjiā lèi bu lèi?","ar":"هل أنتم متعبون؟"},{"tok":["西山公园","在","哪儿"],"zh":"西山公园在哪儿？","py":"Xīshān Gōngyuán zài nǎr?","ar":"أين حديقة شيشان؟"},{"tok":["他们","爬山","累","不","累"],"zh":"他们爬山累不累？","py":"Tāmen páshān lèi bu lèi?","ar":"هل تعبوا من التسلق؟"},{"tok":["他们","去","哪儿","喝","茶"],"zh":"他们去哪儿喝茶？","py":"Tāmen qù nǎr hē chá?","ar":"أين يشربون الشاي؟"},{"tok":["你","去","不","去"],"zh":"你去不去？","py":"Nǐ qù bu qù?","ar":"هل تذهب؟"},{"tok":["你","喝","不","喝","茶"],"zh":"你喝不喝茶？","py":"Nǐ hē bu hē chá?","ar":"هل تشرب الشاي؟"},{"tok":["你","看","不","看","电影"],"zh":"你看不看电影？","py":"Nǐ kàn bu kàn diànyǐng?","ar":"هل تشاهد فيلماً؟"},{"tok":["我","很","累","我","想","休息","一下"],"zh":"我很累，我想休息一下。","py":"Wǒ hěn lèi, wǒ xiǎng xiūxi yíxià.","ar":"أنا متعب وأريد أن أستريح قليلاً."}],"fill":[{"pre":"这个星期天我们也去","post":"。","ans":"爬山","opts":["爬山","出发","一下"],"ar":"هذا الأحد سنذهب نحن أيضاً لتسلّق الجبل.","py":"Zhège xīngqītiān wǒmen yě qù páshān."},{"pre":"我不","post":"。","ans":"忙","opts":["忙","茶","花"],"ar":"لست مشغولاً.","py":"Wǒ bù máng."},{"pre":"星期天我们去","post":"，你去不去？","ans":"爬山","opts":["爬山","茶馆","城市"],"ar":"يوم الأحد سنذهب لتسلّق الجبل، هل تذهب؟","py":"Xīngqītiān wǒmen qù páshān, nǐ qù bu qù?"},{"pre":"你们去哪儿爬","post":"？","ans":"山","opts":["山","小","冷"],"ar":"إلى أين ستذهبون لتسلّق الجبل؟","py":"Nǐmen qù nǎr páshān?"},{"pre":"我七点半去","post":"你。","ans":"找","opts":["找","累","茶"],"ar":"سآتي إليك في السابعة والنصف.","py":"Wǒ qī diǎn bàn qù zhǎo nǐ."},{"pre":"","post":"累不累？","ans":"大家","opts":["大家","爬山","听说"],"ar":"هل أنتم متعبون؟","py":"Dàjiā lèi bu lèi?"},{"pre":"西山","post":"在哪儿？","ans":"公园","opts":["公园","便宜","听说"],"ar":"أين حديقة شيشان؟","py":"Xīshān Gōngyuán zài nǎr?"},{"pre":"他们爬","post":"累不累？","ans":"山","opts":["山","树","冷"],"ar":"هل تعبوا من التسلق؟","py":"Tāmen páshān lèi bu lèi?"},{"pre":"他们去哪儿喝","post":"？","ans":"茶","opts":["茶","找","水"],"ar":"أين يشربون الشاي؟","py":"Tāmen qù nǎr hē chá?"},{"pre":"你喝不喝","post":"？","ans":"茶","opts":["茶","找","水"],"ar":"هل تشرب الشاي؟","py":"Nǐ hē bu hē chá?"},{"pre":"我很","post":"，我想休息一下。","ans":"累","opts":["累","渴","冷"],"ar":"أنا متعب وأريد أن أستريح قليلاً.","py":"Wǒ hěn lèi, wǒ xiǎng xiūxi yíxià."}],"hub":{"levels":[{"n":1,"t":"المستوى الأول","s":"الفصل الدراسي الأول","c":["gram","prac"]},{"n":3,"t":"المستوى الثالث","s":"الفصل الدراسي الثالث","c":["lis"]},{"n":5,"t":"المستوى الخامس","s":"الفصل الدراسي الخامس","c":["biz"]},{"n":7,"t":"المستوى السابع","s":"الفصل الدراسي السابع","c":["cult"]}],"courses":{"gram":{"name":"قواعد ١","book":"《发展汉语初级综合1》","l":[[6,"六","الدرس السادس · 香蕉多少钱一斤","الأسعار والأعداد والنقود: 想 و 多少钱","lesson-6.html","noor-lesson6-v1"],[7,"七","الدرس السابع · 中国银行在哪儿","الأماكن والاتجاهات: 在 و 有","lesson-7.html","noor-lesson7-v1"],[8,"八","الدرس الثامن · 今天几号","التاريخ والأيام وعيد الميلاد","lesson-8.html","noor-lesson8-v1"],[9,"九","الدرس التاسع · 你今天有什么安排","الساعة والبرنامج اليومي: 先…然后…","lesson-9.html","noor-gram9-v1"],[10,"十","الدرس العاشر · 这个星期天你忙不忙","الصفات وأسئلة 忙不忙 و 一下 و 一点儿","lesson-10.html","noor-gram10-v1"]]},"prac":{"name":"القراءة ١","book":"《新实用汉语课本1》","l":[[6,"六","الدرس السادس · 我们去游泳，好吗","الاقتراح والقبول والرفض","prac-6.html","noor-prac6-v1"],[7,"七","الدرس السابع · 你认识不认识他","التعارف: 认识 و 不…不","prac-7.html","noor-prac7-v1"],[8,"八","الدرس الثامن · 你们家有几口人","العائلة والأعداد: 几 و 口","prac-8.html","noor-prac8-v1"],[9,"九","الدرس التاسع · 他今年二十岁","العمر والسؤال بـ 多大","prac-9.html","noor-prac9-v1"],[10,"十","الدرس العاشر · 我在这儿买光盘","الشراء والعبارات المهذبة","prac-10.html","noor-prac10-v1"]]},"lis":{"name":"الاستماع ١","book":"《发展汉语初级听力1》","l":[[6,"六","الدرس السادس · 苹果多少钱一斤","سماع الأسعار والأعداد","lis-6.html","noor-lis6-v1"],[7,"七","الدرس السابع · 留学生楼在哪儿","سماع الأماكن والاتجاهات","lis-7.html","noor-lis7-v1"],[8,"八","الدرس الثامن · 今天星期几","سماع الأيام والتواريخ","lis-8.html","noor-lis8-v1"],[9,"九","الدرس التاسع · 你每天几点起床","سماع الساعة والروتين اليومي","lis-9.html","noor-lis9-v1"],[10,"十","الدرس العاشر · 你们小区真漂亮","سماع وصف الأماكن","lis-10.html","noor-lis10-v1"]]},"biz":{"name":"اللغة الصينية العملية","book":"《新丝路·中级速成商务汉语1》","l":[[4,"四","الدرس الرابع · 我想约个时间和您见面","تحديد المواعيد وتغييرها وإلغاؤها","biz-4.html","noor-biz4-v1"],[5,"五","الدرس الخامس · 为了大家的健康干杯","المآدب والدعوات وكلمة النخب","biz-5.html","noor-biz5-v1"],[6,"六","الدرس السادس · 还有其他颜色吗","التسوق والتخفيضات والفواتير","biz-6.html","noor-biz6-v1"]]},"cult":{"name":"الثقافة الصينية","book":"中国文化","l":[[1,"一","الدرس الأول · 中国的哲学家","فلاسفة الصين: كونفوشيوس ولاوتسي","cult-1.html","noor-cult1-v1"],[2,"二","الدرس الثاني · 中国的节日","الأعياد الصينية الأربعة الكبرى","cult-2.html","noor-cult2-v1"],[3,"三","الدرس الثالث · 伊斯兰教与中国穆斯林民族","الإسلام والقوميات المسلمة: الهوي والأويغور","cult-3.html","noor-cult3-v1"],[4,"四","الدرس الرابع · 中国四大发明","الورق والطباعة والبوصلة والبارود","cult-4.html","noor-cult4-v1"]]}}}};
+var LS=(function(){
+'use strict';
+var KEY=window.PAGE_KEY||'labs',S={xp:0,done:{},words:{},pos:null,today:0,day:''};
+try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);for(var k in o)S[k]=o[k]}}catch(e){}
+var d=new Date().toISOString().slice(0,10);if(S.day!==d){S.day=d;S.today=0}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function $(s,r){return(r||document).querySelector(s)}
+function $$(s,r){return[].slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function zh(s){return esc(s).replace(/([㐀-鿿，。？！、：（）…·]+)/g,'<span class="han" lang="zh-CN" dir="ltr">$1</span>')}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* theme */
+try{var th=localStorage.getItem('labs-theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
+function toggleTheme(){var h=document.documentElement,dark=h.dataset.theme?h.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  h.dataset.theme=dark?'light':'dark';try{localStorage.setItem('labs-theme',h.dataset.theme)}catch(e){}}
+/* toast */
+var tt=0;function toast(m){var t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}
+  t.textContent=m;t.className='show';clearTimeout(tt);tt=setTimeout(function(){t.className=''},2600)}
+/* speech */
+var voice=null,warned=false;
+function pick(){if(!('speechSynthesis' in window))return;var vs=speechSynthesis.getVoices();
+  voice=vs.filter(function(v){return/^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return/^zh/i.test(v.lang)&&!/HK|TW/i.test(v.lang)})[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,slow){if(!('speechSynthesis' in window)||!voice){if(!warned){warned=true;toast('لا يوجد صوت صيني على هذا الجهاز. اقرأ البينيين، أو ثبّت الصوت من إعدادات «تحويل النص إلى كلام».')}return false}
+  speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.voice=voice;u.rate=slow?.55:.85;speechSynthesis.speak(u);return true}
+/* xp */
+function xp(n,el){S.xp+=n;S.today+=n;save();document.dispatchEvent(new CustomEvent('xp',{detail:{n:n,total:S.xp}}));
+  if(el&&!reduce){var r=el.getBoundingClientRect(),f=document.createElement('span');f.className='xpfly';f.textContent='+'+n;
+    f.style.left=Math.min(innerWidth-50,Math.max(8,r.left+r.width/2-16))+'px';f.style.top=(r.top-6)+'px';document.body.appendChild(f);setTimeout(function(){f.remove()},900)}}
+function mark(id){if(!S.done[id]){S.done[id]=1;save();document.dispatchEvent(new CustomEvent('done',{detail:id}))}}
+/* line pinyin from tokens */
+function linePy(l){return l.tok.filter(function(t){return t[1]}).map(function(t){return t[1].replace(/ /g,'')}).join(' ')}
+function lineWords(l){var seen={};return l.tok.filter(function(t){return t[1]&&t[2]&&!seen[t[0]]&&(seen[t[0]]=1)})}
+function gramOf(zhs){return DATA.gram.filter(function(g){return new RegExp(g.re).test(zhs)})}
+/* ---------- exercises: each returns an element; done(ok) is called once ---------- */
+var solvers=new WeakMap();
+function box(cls,prompt){var el=document.createElement('div');el.className='q '+cls;el.innerHTML='<div class="q-p">'+prompt+'</div>';return el}
+function fin(el,ok,done,why){if(el.dataset.done)return;el.dataset.done='1';el.classList.add('done',ok?'is-ok':'is-bad');
+  var w=document.createElement('div');w.className='q-why';w.setAttribute('role','status');w.innerHTML='<b>'+(ok?'أحسنت':'ليس تمامًا')+'</b>'+(why?' · '+why:'');el.appendChild(w);done&&done(ok)}
+function mcq(q,done){var el=box('q-mcq',zh(q.q)),o=document.createElement('div');o.className='q-opts';
+  var opts=q.o.map(function(t,i){return{t:t,ok:i===q.a}}),ord=q.o.length===2?opts:shuffle(opts);
+  ord.forEach(function(x){var b=document.createElement('button');b.className='q-o';b.innerHTML=zh(x.t);b.onclick=function(){if(el.dataset.done)return;
+    $$('.q-o',o).forEach(function(y,i){y.disabled=true;if(ord[i].ok)y.classList.add('ok')});if(!x.ok)b.classList.add('bad');if(x.ok)xp(10,b);fin(el,x.ok,done,zh(q.why||''))};o.appendChild(b)});
+  el.appendChild(o);solvers.set(el,function(){ord.forEach(function(x,i){if(x.ok)$$('.q-o',o)[i].click()})});return el}
+function order(it,done){var el=box('q-order','رتّب الجملة: <span class="q-ar">'+esc(it.ar)+'</span>'),ans=document.createElement('div'),pool=document.createElement('div'),tries=0;
+  ans.className='q-ans';pool.className='q-pool';var toks=it.tok.map(function(t,i){return{t:t,i:i}}),sh=shuffle(toks);
+  if(sh.map(function(x){return x.t}).join('')===it.tok.join('')&&sh.length>1)sh.push(sh.shift());
+  function check(){var got=$$('.q-tok',ans).map(function(b){return b.dataset.t}).join('');if($$('.q-tok',pool).length)return;
+    if(got===it.tok.join('')){xp(tries?8:15,ans);fin(el,true,done,'<span class="han" lang="zh-CN">'+esc(it.zh)+'</span> <span class="py" dir="ltr">'+esc(it.py)+'</span>')}
+    else{tries++;el.classList.add('shake');setTimeout(function(){el.classList.remove('shake');$$('.q-tok',ans).forEach(function(b){pool.appendChild(b)})},500);toast('الترتيب غير صحيح، حاول مرة أخرى')}}
+  sh.forEach(function(x){var b=document.createElement('button');b.className='q-tok';b.dataset.t=x.t;b.dataset.i=x.i;b.innerHTML='<span class="han" lang="zh-CN">'+esc(x.t)+'</span>';
+    b.onclick=function(){if(el.dataset.done)return;(b.parentNode===pool?ans:pool).appendChild(b);check()};pool.appendChild(b)});
+  el.appendChild(ans);el.appendChild(pool);
+  solvers.set(el,function(){$$('.q-tok',ans).forEach(function(b){pool.appendChild(b)});it.tok.forEach(function(t,i){var b=$$('.q-tok',pool).filter(function(x){return +x.dataset.i===i})[0]||$$('.q-tok',pool).filter(function(x){return x.dataset.t===t})[0];b&&b.click()})});return el}
+function fill(it,done){var el=box('q-fill','أكمل الجملة: <span class="q-ar">'+esc(it.ar)+'</span>'),s=document.createElement('div');s.className='q-sent';s.dir='ltr';
+  s.innerHTML='<span class="han" lang="zh-CN">'+esc(it.pre)+'</span><span class="q-blank">　　</span><span class="han" lang="zh-CN">'+esc(it.post)+'</span>';
+  var o=document.createElement('div');o.className='q-opts q-row';var ord=shuffle(it.opts);
+  ord.forEach(function(t){var b=document.createElement('button');b.className='q-o';b.innerHTML='<span class="han" lang="zh-CN">'+esc(t)+'</span>';b.onclick=function(){if(el.dataset.done)return;
+    var ok=t===it.ans;$('.q-blank',s).innerHTML='<span class="han" lang="zh-CN">'+esc(it.ans)+'</span>';$('.q-blank',s).classList.add('in');
+    $$('.q-o',o).forEach(function(y){y.disabled=true;if(y.textContent===it.ans)y.classList.add('ok')});if(!ok)b.classList.add('bad');if(ok)xp(10,b);
+    fin(el,ok,done,'<span class="py" dir="ltr">'+esc(it.py)+'</span>')};o.appendChild(b)});
+  el.appendChild(s);el.appendChild(o);solvers.set(el,function(){$$('.q-o',o).forEach(function(b){if(b.textContent===it.ans)b.click()})});return el}
+function match(pairs,done){var el=box('q-match','صِل الكلمة بمعناها'),g=document.createElement('div');g.className='q-mgrid';var L=document.createElement('div'),R=document.createElement('div'),sel=null,left=pairs.length,miss=0;
+  L.className='q-col';R.className='q-col';
+  shuffle(pairs).forEach(function(p){var b=document.createElement('button');b.className='q-m';b.dataset.k=p[0];b.innerHTML='<span class="han" lang="zh-CN">'+esc(p[0])+'</span>';L.appendChild(b)});
+  shuffle(pairs).forEach(function(p){var b=document.createElement('button');b.className='q-m';b.dataset.k=p[0];b.textContent=p[1];R.appendChild(b)});
+  function on(b,side){if(b.disabled)return;if(!sel||sel.side===side){if(sel)sel.b.classList.remove('sel');sel={b:b,side:side};b.classList.add('sel');if(side==='L')say(b.dataset.k);return}
+    if(sel.b.dataset.k===b.dataset.k){[sel.b,b].forEach(function(x){x.classList.remove('sel');x.classList.add('ok');x.disabled=true});xp(5,b);left--;sel=null;if(!left)fin(el,miss<2,done,'وصلتَ '+pairs.length+' أزواج')}
+    else{miss++;var a=sel.b;a.classList.remove('sel');[a,b].forEach(function(x){x.classList.add('bad');setTimeout(function(){x.classList.remove('bad')},450)});sel=null}}
+  $$('.q-m',L).forEach(function(b){b.onclick=function(){on(b,'L')}});$$('.q-m',R).forEach(function(b){b.onclick=function(){on(b,'R')}});
+  g.appendChild(L);g.appendChild(R);el.appendChild(g);
+  solvers.set(el,function(){$$('.q-m',L).forEach(function(b){if(b.disabled)return;b.click();$$('.q-m',R).filter(function(x){return x.dataset.k===b.dataset.k})[0].click()})});return el}
+function solve(root){$$('.q',root||document).forEach(function(el){if(!el.dataset.done&&solvers.get(el)&&el.offsetParent!==null)solvers.get(el)()})}
+/* the hub's lessons: real file names; progress read from the real site's own lesson keys when present */
+function lessonXp(key){if(key===(window.PAGE_LESSON_KEY||''))return S.xp;try{var o=JSON.parse(localStorage.getItem(key)||'null');return o&&o.xp||0}catch(e){return 0}}
+return{S:S,save:save,$:$,$$:$$,esc:esc,zh:zh,shuffle:shuffle,say:say,xp:xp,mark:mark,toast:toast,toggleTheme:toggleTheme,linePy:linePy,lineWords:lineWords,gramOf:gramOf,
+  mcq:mcq,order:order,fill:fill,match:match,solve:solve,lessonXp:lessonXp,reduce:reduce};
+})();
+window.__ls={S:LS.S,solve:LS.solve};
+</script>
+<script>
+(function(){
+'use strict';
+var D=DATA,S=LS.S,$=LS.$,$$=LS.$$,esc=LS.esc;S.open=S.open||{};
+$$('[data-theme-btn]').forEach(function(b){b.onclick=LS.toggleTheme});
+var IC={board:'<path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',texts:'<path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"/><path d="M8 9h6M8 13h6"/>',
+  words:'<rect x="3" y="5" width="13" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/>',drills:'<path d="M5 12l4 4 10-10"/><path d="M4 20h16"/>',gram:'<path d="M4 19l5-14 5 14M6 14h6"/><path d="M15 9h5M15 13h5M15 17h5"/>'};
+function ic(k){return'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+IC[k]+'</svg>'}
+/* ---------- home: the atlas ---------- */
+var NUM=['','一','二','三','四','五','六','七','八'];
+function home(){
+  var st=status();
+  $('#lvb').innerHTML='<div class="seal" aria-hidden="true">'+NUM[1]+'</div><div class="sp"><b>مستواك: المستوى الأول</b><br><small>محطتك الآن: '+D.meta.ar+' · '+st.n+' من 3 محطات</small></div><button class="btn az" id="resume">تابع</button>';
+  $('#resume').onclick=function(){location.hash='lesson'};
+  var h='';D.hub.levels.forEach(function(lv){
+    h+='<div class="region"><h2>'+lv.t+' <span>· '+lv.s+'</span></h2>';
+    lv.c.forEach(function(ck){var c=D.hub.courses[ck];if(!c)return;
+      h+='<div class="city"><h3>'+c.name+'</h3><ol class="route">';
+      c.l.forEach(function(l){var me=l[4]===D.meta.file,x=LS.lessonXp(l[5]),done=me?st.n===3:x>=300,parts=l[2].split('·');
+        var inner='<span class="dot">'+l[1]+'</span><span class="nm"><span>'+esc(parts[0].trim())+(me?'<span class="pin">أنت هنا</span>':'')+'</span><br><span class="han" lang="zh-CN">'+esc((parts[1]||'').trim())+'</span></span>';
+        h+='<li>'+(me?'<button class="stop here'+(done?' done':'')+'" data-me>'+inner+'</button>':'<a class="stop'+(done?' done':'')+'" href="../'+l[4]+'">'+inner+'</a>')+'</li>'});
+      h+='</ol></div>'});
+    h+='<svg class="ridge" viewBox="0 0 400 70" preserveAspectRatio="none" style="height:34px;margin-top:10px" aria-hidden="true"><use href="#mtn"/></svg></div>'});
+  $('#atlas').innerHTML=h;$$('[data-me]').forEach(function(b){b.onclick=function(){location.hash='lesson'}});
+}
+/* ---------- lesson ---------- */
+var TABS=[['board','الخريطة'],['texts','النصوص'],['words','الكلمات'],['drills','التمارين']];
+var tab='board',built=false,filter='all',round=0;
+var ROUNDS=[[['mcq',D.quiz[0]],['order',D.order[1]],['fill',D.fill[0]]],[['mcq',D.quiz[6]],['match',D.match[0].slice(0,4)],['fill',D.fill[3]]],[['mcq',D.quiz[7]],['order',D.order[5]],['mcq',D.quiz[2]]],[['mcq',D.quiz[8]],['fill',D.fill[6]],['match',D.match[1].slice(0,4)]]];
+function status(){var t=D.texts.every(function(_,i){return S.open['t'+i]}),w=!!S.done.words,d=!!S.done.drills;return{t:t,w:w,d:d,n:(t?1:0)+(w?1:0)+(d?1:0)}}
+function ring(p){var c=2*Math.PI*16;return'<svg class="ring" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" stroke="var(--line)"/><circle cx="20" cy="20" r="16" stroke="var(--mal)" stroke-dasharray="'+c+'" stroke-dashoffset="'+(c*(1-p))+'" transform="rotate(-90 20 20)" stroke-linecap="round"/></svg>'}
+function board(){var st=status(),nt=D.texts.filter(function(_,i){return S.open['t'+i]}).length,nk=Object.keys(S.words).length,nd=Math.min(round,4),sug=!st.t?'texts':!st.w?'words':!st.d?'drills':'';
+  var T=[['texts','النصوص',D.texts.length+' نصوص · 6 د',nt/3,st.t],['words','الكلمات',D.vocab.length+' كلمة · 4 د',st.w?1:Math.min(1,nk/10),st.w],['gram','القواعد',D.gram.length+' نقاط · 3 د',S.done.gramseen?1:0,!!S.done.gramseen],['drills','التمارين','4 جولات · 5 د',nd/4,st.d]];
+  $('#v-board').innerHTML='<div class="banner"><svg viewBox="0 0 400 70" preserveAspectRatio="none" style="display:block;width:100%;height:70px" aria-hidden="true"><use href="#mtn"/></svg><div class="t"><h2>'+D.meta.zh+'</h2><p>'+LS.zh(D.meta.intro)+'</p></div></div>'+
+    '<div class="tiles">'+T.map(function(x){return'<button class="tile'+(x[4]?' ok':'')+(x[0]===sug?' sug':'')+'" data-go="'+x[0]+'">'+ring(x[3])+ic(x[0])+'<b>'+x[1]+'</b><small>'+x[2]+'</small></button>'}).join('')+'</div>'+
+    (st.n===3?'<div class="donebox" data-complete="1"><b>أتممت محطات الدرس الثلاث.</b><br>'+S.xp+' نقطة · الدرس التالي على الأطلس.</div>':'<p class="hint">ادخل المحطات بأي ترتيب. المقترح: النصوص، ثم الكلمات، ثم التمارين. القواعد تظهر أيضًا داخل النصوص.</p>');
+  $$('#v-board .tile').forEach(function(b){b.onclick=function(){if(b.dataset.go==='gram')gramList();else setTab(b.dataset.go)}});
+}
+function gramList(){$('#sheetBody').innerHTML='<h3>قواعد الدرس</h3>'+D.gram.map(function(g){return'<p style="margin:10px 0 0"><b>'+esc(g.t)+'</b></p><div class="f">'+esc(g.f)+'</div><div class="eg"><span class="han" lang="zh-CN">'+esc(g.key)+'</span> '+esc(g.kpy)+'</div>'}).join('');
+  $('#sheet').classList.add('open');if(!S.done.gramseen){LS.mark('gramseen');LS.xp(3,$('#sheet'))}}
+function texts(){var h='';
+  D.texts.forEach(function(t,ti){h+='<details class="txt" data-t="'+ti+'"><summary>'+esc(t.h)+'</summary>'+t.lines.map(function(l,li){var g=LS.gramOf(l.zh);
+    return'<div class="ln"><button class="say" data-t="'+ti+'" data-l="'+li+'" aria-label="استمع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg></button><div><div class="nm">'+esc(l.name)+'</div><div class="z han" lang="zh-CN">'+esc(l.zh)+'</div><div class="p">'+esc(LS.linePy(l))+'</div><div class="a">'+esc(l.ar)+'</div>'+
+      g.map(function(x){return'<button class="gtag" data-g="'+x.id+'">قاعدة: '+esc(x.t)+'</button>'}).join(' ')+'</div></div>'}).join('')+'</details>'});
+  $('#v-texts').innerHTML='<p class="round">'+D.texts.length+' نصوص. افتح النص واضغط زر الصوت.</p>'+h;
+  $$('#v-texts details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open&&!S.open['t'+d.dataset.t]){S.open['t'+d.dataset.t]=1;LS.save();LS.xp(5,d);bar()}})});
+  $$('#v-texts .say').forEach(function(b){b.onclick=function(){LS.say(D.texts[+b.dataset.t].lines[+b.dataset.l].zh)}});
+  $$('#v-texts .gtag').forEach(function(b){b.onclick=function(){var g=D.gram.filter(function(x){return x.id===b.dataset.g})[0];
+    $('#sheetBody').innerHTML='<h3>'+esc(g.t)+'</h3><div class="f">'+esc(g.f)+'</div><p>'+LS.zh(g.ar)+'</p>'+g.ex.map(function(e){return'<div class="eg"><span class="han" lang="zh-CN">'+esc(e[0])+'</span> '+esc(e[1])+' · '+esc(e[2])+'</div>'}).join('');$('#sheet').classList.add('open')}});
+}
+function words(){var list=D.vocab.filter(function(v){return filter==='all'||(filter==='known'?S.words[v[0]]:!S.words[v[0]])}),nk=Object.keys(S.words).length;
+  $('#v-words').innerHTML='<div class="filters" role="group" aria-label="تصفية"><button data-f="all" aria-pressed="'+(filter==='all')+'">الكل '+D.vocab.length+'</button><button data-f="new" aria-pressed="'+(filter==='new')+'">جديدة '+(D.vocab.length-nk)+'</button><button data-f="known" aria-pressed="'+(filter==='known')+'">عرفتها '+nk+'</button></div>'+
+    '<p class="round">اضغط الكلمة لتسمعها وتعلّمها «عرفتها».</p><div class="wl">'+list.map(function(v){return'<button class="w'+(S.words[v[0]]?' known':'')+'" data-w="'+esc(v[0])+'"><span class="z" lang="zh-CN">'+esc(v[0])+'</span><span><span class="p">'+esc(v[1])+'</span><br>'+esc(v[2])+'</span><span class="k" aria-hidden="true"></span></button>'}).join('')+'</div>'+
+    '<button class="btn az" data-wdone style="width:100%;margin-top:12px">'+(S.done.words?'راجعت القائمة ✓':'أنهيت مراجعة الكلمات')+'</button>';
+  $$('#v-words [data-f]').forEach(function(b){b.onclick=function(){filter=b.dataset.f;words()}});
+  $$('#v-words .w').forEach(function(b){b.onclick=function(){LS.say(b.dataset.w);var w=b.dataset.w;if(S.words[w])delete S.words[w];else{S.words[w]=1;LS.xp(2,b)}LS.save();b.classList.toggle('known',!!S.words[w])}});
+  $('#v-words [data-wdone]').onclick=function(){if(!S.done.words){LS.mark('words');LS.xp(10,this)}words();bar()};
+}
+function drills(){var el=$('#v-drills');
+  if(round>=4){el.innerHTML='<div class="donebox"><b>أتممت الجولات الأربع.</b><br>'+S.xp+' نقطة</div>';return}
+  el.innerHTML='<p class="round">الجولة '+(round+1)+' من 4</p>';var n=0;
+  ROUNDS[round].forEach(function(r){el.appendChild(LS[r[0]](r[1],function(){if(++n===3){round++;S.round=round;LS.save();
+    if(round>=4){LS.mark('drills');LS.xp(15,el);el.insertAdjacentHTML('beforeend','<div class="donebox"><b>أتممت الجولات الأربع.</b></div>');bar()}
+    else el.insertAdjacentHTML('beforeend','<button class="btn az" data-more style="width:100%">الجولة التالية</button>');var m=$('[data-more]',el);if(m)m.onclick=drills}}))});
+}
+function setTab(t){tab=t;$$('.view').forEach(function(v){v.classList.toggle('cur',v.id==='v-'+t)});$$('#tabs button').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.tab===t))});
+  if(t==='board')board();if(t==='words')words();if(t==='drills'&&!$('#v-drills').childElementCount)drills();window.scrollTo(0,0)}
+function bar(){var st=status();$$('#tabs button').forEach(function(b){b.classList.toggle('ok',b.dataset.tab==='texts'?st.t:b.dataset.tab==='words'?st.w:b.dataset.tab==='drills'?st.d:st.n===3)})}
+function buildLesson(){built=true;round=S.round||0;$('#lt').textContent=D.meta.ar;$('#lz').textContent=D.meta.zh;
+  $('#tabs').innerHTML=TABS.map(function(t){return'<button role="tab" data-tab="'+t[0]+'" aria-selected="false"><span class="bd"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+IC[t[0]]+'</svg>'+t[1]+'</button>'}).join('');
+  $$('#tabs button').forEach(function(b){b.onclick=function(){setTab(b.dataset.tab)}});texts()}
+$('#sheetClose').onclick=function(){$('#sheet').classList.remove('open')};
+$('#back').onclick=function(){location.hash='home'};
+document.addEventListener('xp',function(){$('#xp').textContent=S.xp+' نقطة'});
+function render(){$('#sheet').classList.remove('open');document.body.classList.toggle('lo',location.hash==='#lesson');if(location.hash==='#lesson'){$('#home').hidden=true;$('#lesson').hidden=false;if(!built)buildLesson();$('#xp').textContent=S.xp+' نقطة';setTab('board');bar()}
+  else{$('#lesson').hidden=true;$('#home').hidden=false;home();window.scrollTo(0,0)}}
+addEventListener('hashchange',render);render();
+})();
+</script>
+</body>
+</html>

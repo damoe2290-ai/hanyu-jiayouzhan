@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>جلسة الشاي · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;600;700&family=ZCOOL+XiaoWei&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Direction 3 — the tea session: a lesson poured into three cups of about five minutes.
+   One card at a time, celadon glaze and tea liquor, rounded like a cup. */
+:root{--bg:#e8efe9;--card:#f9fbf8;--card2:#eef4ef;--ink:#1d2a22;--mut:#566a5d;--cel:#4f8a6a;--cel-soft:rgba(79,138,106,.13);--tea:#9a5b1d;--tea2:#c98a2b;--line:#cfdcd2;--xp:#9a5b1d;
+  --font-ar:"El Messiri",system-ui,sans-serif;--font-han:"ZCOOL XiaoWei","Noto Serif SC",serif;--font-han2:"Noto Serif SC",serif;--font-py:system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101814;--card:#17221c;--card2:#1d2a23;--ink:#e6efe8;--mut:#9fb5a7;--cel:#88c4a2;--cel-soft:rgba(136,196,162,.13);--tea:#e7a650;--tea2:#f0bf6e;--line:#27372e;--xp:#e7a650;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#101814;--card:#17221c;--card2:#1d2a23;--ink:#e6efe8;--mut:#9fb5a7;--cel:#88c4a2;--cel-soft:rgba(136,196,162,.13);--tea:#e7a650;--tea2:#f0bf6e;--line:#27372e;--xp:#e7a650;color-scheme:dark}
+/* shared bits: toast, flying XP, shake, hidden, reduced motion */
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+#toast{position:fixed;inset-inline:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:50;max-width:520px;margin:0 auto;padding:12px 14px;border-radius:12px;background:var(--ink,#111);color:var(--bg,#fff);font-size:14.5px;opacity:0;transform:translateY(10px);pointer-events:none;transition:.25s}
+#toast.show{opacity:1;transform:none}
+.xpfly{position:fixed;z-index:60;font:700 16px system-ui,sans-serif;color:var(--xp,#c27c0e);pointer-events:none;animation:xpfly .9s ease-out forwards}
+@keyframes xpfly{to{transform:translateY(-38px);opacity:0}}
+.shake{animation:shake .4s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.py{font-family:var(--font-py,system-ui,sans-serif)}
+.q-sent,.q-ans,.q-pool{direction:ltr}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 var(--font-ar)}
+button{font:inherit;color:inherit}
+.han{font-family:var(--font-han)}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 40px}
+.ibtn{min-width:44px;min-height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer}
+.ibtn svg{width:22px;height:22px}
+.btn{min-height:50px;padding:0 20px;border-radius:25px;border:1.5px solid var(--cel);background:var(--card);font:600 17px var(--font-ar);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.tea{background:var(--tea);border-color:var(--tea);color:var(--card)}
+.top{display:flex;align-items:center;gap:12px;padding:14px 0 8px}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:400 30px/1.2 var(--font-han);color:var(--cel)}
+.top p{margin:0;color:var(--mut);font-size:15px}
+.cupsvg .liq{transition:transform .5s ease}
+.steam path{stroke:var(--cel);stroke-width:2;fill:none;stroke-linecap:round;opacity:.6;animation:steam 3s ease-in-out infinite}
+.steam path:nth-child(2){animation-delay:1s}
+@keyframes steam{0%{transform:translateY(4px);opacity:0}40%{opacity:.6}100%{transform:translateY(-8px);opacity:0}}
+/* ---------- home: today first ---------- */
+.next{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center;padding:16px;border-radius:28px;background:var(--card);border:1px solid var(--line);margin:6px 0 12px}
+.next small{color:var(--tea);font-weight:700}
+.next .t{font-weight:700;font-size:19px;line-height:1.4}
+.next .t .han{font-weight:400}
+.next .m{color:var(--mut);font-size:14.5px}
+.next .go{grid-column:1/-1}
+.day{display:flex;gap:12px;align-items:center;padding:12px 16px;border-radius:24px;background:var(--card2);margin-bottom:12px}
+.day .cups{display:flex;gap:6px}
+.day .cups i{width:30px;height:26px;border-radius:0 0 12px 12px;border:2px solid var(--cel);border-top-width:3px;position:relative;overflow:hidden}
+.day .cups i.on::after{content:"";position:absolute;inset:40% 0 0;background:var(--tea2)}
+.day .sp{flex:1;min-width:0;font-size:15px}
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:12.5px;color:var(--mut);margin:0 0 18px}
+.week b{display:block;margin:2px auto 0;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line)}
+.week b.on{background:var(--cel);border-color:var(--cel)}
+.week b.today{border-color:var(--tea);border-width:2.5px}
+.shelf h2{margin:16px 0 2px;font:700 19px var(--font-ar)}
+.shelf .bk{color:var(--mut);font-size:13.5px}
+.row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:8px 2px 10px;scrollbar-width:thin}
+.tin{flex:none;width:132px;min-height:150px;scroll-snap-align:start;border-radius:22px;border:1px solid var(--line);background:var(--card);padding:10px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:4px;cursor:pointer;text-align:start}
+.tin .n{font:400 30px var(--font-han);color:var(--cel);line-height:1}
+.tin .zh{font:400 15px var(--font-han);line-height:1.35}
+.tin .c{display:flex;gap:4px;margin-top:auto}
+.tin .c i{width:16px;height:14px;border-radius:0 0 7px 7px;border:1.5px solid var(--cel);position:relative;overflow:hidden}
+.tin .c i.on::after{content:"";position:absolute;inset:35% 0 0;background:var(--tea2)}
+.tin.here{border:2px solid var(--tea)}
+/* ---------- lesson: one card at a time ---------- */
+.lhdr{display:flex;align-items:center;gap:10px;padding:10px 0}
+.lhdr .sp{flex:1;min-width:0;line-height:1.3}
+.lhdr b{font-size:16px;display:block}
+.lhdr .sub{font-size:13.5px;color:var(--mut)}
+.xp{font:700 14px var(--font-py);color:var(--tea)}
+.cupbar{display:flex;gap:8px;margin-bottom:10px}
+.cupbar button{flex:1;min-height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px;position:relative;overflow:hidden}
+.cupbar button i{position:absolute;inset:auto 0 0 0;height:4px;background:var(--tea2);transform-origin:right;transform:scaleX(0);transition:transform .4s}
+.cupbar button.on{border-color:var(--tea);font-weight:700}
+.stage{position:relative;min-height:56vh}
+.card{display:none;border-radius:30px;background:var(--card);border:1px solid var(--line);padding:20px 18px;box-shadow:0 18px 40px -26px rgba(0,0,0,.4)}
+.card.cur{display:block;animation:pour .35s ease both}
+@keyframes pour{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+.card .kind{font-size:13.5px;color:var(--cel);font-weight:700;margin-bottom:4px}
+.card h2{margin:0 0 6px;font:700 24px/1.35 var(--font-ar)}
+.big{font:400 72px/1.1 var(--font-han);text-align:center;margin:10px 0 2px}
+.big.l{font-size:30px;line-height:1.7;direction:ltr;text-align:center}
+.pyl{text-align:center;color:var(--cel);font:500 18px var(--font-py);direction:ltr}
+.mean{text-align:center;font-size:20px;margin-top:6px}
+.exs{margin-top:12px;padding:10px 12px;border-radius:18px;background:var(--card2);font-size:15px;color:var(--mut)}
+.exs .han{font-size:18px;color:var(--ink)}
+.flip,.say{min-height:50px}
+.cta{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.cta>*{flex:1}
+.know[aria-pressed="true"]{background:var(--cel);color:var(--card);border-color:var(--cel)}
+.spk-who{display:flex;gap:10px;align-items:center;justify-content:center;color:var(--mut)}
+.spk-who span{width:44px;height:44px;border-radius:50%;background:var(--cel-soft);color:var(--cel);display:grid;place-items:center;font:400 22px var(--font-han)}
+.gf{direction:ltr;text-align:center;font:700 17px var(--font-py);color:var(--tea);margin:4px 0}
+.gk{text-align:center;font:400 24px var(--font-han);direction:ltr}
+.list{display:grid;gap:6px;margin-top:8px}
+.list div{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;border-radius:12px;background:var(--card2);font-size:15px}
+.nav{position:sticky;bottom:0;z-index:5;display:flex;gap:10px;align-items:center;padding:12px 0 calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,var(--bg) 30%)}
+.nav .cnt{flex:none;font-size:14px;color:var(--mut);min-width:64px;text-align:center}
+.nav #next{flex:1}
+.nav button[disabled]{opacity:.45}
+/* exercises in the cup */
+.q-p{font-weight:600;font-size:18px;margin-bottom:10px}.q-p .han{font-size:22px;font-family:var(--font-han2)}
+.q-ar{color:var(--mut);font-weight:400;font-size:15.5px}
+.q-opts{display:grid;gap:8px}.q-row{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+.q-o{min-height:52px;border-radius:26px;border:1.5px solid var(--line);background:var(--card);cursor:pointer;padding:6px 16px;font:600 16px var(--font-ar);text-align:center}
+.q-o .han{font-size:19px;font-family:var(--font-han2)}
+.q-o.ok{background:var(--cel);border-color:var(--cel);color:var(--card)}.q-o.bad{border-color:var(--tea);color:var(--tea)}
+.q-sent{font:500 24px/2 var(--font-han2);text-align:center}
+.q-blank{display:inline-block;min-width:70px;border-bottom:3px solid var(--tea2)}
+.q-ans{min-height:58px;border-radius:20px;background:var(--card2);padding:6px;display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:10px}
+.q-pool{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.q-tok{min-height:48px;min-width:48px;padding:0 12px;border-radius:24px;border:1.5px solid var(--cel);background:var(--card);cursor:pointer;font:500 20px var(--font-han2)}
+.q-why{margin-top:10px;text-align:center;color:var(--mut);font-size:15px}.q-why b{color:var(--cel)}
+.endc{text-align:center}
+.endc .score{font:700 44px var(--font-ar);color:var(--tea);line-height:1.1}
+footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center;font-family:system-ui,sans-serif}
+:focus-visible{outline:3px solid var(--tea);outline-offset:2px}
+@media (min-width:900px){.wrap{max-width:980px}#lesson .grid{display:grid;grid-template-columns:260px 1fr;gap:20px;align-items:start}.cupbar{flex-direction:column}.tin{width:150px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<section id="home">
+  <header class="top"><div class="sp"><h1>汉语加油站</h1><p>اليوم</p></div>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button></header>
+  <div class="next" id="nextBox"></div>
+  <div class="day" id="dayBox"></div>
+  <div class="week" id="week" aria-label="هذا الأسبوع"></div>
+  <div id="shelves"></div>
+</section>
+<section id="lesson" hidden>
+  <div class="lhdr">
+    <button class="ibtn" id="back" aria-label="اليوم"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="sp"><b id="lt"></b><span class="sub han" id="lz" lang="zh-CN"></span></div>
+    <span class="xp" id="xp"></span>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+  </div>
+  <div class="grid">
+    <div><nav class="cupbar" id="cupbar" aria-label="الأكواب"></nav></div>
+    <div><div class="stage" id="stage"></div>
+      <div class="nav"><button class="btn" id="prev" aria-label="السابق">السابق</button><span class="cnt" id="cnt"></span><button class="btn tea" id="next">التالي</button></div></div>
+  </div>
+</section>
+<footer><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+<script>var PAGE_KEY='labs-d3',PAGE_LESSON_KEY='noor-gram10-v1';</script>
+<script>/* Shared engine of the style prototypes: data, storage, theme, zh-CN speech, XP and four exercise types.
+   Each direction styles the generic classes (.q, .q-o, .q-tok ...) in its own way. */
+var DATA={"meta":{"n":10,"nz":"十","zh":"这个星期天你忙不忙","ar":"الدرس العاشر","sub":"هل أنت مشغول هذا الأحد؟","intro":"تتعلم وصف المكان بالصفات (非常漂亮)، وطرح أسئلة «الإيجاب-النفي» (忙不忙؟ 去不去؟)، واستعمال 一下 و 一点儿، ودعوة الأصدقاء للتنزه. من كتاب «发展汉语·初级综合（一）».","course":"قواعد ١","book":"《发展汉语初级综合1》","file":"lesson-10.html"},"vocab":[["城市","chéng shì","مدينة","这个城市很大。","Zhège chéngshì hěn dà.","هذه المدينة كبيرة."],["公园","gōng yuán","حديقة عامة","城市里有一个公园。","Chéngshì lǐ yǒu yí gè gōngyuán.","في المدينة حديقة."],["那里","nà li","هناك","那里有山，有水。","Nàli yǒu shān, yǒu shuǐ.","هناك جبال وماء."],["山","shān","جبل","那里有山。","Nàli yǒu shān.","هناك جبال."],["水","shuǐ","ماء","那里有山，有水。","Nàli yǒu shān, yǒu shuǐ.","هناك جبال وماء."],["树","shù","شجرة","那里有很多树。","Nàli yǒu hěn duō shù.","هناك أشجار كثيرة."],["花","huā","زهرة","那里有花。","Nàli yǒu huā.","هناك زهور."],["风景","fēng jǐng","منظر طبيعي","风景非常漂亮。","Fēngjǐng fēicháng piàoliang.","المنظر جميل جداً."],["非常","fēi cháng","جداً","空气非常新鲜。","Kōngqì fēicháng xīnxiān.","الهواء منعش جداً."],["漂亮","piào liang","جميل","西山非常漂亮。","Xīshān fēicháng piàoliang.","جبل شيشان جميل جداً."],["空气","kōng qì","هواء","这里的空气很新鲜。","Zhè lǐ de kōngqì hěn xīnxiān.","هواء هنا منعش جداً."],["新鲜","xīn xiān","طازج / منعش","空气非常新鲜。","Kōngqì fēicháng xīnxiān.","الهواء منعش جداً."],["多","duō","كثير","每天有很多人去爬山。","Měitiān yǒu hěn duō rén qù páshān.","كل يوم يذهب كثيرون لتسلّق الجبل."],["爬山","pá shān","يتسلّق الجبل","星期天我们去爬山。","Xīngqītiān wǒmen qù páshān.","يوم الأحد نذهب لتسلّق الجبل."],["呼吸","hū xī","يتنفّس","我们去呼吸新鲜空气。","Wǒmen qù hūxī xīnxiān kōngqì.","نذهب لنتنفس هواءً منعشاً."],["忙","máng","مشغول","这个星期天你忙不忙？","Zhège xīngqītiān nǐ máng bu máng?","هل أنت مشغول هذا الأحد؟"],["听说","tīng shuō","سمعتُ أنّ","听说西山非常漂亮。","Tīngshuō Xīshān fēicháng piàoliang.","سمعت أن جبل شيشان جميل جداً."],["出发","chū fā","ينطلق","我们早上八点出发。","Wǒmen zǎoshang bā diǎn chūfā.","ننطلق في الثامنة صباحاً."],["找","zhǎo","يبحث عن / يزور","我七点半去找你。","Wǒ qī diǎn bàn qù zhǎo nǐ.","سآتي إليك في السابعة والنصف."],["大家","dà jiā","الجميع","大家累不累？","Dàjiā lèi bu lèi?","هل أنتم متعبون؟"],["累","lèi","متعب","我觉得很累。","Wǒ juéde hěn lèi.","أشعر بتعب شديد."],["觉得","jué de","يشعر / يرى","我也觉得很累。","Wǒ yě juéde hěn lèi.","أنا أيضاً أشعر بتعب شديد."],["休息","xiū xi","يستريح","我们休息一下吧。","Wǒmen xiūxi yíxià ba.","فلنستَرِح قليلاً."],["一下","yí xià","قليلاً / لمرة (بعد الفعل)","我们休息一下吧。","Wǒmen xiūxi yíxià ba.","فلنستَرِح قليلاً."],["小","xiǎo","صغير","前边有一个小茶馆。","Qiánbiān yǒu yí gè xiǎo cháguǎn.","في الأمام بيت شاي صغير."],["茶馆","chá guǎn","بيت الشاي","我们去茶馆喝茶。","Wǒmen qù cháguǎn hē chá.","نذهب إلى بيت الشاي لنشرب الشاي."],["茶","chá","شاي","我喝一点儿茶。","Wǒ hē yìdiǎnr chá.","أشرب قليلاً من الشاي."],["喝","hē","يشرب","你喝不喝茶？","Nǐ hē bu hē chá?","هل تشرب الشاي؟"],["一点儿","yì diǎnr","قليل / قليلاً","我们喝一点儿茶吧。","Wǒmen hē yìdiǎnr chá ba.","فلنشرب قليلاً من الشاي."],["冷","lěng","بارد","今天很冷。","Jīntiān hěn lěng.","اليوم بارد جداً."],["热","rè","حار","今天很热。","Jīntiān hěn rè.","اليوم حار جداً."],["饿","è","جائع","你饿不饿？","Nǐ è bu è?","هل أنت جائع؟"],["渴","kě","عطشان","你渴不渴？","Nǐ kě bu kě?","هل أنت عطشان؟"],["贵","guì","غالٍ","这本书很贵。","Zhè běn shū hěn guì.","هذا الكتاب غالٍ."],["便宜","pián yi","رخيص","这个很便宜。","Zhège hěn piányi.","هذا رخيص."]],"texts":[{"h":"النص ١: حديقة الجبل الغربي","scene":"المشهد: تعريف بحديقة في المدينة.","lines":[{"who":"S","name":"أنا","av":"我","zh":"这个城市西边有一个公园，叫西山公园。","ar":"في غرب هذه المدينة حديقة اسمها «حديقة شيشان».","tok":[["这个","zhè ge",""],["城市","chéng shì",""],["西边","xī biān","الغرب"],["有","yǒu","يملك / يوجد"],["一","yí","واحد"],["个","gè","كلمة عدّ عامة"],["公园","gōng yuán",""],["，","",""],["叫","jiào","يُدعى"],["西山公园","Xī Shān gōng yuán",""],["。","",""]]},{"who":"S","name":"أنا","av":"我","zh":"那里有山，有水，有树，有花，风景非常漂亮，空气也非常新鲜。","ar":"فيها جبال وماء وأشجار وزهور، والمنظر جميل جداً والهواء منعش جداً.","tok":[["那里","nà li",""],["有","yǒu","يملك / يوجد"],["山","shān",""],["，","",""],["有","yǒu","يملك / يوجد"],["水","shuǐ",""],["，","",""],["有","yǒu","يملك / يوجد"],["树","shù","شجرة"],["，","",""],["有","yǒu","يملك / يوجد"],["花","huā","زهرة"],["，","",""],["风景","fēng jǐng",""],["非常","fēi cháng","جداً"],["漂亮","piào liang","جميل"],["，","",""],["空气","kōng qì",""],["也","yě","أيضاً"],["非常","fēi cháng","جداً"],["新鲜","xīn xiān",""],["。","",""]]},{"who":"S","name":"أنا","av":"我","zh":"每天都有很多人去那儿爬山，看风景，呼吸新鲜空气。","ar":"كل يوم يذهب إليها كثيرون لتسلّق الجبل ومشاهدة المناظر واستنشاق الهواء المنعش.","tok":[["每天","měi tiān","كل يوم"],["都","dōu","جميعاً"],["有","yǒu","يملك / يوجد"],["很","hěn","جداً"],["多","duō","كثير"],["人","rén","شخص"],["去","qù","يذهب"],["那儿","nà ér","هناك"],["爬山","pá shān",""],["，","",""],["看","kàn","ينظر / يرى"],["风景","fēng jǐng",""],["，","",""],["呼吸","hū xī",""],["新鲜","xīn xiān",""],["空气","kōng qì",""],["。","",""]]},{"who":"S","name":"أنا","av":"我","zh":"这个星期天我们也去爬山。","ar":"هذا الأحد سنذهب نحن أيضاً لتسلّق الجبل.","tok":[["这个","zhè ge",""],["星期天","xīng qī tiān",""],["我们","wǒ men","نحن"],["也","yě","أيضاً"],["去","qù","يذهب"],["爬山","pá shān",""],["。","",""]]}]},{"h":"النص ٢: دعوة إلى التنزه","scene":"المشهد: مارتن يدعو صديقه للتنزه يوم الأحد.","lines":[{"who":"X","name":"مارتن","av":"马","zh":"这个星期天你忙不忙？","ar":"هل أنت مشغول هذا الأحد؟","tok":[["这个","zhè ge",""],["星期天","xīng qī tiān",""],["你","nǐ","أنتَ/أنتِ"],["忙","máng","مشغول"],["不","bù","لا"],["忙","máng","مشغول"],["？","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"我不忙。","ar":"لست مشغولاً.","tok":[["我","wǒ","أنا"],["不","bù","لا"],["忙","máng","مشغول"],["。","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"星期天我们去爬山，你去不去？","ar":"يوم الأحد سنذهب لتسلّق الجبل، هل تذهب؟","tok":[["星期天","xīng qī tiān",""],["我们","wǒ men","نحن"],["去","qù","يذهب"],["爬山","pá shān",""],["，","",""],["你","nǐ","أنتَ/أنتِ"],["去","qù","يذهب"],["不","bú","لا"],["去","qù","يذهب"],["？","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"你们去哪儿爬山？","ar":"إلى أين ستذهبون لتسلّق الجبل؟","tok":[["你们","nǐ men","أنتم"],["去","qù","يذهب"],["哪儿","nǎ r","أين"],["爬山","pá shān",""],["？","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"去西山。","ar":"إلى جبل شيشان.","tok":[["去","qù","يذهب"],["西山","Xī shān",""],["。","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"听说西山非常漂亮，我也想跟你们一起去。","ar":"سمعت أن جبل شيشان جميل جداً، وأريد أن أذهب معكم.","tok":[["听说","tīng shuō",""],["西山","Xī shān",""],["非常","fēi cháng","جداً"],["漂亮","piào liang","جميل"],["，","",""],["我","wǒ","أنا"],["也","yě","أيضاً"],["想","xiǎng","يريد / يفكر"],["跟","gēn","مع / يتبع"],["你们","nǐ men","أنتم"],["一起","yì qǐ","معاً"],["去","qù","يذهب"],["。","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"太好了。我们早上八点出发。","ar":"رائع! ننطلق في الثامنة صباحاً.","tok":[["太","tài","جداً / أكثر من اللازم"],["好","hǎo","جيد"],["了","le","أداة نغمية / ماضٍ"],["。","",""],["我们","wǒ men","نحن"],["早上","zǎo shang","الصباح"],["八","bā","ثمانية"],["点","diǎn","ساعة (الوقت)"],["出发","chū fā",""],["。","",""]]},{"who":"L","name":"الصديق","av":"朋","zh":"我七点半去找你。","ar":"سآتي إليك في السابعة والنصف.","tok":[["我","wǒ","أنا"],["七","qī","سبعة"],["点","diǎn","ساعة (الوقت)"],["半","bàn","نصف"],["去","qù","يذهب"],["找","zhǎo","يرجع الباقي / يبحث"],["你","nǐ","أنتَ/أنتِ"],["。","",""]]}]},{"h":"النص ٣: استراحة في بيت الشاي","scene":"المشهد: تسوي هاو وأصدقاؤه يتسلقون جبل شيشان معاً.","lines":[{"who":"C","name":"تسوي هاو","av":"崔","zh":"大家累不累？","ar":"هل أنتم متعبون؟","tok":[["大家","dà jiā",""],["累","lèi","متعب"],["不","bú","لا"],["累","lèi","متعب"],["？","",""]]},{"who":"A","name":"لين نا","av":"林","zh":"累！","ar":"متعبة!","tok":[["累","lèi","متعب"],["！","",""]]},{"who":"X","name":"مارتن","av":"马","zh":"我也觉得很累，我们休息一下吧。","ar":"أنا أيضاً أشعر بتعب شديد، فلنستَرِح قليلاً.","tok":[["我","wǒ","أنا"],["也","yě","أيضاً"],["觉得","jué de","يشعر / يرى"],["很","hěn","جداً"],["累","lèi","متعب"],["，","",""],["我们","wǒ men","نحن"],["休息","xiū xi",""],["一下","yí xià","قليلاً / مرة (تلطيف)"],["吧","ba","أداة اقتراح لطيف"],["。","",""]]},{"who":"C","name":"تسوي هاو","av":"崔","zh":"前边有一个小茶馆，我们去那儿喝一点儿茶，好不好？","ar":"في الأمام بيت شاي صغير، فلنذهب إلى هناك ونشرب قليلاً من الشاي، ما رأيكم؟","tok":[["前边","qián biān","الأمام"],["有","yǒu","يملك / يوجد"],["一","yí","واحد"],["个","gè","كلمة عدّ عامة"],["小","xiǎo","صغير"],["茶馆","chá guǎn","مقهى شاي"],["，","",""],["我们","wǒ men","نحن"],["去","qù","يذهب"],["那儿","nà ér","هناك"],["喝","hē","يشرب"],["一点儿","yì diǎn r",""],["茶","chá",""],["，","",""],["好","hǎo","جيد"],["不","bù","لا"],["好","hǎo","جيد"],["？","",""]]},{"who":"Y","name":"الجميع","av":"大","zh":"好啊！","ar":"موافقون!","tok":[["好","hǎo","جيد"],["啊","a","آه (فهم مفاجئ)"],["！","",""]]}]}],"gram":[{"id":"adj","t":"الصفة خبرًا","f":"S + 很/非常 + Adj","ar":"لا نضع «是» بين المبتدأ والصفة، وغالبًا نضع قبل الصفة ظرف درجة مثل «很» أو «非常».","key":"风景非常漂亮。","re":"非常|很","kpy":"Fēngjǐng fēicháng piàoliang.","ex":[]},{"id":"anq","t":"سؤال الإيجاب والنفي","f":"Adj/V + 不 + Adj/V ？","ar":"بدل «你忙吗？» نكرّر الصفة أو الفعل مع «不» بينهما. والجواب: «我不忙» أو «我很忙».","key":"这个星期天你忙不忙？","ex":[["你去不去？","Nǐ qù bu qù?","هل تذهب؟"],["你喝不喝茶？","Nǐ hē bu hē chá?","هل تشرب الشاي؟"],["你看不看电影？","Nǐ kàn bu kàn diànyǐng?","هل تشاهد فيلماً؟"]],"re":"(.)不\\1","kpy":"Zhège xīngqītiān nǐ máng bu máng?"},{"id":"yx","t":"الفعل + 一下","f":"V + 一下","ar":"بعد الفعل تعني «قليلًا / لمرة / جرّب»، فتلطّف الطلب.","key":"我们休息一下吧。","ex":[["我很累，我想休息一下。","Wǒ hěn lèi, wǒ xiǎng xiūxi yíxià.","أنا متعب وأريد أن أستريح قليلاً."],["我去一下卫生间。","Wǒ qù yíxià wèishēngjiān.","سأذهب إلى دورة المياه لحظة."]],"re":"一下","kpy":"Wǒmen xiūxi yíxià ba."},{"id":"ydr","t":"一点儿 + اسم","f":"(一)点儿 + N","ar":"«قليل من» وتأتي قبل الاسم، وفي الكلام نحذف «一» غالبًا.","key":"我们去那儿喝一点儿茶，好不好？","ex":[["我买（一）点儿苹果。","Wǒ mǎi (yì) diǎn ér píngguǒ.","أشتري قليلاً من التفاح."],["我们喝（一）点儿水吧。","Wǒmen hē (yì) diǎn ér shuǐ ba.","فلنشرب قليلاً من الماء."]],"re":"点儿","kpy":"Wǒmen qù nàr hē yìdiǎnr chá, hǎo bu hǎo?"}],"quiz":[{"k":"mcq","q":"西山公园在哪儿？","o":["城市的西边","城市的东边","城市的北边","学校里"],"a":0,"why":"«这个城市西边有一个公园，叫西山公园»."},{"k":"mcq","q":"西山公园的空气非常新鲜。","o":["صحيح","خطأ"],"a":0,"why":"«空气也非常新鲜»."},{"k":"mcq","q":"马丁和朋友星期天去哪儿爬山？","o":["西山","北山","东山","南山"],"a":0,"why":"«去西山»."},{"k":"mcq","q":"他们早上几点出发？","o":["八点","七点半","九点","七点"],"a":0,"why":"«我们早上八点出发»؛ والصديق يأتي في ٧:٣٠."},{"k":"mcq","q":"朋友这个星期天很忙。","o":["صحيح","خطأ"],"a":1,"why":"قال «我不忙»."},{"k":"mcq","q":"他们在哪儿休息、喝茶？","o":["小茶馆","公园","学校","饭馆"],"a":0,"why":"«前边有一个小茶馆»."},{"k":"mcq","q":"اختر الصيغة الصحيحة للسؤال بـ «الإيجاب-النفي»:","o":["你累不累？","你累吗不累？","你不累累？","你累累不？"],"a":0,"why":"الصيغة: الصفة + 不 + الصفة."},{"k":"mcq","q":"«西山非常漂亮» — لماذا لا نقول «西山是非常漂亮»؟","o":["الصفة خبر لا تحتاج إلى 是","لأن 是 للأفعال فقط","لأن 非常 لا تُستعمل","لا فرق"],"a":0,"why":"الصفة تعمل كخبر مباشرة، ونضع قبلها ظرف درجة."},{"k":"mcq","q":"جملة صحيحة تعني «سأنظر في كتابك قليلاً»:","o":["我看一下你的书。","我一下看你的书。","我看你的书一下点。","我一下点看书。"],"a":0,"why":"一下 تأتي بعد الفعل."}],"match":[[["风景","منظر طبيعي"],["空气","هواء"],["爬山","يتسلّق الجبل"],["休息","يستريح"],["茶馆","بيت الشاي"],["出发","ينطلق"]],[["冷","بارد"],["热","حار"],["饿","جائع"],["渴","عطشان"],["贵","غالٍ"],["便宜","رخيص"]]],"order":[{"tok":["这个","星期天","我们","也","去","爬山"],"zh":"这个星期天我们也去爬山。","py":"Zhège xīngqītiān wǒmen yě qù páshān.","ar":"هذا الأحد سنذهب نحن أيضاً لتسلّق الجبل."},{"tok":["这个","星期天","你","忙","不","忙"],"zh":"这个星期天你忙不忙？","py":"Zhège xīngqītiān nǐ máng bu máng?","ar":"هل أنت مشغول هذا الأحد؟"},{"tok":["我","不","忙"],"zh":"我不忙。","py":"Wǒ bù máng.","ar":"لست مشغولاً."},{"tok":["星期天","我们","去","爬山","你","去","不","去"],"zh":"星期天我们去爬山，你去不去？","py":"Xīngqītiān wǒmen qù páshān, nǐ qù bu qù?","ar":"يوم الأحد سنذهب لتسلّق الجبل، هل تذهب؟"},{"tok":["你们","去","哪儿","爬山"],"zh":"你们去哪儿爬山？","py":"Nǐmen qù nǎr páshān?","ar":"إلى أين ستذهبون لتسلّق الجبل؟"},{"tok":["我","七","点","半","去","找","你"],"zh":"我七点半去找你。","py":"Wǒ qī diǎn bàn qù zhǎo nǐ.","ar":"سآتي إليك في السابعة والنصف."},{"tok":["大家","累","不","累"],"zh":"大家累不累？","py":"Dàjiā lèi bu lèi?","ar":"هل أنتم متعبون؟"},{"tok":["西山公园","在","哪儿"],"zh":"西山公园在哪儿？","py":"Xīshān Gōngyuán zài nǎr?","ar":"أين حديقة شيشان؟"},{"tok":["他们","爬山","累","不","累"],"zh":"他们爬山累不累？","py":"Tāmen páshān lèi bu lèi?","ar":"هل تعبوا من التسلق؟"},{"tok":["他们","去","哪儿","喝","茶"],"zh":"他们去哪儿喝茶？","py":"Tāmen qù nǎr hē chá?","ar":"أين يشربون الشاي؟"},{"tok":["你","去","不","去"],"zh":"你去不去？","py":"Nǐ qù bu qù?","ar":"هل تذهب؟"},{"tok":["你","喝","不","喝","茶"],"zh":"你喝不喝茶？","py":"Nǐ hē bu hē chá?","ar":"هل تشرب الشاي؟"},{"tok":["你","看","不","看","电影"],"zh":"你看不看电影？","py":"Nǐ kàn bu kàn diànyǐng?","ar":"هل تشاهد فيلماً؟"},{"tok":["我","很","累","我","想","休息","一下"],"zh":"我很累，我想休息一下。","py":"Wǒ hěn lèi, wǒ xiǎng xiūxi yíxià.","ar":"أنا متعب وأريد أن أستريح قليلاً."}],"fill":[{"pre":"这个星期天我们也去","post":"。","ans":"爬山","opts":["爬山","出发","一下"],"ar":"هذا الأحد سنذهب نحن أيضاً لتسلّق الجبل.","py":"Zhège xīngqītiān wǒmen yě qù páshān."},{"pre":"我不","post":"。","ans":"忙","opts":["忙","茶","花"],"ar":"لست مشغولاً.","py":"Wǒ bù máng."},{"pre":"星期天我们去","post":"，你去不去？","ans":"爬山","opts":["爬山","茶馆","城市"],"ar":"يوم الأحد سنذهب لتسلّق الجبل، هل تذهب؟","py":"Xīngqītiān wǒmen qù páshān, nǐ qù bu qù?"},{"pre":"你们去哪儿爬","post":"？","ans":"山","opts":["山","小","冷"],"ar":"إلى أين ستذهبون لتسلّق الجبل؟","py":"Nǐmen qù nǎr páshān?"},{"pre":"我七点半去","post":"你。","ans":"找","opts":["找","累","茶"],"ar":"سآتي إليك في السابعة والنصف.","py":"Wǒ qī diǎn bàn qù zhǎo nǐ."},{"pre":"","post":"累不累？","ans":"大家","opts":["大家","爬山","听说"],"ar":"هل أنتم متعبون؟","py":"Dàjiā lèi bu lèi?"},{"pre":"西山","post":"在哪儿？","ans":"公园","opts":["公园","便宜","听说"],"ar":"أين حديقة شيشان؟","py":"Xīshān Gōngyuán zài nǎr?"},{"pre":"他们爬","post":"累不累？","ans":"山","opts":["山","树","冷"],"ar":"هل تعبوا من التسلق؟","py":"Tāmen páshān lèi bu lèi?"},{"pre":"他们去哪儿喝","post":"？","ans":"茶","opts":["茶","找","水"],"ar":"أين يشربون الشاي؟","py":"Tāmen qù nǎr hē chá?"},{"pre":"你喝不喝","post":"？","ans":"茶","opts":["茶","找","水"],"ar":"هل تشرب الشاي؟","py":"Nǐ hē bu hē chá?"},{"pre":"我很","post":"，我想休息一下。","ans":"累","opts":["累","渴","冷"],"ar":"أنا متعب وأريد أن أستريح قليلاً.","py":"Wǒ hěn lèi, wǒ xiǎng xiūxi yíxià."}],"hub":{"levels":[{"n":1,"t":"المستوى الأول","s":"الفصل الدراسي الأول","c":["gram","prac"]},{"n":3,"t":"المستوى الثالث","s":"الفصل الدراسي الثالث","c":["lis"]},{"n":5,"t":"المستوى الخامس","s":"الفصل الدراسي الخامس","c":["biz"]},{"n":7,"t":"المستوى السابع","s":"الفصل الدراسي السابع","c":["cult"]}],"courses":{"gram":{"name":"قواعد ١","book":"《发展汉语初级综合1》","l":[[6,"六","الدرس السادس · 香蕉多少钱一斤","الأسعار والأعداد والنقود: 想 و 多少钱","lesson-6.html","noor-lesson6-v1"],[7,"七","الدرس السابع · 中国银行在哪儿","الأماكن والاتجاهات: 在 و 有","lesson-7.html","noor-lesson7-v1"],[8,"八","الدرس الثامن · 今天几号","التاريخ والأيام وعيد الميلاد","lesson-8.html","noor-lesson8-v1"],[9,"九","الدرس التاسع · 你今天有什么安排","الساعة والبرنامج اليومي: 先…然后…","lesson-9.html","noor-gram9-v1"],[10,"十","الدرس العاشر · 这个星期天你忙不忙","الصفات وأسئلة 忙不忙 و 一下 و 一点儿","lesson-10.html","noor-gram10-v1"]]},"prac":{"name":"القراءة ١","book":"《新实用汉语课本1》","l":[[6,"六","الدرس السادس · 我们去游泳，好吗","الاقتراح والقبول والرفض","prac-6.html","noor-prac6-v1"],[7,"七","الدرس السابع · 你认识不认识他","التعارف: 认识 و 不…不","prac-7.html","noor-prac7-v1"],[8,"八","الدرس الثامن · 你们家有几口人","العائلة والأعداد: 几 و 口","prac-8.html","noor-prac8-v1"],[9,"九","الدرس التاسع · 他今年二十岁","العمر والسؤال بـ 多大","prac-9.html","noor-prac9-v1"],[10,"十","الدرس العاشر · 我在这儿买光盘","الشراء والعبارات المهذبة","prac-10.html","noor-prac10-v1"]]},"lis":{"name":"الاستماع ١","book":"《发展汉语初级听力1》","l":[[6,"六","الدرس السادس · 苹果多少钱一斤","سماع الأسعار والأعداد","lis-6.html","noor-lis6-v1"],[7,"七","الدرس السابع · 留学生楼在哪儿","سماع الأماكن والاتجاهات","lis-7.html","noor-lis7-v1"],[8,"八","الدرس الثامن · 今天星期几","سماع الأيام والتواريخ","lis-8.html","noor-lis8-v1"],[9,"九","الدرس التاسع · 你每天几点起床","سماع الساعة والروتين اليومي","lis-9.html","noor-lis9-v1"],[10,"十","الدرس العاشر · 你们小区真漂亮","سماع وصف الأماكن","lis-10.html","noor-lis10-v1"]]},"biz":{"name":"اللغة الصينية العملية","book":"《新丝路·中级速成商务汉语1》","l":[[4,"四","الدرس الرابع · 我想约个时间和您见面","تحديد المواعيد وتغييرها وإلغاؤها","biz-4.html","noor-biz4-v1"],[5,"五","الدرس الخامس · 为了大家的健康干杯","المآدب والدعوات وكلمة النخب","biz-5.html","noor-biz5-v1"],[6,"六","الدرس السادس · 还有其他颜色吗","التسوق والتخفيضات والفواتير","biz-6.html","noor-biz6-v1"]]},"cult":{"name":"الثقافة الصينية","book":"中国文化","l":[[1,"一","الدرس الأول · 中国的哲学家","فلاسفة الصين: كونفوشيوس ولاوتسي","cult-1.html","noor-cult1-v1"],[2,"二","الدرس الثاني · 中国的节日","الأعياد الصينية الأربعة الكبرى","cult-2.html","noor-cult2-v1"],[3,"三","الدرس الثالث · 伊斯兰教与中国穆斯林民族","الإسلام والقوميات المسلمة: الهوي والأويغور","cult-3.html","noor-cult3-v1"],[4,"四","الدرس الرابع · 中国四大发明","الورق والطباعة والبوصلة والبارود","cult-4.html","noor-cult4-v1"]]}}}};
+var LS=(function(){
+'use strict';
+var KEY=window.PAGE_KEY||'labs',S={xp:0,done:{},words:{},pos:null,today:0,day:''};
+try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);for(var k in o)S[k]=o[k]}}catch(e){}
+var d=new Date().toISOString().slice(0,10);if(S.day!==d){S.day=d;S.today=0}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function $(s,r){return(r||document).querySelector(s)}
+function $$(s,r){return[].slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function zh(s){return esc(s).replace(/([㐀-鿿，。？！、：（）…·]+)/g,'<span class="han" lang="zh-CN" dir="ltr">$1</span>')}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* theme */
+try{var th=localStorage.getItem('labs-theme');if(th)document.documentElement.dataset.theme=th}catch(e){}
+function toggleTheme(){var h=document.documentElement,dark=h.dataset.theme?h.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  h.dataset.theme=dark?'light':'dark';try{localStorage.setItem('labs-theme',h.dataset.theme)}catch(e){}}
+/* toast */
+var tt=0;function toast(m){var t=$('#toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');document.body.appendChild(t)}
+  t.textContent=m;t.className='show';clearTimeout(tt);tt=setTimeout(function(){t.className=''},2600)}
+/* speech */
+var voice=null,warned=false;
+function pick(){if(!('speechSynthesis' in window))return;var vs=speechSynthesis.getVoices();
+  voice=vs.filter(function(v){return/^zh[-_]CN/i.test(v.lang)})[0]||vs.filter(function(v){return/^zh/i.test(v.lang)&&!/HK|TW/i.test(v.lang)})[0]||null}
+if('speechSynthesis' in window){pick();speechSynthesis.onvoiceschanged=pick}
+function say(t,slow){if(!('speechSynthesis' in window)||!voice){if(!warned){warned=true;toast('لا يوجد صوت صيني على هذا الجهاز. اقرأ البينيين، أو ثبّت الصوت من إعدادات «تحويل النص إلى كلام».')}return false}
+  speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='zh-CN';u.voice=voice;u.rate=slow?.55:.85;speechSynthesis.speak(u);return true}
+/* xp */
+function xp(n,el){S.xp+=n;S.today+=n;save();document.dispatchEvent(new CustomEvent('xp',{detail:{n:n,total:S.xp}}));
+  if(el&&!reduce){var r=el.getBoundingClientRect(),f=document.createElement('span');f.className='xpfly';f.textContent='+'+n;
+    f.style.left=Math.min(innerWidth-50,Math.max(8,r.left+r.width/2-16))+'px';f.style.top=(r.top-6)+'px';document.body.appendChild(f);setTimeout(function(){f.remove()},900)}}
+function mark(id){if(!S.done[id]){S.done[id]=1;save();document.dispatchEvent(new CustomEvent('done',{detail:id}))}}
+/* line pinyin from tokens */
+function linePy(l){return l.tok.filter(function(t){return t[1]}).map(function(t){return t[1].replace(/ /g,'')}).join(' ')}
+function lineWords(l){var seen={};return l.tok.filter(function(t){return t[1]&&t[2]&&!seen[t[0]]&&(seen[t[0]]=1)})}
+function gramOf(zhs){return DATA.gram.filter(function(g){return new RegExp(g.re).test(zhs)})}
+/* ---------- exercises: each returns an element; done(ok) is called once ---------- */
+var solvers=new WeakMap();
+function box(cls,prompt){var el=document.createElement('div');el.className='q '+cls;el.innerHTML='<div class="q-p">'+prompt+'</div>';return el}
+function fin(el,ok,done,why){if(el.dataset.done)return;el.dataset.done='1';el.classList.add('done',ok?'is-ok':'is-bad');
+  var w=document.createElement('div');w.className='q-why';w.setAttribute('role','status');w.innerHTML='<b>'+(ok?'أحسنت':'ليس تمامًا')+'</b>'+(why?' · '+why:'');el.appendChild(w);done&&done(ok)}
+function mcq(q,done){var el=box('q-mcq',zh(q.q)),o=document.createElement('div');o.className='q-opts';
+  var opts=q.o.map(function(t,i){return{t:t,ok:i===q.a}}),ord=q.o.length===2?opts:shuffle(opts);
+  ord.forEach(function(x){var b=document.createElement('button');b.className='q-o';b.innerHTML=zh(x.t);b.onclick=function(){if(el.dataset.done)return;
+    $$('.q-o',o).forEach(function(y,i){y.disabled=true;if(ord[i].ok)y.classList.add('ok')});if(!x.ok)b.classList.add('bad');if(x.ok)xp(10,b);fin(el,x.ok,done,zh(q.why||''))};o.appendChild(b)});
+  el.appendChild(o);solvers.set(el,function(){ord.forEach(function(x,i){if(x.ok)$$('.q-o',o)[i].click()})});return el}
+function order(it,done){var el=box('q-order','رتّب الجملة: <span class="q-ar">'+esc(it.ar)+'</span>'),ans=document.createElement('div'),pool=document.createElement('div'),tries=0;
+  ans.className='q-ans';pool.className='q-pool';var toks=it.tok.map(function(t,i){return{t:t,i:i}}),sh=shuffle(toks);
+  if(sh.map(function(x){return x.t}).join('')===it.tok.join('')&&sh.length>1)sh.push(sh.shift());
+  function check(){var got=$$('.q-tok',ans).map(function(b){return b.dataset.t}).join('');if($$('.q-tok',pool).length)return;
+    if(got===it.tok.join('')){xp(tries?8:15,ans);fin(el,true,done,'<span class="han" lang="zh-CN">'+esc(it.zh)+'</span> <span class="py" dir="ltr">'+esc(it.py)+'</span>')}
+    else{tries++;el.classList.add('shake');setTimeout(function(){el.classList.remove('shake');$$('.q-tok',ans).forEach(function(b){pool.appendChild(b)})},500);toast('الترتيب غير صحيح، حاول مرة أخرى')}}
+  sh.forEach(function(x){var b=document.createElement('button');b.className='q-tok';b.dataset.t=x.t;b.dataset.i=x.i;b.innerHTML='<span class="han" lang="zh-CN">'+esc(x.t)+'</span>';
+    b.onclick=function(){if(el.dataset.done)return;(b.parentNode===pool?ans:pool).appendChild(b);check()};pool.appendChild(b)});
+  el.appendChild(ans);el.appendChild(pool);
+  solvers.set(el,function(){$$('.q-tok',ans).forEach(function(b){pool.appendChild(b)});it.tok.forEach(function(t,i){var b=$$('.q-tok',pool).filter(function(x){return +x.dataset.i===i})[0]||$$('.q-tok',pool).filter(function(x){return x.dataset.t===t})[0];b&&b.click()})});return el}
+function fill(it,done){var el=box('q-fill','أكمل الجملة: <span class="q-ar">'+esc(it.ar)+'</span>'),s=document.createElement('div');s.className='q-sent';s.dir='ltr';
+  s.innerHTML='<span class="han" lang="zh-CN">'+esc(it.pre)+'</span><span class="q-blank">　　</span><span class="han" lang="zh-CN">'+esc(it.post)+'</span>';
+  var o=document.createElement('div');o.className='q-opts q-row';var ord=shuffle(it.opts);
+  ord.forEach(function(t){var b=document.createElement('button');b.className='q-o';b.innerHTML='<span class="han" lang="zh-CN">'+esc(t)+'</span>';b.onclick=function(){if(el.dataset.done)return;
+    var ok=t===it.ans;$('.q-blank',s).innerHTML='<span class="han" lang="zh-CN">'+esc(it.ans)+'</span>';$('.q-blank',s).classList.add('in');
+    $$('.q-o',o).forEach(function(y){y.disabled=true;if(y.textContent===it.ans)y.classList.add('ok')});if(!ok)b.classList.add('bad');if(ok)xp(10,b);
+    fin(el,ok,done,'<span class="py" dir="ltr">'+esc(it.py)+'</span>')};o.appendChild(b)});
+  el.appendChild(s);el.appendChild(o);solvers.set(el,function(){$$('.q-o',o).forEach(function(b){if(b.textContent===it.ans)b.click()})});return el}
+function match(pairs,done){var el=box('q-match','صِل الكلمة بمعناها'),g=document.createElement('div');g.className='q-mgrid';var L=document.createElement('div'),R=document.createElement('div'),sel=null,left=pairs.length,miss=0;
+  L.className='q-col';R.className='q-col';
+  shuffle(pairs).forEach(function(p){var b=document.createElement('button');b.className='q-m';b.dataset.k=p[0];b.innerHTML='<span class="han" lang="zh-CN">'+esc(p[0])+'</span>';L.appendChild(b)});
+  shuffle(pairs).forEach(function(p){var b=document.createElement('button');b.className='q-m';b.dataset.k=p[0];b.textContent=p[1];R.appendChild(b)});
+  function on(b,side){if(b.disabled)return;if(!sel||sel.side===side){if(sel)sel.b.classList.remove('sel');sel={b:b,side:side};b.classList.add('sel');if(side==='L')say(b.dataset.k);return}
+    if(sel.b.dataset.k===b.dataset.k){[sel.b,b].forEach(function(x){x.classList.remove('sel');x.classList.add('ok');x.disabled=true});xp(5,b);left--;sel=null;if(!left)fin(el,miss<2,done,'وصلتَ '+pairs.length+' أزواج')}
+    else{miss++;var a=sel.b;a.classList.remove('sel');[a,b].forEach(function(x){x.classList.add('bad');setTimeout(function(){x.classList.remove('bad')},450)});sel=null}}
+  $$('.q-m',L).forEach(function(b){b.onclick=function(){on(b,'L')}});$$('.q-m',R).forEach(function(b){b.onclick=function(){on(b,'R')}});
+  g.appendChild(L);g.appendChild(R);el.appendChild(g);
+  solvers.set(el,function(){$$('.q-m',L).forEach(function(b){if(b.disabled)return;b.click();$$('.q-m',R).filter(function(x){return x.dataset.k===b.dataset.k})[0].click()})});return el}
+function solve(root){$$('.q',root||document).forEach(function(el){if(!el.dataset.done&&solvers.get(el)&&el.offsetParent!==null)solvers.get(el)()})}
+/* the hub's lessons: real file names; progress read from the real site's own lesson keys when present */
+function lessonXp(key){if(key===(window.PAGE_LESSON_KEY||''))return S.xp;try{var o=JSON.parse(localStorage.getItem(key)||'null');return o&&o.xp||0}catch(e){return 0}}
+return{S:S,save:save,$:$,$$:$$,esc:esc,zh:zh,shuffle:shuffle,say:say,xp:xp,mark:mark,toast:toast,toggleTheme:toggleTheme,linePy:linePy,lineWords:lineWords,gramOf:gramOf,
+  mcq:mcq,order:order,fill:fill,match:match,solve:solve,lessonXp:lessonXp,reduce:reduce};
+})();
+window.__ls={S:LS.S,solve:LS.solve};
+</script>
+<script>
+(function(){
+'use strict';
+var D=DATA,S=LS.S,$=LS.$,$$=LS.$$,esc=LS.esc;S.cup=S.cup||0;S.card=S.card||0;S.cups=S.cups||{};S.days=S.days||{};
+$$('[data-theme-btn]').forEach(function(b){b.onclick=LS.toggleTheme});
+function cupSvg(fill,size){var y=18+40*(1-fill);
+  return'<svg class="cupsvg" viewBox="0 0 88 80" width="'+(size||88)+'" height="'+Math.round((size||88)*80/88)+'" aria-hidden="true"><g class="steam"><path d="M34 14c-4-5 4-7 0-12"/><path d="M50 14c-4-5 4-7 0-12"/></g>'+
+    '<defs><clipPath id="cc'+size+'"><path d="M12 18h56l-6 44a14 14 0 0 1-14 12H32a14 14 0 0 1-14-12z"/></clipPath></defs>'+
+    '<rect x="0" y="'+y+'" width="88" height="80" fill="var(--tea2)" clip-path="url(#cc'+size+')" opacity=".9"/>'+
+    '<path d="M12 18h56l-6 44a14 14 0 0 1-14 12H32a14 14 0 0 1-14-12z" fill="none" stroke="var(--cel)" stroke-width="3"/><path d="M68 28h6a8 8 0 0 1 0 16h-8" fill="none" stroke="var(--cel)" stroke-width="3"/></svg>'}
+/* ---------- the three cups, built from the real lesson ---------- */
+var seen={};function wordsIn(lines){var all=lines.map(function(l){return l.zh}).join('');return D.vocab.filter(function(v){if(seen[v[0]]||all.indexOf(v[0])<0)return false;seen[v[0]]=1;return true})}
+function byZh(z){return D.order.filter(function(o){return o.zh===z})[0]||D.order[0]}
+var w1=wordsIn(D.texts[0].lines),w2=wordsIn(D.texts[1].lines),w3=wordsIn(D.texts[2].lines).concat(D.vocab.filter(function(v){return!seen[v[0]]}));
+var CUPS=[
+ {n:'الكوب الأول',t:D.texts[0],w:w1,g:[0],q:[{k:'mcq',d:D.quiz[0]},{k:'mcq',d:D.quiz[1]},{k:'mcq',d:D.quiz[7]}]},
+ {n:'الكوب الثاني',t:D.texts[1],w:w2,g:[1],q:[{k:'mcq',d:D.quiz[2]},{k:'order',d:byZh('这个星期天你忙不忙？')},{k:'mcq',d:D.quiz[6]},{k:'fill',d:D.fill[1]}]},
+ {n:'الكوب الثالث',t:D.texts[2],w:w3,g:[2,3],q:[{k:'mcq',d:D.quiz[5]},{k:'order',d:byZh('我们休息一下吧。')},{k:'mcq',d:D.quiz[8]},{k:'fill',d:D.fill[4]}]}];
+CUPS.forEach(function(c){c.cards=[{k:'intro'}].concat(c.w.map(function(w){return{k:'word',w:w}}),c.t.lines.map(function(l){return{k:'line',l:l}}),c.g.map(function(i){return{k:'gram',g:D.gram[i]}}),c.q.map(function(q){return{k:'q',q:q}}),[{k:'end'}]);
+  c.min=Math.max(4,Math.round(c.cards.length/5))});
+/* ---------- home: what to do today ---------- */
+function home(){
+  var c=CUPS[Math.min(S.cup,2)],all=CUPS.every(function(_,i){return S.cups[i]}),nd=Object.keys(S.cups).length;
+  $('#nextBox').innerHTML=cupSvg(all?1:S.card/c.cards.length,88)+'<div><small>'+(all?'أتممت أكواب الدرس':'جلستك التالية')+'</small><div class="t">'+D.meta.ar+' · <span class="han" lang="zh-CN">'+D.meta.zh+'</span></div><div class="m">'+(all?'راجع الدرس متى شئت':c.n+' من ٣ · نحو '+c.min+' دقائق · '+c.cards.length+' بطاقة')+'</div></div>'+
+    '<button class="btn tea go" id="resume">'+(all?'راجع الدرس':S.card?'تابع الكوب':'ابدأ '+c.n)+'</button>';
+  $('#resume').onclick=function(){if(all){S.cup=0;S.card=0;LS.save()}location.hash='lesson'};
+  var today=S.days[S.day]||0;
+  $('#dayBox').innerHTML='<div class="cups">'+[0,1,2].map(function(i){return'<i'+(i<today?' class="on"':'')+'></i>'}).join('')+'</div><div class="sp"><b>إبريق اليوم:</b> '+today+' من ٣ أكواب · '+S.today+' نقطة</div>';
+  var names=['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'],now=new Date(),h='';
+  for(var i=6;i>=0;i--){var d=new Date(now);d.setDate(now.getDate()-i);var k=d.toISOString().slice(0,10);h+='<div>'+names[d.getDay()]+'<b class="'+(S.days[k]?'on':'')+(i===0?' today':'')+'"></b></div>'}
+  $('#week').innerHTML=h;
+  var sh='';D.hub.levels.forEach(function(lv){lv.c.forEach(function(ck){var co=D.hub.courses[ck];if(!co)return;
+    sh+='<div class="shelf"><h2>'+co.name+' <span style="font-weight:400;color:var(--mut);font-size:14px">· '+lv.t+'</span></h2><div class="bk han" lang="zh-CN">'+co.book+'</div><div class="row">';
+    co.l.forEach(function(l){var me=l[4]===D.meta.file,x=me?0:LS.lessonXp(l[5]),f=me?nd:Math.min(3,Math.floor(x/100)),parts=l[2].split('·');
+      var inner='<span class="n">'+l[1]+'</span><span>'+esc(parts[0].trim())+'</span><span class="zh" lang="zh-CN">'+esc((parts[1]||'').trim())+'</span><span class="c">'+[0,1,2].map(function(i){return'<i'+(i<f?' class="on"':'')+'></i>'}).join('')+'</span>';
+      sh+=me?'<button class="tin here" data-me>'+inner+'</button>':'<a class="tin" href="../'+l[4]+'">'+inner+'</a>'});
+    sh+='</div></div>'})});
+  $('#shelves').innerHTML=sh;$$('[data-me]').forEach(function(b){b.onclick=function(){location.hash='lesson'}});
+}
+/* ---------- lesson ---------- */
+var built=false;
+function cardHtml(c,ci,i){var x;
+  if(c.k==='intro'){var cup=CUPS[ci];return'<div class="kind">'+cup.n+'</div><h2>'+esc(cup.t.h)+'</h2><div style="text-align:center">'+cupSvg(0,120)+'</div><p>'+esc(cup.t.scene)+'</p><div class="list"><div><span>كلمات</span><b>'+cup.w.length+'</b></div><div><span>جمل الحوار</span><b>'+cup.t.lines.length+'</b></div><div><span>قاعدة</span><b>'+cup.g.map(function(g){return esc(D.gram[g].t)}).join('، ')+'</b></div><div><span>أسئلة</span><b>'+cup.q.length+'</b></div></div><p style="color:var(--mut);font-size:15px;margin-bottom:0">نحو '+cup.min+' دقائق. يمكنك التوقف بعد أي بطاقة والعودة إليها.</p>'}
+  if(c.k==='word'){x=c.w;return'<div class="kind">كلمة</div><div class="big" lang="zh-CN">'+esc(x[0])+'</div><div class="pyl">'+esc(x[1])+'</div><div class="back" hidden><div class="mean">'+esc(x[2])+'</div><div class="exs"><span class="han" lang="zh-CN">'+esc(x[3])+'</span><br><span dir="ltr">'+esc(x[4])+'</span><br>'+esc(x[5])+'</div></div>'+
+    '<div class="cta"><button class="btn flip">اقلب البطاقة</button></div><div class="cta" data-k2 hidden><button class="btn know" data-know aria-pressed="false">عرفتها</button><button class="btn" data-later>ليس بعد</button></div>'}
+  if(c.k==='line'){x=c.l;return'<div class="kind">الحوار</div><div class="spk-who"><span lang="zh-CN">'+esc(x.av)+'</span>'+esc(x.name)+'</div><div class="big l" lang="zh-CN">'+esc(x.zh)+'</div><div class="pyl">'+esc(LS.linePy(x))+'</div><div class="mean" data-mean hidden>'+esc(x.ar)+'</div><div class="cta"><button class="btn say">استمع</button><button class="btn" data-showar>المعنى</button></div>'}
+  if(c.k==='gram'){x=c.g;return'<div class="kind">القاعدة</div><h2>'+esc(x.t)+'</h2><div class="gf">'+esc(x.f)+'</div><p>'+LS.zh(x.ar)+'</p><div class="gk" lang="zh-CN">'+esc(x.key)+'</div><div class="pyl" style="font-size:15px">'+esc(x.kpy)+'</div>'+(x.ex.length?'<div class="exs">'+x.ex.map(function(e){return'<span class="han" lang="zh-CN">'+esc(e[0])+'</span> '+esc(e[2])}).join('<br>')+'</div>':'')+'<div class="cta"><button class="btn" data-sayg>استمع</button></div>'}
+  if(c.k==='q')return'<div class="kind">سؤال</div><div data-qslot></div>';
+  return'<div class="endc" data-endslot></div>';
+}
+function buildLesson(){
+  built=true;$('#lt').textContent=D.meta.ar;$('#lz').textContent=D.meta.zh;var h='';
+  CUPS.forEach(function(cup,ci){cup.cards.forEach(function(c,i){h+='<article class="card" data-cup="'+ci+'" data-i="'+i+'" data-k="'+c.k+'"'+(c.k==='end'?' data-end="1"':'')+'>'+cardHtml(c,ci,i)+'</article>'})});
+  $('#stage').innerHTML=h;
+  $$('.card').forEach(function(el){var ci=+el.dataset.cup,c=CUPS[ci].cards[+el.dataset.i];
+    if(c.k==='word'){$('.flip',el).onclick=function(){$('.back',el).hidden=false;$('[data-k2]',el).hidden=false;this.parentNode.hidden=true;LS.say(c.w[0])};
+      $('[data-know]',el).onclick=function(){if(!S.words[c.w[0]]){S.words[c.w[0]]=1;LS.save();LS.xp(2,this)}this.setAttribute('aria-pressed','true');step(1)};
+      $('[data-later]',el).onclick=function(){step(1)}}
+    if(c.k==='line'){$('.say',el).onclick=function(){LS.say(c.l.zh);if(!el.dataset.heard){el.dataset.heard=1;LS.xp(1,this)}};$('[data-showar]',el).onclick=function(){$('[data-mean]',el).hidden=false}}
+    if(c.k==='gram'){$('[data-sayg]',el).onclick=function(){LS.say(c.g.key,true)}}
+    if(c.k==='q'){var q=c.q,mk=q.k==='mcq'?LS.mcq:q.k==='order'?LS.order:LS.fill;$('[data-qslot]',el).appendChild(mk(q.d,function(){el.dataset.ans='1';nav()}))}
+  });
+  $('#cupbar').innerHTML=CUPS.map(function(c,i){return'<button data-c="'+i+'">'+c.n+'<i></i></button>'}).join('');
+  $$('#cupbar button').forEach(function(b){b.onclick=function(){S.cup=+b.dataset.c;S.card=0;show()}});
+}
+function cur(){return $('.card[data-cup="'+S.cup+'"][data-i="'+S.card+'"]')}
+function show(){
+  $$('.card').forEach(function(c){c.classList.remove('cur')});var el=cur();el.classList.add('cur');
+  if(el.dataset.k==='end')endCard(el);
+  LS.save();nav();window.scrollTo(0,0);
+}
+function endCard(el){var ci=S.cup,first=!S.cups[ci];
+  if(first){S.cups[ci]=1;S.days[S.day]=(S.days[S.day]||0)+1;LS.xp(15,el);LS.save()}
+  var all=CUPS.every(function(_,i){return S.cups[i]});
+  $('[data-endslot]',el).innerHTML=cupSvg(1,120)+'<h2>'+(all?'أتممت الأكواب الثلاثة':'شربتَ '+CUPS[ci].n)+'</h2><div class="score">'+S.xp+'</div><div style="color:var(--mut)">نقطة في هذا الدرس</div>'+
+    (all?'<p data-complete="1">انتهى الدرس العاشر. عُد غدًا لمراجعة الكلمات التي قلت عنها «ليس بعد».</p><button class="btn tea" onclick="location.hash=\'home\'">إلى اليوم</button>':
+      '<p>استراحة قصيرة؟ الكوب التالي ينتظرك هنا متى شئت.</p><div class="cta"><button class="btn tea" data-nextcup>'+CUPS[ci+1].n+'</button><button class="btn" onclick="location.hash=\'home\'">استراحة</button></div>');
+  var nb=$('[data-nextcup]',el);if(nb)nb.onclick=function(){S.cup=ci+1;S.card=0;show()};
+}
+function step(d){var n=CUPS[S.cup].cards.length;S.card=Math.max(0,Math.min(n-1,S.card+d));show()}
+function nav(){var cup=CUPS[S.cup],el=cur();
+  $('#cnt').textContent=(S.card+1)+' / '+cup.cards.length;
+  $('#prev').disabled=S.card===0;
+  var needs=el.dataset.k==='q'&&!el.dataset.ans;
+  $('#next').disabled=needs||el.dataset.k==='end';$('#next').textContent=needs?'أجب أولًا':'التالي';
+  $$('#cupbar button').forEach(function(b,i){b.classList.toggle('on',i===S.cup);$('i',b).style.transform='scaleX('+(S.cups[i]?1:i===S.cup?S.card/(CUPS[i].cards.length-1):0)+')'});
+}
+$('#next').onclick=function(){step(1)};$('#prev').onclick=function(){step(-1)};
+$('#back').onclick=function(){location.hash='home'};
+document.addEventListener('xp',function(){$('#xp').textContent=S.xp+' نقطة'});
+function render(){if(location.hash==='#lesson'){$('#home').hidden=true;$('#lesson').hidden=false;if(!built)buildLesson();$('#xp').textContent=S.xp+' نقطة';show()}
+  else{$('#lesson').hidden=true;$('#home').hidden=false;home();window.scrollTo(0,0)}}
+addEventListener('hashchange',render);render();
+})();
+</script>
+</body>
+</html>

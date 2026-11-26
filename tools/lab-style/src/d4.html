@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>الأطلس · 汉语加油站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;700&family=ZCOOL+QingKe+HuangYou&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Direction 4 — the atlas: blue-green landscape painting (青绿山水) turned into a map.
+   The lesson is a board of stations you can enter in any order; a bottom bar is always within reach of the thumb. */
+:root{--bg:#eef2ee;--card:#fbfcfa;--card2:#e9efe9;--ink:#13211f;--mut:#51625d;--az:#1d4f91;--az-soft:rgba(29,79,145,.10);--mal:#2b7a57;--mal-soft:rgba(43,122,87,.12);--och:#b07a24;--line:#d2ddd5;--xp:#b07a24;
+  --font-ar:"Alexandria",system-ui,sans-serif;--font-hd:"ZCOOL QingKe HuangYou","Noto Sans SC",sans-serif;--font-han:"Noto Sans SC","Noto Sans CJK SC",sans-serif;--font-py:"Alexandria",system-ui,sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b141c;--card:#111d27;--card2:#16242f;--ink:#e3ecef;--mut:#93a8b2;--az:#7fb0ff;--az-soft:rgba(127,176,255,.12);--mal:#5fcf9a;--mal-soft:rgba(95,207,154,.12);--och:#e6b25a;--line:#223340;--xp:#e6b25a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b141c;--card:#111d27;--card2:#16242f;--ink:#e3ecef;--mut:#93a8b2;--az:#7fb0ff;--az-soft:rgba(127,176,255,.12);--mal:#5fcf9a;--mal-soft:rgba(95,207,154,.12);--och:#e6b25a;--line:#223340;--xp:#e6b25a;color-scheme:dark}
+/*BASECSS*/
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15.5px/1.7 var(--font-ar)}
+button{font:inherit;color:inherit}
+.han{font-family:var(--font-han)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 40px}
+.ibtn{min-width:44px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;cursor:pointer}
+.ibtn svg{width:22px;height:22px}
+.btn{min-height:48px;padding:0 18px;border-radius:12px;border:1.5px solid var(--az);background:var(--card);font:500 15.5px var(--font-ar);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;color:var(--az)}
+.btn.az{background:var(--az);color:var(--card)}
+.ridge{display:block;width:calc(100% + 32px);margin:0 -16px;height:auto}
+/* ---------- home: the atlas ---------- */
+.top{display:flex;align-items:center;gap:12px;padding:12px 0 4px}
+.top .sp{flex:1;min-width:0}
+.top h1{margin:0;font:400 30px/1.15 var(--font-hd);color:var(--az)}
+.top p{margin:0;color:var(--mut);font-size:13.5px}
+.lvbadge{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:16px;background:var(--card);border:1px solid var(--line);margin:8px 0 12px}
+.lvbadge .seal{flex:none;width:52px;height:52px;border-radius:12px;background:var(--mal);color:var(--card);display:grid;place-items:center;font:500 26px var(--font-han)}
+.lvbadge .sp{flex:1;min-width:0;line-height:1.45}
+.lvbadge small{color:var(--mut)}
+.region{margin:18px 0 6px}
+.region h2{margin:0;font:700 19px var(--font-ar);display:flex;align-items:center;gap:8px}
+.region h2 span{font:400 15px var(--font-ar);color:var(--mut)}
+.city{margin:10px 0 0;padding:10px 12px;border-radius:14px;background:var(--card2)}
+.city h3{margin:0;font:500 16px var(--font-ar);color:var(--az)}
+.route{position:relative;list-style:none;margin:6px 0 0;padding:4px 0}
+.route::before{content:"";position:absolute;top:22px;bottom:22px;right:27px;border-right:3px dashed var(--mal)}
+.route li{position:relative}
+.stop{display:flex;align-items:center;gap:12px;min-height:56px;padding:4px 0;width:100%;background:none;border:0;cursor:pointer;text-align:start;text-decoration:none;color:inherit}
+.stop .dot{position:relative;z-index:1;flex:none;width:56px;height:56px;border-radius:50%;background:var(--card);border:3px solid var(--mal);display:grid;place-items:center;font:500 22px var(--font-han);color:var(--mal)}
+.stop.done .dot{background:var(--mal);color:var(--card)}
+.stop .nm{min-width:0;line-height:1.35}
+.stop .nm .han{color:var(--mut);font-size:14px}
+.stop.here .dot{border-color:var(--och);color:var(--och);box-shadow:0 0 0 5px rgba(176,122,36,.18)}
+.pin{display:inline-block;margin-inline-start:6px;padding:0 8px;border-radius:10px;background:var(--och);color:var(--card);font-size:12px;vertical-align:middle}
+/* ---------- lesson ---------- */
+.lhdr{display:flex;align-items:center;gap:10px;padding:10px 0}
+.lhdr .sp{flex:1;min-width:0;line-height:1.3}
+.lhdr b{display:block;font-size:16px}
+.lhdr .han{color:var(--mut);font-size:13.5px}
+.xp{font:700 14px var(--font-py);color:var(--och)}
+.view{display:none;padding-bottom:96px}.view.cur{display:block;animation:in .3s ease both}
+.banner{border-radius:18px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.banner .t{padding:10px 14px}
+.banner h2{margin:0;font:500 26px/1.3 var(--font-han);color:var(--az)}
+.banner p{margin:2px 0 0;color:var(--mut);font-size:14px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.tile{position:relative;min-height:128px;border-radius:16px;border:1px solid var(--line);background:var(--card);padding:12px;cursor:pointer;text-align:start;display:flex;flex-direction:column;gap:2px}
+.tile b{font-size:16.5px}.tile small{color:var(--mut);font-size:13px}
+.tile .ring{position:absolute;top:10px;left:10px;width:40px;height:40px}
+.tile .ring circle{fill:none;stroke-width:5}
+.tile .ic{width:30px;height:30px;color:var(--mal)}
+.tile.sug{border:2px solid var(--och)}
+.tile.sug::after{content:"ابدأ من هنا";position:absolute;bottom:10px;left:10px;font-size:11.5px;color:var(--och);font-weight:700}
+.tile.ok{background:var(--mal-soft);border-color:var(--mal)}
+.hint{margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--az-soft);font-size:14px}
+details.txt{margin:10px 0;border-radius:14px;border:1px solid var(--line);background:var(--card);overflow:hidden}
+details.txt summary{min-height:52px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:700;list-style:none}
+details.txt summary::-webkit-details-marker{display:none}
+details.txt summary::after{content:"+";margin-inline-start:auto;font-size:20px;color:var(--az)}
+details[open].txt summary::after{content:"−"}
+.ln{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 14px;border-top:1px solid var(--line)}
+.ln .say{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--az);background:var(--card);color:var(--az);display:grid;place-items:center;cursor:pointer}
+.ln .say svg{width:20px;height:20px}
+.ln .nm{font-size:12.5px;color:var(--mut)}
+.ln .z{font:500 19px/1.6 var(--font-han);direction:ltr;text-align:left}
+.ln .p{font-size:13px;color:var(--az);direction:ltr;text-align:left}
+.ln .a{font-size:14.5px;color:var(--mut)}
+.gtag{margin-top:6px;min-height:44px;padding:0 12px;border-radius:22px;border:1.5px solid var(--och);background:none;color:var(--och);cursor:pointer;font:500 13.5px var(--font-ar)}
+.filters{display:flex;gap:6px;margin:6px 0 10px;position:sticky;top:0;background:var(--bg);padding:6px 0;z-index:3}
+.filters button{flex:1;min-height:44px;border-radius:22px;border:1px solid var(--line);background:var(--card);cursor:pointer;font-size:14px}
+.filters button[aria-pressed="true"]{background:var(--az);color:var(--card);border-color:var(--az)}
+.wl{display:grid;gap:6px}
+.w{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;min-height:56px;padding:6px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);cursor:pointer;text-align:start}
+.w .z{font:500 21px var(--font-han);min-width:64px;text-align:center}
+.w .p{font-size:13px;color:var(--az);direction:ltr;text-align:right}
+.w .k{width:26px;height:26px;border-radius:50%;border:2px solid var(--line)}
+.w.known .k{background:var(--mal);border-color:var(--mal)}
+.round{font-size:13.5px;color:var(--mut);margin:4px 0}
+.tabbar{position:fixed;inset:auto 0 0 0;z-index:25;background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:center;padding:0 0 env(safe-area-inset-bottom,0px)}
+.tabbar .in{display:flex;width:100%;max-width:760px}
+.tabbar button{flex:1;min-height:62px;border:0;background:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font:500 12.5px var(--font-ar);color:var(--mut);position:relative}
+.tabbar svg{width:24px;height:24px}
+.tabbar button[aria-selected="true"]{color:var(--az)}
+.tabbar button[aria-selected="true"]::before{content:"";position:absolute;top:0;inset-inline:22%;height:3px;border-radius:0 0 3px 3px;background:var(--az)}
+.tabbar .bd{position:absolute;top:8px;left:calc(50% - 22px);width:9px;height:9px;border-radius:50%;background:var(--mal);display:none}
+.tabbar button.ok .bd{display:block}
+.sheet{position:fixed;inset:auto 0 0 0;z-index:40;background:var(--card);border-radius:18px 18px 0 0;border-top:3px solid var(--och);padding:16px 16px calc(16px + env(safe-area-inset-bottom,0px));max-width:760px;margin:0 auto;transform:translateY(105%);transition:transform .3s;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.sheet.open{transform:none}
+.sheet:not(.open){visibility:hidden;transition:transform .3s,visibility 0s .3s}
+.sheet h3{margin:0;font:700 18px var(--font-ar);color:var(--och)}
+.sheet .f{direction:ltr;text-align:left;font:600 14px var(--font-py)}
+.sheet .eg{direction:ltr;text-align:left;color:var(--mut);font-size:14px}.sheet .eg .han{color:var(--ink);font-size:17px}
+/* exercises on the map table */
+.q{padding:12px;border-radius:14px;background:var(--card);border:1px solid var(--line);margin:10px 0}
+.q-p{font-weight:500;margin-bottom:8px}.q-p .han{font-size:18px}
+.q-ar{color:var(--mut)}
+.q-opts{display:grid;gap:8px}.q-row{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+.q-o{min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--card2);cursor:pointer;text-align:start;padding:6px 12px;font:500 15px var(--font-ar)}
+.q-o .han{font-size:18px}.q-o.ok{border-color:var(--mal);background:var(--mal-soft)}.q-o.bad{border-color:var(--och);opacity:.7}
+.q-sent{font:500 21px/2 var(--font-han);text-align:left}
+.q-blank{display:inline-block;min-width:64px;border-bottom:2.5px solid var(--az);text-align:center}
+.q-ans{min-height:56px;border-radius:12px;border:2px dashed var(--az);padding:5px;display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.q-pool{display:flex;flex-wrap:wrap;gap:6px}
+.q-tok{min-height:46px;min-width:46px;padding:0 10px;border-radius:10px;border:1.5px solid var(--mal);background:var(--card);cursor:pointer;font:500 19px var(--font-han)}
+.q-mgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.q-col{display:grid;gap:6px;align-content:start}
+.q-m{min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--card2);cursor:pointer;font-size:14.5px}
+.q-m .han{font-size:19px}.q-m.sel{border-color:var(--az)}.q-m.ok{border-color:var(--mal);opacity:.55}.q-m.bad{border-color:var(--och)}
+.q-why{margin-top:8px;font-size:14px;color:var(--mut)}.q-why b{color:var(--mal)}
+.donebox{margin-top:12px;padding:14px;border-radius:16px;border:2px solid var(--mal);background:var(--mal-soft);text-align:center}
+footer{margin-top:28px;padding-top:12px;border-top:1px solid var(--line);color:var(--mut);font-size:12px;text-align:center}
+body.lo footer{padding-bottom:84px}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+:focus-visible{outline:3px solid var(--och);outline-offset:2px}
+@media (min-width:900px){.wrap{max-width:980px}.tiles{grid-template-columns:repeat(4,1fr)}.wl{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <symbol id="mtn" viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 70V48l40-22 30 16 46-34 40 28 30-14 52 30 36-18 46 26 34-16 46 22v32z" fill="var(--mal)" opacity=".35"/><path d="M0 70V56l52-18 40 14 56-26 44 24 48-18 40 16 54-22 66 30v14z" fill="var(--az)" opacity=".45"/><path d="M0 70V62c60-10 120 6 200-4s140 8 200-2v14z" fill="var(--mal)" opacity=".6"/></symbol>
+</defs></svg>
+<div class="wrap">
+<section id="home">
+  <header class="top"><div class="sp"><h1>汉语加油站</h1><p>أطلس الدروس</p></div>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button></header>
+  <svg class="ridge" viewBox="0 0 400 70" preserveAspectRatio="none" style="height:56px" aria-hidden="true"><use href="#mtn"/></svg>
+  <div class="lvbadge" id="lvb"></div>
+  <div id="atlas"></div>
+</section>
+<section id="lesson" hidden>
+  <div class="lhdr">
+    <button class="ibtn" id="back" aria-label="الأطلس"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+    <div class="sp"><b id="lt"></b><span class="han" id="lz" lang="zh-CN"></span></div>
+    <span class="xp" id="xp"></span>
+    <button class="ibtn" data-theme-btn aria-label="تبديل الوضع الليلي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></button>
+  </div>
+  <div class="view" id="v-board"></div>
+  <div class="view" id="v-texts"></div>
+  <div class="view" id="v-words"></div>
+  <div class="view" id="v-drills"></div>
+  <nav class="tabbar" role="tablist" aria-label="أقسام الدرس"><div class="in" id="tabs"></div></nav>
+</section>
+<footer><span dir="ltr">© 2026 Mahmod Alsideig · <span lang="zh">大漠老师</span> · All rights reserved. Content is for personal learning only and may not be copied or republished without permission.</span></footer>
+</div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="القاعدة"><div id="sheetBody"></div><button class="btn az" id="sheetClose" style="width:100%;margin-top:12px">إغلاق</button></div>
+<script>var PAGE_KEY='labs-d4',PAGE_LESSON_KEY='noor-gram10-v1';</script>
+<script>/*COMMON*/</script>
+<script>
+(function(){
+'use strict';
+var D=DATA,S=LS.S,$=LS.$,$$=LS.$$,esc=LS.esc;S.open=S.open||{};
+$$('[data-theme-btn]').forEach(function(b){b.onclick=LS.toggleTheme});
+var IC={board:'<path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/>',texts:'<path d="M4 5h11a3 3 0 0 1 3 3v11H7a3 3 0 0 1-3-3z"/><path d="M8 9h6M8 13h6"/>',
+  words:'<rect x="3" y="5" width="13" height="15" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/>',drills:'<path d="M5 12l4 4 10-10"/><path d="M4 20h16"/>',gram:'<path d="M4 19l5-14 5 14M6 14h6"/><path d="M15 9h5M15 13h5M15 17h5"/>'};
+function ic(k){return'<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+IC[k]+'</svg>'}
+/* ---------- home: the atlas ---------- */
+var NUM=['','一','二','三','四','五','六','七','八'];
+function home(){
+  var st=status();
+  $('#lvb').innerHTML='<div class="seal" aria-hidden="true">'+NUM[1]+'</div><div class="sp"><b>مستواك: المستوى الأول</b><br><small>محطتك الآن: '+D.meta.ar+' · '+st.n+' من 3 محطات</small></div><button class="btn az" id="resume">تابع</button>';
+  $('#resume').onclick=function(){location.hash='lesson'};
+  var h='';D.hub.levels.forEach(function(lv){
+    h+='<div class="region"><h2>'+lv.t+' <span>· '+lv.s+'</span></h2>';
+    lv.c.forEach(function(ck){var c=D.hub.courses[ck];if(!c)return;
+      h+='<div class="city"><h3>'+c.name+'</h3><ol class="route">';
+      c.l.forEach(function(l){var me=l[4]===D.meta.file,x=LS.lessonXp(l[5]),done=me?st.n===3:x>=300,parts=l[2].split('·');
+        var inner='<span class="dot">'+l[1]+'</span><span class="nm"><span>'+esc(parts[0].trim())+(me?'<span class="pin">أنت هنا</span>':'')+'</span><br><span class="han" lang="zh-CN">'+esc((parts[1]||'').trim())+'</span></span>';
+        h+='<li>'+(me?'<button class="stop here'+(done?' done':'')+'" data-me>'+inner+'</button>':'<a class="stop'+(done?' done':'')+'" href="../'+l[4]+'">'+inner+'</a>')+'</li>'});
+      h+='</ol></div>'});
+    h+='<svg class="ridge" viewBox="0 0 400 70" preserveAspectRatio="none" style="height:34px;margin-top:10px" aria-hidden="true"><use href="#mtn"/></svg></div>'});
+  $('#atlas').innerHTML=h;$$('[data-me]').forEach(function(b){b.onclick=function(){location.hash='lesson'}});
+}
+/* ---------- lesson ---------- */
+var TABS=[['board','الخريطة'],['texts','النصوص'],['words','الكلمات'],['drills','التمارين']];
+var tab='board',built=false,filter='all',round=0;
+var ROUNDS=[[['mcq',D.quiz[0]],['order',D.order[1]],['fill',D.fill[0]]],[['mcq',D.quiz[6]],['match',D.match[0].slice(0,4)],['fill',D.fill[3]]],[['mcq',D.quiz[7]],['order',D.order[5]],['mcq',D.quiz[2]]],[['mcq',D.quiz[8]],['fill',D.fill[6]],['match',D.match[1].slice(0,4)]]];
+function status(){var t=D.texts.every(function(_,i){return S.open['t'+i]}),w=!!S.done.words,d=!!S.done.drills;return{t:t,w:w,d:d,n:(t?1:0)+(w?1:0)+(d?1:0)}}
+function ring(p){var c=2*Math.PI*16;return'<svg class="ring" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="16" stroke="var(--line)"/><circle cx="20" cy="20" r="16" stroke="var(--mal)" stroke-dasharray="'+c+'" stroke-dashoffset="'+(c*(1-p))+'" transform="rotate(-90 20 20)" stroke-linecap="round"/></svg>'}
+function board(){var st=status(),nt=D.texts.filter(function(_,i){return S.open['t'+i]}).length,nk=Object.keys(S.words).length,nd=Math.min(round,4),sug=!st.t?'texts':!st.w?'words':!st.d?'drills':'';
+  var T=[['texts','النصوص',D.texts.length+' نصوص · 6 د',nt/3,st.t],['words','الكلمات',D.vocab.length+' كلمة · 4 د',st.w?1:Math.min(1,nk/10),st.w],['gram','القواعد',D.gram.length+' نقاط · 3 د',S.done.gramseen?1:0,!!S.done.gramseen],['drills','التمارين','4 جولات · 5 د',nd/4,st.d]];
+  $('#v-board').innerHTML='<div class="banner"><svg viewBox="0 0 400 70" preserveAspectRatio="none" style="display:block;width:100%;height:70px" aria-hidden="true"><use href="#mtn"/></svg><div class="t"><h2>'+D.meta.zh+'</h2><p>'+LS.zh(D.meta.intro)+'</p></div></div>'+
+    '<div class="tiles">'+T.map(function(x){return'<button class="tile'+(x[4]?' ok':'')+(x[0]===sug?' sug':'')+'" data-go="'+x[0]+'">'+ring(x[3])+ic(x[0])+'<b>'+x[1]+'</b><small>'+x[2]+'</small></button>'}).join('')+'</div>'+
+    (st.n===3?'<div class="donebox" data-complete="1"><b>أتممت محطات الدرس الثلاث.</b><br>'+S.xp+' نقطة · الدرس التالي على الأطلس.</div>':'<p class="hint">ادخل المحطات بأي ترتيب. المقترح: النصوص، ثم الكلمات، ثم التمارين. القواعد تظهر أيضًا داخل النصوص.</p>');
+  $$('#v-board .tile').forEach(function(b){b.onclick=function(){if(b.dataset.go==='gram')gramList();else setTab(b.dataset.go)}});
+}
+function gramList(){$('#sheetBody').innerHTML='<h3>قواعد الدرس</h3>'+D.gram.map(function(g){return'<p style="margin:10px 0 0"><b>'+esc(g.t)+'</b></p><div class="f">'+esc(g.f)+'</div><div class="eg"><span class="han" lang="zh-CN">'+esc(g.key)+'</span> '+esc(g.kpy)+'</div>'}).join('');
+  $('#sheet').classList.add('open');if(!S.done.gramseen){LS.mark('gramseen');LS.xp(3,$('#sheet'))}}
+function texts(){var h='';
+  D.texts.forEach(function(t,ti){h+='<details class="txt" data-t="'+ti+'"><summary>'+esc(t.h)+'</summary>'+t.lines.map(function(l,li){var g=LS.gramOf(l.zh);
+    return'<div class="ln"><button class="say" data-t="'+ti+'" data-l="'+li+'" aria-label="استمع"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/></svg></button><div><div class="nm">'+esc(l.name)+'</div><div class="z han" lang="zh-CN">'+esc(l.zh)+'</div><div class="p">'+esc(LS.linePy(l))+'</div><div class="a">'+esc(l.ar)+'</div>'+
+      g.map(function(x){return'<button class="gtag" data-g="'+x.id+'">قاعدة: '+esc(x.t)+'</button>'}).join(' ')+'</div></div>'}).join('')+'</details>'});
+  $('#v-texts').innerHTML='<p class="round">'+D.texts.length+' نصوص. افتح النص واضغط زر الصوت.</p>'+h;
+  $$('#v-texts details').forEach(function(d){d.addEventListener('toggle',function(){if(d.open&&!S.open['t'+d.dataset.t]){S.open['t'+d.dataset.t]=1;LS.save();LS.xp(5,d);bar()}})});
+  $$('#v-texts .say').forEach(function(b){b.onclick=function(){LS.say(D.texts[+b.dataset.t].lines[+b.dataset.l].zh)}});
+  $$('#v-texts .gtag').forEach(function(b){b.onclick=function(){var g=D.gram.filter(function(x){return x.id===b.dataset.g})[0];
+    $('#sheetBody').innerHTML='<h3>'+esc(g.t)+'</h3><div class="f">'+esc(g.f)+'</div><p>'+LS.zh(g.ar)+'</p>'+g.ex.map(function(e){return'<div class="eg"><span class="han" lang="zh-CN">'+esc(e[0])+'</span> '+esc(e[1])+' · '+esc(e[2])+'</div>'}).join('');$('#sheet').classList.add('open')}});
+}
+function words(){var list=D.vocab.filter(function(v){return filter==='all'||(filter==='known'?S.words[v[0]]:!S.words[v[0]])}),nk=Object.keys(S.words).length;
+  $('#v-words').innerHTML='<div class="filters" role="group" aria-label="تصفية"><button data-f="all" aria-pressed="'+(filter==='all')+'">الكل '+D.vocab.length+'</button><button data-f="new" aria-pressed="'+(filter==='new')+'">جديدة '+(D.vocab.length-nk)+'</button><button data-f="known" aria-pressed="'+(filter==='known')+'">عرفتها '+nk+'</button></div>'+
+    '<p class="round">اضغط الكلمة لتسمعها وتعلّمها «عرفتها».</p><div class="wl">'+list.map(function(v){return'<button class="w'+(S.words[v[0]]?' known':'')+'" data-w="'+esc(v[0])+'"><span class="z" lang="zh-CN">'+esc(v[0])+'</span><span><span class="p">'+esc(v[1])+'</span><br>'+esc(v[2])+'</span><span class="k" aria-hidden="true"></span></button>'}).join('')+'</div>'+
+    '<button class="btn az" data-wdone style="width:100%;margin-top:12px">'+(S.done.words?'راجعت القائمة ✓':'أنهيت مراجعة الكلمات')+'</button>';
+  $$('#v-words [data-f]').forEach(function(b){b.onclick=function(){filter=b.dataset.f;words()}});
+  $$('#v-words .w').forEach(function(b){b.onclick=function(){LS.say(b.dataset.w);var w=b.dataset.w;if(S.words[w])delete S.words[w];else{S.words[w]=1;LS.xp(2,b)}LS.save();b.classList.toggle('known',!!S.words[w])}});
+  $('#v-words [data-wdone]').onclick=function(){if(!S.done.words){LS.mark('words');LS.xp(10,this)}words();bar()};
+}
+function drills(){var el=$('#v-drills');
+  if(round>=4){el.innerHTML='<div class="donebox"><b>أتممت الجولات الأربع.</b><br>'+S.xp+' نقطة</div>';return}
+  el.innerHTML='<p class="round">الجولة '+(round+1)+' من 4</p>';var n=0;
+  ROUNDS[round].forEach(function(r){el.appendChild(LS[r[0]](r[1],function(){if(++n===3){round++;S.round=round;LS.save();
+    if(round>=4){LS.mark('drills');LS.xp(15,el);el.insertAdjacentHTML('beforeend','<div class="donebox"><b>أتممت الجولات الأربع.</b></div>');bar()}
+    else el.insertAdjacentHTML('beforeend','<button class="btn az" data-more style="width:100%">الجولة التالية</button>');var m=$('[data-more]',el);if(m)m.onclick=drills}}))});
+}
+function setTab(t){tab=t;$$('.view').forEach(function(v){v.classList.toggle('cur',v.id==='v-'+t)});$$('#tabs button').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.tab===t))});
+  if(t==='board')board();if(t==='words')words();if(t==='drills'&&!$('#v-drills').childElementCount)drills();window.scrollTo(0,0)}
+function bar(){var st=status();$$('#tabs button').forEach(function(b){b.classList.toggle('ok',b.dataset.tab==='texts'?st.t:b.dataset.tab==='words'?st.w:b.dataset.tab==='drills'?st.d:st.n===3)})}
+function buildLesson(){built=true;round=S.round||0;$('#lt').textContent=D.meta.ar;$('#lz').textContent=D.meta.zh;
+  $('#tabs').innerHTML=TABS.map(function(t){return'<button role="tab" data-tab="'+t[0]+'" aria-selected="false"><span class="bd"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+IC[t[0]]+'</svg>'+t[1]+'</button>'}).join('');
+  $$('#tabs button').forEach(function(b){b.onclick=function(){setTab(b.dataset.tab)}});texts()}
+$('#sheetClose').onclick=function(){$('#sheet').classList.remove('open')};
+$('#back').onclick=function(){location.hash='home'};
+document.addEventListener('xp',function(){$('#xp').textContent=S.xp+' نقطة'});
+function render(){$('#sheet').classList.remove('open');document.body.classList.toggle('lo',location.hash==='#lesson');if(location.hash==='#lesson'){$('#home').hidden=true;$('#lesson').hidden=false;if(!built)buildLesson();$('#xp').textContent=S.xp+' نقطة';setTab('board');bar()}
+  else{$('#lesson').hidden=true;$('#home').hidden=false;home();window.scrollTo(0,0)}}
+addEventListener('hashchange',render);render();
+})();
+</script>
+</body>
+</html>
